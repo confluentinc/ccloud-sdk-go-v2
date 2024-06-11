@@ -41,6 +41,1482 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1.StatementException" />
   name: Statement Exceptions (sql/v1)
 paths:
+  /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections:
+    get:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Retrieve a sorted, filtered and paginated list of all Connections.
+      operationId: listSqlv1Connections
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter the results by exact match for spec.connection_type
+        explode: true
+        in: query
+        name: spec.connection_type
+        required: false
+        schema:
+          type: string
+          x-extensible-enum:
+          - OPENAI
+          - AZUREML
+          - AZUREOPENAI
+          - BEDROCK
+          - SAGEMAKER
+          - GOOGLEAI
+          - VERTEXAI
+        style: form
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sql.v1.ConnectionList'
+          description: Connections.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: List of Connections
+      tags:
+      - Connections (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create a Connection.
+      operationId: createSqlv1Connection
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/sql.v1.Connection'
+              - properties:
+                  spec:
+                    required:
+                    - auth_data
+                    - connection_type
+                    - endpoint
+                    type: object
+                required:
+                - name
+                - spec
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/sql.v1.Connection'
+                - properties:
+                    spec:
+                      required:
+                      - auth_data
+                      - connection_type
+                      - endpoint
+                      type: object
+                  required:
+                  - spec
+                  type: object
+          description: A Connection has been successfully created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Connection resource uri
+              explode: false
+              schema:
+                example: https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{name}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Create a Connection
+      tags:
+      - Connections (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"name":"my-openai-connection","spec":{"connection_type":"OPENAI","endpoint":"https://api.openai.com/v1/chat/completions","auth_data":{"kind":"PlaintextProvider","data":"string"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}}}");
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"my-openai-connection\\\
+          \",\\\"spec\\\":{\\\"connection_type\\\":\\\"OPENAI\\\",\\\"endpoint\\\"\
+          :\\\"https://api.openai.com/v1/chat/completions\\\",\\\"auth_data\\\":{\\\
+          \"kind\\\":\\\"PlaintextProvider\\\",\\\"data\\\":\\\"string\\\"}}}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          payload = "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            name: 'my-openai-connection',
+            spec: {
+              connection_type: 'OPENAI',
+              endpoint: 'https://api.openai.com/v1/chat/completions',
+              auth_data: {kind: 'PlaintextProvider', data: 'string'}
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: SQL API v1
+  /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}:
+    delete:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to delete a statement.
+      operationId: deleteSqlv1Connection
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the connection.
+        explode: false
+        in: path
+        name: connection_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: A Connection has been deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Delete a Connection
+      tags:
+      - Connections (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    get:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read a Connection.
+      operationId: getSqlv1Connection
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The user provided name of the Connection. Unique within a region
+          within an org and env.
+        explode: false
+        in: path
+        name: connection_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/sql.v1.Connection'
+                - properties:
+                    spec:
+                      required:
+                      - auth_data
+                      - connection_type
+                      - endpoint
+                      type: object
+                  required:
+                  - api_version
+                  - kind
+                  - metadata
+                  - spec
+                  type: object
+          description: Connection.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Read a Connection
+      tags:
+      - Connections (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    put:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to update a connection.
+      operationId: updateSqlv1Connection
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the connection.
+        explode: false
+        in: path
+        name: connection_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/sql.v1.Connection'
+              - properties:
+                  spec:
+                    required:
+                    - auth_data
+                    type: object
+                  metadata:
+                    required:
+                    - resource_version
+                    type: object
+                required:
+                - metadata
+                - name
+                - spec
+                type: object
+      responses:
+        "200":
+          description: A Connection has been updated.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Update a Connection
+      tags:
+      - Connections (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"name":"my-openai-connection","spec":{"connection_type":"OPENAI","endpoint":"https://api.openai.com/v1/chat/completions","auth_data":{"kind":"PlaintextProvider","data":"string"}},"metadata":{}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}},\"metadata\":{}}");
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}")
+            .put(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"my-openai-connection\\\
+          \",\\\"spec\\\":{\\\"connection_type\\\":\\\"OPENAI\\\",\\\"endpoint\\\"\
+          :\\\"https://api.openai.com/v1/chat/completions\\\",\\\"auth_data\\\":{\\\
+          \"kind\\\":\\\"PlaintextProvider\\\",\\\"data\\\":\\\"string\\\"}},\\\"\
+          metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          payload = "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}},\"metadata\":{}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PUT", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PUT",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            name: 'my-openai-connection',
+            spec: {
+              connection_type: 'OPENAI',
+              endpoint: 'https://api.openai.com/v1/chat/completions',
+              auth_data: {kind: 'PlaintextProvider', data: 'string'}
+            },
+            metadata: {}
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}},\"metadata\":{}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}");
+          var request = new RestRequest(Method.PUT);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"name\":\"my-openai-connection\",\"spec\":{\"connection_type\":\"OPENAI\",\"endpoint\":\"https://api.openai.com/v1/chat/completions\",\"auth_data\":{\"kind\":\"PlaintextProvider\",\"data\":\"string\"}},\"metadata\":{}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results:
     get:
       description: |-
@@ -2274,6 +3750,218 @@ components:
             type: string
           style: simple
   schemas:
+    sql.v1.Connection:
+      description: "`Connection` models a reusable endpoint and auth token to authenticate\
+        \ the caller to\nuse that endpoint.\nOnly `OrgAdmins` and `EnvAdmins` will\
+        \ have the permissions to create, update and delete `Connections`. \n`FlinkDevelopers`\
+        \ and `ModelResourceOwners` can later reference a `Connection` resource within\
+        \ their Model \ncreation statements. \nThe API allows you to list, create,\
+        \ read, and delete your connections.\n## The Connections Model\n<SchemaDefinition\
+        \ schemaRef=\"#/components/schemas/sql.v1.Connection\" />"
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - sql/v1
+          example: sql/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Connection
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/organizations/org-abc/environments/env-123/connections/my-openai-connection
+              uid:
+                example: 12345678-1234-1234-1234-123456789012
+              resource_version:
+                example: a23av
+              resource_name:
+                example: ""
+        name:
+          description: The user provided name of the resource, unique within this
+            environment.
+          example: my-openai-connection
+          maxLength: 100
+          pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
+          type: string
+          x-immutable: true
+        spec:
+          $ref: '#/components/schemas/sql.v1.ConnectionSpec'
+        status:
+          $ref: '#/components/schemas/sql.v1.ConnectionStatus'
+      type: object
+    sql.v1.ConnectionList:
+      description: |-
+        `Connection` models a reusable endpoint and auth token to authenticate the caller to
+        use that endpoint.
+        Only `OrgAdmins` and `EnvAdmins` will have the permissions to create, update and delete `Connections`.
+        `FlinkDevelopers` and `ModelResourceOwners` can later reference a `Connection` resource within their Model
+        creation statements.
+        The API allows you to list, create, read, and delete your connections.
+        ## The Connection Model
+        <SchemaDefinition schemaRef="#/components/schemas/sql.v1.Connection" />
+      example:
+        metadata: ""
+        data:
+        - ""
+        - ""
+        kind: ConnectionList
+        api_version: sql/v1
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - sql/v1
+          example: sql/v1
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - ConnectionList
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              self:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/connections
+              first:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/connections
+              last:
+                example: ""
+              prev:
+                example: ""
+              next:
+                example: https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/connections?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/sql.v1.Connection'
+            - properties:
+                spec:
+                  required:
+                  - connection_type
+                  - endpoint
+                  type: object
+              required:
+              - api_version
+              - environment_id
+              - kind
+              - metadata
+              - name
+              - organization_id
+              - spec
+              - status
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    sql.v1.ConnectionStatus:
+      description: The status of the Connection
+      properties:
+        phase:
+          description: |
+            Describes the status of the connection:
+
+            READY: The Connection is usable;
+
+            UNREACHABLE: The Connection endpoint is unreachable;
+
+            INVALID_AUTH: The Connection auth token is invalid;
+          example: READY
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - ACTIVE
+          - UNREACHABLE
+          - INVALID_AUTH
+        detail:
+          description: Details about why connection transitioned into a given status.
+          example: 'Lookup failed: ai.openai.com'
+          readOnly: true
+          type: string
+      readOnly: true
+      required:
+      - phase
+      type: object
+    sql.v1.PlaintextProvider:
+      description: |
+        Describes a sensitive piece of information passed in plaintext.
+
+        Confluent only accepts authentication tokens of supported model providers from OrgAdmins and EnvAdmins.
+        For now, only 'PlainText' provider is supported. It stores authentication token details as opaque bytes in an encrypted form.
+        This option offers limited security as it only provides a single level of encryption.
+      properties:
+        kind:
+          description: |
+            Plaintext Provider Kind Type
+          enum:
+          - PlaintextProvider
+          type: string
+          x-immutable: true
+        data:
+          description: |
+            Base64 encoded opaque piece of sensitive information.
+
+            Scoped to an endpoint of a `Connection` resource.
+          format: byte
+          type: string
+      type: object
+    sql.v1.ConnectionSpec:
+      description: Encapsulates the model provider access details
+      properties:
+        connection_type:
+          description: The type of this connection.
+          example: OPENAI
+          type: string
+          x-immutable: true
+          x-extensible-enum:
+          - OPENAI
+          - AZUREML
+          - AZUREOPENAI
+          - BEDROCK
+          - SAGEMAKER
+          - GOOGLEAI
+          - VERTEXAI
+        endpoint:
+          description: The endpoint that is used to run model inferencing.
+          example: https://api.openai.com/v1/chat/completions
+          maxLength: 16384
+          type: string
+          x-immutable: true
+        auth_data:
+          description: "The vendor specific authentication token details\n\nThe contents\
+            \ are stored as opaque bytes given in plaintext by an EnvAdmin. \nIn future,\
+            \ we would support more secure methods for distributing authentication\
+            \ tokens.\n"
+          discriminator:
+            mapping:
+              PlaintextProvider: '#/components/schemas/sql.v1.PlaintextProvider'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/sql.v1.PlaintextProvider'
+          type: object
+          x-immutable: false
+          x-one-of-name: SqlV1ConnectionSpecAuthDataOneOf
+      type: object
+      x-enable-listmeta: true
+      x-enable-objectmeta: true
     sql.v1.Statement:
       description: |-
         `Statement` represents a core resource used to model SQL statements for execution.
