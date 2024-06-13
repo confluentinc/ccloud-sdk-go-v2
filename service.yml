@@ -1,16 +1,16 @@
 name: ccloud-sdk-go-v2-internal
 lang: go
-lang_version: unknown
+lang_version: "1.16"
 git:
   enable: true
 github:
   enable: true
 semaphore:
   enable: true
-  pipeline_enable: false
+  pipeline_enable: true
   branches:
     - master
-    - /^v\d+\.\d+\.x$/
+    - /^v\d+\.\d+\.\d+$/
 make:
   enable: true
   enable_updates: true
