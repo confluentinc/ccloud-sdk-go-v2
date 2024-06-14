@@ -25,7 +25,7 @@ spec:
     whitelist:
       branches:
       - master
-      - /^v\d+\.\d+\.x$/
+      - /^v\d+\.\d+\.\d+$/
   custom_permissions: true
   debug_permissions:
   - empty
