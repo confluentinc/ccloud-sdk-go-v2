@@ -79,6 +79,11 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CustomConnectorPluginVersionsConnectV1Api* | [**CreateConnectV1CustomConnectorPluginVersion**](docs/CustomConnectorPluginVersionsConnectV1Api.md#createconnectv1customconnectorpluginversion) | **Post** /connect/v1/custom-connector-plugins/{plugin_id}/versions | Create a Custom Connector Plugin Version
+*CustomConnectorPluginVersionsConnectV1Api* | [**DeleteConnectV1CustomConnectorPluginVersion**](docs/CustomConnectorPluginVersionsConnectV1Api.md#deleteconnectv1customconnectorpluginversion) | **Delete** /connect/v1/custom-connector-plugins/{plugin_id}/versions/{id} | Delete a Custom Connector Plugin Version
+*CustomConnectorPluginVersionsConnectV1Api* | [**GetConnectV1CustomConnectorPluginVersion**](docs/CustomConnectorPluginVersionsConnectV1Api.md#getconnectv1customconnectorpluginversion) | **Get** /connect/v1/custom-connector-plugins/{plugin_id}/versions/{id} | Read a Custom Connector Plugin Version
+*CustomConnectorPluginVersionsConnectV1Api* | [**ListConnectV1CustomConnectorPluginVersions**](docs/CustomConnectorPluginVersionsConnectV1Api.md#listconnectv1customconnectorpluginversions) | **Get** /connect/v1/custom-connector-plugins/{plugin_id}/versions | List of Custom Connector Plugin Versions
+*CustomConnectorPluginVersionsConnectV1Api* | [**UpdateConnectV1CustomConnectorPluginVersion**](docs/CustomConnectorPluginVersionsConnectV1Api.md#updateconnectv1customconnectorpluginversion) | **Patch** /connect/v1/custom-connector-plugins/{plugin_id}/versions/{id} | Update a Custom Connector Plugin Version
 *CustomConnectorPluginsConnectV1Api* | [**CreateConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#createconnectv1customconnectorplugin) | **Post** /connect/v1/custom-connector-plugins | Create a Custom Connector Plugin
 *CustomConnectorPluginsConnectV1Api* | [**DeleteConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#deleteconnectv1customconnectorplugin) | **Delete** /connect/v1/custom-connector-plugins/{id} | Delete a Custom Connector Plugin
 *CustomConnectorPluginsConnectV1Api* | [**GetConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#getconnectv1customconnectorplugin) | **Get** /connect/v1/custom-connector-plugins/{id} | Read a Custom Connector Plugin
@@ -94,6 +99,9 @@ Class | Method | HTTP request | Description
  - [ConnectV1CustomConnectorPluginUpdate](docs/ConnectV1CustomConnectorPluginUpdate.md)
  - [ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf.md)
  - [ConnectV1CustomConnectorPluginUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginUploadSourceOneOf.md)
+ - [ConnectV1CustomConnectorPluginVersion](docs/ConnectV1CustomConnectorPluginVersion.md)
+ - [ConnectV1CustomConnectorPluginVersionList](docs/ConnectV1CustomConnectorPluginVersionList.md)
+ - [ConnectV1CustomConnectorPluginVersionUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginVersionUploadSourceOneOf.md)
  - [ConnectV1PresignedUrl](docs/ConnectV1PresignedUrl.md)
  - [ConnectV1PresignedUrlRequest](docs/ConnectV1PresignedUrlRequest.md)
  - [ConnectV1UploadSourcePresignedUrl](docs/ConnectV1UploadSourcePresignedUrl.md)

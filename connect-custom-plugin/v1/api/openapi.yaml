@@ -14,6 +14,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -41,6 +45,16 @@ tags:
     ## The Presigned Urls Model
     <SchemaDefinition schemaRef="#/components/schemas/connect.v1.PresignedUrl" />
   name: Presigned Urls (connect/v1)
+- description: |-
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+    CustomConnectorPluginVersion objects represent Custom Connector Plugin Versions on Confluent Cloud.
+    The API allows you to list, create, read, update, and delete your Custom Connector Plugin Versions.
+
+
+    ## The Custom Connector Plugin Versions Model
+    <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorPluginVersion" />
+  name: Custom Connector Plugin Versions (connect/v1)
 paths:
   /connect/v1/custom-connector-plugins:
     get:
@@ -615,13 +629,13 @@ paths:
             --url https://api.confluent.cloud/connect/v1/custom-connector-plugins \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA"}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA","version":"0.0.0","release_notes":"string","is_beta":true}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins")
             .post(body)
@@ -640,7 +654,8 @@ paths:
           sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
           \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
           \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"},\\\"\
-          runtime_language\\\":\\\"JAVA\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          runtime_language\\\":\\\"JAVA\\\",\\\"version\\\":\\\"0.0.0\\\",\\\"release_notes\\\
+          \":\\\"string\\\",\\\"is_beta\\\":true}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -652,7 +667,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}"
 
           headers = {
               'content-type': "application/json",
@@ -705,7 +720,10 @@ paths:
               location: 'PRESIGNED_URL_LOCATION',
               upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
             },
-            runtime_language: 'JAVA'
+            runtime_language: 'JAVA',
+            version: '0.0.0',
+            release_notes: 'string',
+            is_beta: true
           }));
           req.end();
       - lang: C
@@ -720,7 +738,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -729,7 +747,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/custom-connector-plugins/{id}:
     delete:
@@ -1615,13 +1633,13 @@ paths:
             --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA"}'
+            --data '{"display_name":"string","description":"string","documentation_link":"https://github.com/confluentinc/kafka-connect-datagen","connector_class":"io.confluent.kafka.connect.datagen.DatagenConnector","connector_type":"SOURCE","cloud":"AWS","sensitive_config_properties":["passwords","keys","tokens"],"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"},"runtime_language":"JAVA","version":"0.0.0","release_notes":"string","is_beta":true}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{id}")
             .patch(body)
@@ -1640,7 +1658,8 @@ paths:
           sensitive_config_properties\\\":[\\\"passwords\\\",\\\"keys\\\",\\\"tokens\\\
           \"],\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\
           \",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"},\\\"\
-          runtime_language\\\":\\\"JAVA\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          runtime_language\\\":\\\"JAVA\\\",\\\"version\\\":\\\"0.0.0\\\",\\\"release_notes\\\
+          \":\\\"string\\\",\\\"is_beta\\\":true}\")\n\n\treq, _ := http.NewRequest(\"\
           PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -1652,7 +1671,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}"
+          payload = "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}"
 
           headers = {
               'content-type': "application/json",
@@ -1705,7 +1724,10 @@ paths:
               location: 'PRESIGNED_URL_LOCATION',
               upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
             },
-            runtime_language: 'JAVA'
+            runtime_language: 'JAVA',
+            version: '0.0.0',
+            release_notes: 'string',
+            is_beta: true
           }));
           req.end();
       - lang: C
@@ -1720,7 +1742,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1729,7 +1751,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"string\",\"description\":\"string\",\"documentation_link\":\"https://github.com/confluentinc/kafka-connect-datagen\",\"connector_class\":\"io.confluent.kafka.connect.datagen.DatagenConnector\",\"connector_type\":\"SOURCE\",\"cloud\":\"AWS\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"},\"runtime_language\":\"JAVA\",\"version\":\"0.0.0\",\"release_notes\":\"string\",\"is_beta\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /connect/v1/presigned-upload-url:
     post:
@@ -2052,6 +2074,1705 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"content_format\":\"ZIP\",\"cloud\":\"AWS\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+  /connect/v1/custom-connector-plugins/{plugin_id}/versions:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Retrieve a sorted, filtered, paginated list of all custom connector plugin versions.
+      operationId: listConnectV1CustomConnectorPluginVersions
+      parameters:
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      - description: The Plugin
+        explode: false
+        in: path
+        name: plugin_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersionList'
+          description: Custom Connector Plugin Version.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: List of Custom Connector Plugin Versions
+      tags:
+      - Custom Connector Plugin Versions (connect/v1)
+      x-request-access-name: Plugin Versioning APIs EA
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/custom-connector-plugins/{plugin_id}/versions", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-plugins/{plugin_id}/versions",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Make a request to create a custom connector plugin version.
+      operationId: createConnectV1CustomConnectorPluginVersion
+      parameters:
+      - description: The Plugin
+        explode: false
+        in: path
+        name: plugin_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+              - required:
+                - upload_source
+                - version
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+                - required:
+                  - upload_source
+                  - version
+                  type: object
+          description: A Custom Connector Plugin Version was created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Location:
+              description: CustomConnectorPluginVersion resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Create a Custom Connector Plugin Version
+      tags:
+      - Custom Connector Plugin Versions (connect/v1)
+      x-request-access-name: Plugin Versioning APIs EA
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"version":"string","release_notes":"string","sensitive_config_properties":["passwords","keys","tokens"],"is_beta":true,"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"version\\\":\\\"string\\\",\\\"\
+          release_notes\\\":\\\"string\\\",\\\"sensitive_config_properties\\\":[\\\
+          \"passwords\\\",\\\"keys\\\",\\\"tokens\\\"],\\\"is_beta\\\":true,\\\"upload_source\\\
+          \":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\
+          \"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/connect/v1/custom-connector-plugins/{plugin_id}/versions", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-plugins/{plugin_id}/versions",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            version: 'string',
+            release_notes: 'string',
+            sensitive_config_properties: ['passwords', 'keys', 'tokens'],
+            is_beta: true,
+            upload_source: {
+              location: 'PRESIGNED_URL_LOCATION',
+              upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: Plugin Versioning APIs EA
+  /connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}:
+    delete:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Make a request to delete a custom connector plugin version.
+      operationId: deleteConnectV1CustomConnectorPluginVersion
+      parameters:
+      - description: The Plugin
+        explode: false
+        in: path
+        name: plugin_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the custom connector plugin version.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: A Custom Connector Plugin Version is being deleted.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Delete a Custom Connector Plugin Version
+      tags:
+      - Custom Connector Plugin Versions (connect/v1)
+      x-request-access-name: Plugin Versioning APIs EA
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}")
+            .delete(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}\"\
+          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("DELETE", "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "DELETE",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+          var request = new RestRequest(Method.DELETE);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Make a request to read a custom connector plugin version.
+      operationId: getConnectV1CustomConnectorPluginVersion
+      parameters:
+      - description: The Plugin
+        explode: false
+        in: path
+        name: plugin_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the custom connector plugin version.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+                - required:
+                  - api_version
+                  - id
+                  - kind
+                  - upload_source
+                  - version
+                  type: object
+          description: Custom Connector Plugin Version.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Read a Custom Connector Plugin Version
+      tags:
+      - Custom Connector Plugin Versions (connect/v1)
+      x-request-access-name: Plugin Versioning APIs EA
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Make a request to update a custom connector plugin version.
+
+      operationId: updateConnectV1CustomConnectorPluginVersion
+      parameters:
+      - description: The Plugin
+        explode: false
+        in: path
+        name: plugin_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the custom connector plugin version.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+                - required:
+                  - api_version
+                  - id
+                  - kind
+                  - upload_source
+                  - version
+                  type: object
+          description: Custom Connector Plugin Version.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      summary: Update a Custom Connector Plugin Version
+      tags:
+      - Custom Connector Plugin Versions (connect/v1)
+      x-request-access-name: Plugin Versioning APIs EA
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"version":"string","release_notes":"string","sensitive_config_properties":["passwords","keys","tokens"],"is_beta":true,"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"version\\\":\\\"string\\\",\\\"\
+          release_notes\\\":\\\"string\\\",\\\"sensitive_config_properties\\\":[\\\
+          \"passwords\\\",\\\"keys\\\",\\\"tokens\\\"],\\\"is_beta\\\":true,\\\"upload_source\\\
+          \":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\
+          \"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            version: 'string',
+            release_notes: 'string',
+            sensitive_config_properties: ['passwords', 'keys', 'tokens'],
+            is_beta: true,
+            upload_source: {
+              location: 'PRESIGNED_URL_LOCATION',
+              upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"version\":\"string\",\"release_notes\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"is_beta\":true,\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: Plugin Versioning APIs EA
 components:
   responses:
     BadRequestError:
@@ -2385,8 +4106,8 @@ components:
             type: string
           type: array
         upload_source:
-          description: '[immutable] Upload source of Custom Connector Plugin. Only
-            required in `create` request, will be ignored in `read`, `update` or `list`.'
+          description: Upload source of Custom Connector Plugin. Only required in
+            `create` request, will be ignored in `read`, `update` or `list`.
           discriminator:
             mapping:
               PRESIGNED_URL_LOCATION: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
@@ -2403,6 +4124,25 @@ components:
           x-extensible-enum:
           - JAVA
           - PYTHON
+        version:
+          default: 0.0.0
+          description: Version of the Custom Connector Plugin.
+          maxLength: 60
+          type: string
+          x-immutable: true
+        release_notes:
+          description: Version release notes of the Custom Connector Plugin.
+          maxLength: 256
+          type: string
+          x-immutable: true
+        is_beta:
+          description: Flag showing stability for the version of the Custom Connector
+            Plugin.
+          example: "true"
+          type: string
+          x-extensible-enum:
+          - "TRUE"
+          - "FALSE"
           x-immutable: true
       type: object
     connect.v1.PresignedUrl:
@@ -2474,6 +4214,86 @@ components:
             x-amz-signature: string
           readOnly: true
           type: object
+      type: object
+    connect.v1.CustomConnectorPluginVersion:
+      description: |-
+        CustomConnectorPluginVersion objects represent Custom Connector Plugin Versions on Confluent Cloud.
+        The API allows you to list, create, read, update, and delete your Custom Connector Plugin Versions.
+
+
+        ## The Custom Connector Plugin Versions Model
+        <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorPluginVersion" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - connect/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - CustomConnectorPluginVersion
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugin-versions/ccpv-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/custom-connector-plugin-version=ccpv-12345
+        version:
+          description: Version of the Custom Connector Plugin.
+          maxLength: 60
+          type: string
+        release_notes:
+          description: Release Notes of the Custom Connector Plugin Version.
+          maxLength: 256
+          type: string
+        sensitive_config_properties:
+          description: A sensitive property is a connector configuration property
+            that must be hidden after a user enters property value when setting up
+            connector.
+          example:
+          - passwords
+          - keys
+          - tokens
+          items:
+            maxLength: 150
+            pattern: ^[\w\+\.-]+$
+            type: string
+          type: array
+        is_beta:
+          description: Flag to specify stability of the version
+          example: "true"
+          type: string
+          x-extensible-enum:
+          - "TRUE"
+          - "FALSE"
+        upload_source:
+          description: Upload source of Custom Connector Plugin Version. Only required
+            in `create` request, will be ignored in `read`, `update` or `list`.
+          discriminator:
+            mapping:
+              PRESIGNED_URL_LOCATION: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
+            propertyName: location
+          oneOf:
+          - $ref: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
+          type: object
+          x-one-of-name: ConnectV1CustomConnectorPluginVersionUploadSourceOneOf
       type: object
     connect.v1.PresignedUrlRequest:
       description: |
@@ -2599,6 +4419,60 @@ components:
               - id
               - metadata
               - upload_source
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    connect.v1.CustomConnectorPluginVersionList:
+      description: |-
+        CustomConnectorPluginVersion objects represent Custom Connector Plugin Versions on Confluent Cloud.
+        The API allows you to list, create, read, update, and delete your Custom Connector Plugin Versions.
+
+
+        ## The Custom Connector Plugin Versions Model
+        <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorPluginVersion" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - connect/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - CustomConnectorPluginVersionList
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugin-versions
+              last:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugin-versions?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugin-versions?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-plugin-versions?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/connect.v1.CustomConnectorPluginVersion'
+            - required:
+              - id
+              - metadata
+              - upload_source
+              - version
               type: object
           type: array
           uniqueItems: true
@@ -2851,8 +4725,8 @@ components:
             type: string
           type: array
         upload_source:
-          description: '[immutable] Upload source of Custom Connector Plugin. Only
-            required in `create` request, will be ignored in `read`, `update` or `list`.'
+          description: Upload source of Custom Connector Plugin. Only required in
+            `create` request, will be ignored in `read`, `update` or `list`.
           discriminator:
             mapping:
               PRESIGNED_URL_LOCATION: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
@@ -2861,6 +4735,14 @@ components:
           - $ref: '#/components/schemas/connect.v1.UploadSource.PresignedUrl'
           type: object
           x-one-of-name: ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf
+        runtime_language:
+          default: JAVA
+          description: Runtime language of Custom Connector Plugin.
+          example: JAVA
+          type: string
+          x-extensible-enum:
+          - JAVA
+          - PYTHON
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
