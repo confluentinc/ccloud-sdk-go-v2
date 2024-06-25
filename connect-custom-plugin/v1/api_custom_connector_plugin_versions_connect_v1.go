@@ -39,150 +39,156 @@ var (
 	_ _context.Context
 )
 
-type CustomConnectorPluginsConnectV1Api interface {
+type CustomConnectorPluginVersionsConnectV1Api interface {
 
 	/*
-		CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
+		CreateConnectV1CustomConnectorPluginVersion Create a Custom Connector Plugin Version
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to create a custom connector plugin.
+	Make a request to create a custom connector plugin version.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateConnectV1CustomConnectorPluginRequest
+		 @param pluginId The Plugin
+		 @return ApiCreateConnectV1CustomConnectorPluginVersionRequest
 	*/
-	CreateConnectV1CustomConnectorPlugin(ctx _context.Context) ApiCreateConnectV1CustomConnectorPluginRequest
+	CreateConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string) ApiCreateConnectV1CustomConnectorPluginVersionRequest
 
-	// CreateConnectV1CustomConnectorPluginExecute executes the request
-	//  @return ConnectV1CustomConnectorPlugin
-	CreateConnectV1CustomConnectorPluginExecute(r ApiCreateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error)
+	// CreateConnectV1CustomConnectorPluginVersionExecute executes the request
+	//  @return ConnectV1CustomConnectorPluginVersion
+	CreateConnectV1CustomConnectorPluginVersionExecute(r ApiCreateConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error)
 
 	/*
-		DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
+		DeleteConnectV1CustomConnectorPluginVersion Delete a Custom Connector Plugin Version
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to delete a custom connector plugin.
+	Make a request to delete a custom connector plugin version.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the custom connector plugin.
-		 @return ApiDeleteConnectV1CustomConnectorPluginRequest
+		 @param pluginId The Plugin
+		 @param id The unique identifier for the custom connector plugin version.
+		 @return ApiDeleteConnectV1CustomConnectorPluginVersionRequest
 	*/
-	DeleteConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiDeleteConnectV1CustomConnectorPluginRequest
+	DeleteConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiDeleteConnectV1CustomConnectorPluginVersionRequest
 
-	// DeleteConnectV1CustomConnectorPluginExecute executes the request
-	DeleteConnectV1CustomConnectorPluginExecute(r ApiDeleteConnectV1CustomConnectorPluginRequest) (*_nethttp.Response, error)
+	// DeleteConnectV1CustomConnectorPluginVersionExecute executes the request
+	DeleteConnectV1CustomConnectorPluginVersionExecute(r ApiDeleteConnectV1CustomConnectorPluginVersionRequest) (*_nethttp.Response, error)
 
 	/*
-		GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
+		GetConnectV1CustomConnectorPluginVersion Read a Custom Connector Plugin Version
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read a custom connector plugin.
+	Make a request to read a custom connector plugin version.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the custom connector plugin.
-		 @return ApiGetConnectV1CustomConnectorPluginRequest
+		 @param pluginId The Plugin
+		 @param id The unique identifier for the custom connector plugin version.
+		 @return ApiGetConnectV1CustomConnectorPluginVersionRequest
 	*/
-	GetConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiGetConnectV1CustomConnectorPluginRequest
+	GetConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiGetConnectV1CustomConnectorPluginVersionRequest
 
-	// GetConnectV1CustomConnectorPluginExecute executes the request
-	//  @return ConnectV1CustomConnectorPlugin
-	GetConnectV1CustomConnectorPluginExecute(r ApiGetConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error)
+	// GetConnectV1CustomConnectorPluginVersionExecute executes the request
+	//  @return ConnectV1CustomConnectorPluginVersion
+	GetConnectV1CustomConnectorPluginVersionExecute(r ApiGetConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error)
 
 	/*
-		ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
+		ListConnectV1CustomConnectorPluginVersions List of Custom Connector Plugin Versions
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all custom connector plugins.
-
-	If no `cloud` filter is specified, returns custom connector plugins from all clouds.
-
+	Retrieve a sorted, filtered, paginated list of all custom connector plugin versions.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListConnectV1CustomConnectorPluginsRequest
+		 @param pluginId The Plugin
+		 @return ApiListConnectV1CustomConnectorPluginVersionsRequest
 	*/
-	ListConnectV1CustomConnectorPlugins(ctx _context.Context) ApiListConnectV1CustomConnectorPluginsRequest
+	ListConnectV1CustomConnectorPluginVersions(ctx _context.Context, pluginId string) ApiListConnectV1CustomConnectorPluginVersionsRequest
 
-	// ListConnectV1CustomConnectorPluginsExecute executes the request
-	//  @return ConnectV1CustomConnectorPluginList
-	ListConnectV1CustomConnectorPluginsExecute(r ApiListConnectV1CustomConnectorPluginsRequest) (ConnectV1CustomConnectorPluginList, *_nethttp.Response, error)
+	// ListConnectV1CustomConnectorPluginVersionsExecute executes the request
+	//  @return ConnectV1CustomConnectorPluginVersionList
+	ListConnectV1CustomConnectorPluginVersionsExecute(r ApiListConnectV1CustomConnectorPluginVersionsRequest) (ConnectV1CustomConnectorPluginVersionList, *_nethttp.Response, error)
 
 	/*
-		UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
+		UpdateConnectV1CustomConnectorPluginVersion Update a Custom Connector Plugin Version
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to update a custom connector plugin.
+	Make a request to update a custom connector plugin version.
 
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the custom connector plugin.
-		 @return ApiUpdateConnectV1CustomConnectorPluginRequest
+		 @param pluginId The Plugin
+		 @param id The unique identifier for the custom connector plugin version.
+		 @return ApiUpdateConnectV1CustomConnectorPluginVersionRequest
 	*/
-	UpdateConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiUpdateConnectV1CustomConnectorPluginRequest
+	UpdateConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiUpdateConnectV1CustomConnectorPluginVersionRequest
 
-	// UpdateConnectV1CustomConnectorPluginExecute executes the request
-	//  @return ConnectV1CustomConnectorPlugin
-	UpdateConnectV1CustomConnectorPluginExecute(r ApiUpdateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error)
+	// UpdateConnectV1CustomConnectorPluginVersionExecute executes the request
+	//  @return ConnectV1CustomConnectorPluginVersion
+	UpdateConnectV1CustomConnectorPluginVersionExecute(r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error)
 }
 
-// CustomConnectorPluginsConnectV1ApiService CustomConnectorPluginsConnectV1Api service
-type CustomConnectorPluginsConnectV1ApiService service
+// CustomConnectorPluginVersionsConnectV1ApiService CustomConnectorPluginVersionsConnectV1Api service
+type CustomConnectorPluginVersionsConnectV1ApiService service
 
-type ApiCreateConnectV1CustomConnectorPluginRequest struct {
-	ctx                            _context.Context
-	ApiService                     CustomConnectorPluginsConnectV1Api
-	connectV1CustomConnectorPlugin *ConnectV1CustomConnectorPlugin
+type ApiCreateConnectV1CustomConnectorPluginVersionRequest struct {
+	ctx                                   _context.Context
+	ApiService                            CustomConnectorPluginVersionsConnectV1Api
+	pluginId                              string
+	connectV1CustomConnectorPluginVersion *ConnectV1CustomConnectorPluginVersion
 }
 
-func (r ApiCreateConnectV1CustomConnectorPluginRequest) ConnectV1CustomConnectorPlugin(connectV1CustomConnectorPlugin ConnectV1CustomConnectorPlugin) ApiCreateConnectV1CustomConnectorPluginRequest {
-	r.connectV1CustomConnectorPlugin = &connectV1CustomConnectorPlugin
+func (r ApiCreateConnectV1CustomConnectorPluginVersionRequest) ConnectV1CustomConnectorPluginVersion(connectV1CustomConnectorPluginVersion ConnectV1CustomConnectorPluginVersion) ApiCreateConnectV1CustomConnectorPluginVersionRequest {
+	r.connectV1CustomConnectorPluginVersion = &connectV1CustomConnectorPluginVersion
 	return r
 }
 
-func (r ApiCreateConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
-	return r.ApiService.CreateConnectV1CustomConnectorPluginExecute(r)
+func (r ApiCreateConnectV1CustomConnectorPluginVersionRequest) Execute() (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
+	return r.ApiService.CreateConnectV1CustomConnectorPluginVersionExecute(r)
 }
 
 /*
-CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
+CreateConnectV1CustomConnectorPluginVersion Create a Custom Connector Plugin Version
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create a custom connector plugin.
+Make a request to create a custom connector plugin version.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateConnectV1CustomConnectorPluginRequest
+	@param pluginId The Plugin
+	@return ApiCreateConnectV1CustomConnectorPluginVersionRequest
 */
-func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnectorPlugin(ctx _context.Context) ApiCreateConnectV1CustomConnectorPluginRequest {
-	return ApiCreateConnectV1CustomConnectorPluginRequest{
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) CreateConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string) ApiCreateConnectV1CustomConnectorPluginVersionRequest {
+	return ApiCreateConnectV1CustomConnectorPluginVersionRequest{
 		ApiService: a,
 		ctx:        ctx,
+		pluginId:   pluginId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ConnectV1CustomConnectorPlugin
-func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnectorPluginExecute(r ApiCreateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
+//	@return ConnectV1CustomConnectorPluginVersion
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) CreateConnectV1CustomConnectorPluginVersionExecute(r ApiCreateConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1CustomConnectorPlugin
+		localVarReturnValue  ConnectV1CustomConnectorPluginVersion
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginsConnectV1ApiService.CreateConnectV1CustomConnectorPlugin")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginVersionsConnectV1ApiService.CreateConnectV1CustomConnectorPluginVersion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{plugin_id}/versions"
+	localVarPath = strings.Replace(localVarPath, "{"+"plugin_id"+"}", _neturl.PathEscape(parameterToString(r.pluginId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -206,7 +212,7 @@ func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnect
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.connectV1CustomConnectorPlugin
+	localVarPostBody = r.connectV1CustomConnectorPluginVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -303,37 +309,40 @@ func (a *CustomConnectorPluginsConnectV1ApiService) CreateConnectV1CustomConnect
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteConnectV1CustomConnectorPluginRequest struct {
+type ApiDeleteConnectV1CustomConnectorPluginVersionRequest struct {
 	ctx        _context.Context
-	ApiService CustomConnectorPluginsConnectV1Api
+	ApiService CustomConnectorPluginVersionsConnectV1Api
+	pluginId   string
 	id         string
 }
 
-func (r ApiDeleteConnectV1CustomConnectorPluginRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteConnectV1CustomConnectorPluginExecute(r)
+func (r ApiDeleteConnectV1CustomConnectorPluginVersionRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteConnectV1CustomConnectorPluginVersionExecute(r)
 }
 
 /*
-DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
+DeleteConnectV1CustomConnectorPluginVersion Delete a Custom Connector Plugin Version
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete a custom connector plugin.
+Make a request to delete a custom connector plugin version.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the custom connector plugin.
-	@return ApiDeleteConnectV1CustomConnectorPluginRequest
+	@param pluginId The Plugin
+	@param id The unique identifier for the custom connector plugin version.
+	@return ApiDeleteConnectV1CustomConnectorPluginVersionRequest
 */
-func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiDeleteConnectV1CustomConnectorPluginRequest {
-	return ApiDeleteConnectV1CustomConnectorPluginRequest{
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) DeleteConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiDeleteConnectV1CustomConnectorPluginVersionRequest {
+	return ApiDeleteConnectV1CustomConnectorPluginVersionRequest{
 		ApiService: a,
 		ctx:        ctx,
+		pluginId:   pluginId,
 		id:         id,
 	}
 }
 
 // Execute executes the request
-func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnectorPluginExecute(r ApiDeleteConnectV1CustomConnectorPluginRequest) (*_nethttp.Response, error) {
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) DeleteConnectV1CustomConnectorPluginVersionExecute(r ApiDeleteConnectV1CustomConnectorPluginVersionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -342,12 +351,13 @@ func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnect
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginsConnectV1ApiService.DeleteConnectV1CustomConnectorPlugin")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginVersionsConnectV1ApiService.DeleteConnectV1CustomConnectorPluginVersion")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{id}"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"plugin_id"+"}", _neturl.PathEscape(parameterToString(r.pluginId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -448,54 +458,58 @@ func (a *CustomConnectorPluginsConnectV1ApiService) DeleteConnectV1CustomConnect
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetConnectV1CustomConnectorPluginRequest struct {
+type ApiGetConnectV1CustomConnectorPluginVersionRequest struct {
 	ctx        _context.Context
-	ApiService CustomConnectorPluginsConnectV1Api
+	ApiService CustomConnectorPluginVersionsConnectV1Api
+	pluginId   string
 	id         string
 }
 
-func (r ApiGetConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
-	return r.ApiService.GetConnectV1CustomConnectorPluginExecute(r)
+func (r ApiGetConnectV1CustomConnectorPluginVersionRequest) Execute() (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
+	return r.ApiService.GetConnectV1CustomConnectorPluginVersionExecute(r)
 }
 
 /*
-GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
+GetConnectV1CustomConnectorPluginVersion Read a Custom Connector Plugin Version
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read a custom connector plugin.
+Make a request to read a custom connector plugin version.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the custom connector plugin.
-	@return ApiGetConnectV1CustomConnectorPluginRequest
+	@param pluginId The Plugin
+	@param id The unique identifier for the custom connector plugin version.
+	@return ApiGetConnectV1CustomConnectorPluginVersionRequest
 */
-func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiGetConnectV1CustomConnectorPluginRequest {
-	return ApiGetConnectV1CustomConnectorPluginRequest{
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) GetConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiGetConnectV1CustomConnectorPluginVersionRequest {
+	return ApiGetConnectV1CustomConnectorPluginVersionRequest{
 		ApiService: a,
 		ctx:        ctx,
+		pluginId:   pluginId,
 		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ConnectV1CustomConnectorPlugin
-func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorPluginExecute(r ApiGetConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
+//	@return ConnectV1CustomConnectorPluginVersion
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) GetConnectV1CustomConnectorPluginVersionExecute(r ApiGetConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1CustomConnectorPlugin
+		localVarReturnValue  ConnectV1CustomConnectorPluginVersion
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginsConnectV1ApiService.GetConnectV1CustomConnectorPlugin")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginVersionsConnectV1ApiService.GetConnectV1CustomConnectorPluginVersion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{id}"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"plugin_id"+"}", _neturl.PathEscape(parameterToString(r.pluginId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -605,82 +619,74 @@ func (a *CustomConnectorPluginsConnectV1ApiService) GetConnectV1CustomConnectorP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListConnectV1CustomConnectorPluginsRequest struct {
+type ApiListConnectV1CustomConnectorPluginVersionsRequest struct {
 	ctx        _context.Context
-	ApiService CustomConnectorPluginsConnectV1Api
-	cloud      *string
+	ApiService CustomConnectorPluginVersionsConnectV1Api
+	pluginId   string
 	pageSize   *int32
 	pageToken  *string
 }
 
-// Filter the results by exact match for cloud.
-func (r ApiListConnectV1CustomConnectorPluginsRequest) Cloud(cloud string) ApiListConnectV1CustomConnectorPluginsRequest {
-	r.cloud = &cloud
-	return r
-}
-
 // A pagination size for collection requests.
-func (r ApiListConnectV1CustomConnectorPluginsRequest) PageSize(pageSize int32) ApiListConnectV1CustomConnectorPluginsRequest {
+func (r ApiListConnectV1CustomConnectorPluginVersionsRequest) PageSize(pageSize int32) ApiListConnectV1CustomConnectorPluginVersionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListConnectV1CustomConnectorPluginsRequest) PageToken(pageToken string) ApiListConnectV1CustomConnectorPluginsRequest {
+func (r ApiListConnectV1CustomConnectorPluginVersionsRequest) PageToken(pageToken string) ApiListConnectV1CustomConnectorPluginVersionsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListConnectV1CustomConnectorPluginsRequest) Execute() (ConnectV1CustomConnectorPluginList, *_nethttp.Response, error) {
-	return r.ApiService.ListConnectV1CustomConnectorPluginsExecute(r)
+func (r ApiListConnectV1CustomConnectorPluginVersionsRequest) Execute() (ConnectV1CustomConnectorPluginVersionList, *_nethttp.Response, error) {
+	return r.ApiService.ListConnectV1CustomConnectorPluginVersionsExecute(r)
 }
 
 /*
-ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
+ListConnectV1CustomConnectorPluginVersions List of Custom Connector Plugin Versions
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all custom connector plugins.
-
-If no `cloud` filter is specified, returns custom connector plugins from all clouds.
+Retrieve a sorted, filtered, paginated list of all custom connector plugin versions.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListConnectV1CustomConnectorPluginsRequest
+	@param pluginId The Plugin
+	@return ApiListConnectV1CustomConnectorPluginVersionsRequest
 */
-func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnectorPlugins(ctx _context.Context) ApiListConnectV1CustomConnectorPluginsRequest {
-	return ApiListConnectV1CustomConnectorPluginsRequest{
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) ListConnectV1CustomConnectorPluginVersions(ctx _context.Context, pluginId string) ApiListConnectV1CustomConnectorPluginVersionsRequest {
+	return ApiListConnectV1CustomConnectorPluginVersionsRequest{
 		ApiService: a,
 		ctx:        ctx,
+		pluginId:   pluginId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ConnectV1CustomConnectorPluginList
-func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnectorPluginsExecute(r ApiListConnectV1CustomConnectorPluginsRequest) (ConnectV1CustomConnectorPluginList, *_nethttp.Response, error) {
+//	@return ConnectV1CustomConnectorPluginVersionList
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) ListConnectV1CustomConnectorPluginVersionsExecute(r ApiListConnectV1CustomConnectorPluginVersionsRequest) (ConnectV1CustomConnectorPluginVersionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1CustomConnectorPluginList
+		localVarReturnValue  ConnectV1CustomConnectorPluginVersionList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginsConnectV1ApiService.ListConnectV1CustomConnectorPlugins")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginVersionsConnectV1ApiService.ListConnectV1CustomConnectorPluginVersions")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{plugin_id}/versions"
+	localVarPath = strings.Replace(localVarPath, "{"+"plugin_id"+"}", _neturl.PathEscape(parameterToString(r.pluginId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.cloud != nil {
-		localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
-	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -780,60 +786,64 @@ func (a *CustomConnectorPluginsConnectV1ApiService) ListConnectV1CustomConnector
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateConnectV1CustomConnectorPluginRequest struct {
-	ctx                                  _context.Context
-	ApiService                           CustomConnectorPluginsConnectV1Api
-	id                                   string
-	connectV1CustomConnectorPluginUpdate *ConnectV1CustomConnectorPluginUpdate
+type ApiUpdateConnectV1CustomConnectorPluginVersionRequest struct {
+	ctx                                   _context.Context
+	ApiService                            CustomConnectorPluginVersionsConnectV1Api
+	pluginId                              string
+	id                                    string
+	connectV1CustomConnectorPluginVersion *ConnectV1CustomConnectorPluginVersion
 }
 
-func (r ApiUpdateConnectV1CustomConnectorPluginRequest) ConnectV1CustomConnectorPluginUpdate(connectV1CustomConnectorPluginUpdate ConnectV1CustomConnectorPluginUpdate) ApiUpdateConnectV1CustomConnectorPluginRequest {
-	r.connectV1CustomConnectorPluginUpdate = &connectV1CustomConnectorPluginUpdate
+func (r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) ConnectV1CustomConnectorPluginVersion(connectV1CustomConnectorPluginVersion ConnectV1CustomConnectorPluginVersion) ApiUpdateConnectV1CustomConnectorPluginVersionRequest {
+	r.connectV1CustomConnectorPluginVersion = &connectV1CustomConnectorPluginVersion
 	return r
 }
 
-func (r ApiUpdateConnectV1CustomConnectorPluginRequest) Execute() (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
-	return r.ApiService.UpdateConnectV1CustomConnectorPluginExecute(r)
+func (r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) Execute() (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
+	return r.ApiService.UpdateConnectV1CustomConnectorPluginVersionExecute(r)
 }
 
 /*
-UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
+UpdateConnectV1CustomConnectorPluginVersion Update a Custom Connector Plugin Version
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Plugin Versioning APIs EA](https://img.shields.io/badge/-Request%20Access%20To%20Plugin%20Versioning%20APIs%20EA-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to update a custom connector plugin.
+Make a request to update a custom connector plugin version.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the custom connector plugin.
-	@return ApiUpdateConnectV1CustomConnectorPluginRequest
+	@param pluginId The Plugin
+	@param id The unique identifier for the custom connector plugin version.
+	@return ApiUpdateConnectV1CustomConnectorPluginVersionRequest
 */
-func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnectorPlugin(ctx _context.Context, id string) ApiUpdateConnectV1CustomConnectorPluginRequest {
-	return ApiUpdateConnectV1CustomConnectorPluginRequest{
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) UpdateConnectV1CustomConnectorPluginVersion(ctx _context.Context, pluginId string, id string) ApiUpdateConnectV1CustomConnectorPluginVersionRequest {
+	return ApiUpdateConnectV1CustomConnectorPluginVersionRequest{
 		ApiService: a,
 		ctx:        ctx,
+		pluginId:   pluginId,
 		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ConnectV1CustomConnectorPlugin
-func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnectorPluginExecute(r ApiUpdateConnectV1CustomConnectorPluginRequest) (ConnectV1CustomConnectorPlugin, *_nethttp.Response, error) {
+//	@return ConnectV1CustomConnectorPluginVersion
+func (a *CustomConnectorPluginVersionsConnectV1ApiService) UpdateConnectV1CustomConnectorPluginVersionExecute(r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) (ConnectV1CustomConnectorPluginVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1CustomConnectorPlugin
+		localVarReturnValue  ConnectV1CustomConnectorPluginVersion
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginsConnectV1ApiService.UpdateConnectV1CustomConnectorPlugin")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorPluginVersionsConnectV1ApiService.UpdateConnectV1CustomConnectorPluginVersion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{id}"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-plugins/{plugin_id}/versions/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"plugin_id"+"}", _neturl.PathEscape(parameterToString(r.pluginId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -858,7 +868,7 @@ func (a *CustomConnectorPluginsConnectV1ApiService) UpdateConnectV1CustomConnect
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.connectV1CustomConnectorPluginUpdate
+	localVarPostBody = r.connectV1CustomConnectorPluginVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
