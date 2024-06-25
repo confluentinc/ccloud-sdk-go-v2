@@ -53,8 +53,10 @@ type ConnectV1CustomConnectorPluginUpdate struct {
 	DocumentationLink *string `json:"documentation_link,omitempty"`
 	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
-	// [immutable] Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
+	// Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
 	UploadSource *ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf `json:"upload_source,omitempty"`
+	// Runtime language of Custom Connector Plugin.
+	RuntimeLanguage *string `json:"runtime_language,omitempty"`
 }
 
 // NewConnectV1CustomConnectorPluginUpdate instantiates a new ConnectV1CustomConnectorPluginUpdate object
@@ -63,6 +65,8 @@ type ConnectV1CustomConnectorPluginUpdate struct {
 // will change when the set of required properties is changed
 func NewConnectV1CustomConnectorPluginUpdate() *ConnectV1CustomConnectorPluginUpdate {
 	this := ConnectV1CustomConnectorPluginUpdate{}
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -71,6 +75,8 @@ func NewConnectV1CustomConnectorPluginUpdate() *ConnectV1CustomConnectorPluginUp
 // but it doesn't guarantee that properties required by API are set
 func NewConnectV1CustomConnectorPluginUpdateWithDefaults() *ConnectV1CustomConnectorPluginUpdate {
 	this := ConnectV1CustomConnectorPluginUpdate{}
+	var runtimeLanguage string = "JAVA"
+	this.RuntimeLanguage = &runtimeLanguage
 	return &this
 }
 
@@ -394,6 +400,38 @@ func (o *ConnectV1CustomConnectorPluginUpdate) SetUploadSource(v ConnectV1Custom
 	o.UploadSource = &v
 }
 
+// GetRuntimeLanguage returns the RuntimeLanguage field value if set, zero value otherwise.
+func (o *ConnectV1CustomConnectorPluginUpdate) GetRuntimeLanguage() string {
+	if o == nil || o.RuntimeLanguage == nil {
+		var ret string
+		return ret
+	}
+	return *o.RuntimeLanguage
+}
+
+// GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1CustomConnectorPluginUpdate) GetRuntimeLanguageOk() (*string, bool) {
+	if o == nil || o.RuntimeLanguage == nil {
+		return nil, false
+	}
+	return o.RuntimeLanguage, true
+}
+
+// HasRuntimeLanguage returns a boolean if a field has been set.
+func (o *ConnectV1CustomConnectorPluginUpdate) HasRuntimeLanguage() bool {
+	if o != nil && o.RuntimeLanguage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRuntimeLanguage gets a reference to the given string and assigns it to the RuntimeLanguage field.
+func (o *ConnectV1CustomConnectorPluginUpdate) SetRuntimeLanguage(v string) {
+	o.RuntimeLanguage = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPluginUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -406,6 +444,7 @@ func (o *ConnectV1CustomConnectorPluginUpdate) Redact() {
 	o.recurseRedact(o.DocumentationLink)
 	o.recurseRedact(o.SensitiveConfigProperties)
 	o.recurseRedact(o.UploadSource)
+	o.recurseRedact(o.RuntimeLanguage)
 }
 
 func (o *ConnectV1CustomConnectorPluginUpdate) recurseRedact(v interface{}) {
@@ -469,6 +508,9 @@ func (o ConnectV1CustomConnectorPluginUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.UploadSource != nil {
 		toSerialize["upload_source"] = o.UploadSource
+	}
+	if o.RuntimeLanguage != nil {
+		toSerialize["runtime_language"] = o.RuntimeLanguage
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

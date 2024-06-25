@@ -13,7 +13,8 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of Custom Connector Plugin. | [optional] 
 **DocumentationLink** | Pointer to **string** | Document link of Custom Connector Plugin. | [optional] 
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. | [optional] 
-**UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf**](ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf.md) | [immutable] Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
+**UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf**](ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf.md) | Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
+**RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
 
 ## Methods
 
@@ -283,6 +284,31 @@ SetUploadSource sets UploadSource field to given value.
 `func (o *ConnectV1CustomConnectorPluginUpdate) HasUploadSource() bool`
 
 HasUploadSource returns a boolean if a field has been set.
+
+### GetRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPluginUpdate) GetRuntimeLanguage() string`
+
+GetRuntimeLanguage returns the RuntimeLanguage field if non-nil, zero value otherwise.
+
+### GetRuntimeLanguageOk
+
+`func (o *ConnectV1CustomConnectorPluginUpdate) GetRuntimeLanguageOk() (*string, bool)`
+
+GetRuntimeLanguageOk returns a tuple with the RuntimeLanguage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPluginUpdate) SetRuntimeLanguage(v string)`
+
+SetRuntimeLanguage sets RuntimeLanguage field to given value.
+
+### HasRuntimeLanguage
+
+`func (o *ConnectV1CustomConnectorPluginUpdate) HasRuntimeLanguage() bool`
+
+HasRuntimeLanguage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

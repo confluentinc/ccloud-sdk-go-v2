@@ -16,8 +16,11 @@ Name | Type | Description | Notes
 **ConnectorType** | Pointer to **string** | Custom Connector type.  | [optional] 
 **Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. | [optional] 
-**UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | [immutable] Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
+**UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
+**Version** | Pointer to **string** | Version of the Custom Connector Plugin. | [optional] [default to "0.0.0"]
+**ReleaseNotes** | Pointer to **string** | Version release notes of the Custom Connector Plugin. | [optional] 
+**IsBeta** | Pointer to **string** | Flag showing stability for the version of the Custom Connector Plugin. | [optional] 
 
 ## Methods
 
@@ -387,6 +390,81 @@ SetRuntimeLanguage sets RuntimeLanguage field to given value.
 `func (o *ConnectV1CustomConnectorPlugin) HasRuntimeLanguage() bool`
 
 HasRuntimeLanguage returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *ConnectV1CustomConnectorPlugin) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *ConnectV1CustomConnectorPlugin) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *ConnectV1CustomConnectorPlugin) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *ConnectV1CustomConnectorPlugin) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
+
+### GetReleaseNotes
+
+`func (o *ConnectV1CustomConnectorPlugin) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *ConnectV1CustomConnectorPlugin) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *ConnectV1CustomConnectorPlugin) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *ConnectV1CustomConnectorPlugin) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### GetIsBeta
+
+`func (o *ConnectV1CustomConnectorPlugin) GetIsBeta() string`
+
+GetIsBeta returns the IsBeta field if non-nil, zero value otherwise.
+
+### GetIsBetaOk
+
+`func (o *ConnectV1CustomConnectorPlugin) GetIsBetaOk() (*string, bool)`
+
+GetIsBetaOk returns a tuple with the IsBeta field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBeta
+
+`func (o *ConnectV1CustomConnectorPlugin) SetIsBeta(v string)`
+
+SetIsBeta sets IsBeta field to given value.
+
+### HasIsBeta
+
+`func (o *ConnectV1CustomConnectorPlugin) HasIsBeta() bool`
+
+HasIsBeta returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
