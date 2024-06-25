@@ -1,5 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2
-
+module github.com/confluentinc/ccloud-sdk-go-v2/connect-custom-plugin
 go 1.16
 
 require (
