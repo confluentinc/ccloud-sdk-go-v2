@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **PrivateEndpointResourceId** | **string** | Resource ID of the Private Endpoint (if any) that is connected to the Private Link service. | [readonly] 
 **PrivateEndpointDomain** | Pointer to **string** | Domain of the Private Endpoint (if any) that is connected to the Private Link service. | [optional] [readonly] 
 **PrivateEndpointIpAddress** | **string** | IP address of the Private Endpoint (if any) that is connected to the Private Link service. | [readonly] 
+**PrivateEndpointCustomDnsConfigDomains** | Pointer to **[]string** | Domains of the Private Endpoint (if any) based off FQDNs in Azure custom DNS configs, which are required in your private DNS setup. | [optional] [readonly] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ and a boolean to check if the value has been set.
 
 SetPrivateEndpointIpAddress sets PrivateEndpointIpAddress field to given value.
 
+
+### GetPrivateEndpointCustomDnsConfigDomains
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointCustomDnsConfigDomains() []string`
+
+GetPrivateEndpointCustomDnsConfigDomains returns the PrivateEndpointCustomDnsConfigDomains field if non-nil, zero value otherwise.
+
+### GetPrivateEndpointCustomDnsConfigDomainsOk
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointCustomDnsConfigDomainsOk() (*[]string, bool)`
+
+GetPrivateEndpointCustomDnsConfigDomainsOk returns a tuple with the PrivateEndpointCustomDnsConfigDomains field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateEndpointCustomDnsConfigDomains
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointCustomDnsConfigDomains(v []string)`
+
+SetPrivateEndpointCustomDnsConfigDomains sets PrivateEndpointCustomDnsConfigDomains field to given value.
+
+### HasPrivateEndpointCustomDnsConfigDomains
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointCustomDnsConfigDomains() bool`
+
+HasPrivateEndpointCustomDnsConfigDomains returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointStatusConfigOneOf

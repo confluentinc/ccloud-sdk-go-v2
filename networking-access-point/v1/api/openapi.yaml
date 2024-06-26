@@ -30,7 +30,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.AccessPoint" />
   name: Access Points (networking/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     DNS record objects are associated with Confluent Cloud networking resources. This API allows you to list, create, read, update, and delete your DNS records.
 
@@ -1869,7 +1869,7 @@ paths:
   /networking/v1/dns-records:
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all DNS records.
       operationId: listNetworkingV1DnsRecords
@@ -2149,7 +2149,6 @@ paths:
       summary: List of DNS Records
       tags:
       - DNS Records (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2236,7 +2235,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a DNS record.
       operationId: createNetworkingV1DnsRecord
@@ -2535,7 +2534,6 @@ paths:
       summary: Create a DNS Record
       tags:
       - DNS Records (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2651,11 +2649,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
   /networking/v1/dns-records/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a DNS record.
       operationId: deleteNetworkingV1DnsRecord
@@ -2869,7 +2866,6 @@ paths:
       summary: Delete a DNS Record
       tags:
       - DNS Records (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2956,7 +2952,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a DNS record.
       operationId: getNetworkingV1DnsRecord
@@ -3205,7 +3201,6 @@ paths:
       summary: Read a DNS Record
       tags:
       - DNS Records (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3292,7 +3287,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Networking v1](https://img.shields.io/badge/-Request%20Access%20To%20Networking%20v1-%23bc8540)](mailto:ccloud-api-access+networking-v1-early-access@confluent.io?subject=Request%20to%20join%20networking/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20networking/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a DNS record.
 
@@ -3604,7 +3599,6 @@ paths:
       summary: Update a DNS Record
       tags:
       - DNS Records (networking/v1)
-      x-request-access-name: Networking v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -3720,7 +3714,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-dnsrec-1\",\"domain\":\"example.com\",\"config\":{\"kind\":\"PrivateLinkAccessPoint\",\"resource_id\":\"ap-12345\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Networking v1
 components:
   responses:
     BadRequestError:
@@ -4009,6 +4002,8 @@ components:
               FAILED: Access point is in a failed state;
 
               DEPROVISIONING: Access point deprovisioning is in progress;
+
+              DISCONNECTED: Access Point has been disconnected in the cloud provider by the customer;
           example: READY
           readOnly: true
           type: string
@@ -4018,6 +4013,7 @@ components:
           - READY
           - FAILED
           - DEPROVISIONING
+          - DISCONNECTED
         error_code:
           description: Error code if access point is in a failed state. May be used
             for programmatic error checking.
@@ -4224,6 +4220,16 @@ components:
           example: 10.2.0.68
           readOnly: true
           type: string
+        private_endpoint_custom_dns_config_domains:
+          description: Domains of the Private Endpoint (if any) based off FQDNs in
+            Azure custom DNS configs, which are required in your private DNS setup.
+          example:
+          - dbname.database.windows.net
+          - dbname-region.database.windows.net
+          items:
+            type: string
+          readOnly: true
+          type: array
       required:
       - kind
       - private_endpoint_ip_address
