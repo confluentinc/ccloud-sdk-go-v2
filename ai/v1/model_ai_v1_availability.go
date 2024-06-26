@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// AiV1Availability Returns '{ ai_assistant_enabled: true|false}' based on if the Confluent AI Assistant is enabled for your organization. 
+// AiV1Availability Returns '{ ai_assistant_enabled: true|false}' based on if the Confluent AI Assistant is enabled for your organization.
 type AiV1Availability struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
@@ -159,39 +159,39 @@ func (o *AiV1Availability) SetAiAssistantEnabled(v bool) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *AiV1Availability) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.AiAssistantEnabled)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.AiAssistantEnabled)
 }
 
 func (o *AiV1Availability) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o AiV1Availability) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AiV1Availability) MarshalJSON() ([]byte, error) {
@@ -251,5 +251,3 @@ func (v *NullableAiV1Availability) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

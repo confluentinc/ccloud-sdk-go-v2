@@ -38,55 +38,55 @@ var (
 	_ _context.Context
 )
 
-type DocCompletionsDocsAiV1Api interface {
+type TagSuggestionsAiV1Api interface {
 
 	/*
-			QueryDocsAiV1DocCompletion Query a Doc Completion
+			QueryAiV1TagSuggestion Query a Tag Suggestion
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-		Query the Docs AI assistant, optionally with prior conversation history.
+		Query the Confluent AI assistant to suggest tags for given fields in a schema.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiQueryDocsAiV1DocCompletionRequest
+			 @return ApiQueryAiV1TagSuggestionRequest
 	*/
-	QueryDocsAiV1DocCompletion(ctx _context.Context) ApiQueryDocsAiV1DocCompletionRequest
+	QueryAiV1TagSuggestion(ctx _context.Context) ApiQueryAiV1TagSuggestionRequest
 
-	// QueryDocsAiV1DocCompletionExecute executes the request
-	//  @return AiV1ChatCompletionsReply
-	QueryDocsAiV1DocCompletionExecute(r ApiQueryDocsAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error)
+	// QueryAiV1TagSuggestionExecute executes the request
+	//  @return AiV1TagSuggestionsResponse
+	QueryAiV1TagSuggestionExecute(r ApiQueryAiV1TagSuggestionRequest) (AiV1TagSuggestionsResponse, *_nethttp.Response, error)
 }
 
-// DocCompletionsDocsAiV1ApiService DocCompletionsDocsAiV1Api service
-type DocCompletionsDocsAiV1ApiService service
+// TagSuggestionsAiV1ApiService TagSuggestionsAiV1Api service
+type TagSuggestionsAiV1ApiService service
 
-type ApiQueryDocsAiV1DocCompletionRequest struct {
-	ctx                        _context.Context
-	ApiService                 DocCompletionsDocsAiV1Api
-	aiV1ChatCompletionsRequest *AiV1ChatCompletionsRequest
+type ApiQueryAiV1TagSuggestionRequest struct {
+	ctx                       _context.Context
+	ApiService                TagSuggestionsAiV1Api
+	aiV1TagSuggestionsRequest *AiV1TagSuggestionsRequest
 }
 
-func (r ApiQueryDocsAiV1DocCompletionRequest) AiV1ChatCompletionsRequest(aiV1ChatCompletionsRequest AiV1ChatCompletionsRequest) ApiQueryDocsAiV1DocCompletionRequest {
-	r.aiV1ChatCompletionsRequest = &aiV1ChatCompletionsRequest
+func (r ApiQueryAiV1TagSuggestionRequest) AiV1TagSuggestionsRequest(aiV1TagSuggestionsRequest AiV1TagSuggestionsRequest) ApiQueryAiV1TagSuggestionRequest {
+	r.aiV1TagSuggestionsRequest = &aiV1TagSuggestionsRequest
 	return r
 }
 
-func (r ApiQueryDocsAiV1DocCompletionRequest) Execute() (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
-	return r.ApiService.QueryDocsAiV1DocCompletionExecute(r)
+func (r ApiQueryAiV1TagSuggestionRequest) Execute() (AiV1TagSuggestionsResponse, *_nethttp.Response, error) {
+	return r.ApiService.QueryAiV1TagSuggestionExecute(r)
 }
 
 /*
-QueryDocsAiV1DocCompletion Query a Doc Completion
+QueryAiV1TagSuggestion Query a Tag Suggestion
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+docs-ai-v1-early-access@confluent.io?subject=Request%20to%20join%20docs-ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20docs-ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Query the Docs AI assistant, optionally with prior conversation history.
+Query the Confluent AI assistant to suggest tags for given fields in a schema.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQueryDocsAiV1DocCompletionRequest
+	@return ApiQueryAiV1TagSuggestionRequest
 */
-func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletion(ctx _context.Context) ApiQueryDocsAiV1DocCompletionRequest {
-	return ApiQueryDocsAiV1DocCompletionRequest{
+func (a *TagSuggestionsAiV1ApiService) QueryAiV1TagSuggestion(ctx _context.Context) ApiQueryAiV1TagSuggestionRequest {
+	return ApiQueryAiV1TagSuggestionRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -94,23 +94,23 @@ func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletion(ctx _conte
 
 // Execute executes the request
 //
-//	@return AiV1ChatCompletionsReply
-func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletionExecute(r ApiQueryDocsAiV1DocCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
+//	@return AiV1TagSuggestionsResponse
+func (a *TagSuggestionsAiV1ApiService) QueryAiV1TagSuggestionExecute(r ApiQueryAiV1TagSuggestionRequest) (AiV1TagSuggestionsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AiV1ChatCompletionsReply
+		localVarReturnValue  AiV1TagSuggestionsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DocCompletionsDocsAiV1ApiService.QueryDocsAiV1DocCompletion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagSuggestionsAiV1ApiService.QueryAiV1TagSuggestion")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/docs-ai/v1/doc-completions"
+	localVarPath := localBasePath + "/ai/v1/tag-suggestions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -134,7 +134,7 @@ func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletionExecute(r A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aiV1ChatCompletionsRequest
+	localVarPostBody = r.aiV1TagSuggestionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -158,6 +158,26 @@ func (a *DocCompletionsDocsAiV1ApiService) QueryDocsAiV1DocCompletionExecute(r A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

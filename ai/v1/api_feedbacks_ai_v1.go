@@ -42,15 +42,15 @@ var (
 type FeedbacksAiV1Api interface {
 
 	/*
-		CreateAiV1ChatCompletionFeedback Create a Feedback
+			CreateAiV1ChatCompletionFeedback Create a Feedback
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Submit feedback on the Confluent AI assistant.
+		Submit feedback on the Confluent AI assistant.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param chatCompletionId The Chat Completion
-		 @return ApiCreateAiV1ChatCompletionFeedbackRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param chatCompletionId The Chat Completion
+			 @return ApiCreateAiV1ChatCompletionFeedbackRequest
 	*/
 	CreateAiV1ChatCompletionFeedback(ctx _context.Context, chatCompletionId string) ApiCreateAiV1ChatCompletionFeedbackRequest
 
@@ -58,15 +58,15 @@ type FeedbacksAiV1Api interface {
 	CreateAiV1ChatCompletionFeedbackExecute(r ApiCreateAiV1ChatCompletionFeedbackRequest) (*_nethttp.Response, error)
 
 	/*
-		CreateAiV1DocCompletionFeedback Create a Feedback
+			CreateAiV1DocCompletionFeedback Create a Feedback
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Submit feedback on the Doc AI assistant.
+		Submit feedback on the Doc AI assistant.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param docCompletionId The Doc Completion
-		 @return ApiCreateAiV1DocCompletionFeedbackRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param docCompletionId The Doc Completion
+			 @return ApiCreateAiV1DocCompletionFeedbackRequest
 	*/
 	CreateAiV1DocCompletionFeedback(ctx _context.Context, docCompletionId string) ApiCreateAiV1DocCompletionFeedbackRequest
 

@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *FeedbacksAiV1Api* | [**CreateAiV1DocCompletionFeedback**](docs/FeedbacksAiV1Api.md#createaiv1doccompletionfeedback) | **Post** /docs-ai/v1/doc-completions/{doc_completion_id}/feedback | Create a Feedback
 *OrgPreferencesAiV1Api* | [**GetAiV1OrgPreference**](docs/OrgPreferencesAiV1Api.md#getaiv1orgpreference) | **Get** /ai/v1/org-preferences | Read the organization&#39;s ai-assistant setting in org-preferences.
 *OrgPreferencesAiV1Api* | [**UpdateAiV1OrgPreference**](docs/OrgPreferencesAiV1Api.md#updateaiv1orgpreference) | **Patch** /ai/v1/org-preferences | Set the organization&#39;s ai-assistant setting in org-preferences.
+*TagSuggestionsAiV1Api* | [**QueryAiV1TagSuggestion**](docs/TagSuggestionsAiV1Api.md#queryaiv1tagsuggestion) | **Post** /ai/v1/tag-suggestions | Query a Tag Suggestion
 
 
 ## Documentation For Models
@@ -97,6 +98,11 @@ Class | Method | HTTP request | Description
  - [AiV1ChatCompletionsRequest](docs/AiV1ChatCompletionsRequest.md)
  - [AiV1Feedback](docs/AiV1Feedback.md)
  - [AiV1OrgPreferences](docs/AiV1OrgPreferences.md)
+ - [AiV1SchemaField](docs/AiV1SchemaField.md)
+ - [AiV1TagDefinition](docs/AiV1TagDefinition.md)
+ - [AiV1TagSuggestionsRequest](docs/AiV1TagSuggestionsRequest.md)
+ - [AiV1TagSuggestionsResponse](docs/AiV1TagSuggestionsResponse.md)
+ - [AiV1TaggedSchemaField](docs/AiV1TaggedSchemaField.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
@@ -140,7 +146,7 @@ Each of these functions takes a value of the given basic type and returns a poin
 * `PtrString`
 * `PtrTime`
 
-## Author of this repo
+## Author
 
 api-team@confluent.io
 

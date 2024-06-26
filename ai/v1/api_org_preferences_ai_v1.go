@@ -41,15 +41,15 @@ var (
 type OrgPreferencesAiV1Api interface {
 
 	/*
-		GetAiV1OrgPreference Read the organization's ai-assistant setting in org-preferences.
+			GetAiV1OrgPreference Read the organization's ai-assistant setting in org-preferences.
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Returns the organization's ai-assistant setting in org-preferences.
+		Returns the organization's ai-assistant setting in org-preferences.
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiGetAiV1OrgPreferenceRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiGetAiV1OrgPreferenceRequest
 	*/
 	GetAiV1OrgPreference(ctx _context.Context) ApiGetAiV1OrgPreferenceRequest
 
@@ -58,17 +58,17 @@ type OrgPreferencesAiV1Api interface {
 	GetAiV1OrgPreferenceExecute(r ApiGetAiV1OrgPreferenceRequest) (AiV1OrgPreferences, *_nethttp.Response, error)
 
 	/*
-		UpdateAiV1OrgPreference Set the organization's ai-assistant setting in org-preferences.
+			UpdateAiV1OrgPreference Set the organization's ai-assistant setting in org-preferences.
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Updates the organization's ai-assistant setting in org-preferences.
-
-
+		Updates the organization's ai-assistant setting in org-preferences.
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiUpdateAiV1OrgPreferenceRequest
+
+
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiUpdateAiV1OrgPreferenceRequest
 	*/
 	UpdateAiV1OrgPreference(ctx _context.Context) ApiUpdateAiV1OrgPreferenceRequest
 

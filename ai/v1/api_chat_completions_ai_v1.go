@@ -41,14 +41,14 @@ var (
 type ChatCompletionsAiV1Api interface {
 
 	/*
-	GetAiV1ChatCompletion Read a Chat Completion
+			GetAiV1ChatCompletion Read a Chat Completion
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Get the HTTP methods/verbs (if any) the particular authenticated user is allowed to submit
+		Get the HTTP methods/verbs (if any) the particular authenticated user is allowed to submit
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetAiV1ChatCompletionRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiGetAiV1ChatCompletionRequest
 	*/
 	GetAiV1ChatCompletion(ctx _context.Context) ApiGetAiV1ChatCompletionRequest
 
@@ -56,14 +56,14 @@ Get the HTTP methods/verbs (if any) the particular authenticated user is allowed
 	GetAiV1ChatCompletionExecute(r ApiGetAiV1ChatCompletionRequest) (*_nethttp.Response, error)
 
 	/*
-	QueryAiV1ChatCompletion Query a Chat Completion
+			QueryAiV1ChatCompletion Query a Chat Completion
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To AI API v1](https://img.shields.io/badge/-Request%20Access%20To%20AI%20API%20v1-%23bc8540)](mailto:ccloud-api-access+ai-v1-early-access@confluent.io?subject=Request%20to%20join%20ai/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ai/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Query the Confluent AI assistant, optionally with prior conversation history.
+		Query the Confluent AI assistant, optionally with prior conversation history.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiQueryAiV1ChatCompletionRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiQueryAiV1ChatCompletionRequest
 	*/
 	QueryAiV1ChatCompletion(ctx _context.Context) ApiQueryAiV1ChatCompletionRequest
 
@@ -76,10 +76,9 @@ Query the Confluent AI assistant, optionally with prior conversation history.
 type ChatCompletionsAiV1ApiService service
 
 type ApiGetAiV1ChatCompletionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService ChatCompletionsAiV1Api
 }
-
 
 func (r ApiGetAiV1ChatCompletionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.GetAiV1ChatCompletionExecute(r)
@@ -92,13 +91,13 @@ GetAiV1ChatCompletion Read a Chat Completion
 
 Get the HTTP methods/verbs (if any) the particular authenticated user is allowed to submit
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAiV1ChatCompletionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAiV1ChatCompletionRequest
 */
 func (a *ChatCompletionsAiV1ApiService) GetAiV1ChatCompletion(ctx _context.Context) ApiGetAiV1ChatCompletionRequest {
 	return ApiGetAiV1ChatCompletionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -218,8 +217,8 @@ func (a *ChatCompletionsAiV1ApiService) GetAiV1ChatCompletionExecute(r ApiGetAiV
 }
 
 type ApiQueryAiV1ChatCompletionRequest struct {
-	ctx _context.Context
-	ApiService ChatCompletionsAiV1Api
+	ctx                        _context.Context
+	ApiService                 ChatCompletionsAiV1Api
 	aiV1ChatCompletionsRequest *AiV1ChatCompletionsRequest
 }
 
@@ -239,18 +238,19 @@ QueryAiV1ChatCompletion Query a Chat Completion
 
 Query the Confluent AI assistant, optionally with prior conversation history.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryAiV1ChatCompletionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryAiV1ChatCompletionRequest
 */
 func (a *ChatCompletionsAiV1ApiService) QueryAiV1ChatCompletion(ctx _context.Context) ApiQueryAiV1ChatCompletionRequest {
 	return ApiQueryAiV1ChatCompletionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AiV1ChatCompletionsReply
+//
+//	@return AiV1ChatCompletionsReply
 func (a *ChatCompletionsAiV1ApiService) QueryAiV1ChatCompletionExecute(r ApiQueryAiV1ChatCompletionRequest) (AiV1ChatCompletionsReply, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
