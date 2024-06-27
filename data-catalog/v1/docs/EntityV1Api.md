@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**GetByUniqueAttributes**](EntityV1Api.md#GetByUniqueAttributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Read an Entity
 [**GetTags**](EntityV1Api.md#GetTags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Read Tags for an Entity
 [**PartialEntityUpdate**](EntityV1Api.md#PartialEntityUpdate) | **Put** /catalog/v1/entity | Update an Entity Attribute
+[**RepublishAllEntities**](EntityV1Api.md#RepublishAllEntities) | **Post** /catalog/v1/entity-notifications-snapshot | Republish all entities events.
 [**UpdateBusinessMetadata**](EntityV1Api.md#UpdateBusinessMetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk Update Business Metadata
 [**UpdateTags**](EntityV1Api.md#UpdateTags) | **Put** /catalog/v1/entity/tags | Bulk Update Tags
 
@@ -579,6 +580,65 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RepublishAllEntities
+
+> RepublishAllEntities(ctx).Execute()
+
+Republish all entities events.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.EntityV1Api.RepublishAllEntities(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.RepublishAllEntities``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRepublishAllEntitiesRequest struct via the builder pattern
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

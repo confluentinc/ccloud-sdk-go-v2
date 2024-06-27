@@ -38,7 +38,7 @@ func main() {
     sortBy := "sortBy_example" // string | An attribute to sort by (optional)
     sortOrder := "sortOrder_example" // string | Sort order, either ASCENDING (default) or DESCENDING (optional)
     deleted := true // bool | Whether to include deleted entities (optional)
-    limit := int32(56) // int32 | Limit the result set to only include the specified number of entries (optional)
+    limit := int32(56) // int32 | Limit the result set to only include the specified number of entries (maximum 500) (optional)
     offset := int32(56) // int32 | Start offset of the result set (useful for pagination) (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | An attribute to sort by | 
  **sortOrder** | **string** | Sort order, either ASCENDING (default) or DESCENDING | 
  **deleted** | **bool** | Whether to include deleted entities | 
- **limit** | **int32** | Limit the result set to only include the specified number of entries | 
+ **limit** | **int32** | Limit the result set to only include the specified number of entries (maximum 500) | 
  **offset** | **int32** | Start offset of the result set (useful for pagination) | 
 
 ### Return type
@@ -121,7 +121,7 @@ func main() {
     sortBy := "sortBy_example" // string | An attribute to sort by (optional)
     sortOrder := "sortOrder_example" // string | Sort order, either ASCENDING (default) or DESCENDING (optional)
     deleted := true // bool | Whether to include deleted entities (optional)
-    limit := int32(56) // int32 | Limit the result set to only include the specified number of entries (optional)
+    limit := int32(56) // int32 | Limit the result set to only include the specified number of entries (maximum 500) (optional)
     offset := int32(56) // int32 | Start offset of the result set (useful for pagination) (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
  **sortBy** | **string** | An attribute to sort by | 
  **sortOrder** | **string** | Sort order, either ASCENDING (default) or DESCENDING | 
  **deleted** | **bool** | Whether to include deleted entities | 
- **limit** | **int32** | Limit the result set to only include the specified number of entries | 
+ **limit** | **int32** | Limit the result set to only include the specified number of entries (maximum 500) | 
  **offset** | **int32** | Start offset of the result set (useful for pagination) | 
 
 ### Return type

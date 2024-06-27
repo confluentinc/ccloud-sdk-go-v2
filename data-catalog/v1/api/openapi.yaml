@@ -37,6 +37,147 @@ tags:
     Related guide: [Catalog API Documentation](https://docs.confluent.io/cloud/current/stream-governance/stream-catalog.html#catalog-api-documentation).
   name: Types (v1)
 paths:
+  /catalog/v1/entity-notifications-snapshot:
+    post:
+      description: Republish all entities events.
+      operationId: republishAllEntities
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              example:
+                error_code: 400
+                message: Bad Request
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Bad Request
+          x-summary: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                error_code: 401
+                message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                error_code: 403
+                message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: The access credentials were considered insufficient to grant
+            access
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Error
+        "500":
+          content:
+            application/json:
+              example:
+                error_code: 500
+                message: Oops, something went wrong
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Internal Server Error
+          x-summary: Internal Server Error
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: Republish all entities events.
+      tags:
+      - Entity (v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity-notifications-snapshot \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity-notifications-snapshot")
+            .post(null)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity-notifications-snapshot\"\
+          \n\n\treq, _ := http.NewRequest(\"POST\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("POST", "/catalog/v1/entity-notifications-snapshot", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "psrc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/catalog/v1/entity-notifications-snapshot",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity-notifications-snapshot");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity-notifications-snapshot");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
   /catalog/v1/types/businessmetadatadefs:
     get:
       description: |-
@@ -3069,13 +3210,14 @@ paths:
           type: boolean
         style: form
       - description: Limit the result set to only include the specified number of
-          entries
+          entries (maximum 500)
         explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
+          maximum: 500
           type: integer
         style: form
       - description: Start offset of the result set (useful for pagination)
@@ -3293,13 +3435,14 @@ paths:
           type: boolean
         style: form
       - description: Limit the result set to only include the specified number of
-          entries
+          entries (maximum 500)
         explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
+          maximum: 500
           type: integer
         style: form
       - description: Start offset of the result set (useful for pagination)
@@ -3695,13 +3838,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"],"color":"PURPLE_LIGHT"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .post(body)
@@ -3729,18 +3872,19 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
-          ]}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ],\\\"color\\\":\\\"PURPLE_LIGHT\\\"}]\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]"
 
           headers = {
               'content-type': "application/json",
@@ -3817,7 +3961,8 @@ paths:
               ],
               superTypes: ['string'],
               entityTypes: ['string'],
-              subTypes: ['string']
+              subTypes: ['string'],
+              color: 'PURPLE_LIGHT'
             }
           ]));
           req.end();
@@ -3833,7 +3978,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3842,7 +3987,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
       description: |-
@@ -3925,13 +4070,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"],"color":"PURPLE_LIGHT"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .put(body)
@@ -3959,18 +4104,19 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
-          ]}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ],\\\"color\\\":\\\"PURPLE_LIGHT\\\"}]\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]"
 
           headers = {
               'content-type': "application/json",
@@ -4047,7 +4193,8 @@ paths:
               ],
               superTypes: ['string'],
               entityTypes: ['string'],
-              subTypes: ['string']
+              subTypes: ['string'],
+              color: 'PURPLE_LIGHT'
             }
           ]));
           req.end();
@@ -4063,7 +4210,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4072,7 +4219,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/types/tagdefs/{tagName}:
     delete:
@@ -5583,6 +5730,7 @@ components:
         - superTypes
         - superTypes
         updatedBy: updatedBy
+        color: PURPLE_LIGHT
         description: description
         updateTime: 6
         subTypes:
@@ -5723,6 +5871,26 @@ components:
             type: string
           type: array
           uniqueItems: true
+        color:
+          description: Tag Definition color
+          enum:
+          - PURPLE_LIGHT
+          - PURPLE_DARK
+          - BLUE_LIGHT
+          - BLUE_DARK
+          - GREEN_LIGHT
+          - GREEN_DARK
+          - YELLOW_LIGHT
+          - YELLOW_DARK
+          - ORANGE_LIGHT
+          - ORANGE_DARK
+          - RED_LIGHT
+          - RED_DARK
+          - MAGENTA_LIGHT
+          - MAGENTA_DARK
+          - NEUTRAL_LIGHT
+          - NEUTRAL_DARK
+          type: string
       type: object
     ErrorMessage:
       description: Error message of this operation
@@ -6094,6 +6262,7 @@ components:
         - superTypes
         - superTypes
         updatedBy: updatedBy
+        color: PURPLE_LIGHT
         description: description
         updateTime: 6
         subTypes:
@@ -6237,6 +6406,26 @@ components:
             type: string
           type: array
           uniqueItems: true
+        color:
+          description: Tag Definition color
+          enum:
+          - PURPLE_LIGHT
+          - PURPLE_DARK
+          - BLUE_LIGHT
+          - BLUE_DARK
+          - GREEN_LIGHT
+          - GREEN_DARK
+          - YELLOW_LIGHT
+          - YELLOW_DARK
+          - ORANGE_LIGHT
+          - ORANGE_DARK
+          - RED_LIGHT
+          - RED_DARK
+          - MAGENTA_LIGHT
+          - MAGENTA_DARK
+          - NEUTRAL_LIGHT
+          - NEUTRAL_DARK
+          type: string
         error:
           $ref: '#/components/schemas/ErrorMessage'
       type: object
@@ -6252,5 +6441,5 @@ components:
       flows:
         clientCredentials:
           scopes: {}
-          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+          tokenUrl: https://<oauth-identity-provider>/token
       type: oauth2

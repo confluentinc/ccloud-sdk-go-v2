@@ -140,7 +140,7 @@ func (r ApiSearchUsingAttributeRequest) Deleted(deleted bool) ApiSearchUsingAttr
 	return r
 }
 
-// Limit the result set to only include the specified number of entries
+// Limit the result set to only include the specified number of entries (maximum 500)
 func (r ApiSearchUsingAttributeRequest) Limit(limit int32) ApiSearchUsingAttributeRequest {
 	r.limit = &limit
 	return r
@@ -397,7 +397,7 @@ func (r ApiSearchUsingBasicRequest) Deleted(deleted bool) ApiSearchUsingBasicReq
 	return r
 }
 
-// Limit the result set to only include the specified number of entries
+// Limit the result set to only include the specified number of entries (maximum 500)
 func (r ApiSearchUsingBasicRequest) Limit(limit int32) ApiSearchUsingBasicRequest {
 	r.limit = &limit
 	return r

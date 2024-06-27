@@ -68,6 +68,8 @@ type TagDef struct {
 	EntityTypes *[]string `json:"entityTypes,omitempty"`
 	// The subtypes
 	SubTypes *[]string `json:"subTypes,omitempty"`
+	// Tag Definition color
+	Color *string `json:"color,omitempty"`
 }
 
 // NewTagDef instantiates a new TagDef object
@@ -599,6 +601,38 @@ func (o *TagDef) SetSubTypes(v []string) {
 	o.SubTypes = &v
 }
 
+// GetColor returns the Color field value if set, zero value otherwise.
+func (o *TagDef) GetColor() string {
+	if o == nil || o.Color == nil {
+		var ret string
+		return ret
+	}
+	return *o.Color
+}
+
+// GetColorOk returns a tuple with the Color field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TagDef) GetColorOk() (*string, bool) {
+	if o == nil || o.Color == nil {
+		return nil, false
+	}
+	return o.Color, true
+}
+
+// HasColor returns a boolean if a field has been set.
+func (o *TagDef) HasColor() bool {
+	if o != nil && o.Color != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetColor gets a reference to the given string and assigns it to the Color field.
+func (o *TagDef) SetColor(v string) {
+	o.Color = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TagDef) Redact() {
 	o.recurseRedact(o.Category)
@@ -617,6 +651,7 @@ func (o *TagDef) Redact() {
 	o.recurseRedact(o.SuperTypes)
 	o.recurseRedact(o.EntityTypes)
 	o.recurseRedact(o.SubTypes)
+	o.recurseRedact(o.Color)
 }
 
 func (o *TagDef) recurseRedact(v interface{}) {
@@ -698,6 +733,9 @@ func (o TagDef) MarshalJSON() ([]byte, error) {
 	}
 	if o.SubTypes != nil {
 		toSerialize["subTypes"] = o.SubTypes
+	}
+	if o.Color != nil {
+		toSerialize["color"] = o.Color
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *EntityV1Api* | [**GetByUniqueAttributes**](docs/EntityV1Api.md#getbyuniqueattributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Read an Entity
 *EntityV1Api* | [**GetTags**](docs/EntityV1Api.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Read Tags for an Entity
 *EntityV1Api* | [**PartialEntityUpdate**](docs/EntityV1Api.md#partialentityupdate) | **Put** /catalog/v1/entity | Update an Entity Attribute
+*EntityV1Api* | [**RepublishAllEntities**](docs/EntityV1Api.md#republishallentities) | **Post** /catalog/v1/entity-notifications-snapshot | Republish all entities events.
 *EntityV1Api* | [**UpdateBusinessMetadata**](docs/EntityV1Api.md#updatebusinessmetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk Update Business Metadata
 *EntityV1Api* | [**UpdateTags**](docs/EntityV1Api.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk Update Tags
 *SearchV1Api* | [**SearchUsingAttribute**](docs/SearchV1Api.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Search by Attribute
