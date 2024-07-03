@@ -34,14 +34,14 @@ import (
 	"reflect"
 )
 
-// PimV1AwsIntegrationConfig config schema for AWS cloud service provider. 
+// PimV1AwsIntegrationConfig config schema for AWS cloud service provider.
 type PimV1AwsIntegrationConfig struct {
-	// Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account. 
-	ConfluentAwsRoleArn *string `json:"confluent_aws_role_arn,omitempty"`
-	// Unique external ID that Confluent Cloud uses when it assumes the IAM role in your Amazon Web Services (AWS) account. 
-	ConfluentAwsExternalId *string `json:"confluent_aws_external_id,omitempty"`
-	// Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account. 
-	AwsRoleArn *string `json:"aws_role_arn,omitempty"`
+	// Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud uses to assume customer IAM role when it accesses resources in your AWS account.
+	IamRoleArn *string `json:"iam_role_arn,omitempty"`
+	// Unique external ID that Confluent Cloud uses when it assumes the IAM role in your Amazon Web Services (AWS) account.
+	ExternalId *string `json:"external_id,omitempty"`
+	// Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account.
+	CustomerIamRoleArn *string `json:"customer_iam_role_arn,omitempty"`
 	// Cloud provider specific config to which access is provided through provider integration.
 	Kind string `json:"kind,omitempty"`
 }
@@ -64,100 +64,100 @@ func NewPimV1AwsIntegrationConfigWithDefaults() *PimV1AwsIntegrationConfig {
 	return &this
 }
 
-// GetConfluentAwsRoleArn returns the ConfluentAwsRoleArn field value if set, zero value otherwise.
-func (o *PimV1AwsIntegrationConfig) GetConfluentAwsRoleArn() string {
-	if o == nil || o.ConfluentAwsRoleArn == nil {
+// GetIamRoleArn returns the IamRoleArn field value if set, zero value otherwise.
+func (o *PimV1AwsIntegrationConfig) GetIamRoleArn() string {
+	if o == nil || o.IamRoleArn == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfluentAwsRoleArn
+	return *o.IamRoleArn
 }
 
-// GetConfluentAwsRoleArnOk returns a tuple with the ConfluentAwsRoleArn field value if set, nil otherwise
+// GetIamRoleArnOk returns a tuple with the IamRoleArn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PimV1AwsIntegrationConfig) GetConfluentAwsRoleArnOk() (*string, bool) {
-	if o == nil || o.ConfluentAwsRoleArn == nil {
+func (o *PimV1AwsIntegrationConfig) GetIamRoleArnOk() (*string, bool) {
+	if o == nil || o.IamRoleArn == nil {
 		return nil, false
 	}
-	return o.ConfluentAwsRoleArn, true
+	return o.IamRoleArn, true
 }
 
-// HasConfluentAwsRoleArn returns a boolean if a field has been set.
-func (o *PimV1AwsIntegrationConfig) HasConfluentAwsRoleArn() bool {
-	if o != nil && o.ConfluentAwsRoleArn != nil {
+// HasIamRoleArn returns a boolean if a field has been set.
+func (o *PimV1AwsIntegrationConfig) HasIamRoleArn() bool {
+	if o != nil && o.IamRoleArn != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetConfluentAwsRoleArn gets a reference to the given string and assigns it to the ConfluentAwsRoleArn field.
-func (o *PimV1AwsIntegrationConfig) SetConfluentAwsRoleArn(v string) {
-	o.ConfluentAwsRoleArn = &v
+// SetIamRoleArn gets a reference to the given string and assigns it to the IamRoleArn field.
+func (o *PimV1AwsIntegrationConfig) SetIamRoleArn(v string) {
+	o.IamRoleArn = &v
 }
 
-// GetConfluentAwsExternalId returns the ConfluentAwsExternalId field value if set, zero value otherwise.
-func (o *PimV1AwsIntegrationConfig) GetConfluentAwsExternalId() string {
-	if o == nil || o.ConfluentAwsExternalId == nil {
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *PimV1AwsIntegrationConfig) GetExternalId() string {
+	if o == nil || o.ExternalId == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfluentAwsExternalId
+	return *o.ExternalId
 }
 
-// GetConfluentAwsExternalIdOk returns a tuple with the ConfluentAwsExternalId field value if set, nil otherwise
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PimV1AwsIntegrationConfig) GetConfluentAwsExternalIdOk() (*string, bool) {
-	if o == nil || o.ConfluentAwsExternalId == nil {
+func (o *PimV1AwsIntegrationConfig) GetExternalIdOk() (*string, bool) {
+	if o == nil || o.ExternalId == nil {
 		return nil, false
 	}
-	return o.ConfluentAwsExternalId, true
+	return o.ExternalId, true
 }
 
-// HasConfluentAwsExternalId returns a boolean if a field has been set.
-func (o *PimV1AwsIntegrationConfig) HasConfluentAwsExternalId() bool {
-	if o != nil && o.ConfluentAwsExternalId != nil {
+// HasExternalId returns a boolean if a field has been set.
+func (o *PimV1AwsIntegrationConfig) HasExternalId() bool {
+	if o != nil && o.ExternalId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetConfluentAwsExternalId gets a reference to the given string and assigns it to the ConfluentAwsExternalId field.
-func (o *PimV1AwsIntegrationConfig) SetConfluentAwsExternalId(v string) {
-	o.ConfluentAwsExternalId = &v
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
+func (o *PimV1AwsIntegrationConfig) SetExternalId(v string) {
+	o.ExternalId = &v
 }
 
-// GetAwsRoleArn returns the AwsRoleArn field value if set, zero value otherwise.
-func (o *PimV1AwsIntegrationConfig) GetAwsRoleArn() string {
-	if o == nil || o.AwsRoleArn == nil {
+// GetCustomerIamRoleArn returns the CustomerIamRoleArn field value if set, zero value otherwise.
+func (o *PimV1AwsIntegrationConfig) GetCustomerIamRoleArn() string {
+	if o == nil || o.CustomerIamRoleArn == nil {
 		var ret string
 		return ret
 	}
-	return *o.AwsRoleArn
+	return *o.CustomerIamRoleArn
 }
 
-// GetAwsRoleArnOk returns a tuple with the AwsRoleArn field value if set, nil otherwise
+// GetCustomerIamRoleArnOk returns a tuple with the CustomerIamRoleArn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PimV1AwsIntegrationConfig) GetAwsRoleArnOk() (*string, bool) {
-	if o == nil || o.AwsRoleArn == nil {
+func (o *PimV1AwsIntegrationConfig) GetCustomerIamRoleArnOk() (*string, bool) {
+	if o == nil || o.CustomerIamRoleArn == nil {
 		return nil, false
 	}
-	return o.AwsRoleArn, true
+	return o.CustomerIamRoleArn, true
 }
 
-// HasAwsRoleArn returns a boolean if a field has been set.
-func (o *PimV1AwsIntegrationConfig) HasAwsRoleArn() bool {
-	if o != nil && o.AwsRoleArn != nil {
+// HasCustomerIamRoleArn returns a boolean if a field has been set.
+func (o *PimV1AwsIntegrationConfig) HasCustomerIamRoleArn() bool {
+	if o != nil && o.CustomerIamRoleArn != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsRoleArn gets a reference to the given string and assigns it to the AwsRoleArn field.
-func (o *PimV1AwsIntegrationConfig) SetAwsRoleArn(v string) {
-	o.AwsRoleArn = &v
+// SetCustomerIamRoleArn gets a reference to the given string and assigns it to the CustomerIamRoleArn field.
+func (o *PimV1AwsIntegrationConfig) SetCustomerIamRoleArn(v string) {
+	o.CustomerIamRoleArn = &v
 }
 
 // GetKind returns the Kind field value
@@ -173,7 +173,7 @@ func (o *PimV1AwsIntegrationConfig) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *PimV1AwsIntegrationConfig) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -186,52 +186,52 @@ func (o *PimV1AwsIntegrationConfig) SetKind(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *PimV1AwsIntegrationConfig) Redact() {
-    o.recurseRedact(o.ConfluentAwsRoleArn)
-    o.recurseRedact(o.ConfluentAwsExternalId)
-    o.recurseRedact(o.AwsRoleArn)
-    o.recurseRedact(&o.Kind)
+	o.recurseRedact(o.IamRoleArn)
+	o.recurseRedact(o.ExternalId)
+	o.recurseRedact(o.CustomerIamRoleArn)
+	o.recurseRedact(&o.Kind)
 }
 
 func (o *PimV1AwsIntegrationConfig) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o PimV1AwsIntegrationConfig) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o PimV1AwsIntegrationConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConfluentAwsRoleArn != nil {
-		toSerialize["confluent_aws_role_arn"] = o.ConfluentAwsRoleArn
+	if o.IamRoleArn != nil {
+		toSerialize["iam_role_arn"] = o.IamRoleArn
 	}
-	if o.ConfluentAwsExternalId != nil {
-		toSerialize["confluent_aws_external_id"] = o.ConfluentAwsExternalId
+	if o.ExternalId != nil {
+		toSerialize["external_id"] = o.ExternalId
 	}
-	if o.AwsRoleArn != nil {
-		toSerialize["aws_role_arn"] = o.AwsRoleArn
+	if o.CustomerIamRoleArn != nil {
+		toSerialize["customer_iam_role_arn"] = o.CustomerIamRoleArn
 	}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -282,5 +282,3 @@ func (v *NullablePimV1AwsIntegrationConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

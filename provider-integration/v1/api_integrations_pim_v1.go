@@ -42,14 +42,14 @@ var (
 type IntegrationsPimV1Api interface {
 
 	/*
-	CreatePimV1Integration Create an Integration
+		CreatePimV1Integration Create an Integration
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to create an integration.
+	Make a request to create an integration.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreatePimV1IntegrationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreatePimV1IntegrationRequest
 	*/
 	CreatePimV1Integration(ctx _context.Context) ApiCreatePimV1IntegrationRequest
 
@@ -58,18 +58,18 @@ Make a request to create an integration.
 	CreatePimV1IntegrationExecute(r ApiCreatePimV1IntegrationRequest) (PimV1Integration, *_nethttp.Response, error)
 
 	/*
-	DeletePimV1Integration Delete an Integration
+		DeletePimV1Integration Delete an Integration
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to delete an integration.
+	Make a request to delete an integration.
 
-This request fails if existing workloads are using this CSP integration.
+	This request fails if existing workloads are using this CSP integration.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the integration.
-	 @return ApiDeletePimV1IntegrationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the integration.
+		 @return ApiDeletePimV1IntegrationRequest
 	*/
 	DeletePimV1Integration(ctx _context.Context, id string) ApiDeletePimV1IntegrationRequest
 
@@ -77,15 +77,15 @@ This request fails if existing workloads are using this CSP integration.
 	DeletePimV1IntegrationExecute(r ApiDeletePimV1IntegrationRequest) (*_nethttp.Response, error)
 
 	/*
-	GetPimV1Integration Read an Integration
+		GetPimV1Integration Read an Integration
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read an integration.
+	Make a request to read an integration.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the integration.
-	 @return ApiGetPimV1IntegrationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the integration.
+		 @return ApiGetPimV1IntegrationRequest
 	*/
 	GetPimV1Integration(ctx _context.Context, id string) ApiGetPimV1IntegrationRequest
 
@@ -94,17 +94,17 @@ Make a request to read an integration.
 	GetPimV1IntegrationExecute(r ApiGetPimV1IntegrationRequest) (PimV1Integration, *_nethttp.Response, error)
 
 	/*
-	ListPimV1Integrations List of Integrations
+		ListPimV1Integrations List of Integrations
 
-	[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v1-early-access@confluent.io?subject=Request%20to%20join%20pim/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all integrations.
+	Retrieve a sorted, filtered, paginated list of all integrations.
 
-If no `provider` filter is specified, returns provider integrations from all clouds.
+	If no `provider` filter is specified, returns provider integrations from all clouds.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListPimV1IntegrationsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListPimV1IntegrationsRequest
 	*/
 	ListPimV1Integrations(ctx _context.Context) ApiListPimV1IntegrationsRequest
 
@@ -117,8 +117,8 @@ If no `provider` filter is specified, returns provider integrations from all clo
 type IntegrationsPimV1ApiService service
 
 type ApiCreatePimV1IntegrationRequest struct {
-	ctx _context.Context
-	ApiService IntegrationsPimV1Api
+	ctx              _context.Context
+	ApiService       IntegrationsPimV1Api
 	pimV1Integration *PimV1Integration
 }
 
@@ -138,18 +138,19 @@ CreatePimV1Integration Create an Integration
 
 Make a request to create an integration.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreatePimV1IntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreatePimV1IntegrationRequest
 */
 func (a *IntegrationsPimV1ApiService) CreatePimV1Integration(ctx _context.Context) ApiCreatePimV1IntegrationRequest {
 	return ApiCreatePimV1IntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PimV1Integration
+//
+//	@return PimV1Integration
 func (a *IntegrationsPimV1ApiService) CreatePimV1IntegrationExecute(r ApiCreatePimV1IntegrationRequest) (PimV1Integration, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -297,10 +298,10 @@ func (a *IntegrationsPimV1ApiService) CreatePimV1IntegrationExecute(r ApiCreateP
 }
 
 type ApiDeletePimV1IntegrationRequest struct {
-	ctx _context.Context
-	ApiService IntegrationsPimV1Api
+	ctx         _context.Context
+	ApiService  IntegrationsPimV1Api
 	environment *string
-	id string
+	id          string
 }
 
 // Scope the operation to the given environment.
@@ -322,16 +323,15 @@ Make a request to delete an integration.
 
 This request fails if existing workloads are using this CSP integration.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the integration.
- @return ApiDeletePimV1IntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the integration.
+	@return ApiDeletePimV1IntegrationRequest
 */
 func (a *IntegrationsPimV1ApiService) DeletePimV1Integration(ctx _context.Context, id string) ApiDeletePimV1IntegrationRequest {
 	return ApiDeletePimV1IntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -456,10 +456,10 @@ func (a *IntegrationsPimV1ApiService) DeletePimV1IntegrationExecute(r ApiDeleteP
 }
 
 type ApiGetPimV1IntegrationRequest struct {
-	ctx _context.Context
-	ApiService IntegrationsPimV1Api
+	ctx         _context.Context
+	ApiService  IntegrationsPimV1Api
 	environment *string
-	id string
+	id          string
 }
 
 // Scope the operation to the given environment.
@@ -479,20 +479,21 @@ GetPimV1Integration Read an Integration
 
 Make a request to read an integration.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the integration.
- @return ApiGetPimV1IntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the integration.
+	@return ApiGetPimV1IntegrationRequest
 */
 func (a *IntegrationsPimV1ApiService) GetPimV1Integration(ctx _context.Context, id string) ApiGetPimV1IntegrationRequest {
 	return ApiGetPimV1IntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return PimV1Integration
+//
+//	@return PimV1Integration
 func (a *IntegrationsPimV1ApiService) GetPimV1IntegrationExecute(r ApiGetPimV1IntegrationRequest) (PimV1Integration, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -623,12 +624,12 @@ func (a *IntegrationsPimV1ApiService) GetPimV1IntegrationExecute(r ApiGetPimV1In
 }
 
 type ApiListPimV1IntegrationsRequest struct {
-	ctx _context.Context
-	ApiService IntegrationsPimV1Api
+	ctx         _context.Context
+	ApiService  IntegrationsPimV1Api
 	environment *string
-	provider *string
-	pageSize *int32
-	pageToken *string
+	provider    *string
+	pageSize    *int32
+	pageToken   *string
 }
 
 // Filter the results by exact match for environment.
@@ -636,16 +637,19 @@ func (r ApiListPimV1IntegrationsRequest) Environment(environment string) ApiList
 	r.environment = &environment
 	return r
 }
+
 // Filter the results by exact match for provider.
 func (r ApiListPimV1IntegrationsRequest) Provider(provider string) ApiListPimV1IntegrationsRequest {
 	r.provider = &provider
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListPimV1IntegrationsRequest) PageSize(pageSize int32) ApiListPimV1IntegrationsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListPimV1IntegrationsRequest) PageToken(pageToken string) ApiListPimV1IntegrationsRequest {
 	r.pageToken = &pageToken
@@ -665,19 +669,19 @@ Retrieve a sorted, filtered, paginated list of all integrations.
 
 If no `provider` filter is specified, returns provider integrations from all clouds.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListPimV1IntegrationsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListPimV1IntegrationsRequest
 */
 func (a *IntegrationsPimV1ApiService) ListPimV1Integrations(ctx _context.Context) ApiListPimV1IntegrationsRequest {
 	return ApiListPimV1IntegrationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PimV1IntegrationList
+//
+//	@return PimV1IntegrationList
 func (a *IntegrationsPimV1ApiService) ListPimV1IntegrationsExecute(r ApiListPimV1IntegrationsRequest) (PimV1IntegrationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

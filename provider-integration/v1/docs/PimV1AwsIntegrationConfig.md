@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConfluentAwsRoleArn** | Pointer to **string** | Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account.  | [optional] [readonly] 
-**ConfluentAwsExternalId** | Pointer to **string** | Unique external ID that Confluent Cloud uses when it assumes the IAM role in your Amazon Web Services (AWS) account.  | [optional] [readonly] 
-**AwsRoleArn** | Pointer to **string** | Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account.  | [optional] 
+**IamRoleArn** | Pointer to **string** | Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud uses to assume customer IAM role when it accesses resources in your AWS account.  | [optional] [readonly] 
+**ExternalId** | Pointer to **string** | Unique external ID that Confluent Cloud uses when it assumes the IAM role in your Amazon Web Services (AWS) account.  | [optional] [readonly] 
+**CustomerIamRoleArn** | Pointer to **string** | Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS) Identity and Access Management (IAM) role that Confluent Cloud assumes when it accesses resources in your AWS account.  | [optional] 
 **Kind** | **string** | Cloud provider specific config to which access is provided through provider integration. | 
 
 ## Methods
@@ -28,80 +28,80 @@ NewPimV1AwsIntegrationConfigWithDefaults instantiates a new PimV1AwsIntegrationC
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetConfluentAwsRoleArn
+### GetIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) GetConfluentAwsRoleArn() string`
+`func (o *PimV1AwsIntegrationConfig) GetIamRoleArn() string`
 
-GetConfluentAwsRoleArn returns the ConfluentAwsRoleArn field if non-nil, zero value otherwise.
+GetIamRoleArn returns the IamRoleArn field if non-nil, zero value otherwise.
 
-### GetConfluentAwsRoleArnOk
+### GetIamRoleArnOk
 
-`func (o *PimV1AwsIntegrationConfig) GetConfluentAwsRoleArnOk() (*string, bool)`
+`func (o *PimV1AwsIntegrationConfig) GetIamRoleArnOk() (*string, bool)`
 
-GetConfluentAwsRoleArnOk returns a tuple with the ConfluentAwsRoleArn field if it's non-nil, zero value otherwise
+GetIamRoleArnOk returns a tuple with the IamRoleArn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfluentAwsRoleArn
+### SetIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) SetConfluentAwsRoleArn(v string)`
+`func (o *PimV1AwsIntegrationConfig) SetIamRoleArn(v string)`
 
-SetConfluentAwsRoleArn sets ConfluentAwsRoleArn field to given value.
+SetIamRoleArn sets IamRoleArn field to given value.
 
-### HasConfluentAwsRoleArn
+### HasIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) HasConfluentAwsRoleArn() bool`
+`func (o *PimV1AwsIntegrationConfig) HasIamRoleArn() bool`
 
-HasConfluentAwsRoleArn returns a boolean if a field has been set.
+HasIamRoleArn returns a boolean if a field has been set.
 
-### GetConfluentAwsExternalId
+### GetExternalId
 
-`func (o *PimV1AwsIntegrationConfig) GetConfluentAwsExternalId() string`
+`func (o *PimV1AwsIntegrationConfig) GetExternalId() string`
 
-GetConfluentAwsExternalId returns the ConfluentAwsExternalId field if non-nil, zero value otherwise.
+GetExternalId returns the ExternalId field if non-nil, zero value otherwise.
 
-### GetConfluentAwsExternalIdOk
+### GetExternalIdOk
 
-`func (o *PimV1AwsIntegrationConfig) GetConfluentAwsExternalIdOk() (*string, bool)`
+`func (o *PimV1AwsIntegrationConfig) GetExternalIdOk() (*string, bool)`
 
-GetConfluentAwsExternalIdOk returns a tuple with the ConfluentAwsExternalId field if it's non-nil, zero value otherwise
+GetExternalIdOk returns a tuple with the ExternalId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfluentAwsExternalId
+### SetExternalId
 
-`func (o *PimV1AwsIntegrationConfig) SetConfluentAwsExternalId(v string)`
+`func (o *PimV1AwsIntegrationConfig) SetExternalId(v string)`
 
-SetConfluentAwsExternalId sets ConfluentAwsExternalId field to given value.
+SetExternalId sets ExternalId field to given value.
 
-### HasConfluentAwsExternalId
+### HasExternalId
 
-`func (o *PimV1AwsIntegrationConfig) HasConfluentAwsExternalId() bool`
+`func (o *PimV1AwsIntegrationConfig) HasExternalId() bool`
 
-HasConfluentAwsExternalId returns a boolean if a field has been set.
+HasExternalId returns a boolean if a field has been set.
 
-### GetAwsRoleArn
+### GetCustomerIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) GetAwsRoleArn() string`
+`func (o *PimV1AwsIntegrationConfig) GetCustomerIamRoleArn() string`
 
-GetAwsRoleArn returns the AwsRoleArn field if non-nil, zero value otherwise.
+GetCustomerIamRoleArn returns the CustomerIamRoleArn field if non-nil, zero value otherwise.
 
-### GetAwsRoleArnOk
+### GetCustomerIamRoleArnOk
 
-`func (o *PimV1AwsIntegrationConfig) GetAwsRoleArnOk() (*string, bool)`
+`func (o *PimV1AwsIntegrationConfig) GetCustomerIamRoleArnOk() (*string, bool)`
 
-GetAwsRoleArnOk returns a tuple with the AwsRoleArn field if it's non-nil, zero value otherwise
+GetCustomerIamRoleArnOk returns a tuple with the CustomerIamRoleArn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAwsRoleArn
+### SetCustomerIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) SetAwsRoleArn(v string)`
+`func (o *PimV1AwsIntegrationConfig) SetCustomerIamRoleArn(v string)`
 
-SetAwsRoleArn sets AwsRoleArn field to given value.
+SetCustomerIamRoleArn sets CustomerIamRoleArn field to given value.
 
-### HasAwsRoleArn
+### HasCustomerIamRoleArn
 
-`func (o *PimV1AwsIntegrationConfig) HasAwsRoleArn() bool`
+`func (o *PimV1AwsIntegrationConfig) HasCustomerIamRoleArn() bool`
 
-HasAwsRoleArn returns a boolean if a field has been set.
+HasCustomerIamRoleArn returns a boolean if a field has been set.
 
 ### GetKind
 

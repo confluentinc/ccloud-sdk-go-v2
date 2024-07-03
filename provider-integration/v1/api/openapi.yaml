@@ -277,6 +277,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Integrations
       tags:
       - Integrations (pim/v1)
@@ -654,6 +655,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create an Integration
       tags:
       - Integrations (pim/v1)
@@ -665,13 +667,13 @@ paths:
             --url https://api.confluent.cloud/pim/v1/integrations \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"s3_provider_integration","provider":"AWS","config":{"aws_role_arn":"arn:aws:iam::000000000000:role/my-test-aws-role","kind":"AwsIntegrationConfig"},"environment":{"id":"env-00000"}}'
+            --data '{"display_name":"s3_provider_integration","provider":"AWS","config":{"customer_iam_role_arn":"arn:aws:iam::000000000000:role/my-test-aws-role","kind":"AwsIntegrationConfig"},"environment":{"id":"env-00000"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"aws_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"customer_iam_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/pim/v1/integrations")
             .post(body)
@@ -684,21 +686,21 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/pim/v1/integrations\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"s3_provider_integration\\\
-          \",\\\"provider\\\":\\\"AWS\\\",\\\"config\\\":{\\\"aws_role_arn\\\":\\\"\
-          arn:aws:iam::000000000000:role/my-test-aws-role\\\",\\\"kind\\\":\\\"AwsIntegrationConfig\\\
-          \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"}}\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"provider\\\":\\\"AWS\\\",\\\"config\\\":{\\\"customer_iam_role_arn\\\
+          \":\\\"arn:aws:iam::000000000000:role/my-test-aws-role\\\",\\\"kind\\\"\
+          :\\\"AwsIntegrationConfig\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"aws_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}"
+          payload = "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"customer_iam_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -743,7 +745,7 @@ paths:
             display_name: 's3_provider_integration',
             provider: 'AWS',
             config: {
-              aws_role_arn: 'arn:aws:iam::000000000000:role/my-test-aws-role',
+              customer_iam_role_arn: 'arn:aws:iam::000000000000:role/my-test-aws-role',
               kind: 'AwsIntegrationConfig'
             },
             environment: {id: 'env-00000'}
@@ -761,7 +763,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"aws_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"customer_iam_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -770,7 +772,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"aws_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"s3_provider_integration\",\"provider\":\"AWS\",\"config\":{\"customer_iam_role_arn\":\"arn:aws:iam::000000000000:role/my-test-aws-role\",\"kind\":\"AwsIntegrationConfig\"},\"environment\":{\"id\":\"env-00000\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Provider Integration
   /pim/v1/integrations/{id}:
@@ -988,6 +990,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete an Integration
       tags:
       - Integrations (pim/v1)
@@ -1307,6 +1310,7 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Integration
       tags:
       - Integrations (pim/v1)
@@ -1714,24 +1718,24 @@ components:
       description: |
         config schema for AWS cloud service provider.
       properties:
-        confluent_aws_role_arn:
+        iam_role_arn:
           description: |
             Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS)
-            Identity and Access Management (IAM) role that Confluent Cloud assumes when
-            it accesses resources in your AWS account.
+            Identity and Access Management (IAM) role that Confluent Cloud uses to assume
+            customer IAM role when it accesses resources in your AWS account.
           example: arn:aws:iam::000000000000:role/my-test-aws-role
           maxLength: 2048
           minLength: 20
           readOnly: true
           type: string
-        confluent_aws_external_id:
+        external_id:
           description: |
             Unique external ID that Confluent Cloud uses when it assumes the IAM role
             in your Amazon Web Services (AWS) account.
           format: uuid
           readOnly: true
           type: string
-        aws_role_arn:
+        customer_iam_role_arn:
           description: |
             Amazon Resource Name (ARN) that identifies the Amazon Web Services (AWS)
             Identity and Access Management (IAM) role that Confluent Cloud assumes when
@@ -2030,3 +2034,11 @@ components:
         Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

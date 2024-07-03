@@ -38,9 +38,8 @@ type PimV1IntegrationConfigOneOf struct {
 
 // PimV1AwsIntegrationConfigAsPimV1IntegrationConfigOneOf is a convenience function that returns PimV1AwsIntegrationConfig wrapped in PimV1IntegrationConfigOneOf
 func PimV1AwsIntegrationConfigAsPimV1IntegrationConfigOneOf(v *PimV1AwsIntegrationConfig) PimV1IntegrationConfigOneOf {
-	return PimV1IntegrationConfigOneOf{ PimV1AwsIntegrationConfig: v}
+	return PimV1IntegrationConfigOneOf{PimV1AwsIntegrationConfig: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PimV1IntegrationConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -93,7 +92,7 @@ func (src PimV1IntegrationConfigOneOf) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PimV1IntegrationConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *PimV1IntegrationConfigOneOf) GetActualInstance() interface{} {
 	if obj.PimV1AwsIntegrationConfig != nil {
 		return obj.PimV1AwsIntegrationConfig
 	}
@@ -141,5 +140,3 @@ func (v *NullablePimV1IntegrationConfigOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
