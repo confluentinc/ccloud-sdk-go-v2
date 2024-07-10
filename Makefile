@@ -73,8 +73,8 @@ ALL_FOLDER_NAMES := $(shell find . -maxdepth 1 -mindepth 1 -type d | awk -F '/' 
 # Go variables
 
 # Git variables
-INITIAL_TAG_VERSION := 0.0.1
 GIT_MESSAGE := $(shell git log -1 --pretty=%B)
+ROOT_FOLDER := "root"
 
 # From the latest PR merged to origin master, check the impacted folder name
 # IMPACTED_FOLDER_NAME represents the immediate tier-1 sub-folder gets impacted
@@ -85,7 +85,7 @@ IMPACTED_FOLDER_NAME := $(shell \
         folder=$$(echo "$$path" | grep "/" | cut -d'/' -f1 | uniq | head -n1); \
         echo $$folder; \
     else \
-        echo "root"; \
+        echo ROOT_FOLDER; \
     fi \
 )
 
@@ -97,7 +97,6 @@ VERSION_PREFIX := $(IMPACTED_FOLDER_NAME)/v
 # If IMPACTED_FOLDER_NAME has at least one tag in the past, bump the associated tag version
 # Otherwise assign the prefix + v0.0.0/v0.0.1 as the current/bump tag version
 CURRENT_TAG_VERSION := $(shell git describe --tags origin/master --match="$(IMPACTED_FOLDER_NAME)/v*" --abbrev=0 2>/dev/null || echo "$(VERSION_PREFIX)0.0.0")
-$(info the latest tag version is $(CURRENT_TAG_VERSION))
 
 # Decompose CURRENT_TAG_VERSION to MAJOR, MINOR and PATCH for flexible bump afterwards
 VERSION_NUMERIC := $(shell echo $(CURRENT_TAG_VERSION) | sed 's/.*\/v//')
@@ -106,7 +105,7 @@ MINOR := $(shell echo $(VERSION_NUMERIC) | awk -F'.' '{print $$2}')
 PATCH := $(shell echo $(VERSION_NUMERIC) | awk -F'.' '{print $$3}')
 
 # Determine new tag version based on commit message inclusion of "major", "minor" or "patch"
-# TODO: Discuss the logic with Kostya to see we should use commit message to trigger it
+# By default, minor version should be bumped
 NEXT_TAG_VERSION = $(VERSION_PREFIX)$(shell \
 	if echo "$(GIT_MESSAGE)" | grep -qi "major"; then \
 		echo "$$(($(MAJOR) + 1)).0.0"; \
@@ -115,19 +114,19 @@ NEXT_TAG_VERSION = $(VERSION_PREFIX)$(shell \
 	elif echo "$(GIT_MESSAGE)" | grep -qi "patch"; then \
 		echo "$(MAJOR).$(MINOR).$$(($(PATCH) + 1))"; \
 	else \
-		echo "$(MAJOR).$(MINOR).$$(($(PATCH) + 1))"; \
+		echo "$(MAJOR).$$(($(MINOR) + 1)).0"; \
 	fi)
 
-# print the impacted folder name, current and next tagging version
-.PHONY: show-version
-show-version:
+# print the impacted folder name, current and next candidate tagging version
+.PHONY: show-args
+show-args:
 	@echo impact folder from latest commit: $(IMPACTED_FOLDER_NAME)
 	@echo current tagging version: $(CURRENT_TAG_VERSION)
-	@echo next tagging version: $(NEXT_TAG_VERSION)
+	@echo next candidate tagging version: $(NEXT_TAG_VERSION)
 
 .PHONY: tag-release
 tag-release:
-ifeq ($(IMPACTED_FOLDER_NAME), root)
+ifeq ($(IMPACTED_FOLDER_NAME), $(ROOT_FOLDER))
 	@echo "Skip making a new tagged version for root-only changes"
 else
 	@echo "Making a new tagged version now for $(IMPACTED_FOLDER_NAME)..."

@@ -30,15 +30,6 @@ global_job_config:
       - export "PATH=${GOPATH}/bin:${PATH}"
       - mkdir -vp "${SEMAPHORE_GIT_DIR}" "${GOPATH}/bin"
       - checkout
-      - make show-args
-      - . vault-setup
-      - . vault-sem-get-secret ci-reporting
-      - . vault-sem-get-secret v1/ci/kv/service-foundations/cc-mk-include
-      - make init-ci
-  epilogue:
-    always:
-      commands:
-        - make epilogue-ci
 
 blocks:
   - name: "Build, Test, Release"
@@ -54,13 +45,11 @@ blocks:
       #          # custom vault secrets
       #          # custom prologue commands
       jobs:
-        - name: "Build, Test, Release"
+        - name: "Displaying the latest tag associated with most recent commit"
           commands:
-            - make build
-            - make test
-            - make release-ci
-      epilogue:
-        always:
-          commands:
-            - make epilogue-ci
-            - make testbreak-after
+            - make show-args
+
+promotions:
+  - name: Publish tagging
+    pipeline_file: publish_tagging.yml
+
