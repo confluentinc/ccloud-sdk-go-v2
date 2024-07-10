@@ -75,6 +75,8 @@ ALL_FOLDER_NAMES := $(shell find . -maxdepth 1 -mindepth 1 -type d | awk -F '/' 
 # Git variables
 GIT_MESSAGE := $(shell git log -1 --pretty=%B)
 ROOT_FOLDER := "root"
+SEMAPHORE_FOLDER := ".semaphore"
+GITHUB_FOLDER := ".github"
 
 # From the latest PR merged to origin master, check the impacted folder name
 # IMPACTED_FOLDER_NAME represents the immediate tier-1 sub-folder gets impacted
@@ -95,7 +97,7 @@ VERSION_PREFIX := $(IMPACTED_FOLDER_NAME)/v
 # such as README.md change in the case we should do nothing
 
 # If IMPACTED_FOLDER_NAME has at least one tag in the past, bump the associated tag version
-# Otherwise assign the prefix + v0.0.0/v0.0.1 as the current/bump tag version
+# Otherwise assign the prefix + v0.0.0/v0.1.0 as the default current/bump tag version
 CURRENT_TAG_VERSION := $(shell git describe --tags origin/master --match="$(IMPACTED_FOLDER_NAME)/v*" --abbrev=0 2>/dev/null || echo "$(VERSION_PREFIX)0.0.0")
 
 # Decompose CURRENT_TAG_VERSION to MAJOR, MINOR and PATCH for flexible bump afterwards
@@ -106,8 +108,11 @@ PATCH := $(shell echo $(VERSION_NUMERIC) | awk -F'.' '{print $$3}')
 
 # Determine new tag version based on commit message inclusion of "major", "minor" or "patch"
 # By default, minor version should be bumped
+# if the CURRENT_TAG_VERSION is deleted, then the numeric version will be reused
 NEXT_TAG_VERSION = $(VERSION_PREFIX)$(shell \
-	if echo "$(GIT_MESSAGE)" | grep -qi "major"; then \
+	if echo "$(CURRENT_TAG_VERSION)" | grep -qi "delete"; then \
+	  	echo "$(MAJOR).$(MINOR).$(PATCH)"; \
+	elif echo "$(GIT_MESSAGE)" | grep -qi "major"; then \
 		echo "$$(($(MAJOR) + 1)).0.0"; \
 	elif echo "$(GIT_MESSAGE)" | grep -qi "minor"; then \
 		echo "$(MAJOR).$$(($(MINOR) + 1)).0"; \
@@ -126,10 +131,17 @@ show-args:
 
 .PHONY: tag-release
 tag-release:
-ifeq ($(IMPACTED_FOLDER_NAME), $(ROOT_FOLDER))
-	@echo "Skip making a new tagged version for root-only changes"
-else
-	@echo "Making a new tagged version now for $(IMPACTED_FOLDER_NAME)..."
-	git tag $(NEXT_TAG_VERSION)
-	git push origin $(NEXT_TAG_VERSION)
-endif
+	@echo "Validate the next candidate tagging version before publishing..."
+	@if [ "$(IMPACTED_FOLDER_NAME)" = "$(ROOT_FOLDER)" ] || [ "$(IMPACTED_FOLDER_NAME)" = "$(SEMAPHORE_FOLDER)" ] || [ "$(IMPACTED_FOLDER_NAME)" = "$(GITHUB_FOLDER)" ]; then \
+    		if [ "$(IMPACTED_FOLDER_NAME)" = "$(ROOT_FOLDER)" ]; then \
+    			echo "Skip making a new tagging version for root-only changes"; \
+    		elif [ "$(IMPACTED_FOLDER_NAME)" = "$(SEMAPHORE_FOLDER)" ]; then \
+    			echo "Skip making a new tagging version for .semaphore folder changes"; \
+    		elif [ "$(IMPACTED_FOLDER_NAME)" = "$(GITHUB_FOLDER)" ]; then \
+    			echo "Skip making a new tagging version for .github folder changes"; \
+    		fi; \
+    else \
+    	echo "Making a new tagged version now for $(IMPACTED_FOLDER_NAME)..."; \
+    	git tag $(NEXT_TAG_VERSION); \
+    	git push origin $(NEXT_TAG_VERSION); \
+    fi
