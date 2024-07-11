@@ -2614,7 +2614,7 @@ components:
         display_name:
           description: The name of the Flink compute pool.
           example: flink_compute_pool_0
-          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,31}$
+          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,63}$
           type: string
           x-immutable: false
         cloud:
@@ -2943,7 +2943,7 @@ components:
         display_name:
           description: The name of the Flink compute pool.
           example: flink_compute_pool_0
-          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,31}$
+          pattern: ^(?:[0-9A-Za-z\-])[\w\.-]{0,63}$
           type: string
           x-immutable: false
         max_cfu:
