@@ -643,6 +643,7 @@ type ApiListSqlv1StatementsRequest struct {
 	specComputePoolId *string
 	pageSize          *int32
 	pageToken         *string
+	labelSelector     *string
 }
 
 // Filter the results by exact match for spec.compute_pool.
@@ -660,6 +661,12 @@ func (r ApiListSqlv1StatementsRequest) PageSize(pageSize int32) ApiListSqlv1Stat
 // An opaque pagination token for collection requests.
 func (r ApiListSqlv1StatementsRequest) PageToken(pageToken string) ApiListSqlv1StatementsRequest {
 	r.pageToken = &pageToken
+	return r
+}
+
+// A comma-separated label selector to filter the statements.
+func (r ApiListSqlv1StatementsRequest) LabelSelector(labelSelector string) ApiListSqlv1StatementsRequest {
+	r.labelSelector = &labelSelector
 	return r
 }
 
@@ -722,6 +729,9 @@ func (a *StatementsSqlV1ApiService) ListSqlv1StatementsExecute(r ApiListSqlv1Sta
 	}
 	if r.pageToken != nil {
 		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
+	}
+	if r.labelSelector != nil {
+		localVarQueryParams.Add("label_selector", parameterToString(*r.labelSelector, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

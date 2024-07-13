@@ -1855,6 +1855,14 @@ paths:
           maxLength: 255
           type: string
         style: form
+      - description: A comma-separated label selector to filter the statements.
+        explode: false
+        in: query
+        name: label_selector
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
