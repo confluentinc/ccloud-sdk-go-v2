@@ -1,4 +1,7 @@
 ### BEGIN MK-INCLUDE UPDATE ###
+### This section is managed by service-bot and should not be edited here.
+### You can make changes upstream in https://github.com/confluentinc/cc-service-bot
+
 CURL ?= curl
 FIND ?= find
 TAR ?= tar
@@ -22,11 +25,16 @@ MK_INCLUDE_TIMEOUT_MINS ?= 240
 # If this latest validated release is breaking you, please file a ticket with DevProd describing the issue, and
 # if necessary you can temporarily override MK_INCLUDE_VERSION above the managed section headers until the bad
 # release is yanked.
-MK_INCLUDE_VERSION ?= v0.1116.0
+MK_INCLUDE_VERSION ?= v0.1120.0
 
 # Make sure we always have a copy of the latest cc-mk-include release less than $(MK_INCLUDE_TIMEOUT_MINS) old:
-./$(MK_INCLUDE_DIR)/%.mk: .mk-include-check-FORCE
-	@trap "rm -f $(MK_INCLUDE_LOCKFILE); exit" 0 2 3 15; \
+# Note: The simply-expanded make variable makes sure this is run once per make invocation.
+UPDATE_MK_INCLUDE := $(shell \
+	func_fatal() { echo "$*" >&2; echo output here triggers error below; exit 1; } ; \
+	test -z "`git ls-files $(MK_INCLUDE_DIR)`" || { \
+		func_fatal 'fatal: checked in $(MK_INCLUDE_DIR)/ directory is preventing make from fetching recent cc-mk-include releases for CI'; \
+	} ; \
+	trap "rm -f $(MK_INCLUDE_LOCKFILE); exit" 0 2 3 15; \
 	waitlock=0; while ! ( set -o noclobber; echo > $(MK_INCLUDE_LOCKFILE) ); do \
 	   sleep $$waitlock; waitlock=`expr $$waitlock + 1`; \
 	   test 14 -lt $$waitlock && { \
@@ -36,33 +44,29 @@ MK_INCLUDE_VERSION ?= v0.1116.0
 	done; \
 	test -s $(MK_INCLUDE_TIMESTAMP_FILE) || rm -f $(MK_INCLUDE_TIMESTAMP_FILE); \
 	test -z "`$(FIND) $(MK_INCLUDE_TIMESTAMP_FILE) -mmin +$(MK_INCLUDE_TIMEOUT_MINS) 2>&1`" || { \
-	   grep -q 'machine $(GITHUB_API)' ~/.netrc 2>/dev/null || { \
-	      echo 'error: follow https://confluentinc.atlassian.net/l/cp/0WXXRLDh to fix your ~/.netrc'; \
-	      exit 1; \
-	   }; \
+	   grep -q 'machine $(GITHUB_API)' ~/.netrc 2>/dev/null || \
+	      func_fatal 'error: follow https://confluentinc.atlassian.net/l/cp/0WXXRLDh to fix your ~/.netrc'; \
 	   $(CURL) --fail --silent --netrc --location "$(GITHUB_API_CC_MK_INCLUDE_VERSION)" --output $(MK_INCLUDE_TIMESTAMP_FILE)T --write-out '$(GITHUB_API_CC_MK_INCLUDE_VERSION): %{errormsg}\n' >&2 \
 	   && $(TAR) zxf $(MK_INCLUDE_TIMESTAMP_FILE)T \
 	   && rm -rf $(MK_INCLUDE_DIR) \
 	   && mv $(GITHUB_MK_INCLUDE_OWNER)-$(GITHUB_MK_INCLUDE_REPO)-* $(MK_INCLUDE_DIR) \
 	   && mv -f $(MK_INCLUDE_TIMESTAMP_FILE)T $(MK_INCLUDE_TIMESTAMP_FILE) \
-	   && echo 'installed cc-mk-include-$(MK_INCLUDE_VERSION) from $(GITHUB_MK_INCLUDE_REPO)' \
+	   && echo 'installed cc-mk-include-$(MK_INCLUDE_VERSION) from $(GITHUB_MK_INCLUDE_REPO)' >&2 \
+	   || func_fatal unable to install cc-mk-include-$(MK_INCLUDE_VERSION) from $(GITHUB_MK_INCLUDE_REPO) \
 	   ; \
 	} || { \
 	   rm -f $(MK_INCLUDE_TIMESTAMP_FILE)T; \
 	   if test -f $(MK_INCLUDE_TIMESTAMP_FILE); then \
 	      touch $(MK_INCLUDE_TIMESTAMP_FILE); \
-	      echo 'unable to access $(GITHUB_MK_INCLUDE_REPO) fetch API to check for latest release; next try in $(MK_INCLUDE_TIMEOUT_MINS) minutes' >&2; \
+	      func_fatal 'unable to access $(GITHUB_MK_INCLUDE_REPO) fetch API to check for latest release; next try in $(MK_INCLUDE_TIMEOUT_MINS) minutes'; \
 	   else \
-	      echo 'unable to access $(GITHUB_MK_INCLUDE_REPO) fetch API to bootstrap mk-include subdirectory' >&2 && false; \
+	      func_fatal 'unable to access $(GITHUB_MK_INCLUDE_REPO) fetch API to bootstrap mk-include subdirectory'; \
 	   fi; \
-	}
-
-.PHONY: .mk-include-check-FORCE
-.mk-include-check-FORCE:
-	@test -z "`git ls-files $(MK_INCLUDE_DIR)`" || { \
-		echo 'fatal: checked in $(MK_INCLUDE_DIR)/ directory is preventing make from fetching recent cc-mk-include releases for CI' >&2; \
-		exit 1; \
-	}
+	} \
+)
+ifneq ($(UPDATE_MK_INCLUDE),)
+    $(error mk-include update failed)
+endif
 ### END MK-INCLUDE UPDATE ###
 # Project variables
 NAME := ccloud-sdk-go-v2-internal
