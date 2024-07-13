@@ -45,6 +45,7 @@ type StatementsSqlV1beta1Api interface {
 		CreateSqlv1beta1Statement Create a Statement
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Make a request to create a statement.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -62,6 +63,7 @@ type StatementsSqlV1beta1Api interface {
 		DeleteSqlv1beta1Statement Delete a Statement
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Make a request to delete a statement.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -79,6 +81,7 @@ type StatementsSqlV1beta1Api interface {
 		GetSqlv1beta1Statement Read a Statement
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Make a request to read a statement.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -97,6 +100,7 @@ type StatementsSqlV1beta1Api interface {
 		ListSqlv1beta1Statements List of Statements
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Retrieve a sorted, filtered, paginated list of all statements.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -114,6 +118,7 @@ type StatementsSqlV1beta1Api interface {
 		UpdateSqlv1beta1Statement Update a Statement
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Make a request to update a statement.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -152,6 +157,7 @@ func (r ApiCreateSqlv1beta1StatementRequest) Execute() (SqlV1beta1Statement, *_n
 CreateSqlv1beta1Statement Create a Statement
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to create a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -325,6 +331,7 @@ func (r ApiDeleteSqlv1beta1StatementRequest) Execute() (*_nethttp.Response, erro
 DeleteSqlv1beta1Statement Delete a Statement
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to delete a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -477,6 +484,7 @@ func (r ApiGetSqlv1beta1StatementRequest) Execute() (SqlV1beta1Statement, *_neth
 GetSqlv1beta1Statement Read a Statement
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to read a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -633,6 +641,7 @@ type ApiListSqlv1beta1StatementsRequest struct {
 	specComputePoolId *string
 	pageSize          *int32
 	pageToken         *string
+	labelSelector     *string
 }
 
 // Filter the results by exact match for spec.compute_pool.
@@ -653,6 +662,12 @@ func (r ApiListSqlv1beta1StatementsRequest) PageToken(pageToken string) ApiListS
 	return r
 }
 
+// A comma-separated label selector to filter the statements.
+func (r ApiListSqlv1beta1StatementsRequest) LabelSelector(labelSelector string) ApiListSqlv1beta1StatementsRequest {
+	r.labelSelector = &labelSelector
+	return r
+}
+
 func (r ApiListSqlv1beta1StatementsRequest) Execute() (SqlV1beta1StatementList, *_nethttp.Response, error) {
 	return r.ApiService.ListSqlv1beta1StatementsExecute(r)
 }
@@ -661,6 +676,7 @@ func (r ApiListSqlv1beta1StatementsRequest) Execute() (SqlV1beta1StatementList, 
 ListSqlv1beta1Statements List of Statements
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Retrieve a sorted, filtered, paginated list of all statements.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -711,6 +727,9 @@ func (a *StatementsSqlV1beta1ApiService) ListSqlv1beta1StatementsExecute(r ApiLi
 	}
 	if r.pageToken != nil {
 		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
+	}
+	if r.labelSelector != nil {
+		localVarQueryParams.Add("label_selector", parameterToString(*r.labelSelector, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -837,6 +856,7 @@ func (r ApiUpdateSqlv1beta1StatementRequest) Execute() (*_nethttp.Response, erro
 UpdateSqlv1beta1Statement Update a Statement
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Make a request to update a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

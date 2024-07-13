@@ -45,6 +45,7 @@ type StatementExceptionsSqlV1beta1Api interface {
 		GetSqlv1beta1StatementExceptions List of Statement Exceptions
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Retrieve a list of the 10 most recent statement exceptions.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -79,6 +80,7 @@ func (r ApiGetSqlv1beta1StatementExceptionsRequest) Execute() (SqlV1beta1Stateme
 GetSqlv1beta1StatementExceptions List of Statement Exceptions
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Retrieve a list of the 10 most recent statement exceptions.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

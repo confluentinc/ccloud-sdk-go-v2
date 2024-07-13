@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 ## ListSqlv1beta1Statements
 
-> SqlV1beta1StatementList ListSqlv1beta1Statements(ctx, organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+> SqlV1beta1StatementList ListSqlv1beta1Statements(ctx, organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
 
 List of Statements
 
@@ -263,10 +263,11 @@ func main() {
     specComputePoolId := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
+    labelSelector := "labelSelector_example" // string | A comma-separated label selector to filter the statements. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1beta1Api.ListSqlv1beta1Statements(context.Background(), organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.StatementsSqlV1beta1Api.ListSqlv1beta1Statements(context.Background(), organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1beta1Api.ListSqlv1beta1Statements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -297,6 +298,7 @@ Name | Type | Description  | Notes
  **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
+ **labelSelector** | **string** | A comma-separated label selector to filter the statements. | 
 
 ### Return type
 

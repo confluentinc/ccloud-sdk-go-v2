@@ -45,6 +45,7 @@ type StatementResultsSqlV1beta1Api interface {
 		GetSqlv1beta1StatementResult Read Statement Result
 
 		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 	Read Statement Result.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -86,6 +87,7 @@ func (r ApiGetSqlv1beta1StatementResultRequest) Execute() (SqlV1beta1StatementRe
 GetSqlv1beta1StatementResult Read Statement Result
 
 [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
 Read Statement Result.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
