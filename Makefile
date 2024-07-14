@@ -30,7 +30,7 @@ MK_INCLUDE_VERSION ?= v0.1120.0
 # Make sure we always have a copy of the latest cc-mk-include release less than $(MK_INCLUDE_TIMEOUT_MINS) old:
 # Note: The simply-expanded make variable makes sure this is run once per make invocation.
 UPDATE_MK_INCLUDE := $(shell \
-	func_fatal() { echo "$*" >&2; echo output here triggers error below; exit 1; } ; \
+	func_fatal() { echo "$$*" >&2; echo output here triggers error below; exit 1; } ; \
 	test -z "`git ls-files $(MK_INCLUDE_DIR)`" || { \
 		func_fatal 'fatal: checked in $(MK_INCLUDE_DIR)/ directory is preventing make from fetching recent cc-mk-include releases for CI'; \
 	} ; \
