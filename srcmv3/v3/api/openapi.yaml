@@ -1069,6 +1069,20 @@ components:
           readOnly: true
           type: string
           x-immutable: true
+        catalog_http_endpoint:
+          description: The cluster's catalog HTTP request URL.
+          example: https://psrc-00000.us-central1.gcp.confluent.cloud
+          format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
+        private_http_endpoint:
+          description: The cluster's private HTTP request URL.
+          example: https://lsrc-abc.us-central-1.private.confluent.cloud
+          format: uri
+          readOnly: true
+          type: string
+          x-immutable: true
         cloud:
           description: The cloud service provider in which the cluster is running.
           example: GCP

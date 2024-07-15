@@ -42,6 +42,10 @@ type SrcmV3ClusterSpec struct {
 	Package *string `json:"package,omitempty"`
 	// The cluster HTTP request URL.
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
+	// The cluster's catalog HTTP request URL.
+	CatalogHttpEndpoint *string `json:"catalog_http_endpoint,omitempty"`
+	// The cluster's private HTTP request URL.
+	PrivateHttpEndpoint *string `json:"private_http_endpoint,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
@@ -163,6 +167,70 @@ func (o *SrcmV3ClusterSpec) SetHttpEndpoint(v string) {
 	o.HttpEndpoint = &v
 }
 
+// GetCatalogHttpEndpoint returns the CatalogHttpEndpoint field value if set, zero value otherwise.
+func (o *SrcmV3ClusterSpec) GetCatalogHttpEndpoint() string {
+	if o == nil || o.CatalogHttpEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.CatalogHttpEndpoint
+}
+
+// GetCatalogHttpEndpointOk returns a tuple with the CatalogHttpEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SrcmV3ClusterSpec) GetCatalogHttpEndpointOk() (*string, bool) {
+	if o == nil || o.CatalogHttpEndpoint == nil {
+		return nil, false
+	}
+	return o.CatalogHttpEndpoint, true
+}
+
+// HasCatalogHttpEndpoint returns a boolean if a field has been set.
+func (o *SrcmV3ClusterSpec) HasCatalogHttpEndpoint() bool {
+	if o != nil && o.CatalogHttpEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCatalogHttpEndpoint gets a reference to the given string and assigns it to the CatalogHttpEndpoint field.
+func (o *SrcmV3ClusterSpec) SetCatalogHttpEndpoint(v string) {
+	o.CatalogHttpEndpoint = &v
+}
+
+// GetPrivateHttpEndpoint returns the PrivateHttpEndpoint field value if set, zero value otherwise.
+func (o *SrcmV3ClusterSpec) GetPrivateHttpEndpoint() string {
+	if o == nil || o.PrivateHttpEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrivateHttpEndpoint
+}
+
+// GetPrivateHttpEndpointOk returns a tuple with the PrivateHttpEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SrcmV3ClusterSpec) GetPrivateHttpEndpointOk() (*string, bool) {
+	if o == nil || o.PrivateHttpEndpoint == nil {
+		return nil, false
+	}
+	return o.PrivateHttpEndpoint, true
+}
+
+// HasPrivateHttpEndpoint returns a boolean if a field has been set.
+func (o *SrcmV3ClusterSpec) HasPrivateHttpEndpoint() bool {
+	if o != nil && o.PrivateHttpEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateHttpEndpoint gets a reference to the given string and assigns it to the PrivateHttpEndpoint field.
+func (o *SrcmV3ClusterSpec) SetPrivateHttpEndpoint(v string) {
+	o.PrivateHttpEndpoint = &v
+}
+
 // GetCloud returns the Cloud field value if set, zero value otherwise.
 func (o *SrcmV3ClusterSpec) GetCloud() string {
 	if o == nil || o.Cloud == nil {
@@ -264,6 +332,8 @@ func (o *SrcmV3ClusterSpec) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Package)
 	o.recurseRedact(o.HttpEndpoint)
+	o.recurseRedact(o.CatalogHttpEndpoint)
+	o.recurseRedact(o.PrivateHttpEndpoint)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
@@ -309,6 +379,12 @@ func (o SrcmV3ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.HttpEndpoint != nil {
 		toSerialize["http_endpoint"] = o.HttpEndpoint
+	}
+	if o.CatalogHttpEndpoint != nil {
+		toSerialize["catalog_http_endpoint"] = o.CatalogHttpEndpoint
+	}
+	if o.PrivateHttpEndpoint != nil {
+		toSerialize["private_http_endpoint"] = o.PrivateHttpEndpoint
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
