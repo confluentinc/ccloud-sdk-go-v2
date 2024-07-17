@@ -34,12 +34,18 @@ import (
 // NetworkingV1AccessPointSpecConfigOneOf - struct for NetworkingV1AccessPointSpecConfigOneOf
 type NetworkingV1AccessPointSpecConfigOneOf struct {
 	NetworkingV1AwsEgressPrivateLinkEndpoint   *NetworkingV1AwsEgressPrivateLinkEndpoint
+	NetworkingV1AwsIngressXeni                 *NetworkingV1AwsIngressXeni
 	NetworkingV1AzureEgressPrivateLinkEndpoint *NetworkingV1AzureEgressPrivateLinkEndpoint
 }
 
 // NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
 func NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecConfigOneOf {
 	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsEgressPrivateLinkEndpoint: v}
+}
+
+// NetworkingV1AwsIngressXeniAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsIngressXeni wrapped in NetworkingV1AccessPointSpecConfigOneOf
+func NetworkingV1AwsIngressXeniAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsIngressXeni) NetworkingV1AccessPointSpecConfigOneOf {
+	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsIngressXeni: v}
 }
 
 // NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AzureEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
@@ -69,6 +75,18 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 		}
 	}
 
+	// check if the discriminator value is 'AwsIngressXeni'
+	if jsonDict["kind"] == "AwsIngressXeni" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressXeni
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressXeni)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressXeni, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressXeni = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsIngressXeni: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'AzureEgressPrivateLinkEndpoint'
 	if jsonDict["kind"] == "AzureEgressPrivateLinkEndpoint" {
 		// try to unmarshal JSON data into NetworkingV1AzureEgressPrivateLinkEndpoint
@@ -90,6 +108,18 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpoint = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.AwsIngressXeni'
+	if jsonDict["kind"] == "networking.v1.AwsIngressXeni" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressXeni
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressXeni)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressXeni, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressXeni = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsIngressXeni: %s", err.Error())
 		}
 	}
 
@@ -118,6 +148,14 @@ func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) 
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1AwsIngressXeni != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsIngressXeni)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1AzureEgressPrivateLinkEndpoint != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -133,6 +171,10 @@ func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) 
 func (obj *NetworkingV1AccessPointSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsEgressPrivateLinkEndpoint != nil {
 		return obj.NetworkingV1AwsEgressPrivateLinkEndpoint
+	}
+
+	if obj.NetworkingV1AwsIngressXeni != nil {
+		return obj.NetworkingV1AwsIngressXeni
 	}
 
 	if obj.NetworkingV1AzureEgressPrivateLinkEndpoint != nil {
