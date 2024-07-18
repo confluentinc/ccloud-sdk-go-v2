@@ -25,7 +25,7 @@ MK_INCLUDE_TIMEOUT_MINS ?= 240
 # If this latest validated release is breaking you, please file a ticket with DevProd describing the issue, and
 # if necessary you can temporarily override MK_INCLUDE_VERSION above the managed section headers until the bad
 # release is yanked.
-MK_INCLUDE_VERSION ?= v0.1120.0
+MK_INCLUDE_VERSION ?= v0.1122.0
 
 # Make sure we always have a copy of the latest cc-mk-include release less than $(MK_INCLUDE_TIMEOUT_MINS) old:
 # Note: The simply-expanded make variable makes sure this is run once per make invocation.
@@ -67,6 +67,12 @@ UPDATE_MK_INCLUDE := $(shell \
 ifneq ($(UPDATE_MK_INCLUDE),)
     $(error mk-include update failed)
 endif
+
+# Export the (empty) .mk-include-check-FORCE target to allow users to trigger the mk-include
+# download code above via make but without having to run any of the other targets, e.g. build.
+.PHONY: .mk-include-check-FORCE
+.mk-include-check-FORCE:
+	@echo -n ""
 ### END MK-INCLUDE UPDATE ###
 # Project variables
 NAME := ccloud-sdk-go-v2-internal
