@@ -97,7 +97,7 @@ IMPACTED_FOLDER_NAME := $(shell \
         folder=$$(echo "$$path" | grep "/" | cut -d'/' -f1 | uniq | head -n1); \
         echo $$folder; \
     else \
-        echo ROOT_FOLDER; \
+        echo $(ROOT_FOLDER); \
     fi \
 )
 
