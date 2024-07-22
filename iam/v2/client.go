@@ -64,10 +64,6 @@ type APIClient struct {
 
 	// API Services
 
-	IPFiltersIamV2Api IPFiltersIamV2Api
-
-	IPGroupsIamV2Api IPGroupsIamV2Api
-
 	InvitationsIamV2Api InvitationsIamV2Api
 
 	ServiceAccountsIamV2Api ServiceAccountsIamV2Api
@@ -91,8 +87,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.IPFiltersIamV2Api = (*IPFiltersIamV2ApiService)(&c.common)
-	c.IPGroupsIamV2Api = (*IPGroupsIamV2ApiService)(&c.common)
 	c.InvitationsIamV2Api = (*InvitationsIamV2ApiService)(&c.common)
 	c.ServiceAccountsIamV2Api = (*ServiceAccountsIamV2ApiService)(&c.common)
 	c.UsersIamV2Api = (*UsersIamV2ApiService)(&c.common)

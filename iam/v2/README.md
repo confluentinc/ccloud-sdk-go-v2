@@ -79,16 +79,6 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IPFiltersIamV2Api* | [**CreateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#createiamv2ipfilter) | **Post** /iam/v2/ip-filters | Create an IP Filter
-*IPFiltersIamV2Api* | [**DeleteIamV2IpFilter**](docs/IPFiltersIamV2Api.md#deleteiamv2ipfilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an IP Filter
-*IPFiltersIamV2Api* | [**GetIamV2IpFilter**](docs/IPFiltersIamV2Api.md#getiamv2ipfilter) | **Get** /iam/v2/ip-filters/{id} | Read an IP Filter
-*IPFiltersIamV2Api* | [**ListIamV2IpFilters**](docs/IPFiltersIamV2Api.md#listiamv2ipfilters) | **Get** /iam/v2/ip-filters | List of IP Filters
-*IPFiltersIamV2Api* | [**UpdateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#updateiamv2ipfilter) | **Patch** /iam/v2/ip-filters/{id} | Update an IP Filter
-*IPGroupsIamV2Api* | [**CreateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#createiamv2ipgroup) | **Post** /iam/v2/ip-groups | Create an IP Group
-*IPGroupsIamV2Api* | [**DeleteIamV2IpGroup**](docs/IPGroupsIamV2Api.md#deleteiamv2ipgroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an IP Group
-*IPGroupsIamV2Api* | [**GetIamV2IpGroup**](docs/IPGroupsIamV2Api.md#getiamv2ipgroup) | **Get** /iam/v2/ip-groups/{id} | Read an IP Group
-*IPGroupsIamV2Api* | [**ListIamV2IpGroups**](docs/IPGroupsIamV2Api.md#listiamv2ipgroups) | **Get** /iam/v2/ip-groups | List of IP Groups
-*IPGroupsIamV2Api* | [**UpdateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#updateiamv2ipgroup) | **Patch** /iam/v2/ip-groups/{id} | Update an IP Group
 *InvitationsIamV2Api* | [**CreateIamV2Invitation**](docs/InvitationsIamV2Api.md#createiamv2invitation) | **Post** /iam/v2/invitations | Create an Invitation
 *InvitationsIamV2Api* | [**DeleteIamV2Invitation**](docs/InvitationsIamV2Api.md#deleteiamv2invitation) | **Delete** /iam/v2/invitations/{id} | Delete an Invitation
 *InvitationsIamV2Api* | [**GetIamV2Invitation**](docs/InvitationsIamV2Api.md#getiamv2invitation) | **Get** /iam/v2/invitations/{id} | Read an Invitation
@@ -112,10 +102,6 @@ Class | Method | HTTP request | Description
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [IamV2Invitation](docs/IamV2Invitation.md)
  - [IamV2InvitationList](docs/IamV2InvitationList.md)
- - [IamV2IpFilter](docs/IamV2IpFilter.md)
- - [IamV2IpFilterList](docs/IamV2IpFilterList.md)
- - [IamV2IpGroup](docs/IamV2IpGroup.md)
- - [IamV2IpGroupList](docs/IamV2IpGroupList.md)
  - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
  - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
  - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
