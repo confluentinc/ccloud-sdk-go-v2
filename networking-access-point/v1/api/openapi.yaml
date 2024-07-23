@@ -4252,13 +4252,13 @@ components:
       - kind
       - resource_id
       type: object
-    networking.v1.AwsIngressXeni:
+    networking.v1.AwsXeni:
       description: AWS Cross-Account Elastic Network Interfaces (X-ENIs).
       properties:
         kind:
-          description: AwsIngressXeni kind.
+          description: AwsXeni kind.
           enum:
-          - AwsIngressXeni
+          - AwsXeni
           type: string
         network_interfaces:
           description: List of the IDs of the Elastic Network Interfaces.
@@ -4359,12 +4359,12 @@ components:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
-              AwsIngressXeni: '#/components/schemas/networking.v1.AwsIngressXeni'
+              AwsXeni: '#/components/schemas/networking.v1.AwsXeni'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
-          - $ref: '#/components/schemas/networking.v1.AwsIngressXeni'
+          - $ref: '#/components/schemas/networking.v1.AwsXeni'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf

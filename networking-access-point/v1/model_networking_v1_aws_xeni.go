@@ -34,34 +34,34 @@ import (
 	"reflect"
 )
 
-// NetworkingV1AwsIngressXeni AWS Cross-Account Elastic Network Interfaces (X-ENIs).
-type NetworkingV1AwsIngressXeni struct {
-	// AwsIngressXeni kind.
+// NetworkingV1AwsXeni AWS Cross-Account Elastic Network Interfaces (X-ENIs).
+type NetworkingV1AwsXeni struct {
+	// AwsXeni kind.
 	Kind string `json:"kind,omitempty"`
 	// List of the IDs of the Elastic Network Interfaces.
 	NetworkInterfaces *[]string `json:"network_interfaces,omitempty"`
 }
 
-// NewNetworkingV1AwsIngressXeni instantiates a new NetworkingV1AwsIngressXeni object
+// NewNetworkingV1AwsXeni instantiates a new NetworkingV1AwsXeni object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AwsIngressXeni(kind string) *NetworkingV1AwsIngressXeni {
-	this := NetworkingV1AwsIngressXeni{}
+func NewNetworkingV1AwsXeni(kind string) *NetworkingV1AwsXeni {
+	this := NetworkingV1AwsXeni{}
 	this.Kind = kind
 	return &this
 }
 
-// NewNetworkingV1AwsIngressXeniWithDefaults instantiates a new NetworkingV1AwsIngressXeni object
+// NewNetworkingV1AwsXeniWithDefaults instantiates a new NetworkingV1AwsXeni object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNetworkingV1AwsIngressXeniWithDefaults() *NetworkingV1AwsIngressXeni {
-	this := NetworkingV1AwsIngressXeni{}
+func NewNetworkingV1AwsXeniWithDefaults() *NetworkingV1AwsXeni {
+	this := NetworkingV1AwsXeni{}
 	return &this
 }
 
 // GetKind returns the Kind field value
-func (o *NetworkingV1AwsIngressXeni) GetKind() string {
+func (o *NetworkingV1AwsXeni) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -72,7 +72,7 @@ func (o *NetworkingV1AwsIngressXeni) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1AwsIngressXeni) GetKindOk() (*string, bool) {
+func (o *NetworkingV1AwsXeni) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,12 +80,12 @@ func (o *NetworkingV1AwsIngressXeni) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *NetworkingV1AwsIngressXeni) SetKind(v string) {
+func (o *NetworkingV1AwsXeni) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetNetworkInterfaces returns the NetworkInterfaces field value if set, zero value otherwise.
-func (o *NetworkingV1AwsIngressXeni) GetNetworkInterfaces() []string {
+func (o *NetworkingV1AwsXeni) GetNetworkInterfaces() []string {
 	if o == nil || o.NetworkInterfaces == nil {
 		var ret []string
 		return ret
@@ -95,7 +95,7 @@ func (o *NetworkingV1AwsIngressXeni) GetNetworkInterfaces() []string {
 
 // GetNetworkInterfacesOk returns a tuple with the NetworkInterfaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1AwsIngressXeni) GetNetworkInterfacesOk() (*[]string, bool) {
+func (o *NetworkingV1AwsXeni) GetNetworkInterfacesOk() (*[]string, bool) {
 	if o == nil || o.NetworkInterfaces == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *NetworkingV1AwsIngressXeni) GetNetworkInterfacesOk() (*[]string, bool) 
 }
 
 // HasNetworkInterfaces returns a boolean if a field has been set.
-func (o *NetworkingV1AwsIngressXeni) HasNetworkInterfaces() bool {
+func (o *NetworkingV1AwsXeni) HasNetworkInterfaces() bool {
 	if o != nil && o.NetworkInterfaces != nil {
 		return true
 	}
@@ -112,17 +112,17 @@ func (o *NetworkingV1AwsIngressXeni) HasNetworkInterfaces() bool {
 }
 
 // SetNetworkInterfaces gets a reference to the given []string and assigns it to the NetworkInterfaces field.
-func (o *NetworkingV1AwsIngressXeni) SetNetworkInterfaces(v []string) {
+func (o *NetworkingV1AwsXeni) SetNetworkInterfaces(v []string) {
 	o.NetworkInterfaces = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *NetworkingV1AwsIngressXeni) Redact() {
+func (o *NetworkingV1AwsXeni) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(o.NetworkInterfaces)
 }
 
-func (o *NetworkingV1AwsIngressXeni) recurseRedact(v interface{}) {
+func (o *NetworkingV1AwsXeni) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -147,12 +147,12 @@ func (o *NetworkingV1AwsIngressXeni) recurseRedact(v interface{}) {
 	}
 }
 
-func (o NetworkingV1AwsIngressXeni) zeroField(v interface{}) {
+func (o NetworkingV1AwsXeni) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o NetworkingV1AwsIngressXeni) MarshalJSON() ([]byte, error) {
+func (o NetworkingV1AwsXeni) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
@@ -167,34 +167,34 @@ func (o NetworkingV1AwsIngressXeni) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableNetworkingV1AwsIngressXeni struct {
-	value *NetworkingV1AwsIngressXeni
+type NullableNetworkingV1AwsXeni struct {
+	value *NetworkingV1AwsXeni
 	isSet bool
 }
 
-func (v NullableNetworkingV1AwsIngressXeni) Get() *NetworkingV1AwsIngressXeni {
+func (v NullableNetworkingV1AwsXeni) Get() *NetworkingV1AwsXeni {
 	return v.value
 }
 
-func (v *NullableNetworkingV1AwsIngressXeni) Set(val *NetworkingV1AwsIngressXeni) {
+func (v *NullableNetworkingV1AwsXeni) Set(val *NetworkingV1AwsXeni) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1AwsIngressXeni) IsSet() bool {
+func (v NullableNetworkingV1AwsXeni) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1AwsIngressXeni) Unset() {
+func (v *NullableNetworkingV1AwsXeni) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1AwsIngressXeni(val *NetworkingV1AwsIngressXeni) *NullableNetworkingV1AwsIngressXeni {
-	return &NullableNetworkingV1AwsIngressXeni{value: val, isSet: true}
+func NewNullableNetworkingV1AwsXeni(val *NetworkingV1AwsXeni) *NullableNetworkingV1AwsXeni {
+	return &NullableNetworkingV1AwsXeni{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1AwsIngressXeni) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1AwsXeni) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -202,7 +202,7 @@ func (v NullableNetworkingV1AwsIngressXeni) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableNetworkingV1AwsIngressXeni) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1AwsXeni) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
