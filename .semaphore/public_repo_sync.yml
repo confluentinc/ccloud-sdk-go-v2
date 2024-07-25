@@ -5,22 +5,18 @@ agent:
     type: s1-prod-ubuntu20-04-amd64-1
 
 blocks:
-  - name: Checkout Repositories
+  - name: Checkout, Copy, Modify, and Push
     task:
       jobs:
-        - name: Checkout Public SDK Repo
+        - name: Sync Changes
           commands:
             - checkout
-            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2.git public-repo
-        - name: Checkout Internal SDK Repo
-          commands:
-            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git internal-repo
-
-  - name: Copy and Modify Files
-    task:
-      jobs:
-        - name: Copy and Modify
-          commands:
+            - |
+              # Checkout the public repository
+              git clone https://github.com/confluentinc/ccloud-sdk-go-v2.git public-repo
+            - |
+              # Checkout the internal repository
+              git clone https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git internal-repo
             - |
               # Define the package names
               INTERNAL_PATH="github.com/confluentinc/ccloud-sdk-go-v2-internal"
@@ -38,7 +34,7 @@ blocks:
               # Modify text in the copied folders in the public repo
               cd public-repo
               for folder in $CHANGED_FOLDERS; do
-                find $folder -type f -name "*.go" -exec sed -i '' 's|INTERNAL_PATH|PUBLIC_PATH|g' {} \;
+                find $folder -type f -name "*.txt" -exec sed -i '' 's|INTERNAL_PATH|PUBLIC_PATH|g' {} \;
               done
               cd ..
             - |
@@ -46,16 +42,7 @@ blocks:
               cd public-repo
               git add .
               git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit"
-              cd ..
-
-  - name: Push to Public Repo Branch
-    task:
-      jobs:
-        - name: Push Changes
-          commands:
             - |
-              cd public-repo
-              # Create a new branch for the changes
-              git checkout -b sync_branch
-              # Push the changes to the new branch
-              git push -u origin sync_branch
+              # Push the changes to a new branch for PR review
+              git checkout -b sync-changes
+              git push -u origin $BRANCH_NAME
