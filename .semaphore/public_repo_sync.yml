@@ -1,0 +1,62 @@
+version: v1.0
+name: Find changed folder and push to the public SDK repo
+agent:
+  machine:
+    type: s1-prod-ubuntu20-04-amd64-1
+
+blocks:
+  - name: Checkout Repositories
+    task:
+      jobs:
+        - name: Checkout Public SDK Repo
+          commands:
+            - checkout
+            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2.git public-repo
+        - name: Checkout Internal SDK Repo
+          commands:
+            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git internal-repo
+
+  - name: Copy and Modify Files
+    task:
+      jobs:
+        - name: Copy and Modify
+          commands:
+            - |
+              # Define the package names
+              INTERNAL_PATH="github.com/confluentinc/ccloud-sdk-go-v2-internal"
+              PUBLIC_PATH="github.com/confluentinc/ccloud-sdk-go-v2"
+              # Find the changed folders in the internal repo
+              cd internal-repo
+              CHANGED_FOLDERS=$(git diff --name-only HEAD~1 HEAD | grep '/' | cut -d'/' -f1 | sort | uniq)
+              echo "Changed folder(s): $CHANGED_FOLDERS"
+              cd ..
+              # Copy changed folders from internal repo to public repo
+              for folder in $CHANGED_FOLDERS; do
+                cp -r internal-repo/$folder public-repo/$folder
+              done
+            - |
+              # Modify text in the copied folders in the public repo
+              cd public-repo
+              for folder in $CHANGED_FOLDERS; do
+                find $folder -type f -name "*.go" -exec sed -i '' 's|INTERNAL_PATH|PUBLIC_PATH|g' {} \;
+              done
+              cd ..
+            - |
+              # Stage and commit changes in the public repo
+              cd public-repo
+              git add .
+              git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit"
+              cd ..
+
+  - name: Push to Public Repo Branch
+    task:
+      jobs:
+        - name: Push Changes
+          commands:
+            - |
+              cd public-repo
+              # Create a new branch for the changes
+              BRANCH_NAME="sync-changes-$(date +%Y%m%d%H%M%S)"
+              git checkout -b $BRANCH_NAME
+              # Push the changes to the new branch
+              git push origin $BRANCH_NAME
