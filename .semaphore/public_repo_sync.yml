@@ -23,7 +23,7 @@ blocks:
               PUBLIC_PATH="github.com/confluentinc/ccloud-sdk-go-v2"
               # Find the changed folders in the internal repo
               cd internal-repo
-              CHANGED_FOLDERS=$(git diff --name-only HEAD~1 HEAD | grep '/' | cut -d'/' -f1 | sort | uniq)
+              CHANGED_FOLDERS=$(git diff --name-only HEAD~2 HEAD~ | grep '/' | cut -d'/' -f1 | sort | uniq)
               echo "Changed folder(s): $CHANGED_FOLDERS"
               cd ..
               # Copy changed folders from internal repo to public repo
