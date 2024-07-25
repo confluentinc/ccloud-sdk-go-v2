@@ -40,9 +40,9 @@ blocks:
             - |
               # Stage and commit changes in the public repo
               cd public-repo
+              git checkout -b sync-changes
               git add .
               git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit"
             - |
               # Push the changes to a new branch for PR review
-              git checkout -b sync-changes
-              git push -u origin $BRANCH_NAME
+              git push -u origin sync-changes
