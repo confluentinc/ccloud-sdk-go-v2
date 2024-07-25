@@ -162,16 +162,17 @@ tag-release:
 
 .PHONY: all checkout_public_repo checkout_internal_repo find_changed_folder copy_folder modify_text commit_and_push
 
-all: checkout_public_repo checkout_internal_repo find_changed_folder copy_folder modify_text commit_and_push
-
+.PHONY: checkout_public_repo
 checkout_public_repo:
 	@echo "Checking out public repository..."
 	@git clone $(PUBLIC_REPO_URL) public-repo
 
+.PHONY: checkout_internal_repo
 checkout_internal_repo:
 	@echo "Checking out internal repository..."
 	@git clone $(INTERNAL_REPO_URL) internal-repo
 
+.PHONY: find_changed_folder
 find_changed_folder:
 	@echo "Finding changed folder in the internal repository..."
 	@cd internal-repo && \
@@ -179,17 +180,20 @@ find_changed_folder:
 	echo "Changed folder: $$CHANGED_FOLDER" && \
 	echo $$CHANGED_FOLDER > ../changed_folder.txt
 
+.PHONY: copy_folder
 copy_folder:
 	@echo "Copying changed folder to the public repository..."
 	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
 	cp -r internal-repo/$$CHANGED_FOLDER public-repo
 
+.PHONY: modify_text
 modify_text:
 	@echo "Modifying text in the copied folder in the public repository..."
 	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
 	cd public-repo && \
 	find $$CHANGED_FOLDER -type f -name "go.mod" -exec sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g'\;
 
+.PHONY: commit_and_push
 commit_and_push:
 	@echo "Staging, committing, and pushing changes..."
 	git add . && \
