@@ -15,7 +15,7 @@ blocks:
             - git clone https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git internal-repo
             - cd internal-repo
             - CHANGED_FOLDER=$(git diff --name-only origin/master~2 origin/master~ | grep '/' | cut -d'/' -f1 | sort | uniq | head -n1)
-            - echo "Changed folder: $(CHANGED_FOLDER)"
+            - echo "Changed folder: $CHANGED_FOLDER"
             - cd ..
             - pwd
               # Copy changed folders from internal repo to public repo
