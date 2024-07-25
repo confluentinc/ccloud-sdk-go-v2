@@ -10,25 +10,9 @@ blocks:
       jobs:
         - name: Sync Changes
           commands:
-            - checkout
-            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2.git public-repo
-            - git clone https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git internal-repo
-            - cd internal-repo
-            - |
-              set -x
-              CHANGED_FOLDER=$(git diff --name-only origin/master~2 origin/master~ | grep '/' | cut -d'/' -f1 | sort | uniq | head -n1)
-              echo "Changed folder: $CHANGED_FOLDER"
-              set +x
-            - cd ..
-            - pwd
-              # Copy changed folders from internal repo to public repo
-            - cp -r internal-repo/$folder public-repo
-            - cd public-repo
-            - pwd
-            - find $CHANGED_FOLDER -type f -name "go.mod" -exec sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' {} \;
-            - cd ..
-            - cd public-repo
-            - git checkout -b sync-changes || echo "Branch sync-changes already exists, continuing..."
-            - git add .
-            - git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit"
-            - git push -uf origin sync-changes
+            - make checkout_public_repo
+            - make checkout_internal_repo
+            - make find_changed_folder
+            - make copy_folder
+            - make modify_text
+            - make commit_and_push

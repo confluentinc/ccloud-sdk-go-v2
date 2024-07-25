@@ -79,6 +79,10 @@ NAME := ccloud-sdk-go-v2-internal
 ALL_FOLDER_NAMES := $(shell find . -maxdepth 1 -mindepth 1 -type d | awk -F '/' '{print $$NF}')
 
 # Build variables
+# Define variables for repository URLs and credentials
+PUBLIC_REPO_URL = https://github.com/confluentinc/ccloud-sdk-go-v2.git
+INTERNAL_REPO_URL = https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git
+BRANCH_NAME = sync-changes
 
 # Go variables
 
@@ -155,3 +159,40 @@ tag-release:
     	git tag $(NEXT_TAG_VERSION); \
     	git push origin $(NEXT_TAG_VERSION); \
     fi
+
+.PHONY: all checkout_public_repo checkout_internal_repo find_changed_folder copy_folder modify_text commit_and_push
+
+all: checkout_public_repo checkout_internal_repo find_changed_folder copy_folder modify_text commit_and_push
+
+checkout_public_repo:
+	@echo "Checking out public repository..."
+	@git clone $(PUBLIC_REPO_URL) public-repo
+
+checkout_internal_repo:
+	@echo "Checking out internal repository..."
+	@git clone $(INTERNAL_REPO_URL) internal-repo
+
+find_changed_folder:
+	@echo "Finding changed folder in the internal repository..."
+	@cd internal-repo && \
+	CHANGED_FOLDER=$$(git diff --name-only origin/master~2 origin/master~ | grep '/' | cut -d'/' -f1 | sort | uniq | head -n1) && \
+	echo "Changed folder: $$CHANGED_FOLDER" && \
+	echo $$CHANGED_FOLDER > ../changed_folder.txt
+
+copy_folder:
+	@echo "Copying changed folder to the public repository..."
+	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
+	cp -r internal-repo/$$CHANGED_FOLDER public-repo
+
+modify_text:
+	@echo "Modifying text in the copied folder in the public repository..."
+	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
+	cd public-repo && \
+	find $$CHANGED_FOLDER -type f -name "go.mod" -exec sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g'\;
+
+commit_and_push:
+	@echo "Staging, committing, and pushing changes..."
+	git add . && \
+	git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit" && \
+	git checkout -b $(BRANCH_NAME) || echo "Branch $(BRANCH_NAME) already exists, continuing..." && \
+	git push -f origin $(BRANCH_NAME)
