@@ -56,7 +56,6 @@ blocks:
             - |
               cd public-repo
               # Create a new branch for the changes
-              BRANCH_NAME="sync-changes-$(date +%Y%m%d%H%M%S)"
-              git checkout -b $BRANCH_NAME
+              git checkout -b sync_branch
               # Push the changes to the new branch
-              git push origin $BRANCH_NAME
+              git push -u origin sync_branch
