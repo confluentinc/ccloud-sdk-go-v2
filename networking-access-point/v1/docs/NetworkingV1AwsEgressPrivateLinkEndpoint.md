@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | AwsEgressPrivateLinkEndpoint kind. | 
 **VpcEndpointServiceName** | **string** | ID of the VPC Endpoint service used for PrivateLink. | 
 **EnableHighAvailability** | Pointer to **bool** | Whether a resource should be provisioned with high availability. Endpoints deployed with high availability have network interfaces deployed in multiple AZs. | [optional] 
+**TargetSystem** | Pointer to **string** | [Used by the Confluent Cloud Console] The target system or service that the PrivateLink Endpoint connects to (e.g. \&quot;MONGODB\&quot; or \&quot;SNOWFLAKE\&quot;). | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetEnableHighAvailability sets EnableHighAvailability field to given value.
 `func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) HasEnableHighAvailability() bool`
 
 HasEnableHighAvailability returns a boolean if a field has been set.
+
+### GetTargetSystem
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetTargetSystem() string`
+
+GetTargetSystem returns the TargetSystem field if non-nil, zero value otherwise.
+
+### GetTargetSystemOk
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetTargetSystemOk() (*string, bool)`
+
+GetTargetSystemOk returns a tuple with the TargetSystem field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetSystem
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) SetTargetSystem(v string)`
+
+SetTargetSystem sets TargetSystem field to given value.
+
+### HasTargetSystem
+
+`func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) HasTargetSystem() bool`
+
+HasTargetSystem returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointSpecConfigOneOf

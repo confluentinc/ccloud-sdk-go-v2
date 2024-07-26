@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | AzureEgressPrivateLinkEndpoint kind. | 
 **PrivateLinkServiceResourceId** | **string** | Resource ID of the Azure Private Link service. | 
 **PrivateLinkSubresourceName** | Pointer to **string** | Name of the subresource for the Private Endpoint to connect to. | [optional] 
+**TargetSystem** | Pointer to **string** | [Used by the Confluent Cloud Console] The target system or service that the PrivateLink Endpoint connects to (e.g. \&quot;MONGODB\&quot; or \&quot;SNOWFLAKE\&quot;). | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetPrivateLinkSubresourceName sets PrivateLinkSubresourceName field to given val
 `func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasPrivateLinkSubresourceName() bool`
 
 HasPrivateLinkSubresourceName returns a boolean if a field has been set.
+
+### GetTargetSystem
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetTargetSystem() string`
+
+GetTargetSystem returns the TargetSystem field if non-nil, zero value otherwise.
+
+### GetTargetSystemOk
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetTargetSystemOk() (*string, bool)`
+
+GetTargetSystemOk returns a tuple with the TargetSystem field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetSystem
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetTargetSystem(v string)`
+
+SetTargetSystem sets TargetSystem field to given value.
+
+### HasTargetSystem
+
+`func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasTargetSystem() bool`
+
+HasTargetSystem returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointSpecConfigOneOf
