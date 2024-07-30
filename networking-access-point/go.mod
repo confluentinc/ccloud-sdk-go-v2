@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/networking-access-point
+module github.com/confluentinc/ccloud-sdk-go-v2/networking-access-point
 
 go 1.16
 
