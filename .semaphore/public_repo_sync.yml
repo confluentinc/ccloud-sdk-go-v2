@@ -10,6 +10,7 @@ blocks:
       jobs:
         - name: Sync Changes
           commands:
+            - checkout
             - make cleanup-internal-sync-branch
             - make replace-internal-content
             - make commit-and-push
