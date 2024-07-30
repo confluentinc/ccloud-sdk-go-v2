@@ -12,7 +12,6 @@ blocks:
           commands:
             - make checkout_public_repo
             - make checkout_internal_repo
-            - make find_changed_folder
             - make copy_folder
-            - make modify_text
+            - make replace_internal_content
             - make commit_and_push

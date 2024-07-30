@@ -96,7 +96,7 @@ GITHUB_FOLDER := ".github"
 # IMPACTED_FOLDER_NAME represents the immediate tier-1 sub-folder gets impacted
 # If all impacted files are under root, then assign root to IMPACTED_FOLDER_NAME
 IMPACTED_FOLDER_NAME := $(shell \
-    path=$$(git diff --name-only origin/master~ origin/master); \
+    path=$$(git diff --name-only origin/master~2 origin/master~); \
     if echo "$$path" | grep -q "/"; then \
         folder=$$(echo "$$path" | grep "/" | cut -d'/' -f1 | uniq | head -n1); \
         echo $$folder; \
@@ -160,8 +160,6 @@ tag-release:
     	git push origin $(NEXT_TAG_VERSION); \
     fi
 
-.PHONY: all checkout_public_repo checkout_internal_repo find_changed_folder copy_folder modify_text commit_and_push
-
 .PHONY: checkout_public_repo
 checkout_public_repo:
 	@echo "Checking out public repository..."
@@ -172,26 +170,21 @@ checkout_internal_repo:
 	@echo "Checking out internal repository..."
 	@git clone $(INTERNAL_REPO_URL) internal-repo
 
-.PHONY: find_changed_folder
-find_changed_folder:
-	@echo "Finding changed folder in the internal repository..."
-	@cd internal-repo && \
-	CHANGED_FOLDER=$$(git diff --name-only origin/master~2 origin/master~ | grep '/' | cut -d'/' -f1 | sort | uniq | head -n1) && \
-	echo "Changed folder: $$CHANGED_FOLDER" && \
-	echo $$CHANGED_FOLDER > ../changed_folder.txt
-
 .PHONY: copy_folder
 copy_folder:
-	@echo "Copying changed folder to the public repository..."
-	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
-	cp -r internal-repo/$$CHANGED_FOLDER public-repo
+	@if [ "$(IMPACTED_FOLDER_NAME)" = $(ROOT_FOLDER) ]; then \
+  		echo "Copying root directory changes to the public repository..."; \
+  		find internal-repo/ -maxdepth 1 -type f -execdir cp "{}" ../public-repo/ ";"; \
+  	else \
+  		echo "Copying $(IMPACTED_FOLDER_NAME) directory changes to the public repository..."; \
+		cp -r internal-repo/$(IMPACTED_FOLDER_NAME) public-repo; \
+	fi
 
-.PHONY: modify_text
-modify_text:
-	@echo "Modifying text in the copied folder in the public repository..."
-	@CHANGED_FOLDER=$$(cat changed_folder.txt) && \
+.PHONY: replace_internal_content
+replace_internal_content:
+	@echo "Replacing the internal content from the public $(IMPACTED_FOLDER_NAME) repository..."
 	cd public-repo && \
-	find $$CHANGED_FOLDER -type f -name "go.mod" -exec sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g'\;
+	sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' $(IMPACTED_FOLDER_NAME)/go.mod;
 
 .PHONY: commit_and_push
 commit_and_push:
@@ -199,4 +192,4 @@ commit_and_push:
 	git add . && \
 	git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit" && \
 	git checkout -b $(BRANCH_NAME) || echo "Branch $(BRANCH_NAME) already exists, continuing..." && \
-	git push -f origin $(BRANCH_NAME)
+	git push origin $(BRANCH_NAME)
