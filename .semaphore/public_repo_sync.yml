@@ -10,8 +10,6 @@ blocks:
       jobs:
         - name: Sync Changes
           commands:
-            - make checkout_public_repo
-            - make checkout_internal_repo
-            - make copy_folder
-            - make replace_internal_content
-            - make commit_and_push
+            - make cleanup-internal-sync-branch
+            - make replace-internal-content
+            - make commit-and-push

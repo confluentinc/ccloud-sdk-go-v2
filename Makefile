@@ -82,7 +82,11 @@ ALL_FOLDER_NAMES := $(shell find . -maxdepth 1 -mindepth 1 -type d | awk -F '/' 
 # Define variables for repository URLs and credentials
 PUBLIC_REPO_URL = https://github.com/confluentinc/ccloud-sdk-go-v2.git
 INTERNAL_REPO_URL = https://github.com/confluentinc/ccloud-sdk-go-v2-internal.git
-BRANCH_NAME = sync-changes
+
+# The PUBLIC_SYNC_BRANCH will be deleted once the changes are synced to public repo master
+# The INTERNAL_SYNC_BRANCH will be deleted every time before running a new sync job
+PUBLIC_SYNC_BRANCH = sync-changes-public
+INTERNAL_SYNC_BRANCH = sync-changes-internal
 
 # Go variables
 
@@ -160,36 +164,28 @@ tag-release:
     	git push origin $(NEXT_TAG_VERSION); \
     fi
 
-.PHONY: checkout_public_repo
-checkout_public_repo:
-	@echo "Checking out public repository..."
-	@git clone $(PUBLIC_REPO_URL) public-repo
+# Clean up the remote sync branch from internal repo to guarantee a clean start
+.PHONY: cleanup-internal-sync-branch
+cleanup-internal-sync-branch:
+	echo "Cleaning up the remote internal-sync-branch to ensure a clean start..."
+	git push origin --delete $(INTERNAL_SYNC_BRANCH) || echo "internal-sync-branch doesn't exist, continue the process"
 
-.PHONY: checkout_internal_repo
-checkout_internal_repo:
-	@echo "Checking out internal repository..."
-	@git clone $(INTERNAL_REPO_URL) internal-repo
-
-.PHONY: copy_folder
-copy_folder:
+# Replace the internal content from internal repo
+.PHONY: replace-internal-content
+replace_internal_content:
 	@if [ "$(IMPACTED_FOLDER_NAME)" = $(ROOT_FOLDER) ]; then \
-  		echo "Copying root directory changes to the public repository..."; \
-  		find internal-repo/ -maxdepth 1 -type f -execdir cp "{}" ../public-repo/ ";"; \
+  		echo "No need to replace the root folder internal content for the public repository..."; \
   	else \
-  		echo "Copying $(IMPACTED_FOLDER_NAME) directory changes to the public repository..."; \
-		cp -r internal-repo/$(IMPACTED_FOLDER_NAME) public-repo; \
+		echo "Replacing the internal content for the public $(IMPACTED_FOLDER_NAME) repository..."; \
+		sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' $(IMPACTED_FOLDER_NAME)/go.mod; \
 	fi
 
-.PHONY: replace_internal_content
-replace_internal_content:
-	@echo "Replacing the internal content from the public $(IMPACTED_FOLDER_NAME) repository..."
-	cd public-repo && \
-	sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' $(IMPACTED_FOLDER_NAME)/go.mod;
-
-.PHONY: commit_and_push
+# Push the PRs from internal repo INTERNAL_SYNC_BRANCH to public repo PUBLIC_SYNC_BRANCH
+.PHONY: commit-and-push
 commit_and_push:
-	@echo "Staging, committing, and pushing changes..."
+	@echo "Staging, committing, and pushing changes to remote public SDK repo..."
+	git checkout -b $(INTERNAL_SYNC_BRANCH) || echo "Branch $(INTERNAL_SYNC_BRANCH) already exists, continuing..." && \
 	git add . && \
-	git commit -m "Sync changes from internal repo and modify text" || echo "No changes to commit" && \
-	git checkout -b $(BRANCH_NAME) || echo "Branch $(BRANCH_NAME) already exists, continuing..." && \
-	git push origin $(BRANCH_NAME)
+	git commit -m "Sync changes from internal repo" || echo "No changes to commit" && \
+	git remote add public-sdk-repo $(PUBLIC_REPO_URL) && \
+	git push public-sdk-repo $(INTERNAL_SYNC_BRANCH):$(PUBLIC_SYNC_BRANCH)
