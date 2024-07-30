@@ -174,7 +174,8 @@ cleanup-internal-sync-branch:
 .PHONY: cleanup-public-sync-branch
 cleanup-public-sync-branch:
 	echo "Cleaning up the remote public-sync-branch to ensure a clean start..."
-	git push origin --delete $(PUBLIC_SYNC_BRANCH) || echo "public-sync-branch doesn't exist, continue the process"
+	git remote add public-sdk-repo $(PUBLIC_REPO_URL)
+	git push public-sdk-repo --delete $(PUBLIC_SYNC_BRANCH) || echo "public-sync-branch doesn't exist, continue the process"
 
 # Replace the internal content from internal repo
 .PHONY: replace-internal-content
@@ -183,7 +184,7 @@ replace-internal-content:
   		echo "No need to replace the root folder internal content for the public repository..."; \
   	else \
 		echo "Replacing the internal content for the public $(IMPACTED_FOLDER_NAME) repository..."; \
-		sed -i '' 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' $(IMPACTED_FOLDER_NAME)/go.mod; \
+		sed -i 's|github.com/confluentinc/ccloud-sdk-go-v2-internal|github.com/confluentinc/ccloud-sdk-go-v2|g' $(IMPACTED_FOLDER_NAME)/go.mod; \
 	fi
 
 # Push the PRs from internal repo INTERNAL_SYNC_BRANCH to public repo PUBLIC_SYNC_BRANCH
@@ -193,5 +194,4 @@ commit-and-push:
 	git checkout -b $(INTERNAL_SYNC_BRANCH) || echo "Branch $(INTERNAL_SYNC_BRANCH) already exists, continuing..." && \
 	git add networking-access-point && \
 	git commit -m "Sync changes from internal repo" || echo "No changes to commit" && \
-	git remote add public-sdk-repo $(PUBLIC_REPO_URL) && \
 	git push public-sdk-repo $(INTERNAL_SYNC_BRANCH):$(PUBLIC_SYNC_BRANCH)
