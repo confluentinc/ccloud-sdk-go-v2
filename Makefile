@@ -100,7 +100,7 @@ GITHUB_FOLDER := ".github"
 # IMPACTED_FOLDER_NAME represents the immediate tier-1 sub-folder gets impacted
 # If all impacted files are under root, then assign root to IMPACTED_FOLDER_NAME
 IMPACTED_FOLDER_NAME := $(shell \
-    path=$$(git diff --name-only origin/master~2 origin/master~); \
+    path=$$(git diff --name-only origin/master~ origin/master); \
     if echo "$$path" | grep -q "/"; then \
         folder=$$(echo "$$path" | grep "/" | cut -d'/' -f1 | uniq | head -n1); \
         echo $$folder; \
