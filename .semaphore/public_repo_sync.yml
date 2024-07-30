@@ -12,5 +12,6 @@ blocks:
           commands:
             - checkout
             - make cleanup-internal-sync-branch
+            - make cleanup-public-sync-branch
             - make replace-internal-content
             - make commit-and-push

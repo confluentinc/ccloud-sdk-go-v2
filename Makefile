@@ -100,7 +100,7 @@ GITHUB_FOLDER := ".github"
 # IMPACTED_FOLDER_NAME represents the immediate tier-1 sub-folder gets impacted
 # If all impacted files are under root, then assign root to IMPACTED_FOLDER_NAME
 IMPACTED_FOLDER_NAME := $(shell \
-    path=$$(git diff --name-only origin/master~ origin/master); \
+    path=$$(git diff --name-only origin/master~2 origin/master~); \
     if echo "$$path" | grep -q "/"; then \
         folder=$$(echo "$$path" | grep "/" | cut -d'/' -f1 | uniq | head -n1); \
         echo $$folder; \
@@ -170,6 +170,12 @@ cleanup-internal-sync-branch:
 	echo "Cleaning up the remote internal-sync-branch to ensure a clean start..."
 	git push origin --delete $(INTERNAL_SYNC_BRANCH) || echo "internal-sync-branch doesn't exist, continue the process"
 
+# Clean up the remote sync branch from public repo to guarantee a clean start
+.PHONY: cleanup-public-sync-branch
+cleanup-public-sync-branch:
+	echo "Cleaning up the remote public-sync-branch to ensure a clean start..."
+	git push origin --delete $(PUBLIC_SYNC_BRANCH) || echo "public-sync-branch doesn't exist, continue the process"
+
 # Replace the internal content from internal repo
 .PHONY: replace-internal-content
 replace-internal-content:
@@ -185,7 +191,7 @@ replace-internal-content:
 commit-and-push:
 	@echo "Staging, committing, and pushing changes to remote public SDK repo..."
 	git checkout -b $(INTERNAL_SYNC_BRANCH) || echo "Branch $(INTERNAL_SYNC_BRANCH) already exists, continuing..." && \
-	git add . && \
+	git add networking-access-point && \
 	git commit -m "Sync changes from internal repo" || echo "No changes to commit" && \
 	git remote add public-sdk-repo $(PUBLIC_REPO_URL) && \
 	git push public-sdk-repo $(INTERNAL_SYNC_BRANCH):$(PUBLIC_SYNC_BRANCH)
