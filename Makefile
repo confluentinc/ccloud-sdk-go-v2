@@ -172,7 +172,7 @@ cleanup-internal-sync-branch:
 
 # Replace the internal content from internal repo
 .PHONY: replace-internal-content
-replace_internal_content:
+replace-internal-content:
 	@if [ "$(IMPACTED_FOLDER_NAME)" = $(ROOT_FOLDER) ]; then \
   		echo "No need to replace the root folder internal content for the public repository..."; \
   	else \
@@ -182,7 +182,7 @@ replace_internal_content:
 
 # Push the PRs from internal repo INTERNAL_SYNC_BRANCH to public repo PUBLIC_SYNC_BRANCH
 .PHONY: commit-and-push
-commit_and_push:
+commit-and-push:
 	@echo "Staging, committing, and pushing changes to remote public SDK repo..."
 	git checkout -b $(INTERNAL_SYNC_BRANCH) || echo "Branch $(INTERNAL_SYNC_BRANCH) already exists, continuing..." && \
 	git add . && \
