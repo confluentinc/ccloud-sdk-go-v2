@@ -1,0 +1,17 @@
+version: v1.0
+name: Find changed folder and push to the public SDK repo
+agent:
+  machine:
+    type: s1-prod-ubuntu20-04-amd64-1
+
+blocks:
+  - name: Checkout, Copy, Modify, and Push
+    task:
+      jobs:
+        - name: Sync Changes
+          commands:
+            - checkout
+            - make cleanup-internal-sync-branch
+            - make cleanup-public-sync-branch
+            - make replace-internal-content
+            - make commit-and-push

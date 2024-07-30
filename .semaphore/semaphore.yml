@@ -54,3 +54,5 @@ promotions:
     pipeline_file: publish_tagging.yml
     auto_promote:
       when: "result = 'passed' and branch = 'master'"
+  - name: Public SDK repo sync
+    pipeline_file: public_repo_sync.yml
