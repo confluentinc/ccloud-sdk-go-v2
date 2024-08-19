@@ -36,16 +36,18 @@ type MirrorTopicStatus string
 
 // List of MirrorTopicStatus
 const (
-	ACTIVE              MirrorTopicStatus = "ACTIVE"
-	FAILED              MirrorTopicStatus = "FAILED"
-	LINK_FAILED         MirrorTopicStatus = "LINK_FAILED"
-	LINK_PAUSED         MirrorTopicStatus = "LINK_PAUSED"
-	PAUSED              MirrorTopicStatus = "PAUSED"
-	PENDING_STOPPED     MirrorTopicStatus = "PENDING_STOPPED"
-	SOURCE_UNAVAILABLE  MirrorTopicStatus = "SOURCE_UNAVAILABLE"
-	STOPPED             MirrorTopicStatus = "STOPPED"
-	PENDING_MIRROR      MirrorTopicStatus = "PENDING_MIRROR"
-	PENDING_SYNCHRONIZE MirrorTopicStatus = "PENDING_SYNCHRONIZE"
+	ACTIVE                    MirrorTopicStatus = "ACTIVE"
+	FAILED                    MirrorTopicStatus = "FAILED"
+	LINK_FAILED               MirrorTopicStatus = "LINK_FAILED"
+	LINK_PAUSED               MirrorTopicStatus = "LINK_PAUSED"
+	PAUSED                    MirrorTopicStatus = "PAUSED"
+	PENDING_STOPPED           MirrorTopicStatus = "PENDING_STOPPED"
+	SOURCE_UNAVAILABLE        MirrorTopicStatus = "SOURCE_UNAVAILABLE"
+	STOPPED                   MirrorTopicStatus = "STOPPED"
+	PENDING_MIRROR            MirrorTopicStatus = "PENDING_MIRROR"
+	PENDING_SYNCHRONIZE       MirrorTopicStatus = "PENDING_SYNCHRONIZE"
+	PENDING_SETUP_FOR_RESTORE MirrorTopicStatus = "PENDING_SETUP_FOR_RESTORE"
+	PENDING_RESTORE           MirrorTopicStatus = "PENDING_RESTORE"
 )
 
 var allowedMirrorTopicStatusEnumValues = []MirrorTopicStatus{
@@ -59,6 +61,8 @@ var allowedMirrorTopicStatusEnumValues = []MirrorTopicStatus{
 	"STOPPED",
 	"PENDING_MIRROR",
 	"PENDING_SYNCHRONIZE",
+	"PENDING_SETUP_FOR_RESTORE",
+	"PENDING_RESTORE",
 }
 
 func (v *MirrorTopicStatus) UnmarshalJSON(src []byte) error {

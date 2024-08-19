@@ -7126,6 +7126,8 @@ paths:
         the connection is successfully established. To identify records that
         have encountered an error, check the error_code of each delivery report.
 
+        Note that the cluster_id is validated only when running in Confluent Cloud.
+
         This API currently does not support Schema Registry integration. Sending
         schemas is not supported. Only BINARY, JSON, and STRING formats are
         supported.
@@ -7655,7 +7657,11 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
-      description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
+      description: |-
+        [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Cluster link creation requires source cluster security configurations in
+        the configs JSON section of the data request payload.
       operationId: createKafkaLink
       parameters:
       - description: The Kafka cluster ID.
@@ -11999,6 +12005,256 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:truncate-and-restore:
+    post:
+      description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
+      operationId: updateKafkaMirrorTopicsTruncateAndRestoreMirror
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The link name
+        example: link-sb1
+        explode: false
+        in: path
+        name: link_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: 'To validate the action can be performed successfully or not.
+          Default: false'
+        example: false
+        explode: true
+        in: query
+        name: validate_only
+        required: false
+        schema:
+          type: boolean
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/AlterMirrorsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaPromoteMirror
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-1/mirrors
+                  resource_name: crn:///kafka=cluster-1
+                data:
+                - kind: AlterMirrorsData
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-1
+                    resource: crn:///kafka=cluster-1
+                  mirror_topic_name: topic-sb
+                  error_code: null
+                  error_message: null
+                  mirror_lags:
+                  - partition: 0
+                    lag: 0
+                    last_source_fetch_offset: 0
+                  - partition: 1
+                    lag: 10000
+                    last_source_fetch_offset: 1000
+                  - partition: 2
+                    lag: 40000
+                    last_source_fetch_offset: 12030
+                - kind: AlterMirrorsData
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
+                    resource: crn:///kafka=cluster-1
+                  mirror_topic_name: topic-2
+                  error_code: 400
+                  error_message: Topic 'topic-2' has already stopped its mirror from
+                    'my-new-link-1'
+                  mirror_lags:
+                  - partition: 0
+                    lag: 0
+                    last_source_fetch_offset: 0
+                  - partition: 1
+                    lag: 10000
+                    last_source_fetch_offset: 1000
+                  - partition: 2
+                    lag: 40000
+                    last_source_fetch_offset: 12030
+              schema:
+                $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
+          description: Mirror status alternation result
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: Truncates the local topic to the remote stopped mirror log end offsets
+        and restores mirroring to the local topic to mirror from the remote topic
+      tags:
+      - Cluster Linking (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --data '{"mirror_topic_names":["string"],"mirror_topic_name_pattern":"string"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore")
+            .post(body)
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"mirror_topic_names\\\":[\\\"string\\\
+          \"],\\\"mirror_topic_name_pattern\\\":\\\"string\\\"}\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          payload = "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}"
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("POST", "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({mirror_topic_names: ['string'], mirror_topic_name_pattern: 'string'}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/link-sb1/mirrors:truncate-and-restore");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
 components:
   parameters:
     AclHost:
@@ -12490,6 +12746,13 @@ components:
                   value: "false"
                 - name: consumer.offset.sync.ms
                   value: "30000"
+                - name: sasl.mechanism
+                  value: PLAIN
+                - name: sasl.protocol
+                  value: SASL_SSL
+                - name: sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Kafka API Key>' password='<Kafka API Secret>';
             source_initiated_link_at_source_cluster:
               description: Create a source initiated cluster link at source cluster
               value:
@@ -12499,6 +12762,13 @@ components:
                   value: cluster-2-bootstrap-server
                 - name: link.mode
                   value: SOURCE
+                - name: sasl.mechanism
+                  value: PLAIN
+                - name: sasl.protocol
+                  value: SASL_SSL
+                - name: sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Kafka API Key>' password='<Kafka API Secret>';
             source_initiated_link_at_destination_cluster:
               description: Create a source initiated cluster link at destination cluster
               value:
@@ -12512,6 +12782,13 @@ components:
                   value: INBOUND
                 - name: acl.sync.enable
                   value: "false"
+                - name: sasl.mechanism
+                  value: PLAIN
+                - name: sasl.protocol
+                  value: SASL_SSL
+                - name: sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Kafka API Key>' password='<Kafka API Secret>';
             bidirectional_link_east:
               description: Create a bidirectional cluster link in east
               value:
@@ -12523,6 +12800,13 @@ components:
                   value: BIDIRECTIONAL
                 - name: cluster.link.prefix
                   value: west.
+                - name: sasl.mechanism
+                  value: PLAIN
+                - name: sasl.protocol
+                  value: SASL_SSL
+                - name: sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Kafka API Key>' password='<Kafka API Secret>';
             bidirectional_link_west:
               description: Create a bidirectional cluster link in west
               value:
@@ -12535,6 +12819,13 @@ components:
                   value: BIDIRECTIONAL
                 - name: cluster.link.prefix
                   value: east.
+                - name: sasl.mechanism
+                  value: PLAIN
+                - name: sasl.protocol
+                  value: SASL_SSL
+                - name: sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Kafka API Key>' password='<Kafka API Secret>';
           schema:
             $ref: '#/components/schemas/CreateLinkRequestData'
       description: Create a cluster link
@@ -15661,6 +15952,11 @@ components:
       - POLICY_VIOLATION_ERROR
       - LINK_COORDINATOR_NOT_ENABLED_ERROR
       - ACL_LIMIT_EXCEEDED
+      - REMOTE_MIRROR_NOT_FOUND_ERROR
+      - UNKNOWN_TOPIC_OR_PARTITION_ERROR
+      - INVALID_TOPIC
+      - SUPPRESSED_ERRORS
+      - INVALID_REQUEST_ERROR
     ListLinksResponseData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -15773,6 +16069,8 @@ components:
       - STOPPED
       - PENDING_MIRROR
       - PENDING_SYNCHRONIZE
+      - PENDING_SETUP_FOR_RESTORE
+      - PENDING_RESTORE
       type: string
     AnyUnevenLoadStatus:
       type: string

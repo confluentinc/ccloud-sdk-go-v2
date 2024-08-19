@@ -23,6 +23,10 @@
 
 * `PENDING_SYNCHRONIZE` (value: `"PENDING_SYNCHRONIZE"`)
 
+* `PENDING_SETUP_FOR_RESTORE` (value: `"PENDING_SETUP_FOR_RESTORE"`)
+
+* `PENDING_RESTORE` (value: `"PENDING_RESTORE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
