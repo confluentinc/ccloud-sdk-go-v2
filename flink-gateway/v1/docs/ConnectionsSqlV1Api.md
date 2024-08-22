@@ -1,22 +1,22 @@
-# \StatementsSqlV1Api
+# \ConnectionsSqlV1Api
 
 All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSqlv1Statement**](StatementsSqlV1Api.md#CreateSqlv1Statement) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | Create a Statement
-[**DeleteSqlv1Statement**](StatementsSqlV1Api.md#DeleteSqlv1Statement) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
-[**GetSqlv1Statement**](StatementsSqlV1Api.md#GetSqlv1Statement) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement
-[**ListSqlv1Statements**](StatementsSqlV1Api.md#ListSqlv1Statements) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
-[**UpdateSqlv1Statement**](StatementsSqlV1Api.md#UpdateSqlv1Statement) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
+[**CreateSqlv1Connection**](ConnectionsSqlV1Api.md#CreateSqlv1Connection) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | Create a Connection
+[**DeleteSqlv1Connection**](ConnectionsSqlV1Api.md#DeleteSqlv1Connection) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Delete a Connection
+[**GetSqlv1Connection**](ConnectionsSqlV1Api.md#GetSqlv1Connection) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Read a Connection
+[**ListSqlv1Connections**](ConnectionsSqlV1Api.md#ListSqlv1Connections) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | List of Connections
+[**UpdateSqlv1Connection**](ConnectionsSqlV1Api.md#UpdateSqlv1Connection) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Update a Connection
 
 
 
-## CreateSqlv1Statement
+## CreateSqlv1Connection
 
-> SqlV1Statement CreateSqlv1Statement(ctx, organizationId, environmentId).SqlV1Statement(sqlV1Statement).Execute()
+> SqlV1Connection CreateSqlv1Connection(ctx, organizationId, environmentId).SqlV1Connection(sqlV1Connection).Execute()
 
-Create a Statement
+Create a Connection
 
 
 
@@ -35,17 +35,17 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    sqlV1Statement := *openapiclient.NewSqlV1Statement() // SqlV1Statement |  (optional)
+    sqlV1Connection := *openapiclient.NewSqlV1Connection() // SqlV1Connection |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1Api.CreateSqlv1Statement(context.Background(), organizationId, environmentId).SqlV1Statement(sqlV1Statement).Execute()
+    resp, r, err := api_client.ConnectionsSqlV1Api.CreateSqlv1Connection(context.Background(), organizationId, environmentId).SqlV1Connection(sqlV1Connection).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1Api.CreateSqlv1Statement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsSqlV1Api.CreateSqlv1Connection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateSqlv1Statement`: SqlV1Statement
-    fmt.Fprintf(os.Stdout, "Response from `StatementsSqlV1Api.CreateSqlv1Statement`: %v\n", resp)
+    // response from `CreateSqlv1Connection`: SqlV1Connection
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsSqlV1Api.CreateSqlv1Connection`: %v\n", resp)
 }
 ```
 
@@ -60,18 +60,18 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateSqlv1StatementRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateSqlv1ConnectionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **sqlV1Statement** | [**SqlV1Statement**](SqlV1Statement.md) |  | 
+ **sqlV1Connection** | [**SqlV1Connection**](SqlV1Connection.md) |  | 
 
 ### Return type
 
-[**SqlV1Statement**](sql.v1.Statement.md)
+[**SqlV1Connection**](sql.v1.Connection.md)
 
 ### Authorization
 
@@ -87,11 +87,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteSqlv1Statement
+## DeleteSqlv1Connection
 
-> DeleteSqlv1Statement(ctx, organizationId, environmentId, statementName).Execute()
+> DeleteSqlv1Connection(ctx, organizationId, environmentId, connectionName).Execute()
 
-Delete a Statement
+Delete a Connection
 
 
 
@@ -110,13 +110,13 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    statementName := "statementName_example" // string | The unique identifier for the statement.
+    connectionName := "connectionName_example" // string | The unique identifier for the connection.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1Api.DeleteSqlv1Statement(context.Background(), organizationId, environmentId, statementName).Execute()
+    resp, r, err := api_client.ConnectionsSqlV1Api.DeleteSqlv1Connection(context.Background(), organizationId, environmentId, connectionName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1Api.DeleteSqlv1Statement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsSqlV1Api.DeleteSqlv1Connection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -130,11 +130,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organizationId** | [**string**](.md) | The unique identifier for the organization. | 
 **environmentId** | **string** | The unique identifier for the environment. | 
-**statementName** | **string** | The unique identifier for the statement. | 
+**connectionName** | **string** | The unique identifier for the connection. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteSqlv1StatementRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteSqlv1ConnectionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -161,11 +161,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetSqlv1Statement
+## GetSqlv1Connection
 
-> SqlV1Statement GetSqlv1Statement(ctx, organizationId, environmentId, statementName).Execute()
+> SqlV1Connection GetSqlv1Connection(ctx, organizationId, environmentId, connectionName).Execute()
 
-Read a Statement
+Read a Connection
 
 
 
@@ -184,17 +184,17 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    statementName := "statementName_example" // string | The unique identifier for the statement.
+    connectionName := "connectionName_example" // string | The user provided name of the Connection. Unique within a region within an org and env.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1Api.GetSqlv1Statement(context.Background(), organizationId, environmentId, statementName).Execute()
+    resp, r, err := api_client.ConnectionsSqlV1Api.GetSqlv1Connection(context.Background(), organizationId, environmentId, connectionName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1Api.GetSqlv1Statement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsSqlV1Api.GetSqlv1Connection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetSqlv1Statement`: SqlV1Statement
-    fmt.Fprintf(os.Stdout, "Response from `StatementsSqlV1Api.GetSqlv1Statement`: %v\n", resp)
+    // response from `GetSqlv1Connection`: SqlV1Connection
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsSqlV1Api.GetSqlv1Connection`: %v\n", resp)
 }
 ```
 
@@ -206,11 +206,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organizationId** | [**string**](.md) | The unique identifier for the organization. | 
 **environmentId** | **string** | The unique identifier for the environment. | 
-**statementName** | **string** | The unique identifier for the statement. | 
+**connectionName** | **string** | The user provided name of the Connection. Unique within a region within an org and env. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetSqlv1StatementRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetSqlv1ConnectionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1Statement**](sql.v1.Statement.md)
+[**SqlV1Connection**](sql.v1.Connection.md)
 
 ### Authorization
 
@@ -237,11 +237,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListSqlv1Statements
+## ListSqlv1Connections
 
-> SqlV1StatementList ListSqlv1Statements(ctx, organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
+> SqlV1ConnectionList ListSqlv1Connections(ctx, organizationId, environmentId).SpecConnectionType(specConnectionType).PageSize(pageSize).PageToken(pageToken).Execute()
 
-List of Statements
+List of Connections
 
 
 
@@ -260,20 +260,19 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    specComputePoolId := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool. (optional)
+    specConnectionType := "specConnectionType_example" // string | Filter the results by exact match for spec.connection_type (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
-    labelSelector := "labelSelector_example" // string | A comma-separated label selector to filter the statements. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1Api.ListSqlv1Statements(context.Background(), organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
+    resp, r, err := api_client.ConnectionsSqlV1Api.ListSqlv1Connections(context.Background(), organizationId, environmentId).SpecConnectionType(specConnectionType).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1Api.ListSqlv1Statements``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsSqlV1Api.ListSqlv1Connections``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSqlv1Statements`: SqlV1StatementList
-    fmt.Fprintf(os.Stdout, "Response from `StatementsSqlV1Api.ListSqlv1Statements`: %v\n", resp)
+    // response from `ListSqlv1Connections`: SqlV1ConnectionList
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsSqlV1Api.ListSqlv1Connections`: %v\n", resp)
 }
 ```
 
@@ -288,21 +287,20 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListSqlv1StatementsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListSqlv1ConnectionsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool. | 
+ **specConnectionType** | **string** | Filter the results by exact match for spec.connection_type | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
- **labelSelector** | **string** | A comma-separated label selector to filter the statements. | 
 
 ### Return type
 
-[**SqlV1StatementList**](SqlV1StatementList.md)
+[**SqlV1ConnectionList**](SqlV1ConnectionList.md)
 
 ### Authorization
 
@@ -318,11 +316,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateSqlv1Statement
+## UpdateSqlv1Connection
 
-> UpdateSqlv1Statement(ctx, organizationId, environmentId, statementName).SqlV1Statement(sqlV1Statement).Execute()
+> UpdateSqlv1Connection(ctx, organizationId, environmentId, connectionName).SqlV1Connection(sqlV1Connection).Execute()
 
-Update a Statement
+Update a Connection
 
 
 
@@ -341,14 +339,14 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    statementName := "statementName_example" // string | The unique identifier for the statement.
-    sqlV1Statement := *openapiclient.NewSqlV1Statement() // SqlV1Statement |  (optional)
+    connectionName := "connectionName_example" // string | The unique identifier for the connection.
+    sqlV1Connection := *openapiclient.NewSqlV1Connection() // SqlV1Connection |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1Api.UpdateSqlv1Statement(context.Background(), organizationId, environmentId, statementName).SqlV1Statement(sqlV1Statement).Execute()
+    resp, r, err := api_client.ConnectionsSqlV1Api.UpdateSqlv1Connection(context.Background(), organizationId, environmentId, connectionName).SqlV1Connection(sqlV1Connection).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1Api.UpdateSqlv1Statement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsSqlV1Api.UpdateSqlv1Connection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -362,11 +360,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organizationId** | [**string**](.md) | The unique identifier for the organization. | 
 **environmentId** | **string** | The unique identifier for the environment. | 
-**statementName** | **string** | The unique identifier for the statement. | 
+**connectionName** | **string** | The unique identifier for the connection. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateSqlv1StatementRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateSqlv1ConnectionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -374,7 +372,7 @@ Name | Type | Description  | Notes
 
 
 
- **sqlV1Statement** | [**SqlV1Statement**](SqlV1Statement.md) |  | 
+ **sqlV1Connection** | [**SqlV1Connection**](SqlV1Connection.md) |  | 
 
 ### Return type
 
