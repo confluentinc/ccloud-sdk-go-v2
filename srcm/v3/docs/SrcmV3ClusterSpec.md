@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The cluster name. | [optional] [readonly] 
 **Package** | Pointer to **string** | The billing package.  Note: Clusters can be upgraded from ESSENTIALS to ADVANCED, but cannot be downgraded from ADVANCED to ESSENTIALS.  | [optional] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
+**CatalogHttpEndpoint** | Pointer to **string** | The cluster&#39;s catalog HTTP request URL. | [optional] [readonly] 
+**PrivateHttpEndpoint** | Pointer to **string** | The cluster&#39;s private HTTP request URL. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
 **Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -104,6 +106,56 @@ SetHttpEndpoint sets HttpEndpoint field to given value.
 `func (o *SrcmV3ClusterSpec) HasHttpEndpoint() bool`
 
 HasHttpEndpoint returns a boolean if a field has been set.
+
+### GetCatalogHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) GetCatalogHttpEndpoint() string`
+
+GetCatalogHttpEndpoint returns the CatalogHttpEndpoint field if non-nil, zero value otherwise.
+
+### GetCatalogHttpEndpointOk
+
+`func (o *SrcmV3ClusterSpec) GetCatalogHttpEndpointOk() (*string, bool)`
+
+GetCatalogHttpEndpointOk returns a tuple with the CatalogHttpEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCatalogHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) SetCatalogHttpEndpoint(v string)`
+
+SetCatalogHttpEndpoint sets CatalogHttpEndpoint field to given value.
+
+### HasCatalogHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) HasCatalogHttpEndpoint() bool`
+
+HasCatalogHttpEndpoint returns a boolean if a field has been set.
+
+### GetPrivateHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) GetPrivateHttpEndpoint() string`
+
+GetPrivateHttpEndpoint returns the PrivateHttpEndpoint field if non-nil, zero value otherwise.
+
+### GetPrivateHttpEndpointOk
+
+`func (o *SrcmV3ClusterSpec) GetPrivateHttpEndpointOk() (*string, bool)`
+
+GetPrivateHttpEndpointOk returns a tuple with the PrivateHttpEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) SetPrivateHttpEndpoint(v string)`
+
+SetPrivateHttpEndpoint sets PrivateHttpEndpoint field to given value.
+
+### HasPrivateHttpEndpoint
+
+`func (o *SrcmV3ClusterSpec) HasPrivateHttpEndpoint() bool`
+
+HasPrivateHttpEndpoint returns a boolean if a field has been set.
 
 ### GetCloud
 
