@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the access point:    PROVISIONING: Access point provisioning is in progress;    PENDING_ACCEPT: Access point connection request is pending acceptance by the customer;    READY:  Access point is ready;    FAILED: Access point is in a failed state;    DEPROVISIONING: Access point deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the access point:    PROVISIONING: Access point provisioning is in progress;    PENDING_ACCEPT: Access point connection request is pending acceptance by the customer;    READY:  Access point is ready;    FAILED: Access point is in a failed state;    DEPROVISIONING: Access point deprovisioning is in progress;    DISCONNECTED: Access Point has been disconnected in the cloud provider by the customer;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if access point is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if access point is in a failed state. | [optional] [readonly] 
 **Config** | Pointer to [**NetworkingV1AccessPointStatusConfigOneOf**](NetworkingV1AccessPointStatusConfigOneOf.md) | Cloud specific status of the access point. | [optional] [readonly] 

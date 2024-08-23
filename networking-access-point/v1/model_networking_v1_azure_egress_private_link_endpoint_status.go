@@ -44,6 +44,8 @@ type NetworkingV1AzureEgressPrivateLinkEndpointStatus struct {
 	PrivateEndpointDomain *string `json:"private_endpoint_domain,omitempty"`
 	// IP address of the Private Endpoint (if any) that is connected to the Private Link service.
 	PrivateEndpointIpAddress string `json:"private_endpoint_ip_address,omitempty"`
+	// Domains of the Private Endpoint (if any) based off FQDNs in Azure custom DNS configs, which are required in your private DNS setup.
+	PrivateEndpointCustomDnsConfigDomains *[]string `json:"private_endpoint_custom_dns_config_domains,omitempty"`
 }
 
 // NewNetworkingV1AzureEgressPrivateLinkEndpointStatus instantiates a new NetworkingV1AzureEgressPrivateLinkEndpointStatus object
@@ -170,12 +172,45 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointIpA
 	o.PrivateEndpointIpAddress = v
 }
 
+// GetPrivateEndpointCustomDnsConfigDomains returns the PrivateEndpointCustomDnsConfigDomains field value if set, zero value otherwise.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointCustomDnsConfigDomains() []string {
+	if o == nil || o.PrivateEndpointCustomDnsConfigDomains == nil {
+		var ret []string
+		return ret
+	}
+	return *o.PrivateEndpointCustomDnsConfigDomains
+}
+
+// GetPrivateEndpointCustomDnsConfigDomainsOk returns a tuple with the PrivateEndpointCustomDnsConfigDomains field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) GetPrivateEndpointCustomDnsConfigDomainsOk() (*[]string, bool) {
+	if o == nil || o.PrivateEndpointCustomDnsConfigDomains == nil {
+		return nil, false
+	}
+	return o.PrivateEndpointCustomDnsConfigDomains, true
+}
+
+// HasPrivateEndpointCustomDnsConfigDomains returns a boolean if a field has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) HasPrivateEndpointCustomDnsConfigDomains() bool {
+	if o != nil && o.PrivateEndpointCustomDnsConfigDomains != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateEndpointCustomDnsConfigDomains gets a reference to the given []string and assigns it to the PrivateEndpointCustomDnsConfigDomains field.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) SetPrivateEndpointCustomDnsConfigDomains(v []string) {
+	o.PrivateEndpointCustomDnsConfigDomains = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateEndpointResourceId)
 	o.recurseRedact(o.PrivateEndpointDomain)
 	o.recurseRedact(&o.PrivateEndpointIpAddress)
+	o.recurseRedact(o.PrivateEndpointCustomDnsConfigDomains)
 }
 
 func (o *NetworkingV1AzureEgressPrivateLinkEndpointStatus) recurseRedact(v interface{}) {
@@ -221,6 +256,9 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpointStatus) MarshalJSON() ([]byte,
 	}
 	if true {
 		toSerialize["private_endpoint_ip_address"] = o.PrivateEndpointIpAddress
+	}
+	if o.PrivateEndpointCustomDnsConfigDomains != nil {
+		toSerialize["private_endpoint_custom_dns_config_domains"] = o.PrivateEndpointCustomDnsConfigDomains
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
