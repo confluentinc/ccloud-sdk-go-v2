@@ -52,5 +52,3 @@ blocks:
 promotions:
   - name: Publish tagging
     pipeline_file: publish_tagging.yml
-    auto_promote:
-      when: "result = 'passed' and branch = 'master'"
