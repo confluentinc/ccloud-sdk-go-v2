@@ -108,7 +108,7 @@ VERSION_PREFIX := $(IMPACTED_FOLDER_NAME)/v
 
 # If IMPACTED_FOLDER_NAME has at least one tag in the past, bump the associated tag version
 # Otherwise assign the prefix + v0.0.0/v0.1.0 as the default current/bump tag version
-CURRENT_TAG_VERSION := $(shell git describe --tags origin/master --match="$(IMPACTED_FOLDER_NAME)/v*" --abbrev=0 2>/dev/null || echo "$(VERSION_PREFIX)0.0.0")
+CURRENT_TAG_VERSION := $(shell git describe --tags origin/master --match="$(IMPACTED_FOLDER_NAME)/v*" --abbrev=0 || echo "$(VERSION_PREFIX)0.0.0")
 
 # Decompose CURRENT_TAG_VERSION to MAJOR, MINOR and PATCH for flexible bump afterwards
 VERSION_NUMERIC := $(shell echo $(CURRENT_TAG_VERSION) | sed 's/.*\/v//')
