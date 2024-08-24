@@ -1,6 +1,6 @@
 # \ClustersSrcmV3Api
 
-All URIs are relative to *https://api.confluent.cloud*
+All URIs below are relative to *https://api.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
