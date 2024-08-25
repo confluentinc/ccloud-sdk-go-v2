@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **time.Time** | The date and time at which this object was last updated. It is represented in RFC3339 format and is in UTC. | [optional] 
 **Uid** | Pointer to **string** | A system generated globally unique identifier for this resource. | [optional] 
 **ResourceVersion** | Pointer to **string** | A system generated string that uniquely identifies the version of this resource. | [optional] 
+**Labels** | Pointer to **map[string]string** | A map of key-value pairs that describe the resource. | [optional] 
 
 ## Methods
 
@@ -148,6 +149,31 @@ SetResourceVersion sets ResourceVersion field to given value.
 `func (o *ObjectMeta) HasResourceVersion() bool`
 
 HasResourceVersion returns a boolean if a field has been set.
+
+### GetLabels
+
+`func (o *ObjectMeta) GetLabels() map[string]string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *ObjectMeta) GetLabelsOk() (*map[string]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *ObjectMeta) SetLabels(v map[string]string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *ObjectMeta) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
