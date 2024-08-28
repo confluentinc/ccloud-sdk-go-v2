@@ -39,136 +39,134 @@ var (
 	_ _context.Context
 )
 
-type StatementsSqlV1Api interface {
+type ConnectionsSqlV1Api interface {
 
 	/*
-		CreateSqlv1Statement Create a Statement
+		CreateSqlv1Connection Create a Connection
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a statement.
+	Make a request to create a Connection.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
-		 @return ApiCreateSqlv1StatementRequest
+		 @return ApiCreateSqlv1ConnectionRequest
 	*/
-	CreateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1StatementRequest
+	CreateSqlv1Connection(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1ConnectionRequest
 
-	// CreateSqlv1StatementExecute executes the request
-	//  @return SqlV1Statement
-	CreateSqlv1StatementExecute(r ApiCreateSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error)
+	// CreateSqlv1ConnectionExecute executes the request
+	//  @return SqlV1Connection
+	CreateSqlv1ConnectionExecute(r ApiCreateSqlv1ConnectionRequest) (SqlV1Connection, *_nethttp.Response, error)
 
 	/*
-		DeleteSqlv1Statement Delete a Statement
+		DeleteSqlv1Connection Delete a Connection
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a statement.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiDeleteSqlv1StatementRequest
+		 @param connectionName The unique identifier for the connection.
+		 @return ApiDeleteSqlv1ConnectionRequest
 	*/
-	DeleteSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiDeleteSqlv1StatementRequest
+	DeleteSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiDeleteSqlv1ConnectionRequest
 
-	// DeleteSqlv1StatementExecute executes the request
-	DeleteSqlv1StatementExecute(r ApiDeleteSqlv1StatementRequest) (*_nethttp.Response, error)
+	// DeleteSqlv1ConnectionExecute executes the request
+	DeleteSqlv1ConnectionExecute(r ApiDeleteSqlv1ConnectionRequest) (*_nethttp.Response, error)
 
 	/*
-		GetSqlv1Statement Read a Statement
+		GetSqlv1Connection Read a Connection
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a statement.
+	Make a request to read a Connection.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiGetSqlv1StatementRequest
+		 @param connectionName The user provided name of the Connection. Unique within a region within an org and env.
+		 @return ApiGetSqlv1ConnectionRequest
 	*/
-	GetSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1StatementRequest
+	GetSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiGetSqlv1ConnectionRequest
 
-	// GetSqlv1StatementExecute executes the request
-	//  @return SqlV1Statement
-	GetSqlv1StatementExecute(r ApiGetSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error)
+	// GetSqlv1ConnectionExecute executes the request
+	//  @return SqlV1Connection
+	GetSqlv1ConnectionExecute(r ApiGetSqlv1ConnectionRequest) (SqlV1Connection, *_nethttp.Response, error)
 
 	/*
-		ListSqlv1Statements List of Statements
+		ListSqlv1Connections List of Connections
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all statements.
+	Retrieve a sorted, filtered and paginated list of all Connections.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
-		 @return ApiListSqlv1StatementsRequest
+		 @return ApiListSqlv1ConnectionsRequest
 	*/
-	ListSqlv1Statements(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1StatementsRequest
+	ListSqlv1Connections(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1ConnectionsRequest
 
-	// ListSqlv1StatementsExecute executes the request
-	//  @return SqlV1StatementList
-	ListSqlv1StatementsExecute(r ApiListSqlv1StatementsRequest) (SqlV1StatementList, *_nethttp.Response, error)
+	// ListSqlv1ConnectionsExecute executes the request
+	//  @return SqlV1ConnectionList
+	ListSqlv1ConnectionsExecute(r ApiListSqlv1ConnectionsRequest) (SqlV1ConnectionList, *_nethttp.Response, error)
 
 	/*
-		UpdateSqlv1Statement Update a Statement
+		UpdateSqlv1Connection Update a Connection
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a statement.
-	The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
-	In this case, do a GET, reapply the modifications, and try the update again.
+	Make a request to update a connection.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
-		 @param statementName The unique identifier for the statement.
-		 @return ApiUpdateSqlv1StatementRequest
+		 @param connectionName The unique identifier for the connection.
+		 @return ApiUpdateSqlv1ConnectionRequest
 	*/
-	UpdateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiUpdateSqlv1StatementRequest
+	UpdateSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiUpdateSqlv1ConnectionRequest
 
-	// UpdateSqlv1StatementExecute executes the request
-	UpdateSqlv1StatementExecute(r ApiUpdateSqlv1StatementRequest) (*_nethttp.Response, error)
+	// UpdateSqlv1ConnectionExecute executes the request
+	UpdateSqlv1ConnectionExecute(r ApiUpdateSqlv1ConnectionRequest) (*_nethttp.Response, error)
 }
 
-// StatementsSqlV1ApiService StatementsSqlV1Api service
-type StatementsSqlV1ApiService service
+// ConnectionsSqlV1ApiService ConnectionsSqlV1Api service
+type ConnectionsSqlV1ApiService service
 
-type ApiCreateSqlv1StatementRequest struct {
-	ctx            _context.Context
-	ApiService     StatementsSqlV1Api
-	organizationId string
-	environmentId  string
-	sqlV1Statement *SqlV1Statement
+type ApiCreateSqlv1ConnectionRequest struct {
+	ctx             _context.Context
+	ApiService      ConnectionsSqlV1Api
+	organizationId  string
+	environmentId   string
+	sqlV1Connection *SqlV1Connection
 }
 
-func (r ApiCreateSqlv1StatementRequest) SqlV1Statement(sqlV1Statement SqlV1Statement) ApiCreateSqlv1StatementRequest {
-	r.sqlV1Statement = &sqlV1Statement
+func (r ApiCreateSqlv1ConnectionRequest) SqlV1Connection(sqlV1Connection SqlV1Connection) ApiCreateSqlv1ConnectionRequest {
+	r.sqlV1Connection = &sqlV1Connection
 	return r
 }
 
-func (r ApiCreateSqlv1StatementRequest) Execute() (SqlV1Statement, *_nethttp.Response, error) {
-	return r.ApiService.CreateSqlv1StatementExecute(r)
+func (r ApiCreateSqlv1ConnectionRequest) Execute() (SqlV1Connection, *_nethttp.Response, error) {
+	return r.ApiService.CreateSqlv1ConnectionExecute(r)
 }
 
 /*
-CreateSqlv1Statement Create a Statement
+CreateSqlv1Connection Create a Connection
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a statement.
+Make a request to create a Connection.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
-	@return ApiCreateSqlv1StatementRequest
+	@return ApiCreateSqlv1ConnectionRequest
 */
-func (a *StatementsSqlV1ApiService) CreateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1StatementRequest {
-	return ApiCreateSqlv1StatementRequest{
+func (a *ConnectionsSqlV1ApiService) CreateSqlv1Connection(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1ConnectionRequest {
+	return ApiCreateSqlv1ConnectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
@@ -178,23 +176,23 @@ func (a *StatementsSqlV1ApiService) CreateSqlv1Statement(ctx _context.Context, o
 
 // Execute executes the request
 //
-//	@return SqlV1Statement
-func (a *StatementsSqlV1ApiService) CreateSqlv1StatementExecute(r ApiCreateSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error) {
+//	@return SqlV1Connection
+func (a *ConnectionsSqlV1ApiService) CreateSqlv1ConnectionExecute(r ApiCreateSqlv1ConnectionRequest) (SqlV1Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  SqlV1Statement
+		localVarReturnValue  SqlV1Connection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementsSqlV1ApiService.CreateSqlv1Statement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsSqlV1ApiService.CreateSqlv1Connection")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
 
@@ -220,7 +218,7 @@ func (a *StatementsSqlV1ApiService) CreateSqlv1StatementExecute(r ApiCreateSqlv1
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sqlV1Statement
+	localVarPostBody = r.sqlV1Connection
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -317,43 +315,43 @@ func (a *StatementsSqlV1ApiService) CreateSqlv1StatementExecute(r ApiCreateSqlv1
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteSqlv1StatementRequest struct {
+type ApiDeleteSqlv1ConnectionRequest struct {
 	ctx            _context.Context
-	ApiService     StatementsSqlV1Api
+	ApiService     ConnectionsSqlV1Api
 	organizationId string
 	environmentId  string
-	statementName  string
+	connectionName string
 }
 
-func (r ApiDeleteSqlv1StatementRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteSqlv1StatementExecute(r)
+func (r ApiDeleteSqlv1ConnectionRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteSqlv1ConnectionExecute(r)
 }
 
 /*
-DeleteSqlv1Statement Delete a Statement
+DeleteSqlv1Connection Delete a Connection
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a statement.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
-	@param statementName The unique identifier for the statement.
-	@return ApiDeleteSqlv1StatementRequest
+	@param connectionName The unique identifier for the connection.
+	@return ApiDeleteSqlv1ConnectionRequest
 */
-func (a *StatementsSqlV1ApiService) DeleteSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiDeleteSqlv1StatementRequest {
-	return ApiDeleteSqlv1StatementRequest{
+func (a *ConnectionsSqlV1ApiService) DeleteSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiDeleteSqlv1ConnectionRequest {
+	return ApiDeleteSqlv1ConnectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
 		environmentId:  environmentId,
-		statementName:  statementName,
+		connectionName: connectionName,
 	}
 }
 
 // Execute executes the request
-func (a *StatementsSqlV1ApiService) DeleteSqlv1StatementExecute(r ApiDeleteSqlv1StatementRequest) (*_nethttp.Response, error) {
+func (a *ConnectionsSqlV1ApiService) DeleteSqlv1ConnectionExecute(r ApiDeleteSqlv1ConnectionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -362,15 +360,15 @@ func (a *StatementsSqlV1ApiService) DeleteSqlv1StatementExecute(r ApiDeleteSqlv1
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementsSqlV1ApiService.DeleteSqlv1Statement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsSqlV1ApiService.DeleteSqlv1Connection")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"statement_name"+"}", _neturl.PathEscape(parameterToString(r.statementName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"connection_name"+"}", _neturl.PathEscape(parameterToString(r.connectionName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -470,63 +468,63 @@ func (a *StatementsSqlV1ApiService) DeleteSqlv1StatementExecute(r ApiDeleteSqlv1
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetSqlv1StatementRequest struct {
+type ApiGetSqlv1ConnectionRequest struct {
 	ctx            _context.Context
-	ApiService     StatementsSqlV1Api
+	ApiService     ConnectionsSqlV1Api
 	organizationId string
 	environmentId  string
-	statementName  string
+	connectionName string
 }
 
-func (r ApiGetSqlv1StatementRequest) Execute() (SqlV1Statement, *_nethttp.Response, error) {
-	return r.ApiService.GetSqlv1StatementExecute(r)
+func (r ApiGetSqlv1ConnectionRequest) Execute() (SqlV1Connection, *_nethttp.Response, error) {
+	return r.ApiService.GetSqlv1ConnectionExecute(r)
 }
 
 /*
-GetSqlv1Statement Read a Statement
+GetSqlv1Connection Read a Connection
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a statement.
+Make a request to read a Connection.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
-	@param statementName The unique identifier for the statement.
-	@return ApiGetSqlv1StatementRequest
+	@param connectionName The user provided name of the Connection. Unique within a region within an org and env.
+	@return ApiGetSqlv1ConnectionRequest
 */
-func (a *StatementsSqlV1ApiService) GetSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiGetSqlv1StatementRequest {
-	return ApiGetSqlv1StatementRequest{
+func (a *ConnectionsSqlV1ApiService) GetSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiGetSqlv1ConnectionRequest {
+	return ApiGetSqlv1ConnectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
 		environmentId:  environmentId,
-		statementName:  statementName,
+		connectionName: connectionName,
 	}
 }
 
 // Execute executes the request
 //
-//	@return SqlV1Statement
-func (a *StatementsSqlV1ApiService) GetSqlv1StatementExecute(r ApiGetSqlv1StatementRequest) (SqlV1Statement, *_nethttp.Response, error) {
+//	@return SqlV1Connection
+func (a *ConnectionsSqlV1ApiService) GetSqlv1ConnectionExecute(r ApiGetSqlv1ConnectionRequest) (SqlV1Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  SqlV1Statement
+		localVarReturnValue  SqlV1Connection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementsSqlV1ApiService.GetSqlv1Statement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsSqlV1ApiService.GetSqlv1Connection")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"statement_name"+"}", _neturl.PathEscape(parameterToString(r.statementName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"connection_name"+"}", _neturl.PathEscape(parameterToString(r.connectionName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -635,59 +633,52 @@ func (a *StatementsSqlV1ApiService) GetSqlv1StatementExecute(r ApiGetSqlv1Statem
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListSqlv1StatementsRequest struct {
-	ctx               _context.Context
-	ApiService        StatementsSqlV1Api
-	organizationId    string
-	environmentId     string
-	specComputePoolId *string
-	pageSize          *int32
-	pageToken         *string
-	labelSelector     *string
+type ApiListSqlv1ConnectionsRequest struct {
+	ctx                _context.Context
+	ApiService         ConnectionsSqlV1Api
+	organizationId     string
+	environmentId      string
+	specConnectionType *string
+	pageSize           *int32
+	pageToken          *string
 }
 
-// Filter the results by exact match for spec.compute_pool.
-func (r ApiListSqlv1StatementsRequest) SpecComputePoolId(specComputePoolId string) ApiListSqlv1StatementsRequest {
-	r.specComputePoolId = &specComputePoolId
+// Filter the results by exact match for spec.connection_type
+func (r ApiListSqlv1ConnectionsRequest) SpecConnectionType(specConnectionType string) ApiListSqlv1ConnectionsRequest {
+	r.specConnectionType = &specConnectionType
 	return r
 }
 
 // A pagination size for collection requests.
-func (r ApiListSqlv1StatementsRequest) PageSize(pageSize int32) ApiListSqlv1StatementsRequest {
+func (r ApiListSqlv1ConnectionsRequest) PageSize(pageSize int32) ApiListSqlv1ConnectionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListSqlv1StatementsRequest) PageToken(pageToken string) ApiListSqlv1StatementsRequest {
+func (r ApiListSqlv1ConnectionsRequest) PageToken(pageToken string) ApiListSqlv1ConnectionsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// A comma-separated label selector to filter the statements.
-func (r ApiListSqlv1StatementsRequest) LabelSelector(labelSelector string) ApiListSqlv1StatementsRequest {
-	r.labelSelector = &labelSelector
-	return r
-}
-
-func (r ApiListSqlv1StatementsRequest) Execute() (SqlV1StatementList, *_nethttp.Response, error) {
-	return r.ApiService.ListSqlv1StatementsExecute(r)
+func (r ApiListSqlv1ConnectionsRequest) Execute() (SqlV1ConnectionList, *_nethttp.Response, error) {
+	return r.ApiService.ListSqlv1ConnectionsExecute(r)
 }
 
 /*
-ListSqlv1Statements List of Statements
+ListSqlv1Connections List of Connections
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all statements.
+Retrieve a sorted, filtered and paginated list of all Connections.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
-	@return ApiListSqlv1StatementsRequest
+	@return ApiListSqlv1ConnectionsRequest
 */
-func (a *StatementsSqlV1ApiService) ListSqlv1Statements(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1StatementsRequest {
-	return ApiListSqlv1StatementsRequest{
+func (a *ConnectionsSqlV1ApiService) ListSqlv1Connections(ctx _context.Context, organizationId string, environmentId string) ApiListSqlv1ConnectionsRequest {
+	return ApiListSqlv1ConnectionsRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
@@ -697,23 +688,23 @@ func (a *StatementsSqlV1ApiService) ListSqlv1Statements(ctx _context.Context, or
 
 // Execute executes the request
 //
-//	@return SqlV1StatementList
-func (a *StatementsSqlV1ApiService) ListSqlv1StatementsExecute(r ApiListSqlv1StatementsRequest) (SqlV1StatementList, *_nethttp.Response, error) {
+//	@return SqlV1ConnectionList
+func (a *ConnectionsSqlV1ApiService) ListSqlv1ConnectionsExecute(r ApiListSqlv1ConnectionsRequest) (SqlV1ConnectionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  SqlV1StatementList
+		localVarReturnValue  SqlV1ConnectionList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementsSqlV1ApiService.ListSqlv1Statements")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsSqlV1ApiService.ListSqlv1Connections")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
 
@@ -721,8 +712,8 @@ func (a *StatementsSqlV1ApiService) ListSqlv1StatementsExecute(r ApiListSqlv1Sta
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.specComputePoolId != nil {
-		localVarQueryParams.Add("spec.compute_pool_id", parameterToString(*r.specComputePoolId, ""))
+	if r.specConnectionType != nil {
+		localVarQueryParams.Add("spec.connection_type", parameterToString(*r.specConnectionType, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -730,9 +721,6 @@ func (a *StatementsSqlV1ApiService) ListSqlv1StatementsExecute(r ApiListSqlv1Sta
 	if r.pageToken != nil {
 		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
 	}
-	if r.labelSelector != nil {
-		localVarQueryParams.Add("label_selector", parameterToString(*r.labelSelector, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -836,51 +824,49 @@ func (a *StatementsSqlV1ApiService) ListSqlv1StatementsExecute(r ApiListSqlv1Sta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateSqlv1StatementRequest struct {
-	ctx            _context.Context
-	ApiService     StatementsSqlV1Api
-	organizationId string
-	environmentId  string
-	statementName  string
-	sqlV1Statement *SqlV1Statement
+type ApiUpdateSqlv1ConnectionRequest struct {
+	ctx             _context.Context
+	ApiService      ConnectionsSqlV1Api
+	organizationId  string
+	environmentId   string
+	connectionName  string
+	sqlV1Connection *SqlV1Connection
 }
 
-func (r ApiUpdateSqlv1StatementRequest) SqlV1Statement(sqlV1Statement SqlV1Statement) ApiUpdateSqlv1StatementRequest {
-	r.sqlV1Statement = &sqlV1Statement
+func (r ApiUpdateSqlv1ConnectionRequest) SqlV1Connection(sqlV1Connection SqlV1Connection) ApiUpdateSqlv1ConnectionRequest {
+	r.sqlV1Connection = &sqlV1Connection
 	return r
 }
 
-func (r ApiUpdateSqlv1StatementRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.UpdateSqlv1StatementExecute(r)
+func (r ApiUpdateSqlv1ConnectionRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.UpdateSqlv1ConnectionExecute(r)
 }
 
 /*
-UpdateSqlv1Statement Update a Statement
+UpdateSqlv1Connection Update a Connection
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update a statement.
-The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
-In this case, do a GET, reapply the modifications, and try the update again.
+Make a request to update a connection.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
-	@param statementName The unique identifier for the statement.
-	@return ApiUpdateSqlv1StatementRequest
+	@param connectionName The unique identifier for the connection.
+	@return ApiUpdateSqlv1ConnectionRequest
 */
-func (a *StatementsSqlV1ApiService) UpdateSqlv1Statement(ctx _context.Context, organizationId string, environmentId string, statementName string) ApiUpdateSqlv1StatementRequest {
-	return ApiUpdateSqlv1StatementRequest{
+func (a *ConnectionsSqlV1ApiService) UpdateSqlv1Connection(ctx _context.Context, organizationId string, environmentId string, connectionName string) ApiUpdateSqlv1ConnectionRequest {
+	return ApiUpdateSqlv1ConnectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
 		environmentId:  environmentId,
-		statementName:  statementName,
+		connectionName: connectionName,
 	}
 }
 
 // Execute executes the request
-func (a *StatementsSqlV1ApiService) UpdateSqlv1StatementExecute(r ApiUpdateSqlv1StatementRequest) (*_nethttp.Response, error) {
+func (a *ConnectionsSqlV1ApiService) UpdateSqlv1ConnectionExecute(r ApiUpdateSqlv1ConnectionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -889,15 +875,15 @@ func (a *StatementsSqlV1ApiService) UpdateSqlv1StatementExecute(r ApiUpdateSqlv1
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatementsSqlV1ApiService.UpdateSqlv1Statement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsSqlV1ApiService.UpdateSqlv1Connection")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"statement_name"+"}", _neturl.PathEscape(parameterToString(r.statementName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"connection_name"+"}", _neturl.PathEscape(parameterToString(r.connectionName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -921,7 +907,7 @@ func (a *StatementsSqlV1ApiService) UpdateSqlv1StatementExecute(r ApiUpdateSqlv1
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sqlV1Statement
+	localVarPostBody = r.sqlV1Connection
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

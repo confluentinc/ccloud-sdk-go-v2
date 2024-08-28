@@ -79,6 +79,11 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ConnectionsSqlV1Api* | [**CreateSqlv1Connection**](docs/ConnectionsSqlV1Api.md#createsqlv1connection) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | Create a Connection
+*ConnectionsSqlV1Api* | [**DeleteSqlv1Connection**](docs/ConnectionsSqlV1Api.md#deletesqlv1connection) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Delete a Connection
+*ConnectionsSqlV1Api* | [**GetSqlv1Connection**](docs/ConnectionsSqlV1Api.md#getsqlv1connection) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Read a Connection
+*ConnectionsSqlV1Api* | [**ListSqlv1Connections**](docs/ConnectionsSqlV1Api.md#listsqlv1connections) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | List of Connections
+*ConnectionsSqlV1Api* | [**UpdateSqlv1Connection**](docs/ConnectionsSqlV1Api.md#updatesqlv1connection) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Update a Connection
 *StatementExceptionsSqlV1Api* | [**GetSqlv1StatementExceptions**](docs/StatementExceptionsSqlV1Api.md#getsqlv1statementexceptions) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
 *StatementResultsSqlV1Api* | [**GetSqlv1StatementResult**](docs/StatementResultsSqlV1Api.md#getsqlv1statementresult) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
 *StatementsSqlV1Api* | [**CreateSqlv1Statement**](docs/StatementsSqlV1Api.md#createsqlv1statement) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | Create a Statement
@@ -101,6 +106,12 @@ Class | Method | HTTP request | Description
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ResultListMeta](docs/ResultListMeta.md)
  - [RowFieldType](docs/RowFieldType.md)
+ - [SqlV1Connection](docs/SqlV1Connection.md)
+ - [SqlV1ConnectionList](docs/SqlV1ConnectionList.md)
+ - [SqlV1ConnectionSpec](docs/SqlV1ConnectionSpec.md)
+ - [SqlV1ConnectionSpecAuthDataOneOf](docs/SqlV1ConnectionSpecAuthDataOneOf.md)
+ - [SqlV1ConnectionStatus](docs/SqlV1ConnectionStatus.md)
+ - [SqlV1PlaintextProvider](docs/SqlV1PlaintextProvider.md)
  - [SqlV1ResultSchema](docs/SqlV1ResultSchema.md)
  - [SqlV1ScalingStatus](docs/SqlV1ScalingStatus.md)
  - [SqlV1Statement](docs/SqlV1Statement.md)
