@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteSqlv1beta1Statement**](StatementsSqlV1beta1Api.md#DeleteSqlv1beta1Statement) | **Delete** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 [**GetSqlv1beta1Statement**](StatementsSqlV1beta1Api.md#GetSqlv1beta1Statement) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement
 [**ListSqlv1beta1Statements**](StatementsSqlV1beta1Api.md#ListSqlv1beta1Statements) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
+[**PatchSqlv1beta1Statement**](StatementsSqlV1beta1Api.md#PatchSqlv1beta1Statement) | **Patch** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Patch a Statement
 [**UpdateSqlv1beta1Statement**](StatementsSqlV1beta1Api.md#UpdateSqlv1beta1Statement) | **Put** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
 
 
@@ -239,7 +240,7 @@ Name | Type | Description  | Notes
 
 ## ListSqlv1beta1Statements
 
-> SqlV1beta1StatementList ListSqlv1beta1Statements(ctx, organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+> SqlV1beta1StatementList ListSqlv1beta1Statements(ctx, organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
 
 List of Statements
 
@@ -263,10 +264,11 @@ func main() {
     specComputePoolId := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
+    labelSelector := "labelSelector_example" // string | A comma-separated label selector to filter the statements. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StatementsSqlV1beta1Api.ListSqlv1beta1Statements(context.Background(), organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.StatementsSqlV1beta1Api.ListSqlv1beta1Statements(context.Background(), organizationId, environmentId).SpecComputePoolId(specComputePoolId).PageSize(pageSize).PageToken(pageToken).LabelSelector(labelSelector).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1beta1Api.ListSqlv1beta1Statements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -297,6 +299,7 @@ Name | Type | Description  | Notes
  **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
+ **labelSelector** | **string** | A comma-separated label selector to filter the statements. | 
 
 ### Return type
 
@@ -309,6 +312,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchSqlv1beta1Statement
+
+> SqlV1beta1Statement PatchSqlv1beta1Statement(ctx, organizationId, environmentId, statementName).PatchRequest(patchRequest).Execute()
+
+Patch a Statement
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    organizationId := TODO // string | The unique identifier for the organization.
+    environmentId := "environmentId_example" // string | The unique identifier for the environment.
+    statementName := "statementName_example" // string | The unique identifier for the statement.
+    patchRequest := *openapiclient.NewPatchRequest() // PatchRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StatementsSqlV1beta1Api.PatchSqlv1beta1Statement(context.Background(), organizationId, environmentId, statementName).PatchRequest(patchRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StatementsSqlV1beta1Api.PatchSqlv1beta1Statement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchSqlv1beta1Statement`: SqlV1beta1Statement
+    fmt.Fprintf(os.Stdout, "Response from `StatementsSqlV1beta1Api.PatchSqlv1beta1Statement`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | [**string**](.md) | The unique identifier for the organization. | 
+**environmentId** | **string** | The unique identifier for the environment. | 
+**statementName** | **string** | The unique identifier for the statement. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchSqlv1beta1StatementRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **patchRequest** | [**PatchRequest**](PatchRequest.md) |  | 
+
+### Return type
+
+[**SqlV1beta1Statement**](sql.v1beta1.Statement.md)
+
+### Authorization
+
+[resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

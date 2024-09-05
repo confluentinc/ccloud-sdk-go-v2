@@ -37,8 +37,9 @@ import (
 // SqlV1beta1StatementStatus The status of the Statement
 type SqlV1beta1StatementStatus struct {
 	// The lifecycle phase of the submitted SQL statement: PENDING: SQL statement is pending execution; RUNNING: SQL statement execution is in progress; COMPLETED: SQL statement is completed; DELETING: SQL statement deletion is in progress; FAILING: SQL statement is failing; FAILED: SQL statement execution has failed; STOPPED: SQL statement execution has successfully been stopped;
-	Phase        string                  `json:"phase,omitempty"`
-	ResultSchema *SqlV1beta1ResultSchema `json:"result_schema,omitempty"`
+	Phase         string                   `json:"phase,omitempty"`
+	ScalingStatus *SqlV1beta1ScalingStatus `json:"scaling_status,omitempty"`
+	ResultSchema  *SqlV1beta1ResultSchema  `json:"result_schema,omitempty"`
 	// Description of a SQL statement phase.
 	Detail *string `json:"detail,omitempty"`
 }
@@ -83,6 +84,38 @@ func (o *SqlV1beta1StatementStatus) GetPhaseOk() (*string, bool) {
 // SetPhase sets field value
 func (o *SqlV1beta1StatementStatus) SetPhase(v string) {
 	o.Phase = v
+}
+
+// GetScalingStatus returns the ScalingStatus field value if set, zero value otherwise.
+func (o *SqlV1beta1StatementStatus) GetScalingStatus() SqlV1beta1ScalingStatus {
+	if o == nil || o.ScalingStatus == nil {
+		var ret SqlV1beta1ScalingStatus
+		return ret
+	}
+	return *o.ScalingStatus
+}
+
+// GetScalingStatusOk returns a tuple with the ScalingStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1beta1StatementStatus) GetScalingStatusOk() (*SqlV1beta1ScalingStatus, bool) {
+	if o == nil || o.ScalingStatus == nil {
+		return nil, false
+	}
+	return o.ScalingStatus, true
+}
+
+// HasScalingStatus returns a boolean if a field has been set.
+func (o *SqlV1beta1StatementStatus) HasScalingStatus() bool {
+	if o != nil && o.ScalingStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScalingStatus gets a reference to the given SqlV1beta1ScalingStatus and assigns it to the ScalingStatus field.
+func (o *SqlV1beta1StatementStatus) SetScalingStatus(v SqlV1beta1ScalingStatus) {
+	o.ScalingStatus = &v
 }
 
 // GetResultSchema returns the ResultSchema field value if set, zero value otherwise.
@@ -152,6 +185,7 @@ func (o *SqlV1beta1StatementStatus) SetDetail(v string) {
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1beta1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.ScalingStatus)
 	o.recurseRedact(o.ResultSchema)
 	o.recurseRedact(o.Detail)
 }
@@ -190,6 +224,9 @@ func (o SqlV1beta1StatementStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.ScalingStatus != nil {
+		toSerialize["scaling_status"] = o.ScalingStatus
 	}
 	if o.ResultSchema != nil {
 		toSerialize["result_schema"] = o.ResultSchema

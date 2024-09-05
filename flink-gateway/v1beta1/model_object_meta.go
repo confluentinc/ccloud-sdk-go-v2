@@ -47,6 +47,8 @@ type ObjectMeta struct {
 	Uid *string `json:"uid,omitempty"`
 	// A system generated string that uniquely identifies the version of this resource.
 	ResourceVersion *string `json:"resource_version,omitempty"`
+	// A map of key-value pairs that describe the resource.
+	Labels *map[string]string `json:"labels,omitempty"`
 }
 
 // NewObjectMeta instantiates a new ObjectMeta object
@@ -219,6 +221,38 @@ func (o *ObjectMeta) SetResourceVersion(v string) {
 	o.ResourceVersion = &v
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *ObjectMeta) GetLabels() map[string]string {
+	if o == nil || o.Labels == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ObjectMeta) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || o.Labels == nil {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *ObjectMeta) HasLabels() bool {
+	if o != nil && o.Labels != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *ObjectMeta) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ObjectMeta) Redact() {
 	o.recurseRedact(&o.Self)
@@ -226,6 +260,7 @@ func (o *ObjectMeta) Redact() {
 	o.recurseRedact(o.UpdatedAt)
 	o.recurseRedact(o.Uid)
 	o.recurseRedact(o.ResourceVersion)
+	o.recurseRedact(o.Labels)
 }
 
 func (o *ObjectMeta) recurseRedact(v interface{}) {
@@ -274,6 +309,9 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	}
 	if o.ResourceVersion != nil {
 		toSerialize["resource_version"] = o.ResourceVersion
+	}
+	if o.Labels != nil {
+		toSerialize["labels"] = o.Labels
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

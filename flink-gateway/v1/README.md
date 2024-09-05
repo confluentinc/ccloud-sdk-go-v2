@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 *StatementsSqlV1Api* | [**DeleteSqlv1Statement**](docs/StatementsSqlV1Api.md#deletesqlv1statement) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 *StatementsSqlV1Api* | [**GetSqlv1Statement**](docs/StatementsSqlV1Api.md#getsqlv1statement) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement
 *StatementsSqlV1Api* | [**ListSqlv1Statements**](docs/StatementsSqlV1Api.md#listsqlv1statements) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
+*StatementsSqlV1Api* | [**PatchSqlv1Statement**](docs/StatementsSqlV1Api.md#patchsqlv1statement) | **Patch** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Patch a Statement
 *StatementsSqlV1Api* | [**UpdateSqlv1Statement**](docs/StatementsSqlV1Api.md#updatesqlv1statement) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
 
 
@@ -101,9 +102,14 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [ExceptionListMeta](docs/ExceptionListMeta.md)
  - [Failure](docs/Failure.md)
+ - [JsonPatchRequestAddReplace](docs/JsonPatchRequestAddReplace.md)
+ - [JsonPatchRequestMoveCopy](docs/JsonPatchRequestMoveCopy.md)
+ - [JsonPatchRequestRemove](docs/JsonPatchRequestRemove.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
+ - [PatchRequest](docs/PatchRequest.md)
+ - [PatchRequestOneOf](docs/PatchRequestOneOf.md)
  - [ResultListMeta](docs/ResultListMeta.md)
  - [RowFieldType](docs/RowFieldType.md)
  - [SqlV1Connection](docs/SqlV1Connection.md)

@@ -80,11 +80,12 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *StatementExceptionsSqlV1beta1Api* | [**GetSqlv1beta1StatementExceptions**](docs/StatementExceptionsSqlV1beta1Api.md#getsqlv1beta1statementexceptions) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
-*StatementResultSqlV1beta1Api* | [**GetSqlv1beta1StatementResult**](docs/StatementResultSqlV1beta1Api.md#getsqlv1beta1statementresult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
+*StatementResultsSqlV1beta1Api* | [**GetSqlv1beta1StatementResult**](docs/StatementResultsSqlV1beta1Api.md#getsqlv1beta1statementresult) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
 *StatementsSqlV1beta1Api* | [**CreateSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#createsqlv1beta1statement) | **Post** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements | Create a Statement
 *StatementsSqlV1beta1Api* | [**DeleteSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#deletesqlv1beta1statement) | **Delete** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Delete a Statement
 *StatementsSqlV1beta1Api* | [**GetSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#getsqlv1beta1statement) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Read a Statement
 *StatementsSqlV1beta1Api* | [**ListSqlv1beta1Statements**](docs/StatementsSqlV1beta1Api.md#listsqlv1beta1statements) | **Get** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
+*StatementsSqlV1beta1Api* | [**PatchSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#patchsqlv1beta1statement) | **Patch** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Patch a Statement
 *StatementsSqlV1beta1Api* | [**UpdateSqlv1beta1Statement**](docs/StatementsSqlV1beta1Api.md#updatesqlv1beta1statement) | **Put** /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
 
 
@@ -96,12 +97,18 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [ExceptionListMeta](docs/ExceptionListMeta.md)
  - [Failure](docs/Failure.md)
+ - [JsonPatchRequestAddReplace](docs/JsonPatchRequestAddReplace.md)
+ - [JsonPatchRequestMoveCopy](docs/JsonPatchRequestMoveCopy.md)
+ - [JsonPatchRequestRemove](docs/JsonPatchRequestRemove.md)
  - [ListMeta](docs/ListMeta.md)
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
+ - [PatchRequest](docs/PatchRequest.md)
+ - [PatchRequestOneOf](docs/PatchRequestOneOf.md)
  - [ResultListMeta](docs/ResultListMeta.md)
  - [RowFieldType](docs/RowFieldType.md)
  - [SqlV1beta1ResultSchema](docs/SqlV1beta1ResultSchema.md)
+ - [SqlV1beta1ScalingStatus](docs/SqlV1beta1ScalingStatus.md)
  - [SqlV1beta1Statement](docs/SqlV1beta1Statement.md)
  - [SqlV1beta1StatementException](docs/SqlV1beta1StatementException.md)
  - [SqlV1beta1StatementExceptionList](docs/SqlV1beta1StatementExceptionList.md)

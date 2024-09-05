@@ -15,7 +15,8 @@ servers:
   url: https://flink.region.provider.confluent.cloud
 tags:
 - description: |-
-    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
     `Statement` represents a core resource used to model SQL statements for execution.
     A statement generalizes DDL, DML, DQL, etc., but doesn’t attempt to handle session
     management or any higher-level functionality.
@@ -23,11 +24,27 @@ tags:
     ## The Statements Model
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.Statement" />
   name: Statements (sql/v1beta1)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    `StatementResult` represents a result of a `Statement` resource.
+    The API allows you to read your statement's results.
+    ## The Statement Results Model
+    <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.StatementResult" />
+  name: Statement Results (sql/v1beta1)
+- description: |-
+    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+    `StatementException` represents an exception of a `Statement` resource.
+    The API allows you to read your statement's exceptions.
+    ## The Statement Exceptions Model
+    <SchemaDefinition schemaRef="#/components/schemas/sql.v1beta1.StatementException" />
+  name: Statement Exceptions (sql/v1beta1)
 paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20kk%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
 
         Read Statement Result.
       operationId: getSqlv1beta1StatementResult
@@ -221,20 +238,20 @@ paths:
       - resource-api-key: []
       summary: Read Statement Result
       tags:
-      - Statement Result (sql/v1beta1)
+      - Statement Results (sql/v1beta1)
       x-request-access-name: SQL API v1beta1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE' \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE")
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -242,7 +259,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -255,7 +272,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -269,7 +286,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE",
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -294,7 +311,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -303,7 +320,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results?page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -311,7 +328,8 @@ paths:
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Retrieve a sorted, filtered, paginated list of all statements.
       operationId: listSqlv1beta1Statements
       parameters:
@@ -359,6 +377,14 @@ paths:
         required: false
         schema:
           maxLength: 255
+          type: string
+        style: form
+      - description: A comma-separated label selector to filter the statements.
+        explode: false
+        in: query
+        name: label_selector
+        required: false
+        schema:
           type: string
         style: form
       responses:
@@ -508,14 +534,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -523,7 +549,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -536,7 +562,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -550,7 +576,7 @@ paths:
             "method": "GET",
             "hostname": "flink.region.provider.confluent.cloud",
             "port": null,
-            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -575,7 +601,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -584,13 +610,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements?spec.compute_pool_id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to create a statement.
       operationId: createSqlv1beta1Statement
       parameters:
@@ -833,13 +860,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements")
             .post(body)
@@ -854,13 +881,14 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
           \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
           \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
-          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
-          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
-          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true}}\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
+          \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
+          \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
+          \",\\\"stopped\\\":false}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -868,7 +896,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}"
 
           headers = {
               'content-type': "application/json",
@@ -915,10 +943,13 @@ paths:
             environment_id: 'string',
             spec: {
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
-              properties: {key1: 'value1', key2: 'value2'},
+              properties: {
+                'sql.current-catalog': 'my_environment',
+                'sql.current-database': 'my_kafka_cluster'
+              },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: true
+              stopped: false
             }
           }));
           req.end();
@@ -934,7 +965,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -943,13 +974,14 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1beta1
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}:
     delete:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to delete a statement.
       operationId: deleteSqlv1beta1Statement
       parameters:
@@ -1203,7 +1235,8 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to read a statement.
       operationId: getSqlv1beta1Statement
       parameters:
@@ -1474,9 +1507,341 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    patch:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to patch a statement.
+      operationId: patchSqlv1beta1Statement
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The unique identifier for the statement.
+        explode: false
+        in: path
+        name: statement_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/sql.v1beta1.Statement'
+                - properties:
+                    spec:
+                      required:
+                      - compute_pool_id
+                      - statement
+                      - statement_name
+                      type: object
+                  required:
+                  - spec
+                  - status
+                  type: object
+          description: Patched Statement.
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Patch a Statement
+      tags:
+      - Statements (sql/v1beta1)
+      x-request-access-name: SQL API v1beta1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json-patch+json'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}")
+            .patch(null)
+            .addHeader("content-type", "application/json-patch+json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}\"\
+          \n\n\treq, _ := http.NewRequest(\"PATCH\", url, nil)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json-patch+json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          headers = {
+              'content-type': "application/json-patch+json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}",
+            "headers": {
+              "content-type": "application/json-patch+json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json-patch+json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json-patch+json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
     put:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Make a request to update a statement.
       operationId: updateSqlv1beta1Statement
       parameters:
@@ -1671,13 +2036,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"key1":"value1","key2":"value2"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":true},"metadata":{}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false},"metadata":{}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}")
             .put(body)
@@ -1692,21 +2057,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"sql123\\\",\\\"organization_id\\\
           \":\\\"7c60d51f-b44e-4682-87d6-449835ea4de6\\\",\\\"environment_id\\\":\\\
           \"string\\\",\\\"spec\\\":{\\\"statement\\\":\\\"SELECT * FROM TABLE WHERE\
-          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"key1\\\":\\\"value1\\\",\\\
-          \"key2\\\":\\\"value2\\\"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"\
-          principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\":true},\\\"metadata\\\":{}}\"\
-          )\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
+          \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
+          \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
+          \",\\\"stopped\\\":false},\\\"metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}"
 
           headers = {
               'content-type': "application/json",
@@ -1753,10 +2119,13 @@ paths:
             environment_id: 'string',
             spec: {
               statement: 'SELECT * FROM TABLE WHERE VALUE1 = VALUE2;',
-              properties: {key1: 'value1', key2: 'value2'},
+              properties: {
+                'sql.current-catalog': 'my_environment',
+                'sql.current-database': 'my_kafka_cluster'
+              },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: true
+              stopped: false
             },
             metadata: {}
           }));
@@ -1773,7 +2142,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1782,13 +2151,14 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"key1\":\"value1\",\"key2\":\"value2\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":true},\"metadata\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1beta1
   /sql/v1beta1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To SQL API v1beta1](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Gateway%20API-%23bc8540)](mailto:ccloud-api-access+sql-v1beta1-early-access@confluent.io?subject=Request%20to%20join%20sql/v1beta1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20sql/v1beta1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
         Retrieve a list of the 10 most recent statement exceptions.
       operationId: getSqlv1beta1StatementExceptions
       parameters:
@@ -1958,7 +2328,7 @@ paths:
       - resource-api-key: []
       summary: List of Statement Exceptions
       tags:
-      - StatementExceptions (sql/v1beta1)
+      - Statement Exceptions (sql/v1beta1)
       x-request-access-name: SQL API v1beta1
       x-codeSamples:
       - lang: Shell
@@ -2273,6 +2643,7 @@ components:
             environment.
           example: sql123
           maxLength: 255
+          pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
           type: string
           x-immutable: true
         organization_id:
@@ -2313,6 +2684,8 @@ components:
           - FAILING
           - FAILED
           - STOPPED
+        scaling_status:
+          $ref: '#/components/schemas/sql.v1beta1.ScalingStatus'
         result_schema:
           $ref: '#/components/schemas/sql.v1beta1.ResultSchema'
         detail:
@@ -2475,8 +2848,8 @@ components:
             type: string
           description: A map (key-value pairs) of statement properties.
           example:
-            key1: value1
-            key2: value2
+            sql.current-catalog: my_environment
+            sql.current-database: my_kafka_cluster
           maximum: 8192
           type: object
         compute_pool_id:
@@ -2492,6 +2865,7 @@ components:
           x-immutable: true
         stopped:
           description: Indicates whether the statement should be stopped.
+          example: false
           type: boolean
       type: object
       x-enable-listmeta: true
@@ -2527,6 +2901,13 @@ components:
             of this resource.
           example: a23av
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: A map of key-value pairs that describe the resource.
+          example:
+            user.confluent.io/hidden: "true"
+          type: object
       readOnly: true
       required:
       - self
@@ -2564,6 +2945,31 @@ components:
           format: date-time
           readOnly: true
           type: string
+      type: object
+    sql.v1beta1.ScalingStatus:
+      description: Scaling status for this statement.
+      properties:
+        scaling_state:
+          description: |
+            OK: The statement runs at the right scale.
+            PENDING_SCALE_DOWN: The statement requires less resources, and will be scaled down in the near future.
+            PENDING_SCALE_UP: The statement requires more resources, and will be scaled up in the near future.
+            POOL_EXHAUSTED: The statement requires more resources, but not enough resources are available.
+          example: OK
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - OK
+          - PENDING_SCALE_DOWN
+          - PENDING_SCALE_UP
+          - POOL_EXHAUSTED
+        last_updated:
+          description: The last time the scaling status was updated.
+          example: 1996-03-19T01:02:03-04:05
+          format: date-time
+          readOnly: true
+          type: string
+      readOnly: true
       type: object
     sql.v1beta1.ResultSchema:
       description: The table columns of the results schema.
@@ -2777,6 +3183,74 @@ components:
           type: string
       type: object
       x-enable-objectmeta: true
+    PatchRequest:
+      description: PatchRequest represent a json-patch request to be applied to the
+        Statement. See https://tools.ietf.org/html/rfc6902
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/JsonPatchRequestAddReplace'
+        - $ref: '#/components/schemas/JsonPatchRequestRemove'
+        - $ref: '#/components/schemas/JsonPatchRequestMoveCopy'
+        x-one-of-name: PatchRequestOneOf
+      type: array
+    JsonPatchRequestAddReplace:
+      additionalProperties: false
+      description: This option is used to add or replace a value for a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        value:
+          description: The value to add, replace or test.
+        op:
+          description: The operation to perform.
+          enum:
+          - ADD
+          - REPLACE
+          - TEST
+          type: string
+      required:
+      - op
+      - path
+      - value
+      type: object
+    JsonPatchRequestRemove:
+      additionalProperties: false
+      description: This option is used to remove a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        op:
+          description: The operation to perform.
+          enum:
+          - REMOVE
+          type: string
+      required:
+      - op
+      - path
+      type: object
+    JsonPatchRequestMoveCopy:
+      additionalProperties: false
+      description: This option is used to move or copy a field
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+        op:
+          description: The operation to perform.
+          enum:
+          - MOVE
+          - COPY
+          type: string
+        from:
+          description: A JSON Pointer path.
+          type: string
+      required:
+      - from
+      - op
+      - path
+      type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
