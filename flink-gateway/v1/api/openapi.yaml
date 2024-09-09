@@ -81,6 +81,9 @@ paths:
           - SAGEMAKER
           - GOOGLEAI
           - VERTEXAI
+          - MONGODB
+          - PINECONE
+          - ELASTIC
         style: form
       - description: A pagination size for collection requests.
         explode: true
@@ -3947,6 +3950,9 @@ components:
           - SAGEMAKER
           - GOOGLEAI
           - VERTEXAI
+          - MONGODB
+          - PINECONE
+          - ELASTIC
         endpoint:
           description: The endpoint that is used to run model inferencing.
           example: https://api.openai.com/v1/chat/completions
