@@ -36,22 +36,26 @@ import (
 
 // AlterMirrorStatusResponseDataAllOf struct for AlterMirrorStatusResponseDataAllOf
 type AlterMirrorStatusResponseDataAllOf struct {
-	MirrorTopicName string         `json:"mirror_topic_name,omitempty"`
-	ErrorMessage    NullableString `json:"error_message,omitempty"`
-	ErrorCode       NullableInt32  `json:"error_code,omitempty"`
-	MirrorLags      MirrorLags     `json:"mirror_lags,omitempty"`
+	MirrorTopicName              string                           `json:"mirror_topic_name,omitempty"`
+	ErrorMessage                 NullableString                   `json:"error_message,omitempty"`
+	ErrorCode                    NullableInt32                    `json:"error_code,omitempty"`
+	MirrorLags                   MirrorLags                       `json:"mirror_lags,omitempty"`
+	MessagesTruncated            NullableString                   `json:"messages_truncated,omitempty"`
+	PartitionLevelTruncationData PartitionLevelTruncationDataList `json:"partition_level_truncation_data,omitempty"`
 }
 
 // NewAlterMirrorStatusResponseDataAllOf instantiates a new AlterMirrorStatusResponseDataAllOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags) *AlterMirrorStatusResponseDataAllOf {
+func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableString, partitionLevelTruncationData PartitionLevelTruncationDataList) *AlterMirrorStatusResponseDataAllOf {
 	this := AlterMirrorStatusResponseDataAllOf{}
 	this.MirrorTopicName = mirrorTopicName
 	this.ErrorMessage = errorMessage
 	this.ErrorCode = errorCode
 	this.MirrorLags = mirrorLags
+	this.MessagesTruncated = messagesTruncated
+	this.PartitionLevelTruncationData = partitionLevelTruncationData
 	return &this
 }
 
@@ -163,12 +167,64 @@ func (o *AlterMirrorStatusResponseDataAllOf) SetMirrorLags(v MirrorLags) {
 	o.MirrorLags = v
 }
 
+// GetMessagesTruncated returns the MessagesTruncated field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() string {
+	if o == nil || o.MessagesTruncated.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.MessagesTruncated.Get()
+}
+
+// GetMessagesTruncatedOk returns a tuple with the MessagesTruncated field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MessagesTruncated.Get(), o.MessagesTruncated.IsSet()
+}
+
+// SetMessagesTruncated sets field value
+func (o *AlterMirrorStatusResponseDataAllOf) SetMessagesTruncated(v string) {
+	o.MessagesTruncated.Set(&v)
+}
+
+// GetPartitionLevelTruncationData returns the PartitionLevelTruncationData field value
+func (o *AlterMirrorStatusResponseDataAllOf) GetPartitionLevelTruncationData() PartitionLevelTruncationDataList {
+	if o == nil {
+		var ret PartitionLevelTruncationDataList
+		return ret
+	}
+
+	return o.PartitionLevelTruncationData
+}
+
+// GetPartitionLevelTruncationDataOk returns a tuple with the PartitionLevelTruncationData field value
+// and a boolean to check if the value has been set.
+func (o *AlterMirrorStatusResponseDataAllOf) GetPartitionLevelTruncationDataOk() (*PartitionLevelTruncationDataList, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PartitionLevelTruncationData, true
+}
+
+// SetPartitionLevelTruncationData sets field value
+func (o *AlterMirrorStatusResponseDataAllOf) SetPartitionLevelTruncationData(v PartitionLevelTruncationDataList) {
+	o.PartitionLevelTruncationData = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *AlterMirrorStatusResponseDataAllOf) Redact() {
 	o.recurseRedact(&o.MirrorTopicName)
 	o.recurseRedact(&o.ErrorMessage)
 	o.recurseRedact(&o.ErrorCode)
 	o.recurseRedact(&o.MirrorLags)
+	o.recurseRedact(&o.MessagesTruncated)
+	o.recurseRedact(&o.PartitionLevelTruncationData)
 }
 
 func (o *AlterMirrorStatusResponseDataAllOf) recurseRedact(v interface{}) {
@@ -214,6 +270,12 @@ func (o AlterMirrorStatusResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["mirror_lags"] = o.MirrorLags
+	}
+	if true {
+		toSerialize["messages_truncated"] = o.MessagesTruncated.Get()
+	}
+	if true {
+		toSerialize["partition_level_truncation_data"] = o.PartitionLevelTruncationData
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

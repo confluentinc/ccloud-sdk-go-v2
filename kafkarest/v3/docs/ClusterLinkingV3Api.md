@@ -1459,7 +1459,7 @@ Name | Type | Description  | Notes
 
 ## UpdateKafkaMirrorTopicsTruncateAndRestoreMirror
 
-> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx, clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+> AlterMirrorStatusResponseDataList UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx, clusterId, linkName).IncludePartitionLevelTruncationData(includePartitionLevelTruncationData).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
 
 Truncates the local topic to the remote stopped mirror log end offsets and restores mirroring to the local topic to mirror from the remote topic
 
@@ -1480,12 +1480,13 @@ import (
 func main() {
     clusterId := "cluster-1" // string | The Kafka cluster ID.
     linkName := "link-sb1" // string | The link name
+    includePartitionLevelTruncationData := false // bool | Whether to include partition level truncation information when truncating and restoring a topic in the response. Default: false (optional)
     validateOnly := false // bool | To validate the action can be performed successfully or not. Default: false (optional)
     alterMirrorsRequestData := *openapiclient.NewAlterMirrorsRequestData() // AlterMirrorsRequestData | Mirror topics to be altered. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(context.Background(), clusterId, linkName).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
+    resp, r, err := api_client.ClusterLinkingV3Api.UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(context.Background(), clusterId, linkName).IncludePartitionLevelTruncationData(includePartitionLevelTruncationData).ValidateOnly(validateOnly).AlterMirrorsRequestData(alterMirrorsRequestData).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClusterLinkingV3Api.UpdateKafkaMirrorTopicsTruncateAndRestoreMirror``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1513,6 +1514,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includePartitionLevelTruncationData** | **bool** | Whether to include partition level truncation information when truncating and restoring a topic in the response. Default: false | 
  **validateOnly** | **bool** | To validate the action can be performed successfully or not. Default: false | 
  **alterMirrorsRequestData** | [**AlterMirrorsRequestData**](AlterMirrorsRequestData.md) | Mirror topics to be altered. | 
 
