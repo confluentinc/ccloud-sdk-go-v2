@@ -10573,6 +10573,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -10591,6 +10602,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -10822,6 +10844,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -10840,6 +10873,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -11071,6 +11115,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -11089,6 +11144,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -11320,6 +11386,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -11338,6 +11415,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -11569,6 +11657,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -11587,6 +11686,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -11818,6 +11928,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -11836,6 +11957,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -12028,6 +12160,16 @@ paths:
         schema:
           type: string
         style: simple
+      - description: 'Whether to include partition level truncation information when
+          truncating and restoring a topic in the response. Default: false'
+        example: false
+        explode: true
+        in: query
+        name: include_partition_level_truncation_data
+        required: false
+        schema:
+          type: boolean
+        style: form
       - description: 'To validate the action can be performed successfully or not.
           Default: false'
         example: false
@@ -12067,6 +12209,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
                 - kind: AlterMirrorsData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -12085,6 +12238,17 @@ paths:
                   - partition: 2
                     lag: 40000
                     last_source_fetch_offset: 12030
+                  messages_truncated: null
+                  partition_level_truncation_data:
+                  - partition_id: 0
+                    offset_truncated_to: "0"
+                    messages_truncated: "0"
+                  - partition_id: 1
+                    offset_truncated_to: "10"
+                    messages_truncated: "5"
+                  - partition_id: 2
+                    offset_truncated_to: "10"
+                    messages_truncated: "0"
               schema:
                 $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
           description: Mirror status alternation result
@@ -12506,6 +12670,17 @@ components:
       explode: true
       in: query
       name: force
+      required: false
+      schema:
+        type: boolean
+      style: form
+    IncludePartitionLevelTruncationData:
+      description: 'Whether to include partition level truncation information when
+        truncating and restoring a topic in the response. Default: false'
+      example: false
+      explode: true
+      in: query
+      name: include_partition_level_truncation_data
       required: false
       schema:
         type: boolean
@@ -15085,6 +15260,17 @@ components:
               - partition: 2
                 lag: 40000
                 last_source_fetch_offset: 12030
+              messages_truncated: null
+              partition_level_truncation_data:
+              - partition_id: 0
+                offset_truncated_to: "0"
+                messages_truncated: "0"
+              - partition_id: 1
+                offset_truncated_to: "10"
+                messages_truncated: "5"
+              - partition_id: 2
+                offset_truncated_to: "10"
+                messages_truncated: "0"
             - kind: AlterMirrorsData
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/links/my-new-link-1/mirrors/topic-2
@@ -15102,6 +15288,17 @@ components:
               - partition: 2
                 lag: 40000
                 last_source_fetch_offset: 12030
+              messages_truncated: null
+              partition_level_truncation_data:
+              - partition_id: 0
+                offset_truncated_to: "0"
+                messages_truncated: "0"
+              - partition_id: 1
+                offset_truncated_to: "10"
+                messages_truncated: "5"
+              - partition_id: 2
+                offset_truncated_to: "10"
+                messages_truncated: "0"
           schema:
             $ref: '#/components/schemas/AlterMirrorStatusResponseDataList'
       description: Mirror status alternation result
@@ -16037,6 +16234,24 @@ components:
           type: array
       required:
       - broker_ids
+      type: object
+    PartitionLevelTruncationDataList:
+      items:
+        $ref: '#/components/schemas/PartitionLevelTruncationData'
+      type: array
+    PartitionLevelTruncationData:
+      properties:
+        partition_id:
+          format: int32
+          type: integer
+        offset_truncated_to:
+          type: string
+        messages_truncated:
+          type: string
+      required:
+      - messages_truncated
+      - offset_truncated_to
+      - partition_id
       type: object
     MirrorLags:
       items:
@@ -17243,11 +17458,18 @@ components:
           type: integer
         mirror_lags:
           $ref: '#/components/schemas/MirrorLags'
+        messages_truncated:
+          nullable: true
+          type: string
+        partition_level_truncation_data:
+          $ref: '#/components/schemas/PartitionLevelTruncationDataList'
       required:
       - error_code
       - error_message
+      - messages_truncated
       - mirror_lags
       - mirror_topic_name
+      - partition_level_truncation_data
       type: object
     AlterMirrorStatusResponseDataList_allOf:
       properties:
