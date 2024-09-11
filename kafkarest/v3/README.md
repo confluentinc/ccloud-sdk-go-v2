@@ -238,6 +238,8 @@ Class | Method | HTTP request | Description
  - [PartitionDataAllOf](docs/PartitionDataAllOf.md)
  - [PartitionDataList](docs/PartitionDataList.md)
  - [PartitionDataListAllOf](docs/PartitionDataListAllOf.md)
+ - [PartitionLevelTruncationData](docs/PartitionLevelTruncationData.md)
+ - [PartitionLevelTruncationDataList](docs/PartitionLevelTruncationDataList.md)
  - [ProduceRequest](docs/ProduceRequest.md)
  - [ProduceRequestData](docs/ProduceRequestData.md)
  - [ProduceRequestHeader](docs/ProduceRequestHeader.md)

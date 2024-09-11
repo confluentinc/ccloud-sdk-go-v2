@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 **ErrorMessage** | **NullableString** |  | 
 **ErrorCode** | **NullableInt32** |  | 
 **MirrorLags** | [**MirrorLags**](MirrorLags.md) |  | 
+**MessagesTruncated** | **NullableString** |  | 
+**PartitionLevelTruncationData** | [**PartitionLevelTruncationDataList**](PartitionLevelTruncationDataList.md) |  | 
 
 ## Methods
 
 ### NewAlterMirrorStatusResponseData
 
-`func NewAlterMirrorStatusResponseData(kind string, metadata ResourceMetadata, mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, ) *AlterMirrorStatusResponseData`
+`func NewAlterMirrorStatusResponseData(kind string, metadata ResourceMetadata, mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableString, partitionLevelTruncationData PartitionLevelTruncationDataList, ) *AlterMirrorStatusResponseData`
 
 NewAlterMirrorStatusResponseData instantiates a new AlterMirrorStatusResponseData object
 This constructor will assign default values to properties that have it defined,
@@ -168,6 +170,56 @@ and a boolean to check if the value has been set.
 `func (o *AlterMirrorStatusResponseData) SetMirrorLags(v MirrorLags)`
 
 SetMirrorLags sets MirrorLags field to given value.
+
+
+### GetMessagesTruncated
+
+`func (o *AlterMirrorStatusResponseData) GetMessagesTruncated() string`
+
+GetMessagesTruncated returns the MessagesTruncated field if non-nil, zero value otherwise.
+
+### GetMessagesTruncatedOk
+
+`func (o *AlterMirrorStatusResponseData) GetMessagesTruncatedOk() (*string, bool)`
+
+GetMessagesTruncatedOk returns a tuple with the MessagesTruncated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessagesTruncated
+
+`func (o *AlterMirrorStatusResponseData) SetMessagesTruncated(v string)`
+
+SetMessagesTruncated sets MessagesTruncated field to given value.
+
+
+### SetMessagesTruncatedNil
+
+`func (o *AlterMirrorStatusResponseData) SetMessagesTruncatedNil(b bool)`
+
+ SetMessagesTruncatedNil sets the value for MessagesTruncated to be an explicit nil
+
+### UnsetMessagesTruncated
+`func (o *AlterMirrorStatusResponseData) UnsetMessagesTruncated()`
+
+UnsetMessagesTruncated ensures that no value is present for MessagesTruncated, not even an explicit nil
+### GetPartitionLevelTruncationData
+
+`func (o *AlterMirrorStatusResponseData) GetPartitionLevelTruncationData() PartitionLevelTruncationDataList`
+
+GetPartitionLevelTruncationData returns the PartitionLevelTruncationData field if non-nil, zero value otherwise.
+
+### GetPartitionLevelTruncationDataOk
+
+`func (o *AlterMirrorStatusResponseData) GetPartitionLevelTruncationDataOk() (*PartitionLevelTruncationDataList, bool)`
+
+GetPartitionLevelTruncationDataOk returns a tuple with the PartitionLevelTruncationData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionLevelTruncationData
+
+`func (o *AlterMirrorStatusResponseData) SetPartitionLevelTruncationData(v PartitionLevelTruncationDataList)`
+
+SetPartitionLevelTruncationData sets PartitionLevelTruncationData field to given value.
 
 
 
