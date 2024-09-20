@@ -51,6 +51,10 @@ type IamV2UpdateCertRequest struct {
 	CertificateChain *string `json:"certificate_chain,omitempty"`
 	// The name of the certificate file. Must be set if certificate is updated.
 	CertificateChainFilename *string `json:"certificate_chain_filename,omitempty"`
+	// The url from which to fetch the CRL for the certificate authority if crl_source is URL.
+	CrlUrl *string `json:"crl_url,omitempty"`
+	// The Base64 encoded string containing the CRL for this certificate authority. Defaults to this over `crl_url` if available.
+	CrlChain *string `json:"crl_chain,omitempty"`
 }
 
 // NewIamV2UpdateCertRequest instantiates a new IamV2UpdateCertRequest object
@@ -326,6 +330,70 @@ func (o *IamV2UpdateCertRequest) SetCertificateChainFilename(v string) {
 	o.CertificateChainFilename = &v
 }
 
+// GetCrlUrl returns the CrlUrl field value if set, zero value otherwise.
+func (o *IamV2UpdateCertRequest) GetCrlUrl() string {
+	if o == nil || o.CrlUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.CrlUrl
+}
+
+// GetCrlUrlOk returns a tuple with the CrlUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2UpdateCertRequest) GetCrlUrlOk() (*string, bool) {
+	if o == nil || o.CrlUrl == nil {
+		return nil, false
+	}
+	return o.CrlUrl, true
+}
+
+// HasCrlUrl returns a boolean if a field has been set.
+func (o *IamV2UpdateCertRequest) HasCrlUrl() bool {
+	if o != nil && o.CrlUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCrlUrl gets a reference to the given string and assigns it to the CrlUrl field.
+func (o *IamV2UpdateCertRequest) SetCrlUrl(v string) {
+	o.CrlUrl = &v
+}
+
+// GetCrlChain returns the CrlChain field value if set, zero value otherwise.
+func (o *IamV2UpdateCertRequest) GetCrlChain() string {
+	if o == nil || o.CrlChain == nil {
+		var ret string
+		return ret
+	}
+	return *o.CrlChain
+}
+
+// GetCrlChainOk returns a tuple with the CrlChain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2UpdateCertRequest) GetCrlChainOk() (*string, bool) {
+	if o == nil || o.CrlChain == nil {
+		return nil, false
+	}
+	return o.CrlChain, true
+}
+
+// HasCrlChain returns a boolean if a field has been set.
+func (o *IamV2UpdateCertRequest) HasCrlChain() bool {
+	if o != nil && o.CrlChain != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCrlChain gets a reference to the given string and assigns it to the CrlChain field.
+func (o *IamV2UpdateCertRequest) SetCrlChain(v string) {
+	o.CrlChain = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2UpdateCertRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -336,6 +404,8 @@ func (o *IamV2UpdateCertRequest) Redact() {
 	o.recurseRedact(o.Description)
 	o.recurseRedact(o.CertificateChain)
 	o.recurseRedact(o.CertificateChainFilename)
+	o.recurseRedact(o.CrlUrl)
+	o.recurseRedact(o.CrlChain)
 }
 
 func (o *IamV2UpdateCertRequest) recurseRedact(v interface{}) {
@@ -393,6 +463,12 @@ func (o IamV2UpdateCertRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.CertificateChainFilename != nil {
 		toSerialize["certificate_chain_filename"] = o.CertificateChainFilename
+	}
+	if o.CrlUrl != nil {
+		toSerialize["crl_url"] = o.CrlUrl
+	}
+	if o.CrlChain != nil {
+		toSerialize["crl_chain"] = o.CrlChain
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

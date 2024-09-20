@@ -56,6 +56,12 @@ type IamV2CertificateAuthority struct {
 	SerialNumbers *[]string `json:"serial_numbers,omitempty"`
 	// The file name of the uploaded pem file for this certificate authority.
 	CertificateChainFilename *string `json:"certificate_chain_filename,omitempty"`
+	// The source specifies whether the Certificate Revocation List (CRL) is updated from either local file uploaded (LOCAL) or from url of CRL (URL).
+	CrlSource *string `json:"crl_source,omitempty"`
+	// The url from which to fetch the CRL for the certificate authority if crl_source is URL.
+	CrlUrl *string `json:"crl_url,omitempty"`
+	// The timestamp for when CRL was last updated.
+	CrlUpdatedAt *time.Time `json:"crl_updated_at,omitempty"`
 	// The current state of the certificate authority.
 	State *string `json:"state,omitempty"`
 }
@@ -397,6 +403,102 @@ func (o *IamV2CertificateAuthority) SetCertificateChainFilename(v string) {
 	o.CertificateChainFilename = &v
 }
 
+// GetCrlSource returns the CrlSource field value if set, zero value otherwise.
+func (o *IamV2CertificateAuthority) GetCrlSource() string {
+	if o == nil || o.CrlSource == nil {
+		var ret string
+		return ret
+	}
+	return *o.CrlSource
+}
+
+// GetCrlSourceOk returns a tuple with the CrlSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2CertificateAuthority) GetCrlSourceOk() (*string, bool) {
+	if o == nil || o.CrlSource == nil {
+		return nil, false
+	}
+	return o.CrlSource, true
+}
+
+// HasCrlSource returns a boolean if a field has been set.
+func (o *IamV2CertificateAuthority) HasCrlSource() bool {
+	if o != nil && o.CrlSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCrlSource gets a reference to the given string and assigns it to the CrlSource field.
+func (o *IamV2CertificateAuthority) SetCrlSource(v string) {
+	o.CrlSource = &v
+}
+
+// GetCrlUrl returns the CrlUrl field value if set, zero value otherwise.
+func (o *IamV2CertificateAuthority) GetCrlUrl() string {
+	if o == nil || o.CrlUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.CrlUrl
+}
+
+// GetCrlUrlOk returns a tuple with the CrlUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2CertificateAuthority) GetCrlUrlOk() (*string, bool) {
+	if o == nil || o.CrlUrl == nil {
+		return nil, false
+	}
+	return o.CrlUrl, true
+}
+
+// HasCrlUrl returns a boolean if a field has been set.
+func (o *IamV2CertificateAuthority) HasCrlUrl() bool {
+	if o != nil && o.CrlUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCrlUrl gets a reference to the given string and assigns it to the CrlUrl field.
+func (o *IamV2CertificateAuthority) SetCrlUrl(v string) {
+	o.CrlUrl = &v
+}
+
+// GetCrlUpdatedAt returns the CrlUpdatedAt field value if set, zero value otherwise.
+func (o *IamV2CertificateAuthority) GetCrlUpdatedAt() time.Time {
+	if o == nil || o.CrlUpdatedAt == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.CrlUpdatedAt
+}
+
+// GetCrlUpdatedAtOk returns a tuple with the CrlUpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2CertificateAuthority) GetCrlUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || o.CrlUpdatedAt == nil {
+		return nil, false
+	}
+	return o.CrlUpdatedAt, true
+}
+
+// HasCrlUpdatedAt returns a boolean if a field has been set.
+func (o *IamV2CertificateAuthority) HasCrlUpdatedAt() bool {
+	if o != nil && o.CrlUpdatedAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCrlUpdatedAt gets a reference to the given time.Time and assigns it to the CrlUpdatedAt field.
+func (o *IamV2CertificateAuthority) SetCrlUpdatedAt(v time.Time) {
+	o.CrlUpdatedAt = &v
+}
+
 // GetState returns the State field value if set, zero value otherwise.
 func (o *IamV2CertificateAuthority) GetState() string {
 	if o == nil || o.State == nil {
@@ -441,6 +543,9 @@ func (o *IamV2CertificateAuthority) Redact() {
 	o.recurseRedact(o.ExpirationDates)
 	o.recurseRedact(o.SerialNumbers)
 	o.recurseRedact(o.CertificateChainFilename)
+	o.recurseRedact(o.CrlSource)
+	o.recurseRedact(o.CrlUrl)
+	o.recurseRedact(o.CrlUpdatedAt)
 	o.recurseRedact(o.State)
 }
 
@@ -505,6 +610,15 @@ func (o IamV2CertificateAuthority) MarshalJSON() ([]byte, error) {
 	}
 	if o.CertificateChainFilename != nil {
 		toSerialize["certificate_chain_filename"] = o.CertificateChainFilename
+	}
+	if o.CrlSource != nil {
+		toSerialize["crl_source"] = o.CrlSource
+	}
+	if o.CrlUrl != nil {
+		toSerialize["crl_url"] = o.CrlUrl
+	}
+	if o.CrlUpdatedAt != nil {
+		toSerialize["crl_updated_at"] = o.CrlUpdatedAt
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
