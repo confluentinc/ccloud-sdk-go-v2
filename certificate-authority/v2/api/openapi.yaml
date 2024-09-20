@@ -14,10 +14,6 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-- description: Confluent Cloud staging
-  url: https://api.stag.cpdev.cloud
-- description: Confluent Cloud development
-  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
@@ -654,7 +650,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
-          -----END CERTIFICATE-----","certificate_chain_filename":"certificate.pem"}'
+          -----END CERTIFICATE-----","certificate_chain_filename":"certificate.pem","crl_url":"http://example.com","crl_chain":"-----BEGIN X509 CRL-----
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+          -----END X509 CRL-----"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -677,7 +686,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}");
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/certificate-authorities")
             .post(body)
@@ -707,12 +729,20 @@ paths:
           \nj/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\\\
           \nhm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\\\
           \nX4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\\\n-----END CERTIFICATE-----\\\
-          \",\\\"certificate_chain_filename\\\":\\\"certificate.pem\\\"}\")\n\n\t\
-          req, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \",\\\"certificate_chain_filename\\\":\\\"certificate.pem\\\",\\\"crl_url\\\
+          \":\\\"http://example.com\\\",\\\"crl_chain\\\":\\\"-----BEGIN X509 CRL-----\\\
+          \nMIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\\\nVQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\\\
+          \nZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\\\neS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\\\
+          \nMS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\\\nAhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\\\
+          \nBAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\\\nCKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\\\
+          \nxqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\\\ngIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\\\
+          \njatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\\\ncGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\\\
+          \n-----END X509 CRL-----\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -736,7 +766,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}"
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -798,7 +841,22 @@ paths:
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
           -----END CERTIFICATE-----',
-            certificate_chain_filename: 'certificate.pem'
+            certificate_chain_filename: 'certificate.pem',
+            crl_url: 'http://example.com',
+            crl_chain: '-----BEGIN X509 CRL-----
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+          -----END X509 CRL-----'
           }));
           req.end();
       - lang: C
@@ -830,7 +888,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}");
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -856,7 +927,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}", ParameterType.RequestBody);
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: mTLS for Dedicated Kafka
   /iam/v2/certificate-authorities/{id}:
@@ -1807,7 +1891,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
-          -----END CERTIFICATE-----","certificate_chain_filename":"certificate.pem"}'
+          -----END CERTIFICATE-----","certificate_chain_filename":"certificate.pem","crl_url":"http://example.com","crl_chain":"-----BEGIN X509 CRL-----
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+          -----END X509 CRL-----"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
@@ -1830,7 +1927,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}");
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D")
             .put(body)
@@ -1860,12 +1970,20 @@ paths:
           \nj/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\\\
           \nhm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\\\
           \nX4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\\\n-----END CERTIFICATE-----\\\
-          \",\\\"certificate_chain_filename\\\":\\\"certificate.pem\\\"}\")\n\n\t\
-          req, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\t\
-          defer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\
-          \tfmt.Println(string(body))\n\n}"
+          \",\\\"certificate_chain_filename\\\":\\\"certificate.pem\\\",\\\"crl_url\\\
+          \":\\\"http://example.com\\\",\\\"crl_chain\\\":\\\"-----BEGIN X509 CRL-----\\\
+          \nMIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\\\nVQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\\\
+          \nZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\\\neS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\\\
+          \nMS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\\\nAhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\\\
+          \nBAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\\\nCKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\\\
+          \nxqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\\\ngIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\\\
+          \njatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\\\ncGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\\\
+          \n-----END X509 CRL-----\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
+          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
@@ -1889,7 +2007,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}"
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}"
 
           headers = {
               'Authorization': "Basic REPLACE_BASIC_AUTH",
@@ -1951,7 +2082,22 @@ paths:
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
           -----END CERTIFICATE-----',
-            certificate_chain_filename: 'certificate.pem'
+            certificate_chain_filename: 'certificate.pem',
+            crl_url: 'http://example.com',
+            crl_chain: '-----BEGIN X509 CRL-----
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+          -----END X509 CRL-----'
           }));
           req.end();
       - lang: C
@@ -1983,7 +2129,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}");
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2009,7 +2168,20 @@ paths:
           j/8N7yy5Y0b2qvzfvGn9LhJIZJrglfCm7ymPAbEVtQwdpf5pLGkkeB6zpxxxYu7KyJesF12KwvhH\
           hm4qxFYxldBniYUr+WymXUadDKqC5JlR3XC321Y9YeRq4VzW9v493kHMB65jUr9TU/Qr6cf9tveC\
           X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==\
-          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\"}", ParameterType.RequestBody);
+          -----END CERTIFICATE-----\",\"certificate_chain_filename\":\"certificate.pem\",\"crl_url\":\"http://example.com\",\"crl_chain\":\"-----BEGIN X509 CRL-----\
+          MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD\
+          VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1\
+          ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0\
+          eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt\
+          MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl\
+          AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U\
+          BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX\
+          CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4\
+          xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\
+          gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\
+          jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\
+          cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
+          -----END X509 CRL-----\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: mTLS for Dedicated Kafka
   /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools:
@@ -4082,6 +4254,28 @@ components:
           example: certificate.pem
           readOnly: true
           type: string
+        crl_source:
+          description: |-
+            The source specifies whether the Certificate Revocation List (CRL) is updated from
+            either local file uploaded (LOCAL) or from url of CRL (URL).
+          example: LOCAL
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - LOCAL
+          - URL
+        crl_url:
+          description: The url from which to fetch the CRL for the certificate authority
+            if crl_source is URL.
+          format: uri
+          readOnly: true
+          type: string
+        crl_updated_at:
+          description: The timestamp for when CRL was last updated.
+          example: 2017-07-21T17:32:28Z
+          format: date-time
+          readOnly: true
+          type: string
         state:
           description: The current state of the certificate authority.
           example: ENABLED
@@ -4247,6 +4441,31 @@ components:
           description: The name of the certificate file.
           example: certificate.pem
           type: string
+        crl_url:
+          description: The url from which to fetch the CRL for the certificate authority
+            if crl_source is URL.
+          format: uri
+          type: string
+        crl_chain:
+          description: |-
+            The Base64 encoded string containing the CRL for this certificate authority.
+            Defaults to this over `crl_url` if available.
+          example: |-
+            -----BEGIN X509 CRL-----
+            MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+            VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+            ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+            eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+            MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+            AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+            BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+            CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+            xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+            gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+            jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+            cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+            -----END X509 CRL-----
+          type: string
       type: object
     iam.v2.UpdateCertRequest:
       description: This contains the form fields used to update a Certificate Authority
@@ -4318,6 +4537,31 @@ components:
           description: The name of the certificate file. Must be set if certificate
             is updated.
           example: certificate.pem
+          type: string
+        crl_url:
+          description: The url from which to fetch the CRL for the certificate authority
+            if crl_source is URL.
+          format: uri
+          type: string
+        crl_chain:
+          description: |-
+            The Base64 encoded string containing the CRL for this certificate authority.
+            Defaults to this over `crl_url` if available.
+          example: |-
+            -----BEGIN X509 CRL-----
+            MIICNTCCAR0CAQEwDQYJKoZIhvcNAQELBQAwgbExCzAJBgNVBAYTAlVTMQswCQYD
+            VQQIDAJDQTEWMBQGA1UEBwwNTW91bnRhaW4gVmlldzESMBAGA1UECgwJQ29uZmx1
+            ZW50MRMwEQYDVQQLDApzZWN1cml0eS0xMSYwJAYDVQQDDB1tdGxzMS5zZWN1cml0
+            eS0xLmNvbmZsdWVudC5pbzEsMCoGCSqGSIb3DQEJARYdbXRsczFAc2VjdXJpdHkt
+            MS5jb25mbHVlbnQuaW8XDTI0MDgyNTE3NTYyNloXDTI0MTEyMzE3NTYyNlowJzAl
+            AhQERu3UxH2q3eUglbdeQY8y0vT7rRcNMjQwODI1MTc1NTE2WqAOMAwwCgYDVR0U
+            BAMCAQEwDQYJKoZIhvcNAQELBQADggEBAGvmflwxVAnqZbRx8njb2t6yXqeIOBaX
+            CKhMq5CUWrWhMX/JrV5NhVfzeB2tgCCfM4J7gbKSArOKqjYpQBFL+r5eCjPBBcG4
+            xqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl
+            gIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE
+            jatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6
+            cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=
+            -----END X509 CRL-----
           type: string
       type: object
     iam.v2.CertificateAuthorityList:
