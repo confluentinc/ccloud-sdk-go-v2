@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **ExpirationDates** | Pointer to [**[]time.Time**](time.Time.md) | The expiration dates of certificates in the chain. | [optional] [readonly] 
 **SerialNumbers** | Pointer to **[]string** | The serial numbers for each certificate in the certificate chain. | [optional] [readonly] 
 **CertificateChainFilename** | Pointer to **string** | The file name of the uploaded pem file for this certificate authority. | [optional] [readonly] 
+**CrlSource** | Pointer to **string** | The source specifies whether the Certificate Revocation List (CRL) is updated from either local file uploaded (LOCAL) or from url of CRL (URL). | [optional] [readonly] 
+**CrlUrl** | Pointer to **string** | The url from which to fetch the CRL for the certificate authority if crl_source is URL. | [optional] [readonly] 
+**CrlUpdatedAt** | Pointer to **time.Time** | The timestamp for when CRL was last updated. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of the certificate authority. | [optional] [readonly] 
 
 ## Methods
@@ -284,6 +287,81 @@ SetCertificateChainFilename sets CertificateChainFilename field to given value.
 `func (o *IamV2CertificateAuthority) HasCertificateChainFilename() bool`
 
 HasCertificateChainFilename returns a boolean if a field has been set.
+
+### GetCrlSource
+
+`func (o *IamV2CertificateAuthority) GetCrlSource() string`
+
+GetCrlSource returns the CrlSource field if non-nil, zero value otherwise.
+
+### GetCrlSourceOk
+
+`func (o *IamV2CertificateAuthority) GetCrlSourceOk() (*string, bool)`
+
+GetCrlSourceOk returns a tuple with the CrlSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrlSource
+
+`func (o *IamV2CertificateAuthority) SetCrlSource(v string)`
+
+SetCrlSource sets CrlSource field to given value.
+
+### HasCrlSource
+
+`func (o *IamV2CertificateAuthority) HasCrlSource() bool`
+
+HasCrlSource returns a boolean if a field has been set.
+
+### GetCrlUrl
+
+`func (o *IamV2CertificateAuthority) GetCrlUrl() string`
+
+GetCrlUrl returns the CrlUrl field if non-nil, zero value otherwise.
+
+### GetCrlUrlOk
+
+`func (o *IamV2CertificateAuthority) GetCrlUrlOk() (*string, bool)`
+
+GetCrlUrlOk returns a tuple with the CrlUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrlUrl
+
+`func (o *IamV2CertificateAuthority) SetCrlUrl(v string)`
+
+SetCrlUrl sets CrlUrl field to given value.
+
+### HasCrlUrl
+
+`func (o *IamV2CertificateAuthority) HasCrlUrl() bool`
+
+HasCrlUrl returns a boolean if a field has been set.
+
+### GetCrlUpdatedAt
+
+`func (o *IamV2CertificateAuthority) GetCrlUpdatedAt() time.Time`
+
+GetCrlUpdatedAt returns the CrlUpdatedAt field if non-nil, zero value otherwise.
+
+### GetCrlUpdatedAtOk
+
+`func (o *IamV2CertificateAuthority) GetCrlUpdatedAtOk() (*time.Time, bool)`
+
+GetCrlUpdatedAtOk returns a tuple with the CrlUpdatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrlUpdatedAt
+
+`func (o *IamV2CertificateAuthority) SetCrlUpdatedAt(v time.Time)`
+
+SetCrlUpdatedAt sets CrlUpdatedAt field to given value.
+
+### HasCrlUpdatedAt
+
+`func (o *IamV2CertificateAuthority) HasCrlUpdatedAt() bool`
+
+HasCrlUpdatedAt returns a boolean if a field has been set.
 
 ### GetState
 

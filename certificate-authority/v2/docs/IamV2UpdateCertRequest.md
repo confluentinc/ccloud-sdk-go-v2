@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the certificate authority. | [optional] 
 **CertificateChain** | Pointer to **string** | The Base64 encoded string containing the signing certificate chain used to validate client certs. | [optional] 
 **CertificateChainFilename** | Pointer to **string** | The name of the certificate file. Must be set if certificate is updated. | [optional] 
+**CrlUrl** | Pointer to **string** | The url from which to fetch the CRL for the certificate authority if crl_source is URL. | [optional] 
+**CrlChain** | Pointer to **string** | The Base64 encoded string containing the CRL for this certificate authority. Defaults to this over &#x60;crl_url&#x60; if available. | [optional] 
 
 ## Methods
 
@@ -231,6 +233,56 @@ SetCertificateChainFilename sets CertificateChainFilename field to given value.
 `func (o *IamV2UpdateCertRequest) HasCertificateChainFilename() bool`
 
 HasCertificateChainFilename returns a boolean if a field has been set.
+
+### GetCrlUrl
+
+`func (o *IamV2UpdateCertRequest) GetCrlUrl() string`
+
+GetCrlUrl returns the CrlUrl field if non-nil, zero value otherwise.
+
+### GetCrlUrlOk
+
+`func (o *IamV2UpdateCertRequest) GetCrlUrlOk() (*string, bool)`
+
+GetCrlUrlOk returns a tuple with the CrlUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrlUrl
+
+`func (o *IamV2UpdateCertRequest) SetCrlUrl(v string)`
+
+SetCrlUrl sets CrlUrl field to given value.
+
+### HasCrlUrl
+
+`func (o *IamV2UpdateCertRequest) HasCrlUrl() bool`
+
+HasCrlUrl returns a boolean if a field has been set.
+
+### GetCrlChain
+
+`func (o *IamV2UpdateCertRequest) GetCrlChain() string`
+
+GetCrlChain returns the CrlChain field if non-nil, zero value otherwise.
+
+### GetCrlChainOk
+
+`func (o *IamV2UpdateCertRequest) GetCrlChainOk() (*string, bool)`
+
+GetCrlChainOk returns a tuple with the CrlChain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrlChain
+
+`func (o *IamV2UpdateCertRequest) SetCrlChain(v string)`
+
+SetCrlChain sets CrlChain field to given value.
+
+### HasCrlChain
+
+`func (o *IamV2UpdateCertRequest) HasCrlChain() bool`
+
+HasCrlChain returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
