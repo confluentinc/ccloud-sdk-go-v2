@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **ErrorMessage** | **NullableString** |  | 
 **ErrorCode** | **NullableInt32** |  | 
 **MirrorLags** | [**MirrorLags**](MirrorLags.md) |  | 
-**MessagesTruncated** | **NullableString** |  | 
+**MessagesTruncated** | **NullableInt64** |  | 
 **PartitionLevelTruncationData** | [**PartitionLevelTruncationDataList**](PartitionLevelTruncationDataList.md) |  | 
 
 ## Methods
 
 ### NewAlterMirrorStatusResponseDataAllOf
 
-`func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableString, partitionLevelTruncationData PartitionLevelTruncationDataList, ) *AlterMirrorStatusResponseDataAllOf`
+`func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableInt64, partitionLevelTruncationData PartitionLevelTruncationDataList, ) *AlterMirrorStatusResponseDataAllOf`
 
 NewAlterMirrorStatusResponseDataAllOf instantiates a new AlterMirrorStatusResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -132,20 +132,20 @@ SetMirrorLags sets MirrorLags field to given value.
 
 ### GetMessagesTruncated
 
-`func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() string`
+`func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() int64`
 
 GetMessagesTruncated returns the MessagesTruncated field if non-nil, zero value otherwise.
 
 ### GetMessagesTruncatedOk
 
-`func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*string, bool)`
+`func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*int64, bool)`
 
 GetMessagesTruncatedOk returns a tuple with the MessagesTruncated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMessagesTruncated
 
-`func (o *AlterMirrorStatusResponseDataAllOf) SetMessagesTruncated(v string)`
+`func (o *AlterMirrorStatusResponseDataAllOf) SetMessagesTruncated(v int64)`
 
 SetMessagesTruncated sets MessagesTruncated field to given value.
 
