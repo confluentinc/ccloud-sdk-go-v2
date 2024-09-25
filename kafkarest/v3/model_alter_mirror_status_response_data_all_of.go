@@ -40,7 +40,7 @@ type AlterMirrorStatusResponseDataAllOf struct {
 	ErrorMessage                 NullableString                   `json:"error_message,omitempty"`
 	ErrorCode                    NullableInt32                    `json:"error_code,omitempty"`
 	MirrorLags                   MirrorLags                       `json:"mirror_lags,omitempty"`
-	MessagesTruncated            NullableString                   `json:"messages_truncated,omitempty"`
+	MessagesTruncated            NullableInt64                    `json:"messages_truncated,omitempty"`
 	PartitionLevelTruncationData PartitionLevelTruncationDataList `json:"partition_level_truncation_data,omitempty"`
 }
 
@@ -48,7 +48,7 @@ type AlterMirrorStatusResponseDataAllOf struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableString, partitionLevelTruncationData PartitionLevelTruncationDataList) *AlterMirrorStatusResponseDataAllOf {
+func NewAlterMirrorStatusResponseDataAllOf(mirrorTopicName string, errorMessage NullableString, errorCode NullableInt32, mirrorLags MirrorLags, messagesTruncated NullableInt64, partitionLevelTruncationData PartitionLevelTruncationDataList) *AlterMirrorStatusResponseDataAllOf {
 	this := AlterMirrorStatusResponseDataAllOf{}
 	this.MirrorTopicName = mirrorTopicName
 	this.ErrorMessage = errorMessage
@@ -168,10 +168,10 @@ func (o *AlterMirrorStatusResponseDataAllOf) SetMirrorLags(v MirrorLags) {
 }
 
 // GetMessagesTruncated returns the MessagesTruncated field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() string {
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() int64 {
 	if o == nil || o.MessagesTruncated.Get() == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 
@@ -181,7 +181,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncated() string {
 // GetMessagesTruncatedOk returns a tuple with the MessagesTruncated field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*string, bool) {
+func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -189,7 +189,7 @@ func (o *AlterMirrorStatusResponseDataAllOf) GetMessagesTruncatedOk() (*string, 
 }
 
 // SetMessagesTruncated sets field value
-func (o *AlterMirrorStatusResponseDataAllOf) SetMessagesTruncated(v string) {
+func (o *AlterMirrorStatusResponseDataAllOf) SetMessagesTruncated(v int64) {
 	o.MessagesTruncated.Set(&v)
 }
 
