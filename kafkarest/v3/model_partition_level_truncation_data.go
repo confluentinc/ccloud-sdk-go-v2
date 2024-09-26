@@ -36,16 +36,16 @@ import (
 
 // PartitionLevelTruncationData struct for PartitionLevelTruncationData
 type PartitionLevelTruncationData struct {
-	PartitionId       int32  `json:"partition_id,omitempty"`
-	OffsetTruncatedTo string `json:"offset_truncated_to,omitempty"`
-	MessagesTruncated string `json:"messages_truncated,omitempty"`
+	PartitionId       int32 `json:"partition_id,omitempty"`
+	OffsetTruncatedTo int64 `json:"offset_truncated_to,omitempty"`
+	MessagesTruncated int64 `json:"messages_truncated,omitempty"`
 }
 
 // NewPartitionLevelTruncationData instantiates a new PartitionLevelTruncationData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPartitionLevelTruncationData(partitionId int32, offsetTruncatedTo string, messagesTruncated string) *PartitionLevelTruncationData {
+func NewPartitionLevelTruncationData(partitionId int32, offsetTruncatedTo int64, messagesTruncated int64) *PartitionLevelTruncationData {
 	this := PartitionLevelTruncationData{}
 	this.PartitionId = partitionId
 	this.OffsetTruncatedTo = offsetTruncatedTo
@@ -86,9 +86,9 @@ func (o *PartitionLevelTruncationData) SetPartitionId(v int32) {
 }
 
 // GetOffsetTruncatedTo returns the OffsetTruncatedTo field value
-func (o *PartitionLevelTruncationData) GetOffsetTruncatedTo() string {
+func (o *PartitionLevelTruncationData) GetOffsetTruncatedTo() int64 {
 	if o == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 
@@ -97,7 +97,7 @@ func (o *PartitionLevelTruncationData) GetOffsetTruncatedTo() string {
 
 // GetOffsetTruncatedToOk returns a tuple with the OffsetTruncatedTo field value
 // and a boolean to check if the value has been set.
-func (o *PartitionLevelTruncationData) GetOffsetTruncatedToOk() (*string, bool) {
+func (o *PartitionLevelTruncationData) GetOffsetTruncatedToOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,14 +105,14 @@ func (o *PartitionLevelTruncationData) GetOffsetTruncatedToOk() (*string, bool) 
 }
 
 // SetOffsetTruncatedTo sets field value
-func (o *PartitionLevelTruncationData) SetOffsetTruncatedTo(v string) {
+func (o *PartitionLevelTruncationData) SetOffsetTruncatedTo(v int64) {
 	o.OffsetTruncatedTo = v
 }
 
 // GetMessagesTruncated returns the MessagesTruncated field value
-func (o *PartitionLevelTruncationData) GetMessagesTruncated() string {
+func (o *PartitionLevelTruncationData) GetMessagesTruncated() int64 {
 	if o == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 
@@ -121,7 +121,7 @@ func (o *PartitionLevelTruncationData) GetMessagesTruncated() string {
 
 // GetMessagesTruncatedOk returns a tuple with the MessagesTruncated field value
 // and a boolean to check if the value has been set.
-func (o *PartitionLevelTruncationData) GetMessagesTruncatedOk() (*string, bool) {
+func (o *PartitionLevelTruncationData) GetMessagesTruncatedOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *PartitionLevelTruncationData) GetMessagesTruncatedOk() (*string, bool) 
 }
 
 // SetMessagesTruncated sets field value
-func (o *PartitionLevelTruncationData) SetMessagesTruncated(v string) {
+func (o *PartitionLevelTruncationData) SetMessagesTruncated(v int64) {
 	o.MessagesTruncated = v
 }
 
