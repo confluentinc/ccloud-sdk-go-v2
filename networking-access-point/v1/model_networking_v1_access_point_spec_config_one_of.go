@@ -34,12 +34,18 @@ import (
 // NetworkingV1AccessPointSpecConfigOneOf - struct for NetworkingV1AccessPointSpecConfigOneOf
 type NetworkingV1AccessPointSpecConfigOneOf struct {
 	NetworkingV1AwsEgressPrivateLinkEndpoint   *NetworkingV1AwsEgressPrivateLinkEndpoint
+	NetworkingV1AwsPrivateNetworkInterface     *NetworkingV1AwsPrivateNetworkInterface
 	NetworkingV1AzureEgressPrivateLinkEndpoint *NetworkingV1AzureEgressPrivateLinkEndpoint
 }
 
 // NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
 func NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecConfigOneOf {
 	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsEgressPrivateLinkEndpoint: v}
+}
+
+// NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsPrivateNetworkInterface wrapped in NetworkingV1AccessPointSpecConfigOneOf
+func NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsPrivateNetworkInterface) NetworkingV1AccessPointSpecConfigOneOf {
+	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsPrivateNetworkInterface: v}
 }
 
 // NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AzureEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
@@ -69,6 +75,18 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 		}
 	}
 
+	// check if the discriminator value is 'AwsPrivateNetworkInterface'
+	if jsonDict["kind"] == "AwsPrivateNetworkInterface" {
+		// try to unmarshal JSON data into NetworkingV1AwsPrivateNetworkInterface
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsPrivateNetworkInterface)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsPrivateNetworkInterface, return on the first match
+		} else {
+			dst.NetworkingV1AwsPrivateNetworkInterface = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'AzureEgressPrivateLinkEndpoint'
 	if jsonDict["kind"] == "AzureEgressPrivateLinkEndpoint" {
 		// try to unmarshal JSON data into NetworkingV1AzureEgressPrivateLinkEndpoint
@@ -90,6 +108,18 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpoint = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.AwsPrivateNetworkInterface'
+	if jsonDict["kind"] == "networking.v1.AwsPrivateNetworkInterface" {
+		// try to unmarshal JSON data into NetworkingV1AwsPrivateNetworkInterface
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsPrivateNetworkInterface)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsPrivateNetworkInterface, return on the first match
+		} else {
+			dst.NetworkingV1AwsPrivateNetworkInterface = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
 		}
 	}
 
@@ -118,6 +148,14 @@ func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) 
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1AwsPrivateNetworkInterface != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsPrivateNetworkInterface)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1AzureEgressPrivateLinkEndpoint != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -133,6 +171,10 @@ func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) 
 func (obj *NetworkingV1AccessPointSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsEgressPrivateLinkEndpoint != nil {
 		return obj.NetworkingV1AwsEgressPrivateLinkEndpoint
+	}
+
+	if obj.NetworkingV1AwsPrivateNetworkInterface != nil {
+		return obj.NetworkingV1AwsPrivateNetworkInterface
 	}
 
 	if obj.NetworkingV1AzureEgressPrivateLinkEndpoint != nil {
