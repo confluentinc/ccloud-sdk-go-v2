@@ -4248,6 +4248,37 @@ components:
       - kind
       - resource_id
       type: object
+    networking.v1.AwsPrivateNetworkInterface:
+      description: Confluent Private Network Interface powered by AWS ENI.
+      properties:
+        kind:
+          description: AwsPrivateNetworkInterface kind.
+          enum:
+          - AwsPrivateNetworkInterface
+          type: string
+        network_interfaces:
+          description: List of the IDs of the Elastic Network Interfaces.
+          example:
+          - eni-00000000000000000
+          - eni-00000000000000001
+          - eni-00000000000000002
+          - eni-00000000000000003
+          - eni-00000000000000004
+          - eni-00000000000000005
+          items:
+            type: string
+          minItems: 6
+          type: array
+          uniqueItems: true
+        account:
+          description: The AWS account ID associated with the ENIs you are using for
+            the Confluent Private Network Interface.
+          example: "000000000000"
+          pattern: ^\d{12}$
+          type: string
+      required:
+      - kind
+      type: object
     MultipleSearchFilter:
       description: Filter a collection by a string search for one or more values
       items:
@@ -4330,10 +4361,12 @@ components:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+              AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf
