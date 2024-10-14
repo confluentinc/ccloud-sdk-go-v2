@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
-**Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
+**Metadata** | Pointer to [**StatementObjectMeta**](StatementObjectMeta.md) |  | [optional] 
 **Name** | Pointer to **string** | The user provided name of the resource, unique within this environment. | [optional] 
 **OrganizationId** | Pointer to **string** | The unique identifier for the organization. | [optional] 
 **EnvironmentId** | Pointer to **string** | The unique identifier for the environment. | [optional] 
 **Spec** | Pointer to [**SqlV1StatementSpec**](SqlV1StatementSpec.md) |  | [optional] 
 **Status** | Pointer to [**SqlV1StatementStatus**](SqlV1StatementStatus.md) |  | [optional] 
+**Result** | Pointer to [**SqlV1StatementResult**](SqlV1StatementResult.md) |  | [optional] 
 
 ## Methods
 
@@ -84,20 +85,20 @@ HasKind returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *SqlV1Statement) GetMetadata() ObjectMeta`
+`func (o *SqlV1Statement) GetMetadata() StatementObjectMeta`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *SqlV1Statement) GetMetadataOk() (*ObjectMeta, bool)`
+`func (o *SqlV1Statement) GetMetadataOk() (*StatementObjectMeta, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *SqlV1Statement) SetMetadata(v ObjectMeta)`
+`func (o *SqlV1Statement) SetMetadata(v StatementObjectMeta)`
 
 SetMetadata sets Metadata field to given value.
 
@@ -231,6 +232,31 @@ SetStatus sets Status field to given value.
 `func (o *SqlV1Statement) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetResult
+
+`func (o *SqlV1Statement) GetResult() SqlV1StatementResult`
+
+GetResult returns the Result field if non-nil, zero value otherwise.
+
+### GetResultOk
+
+`func (o *SqlV1Statement) GetResultOk() (*SqlV1StatementResult, bool)`
+
+GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResult
+
+`func (o *SqlV1Statement) SetResult(v SqlV1StatementResult)`
+
+SetResult sets Result field to given value.
+
+### HasResult
+
+`func (o *SqlV1Statement) HasResult() bool`
+
+HasResult returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

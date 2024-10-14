@@ -44,38 +44,30 @@ func SqlV1PlaintextProviderAsSqlV1ConnectionSpecAuthDataOneOf(v *SqlV1PlaintextP
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *SqlV1ConnectionSpecAuthDataOneOf) UnmarshalJSON(data []byte) error {
 	var err error
-	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
-	err = json.Unmarshal(data, &jsonDict)
-	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
-	}
-
-	// check if the discriminator value is 'PlaintextProvider'
-	if jsonDict["kind"] == "PlaintextProvider" {
-		// try to unmarshal JSON data into SqlV1PlaintextProvider
-		err = json.Unmarshal(data, &dst.SqlV1PlaintextProvider)
-		if err == nil {
-			return nil // data stored in dst.SqlV1PlaintextProvider, return on the first match
-		} else {
+	match := 0
+	// try to unmarshal data into SqlV1PlaintextProvider
+	err = json.Unmarshal(data, &dst.SqlV1PlaintextProvider)
+	if err == nil {
+		jsonSqlV1PlaintextProvider, _ := json.Marshal(dst.SqlV1PlaintextProvider)
+		if string(jsonSqlV1PlaintextProvider) == "{}" { // empty struct
 			dst.SqlV1PlaintextProvider = nil
-			return fmt.Errorf("Failed to unmarshal SqlV1ConnectionSpecAuthDataOneOf as SqlV1PlaintextProvider: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'sql.v1.PlaintextProvider'
-	if jsonDict["kind"] == "sql.v1.PlaintextProvider" {
-		// try to unmarshal JSON data into SqlV1PlaintextProvider
-		err = json.Unmarshal(data, &dst.SqlV1PlaintextProvider)
-		if err == nil {
-			return nil // data stored in dst.SqlV1PlaintextProvider, return on the first match
 		} else {
-			dst.SqlV1PlaintextProvider = nil
-			return fmt.Errorf("Failed to unmarshal SqlV1ConnectionSpecAuthDataOneOf as SqlV1PlaintextProvider: %s", err.Error())
+			match++
 		}
+	} else {
+		dst.SqlV1PlaintextProvider = nil
 	}
 
-	return nil
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.SqlV1PlaintextProvider = nil
+
+		return fmt.Errorf("Data matches more than one schema in oneOf(SqlV1ConnectionSpecAuthDataOneOf)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("Data failed to match schemas in oneOf(SqlV1ConnectionSpecAuthDataOneOf)")
+	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
