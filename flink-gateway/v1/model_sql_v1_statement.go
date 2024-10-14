@@ -39,8 +39,8 @@ type SqlV1Statement struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind     *string     `json:"kind,omitempty"`
-	Metadata *ObjectMeta `json:"metadata,omitempty"`
+	Kind     *string              `json:"kind,omitempty"`
+	Metadata *StatementObjectMeta `json:"metadata,omitempty"`
 	// The user provided name of the resource, unique within this environment.
 	Name *string `json:"name,omitempty"`
 	// The unique identifier for the organization.
@@ -49,6 +49,7 @@ type SqlV1Statement struct {
 	EnvironmentId *string               `json:"environment_id,omitempty"`
 	Spec          *SqlV1StatementSpec   `json:"spec,omitempty"`
 	Status        *SqlV1StatementStatus `json:"status,omitempty"`
+	Result        *SqlV1StatementResult `json:"result,omitempty"`
 }
 
 // NewSqlV1Statement instantiates a new SqlV1Statement object
@@ -133,9 +134,9 @@ func (o *SqlV1Statement) SetKind(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *SqlV1Statement) GetMetadata() ObjectMeta {
+func (o *SqlV1Statement) GetMetadata() StatementObjectMeta {
 	if o == nil || o.Metadata == nil {
-		var ret ObjectMeta
+		var ret StatementObjectMeta
 		return ret
 	}
 	return *o.Metadata
@@ -143,7 +144,7 @@ func (o *SqlV1Statement) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SqlV1Statement) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *SqlV1Statement) GetMetadataOk() (*StatementObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -159,8 +160,8 @@ func (o *SqlV1Statement) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *SqlV1Statement) SetMetadata(v ObjectMeta) {
+// SetMetadata gets a reference to the given StatementObjectMeta and assigns it to the Metadata field.
+func (o *SqlV1Statement) SetMetadata(v StatementObjectMeta) {
 	o.Metadata = &v
 }
 
@@ -324,6 +325,38 @@ func (o *SqlV1Statement) SetStatus(v SqlV1StatementStatus) {
 	o.Status = &v
 }
 
+// GetResult returns the Result field value if set, zero value otherwise.
+func (o *SqlV1Statement) GetResult() SqlV1StatementResult {
+	if o == nil || o.Result == nil {
+		var ret SqlV1StatementResult
+		return ret
+	}
+	return *o.Result
+}
+
+// GetResultOk returns a tuple with the Result field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1Statement) GetResultOk() (*SqlV1StatementResult, bool) {
+	if o == nil || o.Result == nil {
+		return nil, false
+	}
+	return o.Result, true
+}
+
+// HasResult returns a boolean if a field has been set.
+func (o *SqlV1Statement) HasResult() bool {
+	if o != nil && o.Result != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResult gets a reference to the given SqlV1StatementResult and assigns it to the Result field.
+func (o *SqlV1Statement) SetResult(v SqlV1StatementResult) {
+	o.Result = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1Statement) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -334,6 +367,7 @@ func (o *SqlV1Statement) Redact() {
 	o.recurseRedact(o.EnvironmentId)
 	o.recurseRedact(o.Spec)
 	o.recurseRedact(o.Status)
+	o.recurseRedact(o.Result)
 }
 
 func (o *SqlV1Statement) recurseRedact(v interface{}) {
@@ -391,6 +425,9 @@ func (o SqlV1Statement) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Result != nil {
+		toSerialize["result"] = o.Result
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
