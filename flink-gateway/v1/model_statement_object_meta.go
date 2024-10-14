@@ -35,8 +35,8 @@ import (
 	"reflect"
 )
 
-// ObjectMeta The metadata of the statement.
-type ObjectMeta struct {
+// StatementObjectMeta The metadata of the statement.
+type StatementObjectMeta struct {
 	// Self is a Uniform Resource Locator (URL) at which an object can be addressed. This URL encodes the service location, API version, and other particulars necessary to locate the resource at a point in time
 	Self string `json:"self,omitempty"`
 	// The date and time at which this object was created. It is represented in RFC3339 format and is in UTC.
@@ -47,28 +47,30 @@ type ObjectMeta struct {
 	Uid *string `json:"uid,omitempty"`
 	// A system generated string that uniquely identifies the version of this resource.
 	ResourceVersion *string `json:"resource_version,omitempty"`
+	// A map of key-value pairs that describe the resource.
+	Labels *map[string]string `json:"labels,omitempty"`
 }
 
-// NewObjectMeta instantiates a new ObjectMeta object
+// NewStatementObjectMeta instantiates a new StatementObjectMeta object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewObjectMeta(self string) *ObjectMeta {
-	this := ObjectMeta{}
+func NewStatementObjectMeta(self string) *StatementObjectMeta {
+	this := StatementObjectMeta{}
 	this.Self = self
 	return &this
 }
 
-// NewObjectMetaWithDefaults instantiates a new ObjectMeta object
+// NewStatementObjectMetaWithDefaults instantiates a new StatementObjectMeta object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewObjectMetaWithDefaults() *ObjectMeta {
-	this := ObjectMeta{}
+func NewStatementObjectMetaWithDefaults() *StatementObjectMeta {
+	this := StatementObjectMeta{}
 	return &this
 }
 
 // GetSelf returns the Self field value
-func (o *ObjectMeta) GetSelf() string {
+func (o *StatementObjectMeta) GetSelf() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -79,7 +81,7 @@ func (o *ObjectMeta) GetSelf() string {
 
 // GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
-func (o *ObjectMeta) GetSelfOk() (*string, bool) {
+func (o *StatementObjectMeta) GetSelfOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,12 +89,12 @@ func (o *ObjectMeta) GetSelfOk() (*string, bool) {
 }
 
 // SetSelf sets field value
-func (o *ObjectMeta) SetSelf(v string) {
+func (o *StatementObjectMeta) SetSelf(v string) {
 	o.Self = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *ObjectMeta) GetCreatedAt() time.Time {
+func (o *StatementObjectMeta) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
 		var ret time.Time
 		return ret
@@ -102,7 +104,7 @@ func (o *ObjectMeta) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ObjectMeta) GetCreatedAtOk() (*time.Time, bool) {
+func (o *StatementObjectMeta) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
@@ -110,7 +112,7 @@ func (o *ObjectMeta) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *ObjectMeta) HasCreatedAt() bool {
+func (o *StatementObjectMeta) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt != nil {
 		return true
 	}
@@ -119,12 +121,12 @@ func (o *ObjectMeta) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *ObjectMeta) SetCreatedAt(v time.Time) {
+func (o *StatementObjectMeta) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *ObjectMeta) GetUpdatedAt() time.Time {
+func (o *StatementObjectMeta) GetUpdatedAt() time.Time {
 	if o == nil || o.UpdatedAt == nil {
 		var ret time.Time
 		return ret
@@ -134,7 +136,7 @@ func (o *ObjectMeta) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ObjectMeta) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *StatementObjectMeta) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || o.UpdatedAt == nil {
 		return nil, false
 	}
@@ -142,7 +144,7 @@ func (o *ObjectMeta) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
-func (o *ObjectMeta) HasUpdatedAt() bool {
+func (o *StatementObjectMeta) HasUpdatedAt() bool {
 	if o != nil && o.UpdatedAt != nil {
 		return true
 	}
@@ -151,12 +153,12 @@ func (o *ObjectMeta) HasUpdatedAt() bool {
 }
 
 // SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *ObjectMeta) SetUpdatedAt(v time.Time) {
+func (o *StatementObjectMeta) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
 // GetUid returns the Uid field value if set, zero value otherwise.
-func (o *ObjectMeta) GetUid() string {
+func (o *StatementObjectMeta) GetUid() string {
 	if o == nil || o.Uid == nil {
 		var ret string
 		return ret
@@ -166,7 +168,7 @@ func (o *ObjectMeta) GetUid() string {
 
 // GetUidOk returns a tuple with the Uid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ObjectMeta) GetUidOk() (*string, bool) {
+func (o *StatementObjectMeta) GetUidOk() (*string, bool) {
 	if o == nil || o.Uid == nil {
 		return nil, false
 	}
@@ -174,7 +176,7 @@ func (o *ObjectMeta) GetUidOk() (*string, bool) {
 }
 
 // HasUid returns a boolean if a field has been set.
-func (o *ObjectMeta) HasUid() bool {
+func (o *StatementObjectMeta) HasUid() bool {
 	if o != nil && o.Uid != nil {
 		return true
 	}
@@ -183,12 +185,12 @@ func (o *ObjectMeta) HasUid() bool {
 }
 
 // SetUid gets a reference to the given string and assigns it to the Uid field.
-func (o *ObjectMeta) SetUid(v string) {
+func (o *StatementObjectMeta) SetUid(v string) {
 	o.Uid = &v
 }
 
 // GetResourceVersion returns the ResourceVersion field value if set, zero value otherwise.
-func (o *ObjectMeta) GetResourceVersion() string {
+func (o *StatementObjectMeta) GetResourceVersion() string {
 	if o == nil || o.ResourceVersion == nil {
 		var ret string
 		return ret
@@ -198,7 +200,7 @@ func (o *ObjectMeta) GetResourceVersion() string {
 
 // GetResourceVersionOk returns a tuple with the ResourceVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ObjectMeta) GetResourceVersionOk() (*string, bool) {
+func (o *StatementObjectMeta) GetResourceVersionOk() (*string, bool) {
 	if o == nil || o.ResourceVersion == nil {
 		return nil, false
 	}
@@ -206,7 +208,7 @@ func (o *ObjectMeta) GetResourceVersionOk() (*string, bool) {
 }
 
 // HasResourceVersion returns a boolean if a field has been set.
-func (o *ObjectMeta) HasResourceVersion() bool {
+func (o *StatementObjectMeta) HasResourceVersion() bool {
 	if o != nil && o.ResourceVersion != nil {
 		return true
 	}
@@ -215,20 +217,53 @@ func (o *ObjectMeta) HasResourceVersion() bool {
 }
 
 // SetResourceVersion gets a reference to the given string and assigns it to the ResourceVersion field.
-func (o *ObjectMeta) SetResourceVersion(v string) {
+func (o *StatementObjectMeta) SetResourceVersion(v string) {
 	o.ResourceVersion = &v
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *StatementObjectMeta) GetLabels() map[string]string {
+	if o == nil || o.Labels == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StatementObjectMeta) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || o.Labels == nil {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *StatementObjectMeta) HasLabels() bool {
+	if o != nil && o.Labels != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *StatementObjectMeta) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
-func (o *ObjectMeta) Redact() {
+func (o *StatementObjectMeta) Redact() {
 	o.recurseRedact(&o.Self)
 	o.recurseRedact(o.CreatedAt)
 	o.recurseRedact(o.UpdatedAt)
 	o.recurseRedact(o.Uid)
 	o.recurseRedact(o.ResourceVersion)
+	o.recurseRedact(o.Labels)
 }
 
-func (o *ObjectMeta) recurseRedact(v interface{}) {
+func (o *StatementObjectMeta) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -253,12 +288,12 @@ func (o *ObjectMeta) recurseRedact(v interface{}) {
 	}
 }
 
-func (o ObjectMeta) zeroField(v interface{}) {
+func (o StatementObjectMeta) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ObjectMeta) MarshalJSON() ([]byte, error) {
+func (o StatementObjectMeta) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["self"] = o.Self
@@ -275,6 +310,9 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	if o.ResourceVersion != nil {
 		toSerialize["resource_version"] = o.ResourceVersion
 	}
+	if o.Labels != nil {
+		toSerialize["labels"] = o.Labels
+	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -282,34 +320,34 @@ func (o ObjectMeta) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableObjectMeta struct {
-	value *ObjectMeta
+type NullableStatementObjectMeta struct {
+	value *StatementObjectMeta
 	isSet bool
 }
 
-func (v NullableObjectMeta) Get() *ObjectMeta {
+func (v NullableStatementObjectMeta) Get() *StatementObjectMeta {
 	return v.value
 }
 
-func (v *NullableObjectMeta) Set(val *ObjectMeta) {
+func (v *NullableStatementObjectMeta) Set(val *StatementObjectMeta) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableObjectMeta) IsSet() bool {
+func (v NullableStatementObjectMeta) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableObjectMeta) Unset() {
+func (v *NullableStatementObjectMeta) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableObjectMeta(val *ObjectMeta) *NullableObjectMeta {
-	return &NullableObjectMeta{value: val, isSet: true}
+func NewNullableStatementObjectMeta(val *StatementObjectMeta) *NullableStatementObjectMeta {
+	return &NullableStatementObjectMeta{value: val, isSet: true}
 }
 
-func (v NullableObjectMeta) MarshalJSON() ([]byte, error) {
+func (v NullableStatementObjectMeta) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -317,7 +355,7 @@ func (v NullableObjectMeta) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableObjectMeta) UnmarshalJSON(src []byte) error {
+func (v *NullableStatementObjectMeta) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Detail** | Pointer to **string** | Details about the execution status of this statement. | [optional] [readonly] 
 **Traits** | Pointer to [**SqlV1StatementTraits**](SqlV1StatementTraits.md) |  | [optional] 
 **NetworkKind** | Pointer to **string** | The networking type used by the submitted SQL statement:  PUBLIC: SQL statement is using public networking;  PRIVATE: SQL statement is using private networking;  | [optional] [readonly] 
+**LatestOffsets** | Pointer to **map[string]string** | The last Kafka offsets that a statement has processed. Represented by a mapping from Kafka topic to a string representation of partitions mapped to offsets.  | [optional] [readonly] 
+**LatestOffsetsTimestamp** | Pointer to **time.Time** | The date and time at which the Kafka topic offsets were added to the statement status. It is represented in RFC3339 format and is in UTC. | [optional] [readonly] 
 
 ## Methods
 
@@ -148,6 +150,56 @@ SetNetworkKind sets NetworkKind field to given value.
 `func (o *SqlV1StatementStatus) HasNetworkKind() bool`
 
 HasNetworkKind returns a boolean if a field has been set.
+
+### GetLatestOffsets
+
+`func (o *SqlV1StatementStatus) GetLatestOffsets() map[string]string`
+
+GetLatestOffsets returns the LatestOffsets field if non-nil, zero value otherwise.
+
+### GetLatestOffsetsOk
+
+`func (o *SqlV1StatementStatus) GetLatestOffsetsOk() (*map[string]string, bool)`
+
+GetLatestOffsetsOk returns a tuple with the LatestOffsets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatestOffsets
+
+`func (o *SqlV1StatementStatus) SetLatestOffsets(v map[string]string)`
+
+SetLatestOffsets sets LatestOffsets field to given value.
+
+### HasLatestOffsets
+
+`func (o *SqlV1StatementStatus) HasLatestOffsets() bool`
+
+HasLatestOffsets returns a boolean if a field has been set.
+
+### GetLatestOffsetsTimestamp
+
+`func (o *SqlV1StatementStatus) GetLatestOffsetsTimestamp() time.Time`
+
+GetLatestOffsetsTimestamp returns the LatestOffsetsTimestamp field if non-nil, zero value otherwise.
+
+### GetLatestOffsetsTimestampOk
+
+`func (o *SqlV1StatementStatus) GetLatestOffsetsTimestampOk() (*time.Time, bool)`
+
+GetLatestOffsetsTimestampOk returns a tuple with the LatestOffsetsTimestamp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatestOffsetsTimestamp
+
+`func (o *SqlV1StatementStatus) SetLatestOffsetsTimestamp(v time.Time)`
+
+SetLatestOffsetsTimestamp sets LatestOffsetsTimestamp field to given value.
+
+### HasLatestOffsetsTimestamp
+
+`func (o *SqlV1StatementStatus) HasLatestOffsetsTimestamp() bool`
+
+HasLatestOffsetsTimestamp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

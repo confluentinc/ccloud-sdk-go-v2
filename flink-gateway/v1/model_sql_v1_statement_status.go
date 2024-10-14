@@ -28,6 +28,7 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 )
 
 import (
@@ -44,6 +45,10 @@ type SqlV1StatementStatus struct {
 	Traits *SqlV1StatementTraits `json:"traits,omitempty"`
 	// The networking type used by the submitted SQL statement:  PUBLIC: SQL statement is using public networking;  PRIVATE: SQL statement is using private networking;
 	NetworkKind *string `json:"network_kind,omitempty"`
+	// The last Kafka offsets that a statement has processed. Represented by a mapping from Kafka topic to a string representation of partitions mapped to offsets.
+	LatestOffsets *map[string]string `json:"latest_offsets,omitempty"`
+	// The date and time at which the Kafka topic offsets were added to the statement status. It is represented in RFC3339 format and is in UTC.
+	LatestOffsetsTimestamp *time.Time `json:"latest_offsets_timestamp,omitempty"`
 }
 
 // NewSqlV1StatementStatus instantiates a new SqlV1StatementStatus object
@@ -216,6 +221,70 @@ func (o *SqlV1StatementStatus) SetNetworkKind(v string) {
 	o.NetworkKind = &v
 }
 
+// GetLatestOffsets returns the LatestOffsets field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetLatestOffsets() map[string]string {
+	if o == nil || o.LatestOffsets == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.LatestOffsets
+}
+
+// GetLatestOffsetsOk returns a tuple with the LatestOffsets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetLatestOffsetsOk() (*map[string]string, bool) {
+	if o == nil || o.LatestOffsets == nil {
+		return nil, false
+	}
+	return o.LatestOffsets, true
+}
+
+// HasLatestOffsets returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasLatestOffsets() bool {
+	if o != nil && o.LatestOffsets != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestOffsets gets a reference to the given map[string]string and assigns it to the LatestOffsets field.
+func (o *SqlV1StatementStatus) SetLatestOffsets(v map[string]string) {
+	o.LatestOffsets = &v
+}
+
+// GetLatestOffsetsTimestamp returns the LatestOffsetsTimestamp field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetLatestOffsetsTimestamp() time.Time {
+	if o == nil || o.LatestOffsetsTimestamp == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LatestOffsetsTimestamp
+}
+
+// GetLatestOffsetsTimestampOk returns a tuple with the LatestOffsetsTimestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetLatestOffsetsTimestampOk() (*time.Time, bool) {
+	if o == nil || o.LatestOffsetsTimestamp == nil {
+		return nil, false
+	}
+	return o.LatestOffsetsTimestamp, true
+}
+
+// HasLatestOffsetsTimestamp returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasLatestOffsetsTimestamp() bool {
+	if o != nil && o.LatestOffsetsTimestamp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestOffsetsTimestamp gets a reference to the given time.Time and assigns it to the LatestOffsetsTimestamp field.
+func (o *SqlV1StatementStatus) SetLatestOffsetsTimestamp(v time.Time) {
+	o.LatestOffsetsTimestamp = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
@@ -223,6 +292,8 @@ func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(o.Detail)
 	o.recurseRedact(o.Traits)
 	o.recurseRedact(o.NetworkKind)
+	o.recurseRedact(o.LatestOffsets)
+	o.recurseRedact(o.LatestOffsetsTimestamp)
 }
 
 func (o *SqlV1StatementStatus) recurseRedact(v interface{}) {
@@ -271,6 +342,12 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.NetworkKind != nil {
 		toSerialize["network_kind"] = o.NetworkKind
+	}
+	if o.LatestOffsets != nil {
+		toSerialize["latest_offsets"] = o.LatestOffsets
+	}
+	if o.LatestOffsetsTimestamp != nil {
+		toSerialize["latest_offsets_timestamp"] = o.LatestOffsetsTimestamp
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
