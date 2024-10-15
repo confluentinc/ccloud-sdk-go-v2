@@ -79,19 +79,17 @@ All URIs are relative to *https://api.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*InvitationsIamV2Api* | [**CreateIamV2Invitation**](docs/InvitationsIamV2Api.md#createiamv2invitation) | **Post** /iam/v2/invitations | Create an Invitation
-*InvitationsIamV2Api* | [**DeleteIamV2Invitation**](docs/InvitationsIamV2Api.md#deleteiamv2invitation) | **Delete** /iam/v2/invitations/{id} | Delete an Invitation
-*InvitationsIamV2Api* | [**GetIamV2Invitation**](docs/InvitationsIamV2Api.md#getiamv2invitation) | **Get** /iam/v2/invitations/{id} | Read an Invitation
-*InvitationsIamV2Api* | [**ListIamV2Invitations**](docs/InvitationsIamV2Api.md#listiamv2invitations) | **Get** /iam/v2/invitations | List of Invitations
-*ServiceAccountsIamV2Api* | [**CreateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#createiamv2serviceaccount) | **Post** /iam/v2/service-accounts | Create a Service Account
-*ServiceAccountsIamV2Api* | [**DeleteIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#deleteiamv2serviceaccount) | **Delete** /iam/v2/service-accounts/{id} | Delete a Service Account
-*ServiceAccountsIamV2Api* | [**GetIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#getiamv2serviceaccount) | **Get** /iam/v2/service-accounts/{id} | Read a Service Account
-*ServiceAccountsIamV2Api* | [**ListIamV2ServiceAccounts**](docs/ServiceAccountsIamV2Api.md#listiamv2serviceaccounts) | **Get** /iam/v2/service-accounts | List of Service Accounts
-*ServiceAccountsIamV2Api* | [**UpdateIamV2ServiceAccount**](docs/ServiceAccountsIamV2Api.md#updateiamv2serviceaccount) | **Patch** /iam/v2/service-accounts/{id} | Update a Service Account
-*UsersIamV2Api* | [**DeleteIamV2User**](docs/UsersIamV2Api.md#deleteiamv2user) | **Delete** /iam/v2/users/{id} | Delete a User
-*UsersIamV2Api* | [**GetIamV2User**](docs/UsersIamV2Api.md#getiamv2user) | **Get** /iam/v2/users/{id} | Read a User
-*UsersIamV2Api* | [**ListIamV2Users**](docs/UsersIamV2Api.md#listiamv2users) | **Get** /iam/v2/users | List of Users
-*UsersIamV2Api* | [**UpdateIamV2User**](docs/UsersIamV2Api.md#updateiamv2user) | **Patch** /iam/v2/users/{id} | Update a User
+*IPFilterSummariesIamV2Api* | [**GetIamV2IpFilterSummary**](docs/IPFilterSummariesIamV2Api.md#getiamv2ipfiltersummary) | **Get** /iam/v2/ip-filter-summary | Read an IP Filter Summary
+*IPFiltersIamV2Api* | [**CreateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#createiamv2ipfilter) | **Post** /iam/v2/ip-filters | Create an IP Filter
+*IPFiltersIamV2Api* | [**DeleteIamV2IpFilter**](docs/IPFiltersIamV2Api.md#deleteiamv2ipfilter) | **Delete** /iam/v2/ip-filters/{id} | Delete an IP Filter
+*IPFiltersIamV2Api* | [**GetIamV2IpFilter**](docs/IPFiltersIamV2Api.md#getiamv2ipfilter) | **Get** /iam/v2/ip-filters/{id} | Read an IP Filter
+*IPFiltersIamV2Api* | [**ListIamV2IpFilters**](docs/IPFiltersIamV2Api.md#listiamv2ipfilters) | **Get** /iam/v2/ip-filters | List of IP Filters
+*IPFiltersIamV2Api* | [**UpdateIamV2IpFilter**](docs/IPFiltersIamV2Api.md#updateiamv2ipfilter) | **Patch** /iam/v2/ip-filters/{id} | Update an IP Filter
+*IPGroupsIamV2Api* | [**CreateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#createiamv2ipgroup) | **Post** /iam/v2/ip-groups | Create an IP Group
+*IPGroupsIamV2Api* | [**DeleteIamV2IpGroup**](docs/IPGroupsIamV2Api.md#deleteiamv2ipgroup) | **Delete** /iam/v2/ip-groups/{id} | Delete an IP Group
+*IPGroupsIamV2Api* | [**GetIamV2IpGroup**](docs/IPGroupsIamV2Api.md#getiamv2ipgroup) | **Get** /iam/v2/ip-groups/{id} | Read an IP Group
+*IPGroupsIamV2Api* | [**ListIamV2IpGroups**](docs/IPGroupsIamV2Api.md#listiamv2ipgroups) | **Get** /iam/v2/ip-groups | List of IP Groups
+*IPGroupsIamV2Api* | [**UpdateIamV2IpGroup**](docs/IPGroupsIamV2Api.md#updateiamv2ipgroup) | **Patch** /iam/v2/ip-groups/{id} | Update an IP Group
 
 
 ## Documentation For Models
@@ -100,14 +98,13 @@ Class | Method | HTTP request | Description
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
- - [IamV2Invitation](docs/IamV2Invitation.md)
- - [IamV2InvitationList](docs/IamV2InvitationList.md)
- - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
- - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
- - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
- - [IamV2User](docs/IamV2User.md)
- - [IamV2UserList](docs/IamV2UserList.md)
- - [IamV2UserUpdate](docs/IamV2UserUpdate.md)
+ - [IamV2IpFilter](docs/IamV2IpFilter.md)
+ - [IamV2IpFilterList](docs/IamV2IpFilterList.md)
+ - [IamV2IpFilterSummary](docs/IamV2IpFilterSummary.md)
+ - [IamV2IpFilterSummaryCategories](docs/IamV2IpFilterSummaryCategories.md)
+ - [IamV2IpFilterSummaryOperationGroups](docs/IamV2IpFilterSummaryOperationGroups.md)
+ - [IamV2IpGroup](docs/IamV2IpGroup.md)
+ - [IamV2IpGroupList](docs/IamV2IpGroupList.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
