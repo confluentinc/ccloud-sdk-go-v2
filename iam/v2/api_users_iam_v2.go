@@ -42,19 +42,19 @@ var (
 type UsersIamV2Api interface {
 
 	/*
-			DeleteIamV2User Delete a User
+		DeleteIamV2User Delete a User
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a user.
+	Make a request to delete a user.
 
-		If successful, this request will also recursively delete all of the user's associated resources,
-		including its cloud and cluster API keys.
+	If successful, this request will also recursively delete all of the user's associated resources,
+	including its cloud and cluster API keys.
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiDeleteIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiDeleteIamV2UserRequest
 	*/
 	DeleteIamV2User(ctx _context.Context, id string) ApiDeleteIamV2UserRequest
 
@@ -62,15 +62,15 @@ type UsersIamV2Api interface {
 	DeleteIamV2UserExecute(r ApiDeleteIamV2UserRequest) (*_nethttp.Response, error)
 
 	/*
-			GetIamV2User Read a User
+		GetIamV2User Read a User
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a user.
+	Make a request to read a user.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiGetIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiGetIamV2UserRequest
 	*/
 	GetIamV2User(ctx _context.Context, id string) ApiGetIamV2UserRequest
 
@@ -79,14 +79,14 @@ type UsersIamV2Api interface {
 	GetIamV2UserExecute(r ApiGetIamV2UserRequest) (IamV2User, *_nethttp.Response, error)
 
 	/*
-			ListIamV2Users List of Users
+		ListIamV2Users List of Users
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all users.
+	Retrieve a sorted, filtered, paginated list of all users.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListIamV2UsersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListIamV2UsersRequest
 	*/
 	ListIamV2Users(ctx _context.Context) ApiListIamV2UsersRequest
 
@@ -95,17 +95,17 @@ type UsersIamV2Api interface {
 	ListIamV2UsersExecute(r ApiListIamV2UsersRequest) (IamV2UserList, *_nethttp.Response, error)
 
 	/*
-			UpdateIamV2User Update a User
+		UpdateIamV2User Update a User
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a user.
+	Make a request to update a user.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the user.
-			 @return ApiUpdateIamV2UserRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the user.
+		 @return ApiUpdateIamV2UserRequest
 	*/
 	UpdateIamV2User(ctx _context.Context, id string) ApiUpdateIamV2UserRequest
 
@@ -727,6 +727,16 @@ func (a *UsersIamV2ApiService) UpdateIamV2UserExecute(r ApiUpdateIamV2UserReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
