@@ -42,20 +42,20 @@ var (
 type InvitationsIamV2Api interface {
 
 	/*
-			CreateIamV2Invitation Create an Invitation
+		CreateIamV2Invitation Create an Invitation
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create an invitation.
+	Make a request to create an invitation.
 
-		The newly invited user will not have any permissions. Give the user permission by assigning them to one or
-		more roles by creating
-		[role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
-		for the created `user`.
+	The newly invited user will not have any permissions. Give the user permission by assigning them to one or
+	more roles by creating
+	[role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
+	for the created `user`.
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateIamV2InvitationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateIamV2InvitationRequest
 	*/
 	CreateIamV2Invitation(ctx _context.Context) ApiCreateIamV2InvitationRequest
 
@@ -64,18 +64,18 @@ type InvitationsIamV2Api interface {
 	CreateIamV2InvitationExecute(r ApiCreateIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error)
 
 	/*
-			DeleteIamV2Invitation Delete an Invitation
+		DeleteIamV2Invitation Delete an Invitation
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete an invitation.
+	Make a request to delete an invitation.
 
-		Delete will deactivate the user if the user didn't accept the invitation yet.
+	Delete will deactivate the user if the user didn't accept the invitation yet.
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the invitation.
-			 @return ApiDeleteIamV2InvitationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the invitation.
+		 @return ApiDeleteIamV2InvitationRequest
 	*/
 	DeleteIamV2Invitation(ctx _context.Context, id string) ApiDeleteIamV2InvitationRequest
 
@@ -83,15 +83,15 @@ type InvitationsIamV2Api interface {
 	DeleteIamV2InvitationExecute(r ApiDeleteIamV2InvitationRequest) (*_nethttp.Response, error)
 
 	/*
-			GetIamV2Invitation Read an Invitation
+		GetIamV2Invitation Read an Invitation
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read an invitation.
+	Make a request to read an invitation.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the invitation.
-			 @return ApiGetIamV2InvitationRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the invitation.
+		 @return ApiGetIamV2InvitationRequest
 	*/
 	GetIamV2Invitation(ctx _context.Context, id string) ApiGetIamV2InvitationRequest
 
@@ -100,14 +100,14 @@ type InvitationsIamV2Api interface {
 	GetIamV2InvitationExecute(r ApiGetIamV2InvitationRequest) (IamV2Invitation, *_nethttp.Response, error)
 
 	/*
-			ListIamV2Invitations List of Invitations
+		ListIamV2Invitations List of Invitations
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all invitations.
+	Retrieve a sorted, filtered, paginated list of all invitations.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListIamV2InvitationsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListIamV2InvitationsRequest
 	*/
 	ListIamV2Invitations(ctx _context.Context) ApiListIamV2InvitationsRequest
 

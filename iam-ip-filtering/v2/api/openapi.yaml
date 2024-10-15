@@ -19,76 +19,49 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
 
-    `User` objects represent individuals who may access your Confluent resources.
-
-    The API allows you to retrieve, update, and delete individual users, as well as list of all your
-    users. This API cannot be used to create new user accounts.
+    Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.
 
 
-    Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
-
-    ## The Users Model
-    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
-
-    ## Quotas and Limits
-    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-    | Quota | Description |
-    | --- | --- |
-    | `users_per_org` | Users in one Confluent Cloud organization |
-  name: Users (iam/v2)
+    ## The IP Groups Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpGroup" />
+  name: IP Groups (iam/v2)
 - description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-    `ServiceAccount` objects are typically used to represent applications and other non-human principals
-    that may access your Confluent resources.
+    `IP Filter` objects are bindings between IP Groups and Confluent resource(s).
+    For example, a binding between "CorpNet" and "Management APIs" will enforce that
+    access must come from one of the CIDR blocks associated with CorpNet.
+    If there are multiple IP filters bound to a resource, a request matching any of the CIDR blocks
+    for any of the IP Group will allow the request.
+    If there are no IP Filters for a resource, then access will be granted to requests originating
+    from any IP Address.
 
-    The API allows you to create, retrieve, update, and delete individual service accounts, as well as
-    list all your service accounts.
 
-
-    Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
-
-    ## The Service Accounts Model
-    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
-
-    ## Quotas and Limits
-    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-    | Quota | Description |
-    | --- | --- |
-    | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
-  name: Service Accounts (iam/v2)
+    ## The IP Filters Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpFilter" />
+  name: IP Filters (iam/v2)
 - description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-    `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.
+    The IP Filter Summary endpoint returns an aggregation of the IP Filters across the system.
+    This API can be queried in the context of an organization or an environment. It returns a
+    summary of every operation group in the system grouped with a higher summary by operation
+    group category.
 
-    The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.
 
-
-    Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).
-
-    ## The Invitations Model
-    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.Invitation" />
-
-    ## Quotas and Limits
-    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-    | Quota | Description |
-    | --- | --- |
-    | `invitations_per_org` | Invitations in a Confluent Cloud organization |
-  name: Invitations (iam/v2)
+    ## The IP Filter Summaries Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpFilterSummary" />
+  name: IP Filter Summaries (iam/v2)
 paths:
-  /iam/v2/users:
+  /iam/v2/ip-groups:
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
 
-        Retrieve a sorted, filtered, paginated list of all users.
-      operationId: listIamV2Users
+        Retrieve a sorted, filtered, paginated list of all IP groups.
+      operationId: listIamV2IpGroups
       parameters:
       - description: A pagination size for collection requests.
         explode: true
@@ -96,7 +69,7 @@ paths:
         name: page_size
         required: false
         schema:
-          default: 10
+          default: 25
           maximum: 100
           type: integer
           x-max-page-items: 500
@@ -116,8 +89,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.UserList'
-          description: User.
+                - $ref: '#/components/schemas/iam.v2.IpGroupList'
+          description: IP Group.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -286,21 +259,26 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: List of Users
+      summary: List of IP Groups
       tags:
-      - Users (iam/v2)
+      - IP Groups (iam/v2)
+      x-request-access-name: IP Groups API
+      x-page-first-available: true
+      x-page-last-available: true
+      x-page-from-start: true
+      x-page-from-end: true
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/iam/v2/users \
+            --url https://api.confluent.cloud/iam/v2/ip-groups \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/users")
+            .url("https://api.confluent.cloud/iam/v2/ip-groups")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -308,7 +286,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/users\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-groups\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -321,7 +299,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/users", headers=headers)
+          conn.request("GET", "/iam/v2/ip-groups", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -335,7 +313,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/users",
+            "path": "/iam/v2/ip-groups",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -360,7 +338,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/users");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-groups");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -369,22 +347,385 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/users");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-groups");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-  /iam/v2/users/{id}:
+    post:
+      description: |-
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+
+        Make a request to create an IP group.
+      operationId: createIamV2IpGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/iam.v2.IpGroup'
+              - required:
+                - cidr_blocks
+                - group_name
+                type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.IpGroup'
+                - required:
+                  - cidr_blocks
+                  - group_name
+                  type: object
+          description: An IP Group was created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Location:
+              description: IpGroup resource uri
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/iam/v2/ip-groups/{id}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Create an IP Group
+      tags:
+      - IP Groups (iam/v2)
+      x-request-access-name: IP Groups API
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/iam/v2/ip-groups \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"group_name":"CorpNet","cidr_blocks":["192.168.0.0/24","192.168.7.0/24"]}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/iam/v2/ip-groups")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-groups\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"group_name\\\":\\\"CorpNet\\\"\
+          ,\\\"cidr_blocks\\\":[\\\"192.168.0.0/24\\\",\\\"192.168.7.0/24\\\"]}\"\
+          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/iam/v2/ip-groups", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/iam/v2/ip-groups",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({group_name: 'CorpNet', cidr_blocks: ['192.168.0.0/24', '192.168.7.0/24']}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-groups");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-groups");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: IP Groups API
+  /iam/v2/ip-groups/{id}:
     delete:
-      description: |
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+      description: |-
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
 
-        Make a request to delete a user.
-
-        If successful, this request will also recursively delete all of the user's associated resources,
-        including its cloud and cluster API keys.
-      operationId: deleteIamV2User
+        Make a request to delete an IP group.
+      operationId: deleteIamV2IpGroup
       parameters:
-      - description: The unique identifier for the user.
+      - description: The unique identifier for the IP group.
         explode: false
         in: path
         name: id
@@ -394,7 +735,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: A User is being deleted.
+          description: An IP Group is being deleted.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -581,21 +922,22 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Delete a User
+      summary: Delete an IP Group
       tags:
-      - Users (iam/v2)
+      - IP Groups (iam/v2)
+      x-request-access-name: IP Groups API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/iam/v2/users/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-groups/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/users/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-groups/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -603,7 +945,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/users/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-groups/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -616,7 +958,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/iam/v2/users/{id}", headers=headers)
+          conn.request("DELETE", "/iam/v2/ip-groups/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -630,7 +972,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/users/{id}",
+            "path": "/iam/v2/ip-groups/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -655,7 +997,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/users/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-groups/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -664,18 +1006,18 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/users/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-groups/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
 
-        Make a request to read a user.
-      operationId: getIamV2User
+        Make a request to read an IP group.
+      operationId: getIamV2IpGroup
       parameters:
-      - description: The unique identifier for the user.
+      - description: The unique identifier for the IP group.
         explode: false
         in: path
         name: id
@@ -689,14 +1031,15 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.User'
+                - $ref: '#/components/schemas/iam.v2.IpGroup'
                 - required:
                   - api_version
-                  - email
+                  - cidr_blocks
+                  - group_name
                   - id
                   - kind
                   type: object
-          description: User.
+          description: IP Group.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -883,21 +1226,22 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Read a User
+      summary: Read an IP Group
       tags:
-      - Users (iam/v2)
+      - IP Groups (iam/v2)
+      x-request-access-name: IP Groups API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/users/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-groups/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/users/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-groups/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -905,7 +1249,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/users/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-groups/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -918,7 +1262,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/users/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/ip-groups/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -932,7 +1276,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/users/{id}",
+            "path": "/iam/v2/ip-groups/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -957,7 +1301,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/users/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-groups/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -966,19 +1310,19 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/users/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-groups/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
 
-        Make a request to update a user.
+        Make a request to update an IP group.
 
-      operationId: updateIamV2User
+      operationId: updateIamV2IpGroup
       parameters:
-      - description: The unique identifier for the user.
+      - description: The unique identifier for the IP group.
         explode: false
         in: path
         name: id
@@ -990,21 +1334,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/iam.v2.UserUpdate'
+              $ref: '#/components/schemas/iam.v2.IpGroup'
       responses:
         "200":
           content:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.User'
+                - $ref: '#/components/schemas/iam.v2.IpGroup'
                 - required:
                   - api_version
-                  - email
+                  - cidr_blocks
+                  - group_name
                   - id
                   - kind
                   type: object
-          description: User.
+          description: IP Group.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1087,27 +1432,6 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
-        "402":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "402"
-                  code: quota_exceeded
-                  title: Kafka Clusters Per Org Quota Exceeded
-                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request would exceed one or more quotas.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -1265,25 +1589,26 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Update a User
+      summary: Update an IP Group
       tags:
-      - Users (iam/v2)
+      - IP Groups (iam/v2)
+      x-request-access-name: IP Groups API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/iam/v2/users/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-groups/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"email":"marty.mcfly@example.com","full_name":"Marty McFly"}'
+            --data '{"group_name":"CorpNet","cidr_blocks":["192.168.0.0/24","192.168.7.0/24"]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/users/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-groups/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1292,28 +1617,28 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/users/{id}\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"email\\\":\\\"marty.mcfly@example.com\\\
-          \",\\\"full_name\\\":\\\"Marty McFly\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-groups/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"group_name\\\":\\\"CorpNet\\\"\
+          ,\\\"cidr_blocks\\\":[\\\"192.168.0.0/24\\\",\\\"192.168.7.0/24\\\"]}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}"
+          payload = "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/iam/v2/users/{id}", payload, headers)
+          conn.request("PATCH", "/iam/v2/ip-groups/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1327,7 +1652,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/users/{id}",
+            "path": "/iam/v2/ip-groups/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1347,38 +1672,39 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({email: 'marty.mcfly@example.com', full_name: 'Marty McFly'}));
+          req.write(JSON.stringify({group_name: 'CorpNet', cidr_blocks: ['192.168.0.0/24', '192.168.7.0/24']}));
           req.end();
       - lang: C
         source: |-
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/users/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-groups/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/users/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-groups/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"email\":\"marty.mcfly@example.com\",\"full_name\":\"Marty McFly\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"group_name\":\"CorpNet\",\"cidr_blocks\":[\"192.168.0.0/24\",\"192.168.7.0/24\"]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /iam/v2/service-accounts:
+    x-request-access-name: IP Groups API
+  /iam/v2/ip-filters:
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Retrieve a sorted, filtered, paginated list of all service accounts.
-      operationId: listIamV2ServiceAccounts
+        Retrieve a sorted, filtered, paginated list of all IP filters.
+      operationId: listIamV2IpFilters
       parameters:
       - description: A pagination size for collection requests.
         explode: true
@@ -1386,7 +1712,7 @@ paths:
         name: page_size
         required: false
         schema:
-          default: 10
+          default: 25
           maximum: 100
           type: integer
           x-max-page-items: 500
@@ -1406,8 +1732,8 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.ServiceAccountList'
-          description: Service Account.
+                - $ref: '#/components/schemas/iam.v2.IpFilterList'
+          description: IP Filter.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1576,21 +1902,26 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: List of Service Accounts
+      summary: List of IP Filters
       tags:
-      - Service Accounts (iam/v2)
+      - IP Filters (iam/v2)
+      x-request-access-name: IP Filters API
+      x-page-first-available: true
+      x-page-last-available: true
+      x-page-from-start: true
+      x-page-from-end: true
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/iam/v2/service-accounts \
+            --url https://api.confluent.cloud/iam/v2/ip-filters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts")
+            .url("https://api.confluent.cloud/iam/v2/ip-filters")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1598,7 +1929,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filters\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1611,7 +1942,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/service-accounts", headers=headers)
+          conn.request("GET", "/iam/v2/ip-filters", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1625,7 +1956,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts",
+            "path": "/iam/v2/ip-filters",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1650,7 +1981,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filters");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1659,24 +1990,26 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filters");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to create a service account.
-      operationId: createIamV2ServiceAccount
+        Make a request to create an IP filter.
+      operationId: createIamV2IpFilter
       requestBody:
         content:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/iam.v2.ServiceAccount'
+              - $ref: '#/components/schemas/iam.v2.IpFilter'
               - required:
-                - display_name
+                - filter_name
+                - ip_groups
+                - resource_group
                 type: object
       responses:
         "201":
@@ -1684,11 +2017,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.ServiceAccount'
+                - $ref: '#/components/schemas/iam.v2.IpFilter'
                 - required:
-                  - display_name
+                  - filter_name
+                  - ip_groups
+                  - resource_group
                   type: object
-          description: A Service Account was created.
+          description: An IP Filter was created.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -1720,10 +2055,10 @@ paths:
                 type: integer
               style: simple
             Location:
-              description: ServiceAccount resource uri
+              description: IpFilter resource uri
               explode: false
               schema:
-                example: https://api.confluent.cloud/iam/v2/service-accounts/{id}
+                example: https://api.confluent.cloud/iam/v2/ip-filters/{id}
                 format: uri
                 type: string
               style: simple
@@ -1779,27 +2114,6 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
-        "402":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "402"
-                  code: quota_exceeded
-                  title: Kafka Clusters Per Org Quota Exceeded
-                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request would exceed one or more quotas.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -1939,25 +2253,26 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Create a Service Account
+      summary: Create an IP Filter
       tags:
-      - Service Accounts (iam/v2)
+      - IP Filters (iam/v2)
+      x-request-access-name: IP Filters API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/iam/v2/service-accounts \
+            --url https://api.confluent.cloud/iam/v2/ip-filters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"DeLorean_auto_repair","description":"Doc'\''s repair bot for the DeLorean"}'
+            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["management"],"ip_groups":[{"id":"string"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts")
+            .url("https://api.confluent.cloud/iam/v2/ip-filters")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1966,28 +2281,31 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"DeLorean_auto_repair\\\
-          \",\\\"description\\\":\\\"Doc's repair bot for the DeLorean\\\"}\")\n\n\
-          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filters\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"filter_name\\\":\\\"Management\
+          \ API Rules\\\",\\\"resource_group\\\":\\\"management\\\",\\\"resource_scope\\\
+          \":\\\"crn://confluent.cloud/organization=org-123/environment=env-abc\\\"\
+          ,\\\"operation_groups\\\":[\\\"management\\\"],\\\"ip_groups\\\":[{\\\"\
+          id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}"
+          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/iam/v2/service-accounts", payload, headers)
+          conn.request("POST", "/iam/v2/ip-filters", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2001,7 +2319,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts",
+            "path": "/iam/v2/ip-filters",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2022,8 +2340,11 @@ paths:
           });
 
           req.write(JSON.stringify({
-            display_name: 'DeLorean_auto_repair',
-            description: 'Doc\'s repair bot for the DeLorean'
+            filter_name: 'Management API Rules',
+            resource_group: 'management',
+            resource_scope: 'crn://confluent.cloud/organization=org-123/environment=env-abc',
+            operation_groups: ['management'],
+            ip_groups: [{id: 'string'}]
           }));
           req.end();
       - lang: C
@@ -2031,36 +2352,34 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filters");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filters");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /iam/v2/service-accounts/{id}:
+    x-request-access-name: IP Filters API
+  /iam/v2/ip-filters/{id}:
     delete:
-      description: |
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+      description: |-
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to delete a service account.
-
-        If successful, this request will also recursively delete all of the service account's associated resources,
-        including its cloud and cluster API keys.
-      operationId: deleteIamV2ServiceAccount
+        Make a request to delete an IP filter.
+      operationId: deleteIamV2IpFilter
       parameters:
-      - description: The unique identifier for the service account.
+      - description: The unique identifier for the IP filter.
         explode: false
         in: path
         name: id
@@ -2070,7 +2389,7 @@ paths:
         style: simple
       responses:
         "204":
-          description: A Service Account is being deleted.
+          description: An IP Filter is being deleted.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -2257,21 +2576,22 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Delete a Service Account
+      summary: Delete an IP Filter
       tags:
-      - Service Accounts (iam/v2)
+      - IP Filters (iam/v2)
+      x-request-access-name: IP Filters API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/iam/v2/service-accounts/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-filters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-filters/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2279,7 +2599,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filters/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2292,7 +2612,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/iam/v2/service-accounts/{id}", headers=headers)
+          conn.request("DELETE", "/iam/v2/ip-filters/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2306,7 +2626,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts/{id}",
+            "path": "/iam/v2/ip-filters/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2331,7 +2651,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filters/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2340,18 +2660,18 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filters/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to read a service account.
-      operationId: getIamV2ServiceAccount
+        Make a request to read an IP filter.
+      operationId: getIamV2IpFilter
       parameters:
-      - description: The unique identifier for the service account.
+      - description: The unique identifier for the IP filter.
         explode: false
         in: path
         name: id
@@ -2365,14 +2685,16 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.ServiceAccount'
+                - $ref: '#/components/schemas/iam.v2.IpFilter'
                 - required:
                   - api_version
-                  - display_name
+                  - filter_name
                   - id
+                  - ip_groups
                   - kind
+                  - resource_group
                   type: object
-          description: Service Account.
+          description: IP Filter.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -2559,21 +2881,22 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Read a Service Account
+      summary: Read an IP Filter
       tags:
-      - Service Accounts (iam/v2)
+      - IP Filters (iam/v2)
+      x-request-access-name: IP Filters API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/service-accounts/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-filters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-filters/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2581,7 +2904,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filters/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2594,7 +2917,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/service-accounts/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/ip-filters/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2608,7 +2931,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts/{id}",
+            "path": "/iam/v2/ip-filters/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2633,7 +2956,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filters/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2642,19 +2965,19 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filters/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Make a request to update a service account.
+        Make a request to update an IP filter.
 
-      operationId: updateIamV2ServiceAccount
+      operationId: updateIamV2IpFilter
       parameters:
-      - description: The unique identifier for the service account.
+      - description: The unique identifier for the IP filter.
         explode: false
         in: path
         name: id
@@ -2666,21 +2989,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/iam.v2.ServiceAccountUpdate'
+              $ref: '#/components/schemas/iam.v2.IpFilter'
       responses:
         "200":
           content:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.ServiceAccount'
+                - $ref: '#/components/schemas/iam.v2.IpFilter'
                 - required:
                   - api_version
-                  - display_name
+                  - filter_name
                   - id
+                  - ip_groups
                   - kind
+                  - resource_group
                   type: object
-          description: Service Account.
+          description: IP Filter.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -2763,27 +3088,6 @@ paths:
                 type: string
               style: simple
           x-summary: Unauthorized
-        "402":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "402"
-                  code: quota_exceeded
-                  title: Kafka Clusters Per Org Quota Exceeded
-                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request would exceed one or more quotas.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Over Quota
         "403":
           content:
             application/json:
@@ -2941,25 +3245,26 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Update a Service Account
+      summary: Update an IP Filter
       tags:
-      - Service Accounts (iam/v2)
+      - IP Filters (iam/v2)
+      x-request-access-name: IP Filters API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/iam/v2/service-accounts/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-filters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"DeLorean_auto_repair","description":"Doc'\''s repair bot for the DeLorean"}'
+            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["management"],"ip_groups":[{"id":"string"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-filters/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -2968,28 +3273,31 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts/{id}\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"DeLorean_auto_repair\\\
-          \",\\\"description\\\":\\\"Doc's repair bot for the DeLorean\\\"}\")\n\n\
-          \treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filters/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"filter_name\\\":\\\"Management\
+          \ API Rules\\\",\\\"resource_group\\\":\\\"management\\\",\\\"resource_scope\\\
+          \":\\\"crn://confluent.cloud/organization=org-123/environment=env-abc\\\"\
+          ,\\\"operation_groups\\\":[\\\"management\\\"],\\\"ip_groups\\\":[{\\\"\
+          id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}"
+          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/iam/v2/service-accounts/{id}", payload, headers)
+          conn.request("PATCH", "/iam/v2/ip-filters/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3003,7 +3311,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts/{id}",
+            "path": "/iam/v2/ip-filters/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -3024,8 +3332,11 @@ paths:
           });
 
           req.write(JSON.stringify({
-            display_name: 'DeLorean_auto_repair',
-            description: 'Doc\'s repair bot for the DeLorean'
+            filter_name: 'Management API Rules',
+            resource_group: 'management',
+            resource_scope: 'crn://confluent.cloud/organization=org-123/environment=env-abc',
+            operation_groups: ['management'],
+            ip_groups: [{id: 'string'}]
           }));
           req.end();
       - lang: C
@@ -3033,87 +3344,41 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filters/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filters/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /iam/v2/invitations:
+    x-request-access-name: IP Filters API
+  /iam/v2/ip-filter-summary:
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-        Retrieve a sorted, filtered, paginated list of all invitations.
-      operationId: listIamV2Invitations
+        Make a request to read an IP filter summary.
+      operationId: getIamV2IpFilterSummary
       parameters:
-      - description: Filter the results by exact match for email.
-        example: johndoe@confluent.io
+      - description: Scope the operation to the given scope.
+        example: crn://confluent.cloud/organization=org-123/environment=env-abc
         explode: true
         in: query
-        name: email
-        required: false
+        name: scope
+        required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Filter the results by exact match for status.
-        example: INVITE_STATUS_SENT
-        explode: true
-        in: query
-        name: status
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Filter the results by exact match for user.
-        example: u-j93dy8
-        explode: true
-        in: query
-        name: user
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Filter the results by exact match for creator.
-        example: u-m2r9o7
-        explode: true
-        in: query
-        name: creator
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: A pagination size for collection requests.
-        explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          default: 10
-          maximum: 100
-          type: integer
-          x-max-page-items: 500
-        style: form
-      - description: An opaque pagination token for collection requests.
-        explode: true
-        in: query
-        name: page_token
-        required: false
-        schema:
-          maxLength: 255
-          type: string
         style: form
       responses:
         "200":
@@ -3121,974 +3386,21 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: '#/components/schemas/iam.v2.InvitationList'
-          description: Invitation.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Retry-After:
-              description: The number of seconds to wait until the rate limit window
-                resets. Only sent when the rate limit is reached.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - cloud-api-key: []
-      - confluent-sts-access-token: []
-      summary: List of Invitations
-      tags:
-      - Invitations (iam/v2)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/invitations?email=johndoe@confluent.io&status=INVITE_STATUS_SENT&user=u-j93dy8&creator=u-m2r9o7");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
-    post:
-      description: |
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-        Make a request to create an invitation.
-
-        The newly invited user will not have any permissions. Give the user permission by assigning them to one or
-        more roles by creating
-        [role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
-        for the created `user`.
-      operationId: createIamV2Invitation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/iam.v2.Invitation'
-              - required:
-                - email
-                type: object
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/iam.v2.Invitation'
-                - required:
-                  - email
-                  type: object
-          description: An Invitation was created.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Location:
-              description: Invitation resource uri
-              explode: false
-              schema:
-                example: https://api.confluent.cloud/iam/v2/invitations/{id}
-                format: uri
-                type: string
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "402":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "402"
-                  code: quota_exceeded
-                  title: Kafka Clusters Per Org Quota Exceeded
-                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request would exceed one or more quotas.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Over Quota
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "409":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "409"
-                  code: resource_already_exists
-                  title: Resource Already exists
-                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
-                    exists.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request is in conflict with the current server state
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            Location:
-              description: Resource URI of conflicting resource
-              explode: false
-              schema:
-                example: https://api.confluent.cloud/{object}/{id}
-                format: uri
-                type: string
-              style: simple
-          x-summary: Conflict
-        "422":
-          content:
-            application/json:
-              example:
-                errors:
-                - status: "422"
-                  code: invalid_configuration
-                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  title: Validation Failed
-                  detail: 'The property ''/cluster/storage_size'' of type string did
-                    not match the following type: integer'
-                  source:
-                    pointer: /cluster/storage_size
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Validation Failed
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Retry-After:
-              description: The number of seconds to wait until the rate limit window
-                resets. Only sent when the rate limit is reached.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - cloud-api-key: []
-      - confluent-sts-access-token: []
-      summary: Create an Invitation
-      tags:
-      - Invitations (iam/v2)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.confluent.cloud/iam/v2/invitations \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
-            --header 'content-type: application/json' \
-            --data '{"email":"johndoe@confluent.io","auth_type":"AUTH_TYPE_SSO"}'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"email\":\"johndoe@confluent.io\",\"auth_type\":\"AUTH_TYPE_SSO\"}");
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/invitations")
-            .post(body)
-            .addHeader("content-type", "application/json")
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/invitations\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"email\\\":\\\"johndoe@confluent.io\\\
-          \",\\\"auth_type\\\":\\\"AUTH_TYPE_SSO\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          payload = "{\"email\":\"johndoe@confluent.io\",\"auth_type\":\"AUTH_TYPE_SSO\"}"
-
-          headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
-              }
-
-          conn.request("POST", "/iam/v2/invitations", payload, headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "POST",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/iam/v2/invitations",
-            "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.write(JSON.stringify({email: 'johndoe@confluent.io', auth_type: 'AUTH_TYPE_SSO'}));
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/invitations");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"johndoe@confluent.io\",\"auth_type\":\"AUTH_TYPE_SSO\"}");
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/invitations");
-          var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"email\":\"johndoe@confluent.io\",\"auth_type\":\"AUTH_TYPE_SSO\"}", ParameterType.RequestBody);
-          IRestResponse response = client.Execute(request);
-  /iam/v2/invitations/{id}:
-    delete:
-      description: |
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-        Make a request to delete an invitation.
-
-        Delete will deactivate the user if the user didn't accept the invitation yet.
-      operationId: deleteIamV2Invitation
-      parameters:
-      - description: The unique identifier for the invitation.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: An Invitation is being deleted.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "404":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "404"
-                  title: Not Found
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Not Found
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Retry-After:
-              description: The number of seconds to wait until the rate limit window
-                resets. Only sent when the rate limit is reached.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - cloud-api-key: []
-      - confluent-sts-access-token: []
-      summary: Delete an Invitation
-      tags:
-      - Invitations (iam/v2)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url 'https://api.confluent.cloud/iam/v2/invitations/{id}' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/invitations/{id}")
-            .delete(null)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/invitations/{id}\"\
-          \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("DELETE", "/iam/v2/invitations/{id}", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "DELETE",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/iam/v2/invitations/{id}",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/invitations/{id}");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/invitations/{id}");
-          var request = new RestRequest(Method.DELETE);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
-    get:
-      description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-        Make a request to read an invitation.
-      operationId: getIamV2Invitation
-      parameters:
-      - description: The unique identifier for the invitation.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/iam.v2.Invitation'
+                - $ref: '#/components/schemas/iam.v2.IpFilterSummary'
                 - required:
                   - api_version
-                  - email
-                  - id
+                  - categories
                   - kind
+                  - scope
                   type: object
-          description: Invitation.
+                - properties:
+                    scope:
+                      example:
+                        id: crn://confluent.cloud/organization=org-123/environment=env-abc
+                        related: https://api.confluent.cloud/v2/ip-filter-summaries/crn://confluent.cloud/organization=org-123/environment=env-abc
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/ip-filter-summary=crn://confluent.cloud/organization=org-123/environment=env-abc
+                  type: object
+          description: IP Filter Summary.
           headers:
             X-Request-Id:
               description: The unique identifier for the API request.
@@ -4275,21 +3587,22 @@ paths:
       security:
       - cloud-api-key: []
       - confluent-sts-access-token: []
-      summary: Read an Invitation
+      summary: Read an IP Filter Summary
       tags:
-      - Invitations (iam/v2)
+      - IP Filter Summaries (iam/v2)
+      x-request-access-name: IP Filter Summary API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/invitations/{id}' \
+            --url 'https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/invitations/{id}")
+            .url("https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4297,7 +3610,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/invitations/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -4310,7 +3623,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/invitations/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -4324,7 +3637,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/invitations/{id}",
+            "path": "/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -4349,7 +3662,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/invitations/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -4358,10 +3671,11 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/invitations/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    x-request-access-name: IP Filter Summary API
 components:
   responses:
     BadRequestError:
@@ -4589,25 +3903,13 @@ components:
             type: string
           style: simple
   schemas:
-    iam.v2.User:
+    iam.v2.IpGroup:
       description: |-
-        `User` objects represent individuals who may access your Confluent resources.
-
-        The API allows you to retrieve, update, and delete individual users, as well as list of all your
-        users. This API cannot be used to create new user accounts.
+        Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.
 
 
-        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
-
-        ## The Users Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `users_per_org` | Users in one Confluent Cloud organization |
+        ## The IP Groups Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpGroup" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -4619,7 +3921,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - User
+          - IpGroup
           readOnly: true
           type: string
         id:
@@ -4637,214 +3939,162 @@ components:
           - $ref: '#/components/schemas/ObjectMeta'
           - properties:
               self:
-                example: https://api.confluent.cloud/iam/v2/users/u-12345
+                example: https://api.confluent.cloud/iam/v2/ip-groups/ipg-12345
               resource_name:
-                example: crn://confluent.cloud/user=u-12345
-        email:
-          description: The user's email address
-          example: marty.mcfly@example.com
-          format: email
-          type: string
-          x-immutable: true
-        full_name:
-          description: The user's full name
-          example: Marty McFly
-          type: string
-        auth_type:
-          description: The user's authentication method
-          example: AUTH_TYPE_SSO
-          readOnly: true
-          type: string
-          x-extensible-enum:
-          - AUTH_TYPE_LOCAL
-          - AUTH_TYPE_SSO
-      type: object
-    iam.v2.ServiceAccount:
-      description: |-
-        `ServiceAccount` objects are typically used to represent applications and other non-human principals
-        that may access your Confluent resources.
-
-        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
-        list all your service accounts.
-
-
-        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
-
-        ## The Service Accounts Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - ServiceAccount
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/service-accounts/sa-12345
-              resource_name:
-                example: crn://confluent.cloud/service-account=sa-12345
-        display_name:
-          description: A human-readable name for the Service Account
-          example: DeLorean_auto_repair
-          type: string
-          x-immutable: true
-        description:
-          description: A free-form description of the Service Account
-          example: Doc's repair bot for the DeLorean
-          type: string
-      type: object
-    iam.v2.Invitation:
-      description: |-
-        `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.
-
-        The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.
-
-
-        Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).
-
-        ## The Invitations Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.Invitation" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `invitations_per_org` | Invitations in a Confluent Cloud organization |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - Invitation
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/invitations/i-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/invitation=i-12345
-        email:
-          description: The user/invitee's email address
-          example: johndoe@confluent.io
-          format: email
-          type: string
-          x-immutable: true
-        auth_type:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/ip-group=ipg-12345
+        group_name:
           description: |
-            The user/invitee's authentication type. Note that only the [OrganizationAdmin role](https://docs.confluent.io/cloud/current/access-management/access-control/cloud-rbac.html#organizationadmin)
-            can invite AUTH_TYPE_LOCAL users to SSO organizations.
-            The user's auth_type is set as AUTH_TYPE_SSO by default if the organization has SSO enabled.
-            Otherwise, the user's auth_type is AUTH_TYPE_LOCAL by default.
-          example: AUTH_TYPE_SSO
+            A human readable name for an IP Group. Can contain any unicode letter or number, the ASCII space character, or
+            any of the following special characters: `[`, `]`, `|`, `&`, `+`, `-`, `_`, `/`, `.`, `,`.
+          example: CorpNet
+          maxLength: 64
+          minLength: 1
           type: string
-          x-extensible-enum:
-          - AUTH_TYPE_LOCAL
-          - AUTH_TYPE_SSO
-        status:
-          description: The status of invitations
-          example: INVITE_STATUS_SENT
+        cidr_blocks:
+          description: A list of CIDRs.
+          example:
+          - 192.168.0.0/24
+          - 192.168.7.0/24
+          items:
+            type: string
+          maxItems: 25
+          minItems: 1
+          type: array
+      type: object
+    iam.v2.IpFilter:
+      description: |-
+        `IP Filter` objects are bindings between IP Groups and Confluent resource(s).
+        For example, a binding between "CorpNet" and "Management APIs" will enforce that
+        access must come from one of the CIDR blocks associated with CorpNet.
+        If there are multiple IP filters bound to a resource, a request matching any of the CIDR blocks
+        for any of the IP Group will allow the request.
+        If there are no IP Filters for a resource, then access will be granted to requests originating
+        from any IP Address.
+
+
+        ## The IP Filters Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpFilter" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - iam/v2
           readOnly: true
           type: string
-          x-extensible-enum:
-          - INVITE_STATUS_SENT
-          - INVITE_STATUS_STAGED
-          - INVITE_STATUS_ACCEPTED
-          - INVITE_STATUS_EXPIRED
-          - INVITE_STATUS_DEACTIVATED
-        accepted_at:
-          description: The timestamp that the invitation was accepted
-          example: 2022-07-06T17:21:33Z
-          format: date-time
-          nullable: true
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - IpFilter
           readOnly: true
           type: string
-        expires_at:
-          description: The timestamp that the invitation will expire
-          example: 2022-07-07T17:22:39Z
-          format: date-time
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
           readOnly: true
           type: string
-        user:
+        metadata:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
-          description: The user/invitee
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/iam/v2/ip-filters/ipf-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/ip-filter=ipf-12345
+        filter_name:
+          description: |
+            A human readable name for an IP Filter. Can contain any unicode letter or number, the ASCII space character,
+            or any of the following special characters: `[`, `]`, `|`, `&`, `+`, `-`, `_`, `/`, `.`, `,`.
+          example: Management API Rules
+          maxLength: 64
+          minLength: 1
+          type: string
+        resource_group:
+          description: |
+            Scope of resources covered by this IP filter. Available resource groups include "management" and "multiple".
+          example: management
+          type: string
+        resource_scope:
+          description: |
+            A CRN that specifies the scope of the ip filter, specifically the organization
+            or environment. Without specifying this property, the ip filter
+            would apply to the whole organization.
+          example: crn://confluent.cloud/organization=org-123/environment=env-abc
+          format: uri
+          pattern: ^crn://.+$
+          type: string
+        operation_groups:
+          description: |
+            Scope of resources covered by this IP filter. Resource group must be set to 'multiple'
+            in order to use this property.During update operations, note that the operation
+            groups passed in will replace the list of existing operation groups
+            (passing in an empty list will remove all operation groups) from the filter
+            (in line with the behavior for ip_groups).
+          example:
+          - management
+          items:
+            type: string
+          type: array
+        ip_groups:
+          description: A list of IP Groups.
+          items:
+            $ref: '#/components/schemas/GlobalObjectReference'
+          maxItems: 25
+          minItems: 1
+          type: array
+      type: object
+    iam.v2.IpFilterSummary:
+      description: |
+        The IP Filter Summary endpoint returns an aggregation of the IP Filters across the system.
+        This API can be queried in the context of an organization or an environment. It returns a
+        summary of every operation group in the system grouped with a higher summary by operation
+        group category.
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - iam/v2
           readOnly: true
-        creator:
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - IpFilterSummary
+          readOnly: true
+          type: string
+        scope:
           allOf:
-          - $ref: '#/components/schemas/GlobalObjectReference'
-          description: The invitation creator
-          readOnly: true
+          - $ref: '#/components/schemas/ObjectReference'
+          description: The scope associated with this object.
+        categories:
+          description: |
+            Summary of the operation groups and IP filters created in those operation groups.
+          example:
+          - name: management
+            status: mixed
+            operation_groups:
+            - name: management
+              status: limited
+          items:
+            $ref: '#/components/schemas/iam_v2_IpFilterSummary_categories'
+          type: array
       type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
-    iam.v2.UserList:
+    iam.v2.IpGroupList:
       description: |-
-        `User` objects represent individuals who may access your Confluent resources.
-
-        The API allows you to retrieve, update, and delete individual users, as well as list of all your
-        users. This API cannot be used to create new user accounts.
+        Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.
 
 
-        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
-
-        ## The Users Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `users_per_org` | Users in one Confluent Cloud organization |
+        ## The IP Groups Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpGroup" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -4856,7 +4106,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - UserList
+          - IpGroupList
           readOnly: true
           type: string
         metadata:
@@ -4864,21 +4114,22 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/iam/v2/users
+                example: https://api.confluent.cloud/iam/v2/ip-groups
               last:
-                example: https://api.confluent.cloud/iam/v2/users?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/iam/v2/ip-groups?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/iam/v2/users?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/iam/v2/ip-groups?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/iam/v2/users?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/iam/v2/ip-groups?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/iam.v2.User'
+            - $ref: '#/components/schemas/iam.v2.IpGroup'
             - required:
-              - email
+              - cidr_blocks
+              - group_name
               - id
               - metadata
               type: object
@@ -4890,26 +4141,19 @@ components:
       - kind
       - metadata
       type: object
-    iam.v2.ServiceAccountList:
+    iam.v2.IpFilterList:
       description: |-
-        `ServiceAccount` objects are typically used to represent applications and other non-human principals
-        that may access your Confluent resources.
+        `IP Filter` objects are bindings between IP Groups and Confluent resource(s).
+        For example, a binding between "CorpNet" and "Management APIs" will enforce that
+        access must come from one of the CIDR blocks associated with CorpNet.
+        If there are multiple IP filters bound to a resource, a request matching any of the CIDR blocks
+        for any of the IP Group will allow the request.
+        If there are no IP Filters for a resource, then access will be granted to requests originating
+        from any IP Address.
 
-        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
-        list all your service accounts.
 
-
-        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
-
-        ## The Service Accounts Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
+        ## The IP Filters Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpFilter" />
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -4921,7 +4165,7 @@ components:
         kind:
           description: Kind defines the object this REST resource represents.
           enum:
-          - ServiceAccountList
+          - IpFilterList
           readOnly: true
           type: string
         metadata:
@@ -4929,86 +4173,25 @@ components:
           - $ref: '#/components/schemas/ListMeta'
           - properties:
               first:
-                example: https://api.confluent.cloud/iam/v2/service-accounts
+                example: https://api.confluent.cloud/iam/v2/ip-filters
               last:
-                example: https://api.confluent.cloud/iam/v2/service-accounts?page_token=bcAOehAY8F16YD84Z1wT
+                example: https://api.confluent.cloud/iam/v2/ip-filters?page_token=bcAOehAY8F16YD84Z1wT
               prev:
-                example: https://api.confluent.cloud/iam/v2/service-accounts?page_token=YIXRY97wWYmwzrax4dld
+                example: https://api.confluent.cloud/iam/v2/ip-filters?page_token=YIXRY97wWYmwzrax4dld
               next:
-                example: https://api.confluent.cloud/iam/v2/service-accounts?page_token=UvmDWOB1iwfAIBPj6EYb
+                example: https://api.confluent.cloud/iam/v2/ip-filters?page_token=UvmDWOB1iwfAIBPj6EYb
         data:
           description: A data property that contains an array of resource items. Each
             entry in the array is a separate resource.
           items:
             allOf:
-            - $ref: '#/components/schemas/iam.v2.ServiceAccount'
+            - $ref: '#/components/schemas/iam.v2.IpFilter'
             - required:
-              - display_name
+              - filter_name
               - id
+              - ip_groups
               - metadata
-              type: object
-          type: array
-          uniqueItems: true
-      required:
-      - api_version
-      - data
-      - kind
-      - metadata
-      type: object
-    iam.v2.InvitationList:
-      description: |-
-        `Invitation` objects represent invitations to invite users to join your organizations in Confluent Cloud.
-
-        The API allows you to list all your invitations, as well as create, read, and delete a specified invitation.
-
-
-        Related guide: [User invitations in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/identity/user-accounts.html).
-
-        ## The Invitations Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.Invitation" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `invitations_per_org` | Invitations in a Confluent Cloud organization |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - InvitationList
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ListMeta'
-          - properties:
-              first:
-                example: https://api.confluent.cloud/iam/v2/invitations
-              last:
-                example: https://api.confluent.cloud/iam/v2/invitations?page_token=bcAOehAY8F16YD84Z1wT
-              prev:
-                example: https://api.confluent.cloud/iam/v2/invitations?page_token=YIXRY97wWYmwzrax4dld
-              next:
-                example: https://api.confluent.cloud/iam/v2/invitations?page_token=UvmDWOB1iwfAIBPj6EYb
-        data:
-          description: A data property that contains an array of resource items. Each
-            entry in the array is a separate resource.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/iam.v2.Invitation'
-            - required:
-              - email
-              - id
-              - metadata
+              - resource_group
               type: object
           type: array
           uniqueItems: true
@@ -5209,126 +4392,28 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
-    iam.v2.UserUpdate:
-      description: |-
-        `User` objects represent individuals who may access your Confluent resources.
-
-        The API allows you to retrieve, update, and delete individual users, as well as list of all your
-        users. This API cannot be used to create new user accounts.
-
-
-        Related guide: [Users in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/user-account.html).
-
-        ## The Users Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.User" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `users_per_org` | Users in one Confluent Cloud organization |
+    iam_v2_IpFilterSummary_operation_groups:
       properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
+        name:
+          description: Name of the operation group.
           type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - User
-          readOnly: true
+        status:
+          description: Open, limited, or no access.
           type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/users/u-12345
-              resource_name:
-                example: crn://confluent.cloud/user=u-12345
-        full_name:
-          description: The user's full name
-          example: Marty McFly
-          type: string
-        auth_type:
-          description: The user's authentication method
-          example: AUTH_TYPE_SSO
-          readOnly: true
-          type: string
-          x-extensible-enum:
-          - AUTH_TYPE_LOCAL
-          - AUTH_TYPE_SSO
       type: object
-    iam.v2.ServiceAccountUpdate:
-      description: |-
-        `ServiceAccount` objects are typically used to represent applications and other non-human principals
-        that may access your Confluent resources.
-
-        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
-        list all your service accounts.
-
-
-        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
-
-        ## The Service Accounts Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
+    iam_v2_IpFilterSummary_categories:
       properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
+        name:
+          description: Name of the category.
           type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - ServiceAccount
-          readOnly: true
+        status:
+          description: Open, limited, or mixed.
           type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/service-accounts/sa-12345
-              resource_name:
-                example: crn://confluent.cloud/service-account=sa-12345
-        description:
-          description: A free-form description of the Service Account
-          example: Doc's repair bot for the DeLorean
-          type: string
+        operation_groups:
+          description: Operation groups part of this category.
+          items:
+            $ref: '#/components/schemas/iam_v2_IpFilterSummary_operation_groups'
+          type: array
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
