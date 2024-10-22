@@ -104,6 +104,12 @@ HasAccount returns a boolean if a field has been set.
 
 Convenience method to wrap this instance of NetworkingV1AwsPrivateNetworkInterface in NetworkingV1AccessPointSpecConfigOneOf
 
+### AsNetworkingV1AccessPointSpecUpdateConfigOneOf
+
+`func (s *NetworkingV1AwsPrivateNetworkInterface) AsNetworkingV1AccessPointSpecUpdateConfigOneOf() NetworkingV1AccessPointSpecUpdateConfigOneOf`
+
+Convenience method to wrap this instance of NetworkingV1AwsPrivateNetworkInterface in NetworkingV1AccessPointSpecUpdateConfigOneOf
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

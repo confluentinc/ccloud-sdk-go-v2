@@ -42,6 +42,8 @@ type NetworkingV1AwsEgressPrivateLinkEndpoint struct {
 	VpcEndpointServiceName string `json:"vpc_endpoint_service_name,omitempty"`
 	// Whether a resource should be provisioned with high availability. Endpoints deployed with high availability have network interfaces deployed in multiple AZs.
 	EnableHighAvailability *bool `json:"enable_high_availability,omitempty"`
+	// [Used by the Confluent Cloud Console] The target system or service that the PrivateLink Endpoint connects to (e.g. \"MONGODB\" or \"SNOWFLAKE\").
+	TargetSystem *string `json:"target_system,omitempty"`
 }
 
 // NewNetworkingV1AwsEgressPrivateLinkEndpoint instantiates a new NetworkingV1AwsEgressPrivateLinkEndpoint object
@@ -143,11 +145,44 @@ func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) SetEnableHighAvailability(v b
 	o.EnableHighAvailability = &v
 }
 
+// GetTargetSystem returns the TargetSystem field value if set, zero value otherwise.
+func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetTargetSystem() string {
+	if o == nil || o.TargetSystem == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetSystem
+}
+
+// GetTargetSystemOk returns a tuple with the TargetSystem field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) GetTargetSystemOk() (*string, bool) {
+	if o == nil || o.TargetSystem == nil {
+		return nil, false
+	}
+	return o.TargetSystem, true
+}
+
+// HasTargetSystem returns a boolean if a field has been set.
+func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) HasTargetSystem() bool {
+	if o != nil && o.TargetSystem != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetSystem gets a reference to the given string and assigns it to the TargetSystem field.
+func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) SetTargetSystem(v string) {
+	o.TargetSystem = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.VpcEndpointServiceName)
 	o.recurseRedact(o.EnableHighAvailability)
+	o.recurseRedact(o.TargetSystem)
 }
 
 func (o *NetworkingV1AwsEgressPrivateLinkEndpoint) recurseRedact(v interface{}) {
@@ -190,6 +225,9 @@ func (o NetworkingV1AwsEgressPrivateLinkEndpoint) MarshalJSON() ([]byte, error) 
 	}
 	if o.EnableHighAvailability != nil {
 		toSerialize["enable_high_availability"] = o.EnableHighAvailability
+	}
+	if o.TargetSystem != nil {
+		toSerialize["target_system"] = o.TargetSystem
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

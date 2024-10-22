@@ -38,6 +38,8 @@ import (
 type NetworkingV1AccessPointSpecUpdate struct {
 	// The name of the access point.
 	DisplayName *string `json:"display_name,omitempty"`
+	// The specific details of the different access point configurations.
+	Config *NetworkingV1AccessPointSpecUpdateConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`
 }
@@ -91,6 +93,38 @@ func (o *NetworkingV1AccessPointSpecUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetConfig returns the Config field value if set, zero value otherwise.
+func (o *NetworkingV1AccessPointSpecUpdate) GetConfig() NetworkingV1AccessPointSpecUpdateConfigOneOf {
+	if o == nil || o.Config == nil {
+		var ret NetworkingV1AccessPointSpecUpdateConfigOneOf
+		return ret
+	}
+	return *o.Config
+}
+
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AccessPointSpecUpdate) GetConfigOk() (*NetworkingV1AccessPointSpecUpdateConfigOneOf, bool) {
+	if o == nil || o.Config == nil {
+		return nil, false
+	}
+	return o.Config, true
+}
+
+// HasConfig returns a boolean if a field has been set.
+func (o *NetworkingV1AccessPointSpecUpdate) HasConfig() bool {
+	if o != nil && o.Config != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfig gets a reference to the given NetworkingV1AccessPointSpecUpdateConfigOneOf and assigns it to the Config field.
+func (o *NetworkingV1AccessPointSpecUpdate) SetConfig(v NetworkingV1AccessPointSpecUpdateConfigOneOf) {
+	o.Config = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *NetworkingV1AccessPointSpecUpdate) GetEnvironment() ObjectReference {
 	if o == nil || o.Environment == nil {
@@ -126,6 +160,7 @@ func (o *NetworkingV1AccessPointSpecUpdate) SetEnvironment(v ObjectReference) {
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AccessPointSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Config)
 	o.recurseRedact(o.Environment)
 }
 
@@ -163,6 +198,9 @@ func (o NetworkingV1AccessPointSpecUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.Config != nil {
+		toSerialize["config"] = o.Config
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
