@@ -75,6 +75,18 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
+      - description: Filter the results by exact match for id. Pass multiple times
+          to see results matching any of the values.
+        example:
+        - ap-1
+        - ap-2
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -297,14 +309,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001' \
+            --url 'https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001")
+            .url("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -312,7 +324,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -325,7 +337,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001", headers=headers)
+          conn.request("GET", "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -339,7 +351,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001",
+            "path": "/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -364,7 +376,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -373,7 +385,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/access-points?spec.display_name=prod-ap-egress-use1,prod-ap-egress-usw2&environment=env-00000&spec.gateway=gw-00000,gw-00001&id=ap-1,ap-2");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -683,13 +695,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/access-points \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-ap-egress-usw2","config":{"kind":"AwsEgressPrivateLinkEndpoint","vpc_endpoint_service_name":"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000","enable_high_availability":false},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"gw-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-ap-egress-usw2","config":{"kind":"AwsEgressPrivateLinkEndpoint","vpc_endpoint_service_name":"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000","enable_high_availability":false,"target_system":"S3"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"gw-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/access-points")
             .post(body)
@@ -704,12 +716,12 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-ap-egress-usw2\\\",\\\"config\\\":{\\\"kind\\\":\\\"AwsEgressPrivateLinkEndpoint\\\
           \",\\\"vpc_endpoint_service_name\\\":\\\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\\\
-          \",\\\"enable_high_availability\\\":false},\\\"environment\\\":{\\\"id\\\
-          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"gateway\\\"\
-          :{\\\"id\\\":\\\"gw-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \",\\\"enable_high_availability\\\":false,\\\"target_system\\\":\\\"S3\\\
+          \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\"\
+          :\\\"string\\\"},\\\"gateway\\\":{\\\"id\\\":\\\"gw-00000\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -718,7 +730,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -765,7 +777,8 @@ paths:
               config: {
                 kind: 'AwsEgressPrivateLinkEndpoint',
                 vpc_endpoint_service_name: 'com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000',
-                enable_high_availability: false
+                enable_high_availability: false,
+                target_system: 'S3'
               },
               environment: {id: 'env-00000', environment: 'string'},
               gateway: {id: 'gw-00000', environment: 'string'}
@@ -784,7 +797,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -793,7 +806,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"gw-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/access-points/{id}:
     delete:
@@ -1750,13 +1763,13 @@ paths:
             --url 'https://api.confluent.cloud/networking/v1/access-points/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-ap-egress-usw2","config":{"kind":"AwsEgressPrivateLinkEndpoint","vpc_endpoint_service_name":"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000","enable_high_availability":false},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-ap-egress-usw2","config":{"kind":"AwsEgressPrivateLinkEndpoint","vpc_endpoint_service_name":"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000","enable_high_availability":false,"target_system":"S3"},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/access-points/{id}")
             .patch(body)
@@ -1771,12 +1784,12 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-ap-egress-usw2\\\",\\\"config\\\":{\\\"kind\\\":\\\"AwsEgressPrivateLinkEndpoint\\\
           \",\\\"vpc_endpoint_service_name\\\":\\\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\\\
-          \",\\\"enable_high_availability\\\":false},\\\"environment\\\":{\\\"id\\\
-          \":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"gateway\\\"\
-          :{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\
-          \treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \",\\\"enable_high_availability\\\":false,\\\"target_system\\\":\\\"S3\\\
+          \"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\"\
+          :\\\"string\\\"},\\\"gateway\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1785,7 +1798,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1832,7 +1845,8 @@ paths:
               config: {
                 kind: 'AwsEgressPrivateLinkEndpoint',
                 vpc_endpoint_service_name: 'com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000',
-                enable_high_availability: false
+                enable_high_availability: false,
+                target_system: 'S3'
               },
               environment: {id: 'env-00000', environment: 'string'},
               gateway: {id: 'string', environment: 'string'}
@@ -1851,7 +1865,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1860,7 +1874,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-ap-egress-usw2\",\"config\":{\"kind\":\"AwsEgressPrivateLinkEndpoint\",\"vpc_endpoint_service_name\":\"com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000\",\"enable_high_availability\":false,\"target_system\":\"S3\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/dns-records:
     get:
@@ -4000,6 +4014,10 @@ components:
               DEPROVISIONING: Access point deprovisioning is in progress;
 
               DISCONNECTED: Access Point has been disconnected in the cloud provider by the customer;
+
+              DEGRADED: Access Point is experiencing reduced performance or partial failure;
+
+              ERROR: Invalid customer input during Access Point creation;
           example: READY
           readOnly: true
           type: string
@@ -4010,6 +4028,8 @@ components:
           - FAILED
           - DEPROVISIONING
           - DISCONNECTED
+          - DEGRADED
+          - ERROR
         error_code:
           description: Error code if access point is in a failed state. May be used
             for programmatic error checking.
@@ -4025,10 +4045,12 @@ components:
             mapping:
               AwsEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
               AzureEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
+              GcpEgressPrivateServiceConnectEndpointStatus: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
+          - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1AccessPointStatusConfigOneOf
@@ -4138,6 +4160,11 @@ components:
           example: false
           type: boolean
           x-immutable: true
+        target_system:
+          description: '[Used by the Confluent Cloud Console] The target system or
+            service that the PrivateLink Endpoint connects to (e.g. "MONGODB" or "SNOWFLAKE").'
+          example: S3
+          type: string
       required:
       - kind
       - vpc_endpoint_service_name
@@ -4160,9 +4187,38 @@ components:
             to.
           example: sqlServer
           type: string
+        target_system:
+          description: '[Used by the Confluent Cloud Console] The target system or
+            service that the PrivateLink Endpoint connects to (e.g. "MONGODB" or "SNOWFLAKE").'
+          example: SNOWFLAKE
+          type: string
       required:
       - kind
       - private_link_service_resource_id
+      type: object
+    networking.v1.GcpEgressPrivateServiceConnectEndpoint:
+      description: GCP Private Service Connect Endpoint.
+      properties:
+        kind:
+          description: GcpEgressPrivateServiceConnectEndpoint kind.
+          enum:
+          - GcpEgressPrivateServiceConnectEndpoint
+          type: string
+        private_service_connect_endpoint_target:
+          description: URI of the service attachment for the published service that
+            the Private Service Connect Endpoint connects to or "ALL_GOOGLE_APIS"
+            for global Google APIs.
+          example: projects/project-name/regions/us-central1/serviceAttachments/service-attachment-name
+          minLength: 1
+          type: string
+        target_system:
+          description: '[Used by the Confluent Cloud Console] The target system or
+            service that the PrivateLink Endpoint connects to (e.g. "GCS" or "SNOWFLAKE").'
+          example: GCS
+          type: string
+      required:
+      - kind
+      - private_service_connect_endpoint_target
       type: object
     networking.v1.AwsEgressPrivateLinkEndpointStatus:
       description: Status of an AWS PrivateLink Endpoint.
@@ -4230,6 +4286,38 @@ components:
       - kind
       - private_endpoint_ip_address
       - private_endpoint_resource_id
+      type: object
+    networking.v1.GcpEgressPrivateServiceConnectEndpointStatus:
+      description: Status of a GCP Private Service Connect Endpoint.
+      properties:
+        kind:
+          description: GcpEgressPrivateServiceConnectEndpointStatus kind.
+          enum:
+          - GcpEgressPrivateServiceConnectEndpointStatus
+          type: string
+        private_service_connect_endpoint_connection_id:
+          description: Connection ID of the Private Service Connect Endpoint (if any)
+            that is connected to the endpoint target.
+          example: ""
+          readOnly: true
+          type: string
+        private_service_connect_endpoint_name:
+          description: Name of the Private Service Connect Endpoint (if any) that
+            is connected to the endpoint target.
+          example: plap-123456
+          readOnly: true
+          type: string
+        private_service_connect_endpoint_ip_address:
+          description: IP address of the Private Service Connect Endpoint (if any)
+            that is connected to the endpoint target.
+          example: 10.2.0.68
+          readOnly: true
+          type: string
+      required:
+      - kind
+      - private_service_connect_endpoint_connection_id
+      - private_service_connect_endpoint_ip_address
+      - private_service_connect_endpoint_name
       type: object
     networking.v1.PrivateLinkAccessPoint:
       description: DNS record that is associated with a PrivateLink access point.
@@ -4362,13 +4450,14 @@ components:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
               AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
+              GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
+          - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
           type: object
-          x-immutable: true
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf
         environment:
           allOf:
@@ -4691,6 +4780,22 @@ components:
           description: The name of the access point.
           example: prod-ap-egress-usw2
           type: string
+        config:
+          description: The specific details of the different access point configurations.
+          discriminator:
+            mapping:
+              AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+              AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+              AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
+              GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+            propertyName: kind
+          oneOf:
+          - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
+          - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+          type: object
+          x-one-of-name: NetworkingV1AccessPointSpecUpdateConfigOneOf
         environment:
           allOf:
           - $ref: '#/components/schemas/ObjectReference'

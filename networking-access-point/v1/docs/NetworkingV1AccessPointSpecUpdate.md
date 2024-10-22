@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the access point. | [optional] 
+**Config** | Pointer to [**NetworkingV1AccessPointSpecUpdateConfigOneOf**](NetworkingV1AccessPointSpecUpdateConfigOneOf.md) | The specific details of the different access point configurations. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *NetworkingV1AccessPointSpecUpdate) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetConfig
+
+`func (o *NetworkingV1AccessPointSpecUpdate) GetConfig() NetworkingV1AccessPointSpecUpdateConfigOneOf`
+
+GetConfig returns the Config field if non-nil, zero value otherwise.
+
+### GetConfigOk
+
+`func (o *NetworkingV1AccessPointSpecUpdate) GetConfigOk() (*NetworkingV1AccessPointSpecUpdateConfigOneOf, bool)`
+
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfig
+
+`func (o *NetworkingV1AccessPointSpecUpdate) SetConfig(v NetworkingV1AccessPointSpecUpdateConfigOneOf)`
+
+SetConfig sets Config field to given value.
+
+### HasConfig
+
+`func (o *NetworkingV1AccessPointSpecUpdate) HasConfig() bool`
+
+HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 

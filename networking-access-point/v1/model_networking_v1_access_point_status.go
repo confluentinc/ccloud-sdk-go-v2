@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1AccessPointStatus The status of the Access Point
 type NetworkingV1AccessPointStatus struct {
-	// The lifecycle phase of the access point:    PROVISIONING: Access point provisioning is in progress;    PENDING_ACCEPT: Access point connection request is pending acceptance by the customer;    READY:  Access point is ready;    FAILED: Access point is in a failed state;    DEPROVISIONING: Access point deprovisioning is in progress;    DISCONNECTED: Access Point has been disconnected in the cloud provider by the customer;
+	// The lifecycle phase of the access point:    PROVISIONING: Access point provisioning is in progress;    PENDING_ACCEPT: Access point connection request is pending acceptance by the customer;    READY:  Access point is ready;    FAILED: Access point is in a failed state;    DEPROVISIONING: Access point deprovisioning is in progress;    DISCONNECTED: Access Point has been disconnected in the cloud provider by the customer;    DEGRADED: Access Point is experiencing reduced performance or partial failure;    ERROR: Invalid customer input during Access Point creation;
 	Phase string `json:"phase,omitempty"`
 	// Error code if access point is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
