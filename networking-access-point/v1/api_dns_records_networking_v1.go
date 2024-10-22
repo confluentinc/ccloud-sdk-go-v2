@@ -43,14 +43,14 @@ var (
 type DNSRecordsNetworkingV1Api interface {
 
 	/*
-			CreateNetworkingV1DnsRecord Create a DNS Record
+		CreateNetworkingV1DnsRecord Create a DNS Record
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a DNS record.
+	Make a request to create a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateNetworkingV1DnsRecordRequest
 	*/
 	CreateNetworkingV1DnsRecord(ctx _context.Context) ApiCreateNetworkingV1DnsRecordRequest
 
@@ -59,15 +59,15 @@ type DNSRecordsNetworkingV1Api interface {
 	CreateNetworkingV1DnsRecordExecute(r ApiCreateNetworkingV1DnsRecordRequest) (NetworkingV1DnsRecord, *_nethttp.Response, error)
 
 	/*
-			DeleteNetworkingV1DnsRecord Delete a DNS Record
+		DeleteNetworkingV1DnsRecord Delete a DNS Record
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a DNS record.
+	Make a request to delete a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiDeleteNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiDeleteNetworkingV1DnsRecordRequest
 	*/
 	DeleteNetworkingV1DnsRecord(ctx _context.Context, id string) ApiDeleteNetworkingV1DnsRecordRequest
 
@@ -75,15 +75,15 @@ type DNSRecordsNetworkingV1Api interface {
 	DeleteNetworkingV1DnsRecordExecute(r ApiDeleteNetworkingV1DnsRecordRequest) (*_nethttp.Response, error)
 
 	/*
-			GetNetworkingV1DnsRecord Read a DNS Record
+		GetNetworkingV1DnsRecord Read a DNS Record
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a DNS record.
+	Make a request to read a DNS record.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiGetNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiGetNetworkingV1DnsRecordRequest
 	*/
 	GetNetworkingV1DnsRecord(ctx _context.Context, id string) ApiGetNetworkingV1DnsRecordRequest
 
@@ -92,14 +92,14 @@ type DNSRecordsNetworkingV1Api interface {
 	GetNetworkingV1DnsRecordExecute(r ApiGetNetworkingV1DnsRecordRequest) (NetworkingV1DnsRecord, *_nethttp.Response, error)
 
 	/*
-			ListNetworkingV1DnsRecords List of DNS Records
+		ListNetworkingV1DnsRecords List of DNS Records
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all DNS records.
+	Retrieve a sorted, filtered, paginated list of all DNS records.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListNetworkingV1DnsRecordsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListNetworkingV1DnsRecordsRequest
 	*/
 	ListNetworkingV1DnsRecords(ctx _context.Context) ApiListNetworkingV1DnsRecordsRequest
 
@@ -108,17 +108,17 @@ type DNSRecordsNetworkingV1Api interface {
 	ListNetworkingV1DnsRecordsExecute(r ApiListNetworkingV1DnsRecordsRequest) (NetworkingV1DnsRecordList, *_nethttp.Response, error)
 
 	/*
-			UpdateNetworkingV1DnsRecord Update a DNS Record
+		UpdateNetworkingV1DnsRecord Update a DNS Record
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a DNS record.
+	Make a request to update a DNS record.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the DNS record.
-			 @return ApiUpdateNetworkingV1DnsRecordRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the DNS record.
+		 @return ApiUpdateNetworkingV1DnsRecordRequest
 	*/
 	UpdateNetworkingV1DnsRecord(ctx _context.Context, id string) ApiUpdateNetworkingV1DnsRecordRequest
 

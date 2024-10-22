@@ -42,6 +42,8 @@ type NetworkingV1AzureEgressPrivateLinkEndpoint struct {
 	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
 	// Name of the subresource for the Private Endpoint to connect to.
 	PrivateLinkSubresourceName *string `json:"private_link_subresource_name,omitempty"`
+	// [Used by the Confluent Cloud Console] The target system or service that the PrivateLink Endpoint connects to (e.g. \"MONGODB\" or \"SNOWFLAKE\").
+	TargetSystem *string `json:"target_system,omitempty"`
 }
 
 // NewNetworkingV1AzureEgressPrivateLinkEndpoint instantiates a new NetworkingV1AzureEgressPrivateLinkEndpoint object
@@ -143,11 +145,44 @@ func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetPrivateLinkSubresourceNa
 	o.PrivateLinkSubresourceName = &v
 }
 
+// GetTargetSystem returns the TargetSystem field value if set, zero value otherwise.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetTargetSystem() string {
+	if o == nil || o.TargetSystem == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetSystem
+}
+
+// GetTargetSystemOk returns a tuple with the TargetSystem field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) GetTargetSystemOk() (*string, bool) {
+	if o == nil || o.TargetSystem == nil {
+		return nil, false
+	}
+	return o.TargetSystem, true
+}
+
+// HasTargetSystem returns a boolean if a field has been set.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) HasTargetSystem() bool {
+	if o != nil && o.TargetSystem != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetSystem gets a reference to the given string and assigns it to the TargetSystem field.
+func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) SetTargetSystem(v string) {
+	o.TargetSystem = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.PrivateLinkServiceResourceId)
 	o.recurseRedact(o.PrivateLinkSubresourceName)
+	o.recurseRedact(o.TargetSystem)
 }
 
 func (o *NetworkingV1AzureEgressPrivateLinkEndpoint) recurseRedact(v interface{}) {
@@ -190,6 +225,9 @@ func (o NetworkingV1AzureEgressPrivateLinkEndpoint) MarshalJSON() ([]byte, error
 	}
 	if o.PrivateLinkSubresourceName != nil {
 		toSerialize["private_link_subresource_name"] = o.PrivateLinkSubresourceName
+	}
+	if o.TargetSystem != nil {
+		toSerialize["target_system"] = o.TargetSystem
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

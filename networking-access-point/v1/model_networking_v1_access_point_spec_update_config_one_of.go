@@ -31,36 +31,36 @@ import (
 	"fmt"
 )
 
-// NetworkingV1AccessPointSpecConfigOneOf - struct for NetworkingV1AccessPointSpecConfigOneOf
-type NetworkingV1AccessPointSpecConfigOneOf struct {
+// NetworkingV1AccessPointSpecUpdateConfigOneOf - struct for NetworkingV1AccessPointSpecUpdateConfigOneOf
+type NetworkingV1AccessPointSpecUpdateConfigOneOf struct {
 	NetworkingV1AwsEgressPrivateLinkEndpoint           *NetworkingV1AwsEgressPrivateLinkEndpoint
 	NetworkingV1AwsPrivateNetworkInterface             *NetworkingV1AwsPrivateNetworkInterface
 	NetworkingV1AzureEgressPrivateLinkEndpoint         *NetworkingV1AzureEgressPrivateLinkEndpoint
 	NetworkingV1GcpEgressPrivateServiceConnectEndpoint *NetworkingV1GcpEgressPrivateServiceConnectEndpoint
 }
 
-// NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
-func NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecConfigOneOf {
-	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsEgressPrivateLinkEndpoint: v}
+// NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecUpdateConfigOneOf
+func NetworkingV1AwsEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecUpdateConfigOneOf {
+	return NetworkingV1AccessPointSpecUpdateConfigOneOf{NetworkingV1AwsEgressPrivateLinkEndpoint: v}
 }
 
-// NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AwsPrivateNetworkInterface wrapped in NetworkingV1AccessPointSpecConfigOneOf
-func NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AwsPrivateNetworkInterface) NetworkingV1AccessPointSpecConfigOneOf {
-	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AwsPrivateNetworkInterface: v}
+// NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecUpdateConfigOneOf is a convenience function that returns NetworkingV1AwsPrivateNetworkInterface wrapped in NetworkingV1AccessPointSpecUpdateConfigOneOf
+func NetworkingV1AwsPrivateNetworkInterfaceAsNetworkingV1AccessPointSpecUpdateConfigOneOf(v *NetworkingV1AwsPrivateNetworkInterface) NetworkingV1AccessPointSpecUpdateConfigOneOf {
+	return NetworkingV1AccessPointSpecUpdateConfigOneOf{NetworkingV1AwsPrivateNetworkInterface: v}
 }
 
-// NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1AzureEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
-func NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1AzureEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecConfigOneOf {
-	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1AzureEgressPrivateLinkEndpoint: v}
+// NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf is a convenience function that returns NetworkingV1AzureEgressPrivateLinkEndpoint wrapped in NetworkingV1AccessPointSpecUpdateConfigOneOf
+func NetworkingV1AzureEgressPrivateLinkEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf(v *NetworkingV1AzureEgressPrivateLinkEndpoint) NetworkingV1AccessPointSpecUpdateConfigOneOf {
+	return NetworkingV1AccessPointSpecUpdateConfigOneOf{NetworkingV1AzureEgressPrivateLinkEndpoint: v}
 }
 
-// NetworkingV1GcpEgressPrivateServiceConnectEndpointAsNetworkingV1AccessPointSpecConfigOneOf is a convenience function that returns NetworkingV1GcpEgressPrivateServiceConnectEndpoint wrapped in NetworkingV1AccessPointSpecConfigOneOf
-func NetworkingV1GcpEgressPrivateServiceConnectEndpointAsNetworkingV1AccessPointSpecConfigOneOf(v *NetworkingV1GcpEgressPrivateServiceConnectEndpoint) NetworkingV1AccessPointSpecConfigOneOf {
-	return NetworkingV1AccessPointSpecConfigOneOf{NetworkingV1GcpEgressPrivateServiceConnectEndpoint: v}
+// NetworkingV1GcpEgressPrivateServiceConnectEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf is a convenience function that returns NetworkingV1GcpEgressPrivateServiceConnectEndpoint wrapped in NetworkingV1AccessPointSpecUpdateConfigOneOf
+func NetworkingV1GcpEgressPrivateServiceConnectEndpointAsNetworkingV1AccessPointSpecUpdateConfigOneOf(v *NetworkingV1GcpEgressPrivateServiceConnectEndpoint) NetworkingV1AccessPointSpecUpdateConfigOneOf {
+	return NetworkingV1AccessPointSpecUpdateConfigOneOf{NetworkingV1GcpEgressPrivateServiceConnectEndpoint: v}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) error {
+func (dst *NetworkingV1AccessPointSpecUpdateConfigOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
@@ -77,7 +77,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AwsEgressPrivateLinkEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
 		}
 	}
 
@@ -89,7 +89,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AwsPrivateNetworkInterface, return on the first match
 		} else {
 			dst.NetworkingV1AwsPrivateNetworkInterface = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
 		}
 	}
 
@@ -101,7 +101,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AzureEgressPrivateLinkEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1AzureEgressPrivateLinkEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AzureEgressPrivateLinkEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AzureEgressPrivateLinkEndpoint: %s", err.Error())
 		}
 	}
 
@@ -113,7 +113,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1GcpEgressPrivateServiceConnectEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1GcpEgressPrivateServiceConnectEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectEndpoint: %s", err.Error())
 		}
 	}
 
@@ -125,7 +125,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AwsEgressPrivateLinkEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpoint: %s", err.Error())
 		}
 	}
 
@@ -137,7 +137,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AwsPrivateNetworkInterface, return on the first match
 		} else {
 			dst.NetworkingV1AwsPrivateNetworkInterface = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AwsPrivateNetworkInterface: %s", err.Error())
 		}
 	}
 
@@ -149,7 +149,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1AzureEgressPrivateLinkEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1AzureEgressPrivateLinkEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1AzureEgressPrivateLinkEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1AzureEgressPrivateLinkEndpoint: %s", err.Error())
 		}
 	}
 
@@ -161,7 +161,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 			return nil // data stored in dst.NetworkingV1GcpEgressPrivateServiceConnectEndpoint, return on the first match
 		} else {
 			dst.NetworkingV1GcpEgressPrivateServiceConnectEndpoint = nil
-			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectEndpoint: %s", err.Error())
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointSpecUpdateConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectEndpoint: %s", err.Error())
 		}
 	}
 
@@ -169,7 +169,7 @@ func (dst *NetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(data []byte) er
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) {
+func (src NetworkingV1AccessPointSpecUpdateConfigOneOf) MarshalJSON() ([]byte, error) {
 	if src.NetworkingV1AwsEgressPrivateLinkEndpoint != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -206,7 +206,7 @@ func (src NetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) 
 }
 
 // Get the actual instance
-func (obj *NetworkingV1AccessPointSpecConfigOneOf) GetActualInstance() interface{} {
+func (obj *NetworkingV1AccessPointSpecUpdateConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsEgressPrivateLinkEndpoint != nil {
 		return obj.NetworkingV1AwsEgressPrivateLinkEndpoint
 	}
@@ -227,34 +227,34 @@ func (obj *NetworkingV1AccessPointSpecConfigOneOf) GetActualInstance() interface
 	return nil
 }
 
-type NullableNetworkingV1AccessPointSpecConfigOneOf struct {
-	value *NetworkingV1AccessPointSpecConfigOneOf
+type NullableNetworkingV1AccessPointSpecUpdateConfigOneOf struct {
+	value *NetworkingV1AccessPointSpecUpdateConfigOneOf
 	isSet bool
 }
 
-func (v NullableNetworkingV1AccessPointSpecConfigOneOf) Get() *NetworkingV1AccessPointSpecConfigOneOf {
+func (v NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) Get() *NetworkingV1AccessPointSpecUpdateConfigOneOf {
 	return v.value
 }
 
-func (v *NullableNetworkingV1AccessPointSpecConfigOneOf) Set(val *NetworkingV1AccessPointSpecConfigOneOf) {
+func (v *NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) Set(val *NetworkingV1AccessPointSpecUpdateConfigOneOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNetworkingV1AccessPointSpecConfigOneOf) IsSet() bool {
+func (v NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNetworkingV1AccessPointSpecConfigOneOf) Unset() {
+func (v *NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNetworkingV1AccessPointSpecConfigOneOf(val *NetworkingV1AccessPointSpecConfigOneOf) *NullableNetworkingV1AccessPointSpecConfigOneOf {
-	return &NullableNetworkingV1AccessPointSpecConfigOneOf{value: val, isSet: true}
+func NewNullableNetworkingV1AccessPointSpecUpdateConfigOneOf(val *NetworkingV1AccessPointSpecUpdateConfigOneOf) *NullableNetworkingV1AccessPointSpecUpdateConfigOneOf {
+	return &NullableNetworkingV1AccessPointSpecUpdateConfigOneOf{value: val, isSet: true}
 }
 
-func (v NullableNetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -262,7 +262,7 @@ func (v NullableNetworkingV1AccessPointSpecConfigOneOf) MarshalJSON() ([]byte, e
 	return buffer.Bytes(), err
 }
 
-func (v *NullableNetworkingV1AccessPointSpecConfigOneOf) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkingV1AccessPointSpecUpdateConfigOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
