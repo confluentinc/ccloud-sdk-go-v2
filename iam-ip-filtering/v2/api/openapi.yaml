@@ -1706,6 +1706,32 @@ paths:
         Retrieve a sorted, filtered, paginated list of all IP filters.
       operationId: listIamV2IpFilters
       parameters:
+      - description: Lists all filters belonging to the specified resource scope.
+        explode: true
+        in: query
+        name: resource_scope
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List all filters defined at the organization scope. This parameter
+          defaults to false.
+        explode: true
+        in: query
+        name: include_only_org_scope_filters
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: If set to true, this includes filters defined at the organization
+          level. The resource scope must also be set to use this parameter.
+        explode: true
+        in: query
+        name: include_parent_scope
+        required: false
+        schema:
+          type: string
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -2264,13 +2290,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/ip-filters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["management"],"ip_groups":[{"id":"string"}]}'
+            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["MANAGEMENT","SCHEMA"],"ip_groups":[{"id":"string"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/ip-filters")
             .post(body)
@@ -2285,11 +2311,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"filter_name\\\":\\\"Management\
           \ API Rules\\\",\\\"resource_group\\\":\\\"management\\\",\\\"resource_scope\\\
           \":\\\"crn://confluent.cloud/organization=org-123/environment=env-abc\\\"\
-          ,\\\"operation_groups\\\":[\\\"management\\\"],\\\"ip_groups\\\":[{\\\"\
-          id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url,\
-          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
-          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
-          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          ,\\\"operation_groups\\\":[\\\"MANAGEMENT\\\",\\\"SCHEMA\\\"],\\\"ip_groups\\\
+          \":[{\\\"id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
@@ -2298,7 +2324,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}"
+          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}"
 
           headers = {
               'content-type': "application/json",
@@ -2343,7 +2369,7 @@ paths:
             filter_name: 'Management API Rules',
             resource_group: 'management',
             resource_scope: 'crn://confluent.cloud/organization=org-123/environment=env-abc',
-            operation_groups: ['management'],
+            operation_groups: ['MANAGEMENT', 'SCHEMA'],
             ip_groups: [{id: 'string'}]
           }));
           req.end();
@@ -2359,7 +2385,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2368,7 +2394,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: IP Filters API
   /iam/v2/ip-filters/{id}:
@@ -3256,13 +3282,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/ip-filters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["management"],"ip_groups":[{"id":"string"}]}'
+            --data '{"filter_name":"Management API Rules","resource_group":"management","resource_scope":"crn://confluent.cloud/organization=org-123/environment=env-abc","operation_groups":["MANAGEMENT","SCHEMA"],"ip_groups":[{"id":"string"}]}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/ip-filters/{id}")
             .patch(body)
@@ -3277,11 +3303,11 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"filter_name\\\":\\\"Management\
           \ API Rules\\\",\\\"resource_group\\\":\\\"management\\\",\\\"resource_scope\\\
           \":\\\"crn://confluent.cloud/organization=org-123/environment=env-abc\\\"\
-          ,\\\"operation_groups\\\":[\\\"management\\\"],\\\"ip_groups\\\":[{\\\"\
-          id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url,\
-          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
-          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
-          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          ,\\\"operation_groups\\\":[\\\"MANAGEMENT\\\",\\\"SCHEMA\\\"],\\\"ip_groups\\\
+          \":[{\\\"id\\\":\\\"string\\\"}]}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
@@ -3290,7 +3316,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}"
+          payload = "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}"
 
           headers = {
               'content-type': "application/json",
@@ -3335,7 +3361,7 @@ paths:
             filter_name: 'Management API Rules',
             resource_group: 'management',
             resource_scope: 'crn://confluent.cloud/organization=org-123/environment=env-abc',
-            operation_groups: ['management'],
+            operation_groups: ['MANAGEMENT', 'SCHEMA'],
             ip_groups: [{id: 'string'}]
           }));
           req.end();
@@ -3351,7 +3377,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3360,7 +3386,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"management\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"filter_name\":\"Management API Rules\",\"resource_group\":\"management\",\"resource_scope\":\"crn://confluent.cloud/organization=org-123/environment=env-abc\",\"operation_groups\":[\"MANAGEMENT\",\"SCHEMA\"],\"ip_groups\":[{\"id\":\"string\"}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: IP Filters API
   /iam/v2/ip-filter-summary:
@@ -4036,7 +4062,8 @@ components:
             (passing in an empty list will remove all operation groups) from the filter
             (in line with the behavior for ip_groups).
           example:
-          - management
+          - MANAGEMENT
+          - SCHEMA
           items:
             type: string
           type: array
@@ -4077,10 +4104,10 @@ components:
             Summary of the operation groups and IP filters created in those operation groups.
           example:
           - name: management
-            status: mixed
+            status: MIXED
             operation_groups:
-            - name: management
-              status: limited
+            - name: MANAGEMENT
+              status: LIMITED
           items:
             $ref: '#/components/schemas/iam_v2_IpFilterSummary_categories'
           type: array
