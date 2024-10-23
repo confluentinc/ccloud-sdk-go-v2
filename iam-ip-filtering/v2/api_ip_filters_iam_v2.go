@@ -605,10 +605,28 @@ func (a *IPFiltersIamV2ApiService) GetIamV2IpFilterExecute(r ApiGetIamV2IpFilter
 type ApiListIamV2IpFiltersRequest struct {
 	ctx _context.Context
 	ApiService IPFiltersIamV2Api
+	resourceScope *string
+	includeOnlyOrgScopeFilters *string
+	includeParentScope *string
 	pageSize *int32
 	pageToken *string
 }
 
+// Lists all filters belonging to the specified resource scope.
+func (r ApiListIamV2IpFiltersRequest) ResourceScope(resourceScope string) ApiListIamV2IpFiltersRequest {
+	r.resourceScope = &resourceScope
+	return r
+}
+// List all filters defined at the organization scope. This parameter defaults to false.
+func (r ApiListIamV2IpFiltersRequest) IncludeOnlyOrgScopeFilters(includeOnlyOrgScopeFilters string) ApiListIamV2IpFiltersRequest {
+	r.includeOnlyOrgScopeFilters = &includeOnlyOrgScopeFilters
+	return r
+}
+// If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter.
+func (r ApiListIamV2IpFiltersRequest) IncludeParentScope(includeParentScope string) ApiListIamV2IpFiltersRequest {
+	r.includeParentScope = &includeParentScope
+	return r
+}
 // A pagination size for collection requests.
 func (r ApiListIamV2IpFiltersRequest) PageSize(pageSize int32) ApiListIamV2IpFiltersRequest {
 	r.pageSize = &pageSize
@@ -664,6 +682,15 @@ func (a *IPFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFil
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.resourceScope != nil {
+		localVarQueryParams.Add("resource_scope", parameterToString(*r.resourceScope, ""))
+	}
+	if r.includeOnlyOrgScopeFilters != nil {
+		localVarQueryParams.Add("include_only_org_scope_filters", parameterToString(*r.includeOnlyOrgScopeFilters, ""))
+	}
+	if r.includeParentScope != nil {
+		localVarQueryParams.Add("include_parent_scope", parameterToString(*r.includeParentScope, ""))
+	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
