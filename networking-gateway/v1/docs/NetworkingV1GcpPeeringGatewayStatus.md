@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | GCP Peering Gateway Status kind type. | 
-**PrincipalArn** | Pointer to **string** | The principal ARN used by the GCP Peering Gateway. | [optional] [readonly] 
+**IamPrincipal** | Pointer to **string** | The IAM principal email used by the GCP Peering Gateway. | [optional] [readonly] 
 
 ## Methods
 
@@ -46,30 +46,30 @@ and a boolean to check if the value has been set.
 SetKind sets Kind field to given value.
 
 
-### GetPrincipalArn
+### GetIamPrincipal
 
-`func (o *NetworkingV1GcpPeeringGatewayStatus) GetPrincipalArn() string`
+`func (o *NetworkingV1GcpPeeringGatewayStatus) GetIamPrincipal() string`
 
-GetPrincipalArn returns the PrincipalArn field if non-nil, zero value otherwise.
+GetIamPrincipal returns the IamPrincipal field if non-nil, zero value otherwise.
 
-### GetPrincipalArnOk
+### GetIamPrincipalOk
 
-`func (o *NetworkingV1GcpPeeringGatewayStatus) GetPrincipalArnOk() (*string, bool)`
+`func (o *NetworkingV1GcpPeeringGatewayStatus) GetIamPrincipalOk() (*string, bool)`
 
-GetPrincipalArnOk returns a tuple with the PrincipalArn field if it's non-nil, zero value otherwise
+GetIamPrincipalOk returns a tuple with the IamPrincipal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrincipalArn
+### SetIamPrincipal
 
-`func (o *NetworkingV1GcpPeeringGatewayStatus) SetPrincipalArn(v string)`
+`func (o *NetworkingV1GcpPeeringGatewayStatus) SetIamPrincipal(v string)`
 
-SetPrincipalArn sets PrincipalArn field to given value.
+SetIamPrincipal sets IamPrincipal field to given value.
 
-### HasPrincipalArn
+### HasIamPrincipal
 
-`func (o *NetworkingV1GcpPeeringGatewayStatus) HasPrincipalArn() bool`
+`func (o *NetworkingV1GcpPeeringGatewayStatus) HasIamPrincipal() bool`
 
-HasPrincipalArn returns a boolean if a field has been set.
+HasIamPrincipal returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1GatewayStatusCloudGatewayOneOf
