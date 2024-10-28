@@ -33,12 +33,13 @@ import (
 
 // NetworkingV1GatewaySpecConfigOneOf - struct for NetworkingV1GatewaySpecConfigOneOf
 type NetworkingV1GatewaySpecConfigOneOf struct {
-	NetworkingV1AwsEgressPrivateLinkGatewaySpec       *NetworkingV1AwsEgressPrivateLinkGatewaySpec
-	NetworkingV1AwsPeeringGatewaySpec                 *NetworkingV1AwsPeeringGatewaySpec
-	NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec *NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec
-	NetworkingV1AzureEgressPrivateLinkGatewaySpec     *NetworkingV1AzureEgressPrivateLinkGatewaySpec
-	NetworkingV1AzurePeeringGatewaySpec               *NetworkingV1AzurePeeringGatewaySpec
-	NetworkingV1GcpPeeringGatewaySpec                 *NetworkingV1GcpPeeringGatewaySpec
+	NetworkingV1AwsEgressPrivateLinkGatewaySpec           *NetworkingV1AwsEgressPrivateLinkGatewaySpec
+	NetworkingV1AwsPeeringGatewaySpec                     *NetworkingV1AwsPeeringGatewaySpec
+	NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec     *NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec
+	NetworkingV1AzureEgressPrivateLinkGatewaySpec         *NetworkingV1AzureEgressPrivateLinkGatewaySpec
+	NetworkingV1AzurePeeringGatewaySpec                   *NetworkingV1AzurePeeringGatewaySpec
+	NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec *NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec
+	NetworkingV1GcpPeeringGatewaySpec                     *NetworkingV1GcpPeeringGatewaySpec
 }
 
 // NetworkingV1AwsEgressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
@@ -64,6 +65,11 @@ func NetworkingV1AzureEgressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfi
 // NetworkingV1AzurePeeringGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1AzurePeeringGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
 func NetworkingV1AzurePeeringGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf(v *NetworkingV1AzurePeeringGatewaySpec) NetworkingV1GatewaySpecConfigOneOf {
 	return NetworkingV1GatewaySpecConfigOneOf{NetworkingV1AzurePeeringGatewaySpec: v}
+}
+
+// NetworkingV1GcpEgressPrivateServiceConnectGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
+func NetworkingV1GcpEgressPrivateServiceConnectGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf(v *NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec) NetworkingV1GatewaySpecConfigOneOf {
+	return NetworkingV1GatewaySpecConfigOneOf{NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec: v}
 }
 
 // NetworkingV1GcpPeeringGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1GcpPeeringGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
@@ -141,6 +147,18 @@ func (dst *NetworkingV1GatewaySpecConfigOneOf) UnmarshalJSON(data []byte) error 
 		}
 	}
 
+	// check if the discriminator value is 'GcpEgressPrivateServiceConnectGatewaySpec'
+	if jsonDict["kind"] == "GcpEgressPrivateServiceConnectGatewaySpec" {
+		// try to unmarshal JSON data into NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec, return on the first match
+		} else {
+			dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'GcpPeeringGatewaySpec'
 	if jsonDict["kind"] == "GcpPeeringGatewaySpec" {
 		// try to unmarshal JSON data into NetworkingV1GcpPeeringGatewaySpec
@@ -213,6 +231,18 @@ func (dst *NetworkingV1GatewaySpecConfigOneOf) UnmarshalJSON(data []byte) error 
 		}
 	}
 
+	// check if the discriminator value is 'networking.v1.GcpEgressPrivateServiceConnectGatewaySpec'
+	if jsonDict["kind"] == "networking.v1.GcpEgressPrivateServiceConnectGatewaySpec" {
+		// try to unmarshal JSON data into NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec, return on the first match
+		} else {
+			dst.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'networking.v1.GcpPeeringGatewaySpec'
 	if jsonDict["kind"] == "networking.v1.GcpPeeringGatewaySpec" {
 		// try to unmarshal JSON data into NetworkingV1GcpPeeringGatewaySpec
@@ -270,6 +300,14 @@ func (src NetworkingV1GatewaySpecConfigOneOf) MarshalJSON() ([]byte, error) {
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1GcpPeeringGatewaySpec != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -301,6 +339,10 @@ func (obj *NetworkingV1GatewaySpecConfigOneOf) GetActualInstance() interface{} {
 
 	if obj.NetworkingV1AzurePeeringGatewaySpec != nil {
 		return obj.NetworkingV1AzurePeeringGatewaySpec
+	}
+
+	if obj.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec != nil {
+		return obj.NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec
 	}
 
 	if obj.NetworkingV1GcpPeeringGatewaySpec != nil {
