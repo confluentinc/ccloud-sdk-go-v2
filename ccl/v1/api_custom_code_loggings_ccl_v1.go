@@ -603,10 +603,17 @@ func (a *CustomCodeLoggingsCclV1ApiService) GetCclV1CustomCodeLoggingExecute(r A
 }
 
 type ApiListCclV1CustomCodeLoggingsRequest struct {
-	ctx        _context.Context
-	ApiService CustomCodeLoggingsCclV1Api
-	pageSize   *int32
-	pageToken  *string
+	ctx         _context.Context
+	ApiService  CustomCodeLoggingsCclV1Api
+	environment *string
+	pageSize    *int32
+	pageToken   *string
+}
+
+// Filter the results by exact match for environment.
+func (r ApiListCclV1CustomCodeLoggingsRequest) Environment(environment string) ApiListCclV1CustomCodeLoggingsRequest {
+	r.environment = &environment
+	return r
 }
 
 // A pagination size for collection requests.
@@ -665,7 +672,11 @@ func (a *CustomCodeLoggingsCclV1ApiService) ListCclV1CustomCodeLoggingsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
