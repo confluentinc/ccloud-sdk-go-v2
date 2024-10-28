@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
  - [NetworkingV1GatewayStatus](docs/NetworkingV1GatewayStatus.md)
  - [NetworkingV1GatewayStatusCloudGatewayOneOf](docs/NetworkingV1GatewayStatusCloudGatewayOneOf.md)
  - [NetworkingV1GatewayUpdate](docs/NetworkingV1GatewayUpdate.md)
+ - [NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec](docs/NetworkingV1GcpEgressPrivateServiceConnectGatewaySpec.md)
+ - [NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus](docs/NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus.md)
  - [NetworkingV1GcpPeeringGatewaySpec](docs/NetworkingV1GcpPeeringGatewaySpec.md)
  - [NetworkingV1GcpPeeringGatewayStatus](docs/NetworkingV1GcpPeeringGatewayStatus.md)
  - [ObjectMeta](docs/ObjectMeta.md)
