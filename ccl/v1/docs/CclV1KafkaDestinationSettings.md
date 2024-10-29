@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Destination** | **string** | The destination where Custom Code Logging is sent. | 
+**Kind** | **string** | The destination where Custom Code Logging is sent. | 
 **ClusterId** | **string** | The kafka cluster id where Custom Code Logging is sent. | 
 **Topic** | **string** | The kafka topic where Custom Code Logging is sent. | 
 **LogLevel** | Pointer to **string** | Minimum log level for Custom Code Logging. | [optional] [default to "INFO"]
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewCclV1KafkaDestinationSettings
 
-`func NewCclV1KafkaDestinationSettings(destination string, clusterId string, topic string, ) *CclV1KafkaDestinationSettings`
+`func NewCclV1KafkaDestinationSettings(kind string, clusterId string, topic string, ) *CclV1KafkaDestinationSettings`
 
 NewCclV1KafkaDestinationSettings instantiates a new CclV1KafkaDestinationSettings object
 This constructor will assign default values to properties that have it defined,
@@ -28,24 +28,24 @@ NewCclV1KafkaDestinationSettingsWithDefaults instantiates a new CclV1KafkaDestin
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDestination
+### GetKind
 
-`func (o *CclV1KafkaDestinationSettings) GetDestination() string`
+`func (o *CclV1KafkaDestinationSettings) GetKind() string`
 
-GetDestination returns the Destination field if non-nil, zero value otherwise.
+GetKind returns the Kind field if non-nil, zero value otherwise.
 
-### GetDestinationOk
+### GetKindOk
 
-`func (o *CclV1KafkaDestinationSettings) GetDestinationOk() (*string, bool)`
+`func (o *CclV1KafkaDestinationSettings) GetKindOk() (*string, bool)`
 
-GetDestinationOk returns a tuple with the Destination field if it's non-nil, zero value otherwise
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDestination
+### SetKind
 
-`func (o *CclV1KafkaDestinationSettings) SetDestination(v string)`
+`func (o *CclV1KafkaDestinationSettings) SetKind(v string)`
 
-SetDestination sets Destination field to given value.
+SetKind sets Kind field to given value.
 
 
 ### GetClusterId
