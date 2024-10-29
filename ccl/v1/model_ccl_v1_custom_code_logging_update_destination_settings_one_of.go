@@ -52,7 +52,7 @@ func (dst *CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf) UnmarshalJSON(d
 	}
 
 	// check if the discriminator value is 'Kafka'
-	if jsonDict["destination"] == "Kafka" {
+	if jsonDict["kind"] == "Kafka" {
 		// try to unmarshal JSON data into CclV1KafkaDestinationSettings
 		err = json.Unmarshal(data, &dst.CclV1KafkaDestinationSettings)
 		if err == nil {
@@ -64,7 +64,7 @@ func (dst *CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf) UnmarshalJSON(d
 	}
 
 	// check if the discriminator value is 'ccl.v1.KafkaDestinationSettings'
-	if jsonDict["destination"] == "ccl.v1.KafkaDestinationSettings" {
+	if jsonDict["kind"] == "ccl.v1.KafkaDestinationSettings" {
 		// try to unmarshal JSON data into CclV1KafkaDestinationSettings
 		err = json.Unmarshal(data, &dst.CclV1KafkaDestinationSettings)
 		if err == nil {

@@ -34,6 +34,15 @@ paths:
         Retrieve a sorted, filtered, paginated list of all custom code loggings.
       operationId: listCclV1CustomCodeLoggings
       parameters:
+      - description: Filter the results by exact match for environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -249,14 +258,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/ccl/v1/custom-code-loggings \
+            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings")
+            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -264,7 +273,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -277,7 +286,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ccl/v1/custom-code-loggings", headers=headers)
+          conn.request("GET", "/ccl/v1/custom-code-loggings?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -291,7 +300,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ccl/v1/custom-code-loggings",
+            "path": "/ccl/v1/custom-code-loggings?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -316,7 +325,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -325,7 +334,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings");
+          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -613,13 +622,13 @@ paths:
             --url https://api.confluent.cloud/ccl/v1/custom-code-loggings \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"cloud":"AWS","region":"us-west-2","destination_settings":{"destination":"KAFKA","cluster_id":"lkc-123","topic":"topic-123","log_level":"INFO"},"environment":{"id":"env-00000","environment":"string"}}'
+            --data '{"cloud":"AWS","region":"us-west-2","destination_settings":{"kind":"Kafka","cluster_id":"lkc-123","topic":"topic-123","log_level":"INFO"},"environment":{"id":"env-00000","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings")
             .post(body)
@@ -632,10 +641,10 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\
-          \":\\\"us-west-2\\\",\\\"destination_settings\\\":{\\\"destination\\\":\\\
-          \"KAFKA\\\",\\\"cluster_id\\\":\\\"lkc-123\\\",\\\"topic\\\":\\\"topic-123\\\
-          \",\\\"log_level\\\":\\\"INFO\\\"},\\\"environment\\\":{\\\"id\\\":\\\"\
-          env-00000\\\",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \":\\\"us-west-2\\\",\\\"destination_settings\\\":{\\\"kind\\\":\\\"Kafka\\\
+          \",\\\"cluster_id\\\":\\\"lkc-123\\\",\\\"topic\\\":\\\"topic-123\\\",\\\
+          \"log_level\\\":\\\"INFO\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
           POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -647,7 +656,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}"
+          payload = "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -691,12 +700,7 @@ paths:
           req.write(JSON.stringify({
             cloud: 'AWS',
             region: 'us-west-2',
-            destination_settings: {
-              destination: 'KAFKA',
-              cluster_id: 'lkc-123',
-              topic: 'topic-123',
-              log_level: 'INFO'
-            },
+            destination_settings: {kind: 'Kafka', cluster_id: 'lkc-123', topic: 'topic-123', log_level: 'INFO'},
             environment: {id: 'env-00000', environment: 'string'}
           }));
           req.end();
@@ -712,7 +716,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -721,7 +725,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Custom Code Logging API EA
   /ccl/v1/custom-code-loggings/{id}:
@@ -1633,13 +1637,13 @@ paths:
             --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"cloud":"AWS","region":"us-west-2","destination_settings":{"destination":"KAFKA","cluster_id":"lkc-123","topic":"topic-123","log_level":"INFO"},"environment":{"id":"env-00000","environment":"string"}}'
+            --data '{"cloud":"AWS","region":"us-west-2","destination_settings":{"kind":"Kafka","cluster_id":"lkc-123","topic":"topic-123","log_level":"INFO"},"environment":{"id":"env-00000","environment":"string"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}")
             .patch(body)
@@ -1652,10 +1656,10 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\
-          \":\\\"us-west-2\\\",\\\"destination_settings\\\":{\\\"destination\\\":\\\
-          \"KAFKA\\\",\\\"cluster_id\\\":\\\"lkc-123\\\",\\\"topic\\\":\\\"topic-123\\\
-          \",\\\"log_level\\\":\\\"INFO\\\"},\\\"environment\\\":{\\\"id\\\":\\\"\
-          env-00000\\\",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          \":\\\"us-west-2\\\",\\\"destination_settings\\\":{\\\"kind\\\":\\\"Kafka\\\
+          \",\\\"cluster_id\\\":\\\"lkc-123\\\",\\\"topic\\\":\\\"topic-123\\\",\\\
+          \"log_level\\\":\\\"INFO\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
+          \",\\\"environment\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
           PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
@@ -1667,7 +1671,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}"
+          payload = "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -1711,12 +1715,7 @@ paths:
           req.write(JSON.stringify({
             cloud: 'AWS',
             region: 'us-west-2',
-            destination_settings: {
-              destination: 'KAFKA',
-              cluster_id: 'lkc-123',
-              topic: 'topic-123',
-              log_level: 'INFO'
-            },
+            destination_settings: {kind: 'Kafka', cluster_id: 'lkc-123', topic: 'topic-123', log_level: 'INFO'},
             environment: {id: 'env-00000', environment: 'string'}
           }));
           req.end();
@@ -1732,7 +1731,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1741,7 +1740,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"destination\":\"KAFKA\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Custom Code Logging API EA
 components:
@@ -2032,7 +2031,7 @@ components:
           discriminator:
             mapping:
               Kafka: '#/components/schemas/ccl.v1.KafkaDestinationSettings'
-            propertyName: destination
+            propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/ccl.v1.KafkaDestinationSettings'
           type: object
@@ -2041,16 +2040,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
           description: The environment to which this belongs.
-          x-immutable: true
       type: object
     ccl.v1.KafkaDestinationSettings:
       description: |
         Kafka Destination Settings of the Custom Code Logging.
       properties:
-        destination:
+        kind:
           description: The destination where Custom Code Logging is sent.
           enum:
-          - KAFKA
+          - Kafka
           type: string
         cluster_id:
           description: The kafka cluster id where Custom Code Logging is sent.
@@ -2075,9 +2073,12 @@ components:
           - DEBUG
       required:
       - cluster_id
-      - destination
+      - kind
       - topic
       type: object
+    SearchFilter:
+      description: Filter a collection by a string search
+      type: string
     ccl.v1.CustomCodeLoggingList:
       description: |-
         CustomCodeLogging objects represent Custom Code Logging on Confluent Cloud.
@@ -2375,11 +2376,15 @@ components:
           discriminator:
             mapping:
               Kafka: '#/components/schemas/ccl.v1.KafkaDestinationSettings'
-            propertyName: destination
+            propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/ccl.v1.KafkaDestinationSettings'
           type: object
           x-one-of-name: CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf
+        environment:
+          allOf:
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          description: The environment to which this belongs.
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
