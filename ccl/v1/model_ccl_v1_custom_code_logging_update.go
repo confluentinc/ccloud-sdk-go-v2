@@ -45,6 +45,8 @@ type CclV1CustomCodeLoggingUpdate struct {
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// Destination Settings of the Custom Code Logging.
 	DestinationSettings *CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf `json:"destination_settings,omitempty"`
+	// The environment to which this belongs.
+	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
 }
 
 // NewCclV1CustomCodeLoggingUpdate instantiates a new CclV1CustomCodeLoggingUpdate object
@@ -224,6 +226,38 @@ func (o *CclV1CustomCodeLoggingUpdate) SetDestinationSettings(v CclV1CustomCodeL
 	o.DestinationSettings = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *CclV1CustomCodeLoggingUpdate) GetEnvironment() EnvScopedObjectReference {
+	if o == nil || o.Environment == nil {
+		var ret EnvScopedObjectReference
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CclV1CustomCodeLoggingUpdate) GetEnvironmentOk() (*EnvScopedObjectReference, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *CclV1CustomCodeLoggingUpdate) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given EnvScopedObjectReference and assigns it to the Environment field.
+func (o *CclV1CustomCodeLoggingUpdate) SetEnvironment(v EnvScopedObjectReference) {
+	o.Environment = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CclV1CustomCodeLoggingUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -231,6 +265,7 @@ func (o *CclV1CustomCodeLoggingUpdate) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.DestinationSettings)
+	o.recurseRedact(o.Environment)
 }
 
 func (o *CclV1CustomCodeLoggingUpdate) recurseRedact(v interface{}) {
@@ -279,6 +314,9 @@ func (o CclV1CustomCodeLoggingUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.DestinationSettings != nil {
 		toSerialize["destination_settings"] = o.DestinationSettings
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
