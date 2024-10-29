@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// NetworkingV1Gateway A Gateway represents a slice of traffic capacity in a region that is reserved for a customer.   ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />
+// NetworkingV1Gateway A Gateway represents a slice of traffic capacity in a region that is reserved for a customer.   ## The Gateways Model <SchemaDefinition schemaRef=\"#/components/schemas/networking.v1.Gateway\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `gateways_per_region_per_environment` | Number of Gateways per region per environment |
 type NetworkingV1Gateway struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

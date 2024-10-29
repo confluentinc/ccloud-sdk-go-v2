@@ -38,8 +38,8 @@ import (
 type NetworkingV1GcpPeeringGatewayStatus struct {
 	// GCP Peering Gateway Status kind type.
 	Kind string `json:"kind,omitempty"`
-	// The principal ARN used by the GCP Peering Gateway.
-	PrincipalArn *string `json:"principal_arn,omitempty"`
+	// The IAM principal email used by the GCP Peering Gateway.
+	IamPrincipal *string `json:"iam_principal,omitempty"`
 }
 
 // NewNetworkingV1GcpPeeringGatewayStatus instantiates a new NetworkingV1GcpPeeringGatewayStatus object
@@ -84,42 +84,42 @@ func (o *NetworkingV1GcpPeeringGatewayStatus) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetPrincipalArn returns the PrincipalArn field value if set, zero value otherwise.
-func (o *NetworkingV1GcpPeeringGatewayStatus) GetPrincipalArn() string {
-	if o == nil || o.PrincipalArn == nil {
+// GetIamPrincipal returns the IamPrincipal field value if set, zero value otherwise.
+func (o *NetworkingV1GcpPeeringGatewayStatus) GetIamPrincipal() string {
+	if o == nil || o.IamPrincipal == nil {
 		var ret string
 		return ret
 	}
-	return *o.PrincipalArn
+	return *o.IamPrincipal
 }
 
-// GetPrincipalArnOk returns a tuple with the PrincipalArn field value if set, nil otherwise
+// GetIamPrincipalOk returns a tuple with the IamPrincipal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1GcpPeeringGatewayStatus) GetPrincipalArnOk() (*string, bool) {
-	if o == nil || o.PrincipalArn == nil {
+func (o *NetworkingV1GcpPeeringGatewayStatus) GetIamPrincipalOk() (*string, bool) {
+	if o == nil || o.IamPrincipal == nil {
 		return nil, false
 	}
-	return o.PrincipalArn, true
+	return o.IamPrincipal, true
 }
 
-// HasPrincipalArn returns a boolean if a field has been set.
-func (o *NetworkingV1GcpPeeringGatewayStatus) HasPrincipalArn() bool {
-	if o != nil && o.PrincipalArn != nil {
+// HasIamPrincipal returns a boolean if a field has been set.
+func (o *NetworkingV1GcpPeeringGatewayStatus) HasIamPrincipal() bool {
+	if o != nil && o.IamPrincipal != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPrincipalArn gets a reference to the given string and assigns it to the PrincipalArn field.
-func (o *NetworkingV1GcpPeeringGatewayStatus) SetPrincipalArn(v string) {
-	o.PrincipalArn = &v
+// SetIamPrincipal gets a reference to the given string and assigns it to the IamPrincipal field.
+func (o *NetworkingV1GcpPeeringGatewayStatus) SetIamPrincipal(v string) {
+	o.IamPrincipal = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPeeringGatewayStatus) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(o.PrincipalArn)
+	o.recurseRedact(o.IamPrincipal)
 }
 
 func (o *NetworkingV1GcpPeeringGatewayStatus) recurseRedact(v interface{}) {
@@ -157,8 +157,8 @@ func (o NetworkingV1GcpPeeringGatewayStatus) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["kind"] = o.Kind
 	}
-	if o.PrincipalArn != nil {
-		toSerialize["principal_arn"] = o.PrincipalArn
+	if o.IamPrincipal != nil {
+		toSerialize["iam_principal"] = o.IamPrincipal
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
