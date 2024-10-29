@@ -37,7 +37,7 @@ import (
 // CclV1KafkaDestinationSettings Kafka Destination Settings of the Custom Code Logging.
 type CclV1KafkaDestinationSettings struct {
 	// The destination where Custom Code Logging is sent.
-	Destination string `json:"destination,omitempty"`
+	Kind string `json:"kind,omitempty"`
 	// The kafka cluster id where Custom Code Logging is sent.
 	ClusterId string `json:"cluster_id,omitempty"`
 	// The kafka topic where Custom Code Logging is sent.
@@ -50,9 +50,9 @@ type CclV1KafkaDestinationSettings struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCclV1KafkaDestinationSettings(destination string, clusterId string, topic string) *CclV1KafkaDestinationSettings {
+func NewCclV1KafkaDestinationSettings(kind string, clusterId string, topic string) *CclV1KafkaDestinationSettings {
 	this := CclV1KafkaDestinationSettings{}
-	this.Destination = destination
+	this.Kind = kind
 	this.ClusterId = clusterId
 	this.Topic = topic
 	var logLevel string = "INFO"
@@ -70,28 +70,28 @@ func NewCclV1KafkaDestinationSettingsWithDefaults() *CclV1KafkaDestinationSettin
 	return &this
 }
 
-// GetDestination returns the Destination field value
-func (o *CclV1KafkaDestinationSettings) GetDestination() string {
+// GetKind returns the Kind field value
+func (o *CclV1KafkaDestinationSettings) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Destination
+	return o.Kind
 }
 
-// GetDestinationOk returns a tuple with the Destination field value
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *CclV1KafkaDestinationSettings) GetDestinationOk() (*string, bool) {
+func (o *CclV1KafkaDestinationSettings) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Destination, true
+	return &o.Kind, true
 }
 
-// SetDestination sets field value
-func (o *CclV1KafkaDestinationSettings) SetDestination(v string) {
-	o.Destination = v
+// SetKind sets field value
+func (o *CclV1KafkaDestinationSettings) SetKind(v string) {
+	o.Kind = v
 }
 
 // GetClusterId returns the ClusterId field value
@@ -176,7 +176,7 @@ func (o *CclV1KafkaDestinationSettings) SetLogLevel(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CclV1KafkaDestinationSettings) Redact() {
-	o.recurseRedact(&o.Destination)
+	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.ClusterId)
 	o.recurseRedact(&o.Topic)
 	o.recurseRedact(o.LogLevel)
@@ -215,7 +215,7 @@ func (o CclV1KafkaDestinationSettings) zeroField(v interface{}) {
 func (o CclV1KafkaDestinationSettings) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["destination"] = o.Destination
+		toSerialize["kind"] = o.Kind
 	}
 	if true {
 		toSerialize["cluster_id"] = o.ClusterId

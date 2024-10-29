@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CclV1CustomCodeLoggingUpdateDestinationSettingsOneOfInterface** | **interface { GetDestination() string }** | An interface that can hold any of the proper implementing types |
+**CclV1CustomCodeLoggingUpdateDestinationSettingsOneOfInterface** | **interface { GetKind() string }** | An interface that can hold any of the proper implementing types |
 
 ## Methods
 
