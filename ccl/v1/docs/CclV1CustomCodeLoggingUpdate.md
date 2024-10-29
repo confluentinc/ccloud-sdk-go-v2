@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DestinationSettings** | Pointer to [**CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf**](CclV1CustomCodeLoggingUpdateDestinationSettingsOneOf.md) | Destination Settings of the Custom Code Logging. | [optional] 
+**Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetDestinationSettings sets DestinationSettings field to given value.
 `func (o *CclV1CustomCodeLoggingUpdate) HasDestinationSettings() bool`
 
 HasDestinationSettings returns a boolean if a field has been set.
+
+### GetEnvironment
+
+`func (o *CclV1CustomCodeLoggingUpdate) GetEnvironment() EnvScopedObjectReference`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *CclV1CustomCodeLoggingUpdate) GetEnvironmentOk() (*EnvScopedObjectReference, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *CclV1CustomCodeLoggingUpdate) SetEnvironment(v EnvScopedObjectReference)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *CclV1CustomCodeLoggingUpdate) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
