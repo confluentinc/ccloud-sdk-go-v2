@@ -42,18 +42,18 @@ var (
 type TopicV3Api interface {
 
 	/*
-		CreateKafkaTopic Create Topic
+	CreateKafkaTopic Create Topic
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Create a topic.
-	Also supports a dry-run mode that only validates whether the topic creation would succeed
-	if the ``validate_only`` request property is explicitly specified and set to true. Note that
-	when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
+Create a topic.
+Also supports a dry-run mode that only validates whether the topic creation would succeed
+if the ``validate_only`` request property is explicitly specified and set to true. Note that
+when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiCreateKafkaTopicRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @return ApiCreateKafkaTopicRequest
 	*/
 	CreateKafkaTopic(ctx _context.Context, clusterId string) ApiCreateKafkaTopicRequest
 
@@ -62,16 +62,16 @@ type TopicV3Api interface {
 	CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest) (TopicData, *_nethttp.Response, error)
 
 	/*
-		DeleteKafkaTopic Delete Topic
+	DeleteKafkaTopic Delete Topic
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Delete the topic with the given `topic_name`.
+Delete the topic with the given `topic_name`.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param topicName The topic name.
-		 @return ApiDeleteKafkaTopicRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @param topicName The topic name.
+	 @return ApiDeleteKafkaTopicRequest
 	*/
 	DeleteKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiDeleteKafkaTopicRequest
 
@@ -79,16 +79,16 @@ type TopicV3Api interface {
 	DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest) (*_nethttp.Response, error)
 
 	/*
-		GetKafkaTopic Get Topic
+	GetKafkaTopic Get Topic
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Return the topic with the given `topic_name`.
+Return the topic with the given `topic_name`.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param topicName The topic name.
-		 @return ApiGetKafkaTopicRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @param topicName The topic name.
+	 @return ApiGetKafkaTopicRequest
 	*/
 	GetKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiGetKafkaTopicRequest
 
@@ -97,15 +97,15 @@ type TopicV3Api interface {
 	GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (TopicData, *_nethttp.Response, error)
 
 	/*
-		ListKafkaTopics List Topics
+	ListKafkaTopics List Topics
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Return the list of topics that belong to the specified Kafka cluster.
+Return the list of topics that belong to the specified Kafka cluster.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiListKafkaTopicsRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @return ApiListKafkaTopicsRequest
 	*/
 	ListKafkaTopics(ctx _context.Context, clusterId string) ApiListKafkaTopicsRequest
 
@@ -114,16 +114,16 @@ type TopicV3Api interface {
 	ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error)
 
 	/*
-		UpdatePartitionCountKafkaTopic Update Partition Count
+	UpdatePartitionCountKafkaTopic Update Partition Count
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Increase the number of partitions for a topic.
+Increase the number of partitions for a topic.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param topicName The topic name.
-		 @return ApiUpdatePartitionCountKafkaTopicRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @param topicName The topic name.
+	 @return ApiUpdatePartitionCountKafkaTopicRequest
 	*/
 	UpdatePartitionCountKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiUpdatePartitionCountKafkaTopicRequest
 
@@ -136,9 +136,9 @@ type TopicV3Api interface {
 type TopicV3ApiService service
 
 type ApiCreateKafkaTopicRequest struct {
-	ctx                    _context.Context
-	ApiService             TopicV3Api
-	clusterId              string
+	ctx _context.Context
+	ApiService TopicV3Api
+	clusterId string
 	createTopicRequestData *CreateTopicRequestData
 }
 
@@ -159,24 +159,23 @@ CreateKafkaTopic Create Topic
 
 Create a topic.
 Also supports a dry-run mode that only validates whether the topic creation would succeed
-if the “validate_only“ request property is explicitly specified and set to true. Note that
+if the ``validate_only`` request property is explicitly specified and set to true. Note that
 when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiCreateKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiCreateKafkaTopicRequest
 */
 func (a *TopicV3ApiService) CreateKafkaTopic(ctx _context.Context, clusterId string) ApiCreateKafkaTopicRequest {
 	return ApiCreateKafkaTopicRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
+		ctx: ctx,
+		clusterId: clusterId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TopicData
+//  @return TopicData
 func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -305,11 +304,12 @@ func (a *TopicV3ApiService) CreateKafkaTopicExecute(r ApiCreateKafkaTopicRequest
 }
 
 type ApiDeleteKafkaTopicRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService TopicV3Api
-	clusterId  string
-	topicName  string
+	clusterId string
+	topicName string
 }
+
 
 func (r ApiDeleteKafkaTopicRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKafkaTopicExecute(r)
@@ -322,17 +322,17 @@ DeleteKafkaTopic Delete Topic
 
 Delete the topic with the given `topic_name`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiDeleteKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiDeleteKafkaTopicRequest
 */
 func (a *TopicV3ApiService) DeleteKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiDeleteKafkaTopicRequest {
 	return ApiDeleteKafkaTopicRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		topicName:  topicName,
+		ctx: ctx,
+		clusterId: clusterId,
+		topicName: topicName,
 	}
 }
 
@@ -464,10 +464,10 @@ func (a *TopicV3ApiService) DeleteKafkaTopicExecute(r ApiDeleteKafkaTopicRequest
 }
 
 type ApiGetKafkaTopicRequest struct {
-	ctx                         _context.Context
-	ApiService                  TopicV3Api
-	clusterId                   string
-	topicName                   string
+	ctx _context.Context
+	ApiService TopicV3Api
+	clusterId string
+	topicName string
 	includeAuthorizedOperations *bool
 }
 
@@ -488,23 +488,22 @@ GetKafkaTopic Get Topic
 
 Return the topic with the given `topic_name`.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiGetKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiGetKafkaTopicRequest
 */
 func (a *TopicV3ApiService) GetKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiGetKafkaTopicRequest {
 	return ApiGetKafkaTopicRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		topicName:  topicName,
+		ctx: ctx,
+		clusterId: clusterId,
+		topicName: topicName,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TopicData
+//  @return TopicData
 func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -645,10 +644,11 @@ func (a *TopicV3ApiService) GetKafkaTopicExecute(r ApiGetKafkaTopicRequest) (Top
 }
 
 type ApiListKafkaTopicsRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService TopicV3Api
-	clusterId  string
+	clusterId string
 }
+
 
 func (r ApiListKafkaTopicsRequest) Execute() (TopicDataList, *_nethttp.Response, error) {
 	return r.ApiService.ListKafkaTopicsExecute(r)
@@ -661,21 +661,20 @@ ListKafkaTopics List Topics
 
 Return the list of topics that belong to the specified Kafka cluster.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiListKafkaTopicsRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiListKafkaTopicsRequest
 */
 func (a *TopicV3ApiService) ListKafkaTopics(ctx _context.Context, clusterId string) ApiListKafkaTopicsRequest {
 	return ApiListKafkaTopicsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
+		ctx: ctx,
+		clusterId: clusterId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TopicDataList
+//  @return TopicDataList
 func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) (TopicDataList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -802,10 +801,10 @@ func (a *TopicV3ApiService) ListKafkaTopicsExecute(r ApiListKafkaTopicsRequest) 
 }
 
 type ApiUpdatePartitionCountKafkaTopicRequest struct {
-	ctx                             _context.Context
-	ApiService                      TopicV3Api
-	clusterId                       string
-	topicName                       string
+	ctx _context.Context
+	ApiService TopicV3Api
+	clusterId string
+	topicName string
 	updatePartitionCountRequestData *UpdatePartitionCountRequestData
 }
 
@@ -825,23 +824,22 @@ UpdatePartitionCountKafkaTopic Update Partition Count
 
 Increase the number of partitions for a topic.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiUpdatePartitionCountKafkaTopicRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiUpdatePartitionCountKafkaTopicRequest
 */
 func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopic(ctx _context.Context, clusterId string, topicName string) ApiUpdatePartitionCountKafkaTopicRequest {
 	return ApiUpdatePartitionCountKafkaTopicRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		topicName:  topicName,
+		ctx: ctx,
+		clusterId: clusterId,
+		topicName: topicName,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TopicData
+//  @return TopicData
 func (a *TopicV3ApiService) UpdatePartitionCountKafkaTopicExecute(r ApiUpdatePartitionCountKafkaTopicRequest) (TopicData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
