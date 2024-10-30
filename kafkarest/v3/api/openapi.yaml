@@ -16110,6 +16110,32 @@ components:
       - state
       - task_name
       type: object
+    LinkCategory:
+      properties:
+        state_category:
+          type: string
+          x-extensible-enum:
+          - PAUSED
+          - IN_ERROR
+          - PENDING
+          - ACTIVE
+          - NOT_APPLICABLE
+        count:
+          example: 123
+          format: int32
+          type: integer
+      required:
+      - count
+      - state_category
+      type: object
+    StateCategory:
+      type: string
+      x-extensible-enum:
+      - PAUSED
+      - IN_ERROR
+      - PENDING
+      - ACTIVE
+      - NOT_APPLICABLE
     LinkTaskError:
       properties:
         error_code:
@@ -17350,6 +17376,11 @@ components:
         tasks:
           items:
             $ref: '#/components/schemas/LinkTask'
+          nullable: true
+          type: array
+        category_counts:
+          items:
+            $ref: '#/components/schemas/LinkCategory'
           nullable: true
           type: array
       required:

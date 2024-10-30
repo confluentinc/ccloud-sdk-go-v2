@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **LinkErrorMessage** | Pointer to **NullableString** |  | [optional] 
 **LinkState** | Pointer to **string** |  | [optional] 
 **Tasks** | Pointer to [**[]LinkTask**](LinkTask.md) |  | [optional] 
+**CategoryCounts** | Pointer to [**[]LinkCategory**](LinkCategory.md) |  | [optional] 
 
 ## Methods
 
@@ -387,6 +388,41 @@ HasTasks returns a boolean if a field has been set.
 `func (o *ListLinksResponseData) UnsetTasks()`
 
 UnsetTasks ensures that no value is present for Tasks, not even an explicit nil
+### GetCategoryCounts
+
+`func (o *ListLinksResponseData) GetCategoryCounts() []LinkCategory`
+
+GetCategoryCounts returns the CategoryCounts field if non-nil, zero value otherwise.
+
+### GetCategoryCountsOk
+
+`func (o *ListLinksResponseData) GetCategoryCountsOk() (*[]LinkCategory, bool)`
+
+GetCategoryCountsOk returns a tuple with the CategoryCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategoryCounts
+
+`func (o *ListLinksResponseData) SetCategoryCounts(v []LinkCategory)`
+
+SetCategoryCounts sets CategoryCounts field to given value.
+
+### HasCategoryCounts
+
+`func (o *ListLinksResponseData) HasCategoryCounts() bool`
+
+HasCategoryCounts returns a boolean if a field has been set.
+
+### SetCategoryCountsNil
+
+`func (o *ListLinksResponseData) SetCategoryCountsNil(b bool)`
+
+ SetCategoryCountsNil sets the value for CategoryCounts to be an explicit nil
+
+### UnsetCategoryCounts
+`func (o *ListLinksResponseData) UnsetCategoryCounts()`
+
+UnsetCategoryCounts ensures that no value is present for CategoryCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
