@@ -217,6 +217,7 @@ Class | Method | HTTP request | Description
  - [CreateTopicRequestDataConfigs](docs/CreateTopicRequestDataConfigs.md)
  - [Error](docs/Error.md)
  - [InlineResponse200](docs/InlineResponse200.md)
+ - [LinkCategory](docs/LinkCategory.md)
  - [LinkTask](docs/LinkTask.md)
  - [LinkTaskError](docs/LinkTaskError.md)
  - [ListLinkConfigsResponseData](docs/ListLinkConfigsResponseData.md)

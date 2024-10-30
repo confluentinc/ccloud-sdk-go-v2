@@ -42,15 +42,15 @@ var (
 type ClusterV3Api interface {
 
 	/*
-		GetKafkaCluster Get Cluster
+	GetKafkaCluster Get Cluster
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Return the Kafka cluster with the specified ``cluster_id``.
+Return the Kafka cluster with the specified ``cluster_id``.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @return ApiGetKafkaClusterRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @return ApiGetKafkaClusterRequest
 	*/
 	GetKafkaCluster(ctx _context.Context, clusterId string) ApiGetKafkaClusterRequest
 
@@ -63,10 +63,11 @@ type ClusterV3Api interface {
 type ClusterV3ApiService service
 
 type ApiGetKafkaClusterRequest struct {
-	ctx        _context.Context
+	ctx _context.Context
 	ApiService ClusterV3Api
-	clusterId  string
+	clusterId string
 }
+
 
 func (r ApiGetKafkaClusterRequest) Execute() (ClusterData, *_nethttp.Response, error) {
 	return r.ApiService.GetKafkaClusterExecute(r)
@@ -77,23 +78,22 @@ GetKafkaCluster Get Cluster
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Return the Kafka cluster with the specified “cluster_id“.
+Return the Kafka cluster with the specified ``cluster_id``.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@return ApiGetKafkaClusterRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @return ApiGetKafkaClusterRequest
 */
 func (a *ClusterV3ApiService) GetKafkaCluster(ctx _context.Context, clusterId string) ApiGetKafkaClusterRequest {
 	return ApiGetKafkaClusterRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
+		ctx: ctx,
+		clusterId: clusterId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ClusterData
+//  @return ClusterData
 func (a *ClusterV3ApiService) GetKafkaClusterExecute(r ApiGetKafkaClusterRequest) (ClusterData, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

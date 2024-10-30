@@ -48,6 +48,7 @@ type ListLinksResponseDataAllOf struct {
 	LinkErrorMessage NullableString `json:"link_error_message,omitempty"`
 	LinkState        *string        `json:"link_state,omitempty"`
 	Tasks            []LinkTask     `json:"tasks,omitempty"`
+	CategoryCounts   []LinkCategory `json:"category_counts,omitempty"`
 }
 
 // NewListLinksResponseDataAllOf instantiates a new ListLinksResponseDataAllOf object
@@ -446,6 +447,39 @@ func (o *ListLinksResponseDataAllOf) SetTasks(v []LinkTask) {
 	o.Tasks = v
 }
 
+// GetCategoryCounts returns the CategoryCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListLinksResponseDataAllOf) GetCategoryCounts() []LinkCategory {
+	if o == nil {
+		var ret []LinkCategory
+		return ret
+	}
+	return o.CategoryCounts
+}
+
+// GetCategoryCountsOk returns a tuple with the CategoryCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListLinksResponseDataAllOf) GetCategoryCountsOk() (*[]LinkCategory, bool) {
+	if o == nil || o.CategoryCounts == nil {
+		return nil, false
+	}
+	return &o.CategoryCounts, true
+}
+
+// HasCategoryCounts returns a boolean if a field has been set.
+func (o *ListLinksResponseDataAllOf) HasCategoryCounts() bool {
+	if o != nil && o.CategoryCounts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCategoryCounts gets a reference to the given []LinkCategory and assigns it to the CategoryCounts field.
+func (o *ListLinksResponseDataAllOf) SetCategoryCounts(v []LinkCategory) {
+	o.CategoryCounts = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ListLinksResponseDataAllOf) Redact() {
 	o.recurseRedact(o.SourceClusterId)
@@ -459,6 +493,7 @@ func (o *ListLinksResponseDataAllOf) Redact() {
 	o.recurseRedact(o.LinkErrorMessage)
 	o.recurseRedact(o.LinkState)
 	o.recurseRedact(o.Tasks)
+	o.recurseRedact(o.CategoryCounts)
 }
 
 func (o *ListLinksResponseDataAllOf) recurseRedact(v interface{}) {
@@ -525,6 +560,9 @@ func (o ListLinksResponseDataAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Tasks != nil {
 		toSerialize["tasks"] = o.Tasks
+	}
+	if o.CategoryCounts != nil {
+		toSerialize["category_counts"] = o.CategoryCounts
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -42,31 +42,31 @@ var (
 type RecordsV3Api interface {
 
 	/*
-		ProduceRecord Produce Records
+	ProduceRecord Produce Records
 
-		[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Produce records to the given topic, returning delivery reports for each
-	record produced. This API can be used in streaming mode by setting
-	"Transfer-Encoding: chunked" header. For as long as the connection is
-	kept open, the server will keep accepting records. Records are streamed
-	to and from the server as Concatenated JSON. For each record sent to the
-	server, the server will asynchronously send back a delivery report, in
-	the same order, each with its own error_code. An error_code of 200
-	indicates success. The HTTP status code will be HTTP 200 OK as long as
-	the connection is successfully established. To identify records that
-	have encountered an error, check the error_code of each delivery report.
+Produce records to the given topic, returning delivery reports for each
+record produced. This API can be used in streaming mode by setting
+"Transfer-Encoding: chunked" header. For as long as the connection is
+kept open, the server will keep accepting records. Records are streamed
+to and from the server as Concatenated JSON. For each record sent to the
+server, the server will asynchronously send back a delivery report, in
+the same order, each with its own error_code. An error_code of 200
+indicates success. The HTTP status code will be HTTP 200 OK as long as
+the connection is successfully established. To identify records that
+have encountered an error, check the error_code of each delivery report.
 
-	Note that the cluster_id is validated only when running in Confluent Cloud.
+Note that the cluster_id is validated only when running in Confluent Cloud.
 
-	This API currently does not support Schema Registry integration. Sending
-	schemas is not supported. Only BINARY, JSON, and STRING formats are
-	supported.
+This API currently does not support Schema Registry integration. Sending
+schemas is not supported. Only BINARY, JSON, and STRING formats are
+supported.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param clusterId The Kafka cluster ID.
-		 @param topicName The topic name.
-		 @return ApiProduceRecordRequest
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param clusterId The Kafka cluster ID.
+	 @param topicName The topic name.
+	 @return ApiProduceRecordRequest
 	*/
 	ProduceRecord(ctx _context.Context, clusterId string, topicName string) ApiProduceRecordRequest
 
@@ -79,10 +79,10 @@ type RecordsV3Api interface {
 type RecordsV3ApiService service
 
 type ApiProduceRecordRequest struct {
-	ctx            _context.Context
-	ApiService     RecordsV3Api
-	clusterId      string
-	topicName      string
+	ctx _context.Context
+	ApiService RecordsV3Api
+	clusterId string
+	topicName string
 	produceRequest *ProduceRequest
 }
 
@@ -118,23 +118,22 @@ This API currently does not support Schema Registry integration. Sending
 schemas is not supported. Only BINARY, JSON, and STRING formats are
 supported.
 
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param clusterId The Kafka cluster ID.
-	@param topicName The topic name.
-	@return ApiProduceRecordRequest
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId The Kafka cluster ID.
+ @param topicName The topic name.
+ @return ApiProduceRecordRequest
 */
 func (a *RecordsV3ApiService) ProduceRecord(ctx _context.Context, clusterId string, topicName string) ApiProduceRecordRequest {
 	return ApiProduceRecordRequest{
 		ApiService: a,
-		ctx:        ctx,
-		clusterId:  clusterId,
-		topicName:  topicName,
+		ctx: ctx,
+		clusterId: clusterId,
+		topicName: topicName,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProduceResponse
+//  @return ProduceResponse
 func (a *RecordsV3ApiService) ProduceRecordExecute(r ApiProduceRecordRequest) (ProduceResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
