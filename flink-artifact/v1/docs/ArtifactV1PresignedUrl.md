@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ContentFormat** | Pointer to **string** | Content format of the Flink Artifact archive. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | Cloud provider where the Flink Artifact archive is uploaded. | [optional] [readonly] 
 **Region** | Pointer to **string** | The Cloud provider region the Flink Artifact archive is uploaded. | [optional] [readonly] 
+**Environment** | Pointer to **string** | The Environment the uploaded Flink Artifact belongs to. | [optional] [readonly] 
 **UploadId** | Pointer to **string** | Unique identifier of this upload. | [optional] [readonly] 
 **UploadUrl** | Pointer to **string** | Upload URL for the Flink Artifact archive. | [optional] [readonly] 
 **UploadFormData** | Pointer to **map[string]interface{}** | Upload form data of the Flink Artifact. All values should be strings. | [optional] [readonly] 
@@ -156,6 +157,31 @@ SetRegion sets Region field to given value.
 `func (o *ArtifactV1PresignedUrl) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
+
+### GetEnvironment
+
+`func (o *ArtifactV1PresignedUrl) GetEnvironment() string`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *ArtifactV1PresignedUrl) GetEnvironmentOk() (*string, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *ArtifactV1PresignedUrl) SetEnvironment(v string)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *ArtifactV1PresignedUrl) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
 
 ### GetUploadId
 
