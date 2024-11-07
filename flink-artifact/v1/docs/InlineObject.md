@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **Cloud** | **string** | Cloud provider where the Flink Artifact archive is uploaded. | 
 **Region** | **string** | The Cloud provider region the Flink Artifact archive is uploaded. | 
 **Environment** | **string** | Environment the Flink Artifact belongs to. | 
-**DisplayName** | **string** | Display name of the Flink Artifact. | 
-**Class** | **string** | Java class or alias for the artifact as provided by developer. | 
+**UniqueName** | **string** | Unique name of the Flink Artifact per cloud, region, environment scope. | 
+**Class** | Pointer to **string** | Java class or alias for the artifact as provided by developer. Deprecated | [optional] 
 **ContentFormat** | Pointer to **string** | Archive format of the Flink Artifact. | [optional] 
 **Description** | Pointer to **string** | Description of the Flink Artifact. | [optional] 
-**DocumentationLink** | Pointer to **string** | Document link of the Flink Artifact. | [optional] 
+**DocumentationLink** | Pointer to **string** | Documentation link of the Flink Artifact. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of the Flink Artifact. | [optional] [default to "JAVA"]
 **UploadSource** | [**InlineObjectUploadSourceOneOf**](InlineObjectUploadSourceOneOf.md) | Upload source of the Flink Artifact source. | 
 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewInlineObject
 
-`func NewInlineObject(cloud string, region string, environment string, displayName string, class string, uploadSource InlineObjectUploadSourceOneOf, ) *InlineObject`
+`func NewInlineObject(cloud string, region string, environment string, uniqueName string, uploadSource InlineObjectUploadSourceOneOf, ) *InlineObject`
 
 NewInlineObject instantiates a new InlineObject object
 This constructor will assign default values to properties that have it defined,
@@ -94,24 +94,24 @@ and a boolean to check if the value has been set.
 SetEnvironment sets Environment field to given value.
 
 
-### GetDisplayName
+### GetUniqueName
 
-`func (o *InlineObject) GetDisplayName() string`
+`func (o *InlineObject) GetUniqueName() string`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetUniqueName returns the UniqueName field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetUniqueNameOk
 
-`func (o *InlineObject) GetDisplayNameOk() (*string, bool)`
+`func (o *InlineObject) GetUniqueNameOk() (*string, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetUniqueNameOk returns a tuple with the UniqueName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetUniqueName
 
-`func (o *InlineObject) SetDisplayName(v string)`
+`func (o *InlineObject) SetUniqueName(v string)`
 
-SetDisplayName sets DisplayName field to given value.
+SetUniqueName sets UniqueName field to given value.
 
 
 ### GetClass
@@ -133,6 +133,11 @@ and a boolean to check if the value has been set.
 
 SetClass sets Class field to given value.
 
+### HasClass
+
+`func (o *InlineObject) HasClass() bool`
+
+HasClass returns a boolean if a field has been set.
 
 ### GetContentFormat
 

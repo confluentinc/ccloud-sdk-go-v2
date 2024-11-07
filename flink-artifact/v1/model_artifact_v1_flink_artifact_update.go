@@ -49,13 +49,13 @@ type ArtifactV1FlinkArtifactUpdate struct {
 	Region *string `json:"region,omitempty"`
 	// Environment the Flink Artifact belongs to.
 	Environment *string `json:"environment,omitempty"`
-	// Display name of the Flink Artifact.
-	DisplayName *string `json:"display_name,omitempty"`
+	// Unique name of the Flink Artifact per cloud, region, environment scope.
+	UniqueName *string `json:"unique_name,omitempty"`
 	// Archive format of the Flink Artifact.
 	ContentFormat *string `json:"content_format,omitempty"`
 	// Description of the Flink Artifact.
 	Description *string `json:"description,omitempty"`
-	// Document link of the Flink Artifact.
+	// Documentation link of the Flink Artifact.
 	DocumentationLink *string `json:"documentation_link,omitempty"`
 	// Runtime language of the Flink Artifact.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`
@@ -308,36 +308,36 @@ func (o *ArtifactV1FlinkArtifactUpdate) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *ArtifactV1FlinkArtifactUpdate) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+// GetUniqueName returns the UniqueName field value if set, zero value otherwise.
+func (o *ArtifactV1FlinkArtifactUpdate) GetUniqueName() string {
+	if o == nil || o.UniqueName == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+	return *o.UniqueName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetUniqueNameOk returns a tuple with the UniqueName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ArtifactV1FlinkArtifactUpdate) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *ArtifactV1FlinkArtifactUpdate) GetUniqueNameOk() (*string, bool) {
+	if o == nil || o.UniqueName == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.UniqueName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *ArtifactV1FlinkArtifactUpdate) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasUniqueName returns a boolean if a field has been set.
+func (o *ArtifactV1FlinkArtifactUpdate) HasUniqueName() bool {
+	if o != nil && o.UniqueName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *ArtifactV1FlinkArtifactUpdate) SetDisplayName(v string) {
-	o.DisplayName = &v
+// SetUniqueName gets a reference to the given string and assigns it to the UniqueName field.
+func (o *ArtifactV1FlinkArtifactUpdate) SetUniqueName(v string) {
+	o.UniqueName = &v
 }
 
 // GetContentFormat returns the ContentFormat field value if set, zero value otherwise.
@@ -509,7 +509,7 @@ func (o *ArtifactV1FlinkArtifactUpdate) Redact() {
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
-	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.UniqueName)
 	o.recurseRedact(o.ContentFormat)
 	o.recurseRedact(o.Description)
 	o.recurseRedact(o.DocumentationLink)
@@ -570,8 +570,8 @@ func (o ArtifactV1FlinkArtifactUpdate) MarshalJSON() ([]byte, error) {
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
 	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
+	if o.UniqueName != nil {
+		toSerialize["unique_name"] = o.UniqueName
 	}
 	if o.ContentFormat != nil {
 		toSerialize["content_format"] = o.ContentFormat

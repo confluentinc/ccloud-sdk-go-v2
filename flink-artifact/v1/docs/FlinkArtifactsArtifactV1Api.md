@@ -35,7 +35,7 @@ import (
 func main() {
     cloud := "AWS" // string | Scope the operation to the given cloud.
     region := "us-east-1" // string | Scope the operation to the given region.
-    inlineObject := *openapiclient.NewInlineObject("AWS", "us-east-1", "env-00000", "DisplayName_example", "io.confluent.example.SumScalarFunction", openapiclient.InlineObjectUploadSourceOneOf{ArtifactV1UploadSourcePresignedUrl: openapiclient.NewArtifactV1UploadSourcePresignedUrl()}) // InlineObject |  (optional)
+    inlineObject := *openapiclient.NewInlineObject("AWS", "us-east-1", "env-00000", "UniqueName_example", openapiclient.InlineObjectUploadSourceOneOf{ArtifactV1UploadSourcePresignedUrl: openapiclient.NewArtifactV1UploadSourcePresignedUrl()}) // InlineObject |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## DeleteArtifactV1FlinkArtifact
 
-> DeleteArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).Execute()
+> DeleteArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).Environment(environment).Execute()
 
 Delete a Flink Artifact
 
@@ -105,11 +105,12 @@ import (
 func main() {
     cloud := "AWS" // string | Scope the operation to the given cloud.
     region := "us-east-1" // string | Scope the operation to the given region.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the flink artifact.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.DeleteArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).Execute()
+    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.DeleteArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FlinkArtifactsArtifactV1Api.DeleteArtifactV1FlinkArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,6 +135,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cloud** | **string** | Scope the operation to the given cloud. | 
  **region** | **string** | Scope the operation to the given region. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -156,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## GetArtifactV1FlinkArtifact
 
-> ArtifactV1FlinkArtifact GetArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).Execute()
+> ArtifactV1FlinkArtifact GetArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).Environment(environment).Execute()
 
 Read a Flink Artifact
 
@@ -177,11 +179,12 @@ import (
 func main() {
     cloud := "AWS" // string | Scope the operation to the given cloud.
     region := "us-east-1" // string | Scope the operation to the given region.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the flink artifact.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.GetArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).Execute()
+    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.GetArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FlinkArtifactsArtifactV1Api.GetArtifactV1FlinkArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +211,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cloud** | **string** | Scope the operation to the given cloud. | 
  **region** | **string** | Scope the operation to the given region. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -251,7 +255,7 @@ import (
 func main() {
     cloud := "AWS" // string | Filter the results by exact match for cloud.
     region := "us-east-1" // string | Filter the results by exact match for region.
-    environment := "env-00000" // string | Filter the results by exact match for environment. (optional)
+    environment := "env-00000" // string | Filter the results by exact match for environment.
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
@@ -304,7 +308,7 @@ Name | Type | Description  | Notes
 
 ## UpdateArtifactV1FlinkArtifact
 
-> ArtifactV1FlinkArtifact UpdateArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).ArtifactV1FlinkArtifactUpdate(artifactV1FlinkArtifactUpdate).Execute()
+> ArtifactV1FlinkArtifact UpdateArtifactV1FlinkArtifact(ctx, id).Cloud(cloud).Region(region).Environment(environment).ArtifactV1FlinkArtifactUpdate(artifactV1FlinkArtifactUpdate).Execute()
 
 Update a Flink Artifact
 
@@ -325,12 +329,13 @@ import (
 func main() {
     cloud := "AWS" // string | Scope the operation to the given cloud.
     region := "us-east-1" // string | Scope the operation to the given region.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the flink artifact.
     artifactV1FlinkArtifactUpdate := *openapiclient.NewArtifactV1FlinkArtifactUpdate() // ArtifactV1FlinkArtifactUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.UpdateArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).ArtifactV1FlinkArtifactUpdate(artifactV1FlinkArtifactUpdate).Execute()
+    resp, r, err := api_client.FlinkArtifactsArtifactV1Api.UpdateArtifactV1FlinkArtifact(context.Background(), id).Cloud(cloud).Region(region).Environment(environment).ArtifactV1FlinkArtifactUpdate(artifactV1FlinkArtifactUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FlinkArtifactsArtifactV1Api.UpdateArtifactV1FlinkArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,6 +362,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cloud** | **string** | Scope the operation to the given cloud. | 
  **region** | **string** | Scope the operation to the given region. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
 
  **artifactV1FlinkArtifactUpdate** | [**ArtifactV1FlinkArtifactUpdate**](ArtifactV1FlinkArtifactUpdate.md) |  | 
 

@@ -46,6 +46,8 @@ type ArtifactV1PresignedUrl struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The Cloud provider region the Flink Artifact archive is uploaded.
 	Region *string `json:"region,omitempty"`
+	// The Environment the uploaded Flink Artifact belongs to.
+	Environment *string `json:"environment,omitempty"`
 	// Unique identifier of this upload.
 	UploadId *string `json:"upload_id,omitempty"`
 	// Upload URL for the Flink Artifact archive.
@@ -231,6 +233,38 @@ func (o *ArtifactV1PresignedUrl) SetRegion(v string) {
 	o.Region = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *ArtifactV1PresignedUrl) GetEnvironment() string {
+	if o == nil || o.Environment == nil {
+		var ret string
+		return ret
+	}
+	return *o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ArtifactV1PresignedUrl) GetEnvironmentOk() (*string, bool) {
+	if o == nil || o.Environment == nil {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *ArtifactV1PresignedUrl) HasEnvironment() bool {
+	if o != nil && o.Environment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
+func (o *ArtifactV1PresignedUrl) SetEnvironment(v string) {
+	o.Environment = &v
+}
+
 // GetUploadId returns the UploadId field value if set, zero value otherwise.
 func (o *ArtifactV1PresignedUrl) GetUploadId() string {
 	if o == nil || o.UploadId == nil {
@@ -334,6 +368,7 @@ func (o *ArtifactV1PresignedUrl) Redact() {
 	o.recurseRedact(o.ContentFormat)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
+	o.recurseRedact(o.Environment)
 	o.recurseRedact(o.UploadId)
 	o.recurseRedact(o.UploadUrl)
 	o.recurseRedact(o.UploadFormData)
@@ -385,6 +420,9 @@ func (o ArtifactV1PresignedUrl) MarshalJSON() ([]byte, error) {
 	}
 	if o.Region != nil {
 		toSerialize["region"] = o.Region
+	}
+	if o.Environment != nil {
+		toSerialize["environment"] = o.Environment
 	}
 	if o.UploadId != nil {
 		toSerialize["upload_id"] = o.UploadId
