@@ -49,15 +49,16 @@ type ArtifactV1FlinkArtifact struct {
 	Region *string `json:"region,omitempty"`
 	// Environment the Flink Artifact belongs to.
 	Environment *string `json:"environment,omitempty"`
-	// Display name of the Flink Artifact.
+	// Unique name of the Flink Artifact per cloud, region, environment scope.
 	DisplayName *string `json:"display_name,omitempty"`
-	// Java class or alias for the artifact as provided by developer.
+	// Java class or alias for the artifact as provided by developer. Deprecated
+	// Deprecated
 	Class *string `json:"class,omitempty"`
 	// Archive format of the Flink Artifact.
 	ContentFormat *string `json:"content_format,omitempty"`
 	// Description of the Flink Artifact.
 	Description *string `json:"description,omitempty"`
-	// Document link of the Flink Artifact.
+	// Documentation link of the Flink Artifact.
 	DocumentationLink *string `json:"documentation_link,omitempty"`
 	// Runtime language of the Flink Artifact.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`
@@ -343,6 +344,7 @@ func (o *ArtifactV1FlinkArtifact) SetDisplayName(v string) {
 }
 
 // GetClass returns the Class field value if set, zero value otherwise.
+// Deprecated
 func (o *ArtifactV1FlinkArtifact) GetClass() string {
 	if o == nil || o.Class == nil {
 		var ret string
@@ -353,6 +355,7 @@ func (o *ArtifactV1FlinkArtifact) GetClass() string {
 
 // GetClassOk returns a tuple with the Class field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ArtifactV1FlinkArtifact) GetClassOk() (*string, bool) {
 	if o == nil || o.Class == nil {
 		return nil, false
@@ -370,6 +373,7 @@ func (o *ArtifactV1FlinkArtifact) HasClass() bool {
 }
 
 // SetClass gets a reference to the given string and assigns it to the Class field.
+// Deprecated
 func (o *ArtifactV1FlinkArtifact) SetClass(v string) {
 	o.Class = &v
 }

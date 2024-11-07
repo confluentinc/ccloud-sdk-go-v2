@@ -49,13 +49,13 @@ type ArtifactV1FlinkArtifactUpdate struct {
 	Region *string `json:"region,omitempty"`
 	// Environment the Flink Artifact belongs to.
 	Environment *string `json:"environment,omitempty"`
-	// Display name of the Flink Artifact.
+	// Unique name of the Flink Artifact per cloud, region, environment scope.
 	DisplayName *string `json:"display_name,omitempty"`
 	// Archive format of the Flink Artifact.
 	ContentFormat *string `json:"content_format,omitempty"`
 	// Description of the Flink Artifact.
 	Description *string `json:"description,omitempty"`
-	// Document link of the Flink Artifact.
+	// Documentation link of the Flink Artifact.
 	DocumentationLink *string `json:"documentation_link,omitempty"`
 	// Runtime language of the Flink Artifact.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`

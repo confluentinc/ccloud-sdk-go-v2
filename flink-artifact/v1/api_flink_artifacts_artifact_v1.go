@@ -44,7 +44,7 @@ type FlinkArtifactsArtifactV1Api interface {
 	/*
 			CreateArtifactV1FlinkArtifact Create a new Flink Artifact.
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Make a request to create a flink artifact.
 
@@ -60,7 +60,7 @@ type FlinkArtifactsArtifactV1Api interface {
 	/*
 			DeleteArtifactV1FlinkArtifact Delete a Flink Artifact
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Make a request to delete a flink artifact.
 
@@ -76,7 +76,7 @@ type FlinkArtifactsArtifactV1Api interface {
 	/*
 			GetArtifactV1FlinkArtifact Read a Flink Artifact
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Make a request to read a flink artifact.
 
@@ -93,12 +93,9 @@ type FlinkArtifactsArtifactV1Api interface {
 	/*
 			ListArtifactV1FlinkArtifacts List of Flink Artifacts
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Retrieve a sorted, filtered, paginated list of all flink artifacts.
-
-		If no `environment` filter is specified, returns Artifacts across envs for cloud & region.
-
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 			 @return ApiListArtifactV1FlinkArtifactsRequest
@@ -112,7 +109,7 @@ type FlinkArtifactsArtifactV1Api interface {
 	/*
 			UpdateArtifactV1FlinkArtifact Update a Flink Artifact
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Make a request to update a flink artifact.
 
@@ -163,7 +160,7 @@ func (r ApiCreateArtifactV1FlinkArtifactRequest) Execute() (ArtifactV1FlinkArtif
 /*
 CreateArtifactV1FlinkArtifact Create a new Flink Artifact.
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a flink artifact.
 
@@ -325,11 +322,12 @@ func (a *FlinkArtifactsArtifactV1ApiService) CreateArtifactV1FlinkArtifactExecut
 }
 
 type ApiDeleteArtifactV1FlinkArtifactRequest struct {
-	ctx        _context.Context
-	ApiService FlinkArtifactsArtifactV1Api
-	cloud      *string
-	region     *string
-	id         string
+	ctx         _context.Context
+	ApiService  FlinkArtifactsArtifactV1Api
+	cloud       *string
+	region      *string
+	environment *string
+	id          string
 }
 
 // Scope the operation to the given cloud.
@@ -344,6 +342,12 @@ func (r ApiDeleteArtifactV1FlinkArtifactRequest) Region(region string) ApiDelete
 	return r
 }
 
+// Scope the operation to the given environment.
+func (r ApiDeleteArtifactV1FlinkArtifactRequest) Environment(environment string) ApiDeleteArtifactV1FlinkArtifactRequest {
+	r.environment = &environment
+	return r
+}
+
 func (r ApiDeleteArtifactV1FlinkArtifactRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteArtifactV1FlinkArtifactExecute(r)
 }
@@ -351,7 +355,7 @@ func (r ApiDeleteArtifactV1FlinkArtifactRequest) Execute() (*_nethttp.Response, 
 /*
 DeleteArtifactV1FlinkArtifact Delete a Flink Artifact
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a flink artifact.
 
@@ -394,9 +398,13 @@ func (a *FlinkArtifactsArtifactV1ApiService) DeleteArtifactV1FlinkArtifactExecut
 	if r.region == nil {
 		return nil, reportError("region is required and must be specified")
 	}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
 	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -492,11 +500,12 @@ func (a *FlinkArtifactsArtifactV1ApiService) DeleteArtifactV1FlinkArtifactExecut
 }
 
 type ApiGetArtifactV1FlinkArtifactRequest struct {
-	ctx        _context.Context
-	ApiService FlinkArtifactsArtifactV1Api
-	cloud      *string
-	region     *string
-	id         string
+	ctx         _context.Context
+	ApiService  FlinkArtifactsArtifactV1Api
+	cloud       *string
+	region      *string
+	environment *string
+	id          string
 }
 
 // Scope the operation to the given cloud.
@@ -511,6 +520,12 @@ func (r ApiGetArtifactV1FlinkArtifactRequest) Region(region string) ApiGetArtifa
 	return r
 }
 
+// Scope the operation to the given environment.
+func (r ApiGetArtifactV1FlinkArtifactRequest) Environment(environment string) ApiGetArtifactV1FlinkArtifactRequest {
+	r.environment = &environment
+	return r
+}
+
 func (r ApiGetArtifactV1FlinkArtifactRequest) Execute() (ArtifactV1FlinkArtifact, *_nethttp.Response, error) {
 	return r.ApiService.GetArtifactV1FlinkArtifactExecute(r)
 }
@@ -518,7 +533,7 @@ func (r ApiGetArtifactV1FlinkArtifactRequest) Execute() (ArtifactV1FlinkArtifact
 /*
 GetArtifactV1FlinkArtifact Read a Flink Artifact
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a flink artifact.
 
@@ -564,9 +579,13 @@ func (a *FlinkArtifactsArtifactV1ApiService) GetArtifactV1FlinkArtifactExecute(r
 	if r.region == nil {
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
 	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -717,11 +736,9 @@ func (r ApiListArtifactV1FlinkArtifactsRequest) Execute() (ArtifactV1FlinkArtifa
 /*
 ListArtifactV1FlinkArtifacts List of Flink Artifacts
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all flink artifacts.
-
-If no `environment` filter is specified, returns Artifacts across envs for cloud & region.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListArtifactV1FlinkArtifactsRequest
@@ -762,12 +779,13 @@ func (a *FlinkArtifactsArtifactV1ApiService) ListArtifactV1FlinkArtifactsExecute
 	if r.region == nil {
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
 	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
-	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	}
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
 	}
@@ -872,6 +890,7 @@ type ApiUpdateArtifactV1FlinkArtifactRequest struct {
 	ApiService                    FlinkArtifactsArtifactV1Api
 	cloud                         *string
 	region                        *string
+	environment                   *string
 	id                            string
 	artifactV1FlinkArtifactUpdate *ArtifactV1FlinkArtifactUpdate
 }
@@ -887,6 +906,12 @@ func (r ApiUpdateArtifactV1FlinkArtifactRequest) Region(region string) ApiUpdate
 	r.region = &region
 	return r
 }
+
+// Scope the operation to the given environment.
+func (r ApiUpdateArtifactV1FlinkArtifactRequest) Environment(environment string) ApiUpdateArtifactV1FlinkArtifactRequest {
+	r.environment = &environment
+	return r
+}
 func (r ApiUpdateArtifactV1FlinkArtifactRequest) ArtifactV1FlinkArtifactUpdate(artifactV1FlinkArtifactUpdate ArtifactV1FlinkArtifactUpdate) ApiUpdateArtifactV1FlinkArtifactRequest {
 	r.artifactV1FlinkArtifactUpdate = &artifactV1FlinkArtifactUpdate
 	return r
@@ -899,7 +924,7 @@ func (r ApiUpdateArtifactV1FlinkArtifactRequest) Execute() (ArtifactV1FlinkArtif
 /*
 UpdateArtifactV1FlinkArtifact Update a Flink Artifact
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a flink artifact.
 
@@ -945,9 +970,13 @@ func (a *FlinkArtifactsArtifactV1ApiService) UpdateArtifactV1FlinkArtifactExecut
 	if r.region == nil {
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
 	localVarQueryParams.Add("cloud", parameterToString(*r.cloud, ""))
 	localVarQueryParams.Add("region", parameterToString(*r.region, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

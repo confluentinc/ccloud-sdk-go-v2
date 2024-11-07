@@ -43,7 +43,7 @@ type PresignedUrlsArtifactV1Api interface {
 	/*
 			PresignedUploadUrlArtifactV1PresignedUrl Request a presigned upload URL for a new Flink Artifact.
 
-			[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 		Request a presigned upload URL to upload a Flink Artifact archive.
 
@@ -78,7 +78,7 @@ func (r ApiPresignedUploadUrlArtifactV1PresignedUrlRequest) Execute() (ArtifactV
 /*
 PresignedUploadUrlArtifactV1PresignedUrl Request a presigned upload URL for a new Flink Artifact.
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Request a presigned upload URL to upload a Flink Artifact archive.
 
