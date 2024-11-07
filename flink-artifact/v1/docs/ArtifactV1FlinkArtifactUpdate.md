@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **Cloud** | Pointer to **string** | Cloud provider where the Flink Artifact archive is uploaded. | [optional] 
 **Region** | Pointer to **string** | The Cloud provider region the Flink Artifact archive is uploaded. | [optional] 
 **Environment** | Pointer to **string** | Environment the Flink Artifact belongs to. | [optional] 
-**DisplayName** | Pointer to **string** | Display name of the Flink Artifact. | [optional] 
+**UniqueName** | Pointer to **string** | Unique name of the Flink Artifact per cloud, region, environment scope. | [optional] 
 **ContentFormat** | Pointer to **string** | Archive format of the Flink Artifact. | [optional] 
 **Description** | Pointer to **string** | Description of the Flink Artifact. | [optional] 
-**DocumentationLink** | Pointer to **string** | Document link of the Flink Artifact. | [optional] 
+**DocumentationLink** | Pointer to **string** | Documentation link of the Flink Artifact. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of the Flink Artifact. | [optional] [default to "JAVA"]
 **Versions** | Pointer to [**[]ArtifactV1FlinkArtifactVersion**](ArtifactV1FlinkArtifactVersion.md) | Versions associated with this Flink Artifact. | [optional] 
 
@@ -212,30 +212,30 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
-### GetDisplayName
+### GetUniqueName
 
-`func (o *ArtifactV1FlinkArtifactUpdate) GetDisplayName() string`
+`func (o *ArtifactV1FlinkArtifactUpdate) GetUniqueName() string`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetUniqueName returns the UniqueName field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetUniqueNameOk
 
-`func (o *ArtifactV1FlinkArtifactUpdate) GetDisplayNameOk() (*string, bool)`
+`func (o *ArtifactV1FlinkArtifactUpdate) GetUniqueNameOk() (*string, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetUniqueNameOk returns a tuple with the UniqueName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetUniqueName
 
-`func (o *ArtifactV1FlinkArtifactUpdate) SetDisplayName(v string)`
+`func (o *ArtifactV1FlinkArtifactUpdate) SetUniqueName(v string)`
 
-SetDisplayName sets DisplayName field to given value.
+SetUniqueName sets UniqueName field to given value.
 
-### HasDisplayName
+### HasUniqueName
 
-`func (o *ArtifactV1FlinkArtifactUpdate) HasDisplayName() bool`
+`func (o *ArtifactV1FlinkArtifactUpdate) HasUniqueName() bool`
 
-HasDisplayName returns a boolean if a field has been set.
+HasUniqueName returns a boolean if a field has been set.
 
 ### GetContentFormat
 
