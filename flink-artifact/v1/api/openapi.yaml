@@ -14,9 +14,13 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     FlinkArtifact objects represent Flink Artifacts on Confluent Cloud.
 
@@ -25,7 +29,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/artifact.v1.FlinkArtifact" />
   name: Flink Artifacts (artifact/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     Request a presigned upload URL for new Flink Artifact. Note that
     the URL policy expires in one hour. If the policy expires, you can request
@@ -36,7 +40,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/artifact.v1.PresignedUrl" />
   name: Presigned Urls (artifact/v1)
 - description: |-
-    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     FlinkArtifactVersion objects represent Flink Artifact Versions on Confluent Cloud.
 
@@ -47,12 +51,10 @@ tags:
 paths:
   /artifact/v1/flink-artifacts:
     get:
-      description: |
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all flink artifacts.
-
-        If no `environment` filter is specified, returns Artifacts across envs for cloud & region.
       operationId: listArtifactV1FlinkArtifacts
       parameters:
       - description: Filter the results by exact match for cloud.
@@ -78,7 +80,7 @@ paths:
         explode: true
         in: query
         name: environment
-        required: false
+        required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
@@ -281,7 +283,6 @@ paths:
       summary: List of Flink Artifacts
       tags:
       - Flink Artifacts (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -368,7 +369,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create a flink artifact.
       operationId: createArtifactV1FlinkArtifact
@@ -419,12 +420,14 @@ paths:
                   maxLength: 255
                   type: string
                 display_name:
-                  description: Display name of the Flink Artifact.
+                  description: Unique name of the Flink Artifact per cloud, region,
+                    environment scope.
                   maxLength: 60
                   type: string
                 class:
+                  deprecated: true
                   description: Java class or alias for the artifact as provided by
-                    developer.
+                    developer. Deprecated
                   example: io.confluent.example.SumScalarFunction
                   maxLength: 150
                   pattern: ^(([a-zA-Z][a-zA-Z_$0-9]*(\.[a-zA-Z][a-zA-Z_$0-9]*)*)\.)?([a-zA-Z][a-zA-Z_$0-9]*)$
@@ -441,7 +444,7 @@ paths:
                   maxLength: 256
                   type: string
                 documentation_link:
-                  description: Document link of the Flink Artifact.
+                  description: Documentation link of the Flink Artifact.
                   maxLength: 512
                   pattern: ^$|^(http://|https://).+
                   type: string
@@ -464,7 +467,6 @@ paths:
                   type: object
                   x-one-of-name: InlineObjectUploadSourceOneOf
               required:
-              - class
               - cloud
               - display_name
               - environment
@@ -479,7 +481,6 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/artifact.v1.FlinkArtifact'
                 - required:
-                  - class
                   - cloud
                   - display_name
                   - environment
@@ -718,7 +719,6 @@ paths:
       summary: Create a new Flink Artifact.
       tags:
       - Flink Artifacts (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -842,11 +842,10 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"class\":\"io.confluent.example.SumScalarFunction\",\"content_format\":\"JAR\",\"description\":\"string\",\"documentation_link\":\"string\",\"runtime_language\":\"JAVA\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Flink Artifact API EA
   /artifact/v1/flink-artifacts/{id}:
     delete:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete a flink artifact.
       operationId: deleteArtifactV1FlinkArtifact
@@ -865,6 +864,15 @@ paths:
         explode: true
         in: query
         name: region
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -1069,19 +1077,18 @@ paths:
       summary: Delete a Flink Artifact
       tags:
       - Flink Artifacts (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1' \
+            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1")
+            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1089,7 +1096,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1102,7 +1109,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1", headers=headers)
+          conn.request("DELETE", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1116,7 +1123,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1",
+            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1141,7 +1148,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1150,13 +1157,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a flink artifact.
       operationId: getArtifactV1FlinkArtifact
@@ -1179,6 +1186,15 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The unique identifier for the flink artifact.
         explode: false
         in: path
@@ -1196,7 +1212,6 @@ paths:
                 - $ref: '#/components/schemas/artifact.v1.FlinkArtifact'
                 - required:
                   - api_version
-                  - class
                   - cloud
                   - display_name
                   - environment
@@ -1394,19 +1409,18 @@ paths:
       summary: Read a Flink Artifact
       tags:
       - Flink Artifacts (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1' \
+            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1")
+            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1414,7 +1428,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1427,7 +1441,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1", headers=headers)
+          conn.request("GET", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1441,7 +1455,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1",
+            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1466,7 +1480,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1475,13 +1489,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a flink artifact.
 
@@ -1501,6 +1515,15 @@ paths:
         explode: true
         in: query
         name: region
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -1527,7 +1550,6 @@ paths:
                 - $ref: '#/components/schemas/artifact.v1.FlinkArtifact'
                 - required:
                   - api_version
-                  - class
                   - cloud
                   - display_name
                   - environment
@@ -1778,12 +1800,11 @@ paths:
       summary: Update a Flink Artifact
       tags:
       - Flink Artifacts (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1' \
+            --url 'https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"cloud":"AWS","region":"us-east-1","environment":"env-00000","display_name":"string","class":"io.confluent.example.SumScalarFunction","content_format":"JAR","description":"string","documentation_link":"string","runtime_language":"JAVA","versions":[{"version":"cfa-ver-001","release_notes":"string","is_beta":true,"artifact_id":{},"upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}]}'
@@ -1794,7 +1815,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"class\":\"io.confluent.example.SumScalarFunction\",\"content_format\":\"JAR\",\"description\":\"string\",\"documentation_link\":\"string\",\"runtime_language\":\"JAVA\",\"versions\":[{\"version\":\"cfa-ver-001\",\"release_notes\":\"string\",\"is_beta\":true,\"artifact_id\":{},\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}]}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1")
+            .url("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1803,7 +1824,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\
           \":\\\"us-east-1\\\",\\\"environment\\\":\\\"env-00000\\\",\\\"display_name\\\
           \":\\\"string\\\",\\\"class\\\":\\\"io.confluent.example.SumScalarFunction\\\
@@ -1831,7 +1852,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1", payload, headers)
+          conn.request("PATCH", "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1845,7 +1866,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1",
+            "path": "/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1894,7 +1915,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1906,17 +1927,16 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1");
+          var client = new RestClient("https://api.confluent.cloud/artifact/v1/flink-artifacts/{id}?cloud=AWS&region=us-east-1&environment=env-00000");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"class\":\"io.confluent.example.SumScalarFunction\",\"content_format\":\"JAR\",\"description\":\"string\",\"documentation_link\":\"string\",\"runtime_language\":\"JAVA\",\"versions\":[{\"version\":\"cfa-ver-001\",\"release_notes\":\"string\",\"is_beta\":true,\"artifact_id\":{},\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}]}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Flink Artifact API EA
   /artifact/v1/presigned-upload-url:
     post:
       description: |-
-        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Flink Artifact API EA](https://img.shields.io/badge/-Request%20Access%20To%20Flink%20Artifact%20API%20EA-%23bc8540)](mailto:ccloud-api-access+artifact-v1-early-access@confluent.io?subject=Request%20to%20join%20artifact/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20artifact/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Request a presigned upload URL to upload a Flink Artifact archive.
       operationId: presigned-upload-urlArtifactV1PresignedUrl
@@ -1929,6 +1949,7 @@ paths:
               - required:
                 - cloud
                 - content_format
+                - environment
                 - region
                 type: object
       responses:
@@ -2131,7 +2152,6 @@ paths:
       summary: Request a presigned upload URL for a new Flink Artifact.
       tags:
       - Presigned Urls (artifact/v1)
-      x-request-access-name: Flink Artifact API EA
       x-name: artifact.v1.PresignedUrl
       x-codeSamples:
       - lang: Shell
@@ -2140,13 +2160,13 @@ paths:
             --url https://api.confluent.cloud/artifact/v1/presigned-upload-url \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"content_format":"JAR","cloud":"AWS","region":"us-east-1"}'
+            --data '{"content_format":"JAR","cloud":"AWS","region":"us-east-1","environment":"env-00000"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/artifact/v1/presigned-upload-url")
             .post(body)
@@ -2159,19 +2179,19 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/artifact/v1/presigned-upload-url\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"content_format\\\":\\\"JAR\\\"\
-          ,\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"us-east-1\\\"}\")\n\n\treq,\
-          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          ,\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"environment\\\
+          \":\\\"env-00000\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\"}"
+          payload = "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}"
 
           headers = {
               'content-type': "application/json",
@@ -2212,7 +2232,12 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({content_format: 'JAR', cloud: 'AWS', region: 'us-east-1'}));
+          req.write(JSON.stringify({
+            content_format: 'JAR',
+            cloud: 'AWS',
+            region: 'us-east-1',
+            environment: 'env-00000'
+          }));
           req.end();
       - lang: C
         source: |-
@@ -2226,7 +2251,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2235,9 +2260,8 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Flink Artifact API EA
 components:
   requestBodies:
     inline_object:
@@ -2530,11 +2554,14 @@ components:
           maxLength: 255
           type: string
         display_name:
-          description: Display name of the Flink Artifact.
+          description: Unique name of the Flink Artifact per cloud, region, environment
+            scope.
           maxLength: 60
           type: string
         class:
+          deprecated: true
           description: Java class or alias for the artifact as provided by developer.
+            Deprecated
           example: io.confluent.example.SumScalarFunction
           maxLength: 150
           pattern: ^(([a-zA-Z][a-zA-Z_$0-9]*(\.[a-zA-Z][a-zA-Z_$0-9]*)*)\.)?([a-zA-Z][a-zA-Z_$0-9]*)$
@@ -2552,7 +2579,7 @@ components:
           maxLength: 256
           type: string
         documentation_link:
-          description: Document link of the Flink Artifact.
+          description: Documentation link of the Flink Artifact.
           maxLength: 512
           pattern: ^$|^(http://|https://).+
           type: string
@@ -2613,6 +2640,11 @@ components:
         region:
           description: The Cloud provider region the Flink Artifact archive is uploaded.
           example: us-east-1
+          readOnly: true
+          type: string
+        environment:
+          description: The Environment the uploaded Flink Artifact belongs to.
+          example: env-00000
           readOnly: true
           type: string
         upload_id:
@@ -2732,6 +2764,11 @@ components:
           example: us-east-1
           maxLength: 60
           type: string
+        environment:
+          description: The Environment the uploaded Flink Artifact belongs to.
+          example: env-00000
+          maxLength: 255
+          type: string
       type: object
     artifact.v1.UploadSource.PresignedUrl:
       description: |-
@@ -2830,7 +2867,6 @@ components:
             allOf:
             - $ref: '#/components/schemas/artifact.v1.FlinkArtifact'
             - required:
-              - class
               - cloud
               - display_name
               - environment
@@ -3070,7 +3106,8 @@ components:
           maxLength: 255
           type: string
         display_name:
-          description: Display name of the Flink Artifact.
+          description: Unique name of the Flink Artifact per cloud, region, environment
+            scope.
           maxLength: 60
           type: string
         content_format:
@@ -3085,7 +3122,7 @@ components:
           maxLength: 256
           type: string
         documentation_link:
-          description: Document link of the Flink Artifact.
+          description: Documentation link of the Flink Artifact.
           maxLength: 512
           pattern: ^$|^(http://|https://).+
           type: string
@@ -3125,11 +3162,14 @@ components:
           maxLength: 255
           type: string
         display_name:
-          description: Display name of the Flink Artifact.
+          description: Unique name of the Flink Artifact per cloud, region, environment
+            scope.
           maxLength: 60
           type: string
         class:
+          deprecated: true
           description: Java class or alias for the artifact as provided by developer.
+            Deprecated
           example: io.confluent.example.SumScalarFunction
           maxLength: 150
           pattern: ^(([a-zA-Z][a-zA-Z_$0-9]*(\.[a-zA-Z][a-zA-Z_$0-9]*)*)\.)?([a-zA-Z][a-zA-Z_$0-9]*)$
@@ -3146,7 +3186,7 @@ components:
           maxLength: 256
           type: string
         documentation_link:
-          description: Document link of the Flink Artifact.
+          description: Documentation link of the Flink Artifact.
           maxLength: 512
           pattern: ^$|^(http://|https://).+
           type: string
@@ -3169,7 +3209,6 @@ components:
           type: object
           x-one-of-name: InlineObjectUploadSourceOneOf
       required:
-      - class
       - cloud
       - display_name
       - environment

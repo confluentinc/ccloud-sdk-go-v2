@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **Cloud** | Pointer to **string** | Cloud provider where the Flink Artifact archive is uploaded. | [optional] 
 **Region** | Pointer to **string** | The Cloud provider region the Flink Artifact archive is uploaded. | [optional] 
 **Environment** | Pointer to **string** | Environment the Flink Artifact belongs to. | [optional] 
-**DisplayName** | Pointer to **string** | Display name of the Flink Artifact. | [optional] 
+**DisplayName** | Pointer to **string** | Unique name of the Flink Artifact per cloud, region, environment scope. | [optional] 
 **ContentFormat** | Pointer to **string** | Archive format of the Flink Artifact. | [optional] 
 **Description** | Pointer to **string** | Description of the Flink Artifact. | [optional] 
-**DocumentationLink** | Pointer to **string** | Document link of the Flink Artifact. | [optional] 
+**DocumentationLink** | Pointer to **string** | Documentation link of the Flink Artifact. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of the Flink Artifact. | [optional] [default to "JAVA"]
 **Versions** | Pointer to [**[]ArtifactV1FlinkArtifactVersion**](ArtifactV1FlinkArtifactVersion.md) | Versions associated with this Flink Artifact. | [optional] 
 
