@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCclV1CustomCodeLogging
 
-> DeleteCclV1CustomCodeLogging(ctx, id).Execute()
+> DeleteCclV1CustomCodeLogging(ctx, id).Environment(environment).Execute()
 
 Delete a Custom Code Logging
 
@@ -99,11 +99,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the custom code logging.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.DeleteCclV1CustomCodeLogging(context.Background(), id).Execute()
+    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.DeleteCclV1CustomCodeLogging(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomCodeLoggingsCclV1Api.DeleteCclV1CustomCodeLogging``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,6 +127,7 @@ Other parameters are passed through a pointer to a apiDeleteCclV1CustomCodeLoggi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -148,7 +150,7 @@ Name | Type | Description  | Notes
 
 ## GetCclV1CustomCodeLogging
 
-> CclV1CustomCodeLogging GetCclV1CustomCodeLogging(ctx, id).Execute()
+> CclV1CustomCodeLogging GetCclV1CustomCodeLogging(ctx, id).Environment(environment).Execute()
 
 Read a Custom Code Logging
 
@@ -167,11 +169,12 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the custom code logging.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.GetCclV1CustomCodeLogging(context.Background(), id).Execute()
+    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.GetCclV1CustomCodeLogging(context.Background(), id).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomCodeLoggingsCclV1Api.GetCclV1CustomCodeLogging``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -196,6 +199,7 @@ Other parameters are passed through a pointer to a apiGetCclV1CustomCodeLoggingR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
 
 ### Return type
@@ -288,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCclV1CustomCodeLogging
 
-> CclV1CustomCodeLogging UpdateCclV1CustomCodeLogging(ctx, id).CclV1CustomCodeLoggingUpdate(cclV1CustomCodeLoggingUpdate).Execute()
+> CclV1CustomCodeLogging UpdateCclV1CustomCodeLogging(ctx, id).Environment(environment).CclV1CustomCodeLoggingUpdate(cclV1CustomCodeLoggingUpdate).Execute()
 
 Update a Custom Code Logging
 
@@ -307,12 +311,13 @@ import (
 )
 
 func main() {
+    environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the custom code logging.
     cclV1CustomCodeLoggingUpdate := *openapiclient.NewCclV1CustomCodeLoggingUpdate() // CclV1CustomCodeLoggingUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.UpdateCclV1CustomCodeLogging(context.Background(), id).CclV1CustomCodeLoggingUpdate(cclV1CustomCodeLoggingUpdate).Execute()
+    resp, r, err := api_client.CustomCodeLoggingsCclV1Api.UpdateCclV1CustomCodeLogging(context.Background(), id).Environment(environment).CclV1CustomCodeLoggingUpdate(cclV1CustomCodeLoggingUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomCodeLoggingsCclV1Api.UpdateCclV1CustomCodeLogging``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -337,6 +342,7 @@ Other parameters are passed through a pointer to a apiUpdateCclV1CustomCodeLoggi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **environment** | **string** | Scope the operation to the given environment. | 
 
  **cclV1CustomCodeLoggingUpdate** | [**CclV1CustomCodeLoggingUpdate**](CclV1CustomCodeLoggingUpdate.md) |  | 
 

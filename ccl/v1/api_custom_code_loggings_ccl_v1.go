@@ -301,9 +301,16 @@ func (a *CustomCodeLoggingsCclV1ApiService) CreateCclV1CustomCodeLoggingExecute(
 }
 
 type ApiDeleteCclV1CustomCodeLoggingRequest struct {
-	ctx        _context.Context
-	ApiService CustomCodeLoggingsCclV1Api
-	id         string
+	ctx         _context.Context
+	ApiService  CustomCodeLoggingsCclV1Api
+	environment *string
+	id          string
+}
+
+// Scope the operation to the given environment.
+func (r ApiDeleteCclV1CustomCodeLoggingRequest) Environment(environment string) ApiDeleteCclV1CustomCodeLoggingRequest {
+	r.environment = &environment
+	return r
 }
 
 func (r ApiDeleteCclV1CustomCodeLoggingRequest) Execute() (*_nethttp.Response, error) {
@@ -350,7 +357,11 @@ func (a *CustomCodeLoggingsCclV1ApiService) DeleteCclV1CustomCodeLoggingExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -446,9 +457,16 @@ func (a *CustomCodeLoggingsCclV1ApiService) DeleteCclV1CustomCodeLoggingExecute(
 }
 
 type ApiGetCclV1CustomCodeLoggingRequest struct {
-	ctx        _context.Context
-	ApiService CustomCodeLoggingsCclV1Api
-	id         string
+	ctx         _context.Context
+	ApiService  CustomCodeLoggingsCclV1Api
+	environment *string
+	id          string
+}
+
+// Scope the operation to the given environment.
+func (r ApiGetCclV1CustomCodeLoggingRequest) Environment(environment string) ApiGetCclV1CustomCodeLoggingRequest {
+	r.environment = &environment
+	return r
 }
 
 func (r ApiGetCclV1CustomCodeLoggingRequest) Execute() (CclV1CustomCodeLogging, *_nethttp.Response, error) {
@@ -498,7 +516,11 @@ func (a *CustomCodeLoggingsCclV1ApiService) GetCclV1CustomCodeLoggingExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -779,10 +801,16 @@ func (a *CustomCodeLoggingsCclV1ApiService) ListCclV1CustomCodeLoggingsExecute(r
 type ApiUpdateCclV1CustomCodeLoggingRequest struct {
 	ctx                          _context.Context
 	ApiService                   CustomCodeLoggingsCclV1Api
+	environment                  *string
 	id                           string
 	cclV1CustomCodeLoggingUpdate *CclV1CustomCodeLoggingUpdate
 }
 
+// Scope the operation to the given environment.
+func (r ApiUpdateCclV1CustomCodeLoggingRequest) Environment(environment string) ApiUpdateCclV1CustomCodeLoggingRequest {
+	r.environment = &environment
+	return r
+}
 func (r ApiUpdateCclV1CustomCodeLoggingRequest) CclV1CustomCodeLoggingUpdate(cclV1CustomCodeLoggingUpdate CclV1CustomCodeLoggingUpdate) ApiUpdateCclV1CustomCodeLoggingRequest {
 	r.cclV1CustomCodeLoggingUpdate = &cclV1CustomCodeLoggingUpdate
 	return r
@@ -835,7 +863,11 @@ func (a *CustomCodeLoggingsCclV1ApiService) UpdateCclV1CustomCodeLoggingExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
 
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
