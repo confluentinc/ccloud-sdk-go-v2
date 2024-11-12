@@ -736,6 +736,15 @@ paths:
         Make a request to delete a custom code logging.
       operationId: deleteCclV1CustomCodeLogging
       parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The unique identifier for the custom code logging.
         explode: false
         in: path
@@ -941,14 +950,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}' \
+            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}")
+            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -956,7 +965,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -969,7 +978,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/ccl/v1/custom-code-loggings/{id}", headers=headers)
+          conn.request("DELETE", "/ccl/v1/custom-code-loggings/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -983,7 +992,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ccl/v1/custom-code-loggings/{id}",
+            "path": "/ccl/v1/custom-code-loggings/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1008,7 +1017,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1017,7 +1026,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1028,6 +1037,15 @@ paths:
         Make a request to read a custom code logging.
       operationId: getCclV1CustomCodeLogging
       parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The unique identifier for the custom code logging.
         explode: false
         in: path
@@ -1254,14 +1272,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}' \
+            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}")
+            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1269,7 +1287,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1282,7 +1300,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/ccl/v1/custom-code-loggings/{id}", headers=headers)
+          conn.request("GET", "/ccl/v1/custom-code-loggings/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1296,7 +1314,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ccl/v1/custom-code-loggings/{id}",
+            "path": "/ccl/v1/custom-code-loggings/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1321,7 +1339,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1330,7 +1348,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1342,6 +1360,15 @@ paths:
 
       operationId: updateCclV1CustomCodeLogging
       parameters:
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The unique identifier for the custom code logging.
         explode: false
         in: path
@@ -1634,7 +1661,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}' \
+            --url 'https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"cloud":"AWS","region":"us-west-2","destination_settings":{"kind":"Kafka","cluster_id":"lkc-123","topic":"topic-123","log_level":"INFO"},"environment":{"id":"env-00000","environment":"string"}}'
@@ -1645,7 +1672,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"cloud\":\"AWS\",\"region\":\"us-west-2\",\"destination_settings\":{\"kind\":\"Kafka\",\"cluster_id\":\"lkc-123\",\"topic\":\"topic-123\",\"log_level\":\"INFO\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}")
+            .url("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1654,7 +1681,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\
           \":\\\"us-west-2\\\",\\\"destination_settings\\\":{\\\"kind\\\":\\\"Kafka\\\
           \",\\\"cluster_id\\\":\\\"lkc-123\\\",\\\"topic\\\":\\\"topic-123\\\",\\\
@@ -1678,7 +1705,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/ccl/v1/custom-code-loggings/{id}", payload, headers)
+          conn.request("PATCH", "/ccl/v1/custom-code-loggings/{id}?environment=env-00000", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1692,7 +1719,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/ccl/v1/custom-code-loggings/{id}",
+            "path": "/ccl/v1/custom-code-loggings/{id}?environment=env-00000",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1724,7 +1751,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1736,7 +1763,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}");
+          var client = new RestClient("https://api.confluent.cloud/ccl/v1/custom-code-loggings/{id}?environment=env-00000");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
