@@ -13,10 +13,6 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-- description: Confluent Cloud staging
-  url: https://api.stag.cpdev.cloud
-- description: Confluent Cloud development
-  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -1380,6 +1376,18 @@ paths:
         Retrieve a sorted, filtered, paginated list of all service accounts.
       operationId: listIamV2ServiceAccounts
       parameters:
+      - description: Filter the results by exact match for display_name. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - tf_runner_sa
+        - mySA
+        explode: true
+        in: query
+        name: display_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -1583,14 +1591,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/iam/v2/service-accounts \
+            --url 'https://api.confluent.cloud/iam/v2/service-accounts?display_name=tf_runner_sa,mySA' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts")
+            .url("https://api.confluent.cloud/iam/v2/service-accounts?display_name=tf_runner_sa,mySA")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1598,7 +1606,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts?display_name=tf_runner_sa,mySA\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1611,7 +1619,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/service-accounts", headers=headers)
+          conn.request("GET", "/iam/v2/service-accounts?display_name=tf_runner_sa,mySA", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1625,7 +1633,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts",
+            "path": "/iam/v2/service-accounts?display_name=tf_runner_sa,mySA",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1650,7 +1658,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts?display_name=tf_runner_sa,mySA");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1659,7 +1667,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts?display_name=tf_runner_sa,mySA");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4823,6 +4831,11 @@ components:
           description: The invitation creator
           readOnly: true
       type: object
+    MultipleSearchFilter:
+      description: Filter a collection by a string search for one or more values
+      items:
+        type: string
+      type: array
     SearchFilter:
       description: Filter a collection by a string search
       type: string
