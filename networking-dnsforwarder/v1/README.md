@@ -100,6 +100,8 @@ Class | Method | HTTP request | Description
  - [NetworkingV1DnsForwarderSpecUpdateConfigOneOf](docs/NetworkingV1DnsForwarderSpecUpdateConfigOneOf.md)
  - [NetworkingV1DnsForwarderStatus](docs/NetworkingV1DnsForwarderStatus.md)
  - [NetworkingV1DnsForwarderUpdate](docs/NetworkingV1DnsForwarderUpdate.md)
+ - [NetworkingV1ForwardViaGcpDnsZones](docs/NetworkingV1ForwardViaGcpDnsZones.md)
+ - [NetworkingV1ForwardViaGcpDnsZonesDomainMappings](docs/NetworkingV1ForwardViaGcpDnsZonesDomainMappings.md)
  - [NetworkingV1ForwardViaIp](docs/NetworkingV1ForwardViaIp.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)

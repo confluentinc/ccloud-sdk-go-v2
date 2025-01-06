@@ -987,14 +987,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1002,7 +1002,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1015,7 +1015,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/dns-forwarders/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1029,7 +1029,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/dns-forwarders/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1054,7 +1054,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1063,7 +1063,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1322,14 +1322,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1337,7 +1337,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1350,7 +1350,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/dns-forwarders/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1364,7 +1364,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/dns-forwarders/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1389,7 +1389,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1398,7 +1398,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1720,7 +1720,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/dns-forwarders/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-dnsf-1","domains":["example.com","domainname.com"],"config":{"kind":"ForwardViaIp","dns_server_ips":["10.200.0.0","10.200.0.1"]},"environment":{"id":"env-00000","environment":"string"},"gateway":{"id":"string","environment":"string"}}}'
@@ -1731,7 +1731,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-dnsf-1\",\"domains\":[\"example.com\",\"domainname.com\"],\"config\":{\"kind\":\"ForwardViaIp\",\"dns_server_ips\":[\"10.200.0.0\",\"10.200.0.1\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"gateway\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1740,7 +1740,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/dns-forwarders/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-dnsf-1\\\",\\\"domains\\\":[\\\"example.com\\\",\\\"domainname.com\\\
           \"],\\\"config\\\":{\\\"kind\\\":\\\"ForwardViaIp\\\",\\\"dns_server_ips\\\
@@ -1765,7 +1765,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/dns-forwarders/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/dns-forwarders/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1779,7 +1779,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/dns-forwarders/%7Bid%7D",
+            "path": "/networking/v1/dns-forwarders/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1814,7 +1814,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/dns-forwarders/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1826,7 +1826,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/dns-forwarders/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -2112,21 +2112,27 @@ components:
       properties:
         phase:
           description: |
-            The lifecycle phase of the dns forwarder:
+            The lifecycle phase of the DNS forwarder:
 
-              PROVISIONING: dns forwarder provisioning is in progress;
+              PROVISIONING: DNS forwarder provisioning is in progress;
 
-              READY: dns forwarder is ready;
+              CREATED: DNS forwarder is created. It will automatically become ready once a Kafka cluster is provisioned;
 
-              FAILED: dns forwarder is in a failed state;
+              READY: DNS forwarder is ready;
 
-              DEPROVISIONING: dns forwarder deprovisioning is in progress;
+              FAILED: DNS forwarder is in a failed state;
+
+              DEGRADED: DNS forwarder is in a degraded state, transitioning from 'READY' due to unreachable DNS resolvers;
+
+              DEPROVISIONING: DNS forwarder deprovisioning is in progress;
           example: READY
           readOnly: true
           type: string
           x-extensible-enum:
           - PROVISIONING
+          - CREATED
           - READY
+          - DEGRADED
           - FAILED
           - DEPROVISIONING
         error_code:
@@ -2170,6 +2176,31 @@ components:
       - dns_server_ips
       - kind
       title: ForwardViaIp
+      type: object
+    networking.v1.ForwardViaGcpDnsZones:
+      description: DNS Forwarder Configured via GCP DNS Zones.
+      properties:
+        kind:
+          description: DNS Forwarder Configured via GCP DNS Zones kind type.
+          enum:
+          - ForwardViaGcpDnsZones
+          type: string
+        domain_mappings:
+          additionalProperties:
+            $ref: '#/components/schemas/networking_v1_ForwardViaGcpDnsZones_domain_mappings'
+          description: Mapping of domain names to GCP DNS Zones and Project ID.
+          example:
+            domain1:
+              zone: zone1
+              project: project1
+            domain2:
+              zone: zone2
+              project: project2
+          type: object
+      required:
+      - domain_mappings
+      - kind
+      title: ForwardViaGcpDnsZones
       type: object
     SearchFilter:
       description: Filter a collection by a string search
@@ -2263,9 +2294,11 @@ components:
           discriminator:
             mapping:
               ForwardViaIp: '#/components/schemas/networking.v1.ForwardViaIp'
+              ForwardViaGcpDnsZones: '#/components/schemas/networking.v1.ForwardViaGcpDnsZones'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.ForwardViaIp'
+          - $ref: '#/components/schemas/networking.v1.ForwardViaGcpDnsZones'
           type: object
           x-one-of-name: NetworkingV1DnsForwarderSpecConfigOneOf
         environment:
@@ -2470,9 +2503,11 @@ components:
           discriminator:
             mapping:
               ForwardViaIp: '#/components/schemas/networking.v1.ForwardViaIp'
+              ForwardViaGcpDnsZones: '#/components/schemas/networking.v1.ForwardViaGcpDnsZones'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.ForwardViaIp'
+          - $ref: '#/components/schemas/networking.v1.ForwardViaGcpDnsZones'
           type: object
           x-one-of-name: NetworkingV1DnsForwarderSpecUpdateConfigOneOf
         environment:
@@ -2530,6 +2565,15 @@ components:
           $ref: '#/components/schemas/networking.v1.DnsForwarderSpecUpdate'
         status:
           $ref: '#/components/schemas/networking.v1.DnsForwarderStatus'
+      type: object
+    networking_v1_ForwardViaGcpDnsZones_domain_mappings:
+      properties:
+        zone:
+          description: DNS zone to forward queries to
+          type: string
+        project:
+          description: GCP project ID where the DNS zone resides
+          type: string
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
