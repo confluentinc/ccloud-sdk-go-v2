@@ -33,7 +33,13 @@ import (
 
 // NetworkingV1DnsForwarderSpecConfigOneOf - struct for NetworkingV1DnsForwarderSpecConfigOneOf
 type NetworkingV1DnsForwarderSpecConfigOneOf struct {
-	NetworkingV1ForwardViaIp *NetworkingV1ForwardViaIp
+	NetworkingV1ForwardViaGcpDnsZones *NetworkingV1ForwardViaGcpDnsZones
+	NetworkingV1ForwardViaIp          *NetworkingV1ForwardViaIp
+}
+
+// NetworkingV1ForwardViaGcpDnsZonesAsNetworkingV1DnsForwarderSpecConfigOneOf is a convenience function that returns NetworkingV1ForwardViaGcpDnsZones wrapped in NetworkingV1DnsForwarderSpecConfigOneOf
+func NetworkingV1ForwardViaGcpDnsZonesAsNetworkingV1DnsForwarderSpecConfigOneOf(v *NetworkingV1ForwardViaGcpDnsZones) NetworkingV1DnsForwarderSpecConfigOneOf {
+	return NetworkingV1DnsForwarderSpecConfigOneOf{NetworkingV1ForwardViaGcpDnsZones: v}
 }
 
 // NetworkingV1ForwardViaIpAsNetworkingV1DnsForwarderSpecConfigOneOf is a convenience function that returns NetworkingV1ForwardViaIp wrapped in NetworkingV1DnsForwarderSpecConfigOneOf
@@ -51,6 +57,18 @@ func (dst *NetworkingV1DnsForwarderSpecConfigOneOf) UnmarshalJSON(data []byte) e
 		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
 	}
 
+	// check if the discriminator value is 'ForwardViaGcpDnsZones'
+	if jsonDict["kind"] == "ForwardViaGcpDnsZones" {
+		// try to unmarshal JSON data into NetworkingV1ForwardViaGcpDnsZones
+		err = json.Unmarshal(data, &dst.NetworkingV1ForwardViaGcpDnsZones)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1ForwardViaGcpDnsZones, return on the first match
+		} else {
+			dst.NetworkingV1ForwardViaGcpDnsZones = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1DnsForwarderSpecConfigOneOf as NetworkingV1ForwardViaGcpDnsZones: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'ForwardViaIp'
 	if jsonDict["kind"] == "ForwardViaIp" {
 		// try to unmarshal JSON data into NetworkingV1ForwardViaIp
@@ -60,6 +78,18 @@ func (dst *NetworkingV1DnsForwarderSpecConfigOneOf) UnmarshalJSON(data []byte) e
 		} else {
 			dst.NetworkingV1ForwardViaIp = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1DnsForwarderSpecConfigOneOf as NetworkingV1ForwardViaIp: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.ForwardViaGcpDnsZones'
+	if jsonDict["kind"] == "networking.v1.ForwardViaGcpDnsZones" {
+		// try to unmarshal JSON data into NetworkingV1ForwardViaGcpDnsZones
+		err = json.Unmarshal(data, &dst.NetworkingV1ForwardViaGcpDnsZones)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1ForwardViaGcpDnsZones, return on the first match
+		} else {
+			dst.NetworkingV1ForwardViaGcpDnsZones = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1DnsForwarderSpecConfigOneOf as NetworkingV1ForwardViaGcpDnsZones: %s", err.Error())
 		}
 	}
 
@@ -80,6 +110,14 @@ func (dst *NetworkingV1DnsForwarderSpecConfigOneOf) UnmarshalJSON(data []byte) e
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NetworkingV1DnsForwarderSpecConfigOneOf) MarshalJSON() ([]byte, error) {
+	if src.NetworkingV1ForwardViaGcpDnsZones != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1ForwardViaGcpDnsZones)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1ForwardViaIp != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -93,6 +131,10 @@ func (src NetworkingV1DnsForwarderSpecConfigOneOf) MarshalJSON() ([]byte, error)
 
 // Get the actual instance
 func (obj *NetworkingV1DnsForwarderSpecConfigOneOf) GetActualInstance() interface{} {
+	if obj.NetworkingV1ForwardViaGcpDnsZones != nil {
+		return obj.NetworkingV1ForwardViaGcpDnsZones
+	}
+
 	if obj.NetworkingV1ForwardViaIp != nil {
 		return obj.NetworkingV1ForwardViaIp
 	}
