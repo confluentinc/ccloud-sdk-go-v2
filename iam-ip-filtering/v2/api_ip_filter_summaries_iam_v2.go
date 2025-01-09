@@ -43,7 +43,7 @@ type IPFilterSummariesIamV2Api interface {
 	/*
 	GetIamV2IpFilterSummary Read an IP Filter Summary
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an IP filter summary.
 
@@ -79,7 +79,7 @@ func (r ApiGetIamV2IpFilterSummaryRequest) Execute() (IamV2IpFilterSummary, *_ne
 /*
 GetIamV2IpFilterSummary Read an IP Filter Summary
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an IP filter summary.
 

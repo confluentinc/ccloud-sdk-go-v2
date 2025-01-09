@@ -44,7 +44,7 @@ type IPFiltersIamV2Api interface {
 	/*
 	CreateIamV2IpFilter Create an IP Filter
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an IP filter.
 
@@ -60,7 +60,7 @@ Make a request to create an IP filter.
 	/*
 	DeleteIamV2IpFilter Delete an IP Filter
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an IP filter.
 
@@ -76,7 +76,7 @@ Make a request to delete an IP filter.
 	/*
 	GetIamV2IpFilter Read an IP Filter
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an IP filter.
 
@@ -93,7 +93,7 @@ Make a request to read an IP filter.
 	/*
 	ListIamV2IpFilters List of IP Filters
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all IP filters.
 
@@ -109,7 +109,7 @@ Retrieve a sorted, filtered, paginated list of all IP filters.
 	/*
 	UpdateIamV2IpFilter Update an IP Filter
 
-	[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an IP filter.
 
@@ -147,7 +147,7 @@ func (r ApiCreateIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Respo
 /*
 CreateIamV2IpFilter Create an IP Filter
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an IP filter.
 
@@ -313,7 +313,7 @@ func (r ApiDeleteIamV2IpFilterRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2IpFilter Delete an IP Filter
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an IP filter.
 
@@ -459,7 +459,7 @@ func (r ApiGetIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Response
 /*
 GetIamV2IpFilter Read an IP Filter
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an IP filter.
 
@@ -606,8 +606,7 @@ type ApiListIamV2IpFiltersRequest struct {
 	ctx _context.Context
 	ApiService IPFiltersIamV2Api
 	resourceScope *string
-	includeOnlyOrgScopeFilters *string
-	includeParentScope *string
+	includeParentScopes *string
 	pageSize *int32
 	pageToken *string
 }
@@ -617,14 +616,9 @@ func (r ApiListIamV2IpFiltersRequest) ResourceScope(resourceScope string) ApiLis
 	r.resourceScope = &resourceScope
 	return r
 }
-// List all filters defined at the organization scope. This parameter defaults to false.
-func (r ApiListIamV2IpFiltersRequest) IncludeOnlyOrgScopeFilters(includeOnlyOrgScopeFilters string) ApiListIamV2IpFiltersRequest {
-	r.includeOnlyOrgScopeFilters = &includeOnlyOrgScopeFilters
-	return r
-}
 // If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter.
-func (r ApiListIamV2IpFiltersRequest) IncludeParentScope(includeParentScope string) ApiListIamV2IpFiltersRequest {
-	r.includeParentScope = &includeParentScope
+func (r ApiListIamV2IpFiltersRequest) IncludeParentScopes(includeParentScopes string) ApiListIamV2IpFiltersRequest {
+	r.includeParentScopes = &includeParentScopes
 	return r
 }
 // A pagination size for collection requests.
@@ -645,7 +639,7 @@ func (r ApiListIamV2IpFiltersRequest) Execute() (IamV2IpFilterList, *_nethttp.Re
 /*
 ListIamV2IpFilters List of IP Filters
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all IP filters.
 
@@ -685,11 +679,8 @@ func (a *IPFiltersIamV2ApiService) ListIamV2IpFiltersExecute(r ApiListIamV2IpFil
 	if r.resourceScope != nil {
 		localVarQueryParams.Add("resource_scope", parameterToString(*r.resourceScope, ""))
 	}
-	if r.includeOnlyOrgScopeFilters != nil {
-		localVarQueryParams.Add("include_only_org_scope_filters", parameterToString(*r.includeOnlyOrgScopeFilters, ""))
-	}
-	if r.includeParentScope != nil {
-		localVarQueryParams.Add("include_parent_scope", parameterToString(*r.includeParentScope, ""))
+	if r.includeParentScopes != nil {
+		localVarQueryParams.Add("include_parent_scopes", parameterToString(*r.includeParentScopes, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -809,7 +800,7 @@ func (r ApiUpdateIamV2IpFilterRequest) Execute() (IamV2IpFilter, *_nethttp.Respo
 /*
 UpdateIamV2IpFilter Update an IP Filter
 
-[![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an IP filter.
 
