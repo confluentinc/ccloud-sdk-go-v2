@@ -41,7 +41,7 @@ type IamV2IpFilterSummary struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// The scope associated with this object.
-	Scope *ObjectReference `json:"scope,omitempty"`
+	Scope *string `json:"scope,omitempty"`
 	// Summary of the operation groups and IP filters created in those operation groups. 
 	Categories *[]IamV2IpFilterSummaryCategories `json:"categories,omitempty"`
 }
@@ -128,9 +128,9 @@ func (o *IamV2IpFilterSummary) SetKind(v string) {
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *IamV2IpFilterSummary) GetScope() ObjectReference {
+func (o *IamV2IpFilterSummary) GetScope() string {
 	if o == nil || o.Scope == nil {
-		var ret ObjectReference
+		var ret string
 		return ret
 	}
 	return *o.Scope
@@ -138,7 +138,7 @@ func (o *IamV2IpFilterSummary) GetScope() ObjectReference {
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2IpFilterSummary) GetScopeOk() (*ObjectReference, bool) {
+func (o *IamV2IpFilterSummary) GetScopeOk() (*string, bool) {
 	if o == nil || o.Scope == nil {
 		return nil, false
 	}
@@ -154,8 +154,8 @@ func (o *IamV2IpFilterSummary) HasScope() bool {
 	return false
 }
 
-// SetScope gets a reference to the given ObjectReference and assigns it to the Scope field.
-func (o *IamV2IpFilterSummary) SetScope(v ObjectReference) {
+// SetScope gets a reference to the given string and assigns it to the Scope field.
+func (o *IamV2IpFilterSummary) SetScope(v string) {
 	o.Scope = &v
 }
 

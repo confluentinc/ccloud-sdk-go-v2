@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
-**Scope** | Pointer to [**ObjectReference**](ObjectReference.md) | The scope associated with this object. | [optional] 
+**Scope** | Pointer to **string** | The scope associated with this object. | [optional] 
 **Categories** | Pointer to [**[]IamV2IpFilterSummaryCategories**](IamV2IpFilterSummaryCategories.md) | Summary of the operation groups and IP filters created in those operation groups.  | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasKind returns a boolean if a field has been set.
 
 ### GetScope
 
-`func (o *IamV2IpFilterSummary) GetScope() ObjectReference`
+`func (o *IamV2IpFilterSummary) GetScope() string`
 
 GetScope returns the Scope field if non-nil, zero value otherwise.
 
 ### GetScopeOk
 
-`func (o *IamV2IpFilterSummary) GetScopeOk() (*ObjectReference, bool)`
+`func (o *IamV2IpFilterSummary) GetScopeOk() (*string, bool)`
 
 GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetScope
 
-`func (o *IamV2IpFilterSummary) SetScope(v ObjectReference)`
+`func (o *IamV2IpFilterSummary) SetScope(v string)`
 
 SetScope sets Scope field to given value.
 
