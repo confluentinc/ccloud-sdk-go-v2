@@ -19,7 +19,7 @@ servers:
   url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     Definitions of networks which can be named and referred by IP blocks, commonly used to attach to IP Filter rules.
 
@@ -28,7 +28,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpGroup" />
   name: IP Groups (iam/v2)
 - description: |-
-    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `IP Filter` objects are bindings between IP Groups and Confluent resource(s).
     For example, a binding between "CorpNet" and "Management APIs" will enforce that
@@ -43,7 +43,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IpFilter" />
   name: IP Filters (iam/v2)
 - description: |-
-    [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     The IP Filter Summary endpoint returns an aggregation of the IP Filters across the system.
     This API can be queried in the context of an organization or an environment. It returns a
@@ -58,7 +58,7 @@ paths:
   /iam/v2/ip-groups:
     get:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all IP groups.
       operationId: listIamV2IpGroups
@@ -353,7 +353,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an IP group.
       operationId: createIamV2IpGroup
@@ -720,7 +720,7 @@ paths:
   /iam/v2/ip-groups/{id}:
     delete:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an IP group.
       operationId: deleteIamV2IpGroup
@@ -1012,7 +1012,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an IP group.
       operationId: getIamV2IpGroup
@@ -1316,7 +1316,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Groups API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Groups%20API-%23bc8540)](mailto:cloud-support@confluent.io?subject=Request%20to%20join%20IP%20Filtering%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Access%20for%20IP%20Filtering.%0AMy%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.%0A)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an IP group.
 
@@ -1701,7 +1701,7 @@ paths:
   /iam/v2/ip-filters:
     get:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all IP filters.
       operationId: listIamV2IpFilters
@@ -1714,20 +1714,11 @@ paths:
         schema:
           type: string
         style: form
-      - description: List all filters defined at the organization scope. This parameter
-          defaults to false.
-        explode: true
-        in: query
-        name: include_only_org_scope_filters
-        required: false
-        schema:
-          type: string
-        style: form
       - description: If set to true, this includes filters defined at the organization
           level. The resource scope must also be set to use this parameter.
         explode: true
         in: query
-        name: include_parent_scope
+        name: include_parent_scopes
         required: false
         schema:
           type: string
@@ -2022,7 +2013,7 @@ paths:
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an IP filter.
       operationId: createIamV2IpFilter
@@ -2400,7 +2391,7 @@ paths:
   /iam/v2/ip-filters/{id}:
     delete:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an IP filter.
       operationId: deleteIamV2IpFilter
@@ -2692,7 +2683,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an IP filter.
       operationId: getIamV2IpFilter
@@ -2997,7 +2988,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filters API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filters%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an IP filter.
 
@@ -3392,7 +3383,7 @@ paths:
   /iam/v2/ip-filter-summary:
     get:
       description: |-
-        [![Limited Availability](https://img.shields.io/badge/Lifecycle%20Stage-Limited%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IP Filter Summary API](https://img.shields.io/badge/-Request%20Access%20To%20IP%20Filter%20Summary%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-limited-availability@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Limited%20Availability&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Limited%20Availability%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an IP filter summary.
       operationId: getIamV2IpFilterSummary
@@ -3404,7 +3395,7 @@ paths:
         name: scope
         required: true
         schema:
-          $ref: '#/components/schemas/SearchFilter'
+          type: string
         style: form
       responses:
         "200":
@@ -3418,13 +3409,6 @@ paths:
                   - categories
                   - kind
                   - scope
-                  type: object
-                - properties:
-                    scope:
-                      example:
-                        id: crn://confluent.cloud/organization=org-123/environment=env-abc
-                        related: https://api.confluent.cloud/v2/ip-filter-summaries/crn://confluent.cloud/organization=org-123/environment=env-abc
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/ip-filter-summary=crn://confluent.cloud/organization=org-123/environment=env-abc
                   type: object
           description: IP Filter Summary.
           headers:
@@ -3621,14 +3605,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc' \
+            --url https://api.confluent.cloud/iam/v2/ip-filter-summary \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc")
+            .url("https://api.confluent.cloud/iam/v2/ip-filter-summary")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3636,7 +3620,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/ip-filter-summary\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3649,7 +3633,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc", headers=headers)
+          conn.request("GET", "/iam/v2/ip-filter-summary", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3663,7 +3647,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc",
+            "path": "/iam/v2/ip-filter-summary",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3688,7 +3672,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/ip-filter-summary");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3697,7 +3681,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filter-summary?scope=crn://confluent.cloud/organization=org-123/environment=env-abc");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/ip-filter-summary");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4096,9 +4080,8 @@ components:
           readOnly: true
           type: string
         scope:
-          allOf:
-          - $ref: '#/components/schemas/ObjectReference'
           description: The scope associated with this object.
+          type: string
         categories:
           description: |
             Summary of the operation groups and IP filters created in those operation groups.

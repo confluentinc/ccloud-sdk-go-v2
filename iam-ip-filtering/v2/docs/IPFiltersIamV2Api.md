@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListIamV2IpFilters
 
-> IamV2IpFilterList ListIamV2IpFilters(ctx).ResourceScope(resourceScope).IncludeOnlyOrgScopeFilters(includeOnlyOrgScopeFilters).IncludeParentScope(includeParentScope).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2IpFilterList ListIamV2IpFilters(ctx).ResourceScope(resourceScope).IncludeParentScopes(includeParentScopes).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of IP Filters
 
@@ -238,14 +238,13 @@ import (
 
 func main() {
     resourceScope := "resourceScope_example" // string | Lists all filters belonging to the specified resource scope. (optional)
-    includeOnlyOrgScopeFilters := "includeOnlyOrgScopeFilters_example" // string | List all filters defined at the organization scope. This parameter defaults to false. (optional)
-    includeParentScope := "includeParentScope_example" // string | If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter. (optional)
+    includeParentScopes := "includeParentScopes_example" // string | If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 25)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IPFiltersIamV2Api.ListIamV2IpFilters(context.Background()).ResourceScope(resourceScope).IncludeOnlyOrgScopeFilters(includeOnlyOrgScopeFilters).IncludeParentScope(includeParentScope).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.IPFiltersIamV2Api.ListIamV2IpFilters(context.Background()).ResourceScope(resourceScope).IncludeParentScopes(includeParentScopes).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IPFiltersIamV2Api.ListIamV2IpFilters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,8 +266,7 @@ Other parameters are passed through a pointer to a apiListIamV2IpFiltersRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **resourceScope** | **string** | Lists all filters belonging to the specified resource scope. | 
- **includeOnlyOrgScopeFilters** | **string** | List all filters defined at the organization scope. This parameter defaults to false. | 
- **includeParentScope** | **string** | If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter. | 
+ **includeParentScopes** | **string** | If set to true, this includes filters defined at the organization level. The resource scope must also be set to use this parameter. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 25]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
