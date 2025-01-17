@@ -26,6 +26,7 @@ Contact: oauth-eng@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,27 +34,29 @@ import (
 	"reflect"
 )
 
-// IamV2IdentityProvider `IdentityProvider` objects represent external OAuth/OpenID Connect providers within Confluent Cloud.  The API allows you to list, create, read, update, and delete your Identity Provider.   Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).  ## The Identity Providers Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IdentityProvider\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `identity_providers_per_org` | Number of Identity Providers per organization | | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
+// IamV2IdentityProvider `IdentityProvider` objects represent external OAuth-OIDC providers in Confluent Cloud.  The API allows you to list, create, read, update, and delete your Identity Provider.   Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).  ## The Identity Providers Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IdentityProvider\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `identity_providers_per_org` | Number of OAuth identity providers per organization | | `public_keys_per_provider` | Number of public keys saved per identity provider |
 type IamV2IdentityProvider struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The name of the Provider.
+	// The human-readable name of the OAuth identity provider.
 	DisplayName *string `json:"display_name,omitempty"`
-	// A description for your provider
+	// A description of the identity provider.
 	Description *string `json:"description,omitempty"`
-	// The current state of the provider
+	// The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). This appears in audit log records. Note: if the client specifies mapping to one identity pool ID, the identity claim configured with that pool will be used instead.
+	IdentityClaim *string `json:"identity_claim,omitempty"`
+	// The current state of the identity provider.
 	State *string `json:"state,omitempty"`
-	// Publicly reachable issuer URI
+	// A publicly accessible URL uniquely identifying the OAuth identity provider authorized to issue access tokens.
 	Issuer *string `json:"issuer,omitempty"`
-	// Publicly reachable JWKS URI for the OIDC provider
+	// A publicly accessible JSON Web Key Set (JWKS) URI for the OAuth identity provider. JWKS provides a set of crypotgraphic keys used to verify the authenticity and integrity of JSON Web Tokens (JWTs) issued by the OAuth identity provider.
 	JwksUri *string `json:"jwks_uri,omitempty"`
-	// The JWKS provided by the Provider. We only express the `kid` and `alg` for each key set
-	Keys *[]IamV2Jwks `json:"keys,omitempty"`
+	// The JWKS issued by the OAuth identity provider. Only `kid` (key ID) and `alg` (algorithm) properties for each key set are included.
+	Keys *[]IamV2JwksObject `json:"keys,omitempty"`
 }
 
 // NewIamV2IdentityProvider instantiates a new IamV2IdentityProvider object
@@ -265,6 +268,38 @@ func (o *IamV2IdentityProvider) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetIdentityClaim returns the IdentityClaim field value if set, zero value otherwise.
+func (o *IamV2IdentityProvider) GetIdentityClaim() string {
+	if o == nil || o.IdentityClaim == nil {
+		var ret string
+		return ret
+	}
+	return *o.IdentityClaim
+}
+
+// GetIdentityClaimOk returns a tuple with the IdentityClaim field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2IdentityProvider) GetIdentityClaimOk() (*string, bool) {
+	if o == nil || o.IdentityClaim == nil {
+		return nil, false
+	}
+	return o.IdentityClaim, true
+}
+
+// HasIdentityClaim returns a boolean if a field has been set.
+func (o *IamV2IdentityProvider) HasIdentityClaim() bool {
+	if o != nil && o.IdentityClaim != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentityClaim gets a reference to the given string and assigns it to the IdentityClaim field.
+func (o *IamV2IdentityProvider) SetIdentityClaim(v string) {
+	o.IdentityClaim = &v
+}
+
 // GetState returns the State field value if set, zero value otherwise.
 func (o *IamV2IdentityProvider) GetState() string {
 	if o == nil || o.State == nil {
@@ -362,9 +397,9 @@ func (o *IamV2IdentityProvider) SetJwksUri(v string) {
 }
 
 // GetKeys returns the Keys field value if set, zero value otherwise.
-func (o *IamV2IdentityProvider) GetKeys() []IamV2Jwks {
+func (o *IamV2IdentityProvider) GetKeys() []IamV2JwksObject {
 	if o == nil || o.Keys == nil {
-		var ret []IamV2Jwks
+		var ret []IamV2JwksObject
 		return ret
 	}
 	return *o.Keys
@@ -372,7 +407,7 @@ func (o *IamV2IdentityProvider) GetKeys() []IamV2Jwks {
 
 // GetKeysOk returns a tuple with the Keys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2IdentityProvider) GetKeysOk() (*[]IamV2Jwks, bool) {
+func (o *IamV2IdentityProvider) GetKeysOk() (*[]IamV2JwksObject, bool) {
 	if o == nil || o.Keys == nil {
 		return nil, false
 	}
@@ -388,53 +423,54 @@ func (o *IamV2IdentityProvider) HasKeys() bool {
 	return false
 }
 
-// SetKeys gets a reference to the given []IamV2Jwks and assigns it to the Keys field.
-func (o *IamV2IdentityProvider) SetKeys(v []IamV2Jwks) {
+// SetKeys gets a reference to the given []IamV2JwksObject and assigns it to the Keys field.
+func (o *IamV2IdentityProvider) SetKeys(v []IamV2JwksObject) {
 	o.Keys = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2IdentityProvider) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.State)
-    o.recurseRedact(o.Issuer)
-    o.recurseRedact(o.JwksUri)
-    o.recurseRedact(o.Keys)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Description)
+	o.recurseRedact(o.IdentityClaim)
+	o.recurseRedact(o.State)
+	o.recurseRedact(o.Issuer)
+	o.recurseRedact(o.JwksUri)
+	o.recurseRedact(o.Keys)
 }
 
 func (o *IamV2IdentityProvider) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o IamV2IdentityProvider) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2IdentityProvider) MarshalJSON() ([]byte, error) {
@@ -457,6 +493,9 @@ func (o IamV2IdentityProvider) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
+	if o.IdentityClaim != nil {
+		toSerialize["identity_claim"] = o.IdentityClaim
+	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
 	}
@@ -469,7 +508,11 @@ func (o IamV2IdentityProvider) MarshalJSON() ([]byte, error) {
 	if o.Keys != nil {
 		toSerialize["keys"] = o.Keys
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2IdentityProvider struct {
@@ -500,12 +543,14 @@ func NewNullableIamV2IdentityProvider(val *IamV2IdentityProvider) *NullableIamV2
 }
 
 func (v NullableIamV2IdentityProvider) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2IdentityProvider) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

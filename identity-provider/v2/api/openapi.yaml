@@ -9,36 +9,53 @@ info:
   version: 0.0.1-alpha1
   x-api-id: fe94c0a0-09e1-4fda-ad39-2eaca5a8e02f
   x-api-group: iam/v2
-  x-audience: company-internal
+  x-audience: external-public
   x-tag-group: Identity Access Management (%s)
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
-    Confluent Cloud.
+    `IdentityProvider` objects represent external OAuth-OIDC providers in Confluent Cloud.
 
     The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-    Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
+    Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).
 
     ## The Identity Providers Model
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
 
     ## Quotas and Limits
-    This resource is subject to the following quotas:
+    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
     | Quota | Description |
     | --- | --- |
-    | `identity_providers_per_org` | Number of Identity Providers per organization |
-    | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
+    | `identity_providers_per_org` | Number of OAuth identity providers per organization |
+    | `public_keys_per_provider` | Number of public keys saved per identity provider |
   name: Identity Providers (iam/v2)
 - description: |-
-    [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    `JWKS` objects represent public key sets for a specific OAuth/OpenID Connect provider within
+    Confluent Cloud.
+
+    The API allows you to refresh JWKS public key data.
+
+
+    Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).
+
+    ## The Jwks Model
+    <SchemaDefinition schemaRef="#/components/schemas/iam.v2.Jwks" />
+  name: Jwks (iam/v2)
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `IdentityPool` objects represent groups of identities tied to a given a `IdentityProvider`
     that authorizes them to Confluent Cloud resources.
@@ -47,13 +64,13 @@ tags:
     is then used to provide access to Confluent Resources.
 
 
-    Related guide: [Confluent Cloud IAM Management API](https://docs.confluent.cloud).
+    Related guide: [Use identity pools with your OAuth provider](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html).
 
     ## The Identity Pools Model
     <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityPool" />
 
     ## Quotas and Limits
-    This resource is subject to the following quotas:
+    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
     | Quota | Description |
     | --- | --- |
@@ -63,7 +80,7 @@ paths:
   /iam/v2/identity-providers:
     get:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all identity providers.
       operationId: listIamV2IdentityProviders
@@ -102,6 +119,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -187,6 +227,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -209,23 +279,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Identity Providers
       tags:
       - Identity Providers (iam/v2)
-      x-request-access-name: IAM API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url https://api.confluent.cloud/iam/v2/identity-providers \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/iam/v2/identity-providers")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -233,7 +303,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -246,7 +316,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/iam/v2/identity-providers", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -260,7 +330,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/iam/v2/identity-providers",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -285,7 +355,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -294,13 +364,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an identity provider.
       operationId: createIamV2IdentityProvider
@@ -336,6 +406,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: IdentityProvider resource uri
@@ -503,6 +596,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -525,11 +648,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create an Identity Provider
       tags:
       - Identity Providers (iam/v2)
-      x-request-access-name: IAM API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -537,13 +660,13 @@ paths:
             --url https://api.confluent.cloud/iam/v2/identity-providers \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
+            --data '{"display_name":"My OIDC Provider","description":"string","identity_claim":"claims.sub","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers")
             .post(body)
@@ -556,7 +679,8 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My OIDC Provider\\\
-          \",\\\"description\\\":\\\"string\\\",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
+          \",\\\"description\\\":\\\"string\\\",\\\"identity_claim\\\":\\\"claims.sub\\\
+          \",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
           \",\\\"jwks_uri\\\":\\\"https://login.microsoftonline.com/common/discovery/v2.0/keys\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
@@ -569,7 +693,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
+          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
 
           headers = {
               'content-type': "application/json",
@@ -613,6 +737,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My OIDC Provider',
             description: 'string',
+            identity_claim: 'claims.sub',
             issuer: 'https://login.microsoftonline.com/{tenantid}/v2.0',
             jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys'
           }));
@@ -629,7 +754,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -638,13 +763,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: IAM API
   /iam/v2/identity-providers/{id}:
     delete:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an identity provider.
       operationId: deleteIamV2IdentityProvider
@@ -666,6 +790,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -769,6 +916,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -791,11 +968,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete an Identity Provider
       tags:
       - Identity Providers (iam/v2)
-      x-request-access-name: IAM API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -882,7 +1059,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an identity provider.
       operationId: getIamV2IdentityProvider
@@ -919,6 +1096,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1022,6 +1222,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1044,11 +1274,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Identity Provider
       tags:
       - Identity Providers (iam/v2)
-      x-request-access-name: IAM API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1135,7 +1365,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an identity provider.
 
@@ -1153,7 +1383,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/iam.v2.IdentityProviderUpdate'
+              $ref: '#/components/schemas/iam.v2.IdentityProvider'
       responses:
         "200":
           content:
@@ -1178,6 +1408,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1293,6 +1546,36 @@ paths:
               schema:
                 type: string
               style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
         "422":
           content:
             application/json:
@@ -1325,6 +1608,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1347,11 +1660,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update an Identity Provider
       tags:
       - Identity Providers (iam/v2)
-      x-request-access-name: IAM API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1359,13 +1672,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My OIDC Provider","description":"string","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
+            --data '{"display_name":"My OIDC Provider","description":"string","identity_claim":"claims.sub","issuer":"https://login.microsoftonline.com/{tenantid}/v2.0","jwks_uri":"https://login.microsoftonline.com/common/discovery/v2.0/keys"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{id}")
             .patch(body)
@@ -1378,7 +1691,8 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My OIDC Provider\\\
-          \",\\\"description\\\":\\\"string\\\",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
+          \",\\\"description\\\":\\\"string\\\",\\\"identity_claim\\\":\\\"claims.sub\\\
+          \",\\\"issuer\\\":\\\"https://login.microsoftonline.com/{tenantid}/v2.0\\\
           \",\\\"jwks_uri\\\":\\\"https://login.microsoftonline.com/common/discovery/v2.0/keys\\\
           \"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
@@ -1391,7 +1705,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
+          payload = "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1435,6 +1749,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My OIDC Provider',
             description: 'string',
+            identity_claim: 'claims.sub',
             issuer: 'https://login.microsoftonline.com/{tenantid}/v2.0',
             jwks_uri: 'https://login.microsoftonline.com/common/discovery/v2.0/keys'
           }));
@@ -1451,7 +1766,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1460,13 +1775,397 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My OIDC Provider\",\"description\":\"string\",\"identity_claim\":\"claims.sub\",\"issuer\":\"https://login.microsoftonline.com/{tenantid}/v2.0\",\"jwks_uri\":\"https://login.microsoftonline.com/common/discovery/v2.0/keys\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: IAM API
+  /iam/v2/identity-providers/{provider_id}/jwks:
+    patch:
+      description: |+
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to refresh the provider's JWKS
+
+      operationId: refreshIamV2JsonWebKeySet
+      parameters:
+      - description: The Provider
+        explode: false
+        in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/iam.v2.Jwks'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/iam.v2.Jwks'
+                - properties:
+                    spec:
+                      required:
+                      - jwks_status
+                      type: object
+                  required:
+                  - api_version
+                  - kind
+                  - spec
+                  type: object
+          description: Jwks.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Refresh a provider's JWKS
+      tags:
+      - Jwks (iam/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/jwks' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"jwks_status":"REFRESHED"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"jwks_status\":\"REFRESHED\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/jwks")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/jwks\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"jwks_status\\\"\
+          :\\\"REFRESHED\\\"}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"jwks_status\":\"REFRESHED\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/iam/v2/identity-providers/{provider_id}/jwks", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/iam/v2/identity-providers/{provider_id}/jwks",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({spec: {jwks_status: 'REFRESHED'}}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/jwks");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"jwks_status\":\"REFRESHED\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/jwks");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"jwks_status\":\"REFRESHED\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
   /iam/v2/identity-providers/{provider_id}/identity-pools:
     get:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all identity pools.
       operationId: listIamV2IdentityPools
@@ -1513,6 +2212,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1598,6 +2320,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1620,23 +2372,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Identity Pools
       tags:
       - Identity Pools (iam/v2)
-      x-request-access-name: OAuth API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1644,7 +2396,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1657,7 +2409,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/iam/v2/identity-providers/{provider_id}/identity-pools", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1671,7 +2423,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1696,7 +2448,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1705,17 +2457,28 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to create an identity pool.
       operationId: createIamV2IdentityPool
       parameters:
+      - description: The resource_id of the principal who will be assigned resource
+          owner on the created identity pool. Principal can be group-mapping (group-xxx),  user
+          (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
+        example: u-a83k9b
+        explode: true
+        in: query
+        name: assigned_resource_owner
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The Provider
         explode: false
         in: path
@@ -1756,6 +2519,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: IdentityPool resource uri
@@ -1923,6 +2709,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1945,27 +2761,27 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create an Identity Pool
       tags:
       - Identity Pools (iam/v2)
-      x-request-access-name: OAuth API
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools' \
+            --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"claims.sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools")
+            .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1974,11 +2790,11 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"identity_claim\\\":\\\"sub\\\",\\\"filter\\\":\\\"\
-          claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
+          \ Engineering\\\",\\\"identity_claim\\\":\\\"claims.sub\\\",\\\"filter\\\
+          \":\\\"claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
           \\\\\"\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\
           \treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -1990,14 +2806,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/iam/v2/identity-providers/{provider_id}/identity-pools", payload, headers)
+          conn.request("POST", "/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2011,7 +2827,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools",
+            "path": "/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2034,7 +2850,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            identity_claim: 'sub',
+            identity_claim: 'claims.sub',
             filter: 'claims.aud=="confluent" && claims.group!="invalid_group"'
           }));
           req.end();
@@ -2043,29 +2859,28 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools?assigned_resource_owner=u-a83k9b");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: OAuth API
   /iam/v2/identity-providers/{provider_id}/identity-pools/{id}:
     delete:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to delete an identity pool.
       operationId: deleteIamV2IdentityPool
@@ -2095,6 +2910,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -2198,6 +3036,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2220,11 +3088,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete an Identity Pool
       tags:
       - Identity Pools (iam/v2)
-      x-request-access-name: OAuth API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2311,7 +3179,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an identity pool.
       operationId: getIamV2IdentityPool
@@ -2357,6 +3225,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -2460,6 +3351,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2482,11 +3403,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Identity Pool
       tags:
       - Identity Pools (iam/v2)
-      x-request-access-name: OAuth API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2573,7 +3494,7 @@ paths:
           IRestResponse response = client.Execute(request);
     patch:
       description: |+
-        [![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update an identity pool.
 
@@ -2625,6 +3546,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -2740,6 +3684,36 @@ paths:
               schema:
                 type: string
               style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
         "422":
           content:
             application/json:
@@ -2772,6 +3746,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -2794,11 +3798,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Update an Identity Pool
       tags:
       - Identity Pools (iam/v2)
-      x-request-access-name: OAuth API
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -2806,13 +3810,13 @@ paths:
             --url 'https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
+            --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","identity_claim":"claims.sub","filter":"claims.aud==\"confluent\" && claims.group!=\"invalid_group\""}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}")
             .patch(body)
@@ -2826,8 +3830,8 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/identity-providers/{provider_id}/identity-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
-          \ Engineering\\\",\\\"identity_claim\\\":\\\"sub\\\",\\\"filter\\\":\\\"\
-          claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
+          \ Engineering\\\",\\\"identity_claim\\\":\\\"claims.sub\\\",\\\"filter\\\
+          \":\\\"claims.aud==\\\\\\\"confluent\\\\\\\" && claims.group!=\\\\\\\"invalid_group\\\
           \\\\\"\\\"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
           \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
@@ -2839,7 +3843,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
+          payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}"
 
           headers = {
               'content-type': "application/json",
@@ -2883,7 +3887,7 @@ paths:
           req.write(JSON.stringify({
             display_name: 'My Identity Pool',
             description: 'Prod Access to Kafka clusters to Release Engineering',
-            identity_claim: 'sub',
+            identity_claim: 'claims.sub',
             filter: 'claims.aud=="confluent" && claims.group!="invalid_group"'
           }));
           req.end();
@@ -2899,7 +3903,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2908,9 +3912,8 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"identity_claim\":\"claims.sub\",\"filter\":\"claims.aud==\\\"confluent\\\" && claims.group!=\\\"invalid_group\\\"\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-    x-request-access-name: OAuth API
 components:
   responses:
     BadRequestError:
@@ -3086,6 +4089,36 @@ components:
           schema:
             type: string
           style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -3110,24 +4143,23 @@ components:
   schemas:
     iam.v2.IdentityProvider:
       description: |-
-        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
-        Confluent Cloud.
+        `IdentityProvider` objects represent external OAuth-OIDC providers in Confluent Cloud.
 
         The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
+        Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).
 
         ## The Identity Providers Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
-        | `identity_providers_per_org` | Number of Identity Providers per organization |
-        | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
+        | `identity_providers_per_org` | Number of OAuth identity providers per organization |
+        | `public_keys_per_provider` | Number of public keys saved per identity provider |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3161,38 +4193,103 @@ components:
               resource_name:
                 example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-provider=ip-12345
         display_name:
-          description: The name of the Provider.
+          description: The human-readable name of the OAuth identity provider.
           example: My OIDC Provider
           type: string
         description:
-          description: A description for your provider
+          description: A description of the identity provider.
+          type: string
+        identity_claim:
+          description: |-
+            The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from
+            [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). This appears
+            in audit log records. Note: if the client specifies mapping to one identity pool ID, the identity
+            claim configured with that pool will be used instead.
+          example: claims.sub
           type: string
         state:
-          description: The current state of the provider
+          description: The current state of the identity provider.
           example: ENABLED
           readOnly: true
           type: string
           x-extensible-enum:
           - ENABLED
         issuer:
-          description: Publicly reachable issuer URI
+          description: |-
+            A publicly accessible URL uniquely identifying the OAuth
+            identity provider authorized to issue access tokens.
           example: https://login.microsoftonline.com/{tenantid}/v2.0
           format: uri
           type: string
-          x-immutable: true
+          x-immutable: false
         jwks_uri:
-          description: Publicly reachable JWKS URI for the OIDC provider
+          description: |-
+            A publicly accessible JSON Web Key Set (JWKS) URI for the OAuth
+            identity provider. JWKS provides a set of crypotgraphic keys
+            used to verify the authenticity and integrity of JSON Web
+            Tokens (JWTs) issued by the OAuth identity provider.
           example: https://login.microsoftonline.com/common/discovery/v2.0/keys
           format: uri
           type: string
-          x-immutable: true
+          x-immutable: false
         keys:
-          description: The JWKS provided by the Provider. We only express the `kid`
-            and `alg` for each key set
+          description: |-
+            The JWKS issued by the OAuth identity provider. Only `kid` (key ID)
+            and `alg` (algorithm) properties for each key set are included.
           items:
-            $ref: '#/components/schemas/iam.v2.Jwks'
+            $ref: '#/components/schemas/iam.v2.JwksObject'
           readOnly: true
           type: array
+      type: object
+    iam.v2.Jwks:
+      description: |-
+        `JWKS` objects represent public key sets for a specific OAuth/OpenID Connect provider within
+        Confluent Cloud.
+
+        The API allows you to refresh JWKS public key data.
+
+
+        Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).
+
+        ## The Jwks Model
+        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.Jwks" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - iam/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Jwks
+          readOnly: true
+          type: string
+        spec:
+          $ref: '#/components/schemas/iam.v2.JwksSpec'
+        status:
+          $ref: '#/components/schemas/iam.v2.JwksStatus'
+      type: object
+    iam.v2.JwksStatus:
+      description: The status of the Jwks
+      properties:
+        jwks_status:
+          description: The actual state of the public key data
+          example: REFRESHED
+          type: string
+          x-extensible-enum:
+          - REFRESHED
+          - OK
+          - INVALID_JWKS_URI
+          - ERROR_FETCHING_JWKS
+        jwks_last_refresh_at:
+          description: The last successful refresh time for the public key data
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          type: string
+      readOnly: true
       type: object
     iam.v2.IdentityPool:
       description: |-
@@ -3203,13 +4300,13 @@ components:
         is then used to provide access to Confluent Resources.
 
 
-        Related guide: [Confluent Cloud IAM Management API](https://docs.confluent.cloud).
+        Related guide: [Use identity pools with your OAuth provider](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html).
 
         ## The Identity Pools Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityPool" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -3255,13 +4352,19 @@ components:
           example: Prod Access to Kafka clusters to Release Engineering
           type: string
         identity_claim:
-          description: The JWT claim to extract the authenticating identity to Confluent
-            resources
-          example: sub
+          description: |-
+            The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from
+            (see [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1) for more details).
+            This appears in the audit log records, showing, for example, that "identity Z used identity pool X to access
+            topic A".
+          example: claims.sub
           type: string
         filter:
-          description: A filter expression that must be evaluated to be true to use
-            this identity pool
+          description: A filter expression in [Supported Common Expression Language
+            (CEL)](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#supported-common-expression-language-cel-filters)
+            that specifies which identities can authenticate using your identity pool
+            (see [Set identity pool filters](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#set-identity-pool-filters)
+            for more details).
           example: claims.aud=="confluent" && claims.group!="invalid_group"
           maxLength: 300
           type: string
@@ -3278,7 +4381,7 @@ components:
           x-extensible-enum:
           - ENABLED
       type: object
-    iam.v2.Jwks:
+    iam.v2.JwksObject:
       description: '`JWKS` contains the published keys for the given OpenIDProvider'
       properties:
         kty:
@@ -3314,26 +4417,28 @@ components:
       - kid
       - kty
       type: object
+    SearchFilter:
+      description: Filter a collection by a string search
+      type: string
     iam.v2.IdentityProviderList:
       description: |-
-        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
-        Confluent Cloud.
+        `IdentityProvider` objects represent external OAuth-OIDC providers in Confluent Cloud.
 
         The API allows you to list, create, read, update, and delete your Identity Provider.
 
 
-        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
+        Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).
 
         ## The Identity Providers Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
-        | `identity_providers_per_org` | Number of Identity Providers per organization |
-        | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
+        | `identity_providers_per_org` | Number of OAuth identity providers per organization |
+        | `public_keys_per_provider` | Number of public keys saved per identity provider |
       properties:
         api_version:
           description: APIVersion defines the schema version of this representation
@@ -3383,6 +4488,19 @@ components:
       - kind
       - metadata
       type: object
+    iam.v2.JwksSpec:
+      description: The desired state of the Jwks
+      properties:
+        jwks_status:
+          description: The desired state of the public key data
+          example: REFRESHED
+          type: string
+          x-extensible-enum:
+          - REFRESHED
+      type: object
+      x-enable-id: false
+      x-enable-listmeta: true
+      x-enable-objectmeta: false
     iam.v2.IdentityPoolList:
       description: |-
         `IdentityPool` objects represent groups of identities tied to a given a `IdentityProvider`
@@ -3392,13 +4510,13 @@ components:
         is then used to provide access to Confluent Resources.
 
 
-        Related guide: [Confluent Cloud IAM Management API](https://docs.confluent.cloud).
+        Related guide: [Use identity pools with your OAuth provider](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html).
 
         ## The Identity Pools Model
         <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityPool" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -3618,80 +4736,6 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
-    iam.v2.IdentityProviderUpdate:
-      description: |-
-        `IdentityProvider` objects represent external OAuth/OpenID Connect providers within
-        Confluent Cloud.
-
-        The API allows you to list, create, read, update, and delete your Identity Provider.
-
-
-        Related guide: [Authenticating with OAuth](https://docs.confluent.cloud).
-
-        ## The Identity Providers Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.IdentityProvider" />
-
-        ## Quotas and Limits
-        This resource is subject to the following quotas:
-
-        | Quota | Description |
-        | --- | --- |
-        | `identity_providers_per_org` | Number of Identity Providers per organization |
-        | `public_keys_per_provider` | Number of public keys saved per Identity Provider |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - IdentityProvider
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/identity-providers/ip-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-provider=ip-12345
-        display_name:
-          description: The name of the Provider.
-          example: My OIDC Provider
-          type: string
-        description:
-          description: A description for your provider
-          type: string
-        state:
-          description: The current state of the provider
-          example: ENABLED
-          readOnly: true
-          type: string
-          x-extensible-enum:
-          - ENABLED
-        keys:
-          description: The JWKS provided by the Provider. We only express the `kid`
-            and `alg` for each key set
-          items:
-            $ref: '#/components/schemas/iam.v2.Jwks'
-          readOnly: true
-          type: array
-      type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
@@ -3707,8 +4751,16 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

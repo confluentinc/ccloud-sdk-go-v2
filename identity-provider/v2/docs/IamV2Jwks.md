@@ -4,18 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kty** | **string** | Specifies the cryptographic algorithm family used with the key | 
-**Kid** | **string** | Specifies the key-id issued by the OpenIDProvider for the particular tenant | 
-**Alg** | **string** | Specifies the algorithm to be used to generate the public key | 
-**Use** | Pointer to **string** | Specifies the intended usage of the key | [optional] 
-**N** | Pointer to **string** | Specifies the modulus of the RSA public key. Represented as a Base64urlUInt-encoded value | [optional] 
-**E** | Pointer to **string** | Specifies the exponent of the RSA public key. | [optional] 
+**ApiVersion** | Pointer to **string** | APIVersion defines the schema version of this representation of a resource. | [optional] [readonly] 
+**Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
+**Spec** | Pointer to [**IamV2JwksSpec**](IamV2JwksSpec.md) |  | [optional] 
+**Status** | Pointer to [**IamV2JwksStatus**](IamV2JwksStatus.md) |  | [optional] 
 
 ## Methods
 
 ### NewIamV2Jwks
 
-`func NewIamV2Jwks(kty string, kid string, alg string, ) *IamV2Jwks`
+`func NewIamV2Jwks() *IamV2Jwks`
 
 NewIamV2Jwks instantiates a new IamV2Jwks object
 This constructor will assign default values to properties that have it defined,
@@ -30,140 +28,105 @@ NewIamV2JwksWithDefaults instantiates a new IamV2Jwks object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetKty
+### GetApiVersion
 
-`func (o *IamV2Jwks) GetKty() string`
+`func (o *IamV2Jwks) GetApiVersion() string`
 
-GetKty returns the Kty field if non-nil, zero value otherwise.
+GetApiVersion returns the ApiVersion field if non-nil, zero value otherwise.
 
-### GetKtyOk
+### GetApiVersionOk
 
-`func (o *IamV2Jwks) GetKtyOk() (*string, bool)`
+`func (o *IamV2Jwks) GetApiVersionOk() (*string, bool)`
 
-GetKtyOk returns a tuple with the Kty field if it's non-nil, zero value otherwise
+GetApiVersionOk returns a tuple with the ApiVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKty
+### SetApiVersion
 
-`func (o *IamV2Jwks) SetKty(v string)`
+`func (o *IamV2Jwks) SetApiVersion(v string)`
 
-SetKty sets Kty field to given value.
+SetApiVersion sets ApiVersion field to given value.
 
+### HasApiVersion
 
-### GetKid
+`func (o *IamV2Jwks) HasApiVersion() bool`
 
-`func (o *IamV2Jwks) GetKid() string`
+HasApiVersion returns a boolean if a field has been set.
 
-GetKid returns the Kid field if non-nil, zero value otherwise.
+### GetKind
 
-### GetKidOk
+`func (o *IamV2Jwks) GetKind() string`
 
-`func (o *IamV2Jwks) GetKidOk() (*string, bool)`
+GetKind returns the Kind field if non-nil, zero value otherwise.
 
-GetKidOk returns a tuple with the Kid field if it's non-nil, zero value otherwise
+### GetKindOk
+
+`func (o *IamV2Jwks) GetKindOk() (*string, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKid
+### SetKind
 
-`func (o *IamV2Jwks) SetKid(v string)`
+`func (o *IamV2Jwks) SetKind(v string)`
 
-SetKid sets Kid field to given value.
+SetKind sets Kind field to given value.
 
+### HasKind
 
-### GetAlg
+`func (o *IamV2Jwks) HasKind() bool`
 
-`func (o *IamV2Jwks) GetAlg() string`
+HasKind returns a boolean if a field has been set.
 
-GetAlg returns the Alg field if non-nil, zero value otherwise.
+### GetSpec
 
-### GetAlgOk
+`func (o *IamV2Jwks) GetSpec() IamV2JwksSpec`
 
-`func (o *IamV2Jwks) GetAlgOk() (*string, bool)`
+GetSpec returns the Spec field if non-nil, zero value otherwise.
 
-GetAlgOk returns a tuple with the Alg field if it's non-nil, zero value otherwise
+### GetSpecOk
+
+`func (o *IamV2Jwks) GetSpecOk() (*IamV2JwksSpec, bool)`
+
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAlg
+### SetSpec
 
-`func (o *IamV2Jwks) SetAlg(v string)`
+`func (o *IamV2Jwks) SetSpec(v IamV2JwksSpec)`
 
-SetAlg sets Alg field to given value.
+SetSpec sets Spec field to given value.
 
+### HasSpec
 
-### GetUse
+`func (o *IamV2Jwks) HasSpec() bool`
 
-`func (o *IamV2Jwks) GetUse() string`
+HasSpec returns a boolean if a field has been set.
 
-GetUse returns the Use field if non-nil, zero value otherwise.
+### GetStatus
 
-### GetUseOk
+`func (o *IamV2Jwks) GetStatus() IamV2JwksStatus`
 
-`func (o *IamV2Jwks) GetUseOk() (*string, bool)`
+GetStatus returns the Status field if non-nil, zero value otherwise.
 
-GetUseOk returns a tuple with the Use field if it's non-nil, zero value otherwise
+### GetStatusOk
+
+`func (o *IamV2Jwks) GetStatusOk() (*IamV2JwksStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUse
+### SetStatus
 
-`func (o *IamV2Jwks) SetUse(v string)`
+`func (o *IamV2Jwks) SetStatus(v IamV2JwksStatus)`
 
-SetUse sets Use field to given value.
+SetStatus sets Status field to given value.
 
-### HasUse
+### HasStatus
 
-`func (o *IamV2Jwks) HasUse() bool`
+`func (o *IamV2Jwks) HasStatus() bool`
 
-HasUse returns a boolean if a field has been set.
-
-### GetN
-
-`func (o *IamV2Jwks) GetN() string`
-
-GetN returns the N field if non-nil, zero value otherwise.
-
-### GetNOk
-
-`func (o *IamV2Jwks) GetNOk() (*string, bool)`
-
-GetNOk returns a tuple with the N field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetN
-
-`func (o *IamV2Jwks) SetN(v string)`
-
-SetN sets N field to given value.
-
-### HasN
-
-`func (o *IamV2Jwks) HasN() bool`
-
-HasN returns a boolean if a field has been set.
-
-### GetE
-
-`func (o *IamV2Jwks) GetE() string`
-
-GetE returns the E field if non-nil, zero value otherwise.
-
-### GetEOk
-
-`func (o *IamV2Jwks) GetEOk() (*string, bool)`
-
-GetEOk returns a tuple with the E field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetE
-
-`func (o *IamV2Jwks) SetE(v string)`
-
-SetE sets E field to given value.
-
-### HasE
-
-`func (o *IamV2Jwks) HasE() bool`
-
-HasE returns a boolean if a field has been set.
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
