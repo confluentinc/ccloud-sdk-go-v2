@@ -26,6 +26,7 @@ Contact: oauth-eng@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,22 +34,22 @@ import (
 	"reflect"
 )
 
-// IamV2IdentityPool `IdentityPool` objects represent groups of identities tied to a given a `IdentityProvider` that authorizes them to Confluent Cloud resources.  It provides a mapping functionality of your `Identity Provider` user to a Confluent identity pool that is then used to provide access to Confluent Resources.   Related guide: [Confluent Cloud IAM Management API](https://docs.confluent.cloud).  ## The Identity Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IdentityPool\" />  ## Quotas and Limits This resource is subject to the following quotas:  | Quota | Description | | --- | --- | | `identity_pools_per_provider` | Number of Identity Pools per Identity Provider |
+// IamV2IdentityPool `IdentityPool` objects represent groups of identities tied to a given a `IdentityProvider` that authorizes them to Confluent Cloud resources.  It provides a mapping functionality of your `Identity Provider` user to a Confluent identity pool that is then used to provide access to Confluent Resources.   Related guide: [Use identity pools with your OAuth provider](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html).  ## The Identity Pools Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.IdentityPool\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `identity_pools_per_provider` | Number of Identity Pools per Identity Provider |
 type IamV2IdentityPool struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The name of the `IdentityPool`.
 	DisplayName *string `json:"display_name,omitempty"`
 	// A description of how this `IdentityPool` is used
 	Description *string `json:"description,omitempty"`
-	// The JWT claim to extract the authenticating identity to Confluent resources
+	// The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from (see [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1) for more details). This appears in the audit log records, showing, for example, that \"identity Z used identity pool X to access topic A\".
 	IdentityClaim *string `json:"identity_claim,omitempty"`
-	// A filter expression that must be evaluated to be true to use this identity pool
+	// A filter expression in [Supported Common Expression Language (CEL)](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#supported-common-expression-language-cel-filters) that specifies which identities can authenticate using your identity pool (see [Set identity pool filters](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#set-identity-pool-filters) for more details).
 	Filter *string `json:"filter,omitempty"`
 	// Represents the federated identity associated with this pool.
 	Principal *string `json:"principal,omitempty"`
@@ -395,46 +396,46 @@ func (o *IamV2IdentityPool) SetState(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2IdentityPool) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.IdentityClaim)
-    o.recurseRedact(o.Filter)
-    o.recurseRedact(o.Principal)
-    o.recurseRedact(o.State)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Description)
+	o.recurseRedact(o.IdentityClaim)
+	o.recurseRedact(o.Filter)
+	o.recurseRedact(o.Principal)
+	o.recurseRedact(o.State)
 }
 
 func (o *IamV2IdentityPool) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o IamV2IdentityPool) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2IdentityPool) MarshalJSON() ([]byte, error) {
@@ -469,7 +470,11 @@ func (o IamV2IdentityPool) MarshalJSON() ([]byte, error) {
 	if o.State != nil {
 		toSerialize["state"] = o.State
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2IdentityPool struct {
@@ -500,12 +505,14 @@ func NewNullableIamV2IdentityPool(val *IamV2IdentityPool) *NullableIamV2Identity
 }
 
 func (v NullableIamV2IdentityPool) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2IdentityPool) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

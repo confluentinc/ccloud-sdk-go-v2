@@ -34,60 +34,67 @@ import (
 	"reflect"
 )
 
-// Failure Provides information about problems encountered while performing an operation.
-type Failure struct {
-	// List of errors which caused this operation to fail
-	Errors []Error `json:"errors,omitempty"`
+// IamV2JwksSpec The desired state of the Jwks
+type IamV2JwksSpec struct {
+	// The desired state of the public key data
+	JwksStatus *string `json:"jwks_status,omitempty"`
 }
 
-// NewFailure instantiates a new Failure object
+// NewIamV2JwksSpec instantiates a new IamV2JwksSpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailure(errors []Error) *Failure {
-	this := Failure{}
-	this.Errors = errors
+func NewIamV2JwksSpec() *IamV2JwksSpec {
+	this := IamV2JwksSpec{}
 	return &this
 }
 
-// NewFailureWithDefaults instantiates a new Failure object
+// NewIamV2JwksSpecWithDefaults instantiates a new IamV2JwksSpec object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewFailureWithDefaults() *Failure {
-	this := Failure{}
+func NewIamV2JwksSpecWithDefaults() *IamV2JwksSpec {
+	this := IamV2JwksSpec{}
 	return &this
 }
 
-// GetErrors returns the Errors field value
-func (o *Failure) GetErrors() []Error {
-	if o == nil {
-		var ret []Error
+// GetJwksStatus returns the JwksStatus field value if set, zero value otherwise.
+func (o *IamV2JwksSpec) GetJwksStatus() string {
+	if o == nil || o.JwksStatus == nil {
+		var ret string
 		return ret
 	}
-
-	return o.Errors
+	return *o.JwksStatus
 }
 
-// GetErrorsOk returns a tuple with the Errors field value
+// GetJwksStatusOk returns a tuple with the JwksStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Failure) GetErrorsOk() (*[]Error, bool) {
-	if o == nil {
+func (o *IamV2JwksSpec) GetJwksStatusOk() (*string, bool) {
+	if o == nil || o.JwksStatus == nil {
 		return nil, false
 	}
-	return &o.Errors, true
+	return o.JwksStatus, true
 }
 
-// SetErrors sets field value
-func (o *Failure) SetErrors(v []Error) {
-	o.Errors = v
+// HasJwksStatus returns a boolean if a field has been set.
+func (o *IamV2JwksSpec) HasJwksStatus() bool {
+	if o != nil && o.JwksStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetJwksStatus gets a reference to the given string and assigns it to the JwksStatus field.
+func (o *IamV2JwksSpec) SetJwksStatus(v string) {
+	o.JwksStatus = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *Failure) Redact() {
-	o.recurseRedact(&o.Errors)
+func (o *IamV2JwksSpec) Redact() {
+	o.recurseRedact(o.JwksStatus)
 }
 
-func (o *Failure) recurseRedact(v interface{}) {
+func (o *IamV2JwksSpec) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -112,15 +119,15 @@ func (o *Failure) recurseRedact(v interface{}) {
 	}
 }
 
-func (o Failure) zeroField(v interface{}) {
+func (o IamV2JwksSpec) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o Failure) MarshalJSON() ([]byte, error) {
+func (o IamV2JwksSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["errors"] = o.Errors
+	if o.JwksStatus != nil {
+		toSerialize["jwks_status"] = o.JwksStatus
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -129,34 +136,34 @@ func (o Failure) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableFailure struct {
-	value *Failure
+type NullableIamV2JwksSpec struct {
+	value *IamV2JwksSpec
 	isSet bool
 }
 
-func (v NullableFailure) Get() *Failure {
+func (v NullableIamV2JwksSpec) Get() *IamV2JwksSpec {
 	return v.value
 }
 
-func (v *NullableFailure) Set(val *Failure) {
+func (v *NullableIamV2JwksSpec) Set(val *IamV2JwksSpec) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableFailure) IsSet() bool {
+func (v NullableIamV2JwksSpec) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableFailure) Unset() {
+func (v *NullableIamV2JwksSpec) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableFailure(val *Failure) *NullableFailure {
-	return &NullableFailure{value: val, isSet: true}
+func NewNullableIamV2JwksSpec(val *IamV2JwksSpec) *NullableIamV2JwksSpec {
+	return &NullableIamV2JwksSpec{value: val, isSet: true}
 }
 
-func (v NullableFailure) MarshalJSON() ([]byte, error) {
+func (v NullableIamV2JwksSpec) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -164,7 +171,7 @@ func (v NullableFailure) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableFailure) UnmarshalJSON(src []byte) error {
+func (v *NullableIamV2JwksSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

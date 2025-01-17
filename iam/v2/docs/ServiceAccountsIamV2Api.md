@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateIamV2ServiceAccount
 
-> IamV2ServiceAccount CreateIamV2ServiceAccount(ctx).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
+> IamV2ServiceAccount CreateIamV2ServiceAccount(ctx).AssignedResourceOwner(assignedResourceOwner).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
 
 Create a Service Account
 
@@ -33,11 +33,12 @@ import (
 )
 
 func main() {
+    assignedResourceOwner := "u-a83k9b" // string | The resource_id of the principal who will be assigned resource owner on the created service account. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). (optional)
     iamV2ServiceAccount := *openapiclient.NewIamV2ServiceAccount() // IamV2ServiceAccount |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.CreateIamV2ServiceAccount(context.Background()).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.CreateIamV2ServiceAccount(context.Background()).AssignedResourceOwner(assignedResourceOwner).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.CreateIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,6 +59,7 @@ Other parameters are passed through a pointer to a apiCreateIamV2ServiceAccountR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **assignedResourceOwner** | **string** | The resource_id of the principal who will be assigned resource owner on the created service account. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). | 
  **iamV2ServiceAccount** | [**IamV2ServiceAccount**](IamV2ServiceAccount.md) |  | 
 
 ### Return type
@@ -288,7 +290,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIamV2ServiceAccount
 
-> IamV2ServiceAccount UpdateIamV2ServiceAccount(ctx, id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
+> IamV2ServiceAccount UpdateIamV2ServiceAccount(ctx, id).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
 
 Update a Service Account
 
@@ -308,11 +310,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the service account.
-    iamV2ServiceAccountUpdate := *openapiclient.NewIamV2ServiceAccountUpdate() // IamV2ServiceAccountUpdate |  (optional)
+    iamV2ServiceAccount := *openapiclient.NewIamV2ServiceAccount() // IamV2ServiceAccount |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount(context.Background(), id).IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate).Execute()
+    resp, r, err := api_client.ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount(context.Background(), id).IamV2ServiceAccount(iamV2ServiceAccount).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ServiceAccountsIamV2Api.UpdateIamV2ServiceAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -338,7 +340,7 @@ Other parameters are passed through a pointer to a apiUpdateIamV2ServiceAccountR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **iamV2ServiceAccountUpdate** | [**IamV2ServiceAccountUpdate**](IamV2ServiceAccountUpdate.md) |  | 
+ **iamV2ServiceAccount** | [**IamV2ServiceAccount**](IamV2ServiceAccount.md) |  | 
 
 ### Return type
 

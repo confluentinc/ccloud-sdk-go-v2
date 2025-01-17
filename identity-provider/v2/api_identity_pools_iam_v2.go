@@ -42,15 +42,15 @@ var (
 type IdentityPoolsIamV2Api interface {
 
 	/*
-	CreateIamV2IdentityPool Create an Identity Pool
+			CreateIamV2IdentityPool Create an Identity Pool
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create an identity pool.
+		Make a request to create an identity pool.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param providerId The Provider
-	 @return ApiCreateIamV2IdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param providerId The Provider
+			 @return ApiCreateIamV2IdentityPoolRequest
 	*/
 	CreateIamV2IdentityPool(ctx _context.Context, providerId string) ApiCreateIamV2IdentityPoolRequest
 
@@ -59,16 +59,16 @@ Make a request to create an identity pool.
 	CreateIamV2IdentityPoolExecute(r ApiCreateIamV2IdentityPoolRequest) (IamV2IdentityPool, *_nethttp.Response, error)
 
 	/*
-	DeleteIamV2IdentityPool Delete an Identity Pool
+			DeleteIamV2IdentityPool Delete an Identity Pool
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete an identity pool.
+		Make a request to delete an identity pool.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param providerId The Provider
-	 @param id The unique identifier for the identity pool.
-	 @return ApiDeleteIamV2IdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param providerId The Provider
+			 @param id The unique identifier for the identity pool.
+			 @return ApiDeleteIamV2IdentityPoolRequest
 	*/
 	DeleteIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiDeleteIamV2IdentityPoolRequest
 
@@ -76,16 +76,16 @@ Make a request to delete an identity pool.
 	DeleteIamV2IdentityPoolExecute(r ApiDeleteIamV2IdentityPoolRequest) (*_nethttp.Response, error)
 
 	/*
-	GetIamV2IdentityPool Read an Identity Pool
+			GetIamV2IdentityPool Read an Identity Pool
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read an identity pool.
+		Make a request to read an identity pool.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param providerId The Provider
-	 @param id The unique identifier for the identity pool.
-	 @return ApiGetIamV2IdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param providerId The Provider
+			 @param id The unique identifier for the identity pool.
+			 @return ApiGetIamV2IdentityPoolRequest
 	*/
 	GetIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiGetIamV2IdentityPoolRequest
 
@@ -94,15 +94,15 @@ Make a request to read an identity pool.
 	GetIamV2IdentityPoolExecute(r ApiGetIamV2IdentityPoolRequest) (IamV2IdentityPool, *_nethttp.Response, error)
 
 	/*
-	ListIamV2IdentityPools List of Identity Pools
+			ListIamV2IdentityPools List of Identity Pools
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all identity pools.
+		Retrieve a sorted, filtered, paginated list of all identity pools.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param providerId The Provider
-	 @return ApiListIamV2IdentityPoolsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param providerId The Provider
+			 @return ApiListIamV2IdentityPoolsRequest
 	*/
 	ListIamV2IdentityPools(ctx _context.Context, providerId string) ApiListIamV2IdentityPoolsRequest
 
@@ -111,18 +111,18 @@ Retrieve a sorted, filtered, paginated list of all identity pools.
 	ListIamV2IdentityPoolsExecute(r ApiListIamV2IdentityPoolsRequest) (IamV2IdentityPoolList, *_nethttp.Response, error)
 
 	/*
-	UpdateIamV2IdentityPool Update an Identity Pool
+			UpdateIamV2IdentityPool Update an Identity Pool
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update an identity pool.
+		Make a request to update an identity pool.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param providerId The Provider
-	 @param id The unique identifier for the identity pool.
-	 @return ApiUpdateIamV2IdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param providerId The Provider
+			 @param id The unique identifier for the identity pool.
+			 @return ApiUpdateIamV2IdentityPoolRequest
 	*/
 	UpdateIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiUpdateIamV2IdentityPoolRequest
 
@@ -135,12 +135,18 @@ Make a request to update an identity pool.
 type IdentityPoolsIamV2ApiService service
 
 type ApiCreateIamV2IdentityPoolRequest struct {
-	ctx _context.Context
-	ApiService IdentityPoolsIamV2Api
-	providerId string
-	iamV2IdentityPool *IamV2IdentityPool
+	ctx                   _context.Context
+	ApiService            IdentityPoolsIamV2Api
+	providerId            string
+	assignedResourceOwner *string
+	iamV2IdentityPool     *IamV2IdentityPool
 }
 
+// The resource_id of the principal who will be assigned resource owner on the created identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
+func (r ApiCreateIamV2IdentityPoolRequest) AssignedResourceOwner(assignedResourceOwner string) ApiCreateIamV2IdentityPoolRequest {
+	r.assignedResourceOwner = &assignedResourceOwner
+	return r
+}
 func (r ApiCreateIamV2IdentityPoolRequest) IamV2IdentityPool(iamV2IdentityPool IamV2IdentityPool) ApiCreateIamV2IdentityPoolRequest {
 	r.iamV2IdentityPool = &iamV2IdentityPool
 	return r
@@ -153,24 +159,25 @@ func (r ApiCreateIamV2IdentityPoolRequest) Execute() (IamV2IdentityPool, *_netht
 /*
 CreateIamV2IdentityPool Create an Identity Pool
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an identity pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param providerId The Provider
- @return ApiCreateIamV2IdentityPoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param providerId The Provider
+	@return ApiCreateIamV2IdentityPoolRequest
 */
 func (a *IdentityPoolsIamV2ApiService) CreateIamV2IdentityPool(ctx _context.Context, providerId string) ApiCreateIamV2IdentityPoolRequest {
 	return ApiCreateIamV2IdentityPoolRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		providerId: providerId,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityPool
+//
+//	@return IamV2IdentityPool
 func (a *IdentityPoolsIamV2ApiService) CreateIamV2IdentityPoolExecute(r ApiCreateIamV2IdentityPoolRequest) (IamV2IdentityPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -193,6 +200,9 @@ func (a *IdentityPoolsIamV2ApiService) CreateIamV2IdentityPoolExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.assignedResourceOwner != nil {
+		localVarQueryParams.Add("assigned_resource_owner", parameterToString(*r.assignedResourceOwner, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -319,12 +329,11 @@ func (a *IdentityPoolsIamV2ApiService) CreateIamV2IdentityPoolExecute(r ApiCreat
 }
 
 type ApiDeleteIamV2IdentityPoolRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityPoolsIamV2Api
 	providerId string
-	id string
+	id         string
 }
-
 
 func (r ApiDeleteIamV2IdentityPoolRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteIamV2IdentityPoolExecute(r)
@@ -333,21 +342,21 @@ func (r ApiDeleteIamV2IdentityPoolRequest) Execute() (*_nethttp.Response, error)
 /*
 DeleteIamV2IdentityPool Delete an Identity Pool
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an identity pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param providerId The Provider
- @param id The unique identifier for the identity pool.
- @return ApiDeleteIamV2IdentityPoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param providerId The Provider
+	@param id The unique identifier for the identity pool.
+	@return ApiDeleteIamV2IdentityPoolRequest
 */
 func (a *IdentityPoolsIamV2ApiService) DeleteIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiDeleteIamV2IdentityPoolRequest {
 	return ApiDeleteIamV2IdentityPoolRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		providerId: providerId,
-		id: id,
+		id:         id,
 	}
 }
 
@@ -469,12 +478,11 @@ func (a *IdentityPoolsIamV2ApiService) DeleteIamV2IdentityPoolExecute(r ApiDelet
 }
 
 type ApiGetIamV2IdentityPoolRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityPoolsIamV2Api
 	providerId string
-	id string
+	id         string
 }
-
 
 func (r ApiGetIamV2IdentityPoolRequest) Execute() (IamV2IdentityPool, *_nethttp.Response, error) {
 	return r.ApiService.GetIamV2IdentityPoolExecute(r)
@@ -483,26 +491,27 @@ func (r ApiGetIamV2IdentityPoolRequest) Execute() (IamV2IdentityPool, *_nethttp.
 /*
 GetIamV2IdentityPool Read an Identity Pool
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an identity pool.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param providerId The Provider
- @param id The unique identifier for the identity pool.
- @return ApiGetIamV2IdentityPoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param providerId The Provider
+	@param id The unique identifier for the identity pool.
+	@return ApiGetIamV2IdentityPoolRequest
 */
 func (a *IdentityPoolsIamV2ApiService) GetIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiGetIamV2IdentityPoolRequest {
 	return ApiGetIamV2IdentityPoolRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		providerId: providerId,
-		id: id,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityPool
+//
+//	@return IamV2IdentityPool
 func (a *IdentityPoolsIamV2ApiService) GetIamV2IdentityPoolExecute(r ApiGetIamV2IdentityPoolRequest) (IamV2IdentityPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -630,11 +639,11 @@ func (a *IdentityPoolsIamV2ApiService) GetIamV2IdentityPoolExecute(r ApiGetIamV2
 }
 
 type ApiListIamV2IdentityPoolsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityPoolsIamV2Api
 	providerId string
-	pageSize *int32
-	pageToken *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // A pagination size for collection requests.
@@ -642,6 +651,7 @@ func (r ApiListIamV2IdentityPoolsRequest) PageSize(pageSize int32) ApiListIamV2I
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListIamV2IdentityPoolsRequest) PageToken(pageToken string) ApiListIamV2IdentityPoolsRequest {
 	r.pageToken = &pageToken
@@ -655,24 +665,25 @@ func (r ApiListIamV2IdentityPoolsRequest) Execute() (IamV2IdentityPoolList, *_ne
 /*
 ListIamV2IdentityPools List of Identity Pools
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all identity pools.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param providerId The Provider
- @return ApiListIamV2IdentityPoolsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param providerId The Provider
+	@return ApiListIamV2IdentityPoolsRequest
 */
 func (a *IdentityPoolsIamV2ApiService) ListIamV2IdentityPools(ctx _context.Context, providerId string) ApiListIamV2IdentityPoolsRequest {
 	return ApiListIamV2IdentityPoolsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		providerId: providerId,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityPoolList
+//
+//	@return IamV2IdentityPoolList
 func (a *IdentityPoolsIamV2ApiService) ListIamV2IdentityPoolsExecute(r ApiListIamV2IdentityPoolsRequest) (IamV2IdentityPoolList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -795,10 +806,10 @@ func (a *IdentityPoolsIamV2ApiService) ListIamV2IdentityPoolsExecute(r ApiListIa
 }
 
 type ApiUpdateIamV2IdentityPoolRequest struct {
-	ctx _context.Context
-	ApiService IdentityPoolsIamV2Api
-	providerId string
-	id string
+	ctx               _context.Context
+	ApiService        IdentityPoolsIamV2Api
+	providerId        string
+	id                string
 	iamV2IdentityPool *IamV2IdentityPool
 }
 
@@ -814,28 +825,27 @@ func (r ApiUpdateIamV2IdentityPoolRequest) Execute() (IamV2IdentityPool, *_netht
 /*
 UpdateIamV2IdentityPool Update an Identity Pool
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To OAuth API](https://img.shields.io/badge/-Request%20Access%20To%20OAuth%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an identity pool.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param providerId The Provider
- @param id The unique identifier for the identity pool.
- @return ApiUpdateIamV2IdentityPoolRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param providerId The Provider
+	@param id The unique identifier for the identity pool.
+	@return ApiUpdateIamV2IdentityPoolRequest
 */
 func (a *IdentityPoolsIamV2ApiService) UpdateIamV2IdentityPool(ctx _context.Context, providerId string, id string) ApiUpdateIamV2IdentityPoolRequest {
 	return ApiUpdateIamV2IdentityPoolRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		providerId: providerId,
-		id: id,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityPool
+//
+//	@return IamV2IdentityPool
 func (a *IdentityPoolsIamV2ApiService) UpdateIamV2IdentityPoolExecute(r ApiUpdateIamV2IdentityPoolRequest) (IamV2IdentityPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -941,6 +951,16 @@ func (a *IdentityPoolsIamV2ApiService) UpdateIamV2IdentityPoolExecute(r ApiUpdat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

@@ -26,6 +26,7 @@ Contact: oauth-eng@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,31 +34,22 @@ import (
 	"reflect"
 )
 
-// IamV2Jwks `JWKS` contains the published keys for the given OpenIDProvider
+// IamV2Jwks `JWKS` objects represent public key sets for a specific OAuth/OpenID Connect provider within Confluent Cloud.  The API allows you to refresh JWKS public key data.   Related guide: [OAuth for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html).  ## The Jwks Model <SchemaDefinition schemaRef=\"#/components/schemas/iam.v2.Jwks\" />
 type IamV2Jwks struct {
-	// Specifies the cryptographic algorithm family used with the key
-	Kty string `json:"kty"`
-	// Specifies the key-id issued by the OpenIDProvider for the particular tenant
-	Kid string `json:"kid"`
-	// Specifies the algorithm to be used to generate the public key
-	Alg string `json:"alg"`
-	// Specifies the intended usage of the key
-	Use *string `json:"use,omitempty"`
-	// Specifies the modulus of the RSA public key. Represented as a Base64urlUInt-encoded value
-	N *string `json:"n,omitempty"`
-	// Specifies the exponent of the RSA public key.
-	E *string `json:"e,omitempty"`
+	// APIVersion defines the schema version of this representation of a resource.
+	ApiVersion *string `json:"api_version,omitempty"`
+	// Kind defines the object this REST resource represents.
+	Kind   *string          `json:"kind,omitempty"`
+	Spec   *IamV2JwksSpec   `json:"spec,omitempty"`
+	Status *IamV2JwksStatus `json:"status,omitempty"`
 }
 
 // NewIamV2Jwks instantiates a new IamV2Jwks object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIamV2Jwks(kty string, kid string, alg string) *IamV2Jwks {
+func NewIamV2Jwks() *IamV2Jwks {
 	this := IamV2Jwks{}
-	this.Kty = kty
-	this.Kid = kid
-	this.Alg = alg
 	return &this
 }
 
@@ -69,235 +61,191 @@ func NewIamV2JwksWithDefaults() *IamV2Jwks {
 	return &this
 }
 
-// GetKty returns the Kty field value
-func (o *IamV2Jwks) GetKty() string {
-	if o == nil {
+// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
+func (o *IamV2Jwks) GetApiVersion() string {
+	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Kty
+	return *o.ApiVersion
 }
 
-// GetKtyOk returns a tuple with the Kty field value
+// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetKtyOk() (*string, bool) {
-	if o == nil  {
+func (o *IamV2Jwks) GetApiVersionOk() (*string, bool) {
+	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
-	return &o.Kty, true
+	return o.ApiVersion, true
 }
 
-// SetKty sets field value
-func (o *IamV2Jwks) SetKty(v string) {
-	o.Kty = v
-}
-
-// GetKid returns the Kid field value
-func (o *IamV2Jwks) GetKid() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Kid
-}
-
-// GetKidOk returns a tuple with the Kid field value
-// and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetKidOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Kid, true
-}
-
-// SetKid sets field value
-func (o *IamV2Jwks) SetKid(v string) {
-	o.Kid = v
-}
-
-// GetAlg returns the Alg field value
-func (o *IamV2Jwks) GetAlg() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Alg
-}
-
-// GetAlgOk returns a tuple with the Alg field value
-// and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetAlgOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Alg, true
-}
-
-// SetAlg sets field value
-func (o *IamV2Jwks) SetAlg(v string) {
-	o.Alg = v
-}
-
-// GetUse returns the Use field value if set, zero value otherwise.
-func (o *IamV2Jwks) GetUse() string {
-	if o == nil || o.Use == nil {
-		var ret string
-		return ret
-	}
-	return *o.Use
-}
-
-// GetUseOk returns a tuple with the Use field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetUseOk() (*string, bool) {
-	if o == nil || o.Use == nil {
-		return nil, false
-	}
-	return o.Use, true
-}
-
-// HasUse returns a boolean if a field has been set.
-func (o *IamV2Jwks) HasUse() bool {
-	if o != nil && o.Use != nil {
+// HasApiVersion returns a boolean if a field has been set.
+func (o *IamV2Jwks) HasApiVersion() bool {
+	if o != nil && o.ApiVersion != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetUse gets a reference to the given string and assigns it to the Use field.
-func (o *IamV2Jwks) SetUse(v string) {
-	o.Use = &v
+// SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
+func (o *IamV2Jwks) SetApiVersion(v string) {
+	o.ApiVersion = &v
 }
 
-// GetN returns the N field value if set, zero value otherwise.
-func (o *IamV2Jwks) GetN() string {
-	if o == nil || o.N == nil {
+// GetKind returns the Kind field value if set, zero value otherwise.
+func (o *IamV2Jwks) GetKind() string {
+	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
 	}
-	return *o.N
+	return *o.Kind
 }
 
-// GetNOk returns a tuple with the N field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetNOk() (*string, bool) {
-	if o == nil || o.N == nil {
+func (o *IamV2Jwks) GetKindOk() (*string, bool) {
+	if o == nil || o.Kind == nil {
 		return nil, false
 	}
-	return o.N, true
+	return o.Kind, true
 }
 
-// HasN returns a boolean if a field has been set.
-func (o *IamV2Jwks) HasN() bool {
-	if o != nil && o.N != nil {
+// HasKind returns a boolean if a field has been set.
+func (o *IamV2Jwks) HasKind() bool {
+	if o != nil && o.Kind != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetN gets a reference to the given string and assigns it to the N field.
-func (o *IamV2Jwks) SetN(v string) {
-	o.N = &v
+// SetKind gets a reference to the given string and assigns it to the Kind field.
+func (o *IamV2Jwks) SetKind(v string) {
+	o.Kind = &v
 }
 
-// GetE returns the E field value if set, zero value otherwise.
-func (o *IamV2Jwks) GetE() string {
-	if o == nil || o.E == nil {
-		var ret string
+// GetSpec returns the Spec field value if set, zero value otherwise.
+func (o *IamV2Jwks) GetSpec() IamV2JwksSpec {
+	if o == nil || o.Spec == nil {
+		var ret IamV2JwksSpec
 		return ret
 	}
-	return *o.E
+	return *o.Spec
 }
 
-// GetEOk returns a tuple with the E field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2Jwks) GetEOk() (*string, bool) {
-	if o == nil || o.E == nil {
+func (o *IamV2Jwks) GetSpecOk() (*IamV2JwksSpec, bool) {
+	if o == nil || o.Spec == nil {
 		return nil, false
 	}
-	return o.E, true
+	return o.Spec, true
 }
 
-// HasE returns a boolean if a field has been set.
-func (o *IamV2Jwks) HasE() bool {
-	if o != nil && o.E != nil {
+// HasSpec returns a boolean if a field has been set.
+func (o *IamV2Jwks) HasSpec() bool {
+	if o != nil && o.Spec != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetE gets a reference to the given string and assigns it to the E field.
-func (o *IamV2Jwks) SetE(v string) {
-	o.E = &v
+// SetSpec gets a reference to the given IamV2JwksSpec and assigns it to the Spec field.
+func (o *IamV2Jwks) SetSpec(v IamV2JwksSpec) {
+	o.Spec = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *IamV2Jwks) GetStatus() IamV2JwksStatus {
+	if o == nil || o.Status == nil {
+		var ret IamV2JwksStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2Jwks) GetStatusOk() (*IamV2JwksStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *IamV2Jwks) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given IamV2JwksStatus and assigns it to the Status field.
+func (o *IamV2Jwks) SetStatus(v IamV2JwksStatus) {
+	o.Status = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2Jwks) Redact() {
-    o.recurseRedact(&o.Kty)
-    o.recurseRedact(&o.Kid)
-    o.recurseRedact(&o.Alg)
-    o.recurseRedact(o.Use)
-    o.recurseRedact(o.N)
-    o.recurseRedact(o.E)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Spec)
+	o.recurseRedact(o.Status)
 }
 
 func (o *IamV2Jwks) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o IamV2Jwks) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2Jwks) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["kty"] = o.Kty
+	if o.ApiVersion != nil {
+		toSerialize["api_version"] = o.ApiVersion
 	}
-	if true {
-		toSerialize["kid"] = o.Kid
+	if o.Kind != nil {
+		toSerialize["kind"] = o.Kind
 	}
-	if true {
-		toSerialize["alg"] = o.Alg
+	if o.Spec != nil {
+		toSerialize["spec"] = o.Spec
 	}
-	if o.Use != nil {
-		toSerialize["use"] = o.Use
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
-	if o.N != nil {
-		toSerialize["n"] = o.N
-	}
-	if o.E != nil {
-		toSerialize["e"] = o.E
-	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2Jwks struct {
@@ -328,12 +276,14 @@ func NewNullableIamV2Jwks(val *IamV2Jwks) *NullableIamV2Jwks {
 }
 
 func (v NullableIamV2Jwks) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2Jwks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

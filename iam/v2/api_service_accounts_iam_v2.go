@@ -135,11 +135,17 @@ type ServiceAccountsIamV2Api interface {
 type ServiceAccountsIamV2ApiService service
 
 type ApiCreateIamV2ServiceAccountRequest struct {
-	ctx                 _context.Context
-	ApiService          ServiceAccountsIamV2Api
-	iamV2ServiceAccount *IamV2ServiceAccount
+	ctx                   _context.Context
+	ApiService            ServiceAccountsIamV2Api
+	assignedResourceOwner *string
+	iamV2ServiceAccount   *IamV2ServiceAccount
 }
 
+// The resource_id of the principal who will be assigned resource owner on the created service account. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
+func (r ApiCreateIamV2ServiceAccountRequest) AssignedResourceOwner(assignedResourceOwner string) ApiCreateIamV2ServiceAccountRequest {
+	r.assignedResourceOwner = &assignedResourceOwner
+	return r
+}
 func (r ApiCreateIamV2ServiceAccountRequest) IamV2ServiceAccount(iamV2ServiceAccount IamV2ServiceAccount) ApiCreateIamV2ServiceAccountRequest {
 	r.iamV2ServiceAccount = &iamV2ServiceAccount
 	return r
@@ -190,6 +196,9 @@ func (a *ServiceAccountsIamV2ApiService) CreateIamV2ServiceAccountExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.assignedResourceOwner != nil {
+		localVarQueryParams.Add("assigned_resource_owner", parameterToString(*r.assignedResourceOwner, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -802,14 +811,14 @@ func (a *ServiceAccountsIamV2ApiService) ListIamV2ServiceAccountsExecute(r ApiLi
 }
 
 type ApiUpdateIamV2ServiceAccountRequest struct {
-	ctx                       _context.Context
-	ApiService                ServiceAccountsIamV2Api
-	id                        string
-	iamV2ServiceAccountUpdate *IamV2ServiceAccountUpdate
+	ctx                 _context.Context
+	ApiService          ServiceAccountsIamV2Api
+	id                  string
+	iamV2ServiceAccount *IamV2ServiceAccount
 }
 
-func (r ApiUpdateIamV2ServiceAccountRequest) IamV2ServiceAccountUpdate(iamV2ServiceAccountUpdate IamV2ServiceAccountUpdate) ApiUpdateIamV2ServiceAccountRequest {
-	r.iamV2ServiceAccountUpdate = &iamV2ServiceAccountUpdate
+func (r ApiUpdateIamV2ServiceAccountRequest) IamV2ServiceAccount(iamV2ServiceAccount IamV2ServiceAccount) ApiUpdateIamV2ServiceAccountRequest {
+	r.iamV2ServiceAccount = &iamV2ServiceAccount
 	return r
 }
 
@@ -879,7 +888,7 @@ func (a *ServiceAccountsIamV2ApiService) UpdateIamV2ServiceAccountExecute(r ApiU
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2ServiceAccountUpdate
+	localVarPostBody = r.iamV2ServiceAccount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
