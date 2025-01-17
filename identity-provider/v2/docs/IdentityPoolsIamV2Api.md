@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateIamV2IdentityPool
 
-> IamV2IdentityPool CreateIamV2IdentityPool(ctx, providerId).IamV2IdentityPool(iamV2IdentityPool).Execute()
+> IamV2IdentityPool CreateIamV2IdentityPool(ctx, providerId).AssignedResourceOwner(assignedResourceOwner).IamV2IdentityPool(iamV2IdentityPool).Execute()
 
 Create an Identity Pool
 
@@ -34,11 +34,12 @@ import (
 
 func main() {
     providerId := "providerId_example" // string | The Provider
+    assignedResourceOwner := "u-a83k9b" // string | The resource_id of the principal who will be assigned resource owner on the created identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). (optional)
     iamV2IdentityPool := *openapiclient.NewIamV2IdentityPool() // IamV2IdentityPool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityPoolsIamV2Api.CreateIamV2IdentityPool(context.Background(), providerId).IamV2IdentityPool(iamV2IdentityPool).Execute()
+    resp, r, err := api_client.IdentityPoolsIamV2Api.CreateIamV2IdentityPool(context.Background(), providerId).AssignedResourceOwner(assignedResourceOwner).IamV2IdentityPool(iamV2IdentityPool).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IdentityPoolsIamV2Api.CreateIamV2IdentityPool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Other parameters are passed through a pointer to a apiCreateIamV2IdentityPoolReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **assignedResourceOwner** | **string** | The resource_id of the principal who will be assigned resource owner on the created identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). | 
  **iamV2IdentityPool** | [**IamV2IdentityPool**](IamV2IdentityPool.md) |  | 
 
 ### Return type
@@ -72,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -143,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -216,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -290,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -365,7 +367,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 

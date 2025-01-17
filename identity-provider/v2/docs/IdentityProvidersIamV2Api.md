@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIamV2IdentityProvider
 
-> IamV2IdentityProvider UpdateIamV2IdentityProvider(ctx, id).IamV2IdentityProviderUpdate(iamV2IdentityProviderUpdate).Execute()
+> IamV2IdentityProvider UpdateIamV2IdentityProvider(ctx, id).IamV2IdentityProvider(iamV2IdentityProvider).Execute()
 
 Update an Identity Provider
 
@@ -306,11 +306,11 @@ import (
 
 func main() {
     id := "id_example" // string | The unique identifier for the identity provider.
-    iamV2IdentityProviderUpdate := *openapiclient.NewIamV2IdentityProviderUpdate() // IamV2IdentityProviderUpdate |  (optional)
+    iamV2IdentityProvider := *openapiclient.NewIamV2IdentityProvider() // IamV2IdentityProvider |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.IdentityProvidersIamV2Api.UpdateIamV2IdentityProvider(context.Background(), id).IamV2IdentityProviderUpdate(iamV2IdentityProviderUpdate).Execute()
+    resp, r, err := api_client.IdentityProvidersIamV2Api.UpdateIamV2IdentityProvider(context.Background(), id).IamV2IdentityProvider(iamV2IdentityProvider).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IdentityProvidersIamV2Api.UpdateIamV2IdentityProvider``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -336,7 +336,7 @@ Other parameters are passed through a pointer to a apiUpdateIamV2IdentityProvide
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **iamV2IdentityProviderUpdate** | [**IamV2IdentityProviderUpdate**](IamV2IdentityProviderUpdate.md) |  | 
+ **iamV2IdentityProvider** | [**IamV2IdentityProvider**](IamV2IdentityProvider.md) |  | 
 
 ### Return type
 
@@ -344,7 +344,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 

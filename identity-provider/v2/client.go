@@ -67,6 +67,8 @@ type APIClient struct {
 	IdentityPoolsIamV2Api IdentityPoolsIamV2Api
 
 	IdentityProvidersIamV2Api IdentityProvidersIamV2Api
+
+	JwksIamV2Api JwksIamV2Api
 }
 
 type service struct {
@@ -87,6 +89,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.IdentityPoolsIamV2Api = (*IdentityPoolsIamV2ApiService)(&c.common)
 	c.IdentityProvidersIamV2Api = (*IdentityProvidersIamV2ApiService)(&c.common)
+	c.JwksIamV2Api = (*JwksIamV2ApiService)(&c.common)
 
 	return c
 }

@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 *IdentityProvidersIamV2Api* | [**GetIamV2IdentityProvider**](docs/IdentityProvidersIamV2Api.md#getiamv2identityprovider) | **Get** /iam/v2/identity-providers/{id} | Read an Identity Provider
 *IdentityProvidersIamV2Api* | [**ListIamV2IdentityProviders**](docs/IdentityProvidersIamV2Api.md#listiamv2identityproviders) | **Get** /iam/v2/identity-providers | List of Identity Providers
 *IdentityProvidersIamV2Api* | [**UpdateIamV2IdentityProvider**](docs/IdentityProvidersIamV2Api.md#updateiamv2identityprovider) | **Patch** /iam/v2/identity-providers/{id} | Update an Identity Provider
+*JwksIamV2Api* | [**RefreshIamV2JsonWebKeySet**](docs/JwksIamV2Api.md#refreshiamv2jsonwebkeyset) | **Patch** /iam/v2/identity-providers/{provider_id}/jwks | Refresh a provider&#39;s JWKS
 
 
 ## Documentation For Models
@@ -100,8 +101,10 @@ Class | Method | HTTP request | Description
  - [IamV2IdentityPoolList](docs/IamV2IdentityPoolList.md)
  - [IamV2IdentityProvider](docs/IamV2IdentityProvider.md)
  - [IamV2IdentityProviderList](docs/IamV2IdentityProviderList.md)
- - [IamV2IdentityProviderUpdate](docs/IamV2IdentityProviderUpdate.md)
  - [IamV2Jwks](docs/IamV2Jwks.md)
+ - [IamV2JwksObject](docs/IamV2JwksObject.md)
+ - [IamV2JwksSpec](docs/IamV2JwksSpec.md)
+ - [IamV2JwksStatus](docs/IamV2JwksStatus.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
@@ -111,7 +114,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
@@ -122,6 +125,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 

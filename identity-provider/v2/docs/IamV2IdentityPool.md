@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | The name of the &#x60;IdentityPool&#x60;. | [optional] 
 **Description** | Pointer to **string** | A description of how this &#x60;IdentityPool&#x60; is used | [optional] 
-**IdentityClaim** | Pointer to **string** | The JWT claim to extract the authenticating identity to Confluent resources | [optional] 
-**Filter** | Pointer to **string** | A filter expression that must be evaluated to be true to use this identity pool | [optional] 
+**IdentityClaim** | Pointer to **string** | The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from (see [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1) for more details). This appears in the audit log records, showing, for example, that \&quot;identity Z used identity pool X to access topic A\&quot;. | [optional] 
+**Filter** | Pointer to **string** | A filter expression in [Supported Common Expression Language (CEL)](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#supported-common-expression-language-cel-filters) that specifies which identities can authenticate using your identity pool (see [Set identity pool filters](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#set-identity-pool-filters) for more details). | [optional] 
 **Principal** | Pointer to **string** | Represents the federated identity associated with this pool. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of the identity pool | [optional] [readonly] 
 

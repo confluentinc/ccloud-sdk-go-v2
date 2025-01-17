@@ -42,14 +42,14 @@ var (
 type IdentityProvidersIamV2Api interface {
 
 	/*
-	CreateIamV2IdentityProvider Create an Identity Provider
+			CreateIamV2IdentityProvider Create an Identity Provider
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create an identity provider.
+		Make a request to create an identity provider.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateIamV2IdentityProviderRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateIamV2IdentityProviderRequest
 	*/
 	CreateIamV2IdentityProvider(ctx _context.Context) ApiCreateIamV2IdentityProviderRequest
 
@@ -58,15 +58,15 @@ Make a request to create an identity provider.
 	CreateIamV2IdentityProviderExecute(r ApiCreateIamV2IdentityProviderRequest) (IamV2IdentityProvider, *_nethttp.Response, error)
 
 	/*
-	DeleteIamV2IdentityProvider Delete an Identity Provider
+			DeleteIamV2IdentityProvider Delete an Identity Provider
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete an identity provider.
+		Make a request to delete an identity provider.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the identity provider.
-	 @return ApiDeleteIamV2IdentityProviderRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the identity provider.
+			 @return ApiDeleteIamV2IdentityProviderRequest
 	*/
 	DeleteIamV2IdentityProvider(ctx _context.Context, id string) ApiDeleteIamV2IdentityProviderRequest
 
@@ -74,15 +74,15 @@ Make a request to delete an identity provider.
 	DeleteIamV2IdentityProviderExecute(r ApiDeleteIamV2IdentityProviderRequest) (*_nethttp.Response, error)
 
 	/*
-	GetIamV2IdentityProvider Read an Identity Provider
+			GetIamV2IdentityProvider Read an Identity Provider
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read an identity provider.
+		Make a request to read an identity provider.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the identity provider.
-	 @return ApiGetIamV2IdentityProviderRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the identity provider.
+			 @return ApiGetIamV2IdentityProviderRequest
 	*/
 	GetIamV2IdentityProvider(ctx _context.Context, id string) ApiGetIamV2IdentityProviderRequest
 
@@ -91,14 +91,14 @@ Make a request to read an identity provider.
 	GetIamV2IdentityProviderExecute(r ApiGetIamV2IdentityProviderRequest) (IamV2IdentityProvider, *_nethttp.Response, error)
 
 	/*
-	ListIamV2IdentityProviders List of Identity Providers
+			ListIamV2IdentityProviders List of Identity Providers
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all identity providers.
+		Retrieve a sorted, filtered, paginated list of all identity providers.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListIamV2IdentityProvidersRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListIamV2IdentityProvidersRequest
 	*/
 	ListIamV2IdentityProviders(ctx _context.Context) ApiListIamV2IdentityProvidersRequest
 
@@ -107,17 +107,17 @@ Retrieve a sorted, filtered, paginated list of all identity providers.
 	ListIamV2IdentityProvidersExecute(r ApiListIamV2IdentityProvidersRequest) (IamV2IdentityProviderList, *_nethttp.Response, error)
 
 	/*
-	UpdateIamV2IdentityProvider Update an Identity Provider
+			UpdateIamV2IdentityProvider Update an Identity Provider
 
-	[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update an identity provider.
+		Make a request to update an identity provider.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the identity provider.
-	 @return ApiUpdateIamV2IdentityProviderRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the identity provider.
+			 @return ApiUpdateIamV2IdentityProviderRequest
 	*/
 	UpdateIamV2IdentityProvider(ctx _context.Context, id string) ApiUpdateIamV2IdentityProviderRequest
 
@@ -130,8 +130,8 @@ Make a request to update an identity provider.
 type IdentityProvidersIamV2ApiService service
 
 type ApiCreateIamV2IdentityProviderRequest struct {
-	ctx _context.Context
-	ApiService IdentityProvidersIamV2Api
+	ctx                   _context.Context
+	ApiService            IdentityProvidersIamV2Api
 	iamV2IdentityProvider *IamV2IdentityProvider
 }
 
@@ -147,22 +147,23 @@ func (r ApiCreateIamV2IdentityProviderRequest) Execute() (IamV2IdentityProvider,
 /*
 CreateIamV2IdentityProvider Create an Identity Provider
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an identity provider.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamV2IdentityProviderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamV2IdentityProviderRequest
 */
 func (a *IdentityProvidersIamV2ApiService) CreateIamV2IdentityProvider(ctx _context.Context) ApiCreateIamV2IdentityProviderRequest {
 	return ApiCreateIamV2IdentityProviderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityProvider
+//
+//	@return IamV2IdentityProvider
 func (a *IdentityProvidersIamV2ApiService) CreateIamV2IdentityProviderExecute(r ApiCreateIamV2IdentityProviderRequest) (IamV2IdentityProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -310,11 +311,10 @@ func (a *IdentityProvidersIamV2ApiService) CreateIamV2IdentityProviderExecute(r 
 }
 
 type ApiDeleteIamV2IdentityProviderRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityProvidersIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiDeleteIamV2IdentityProviderRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteIamV2IdentityProviderExecute(r)
@@ -323,19 +323,19 @@ func (r ApiDeleteIamV2IdentityProviderRequest) Execute() (*_nethttp.Response, er
 /*
 DeleteIamV2IdentityProvider Delete an Identity Provider
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an identity provider.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the identity provider.
- @return ApiDeleteIamV2IdentityProviderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the identity provider.
+	@return ApiDeleteIamV2IdentityProviderRequest
 */
 func (a *IdentityProvidersIamV2ApiService) DeleteIamV2IdentityProvider(ctx _context.Context, id string) ApiDeleteIamV2IdentityProviderRequest {
 	return ApiDeleteIamV2IdentityProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -456,11 +456,10 @@ func (a *IdentityProvidersIamV2ApiService) DeleteIamV2IdentityProviderExecute(r 
 }
 
 type ApiGetIamV2IdentityProviderRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityProvidersIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetIamV2IdentityProviderRequest) Execute() (IamV2IdentityProvider, *_nethttp.Response, error) {
 	return r.ApiService.GetIamV2IdentityProviderExecute(r)
@@ -469,24 +468,25 @@ func (r ApiGetIamV2IdentityProviderRequest) Execute() (IamV2IdentityProvider, *_
 /*
 GetIamV2IdentityProvider Read an Identity Provider
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an identity provider.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the identity provider.
- @return ApiGetIamV2IdentityProviderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the identity provider.
+	@return ApiGetIamV2IdentityProviderRequest
 */
 func (a *IdentityProvidersIamV2ApiService) GetIamV2IdentityProvider(ctx _context.Context, id string) ApiGetIamV2IdentityProviderRequest {
 	return ApiGetIamV2IdentityProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityProvider
+//
+//	@return IamV2IdentityProvider
 func (a *IdentityProvidersIamV2ApiService) GetIamV2IdentityProviderExecute(r ApiGetIamV2IdentityProviderRequest) (IamV2IdentityProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -613,10 +613,10 @@ func (a *IdentityProvidersIamV2ApiService) GetIamV2IdentityProviderExecute(r Api
 }
 
 type ApiListIamV2IdentityProvidersRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService IdentityProvidersIamV2Api
-	pageSize *int32
-	pageToken *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // A pagination size for collection requests.
@@ -624,6 +624,7 @@ func (r ApiListIamV2IdentityProvidersRequest) PageSize(pageSize int32) ApiListIa
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListIamV2IdentityProvidersRequest) PageToken(pageToken string) ApiListIamV2IdentityProvidersRequest {
 	r.pageToken = &pageToken
@@ -637,22 +638,23 @@ func (r ApiListIamV2IdentityProvidersRequest) Execute() (IamV2IdentityProviderLi
 /*
 ListIamV2IdentityProviders List of Identity Providers
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all identity providers.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2IdentityProvidersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListIamV2IdentityProvidersRequest
 */
 func (a *IdentityProvidersIamV2ApiService) ListIamV2IdentityProviders(ctx _context.Context) ApiListIamV2IdentityProvidersRequest {
 	return ApiListIamV2IdentityProvidersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityProviderList
+//
+//	@return IamV2IdentityProviderList
 func (a *IdentityProvidersIamV2ApiService) ListIamV2IdentityProvidersExecute(r ApiListIamV2IdentityProvidersRequest) (IamV2IdentityProviderList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -774,14 +776,14 @@ func (a *IdentityProvidersIamV2ApiService) ListIamV2IdentityProvidersExecute(r A
 }
 
 type ApiUpdateIamV2IdentityProviderRequest struct {
-	ctx _context.Context
-	ApiService IdentityProvidersIamV2Api
-	id string
-	iamV2IdentityProviderUpdate *IamV2IdentityProviderUpdate
+	ctx                   _context.Context
+	ApiService            IdentityProvidersIamV2Api
+	id                    string
+	iamV2IdentityProvider *IamV2IdentityProvider
 }
 
-func (r ApiUpdateIamV2IdentityProviderRequest) IamV2IdentityProviderUpdate(iamV2IdentityProviderUpdate IamV2IdentityProviderUpdate) ApiUpdateIamV2IdentityProviderRequest {
-	r.iamV2IdentityProviderUpdate = &iamV2IdentityProviderUpdate
+func (r ApiUpdateIamV2IdentityProviderRequest) IamV2IdentityProvider(iamV2IdentityProvider IamV2IdentityProvider) ApiUpdateIamV2IdentityProviderRequest {
+	r.iamV2IdentityProvider = &iamV2IdentityProvider
 	return r
 }
 
@@ -792,26 +794,25 @@ func (r ApiUpdateIamV2IdentityProviderRequest) Execute() (IamV2IdentityProvider,
 /*
 UpdateIamV2IdentityProvider Update an Identity Provider
 
-[![Closed Preview](https://img.shields.io/badge/Lifecycle%20Stage-Closed%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To IAM API](https://img.shields.io/badge/-Request%20Access%20To%20IAM%20API-%23bc8540)](mailto:ccloud-api-access+iam-v2-closed-preview@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Closed%20Preview&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Closed%20Preview%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an identity provider.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the identity provider.
- @return ApiUpdateIamV2IdentityProviderRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the identity provider.
+	@return ApiUpdateIamV2IdentityProviderRequest
 */
 func (a *IdentityProvidersIamV2ApiService) UpdateIamV2IdentityProvider(ctx _context.Context, id string) ApiUpdateIamV2IdentityProviderRequest {
 	return ApiUpdateIamV2IdentityProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2IdentityProvider
+//
+//	@return IamV2IdentityProvider
 func (a *IdentityProvidersIamV2ApiService) UpdateIamV2IdentityProviderExecute(r ApiUpdateIamV2IdentityProviderRequest) (IamV2IdentityProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -852,7 +853,7 @@ func (a *IdentityProvidersIamV2ApiService) UpdateIamV2IdentityProviderExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.iamV2IdentityProviderUpdate
+	localVarPostBody = r.iamV2IdentityProvider
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -916,6 +917,16 @@ func (a *IdentityProvidersIamV2ApiService) UpdateIamV2IdentityProviderExecute(r 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

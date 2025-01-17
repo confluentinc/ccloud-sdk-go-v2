@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**DisplayName** | Pointer to **string** | The name of the Provider. | [optional] 
-**Description** | Pointer to **string** | A description for your provider | [optional] 
-**State** | Pointer to **string** | The current state of the provider | [optional] [readonly] 
-**Issuer** | Pointer to **string** | Publicly reachable issuer URI | [optional] 
-**JwksUri** | Pointer to **string** | Publicly reachable JWKS URI for the OIDC provider | [optional] 
-**Keys** | Pointer to [**[]IamV2Jwks**](IamV2Jwks.md) | The JWKS provided by the Provider. We only express the &#x60;kid&#x60; and &#x60;alg&#x60; for each key set | [optional] [readonly] 
+**DisplayName** | Pointer to **string** | The human-readable name of the OAuth identity provider. | [optional] 
+**Description** | Pointer to **string** | A description of the identity provider. | [optional] 
+**IdentityClaim** | Pointer to **string** | The JSON Web Token (JWT) claim to extract the authenticating identity to Confluent resources from [Registered Claim Names](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1). This appears in audit log records. Note: if the client specifies mapping to one identity pool ID, the identity claim configured with that pool will be used instead. | [optional] 
+**State** | Pointer to **string** | The current state of the identity provider. | [optional] [readonly] 
+**Issuer** | Pointer to **string** | A publicly accessible URL uniquely identifying the OAuth identity provider authorized to issue access tokens. | [optional] 
+**JwksUri** | Pointer to **string** | A publicly accessible JSON Web Key Set (JWKS) URI for the OAuth identity provider. JWKS provides a set of crypotgraphic keys used to verify the authenticity and integrity of JSON Web Tokens (JWTs) issued by the OAuth identity provider. | [optional] 
+**Keys** | Pointer to [**[]IamV2JwksObject**](IamV2JwksObject.md) | The JWKS issued by the OAuth identity provider. Only &#x60;kid&#x60; (key ID) and &#x60;alg&#x60; (algorithm) properties for each key set are included. | [optional] [readonly] 
 
 ## Methods
 
@@ -184,6 +185,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetIdentityClaim
+
+`func (o *IamV2IdentityProvider) GetIdentityClaim() string`
+
+GetIdentityClaim returns the IdentityClaim field if non-nil, zero value otherwise.
+
+### GetIdentityClaimOk
+
+`func (o *IamV2IdentityProvider) GetIdentityClaimOk() (*string, bool)`
+
+GetIdentityClaimOk returns a tuple with the IdentityClaim field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentityClaim
+
+`func (o *IamV2IdentityProvider) SetIdentityClaim(v string)`
+
+SetIdentityClaim sets IdentityClaim field to given value.
+
+### HasIdentityClaim
+
+`func (o *IamV2IdentityProvider) HasIdentityClaim() bool`
+
+HasIdentityClaim returns a boolean if a field has been set.
+
 ### GetState
 
 `func (o *IamV2IdentityProvider) GetState() string`
@@ -261,20 +287,20 @@ HasJwksUri returns a boolean if a field has been set.
 
 ### GetKeys
 
-`func (o *IamV2IdentityProvider) GetKeys() []IamV2Jwks`
+`func (o *IamV2IdentityProvider) GetKeys() []IamV2JwksObject`
 
 GetKeys returns the Keys field if non-nil, zero value otherwise.
 
 ### GetKeysOk
 
-`func (o *IamV2IdentityProvider) GetKeysOk() (*[]IamV2Jwks, bool)`
+`func (o *IamV2IdentityProvider) GetKeysOk() (*[]IamV2JwksObject, bool)`
 
 GetKeysOk returns a tuple with the Keys field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKeys
 
-`func (o *IamV2IdentityProvider) SetKeys(v []IamV2Jwks)`
+`func (o *IamV2IdentityProvider) SetKeys(v []IamV2JwksObject)`
 
 SetKeys sets Keys field to given value.
 
