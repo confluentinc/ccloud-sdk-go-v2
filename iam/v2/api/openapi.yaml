@@ -13,6 +13,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -1677,6 +1681,18 @@ paths:
 
         Make a request to create a service account.
       operationId: createIamV2ServiceAccount
+      parameters:
+      - description: The resource_id of the principal who will be assigned resource
+          owner on the created service account. Principal can be group-mapping (group-xxx),  user
+          (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
+        example: u-a83k9b
+        explode: true
+        in: query
+        name: assigned_resource_owner
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       requestBody:
         content:
           application/json:
@@ -1954,7 +1970,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url https://api.confluent.cloud/iam/v2/service-accounts \
+            --url 'https://api.confluent.cloud/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"DeLorean_auto_repair","description":"Doc'\''s repair bot for the DeLorean"}'
@@ -1965,7 +1981,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"DeLorean_auto_repair\",\"description\":\"Doc's repair bot for the DeLorean\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/service-accounts")
+            .url("https://api.confluent.cloud/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1974,7 +1990,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"DeLorean_auto_repair\\\
           \",\\\"description\\\":\\\"Doc's repair bot for the DeLorean\\\"}\")\n\n\
           \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
@@ -1995,7 +2011,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/iam/v2/service-accounts", payload, headers)
+          conn.request("POST", "/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2009,7 +2025,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/service-accounts",
+            "path": "/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2039,7 +2055,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -2051,7 +2067,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/service-accounts?assigned_resource_owner=u-a83k9b");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -2674,7 +2690,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/iam.v2.ServiceAccountUpdate'
+              $ref: '#/components/schemas/iam.v2.ServiceAccount'
       responses:
         "200":
           content:
@@ -4723,7 +4739,6 @@ components:
           description: A human-readable name for the Service Account
           example: DeLorean_auto_repair
           type: string
-          x-immutable: true
         description:
           description: A free-form description of the Service Account
           example: Doc's repair bot for the DeLorean
@@ -5285,63 +5300,6 @@ components:
           x-extensible-enum:
           - AUTH_TYPE_LOCAL
           - AUTH_TYPE_SSO
-      type: object
-    iam.v2.ServiceAccountUpdate:
-      description: |-
-        `ServiceAccount` objects are typically used to represent applications and other non-human principals
-        that may access your Confluent resources.
-
-        The API allows you to create, retrieve, update, and delete individual service accounts, as well as
-        list all your service accounts.
-
-
-        Related guide: [Service Accounts in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/service-account.html).
-
-        ## The Service Accounts Model
-        <SchemaDefinition schemaRef="#/components/schemas/iam.v2.ServiceAccount" />
-
-        ## Quotas and Limits
-        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
-
-        | Quota | Description |
-        | --- | --- |
-        | `service_accounts_per_org` | Service Accounts in one Confluent Cloud organization |
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - iam/v2
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - ServiceAccount
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/iam/v2/service-accounts/sa-12345
-              resource_name:
-                example: crn://confluent.cloud/service-account=sa-12345
-        description:
-          description: A free-form description of the Service Account
-          example: Doc's repair bot for the DeLorean
-          type: string
       type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,

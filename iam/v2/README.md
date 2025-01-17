@@ -104,7 +104,6 @@ Class | Method | HTTP request | Description
  - [IamV2InvitationList](docs/IamV2InvitationList.md)
  - [IamV2ServiceAccount](docs/IamV2ServiceAccount.md)
  - [IamV2ServiceAccountList](docs/IamV2ServiceAccountList.md)
- - [IamV2ServiceAccountUpdate](docs/IamV2ServiceAccountUpdate.md)
  - [IamV2User](docs/IamV2User.md)
  - [IamV2UserList](docs/IamV2UserList.md)
  - [IamV2UserUpdate](docs/IamV2UserUpdate.md)
