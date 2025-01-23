@@ -1074,10 +1074,22 @@ components:
           x-immutable: true
         private_http_endpoint:
           description: The cluster's private HTTP request URL.
-          example: https://lsrc-abc.us-central-1.private.confluent.cloud
+          example: https://lsrc-abc.us-central-1.aws.private.confluent.cloud
           format: uri
           readOnly: true
           type: string
+          x-immutable: true
+        private_http_regional_endpoints:
+          additionalProperties:
+            format: uri
+            type: string
+          description: A map of region identifiers to their corresponding private
+            HTTP request URLs.
+          example:
+            us-central-1: https://lsrc-abc.us-central-1.aws.private.confluent.cloud
+            us-west-2: https://lsrc-abc.us-west-2.aws.private.confluent.cloud
+          readOnly: true
+          type: object
           x-immutable: true
         cloud:
           description: The cloud service provider in which the cluster is running.
