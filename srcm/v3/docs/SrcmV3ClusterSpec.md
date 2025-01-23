@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **CatalogHttpEndpoint** | Pointer to **string** | The cluster&#39;s catalog HTTP request URL. | [optional] [readonly] 
 **PrivateHttpEndpoint** | Pointer to **string** | The cluster&#39;s private HTTP request URL. | [optional] [readonly] 
+**PrivateHttpRegionalEndpoints** | Pointer to **map[string]string** | A map of region identifiers to their corresponding private HTTP request URLs. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
 **Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -156,6 +157,31 @@ SetPrivateHttpEndpoint sets PrivateHttpEndpoint field to given value.
 `func (o *SrcmV3ClusterSpec) HasPrivateHttpEndpoint() bool`
 
 HasPrivateHttpEndpoint returns a boolean if a field has been set.
+
+### GetPrivateHttpRegionalEndpoints
+
+`func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpoints() map[string]string`
+
+GetPrivateHttpRegionalEndpoints returns the PrivateHttpRegionalEndpoints field if non-nil, zero value otherwise.
+
+### GetPrivateHttpRegionalEndpointsOk
+
+`func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpointsOk() (*map[string]string, bool)`
+
+GetPrivateHttpRegionalEndpointsOk returns a tuple with the PrivateHttpRegionalEndpoints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateHttpRegionalEndpoints
+
+`func (o *SrcmV3ClusterSpec) SetPrivateHttpRegionalEndpoints(v map[string]string)`
+
+SetPrivateHttpRegionalEndpoints sets PrivateHttpRegionalEndpoints field to given value.
+
+### HasPrivateHttpRegionalEndpoints
+
+`func (o *SrcmV3ClusterSpec) HasPrivateHttpRegionalEndpoints() bool`
+
+HasPrivateHttpRegionalEndpoints returns a boolean if a field has been set.
 
 ### GetCloud
 
