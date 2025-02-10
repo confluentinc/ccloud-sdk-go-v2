@@ -46,6 +46,8 @@ type SrcmV3ClusterSpec struct {
 	CatalogHttpEndpoint *string `json:"catalog_http_endpoint,omitempty"`
 	// The cluster's private HTTP request URL.
 	PrivateHttpEndpoint *string `json:"private_http_endpoint,omitempty"`
+	// A map of region identifiers to their corresponding private HTTP request URLs.
+	PrivateHttpRegionalEndpoints *map[string]string `json:"private_http_regional_endpoints,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
@@ -231,6 +233,38 @@ func (o *SrcmV3ClusterSpec) SetPrivateHttpEndpoint(v string) {
 	o.PrivateHttpEndpoint = &v
 }
 
+// GetPrivateHttpRegionalEndpoints returns the PrivateHttpRegionalEndpoints field value if set, zero value otherwise.
+func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpoints() map[string]string {
+	if o == nil || o.PrivateHttpRegionalEndpoints == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.PrivateHttpRegionalEndpoints
+}
+
+// GetPrivateHttpRegionalEndpointsOk returns a tuple with the PrivateHttpRegionalEndpoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpointsOk() (*map[string]string, bool) {
+	if o == nil || o.PrivateHttpRegionalEndpoints == nil {
+		return nil, false
+	}
+	return o.PrivateHttpRegionalEndpoints, true
+}
+
+// HasPrivateHttpRegionalEndpoints returns a boolean if a field has been set.
+func (o *SrcmV3ClusterSpec) HasPrivateHttpRegionalEndpoints() bool {
+	if o != nil && o.PrivateHttpRegionalEndpoints != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivateHttpRegionalEndpoints gets a reference to the given map[string]string and assigns it to the PrivateHttpRegionalEndpoints field.
+func (o *SrcmV3ClusterSpec) SetPrivateHttpRegionalEndpoints(v map[string]string) {
+	o.PrivateHttpRegionalEndpoints = &v
+}
+
 // GetCloud returns the Cloud field value if set, zero value otherwise.
 func (o *SrcmV3ClusterSpec) GetCloud() string {
 	if o == nil || o.Cloud == nil {
@@ -334,6 +368,7 @@ func (o *SrcmV3ClusterSpec) Redact() {
 	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.CatalogHttpEndpoint)
 	o.recurseRedact(o.PrivateHttpEndpoint)
+	o.recurseRedact(o.PrivateHttpRegionalEndpoints)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
@@ -385,6 +420,9 @@ func (o SrcmV3ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.PrivateHttpEndpoint != nil {
 		toSerialize["private_http_endpoint"] = o.PrivateHttpEndpoint
+	}
+	if o.PrivateHttpRegionalEndpoints != nil {
+		toSerialize["private_http_regional_endpoints"] = o.PrivateHttpRegionalEndpoints
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
