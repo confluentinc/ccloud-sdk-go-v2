@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateIamV2CertificateIdentityPool
 
-> IamV2CertificateIdentityPool CreateIamV2CertificateIdentityPool(ctx, certificateAuthorityId).AssignedResourceOwner(assignedResourceOwner).IamV2CertificateIdentityPool(iamV2CertificateIdentityPool).Execute()
+> IamV2CertificateIdentityPool CreateIamV2CertificateIdentityPool(ctx, certificateAuthorityId).IamV2CertificateIdentityPool(iamV2CertificateIdentityPool).Execute()
 
 Create a Certificate Identity Pool
 
@@ -34,12 +34,11 @@ import (
 
 func main() {
     certificateAuthorityId := "certificateAuthorityId_example" // string | The Certificate Authority
-    assignedResourceOwner := "u-a83k9b" // string | The resource_id of the principal who will be assigned resource owner on the created certificate identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). (optional)
     iamV2CertificateIdentityPool := *openapiclient.NewIamV2CertificateIdentityPool() // IamV2CertificateIdentityPool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateIdentityPoolsIamV2Api.CreateIamV2CertificateIdentityPool(context.Background(), certificateAuthorityId).AssignedResourceOwner(assignedResourceOwner).IamV2CertificateIdentityPool(iamV2CertificateIdentityPool).Execute()
+    resp, r, err := api_client.CertificateIdentityPoolsIamV2Api.CreateIamV2CertificateIdentityPool(context.Background(), certificateAuthorityId).IamV2CertificateIdentityPool(iamV2CertificateIdentityPool).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateIdentityPoolsIamV2Api.CreateIamV2CertificateIdentityPool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +64,6 @@ Other parameters are passed through a pointer to a apiCreateIamV2CertificateIden
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **assignedResourceOwner** | **string** | The resource_id of the principal who will be assigned resource owner on the created certificate identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx). | 
  **iamV2CertificateIdentityPool** | [**IamV2CertificateIdentityPool**](IamV2CertificateIdentityPool.md) |  | 
 
 ### Return type

@@ -14,13 +14,9 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
-- description: Confluent Cloud staging
-  url: https://api.stag.cpdev.cloud
-- description: Confluent Cloud development
-  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `CertificateAuthority` objects represent signing certificate authorities in Confluent Cloud.
 
@@ -40,7 +36,7 @@ tags:
     | `certificate_authorities_per_org` | Number of certificate authorities per organization |
   name: Certificate Authorities (iam/v2)
 - description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
     `Identitypool` objects represent workload identities in Confluent Cloud.
 
@@ -64,7 +60,7 @@ paths:
   /iam/v2/certificate-authorities:
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all certificate authorities.
       operationId: listIamV2CertificateAuthorities
@@ -268,18 +264,19 @@ paths:
       summary: List of Certificate Authorities
       tags:
       - Certificate Authorities (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/iam/v2/certificate-authorities \
+            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -287,7 +284,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -300,7 +297,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/certificate-authorities", headers=headers)
+          conn.request("GET", "/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -314,7 +311,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities",
+            "path": "/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -339,7 +336,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -348,13 +345,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create a certificate authority.
       operationId: createIamV2CertificateAuthority
@@ -628,6 +625,7 @@ paths:
       summary: Create a Certificate Authority
       tags:
       - Certificate Authorities (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -705,8 +703,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/iam/v2/certificate-authorities")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -740,10 +738,10 @@ paths:
           \nxqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\\\ngIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\\\
           \njatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\\\ncGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\\\
           \n-----END X509 CRL-----\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -784,8 +782,8 @@ paths:
           -----END X509 CRL-----\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
           conn.request("POST", "/iam/v2/certificate-authorities", payload, headers)
@@ -804,8 +802,8 @@ paths:
             "port": null,
             "path": "/iam/v2/certificate-authorities",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -869,8 +867,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Certificate Authority\",\"description\":\"Sample description text\",\"certificate_chain\":\"-----BEGIN CERTIFICATE-----\
@@ -910,8 +908,8 @@ paths:
         source: |-
           var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"display_name\":\"My Certificate Authority\",\"description\":\"Sample description text\",\"certificate_chain\":\"-----BEGIN CERTIFICATE-----\
           MIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkGA1UEBhMCQkUx\
           GTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkds\
@@ -944,10 +942,11 @@ paths:
           cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
           -----END X509 CRL-----\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+    x-request-access-name: mTLS for Dedicated Kafka
   /iam/v2/certificate-authorities/{id}:
     delete:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete a certificate authority.
       operationId: deleteIamV2CertificateAuthority
@@ -1169,18 +1168,19 @@ paths:
       summary: Delete a Certificate Authority
       tags:
       - Certificate Authorities (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1188,7 +1188,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1201,7 +1201,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/iam/v2/certificate-authorities/{id}", headers=headers)
+          conn.request("DELETE", "/iam/v2/certificate-authorities/%7Bid%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1215,7 +1215,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1240,7 +1240,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1249,13 +1249,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read a certificate authority.
       operationId: getIamV2CertificateAuthority
@@ -1477,18 +1477,19 @@ paths:
       summary: Read a Certificate Authority
       tags:
       - Certificate Authorities (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1496,7 +1497,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1509,7 +1510,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/certificate-authorities/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/certificate-authorities/%7Bid%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1523,7 +1524,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1548,7 +1549,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1557,13 +1558,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     put:
       description: |+
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update a certificate authority.
 
@@ -1865,11 +1866,12 @@ paths:
       summary: Update a Certificate Authority
       tags:
       - Certificate Authorities (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"My Certificate Authority","description":"Sample description text","certificate_chain":"-----BEGIN CERTIFICATE-----
@@ -1940,16 +1942,16 @@ paths:
           cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
           -----END X509 CRL-----\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D")
             .put(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Certificate\
           \ Authority\\\",\\\"description\\\":\\\"Sample description text\\\",\\\"\
           certificate_chain\\\":\\\"-----BEGIN CERTIFICATE-----\\\nMIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkGA1UEBhMCQkUx\\\
@@ -1977,10 +1979,10 @@ paths:
           \nxqh1J60l5DDsiUcXQM5FtlWTBBZFxvvvWsLP4qA/0meYRY69YQNqgEQgQ65l0Ehl\\\ngIUx8WkEo82A8MDY/t91PaFHufnffPKu4CxFtcpGwuvA2n9mpxB2TsSTiV8THsfE\\\
           \njatuFwYgumI6t5wIWb71j/1oqQDYtbgpgUvX9gD+g7HlCC4u6Dynd0q8lsimrbf6\\\ncGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\\\
           \n-----END X509 CRL-----\\\"}\")\n\n\treq, _ := http.NewRequest(\"PUT\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          , url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -2021,11 +2023,11 @@ paths:
           -----END X509 CRL-----\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("PUT", "/iam/v2/certificate-authorities/{id}", payload, headers)
+          conn.request("PUT", "/iam/v2/certificate-authorities/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2039,10 +2041,10 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bid%7D",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -2103,11 +2105,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Certificate Authority\",\"description\":\"Sample description text\",\"certificate_chain\":\"-----BEGIN CERTIFICATE-----\
@@ -2145,10 +2147,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bid%7D");
           var request = new RestRequest(Method.PUT);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"display_name\":\"My Certificate Authority\",\"description\":\"Sample description text\",\"certificate_chain\":\"-----BEGIN CERTIFICATE-----\
           MIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkGA1UEBhMCQkUx\
           GTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkds\
@@ -2181,10 +2183,11 @@ paths:
           cGf5Vs3JfMcr1kYNruT7kg4f4hc3p4CcuWtxYmHOcWNyZbi+W9Fdakg=\
           -----END X509 CRL-----\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+    x-request-access-name: mTLS for Dedicated Kafka
   /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools:
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Retrieve a sorted, filtered, paginated list of all certificate identity pools.
       operationId: listIamV2CertificateIdentityPools
@@ -2396,18 +2399,19 @@ paths:
       summary: List of Certificate Identity Pools
       tags:
       - Certificate Identity Pools (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools' \
+            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2415,7 +2419,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2428,7 +2432,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools", headers=headers)
+          conn.request("GET", "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2442,7 +2446,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools",
+            "path": "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2467,7 +2471,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2476,28 +2480,17 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     post:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to create a certificate identity pool.
       operationId: createIamV2CertificateIdentityPool
       parameters:
-      - description: The resource_id of the principal who will be assigned resource
-          owner on the created certificate identity pool. Principal can be group-mapping
-          (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
-        example: u-a83k9b
-        explode: true
-        in: query
-        name: assigned_resource_owner
-        required: false
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: The Certificate Authority
         explode: false
         in: path
@@ -2785,11 +2778,12 @@ paths:
       summary: Create a Certificate Identity Pool
       tags:
       - Certificate Identity Pools (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","external_identifier":"UID","filter":"C=='\''Canada'\'' && O=='\''Confluent'\''"}'
@@ -2800,24 +2794,24 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools")
             .post(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
           \ Engineering\\\",\\\"external_identifier\\\":\\\"UID\\\",\\\"filter\\\"\
           :\\\"C=='Canada' && O=='Confluent'\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -2828,11 +2822,11 @@ paths:
           payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("POST", "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b", payload, headers)
+          conn.request("POST", "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2846,10 +2840,10 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b",
+            "path": "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -2878,11 +2872,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}");
@@ -2890,16 +2884,17 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools?assigned_resource_owner=u-a83k9b");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+    x-request-access-name: mTLS for Dedicated Kafka
   /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}:
     delete:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to delete a certificate identity pool.
       operationId: deleteIamV2CertificateIdentityPool
@@ -3128,18 +3123,19 @@ paths:
       summary: Delete a Certificate Identity Pool
       tags:
       - Certificate Identity Pools (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3147,7 +3143,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3160,7 +3156,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}", headers=headers)
+          conn.request("DELETE", "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3174,7 +3170,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3199,7 +3195,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3208,13 +3204,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     get:
       description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to read a certificate identity pool.
       operationId: getIamV2CertificateIdentityPool
@@ -3443,18 +3439,19 @@ paths:
       summary: Read a Certificate Identity Pool
       tags:
       - Certificate Identity Pools (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3462,7 +3459,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3475,7 +3472,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}", headers=headers)
+          conn.request("GET", "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3489,7 +3486,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3514,7 +3511,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3523,13 +3520,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
     put:
       description: |+
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
         Make a request to update a certificate identity pool.
 
@@ -3838,11 +3835,12 @@ paths:
       summary: Update a Certificate Identity Pool
       tags:
       - Certificate Identity Pools (iam/v2)
+      x-request-access-name: mTLS for Dedicated Kafka
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request PUT \
-            --url 'https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}' \
+            --url https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"My Identity Pool","description":"Prod Access to Kafka clusters to Release Engineering","external_identifier":"UID","filter":"C=='\''Canada'\'' && O=='\''Confluent'\''"}'
@@ -3853,24 +3851,24 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}")
+            .url("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D")
             .put(body)
-            .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .addHeader("content-type", "application/json")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"My Identity\
           \ Pool\\\",\\\"description\\\":\\\"Prod Access to Kafka clusters to Release\
           \ Engineering\\\",\\\"external_identifier\\\":\\\"UID\\\",\\\"filter\\\"\
           :\\\"C=='Canada' && O=='Confluent'\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
-          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
+          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
+          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -3881,11 +3879,11 @@ paths:
           payload = "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}"
 
           headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              'Authorization': "Basic REPLACE_BASIC_AUTH",
+              'content-type': "application/json"
               }
 
-          conn.request("PUT", "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}", payload, headers)
+          conn.request("PUT", "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3899,10 +3897,10 @@ paths:
             "method": "PUT",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}",
+            "path": "/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D",
             "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
+              "Authorization": "Basic REPLACE_BASIC_AUTH",
+              "content-type": "application/json"
             }
           };
 
@@ -3931,11 +3929,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PUT");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          headers = curl_slist_append(headers, "content-type: application/json");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}");
@@ -3943,12 +3941,13 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id}");
+          var client = new RestClient("https://api.confluent.cloud/iam/v2/certificate-authorities/%7Bcertificate_authority_id%7D/identity-pools/%7Bid%7D");
           var request = new RestRequest(Method.PUT);
-          request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddHeader("content-type", "application/json");
           request.AddParameter("application/json", "{\"display_name\":\"My Identity Pool\",\"description\":\"Prod Access to Kafka clusters to Release Engineering\",\"external_identifier\":\"UID\",\"filter\":\"C=='Canada' && O=='Confluent'\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+    x-request-access-name: mTLS for Dedicated Kafka
 components:
   responses:
     BadRequestError:
@@ -4416,7 +4415,7 @@ components:
           type: string
         certificate_chain:
           description: |-
-            The PEM encoded string containing the signing certificate chain
+            The Base64 encoded string containing the signing certificate chain
             used to validate client certs.
           example: |-
             -----BEGIN CERTIFICATE-----
@@ -4449,7 +4448,7 @@ components:
           type: string
         crl_chain:
           description: |-
-            The PEM encoded string containing the CRL for this certificate authority.
+            The Base64 encoded string containing the CRL for this certificate authority.
             Defaults to this over `crl_url` if available.
           example: |-
             -----BEGIN X509 CRL-----
@@ -4512,7 +4511,7 @@ components:
           type: string
         certificate_chain:
           description: |-
-            The PEM encoded string containing the signing certificate chain
+            The Base64 encoded string containing the signing certificate chain
             used to validate client certs.
           example: |-
             -----BEGIN CERTIFICATE-----
@@ -4546,7 +4545,7 @@ components:
           type: string
         crl_chain:
           description: |-
-            The PEM encoded string containing the CRL for this certificate authority.
+            The Base64 encoded string containing the CRL for this certificate authority.
             Defaults to this over `crl_url` if available.
           example: |-
             -----BEGIN X509 CRL-----
@@ -4565,9 +4564,6 @@ components:
             -----END X509 CRL-----
           type: string
       type: object
-    SearchFilter:
-      description: Filter a collection by a string search
-      type: string
     iam.v2.CertificateAuthorityList:
       description: |
         `CertificateAuthority` objects represent signing certificate authorities in Confluent Cloud.
