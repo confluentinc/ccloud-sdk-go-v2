@@ -44,7 +44,7 @@ type CertificateAuthoritiesIamV2Api interface {
 	/*
 		CreateIamV2CertificateAuthority Create a Certificate Authority
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to create a certificate authority.
 
@@ -60,7 +60,7 @@ type CertificateAuthoritiesIamV2Api interface {
 	/*
 		DeleteIamV2CertificateAuthority Delete a Certificate Authority
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to delete a certificate authority.
 
@@ -77,7 +77,7 @@ type CertificateAuthoritiesIamV2Api interface {
 	/*
 		GetIamV2CertificateAuthority Read a Certificate Authority
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to read a certificate authority.
 
@@ -94,7 +94,7 @@ type CertificateAuthoritiesIamV2Api interface {
 	/*
 		ListIamV2CertificateAuthorities List of Certificate Authorities
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all certificate authorities.
 
@@ -110,7 +110,7 @@ type CertificateAuthoritiesIamV2Api interface {
 	/*
 		UpdateIamV2CertificateAuthority Update a Certificate Authority
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a certificate authority.
 
@@ -148,7 +148,7 @@ func (r ApiCreateIamV2CertificateAuthorityRequest) Execute() (IamV2CertificateAu
 /*
 CreateIamV2CertificateAuthority Create a Certificate Authority
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a certificate authority.
 
@@ -324,7 +324,7 @@ func (r ApiDeleteIamV2CertificateAuthorityRequest) Execute() (IamV2CertificateAu
 /*
 DeleteIamV2CertificateAuthority Delete a Certificate Authority
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a certificate authority.
 
@@ -481,7 +481,7 @@ func (r ApiGetIamV2CertificateAuthorityRequest) Execute() (IamV2CertificateAutho
 /*
 GetIamV2CertificateAuthority Read a Certificate Authority
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a certificate authority.
 
@@ -651,7 +651,7 @@ func (r ApiListIamV2CertificateAuthoritiesRequest) Execute() (IamV2CertificateAu
 /*
 ListIamV2CertificateAuthorities List of Certificate Authorities
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all certificate authorities.
 
@@ -807,7 +807,7 @@ func (r ApiUpdateIamV2CertificateAuthorityRequest) Execute() (IamV2CertificateAu
 /*
 UpdateIamV2CertificateAuthority Update a Certificate Authority
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20mTLS%20API%20Limited%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a certificate authority.
 
