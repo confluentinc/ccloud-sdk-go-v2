@@ -47,13 +47,13 @@ type IamV2CreateCertRequest struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// A description of the certificate authority.
 	Description *string `json:"description,omitempty"`
-	// The Base64 encoded string containing the signing certificate chain used to validate client certs.
+	// The PEM encoded string containing the signing certificate chain used to validate client certs.
 	CertificateChain *string `json:"certificate_chain,omitempty"`
 	// The name of the certificate file.
 	CertificateChainFilename *string `json:"certificate_chain_filename,omitempty"`
 	// The url from which to fetch the CRL for the certificate authority if crl_source is URL.
 	CrlUrl *string `json:"crl_url,omitempty"`
-	// The Base64 encoded string containing the CRL for this certificate authority. Defaults to this over `crl_url` if available.
+	// The PEM encoded string containing the CRL for this certificate authority. Defaults to this over `crl_url` if available.
 	CrlChain *string `json:"crl_chain,omitempty"`
 }
 

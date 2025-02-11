@@ -42,15 +42,15 @@ var (
 type CertificateIdentityPoolsIamV2Api interface {
 
 	/*
-		CreateIamV2CertificateIdentityPool Create a Certificate Identity Pool
+			CreateIamV2CertificateIdentityPool Create a Certificate Identity Pool
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a certificate identity pool.
+		Make a request to create a certificate identity pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param certificateAuthorityId The Certificate Authority
-		 @return ApiCreateIamV2CertificateIdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param certificateAuthorityId The Certificate Authority
+			 @return ApiCreateIamV2CertificateIdentityPoolRequest
 	*/
 	CreateIamV2CertificateIdentityPool(ctx _context.Context, certificateAuthorityId string) ApiCreateIamV2CertificateIdentityPoolRequest
 
@@ -59,16 +59,16 @@ type CertificateIdentityPoolsIamV2Api interface {
 	CreateIamV2CertificateIdentityPoolExecute(r ApiCreateIamV2CertificateIdentityPoolRequest) (IamV2CertificateIdentityPool, *_nethttp.Response, error)
 
 	/*
-		DeleteIamV2CertificateIdentityPool Delete a Certificate Identity Pool
+			DeleteIamV2CertificateIdentityPool Delete a Certificate Identity Pool
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a certificate identity pool.
+		Make a request to delete a certificate identity pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param certificateAuthorityId The Certificate Authority
-		 @param id The unique identifier for the certificate identity pool.
-		 @return ApiDeleteIamV2CertificateIdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param certificateAuthorityId The Certificate Authority
+			 @param id The unique identifier for the certificate identity pool.
+			 @return ApiDeleteIamV2CertificateIdentityPoolRequest
 	*/
 	DeleteIamV2CertificateIdentityPool(ctx _context.Context, certificateAuthorityId string, id string) ApiDeleteIamV2CertificateIdentityPoolRequest
 
@@ -77,16 +77,16 @@ type CertificateIdentityPoolsIamV2Api interface {
 	DeleteIamV2CertificateIdentityPoolExecute(r ApiDeleteIamV2CertificateIdentityPoolRequest) (IamV2CertificateIdentityPool, *_nethttp.Response, error)
 
 	/*
-		GetIamV2CertificateIdentityPool Read a Certificate Identity Pool
+			GetIamV2CertificateIdentityPool Read a Certificate Identity Pool
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a certificate identity pool.
+		Make a request to read a certificate identity pool.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param certificateAuthorityId The Certificate Authority
-		 @param id The unique identifier for the certificate identity pool.
-		 @return ApiGetIamV2CertificateIdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param certificateAuthorityId The Certificate Authority
+			 @param id The unique identifier for the certificate identity pool.
+			 @return ApiGetIamV2CertificateIdentityPoolRequest
 	*/
 	GetIamV2CertificateIdentityPool(ctx _context.Context, certificateAuthorityId string, id string) ApiGetIamV2CertificateIdentityPoolRequest
 
@@ -95,15 +95,15 @@ type CertificateIdentityPoolsIamV2Api interface {
 	GetIamV2CertificateIdentityPoolExecute(r ApiGetIamV2CertificateIdentityPoolRequest) (IamV2CertificateIdentityPool, *_nethttp.Response, error)
 
 	/*
-		ListIamV2CertificateIdentityPools List of Certificate Identity Pools
+			ListIamV2CertificateIdentityPools List of Certificate Identity Pools
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all certificate identity pools.
+		Retrieve a sorted, filtered, paginated list of all certificate identity pools.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param certificateAuthorityId The Certificate Authority
-		 @return ApiListIamV2CertificateIdentityPoolsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param certificateAuthorityId The Certificate Authority
+			 @return ApiListIamV2CertificateIdentityPoolsRequest
 	*/
 	ListIamV2CertificateIdentityPools(ctx _context.Context, certificateAuthorityId string) ApiListIamV2CertificateIdentityPoolsRequest
 
@@ -112,18 +112,18 @@ type CertificateIdentityPoolsIamV2Api interface {
 	ListIamV2CertificateIdentityPoolsExecute(r ApiListIamV2CertificateIdentityPoolsRequest) (IamV2CertificateIdentityPoolList, *_nethttp.Response, error)
 
 	/*
-		UpdateIamV2CertificateIdentityPool Update a Certificate Identity Pool
+			UpdateIamV2CertificateIdentityPool Update a Certificate Identity Pool
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a certificate identity pool.
+		Make a request to update a certificate identity pool.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param certificateAuthorityId The Certificate Authority
-		 @param id The unique identifier for the certificate identity pool.
-		 @return ApiUpdateIamV2CertificateIdentityPoolRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param certificateAuthorityId The Certificate Authority
+			 @param id The unique identifier for the certificate identity pool.
+			 @return ApiUpdateIamV2CertificateIdentityPoolRequest
 	*/
 	UpdateIamV2CertificateIdentityPool(ctx _context.Context, certificateAuthorityId string, id string) ApiUpdateIamV2CertificateIdentityPoolRequest
 
@@ -139,9 +139,15 @@ type ApiCreateIamV2CertificateIdentityPoolRequest struct {
 	ctx                          _context.Context
 	ApiService                   CertificateIdentityPoolsIamV2Api
 	certificateAuthorityId       string
+	assignedResourceOwner        *string
 	iamV2CertificateIdentityPool *IamV2CertificateIdentityPool
 }
 
+// The resource_id of the principal who will be assigned resource owner on the created certificate identity pool. Principal can be group-mapping (group-xxx),  user (u-xxx), service-account (sa-xxx) or identity-pool (pool-xxx).
+func (r ApiCreateIamV2CertificateIdentityPoolRequest) AssignedResourceOwner(assignedResourceOwner string) ApiCreateIamV2CertificateIdentityPoolRequest {
+	r.assignedResourceOwner = &assignedResourceOwner
+	return r
+}
 func (r ApiCreateIamV2CertificateIdentityPoolRequest) IamV2CertificateIdentityPool(iamV2CertificateIdentityPool IamV2CertificateIdentityPool) ApiCreateIamV2CertificateIdentityPoolRequest {
 	r.iamV2CertificateIdentityPool = &iamV2CertificateIdentityPool
 	return r
@@ -154,7 +160,7 @@ func (r ApiCreateIamV2CertificateIdentityPoolRequest) Execute() (IamV2Certificat
 /*
 CreateIamV2CertificateIdentityPool Create a Certificate Identity Pool
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create a certificate identity pool.
 
@@ -195,6 +201,9 @@ func (a *CertificateIdentityPoolsIamV2ApiService) CreateIamV2CertificateIdentity
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.assignedResourceOwner != nil {
+		localVarQueryParams.Add("assigned_resource_owner", parameterToString(*r.assignedResourceOwner, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -334,7 +343,7 @@ func (r ApiDeleteIamV2CertificateIdentityPoolRequest) Execute() (IamV2Certificat
 /*
 DeleteIamV2CertificateIdentityPool Delete a Certificate Identity Pool
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete a certificate identity pool.
 
@@ -495,7 +504,7 @@ func (r ApiGetIamV2CertificateIdentityPoolRequest) Execute() (IamV2CertificateId
 /*
 GetIamV2CertificateIdentityPool Read a Certificate Identity Pool
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a certificate identity pool.
 
@@ -669,7 +678,7 @@ func (r ApiListIamV2CertificateIdentityPoolsRequest) Execute() (IamV2Certificate
 /*
 ListIamV2CertificateIdentityPools List of Certificate Identity Pools
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all certificate identity pools.
 
@@ -829,7 +838,7 @@ func (r ApiUpdateIamV2CertificateIdentityPoolRequest) Execute() (IamV2Certificat
 /*
 UpdateIamV2CertificateIdentityPool Update a Certificate Identity Pool
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To mTLS for Dedicated Kafka](https://img.shields.io/badge/-Request%20Access%20To%20mTLS%20for%20Dedicated%20Kafka-%23bc8540)](mailto:ccloud-api-access+iam-v2-early-access@confluent.io?subject=Request%20to%20join%20iam/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20iam/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a certificate identity pool.
 

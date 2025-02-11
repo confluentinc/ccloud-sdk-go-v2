@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | The human-readable name of the certificate authority. | [optional] 
 **Description** | Pointer to **string** | A description of the certificate authority. | [optional] 
-**CertificateChain** | Pointer to **string** | The Base64 encoded string containing the signing certificate chain used to validate client certs. | [optional] 
+**CertificateChain** | Pointer to **string** | The PEM encoded string containing the signing certificate chain used to validate client certs. | [optional] 
 **CertificateChainFilename** | Pointer to **string** | The name of the certificate file. Must be set if certificate is updated. | [optional] 
 **CrlUrl** | Pointer to **string** | The url from which to fetch the CRL for the certificate authority if crl_source is URL. | [optional] 
-**CrlChain** | Pointer to **string** | The Base64 encoded string containing the CRL for this certificate authority. Defaults to this over &#x60;crl_url&#x60; if available. | [optional] 
+**CrlChain** | Pointer to **string** | The PEM encoded string containing the CRL for this certificate authority. Defaults to this over &#x60;crl_url&#x60; if available. | [optional] 
 
 ## Methods
 
