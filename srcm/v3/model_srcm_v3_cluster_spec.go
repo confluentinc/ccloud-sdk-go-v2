@@ -45,9 +45,8 @@ type SrcmV3ClusterSpec struct {
 	// The cluster's catalog HTTP request URL.
 	CatalogHttpEndpoint *string `json:"catalog_http_endpoint,omitempty"`
 	// The cluster's private HTTP request URL.
-	PrivateHttpEndpoint *string `json:"private_http_endpoint,omitempty"`
-	// A map of region identifiers to their corresponding private HTTP request URLs.
-	PrivateHttpRegionalEndpoints *map[string]string `json:"private_http_regional_endpoints,omitempty"`
+	PrivateHttpEndpoint     *string                                   `json:"private_http_endpoint,omitempty"`
+	PrivateNetworkingConfig *SrcmV3ClusterSpecPrivateNetworkingConfig `json:"private_networking_config,omitempty"`
 	// The cloud service provider in which the cluster is running.
 	Cloud *string `json:"cloud,omitempty"`
 	// The cloud service provider region where the cluster is running.
@@ -233,36 +232,36 @@ func (o *SrcmV3ClusterSpec) SetPrivateHttpEndpoint(v string) {
 	o.PrivateHttpEndpoint = &v
 }
 
-// GetPrivateHttpRegionalEndpoints returns the PrivateHttpRegionalEndpoints field value if set, zero value otherwise.
-func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpoints() map[string]string {
-	if o == nil || o.PrivateHttpRegionalEndpoints == nil {
-		var ret map[string]string
+// GetPrivateNetworkingConfig returns the PrivateNetworkingConfig field value if set, zero value otherwise.
+func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfig() SrcmV3ClusterSpecPrivateNetworkingConfig {
+	if o == nil || o.PrivateNetworkingConfig == nil {
+		var ret SrcmV3ClusterSpecPrivateNetworkingConfig
 		return ret
 	}
-	return *o.PrivateHttpRegionalEndpoints
+	return *o.PrivateNetworkingConfig
 }
 
-// GetPrivateHttpRegionalEndpointsOk returns a tuple with the PrivateHttpRegionalEndpoints field value if set, nil otherwise
+// GetPrivateNetworkingConfigOk returns a tuple with the PrivateNetworkingConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpointsOk() (*map[string]string, bool) {
-	if o == nil || o.PrivateHttpRegionalEndpoints == nil {
+func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfigOk() (*SrcmV3ClusterSpecPrivateNetworkingConfig, bool) {
+	if o == nil || o.PrivateNetworkingConfig == nil {
 		return nil, false
 	}
-	return o.PrivateHttpRegionalEndpoints, true
+	return o.PrivateNetworkingConfig, true
 }
 
-// HasPrivateHttpRegionalEndpoints returns a boolean if a field has been set.
-func (o *SrcmV3ClusterSpec) HasPrivateHttpRegionalEndpoints() bool {
-	if o != nil && o.PrivateHttpRegionalEndpoints != nil {
+// HasPrivateNetworkingConfig returns a boolean if a field has been set.
+func (o *SrcmV3ClusterSpec) HasPrivateNetworkingConfig() bool {
+	if o != nil && o.PrivateNetworkingConfig != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateHttpRegionalEndpoints gets a reference to the given map[string]string and assigns it to the PrivateHttpRegionalEndpoints field.
-func (o *SrcmV3ClusterSpec) SetPrivateHttpRegionalEndpoints(v map[string]string) {
-	o.PrivateHttpRegionalEndpoints = &v
+// SetPrivateNetworkingConfig gets a reference to the given SrcmV3ClusterSpecPrivateNetworkingConfig and assigns it to the PrivateNetworkingConfig field.
+func (o *SrcmV3ClusterSpec) SetPrivateNetworkingConfig(v SrcmV3ClusterSpecPrivateNetworkingConfig) {
+	o.PrivateNetworkingConfig = &v
 }
 
 // GetCloud returns the Cloud field value if set, zero value otherwise.
@@ -368,7 +367,7 @@ func (o *SrcmV3ClusterSpec) Redact() {
 	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.CatalogHttpEndpoint)
 	o.recurseRedact(o.PrivateHttpEndpoint)
-	o.recurseRedact(o.PrivateHttpRegionalEndpoints)
+	o.recurseRedact(o.PrivateNetworkingConfig)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
@@ -421,8 +420,8 @@ func (o SrcmV3ClusterSpec) MarshalJSON() ([]byte, error) {
 	if o.PrivateHttpEndpoint != nil {
 		toSerialize["private_http_endpoint"] = o.PrivateHttpEndpoint
 	}
-	if o.PrivateHttpRegionalEndpoints != nil {
-		toSerialize["private_http_regional_endpoints"] = o.PrivateHttpRegionalEndpoints
+	if o.PrivateNetworkingConfig != nil {
+		toSerialize["private_networking_config"] = o.PrivateNetworkingConfig
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud

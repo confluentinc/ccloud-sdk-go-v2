@@ -1079,18 +1079,8 @@ components:
           readOnly: true
           type: string
           x-immutable: true
-        private_http_regional_endpoints:
-          additionalProperties:
-            format: uri
-            type: string
-          description: A map of region identifiers to their corresponding private
-            HTTP request URLs.
-          example:
-            us-central-1: https://lsrc-abc.us-central-1.aws.private.confluent.cloud
-            us-west-2: https://lsrc-abc.us-west-2.aws.private.confluent.cloud
-          readOnly: true
-          type: object
-          x-immutable: true
+        private_networking_config:
+          $ref: '#/components/schemas/srcm_v3_ClusterSpec_private_networking_config'
         cloud:
           description: The cloud service provider in which the cluster is running.
           example: GCP
@@ -1305,6 +1295,23 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
+    srcm_v3_ClusterSpec_private_networking_config:
+      description: Available HTTP request URLs for private connectivity.
+      example:
+        regional_endpoints:
+          us-central-1: https://lsrc-abc.us-central-1.aws.private.confluent.cloud
+          us-west-2: https://lsrc-abc.us-west-2.aws.private.confluent.cloud
+      properties:
+        regional_endpoints:
+          additionalProperties:
+            format: uri
+            type: string
+          description: A map of region identifiers to their corresponding private
+            HTTP request URL.
+          type: object
+      readOnly: true
+      type: object
+      x-immutable: true
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property

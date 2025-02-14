@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **CatalogHttpEndpoint** | Pointer to **string** | The cluster&#39;s catalog HTTP request URL. | [optional] [readonly] 
 **PrivateHttpEndpoint** | Pointer to **string** | The cluster&#39;s private HTTP request URL. | [optional] [readonly] 
-**PrivateHttpRegionalEndpoints** | Pointer to **map[string]string** | A map of region identifiers to their corresponding private HTTP request URLs. | [optional] [readonly] 
+**PrivateNetworkingConfig** | Pointer to [**SrcmV3ClusterSpecPrivateNetworkingConfig**](SrcmV3ClusterSpecPrivateNetworkingConfig.md) |  | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
 **Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -158,30 +158,30 @@ SetPrivateHttpEndpoint sets PrivateHttpEndpoint field to given value.
 
 HasPrivateHttpEndpoint returns a boolean if a field has been set.
 
-### GetPrivateHttpRegionalEndpoints
+### GetPrivateNetworkingConfig
 
-`func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpoints() map[string]string`
+`func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfig() SrcmV3ClusterSpecPrivateNetworkingConfig`
 
-GetPrivateHttpRegionalEndpoints returns the PrivateHttpRegionalEndpoints field if non-nil, zero value otherwise.
+GetPrivateNetworkingConfig returns the PrivateNetworkingConfig field if non-nil, zero value otherwise.
 
-### GetPrivateHttpRegionalEndpointsOk
+### GetPrivateNetworkingConfigOk
 
-`func (o *SrcmV3ClusterSpec) GetPrivateHttpRegionalEndpointsOk() (*map[string]string, bool)`
+`func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfigOk() (*SrcmV3ClusterSpecPrivateNetworkingConfig, bool)`
 
-GetPrivateHttpRegionalEndpointsOk returns a tuple with the PrivateHttpRegionalEndpoints field if it's non-nil, zero value otherwise
+GetPrivateNetworkingConfigOk returns a tuple with the PrivateNetworkingConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPrivateHttpRegionalEndpoints
+### SetPrivateNetworkingConfig
 
-`func (o *SrcmV3ClusterSpec) SetPrivateHttpRegionalEndpoints(v map[string]string)`
+`func (o *SrcmV3ClusterSpec) SetPrivateNetworkingConfig(v SrcmV3ClusterSpecPrivateNetworkingConfig)`
 
-SetPrivateHttpRegionalEndpoints sets PrivateHttpRegionalEndpoints field to given value.
+SetPrivateNetworkingConfig sets PrivateNetworkingConfig field to given value.
 
-### HasPrivateHttpRegionalEndpoints
+### HasPrivateNetworkingConfig
 
-`func (o *SrcmV3ClusterSpec) HasPrivateHttpRegionalEndpoints() bool`
+`func (o *SrcmV3ClusterSpec) HasPrivateNetworkingConfig() bool`
 
-HasPrivateHttpRegionalEndpoints returns a boolean if a field has been set.
+HasPrivateNetworkingConfig returns a boolean if a field has been set.
 
 ### GetCloud
 

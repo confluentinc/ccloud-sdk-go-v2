@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
  - [SrcmV3Cluster](docs/SrcmV3Cluster.md)
  - [SrcmV3ClusterList](docs/SrcmV3ClusterList.md)
  - [SrcmV3ClusterSpec](docs/SrcmV3ClusterSpec.md)
+ - [SrcmV3ClusterSpecPrivateNetworkingConfig](docs/SrcmV3ClusterSpecPrivateNetworkingConfig.md)
  - [SrcmV3ClusterStatus](docs/SrcmV3ClusterStatus.md)
 
 
