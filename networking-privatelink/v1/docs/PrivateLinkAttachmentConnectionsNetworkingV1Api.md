@@ -242,7 +242,7 @@ import (
 
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
-    specPrivateLinkAttachment := "platt-00000" // string | Filter the results by exact match for spec.private_link_attachment.
+    specPrivateLinkAttachment := "platt-00000" // string | Filter the results by exact match for spec.private_link_attachment. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 

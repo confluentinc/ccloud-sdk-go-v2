@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | PrivateLinkAttachmentStatus kind. | [readonly] 
-**ServiceAttachments** | [**[]NetworkingV1GcpPscServiceAttachment**](NetworkingV1GcpPscServiceAttachment.md) | Array of GCP PSC Service attachments that can be used to connect PSC Endpoints for each zone.  | [readonly] 
+**ServiceAttachment** | [**NetworkingV1GcpPscServiceAttachment**](networking.v1.GcpPscServiceAttachment.md) | GCP PSC Service attachment that can be used to connect to a PSC Endpoint.  | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1GcpPrivateLinkAttachmentStatus
 
-`func NewNetworkingV1GcpPrivateLinkAttachmentStatus(kind string, serviceAttachments []NetworkingV1GcpPscServiceAttachment, ) *NetworkingV1GcpPrivateLinkAttachmentStatus`
+`func NewNetworkingV1GcpPrivateLinkAttachmentStatus(kind string, serviceAttachment NetworkingV1GcpPscServiceAttachment, ) *NetworkingV1GcpPrivateLinkAttachmentStatus`
 
 NewNetworkingV1GcpPrivateLinkAttachmentStatus instantiates a new NetworkingV1GcpPrivateLinkAttachmentStatus object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetKind sets Kind field to given value.
 
 
-### GetServiceAttachments
+### GetServiceAttachment
 
-`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachments() []NetworkingV1GcpPscServiceAttachment`
+`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachment() NetworkingV1GcpPscServiceAttachment`
 
-GetServiceAttachments returns the ServiceAttachments field if non-nil, zero value otherwise.
+GetServiceAttachment returns the ServiceAttachment field if non-nil, zero value otherwise.
 
-### GetServiceAttachmentsOk
+### GetServiceAttachmentOk
 
-`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachmentsOk() (*[]NetworkingV1GcpPscServiceAttachment, bool)`
+`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachmentOk() (*NetworkingV1GcpPscServiceAttachment, bool)`
 
-GetServiceAttachmentsOk returns a tuple with the ServiceAttachments field if it's non-nil, zero value otherwise
+GetServiceAttachmentOk returns a tuple with the ServiceAttachment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetServiceAttachments
+### SetServiceAttachment
 
-`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) SetServiceAttachments(v []NetworkingV1GcpPscServiceAttachment)`
+`func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) SetServiceAttachment(v NetworkingV1GcpPscServiceAttachment)`
 
-SetServiceAttachments sets ServiceAttachments field to given value.
+SetServiceAttachment sets ServiceAttachment field to given value.
 
 
 

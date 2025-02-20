@@ -5,15 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | PrivateLinkAttachmentConnectionStatus kind. | 
-**Zone** | **string** | Zone associated with the GCP PrivateLink attachment connection. | [readonly] 
-**PrivateServiceConnectServiceAttachment** | **string** | GCP Private Service Connect ServiceAttachment for the zone. | [readonly] 
+**PrivateServiceConnectServiceAttachment** | **string** | GCP Private Service Connect ServiceAttachment. | [readonly] 
 **PrivateServiceConnectConnectionId** | **string** | Id of the Private Service connection. | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus
 
-`func NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus(kind string, zone string, privateServiceConnectServiceAttachment string, privateServiceConnectConnectionId string, ) *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus`
+`func NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus(kind string, privateServiceConnectServiceAttachment string, privateServiceConnectConnectionId string, ) *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus`
 
 NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus instantiates a new NetworkingV1GcpPrivateLinkAttachmentConnectionStatus object
 This constructor will assign default values to properties that have it defined,
@@ -46,26 +45,6 @@ and a boolean to check if the value has been set.
 `func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) SetKind(v string)`
 
 SetKind sets Kind field to given value.
-
-
-### GetZone
-
-`func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) GetZone() string`
-
-GetZone returns the Zone field if non-nil, zero value otherwise.
-
-### GetZoneOk
-
-`func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) GetZoneOk() (*string, bool)`
-
-GetZoneOk returns a tuple with the Zone field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetZone
-
-`func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) SetZone(v string)`
-
-SetZone sets Zone field to given value.
 
 
 ### GetPrivateServiceConnectServiceAttachment

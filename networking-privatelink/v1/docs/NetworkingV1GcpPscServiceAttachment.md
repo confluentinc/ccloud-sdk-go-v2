@@ -4,14 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Zone** | **string** | Zone associated with the PSC Service attachment. | [readonly] 
 **PrivateServiceConnectServiceAttachment** | **string** | Id of a Private Service Connect Service Attachment in Confluent Cloud. | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1GcpPscServiceAttachment
 
-`func NewNetworkingV1GcpPscServiceAttachment(zone string, privateServiceConnectServiceAttachment string, ) *NetworkingV1GcpPscServiceAttachment`
+`func NewNetworkingV1GcpPscServiceAttachment(privateServiceConnectServiceAttachment string, ) *NetworkingV1GcpPscServiceAttachment`
 
 NewNetworkingV1GcpPscServiceAttachment instantiates a new NetworkingV1GcpPscServiceAttachment object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +24,6 @@ will change when the set of required properties is changed
 NewNetworkingV1GcpPscServiceAttachmentWithDefaults instantiates a new NetworkingV1GcpPscServiceAttachment object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetZone
-
-`func (o *NetworkingV1GcpPscServiceAttachment) GetZone() string`
-
-GetZone returns the Zone field if non-nil, zero value otherwise.
-
-### GetZoneOk
-
-`func (o *NetworkingV1GcpPscServiceAttachment) GetZoneOk() (*string, bool)`
-
-GetZoneOk returns a tuple with the Zone field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetZone
-
-`func (o *NetworkingV1GcpPscServiceAttachment) SetZone(v string)`
-
-SetZone sets Zone field to given value.
-
 
 ### GetPrivateServiceConnectServiceAttachment
 

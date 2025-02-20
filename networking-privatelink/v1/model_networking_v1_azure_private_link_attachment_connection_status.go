@@ -34,17 +34,15 @@ import (
 	"reflect"
 )
 
-// NetworkingV1AzurePrivateLinkAttachmentConnectionStatus Status of an Azure PrivateLink attachment connection for an availability zone.
+// NetworkingV1AzurePrivateLinkAttachmentConnectionStatus Status of a Azure PrivateLink attachment connection.
 type NetworkingV1AzurePrivateLinkAttachmentConnectionStatus struct {
 	// PrivateLinkAttachmentConnectionStatus kind.
 	Kind string `json:"kind,omitempty"`
-	// Availability zone associated with the Azure PrivateLink service.
-	Zone string `json:"zone,omitempty"`
-	// Azure PrivateLink service alias for the availability zone.
+	// Azure PrivateLink service alias.
 	PrivateLinkServiceAlias string `json:"private_link_service_alias,omitempty"`
-	// Azure PrivateLink service resource id for the availability zone.
+	// Azure PrivateLink service resource id.
 	PrivateLinkServiceResourceId string `json:"private_link_service_resource_id,omitempty"`
-	// Resource Id of the PrivateEndpoint (if any) that is connected to the PrivateLink service for this availability zone.
+	// Resource Id of the PrivateEndpoint (if any) that is connected to the PrivateLink service.
 	PrivateEndpointResourceId string `json:"private_endpoint_resource_id,omitempty"`
 }
 
@@ -52,10 +50,9 @@ type NetworkingV1AzurePrivateLinkAttachmentConnectionStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus(kind string, zone string, privateLinkServiceAlias string, privateLinkServiceResourceId string, privateEndpointResourceId string) *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus {
+func NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus(kind string, privateLinkServiceAlias string, privateLinkServiceResourceId string, privateEndpointResourceId string) *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus {
 	this := NetworkingV1AzurePrivateLinkAttachmentConnectionStatus{}
 	this.Kind = kind
-	this.Zone = zone
 	this.PrivateLinkServiceAlias = privateLinkServiceAlias
 	this.PrivateLinkServiceResourceId = privateLinkServiceResourceId
 	this.PrivateEndpointResourceId = privateEndpointResourceId
@@ -92,30 +89,6 @@ func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) GetKindOk() (*s
 // SetKind sets field value
 func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) SetKind(v string) {
 	o.Kind = v
-}
-
-// GetZone returns the Zone field value
-func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) GetZone() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Zone
-}
-
-// GetZoneOk returns a tuple with the Zone field value
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) GetZoneOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Zone, true
-}
-
-// SetZone sets field value
-func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) SetZone(v string) {
-	o.Zone = v
 }
 
 // GetPrivateLinkServiceAlias returns the PrivateLinkServiceAlias field value
@@ -193,7 +166,6 @@ func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) SetPrivateEndpo
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.Zone)
 	o.recurseRedact(&o.PrivateLinkServiceAlias)
 	o.recurseRedact(&o.PrivateLinkServiceResourceId)
 	o.recurseRedact(&o.PrivateEndpointResourceId)
@@ -233,9 +205,6 @@ func (o NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) MarshalJSON() ([
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
-	}
-	if true {
-		toSerialize["zone"] = o.Zone
 	}
 	if true {
 		toSerialize["private_link_service_alias"] = o.PrivateLinkServiceAlias

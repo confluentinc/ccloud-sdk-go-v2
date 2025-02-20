@@ -5,16 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | PrivateLinkAttachmentConnectionStatus kind. | 
-**Zone** | **string** | Availability zone associated with the Azure PrivateLink service. | [readonly] 
-**PrivateLinkServiceAlias** | **string** | Azure PrivateLink service alias for the availability zone. | [readonly] 
-**PrivateLinkServiceResourceId** | **string** | Azure PrivateLink service resource id for the availability zone. | [readonly] 
-**PrivateEndpointResourceId** | **string** | Resource Id of the PrivateEndpoint (if any) that is connected to the PrivateLink service for this availability zone.  | [readonly] 
+**PrivateLinkServiceAlias** | **string** | Azure PrivateLink service alias. | [readonly] 
+**PrivateLinkServiceResourceId** | **string** | Azure PrivateLink service resource id. | [readonly] 
+**PrivateEndpointResourceId** | **string** | Resource Id of the PrivateEndpoint (if any) that is connected to the PrivateLink service.  | [readonly] 
 
 ## Methods
 
 ### NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus
 
-`func NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus(kind string, zone string, privateLinkServiceAlias string, privateLinkServiceResourceId string, privateEndpointResourceId string, ) *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus`
+`func NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus(kind string, privateLinkServiceAlias string, privateLinkServiceResourceId string, privateEndpointResourceId string, ) *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus`
 
 NewNetworkingV1AzurePrivateLinkAttachmentConnectionStatus instantiates a new NetworkingV1AzurePrivateLinkAttachmentConnectionStatus object
 This constructor will assign default values to properties that have it defined,
@@ -47,26 +46,6 @@ and a boolean to check if the value has been set.
 `func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) SetKind(v string)`
 
 SetKind sets Kind field to given value.
-
-
-### GetZone
-
-`func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) GetZone() string`
-
-GetZone returns the Zone field if non-nil, zero value otherwise.
-
-### GetZoneOk
-
-`func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) GetZoneOk() (*string, bool)`
-
-GetZoneOk returns a tuple with the Zone field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetZone
-
-`func (o *NetworkingV1AzurePrivateLinkAttachmentConnectionStatus) SetZone(v string)`
-
-SetZone sets Zone field to given value.
 
 
 ### GetPrivateLinkServiceAlias

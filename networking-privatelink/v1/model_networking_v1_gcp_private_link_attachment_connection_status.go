@@ -34,13 +34,11 @@ import (
 	"reflect"
 )
 
-// NetworkingV1GcpPrivateLinkAttachmentConnectionStatus Status of a GCP PrivateLink attachment connection for a zone.
+// NetworkingV1GcpPrivateLinkAttachmentConnectionStatus Status of GCP PrivateLink attachment connection.
 type NetworkingV1GcpPrivateLinkAttachmentConnectionStatus struct {
 	// PrivateLinkAttachmentConnectionStatus kind.
 	Kind string `json:"kind,omitempty"`
-	// Zone associated with the GCP PrivateLink attachment connection.
-	Zone string `json:"zone,omitempty"`
-	// GCP Private Service Connect ServiceAttachment for the zone.
+	// GCP Private Service Connect ServiceAttachment.
 	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment,omitempty"`
 	// Id of the Private Service connection.
 	PrivateServiceConnectConnectionId string `json:"private_service_connect_connection_id,omitempty"`
@@ -50,10 +48,9 @@ type NetworkingV1GcpPrivateLinkAttachmentConnectionStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus(kind string, zone string, privateServiceConnectServiceAttachment string, privateServiceConnectConnectionId string) *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus {
+func NewNetworkingV1GcpPrivateLinkAttachmentConnectionStatus(kind string, privateServiceConnectServiceAttachment string, privateServiceConnectConnectionId string) *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus {
 	this := NetworkingV1GcpPrivateLinkAttachmentConnectionStatus{}
 	this.Kind = kind
-	this.Zone = zone
 	this.PrivateServiceConnectServiceAttachment = privateServiceConnectServiceAttachment
 	this.PrivateServiceConnectConnectionId = privateServiceConnectConnectionId
 	return &this
@@ -89,30 +86,6 @@ func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) GetKindOk() (*str
 // SetKind sets field value
 func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) SetKind(v string) {
 	o.Kind = v
-}
-
-// GetZone returns the Zone field value
-func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) GetZone() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Zone
-}
-
-// GetZoneOk returns a tuple with the Zone field value
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) GetZoneOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Zone, true
-}
-
-// SetZone sets field value
-func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) SetZone(v string) {
-	o.Zone = v
 }
 
 // GetPrivateServiceConnectServiceAttachment returns the PrivateServiceConnectServiceAttachment field value
@@ -166,7 +139,6 @@ func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) SetPrivateService
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.Zone)
 	o.recurseRedact(&o.PrivateServiceConnectServiceAttachment)
 	o.recurseRedact(&o.PrivateServiceConnectConnectionId)
 }
@@ -205,9 +177,6 @@ func (o NetworkingV1GcpPrivateLinkAttachmentConnectionStatus) MarshalJSON() ([]b
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
-	}
-	if true {
-		toSerialize["zone"] = o.Zone
 	}
 	if true {
 		toSerialize["private_service_connect_service_attachment"] = o.PrivateServiceConnectServiceAttachment
