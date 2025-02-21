@@ -34,10 +34,8 @@ import (
 	"reflect"
 )
 
-// NetworkingV1GcpPscServiceAttachment GCP PSC Service attachment for a zone with reserved capacity to connect a PSC Endpoint.
+// NetworkingV1GcpPscServiceAttachment GCP PSC Service attachment with reserved capacity to connect a PSC Endpoint.
 type NetworkingV1GcpPscServiceAttachment struct {
-	// Zone associated with the PSC Service attachment.
-	Zone string `json:"zone,omitempty"`
 	// Id of a Private Service Connect Service Attachment in Confluent Cloud.
 	PrivateServiceConnectServiceAttachment string `json:"private_service_connect_service_attachment,omitempty"`
 }
@@ -46,9 +44,8 @@ type NetworkingV1GcpPscServiceAttachment struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1GcpPscServiceAttachment(zone string, privateServiceConnectServiceAttachment string) *NetworkingV1GcpPscServiceAttachment {
+func NewNetworkingV1GcpPscServiceAttachment(privateServiceConnectServiceAttachment string) *NetworkingV1GcpPscServiceAttachment {
 	this := NetworkingV1GcpPscServiceAttachment{}
-	this.Zone = zone
 	this.PrivateServiceConnectServiceAttachment = privateServiceConnectServiceAttachment
 	return &this
 }
@@ -59,30 +56,6 @@ func NewNetworkingV1GcpPscServiceAttachment(zone string, privateServiceConnectSe
 func NewNetworkingV1GcpPscServiceAttachmentWithDefaults() *NetworkingV1GcpPscServiceAttachment {
 	this := NetworkingV1GcpPscServiceAttachment{}
 	return &this
-}
-
-// GetZone returns the Zone field value
-func (o *NetworkingV1GcpPscServiceAttachment) GetZone() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Zone
-}
-
-// GetZoneOk returns a tuple with the Zone field value
-// and a boolean to check if the value has been set.
-func (o *NetworkingV1GcpPscServiceAttachment) GetZoneOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Zone, true
-}
-
-// SetZone sets field value
-func (o *NetworkingV1GcpPscServiceAttachment) SetZone(v string) {
-	o.Zone = v
 }
 
 // GetPrivateServiceConnectServiceAttachment returns the PrivateServiceConnectServiceAttachment field value
@@ -111,7 +84,6 @@ func (o *NetworkingV1GcpPscServiceAttachment) SetPrivateServiceConnectServiceAtt
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPscServiceAttachment) Redact() {
-	o.recurseRedact(&o.Zone)
 	o.recurseRedact(&o.PrivateServiceConnectServiceAttachment)
 }
 
@@ -147,9 +119,6 @@ func (o NetworkingV1GcpPscServiceAttachment) zeroField(v interface{}) {
 
 func (o NetworkingV1GcpPscServiceAttachment) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["zone"] = o.Zone
-	}
 	if true {
 		toSerialize["private_service_connect_service_attachment"] = o.PrivateServiceConnectServiceAttachment
 	}

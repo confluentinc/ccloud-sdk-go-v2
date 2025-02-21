@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment connection provisioning is in progress;    READY: PrivateLink attachment connection is ready;    FAILED: PrivateLink attachment connection is in a failed state;    DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment connection provisioning is in progress;    READY: PrivateLink attachment connection is ready;    FAILED: PrivateLink attachment connection is in a failed state;    DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;    DISCONNECTED:|     PrivateLink attachment connection is in a disconnected state. This means the     private endpoint associated with this PrivateLink attachment connection has been deleted;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if PrivateLink attachment connection is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if PrivateLink attachment connection is in a failed state. | [optional] [readonly] 
 **Cloud** | Pointer to [**NetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf**](NetworkingV1PrivateLinkAttachmentConnectionStatusCloudOneOf.md) | The cloud specific status of the PrivateLink attachment connection. | [optional] [readonly] 
