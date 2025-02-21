@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1PrivateLinkAttachmentConnectionStatus The status of the Private Link Attachment Connection
 type NetworkingV1PrivateLinkAttachmentConnectionStatus struct {
-	// The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment connection provisioning is in progress;    READY: PrivateLink attachment connection is ready;    FAILED: PrivateLink attachment connection is in a failed state;    DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;
+	// The lifecycle phase of the PrivateLink attachment:    PROVISIONING: PrivateLink attachment connection provisioning is in progress;    READY: PrivateLink attachment connection is ready;    FAILED: PrivateLink attachment connection is in a failed state;    DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;    DISCONNECTED:|     PrivateLink attachment connection is in a disconnected state. This means the     private endpoint associated with this PrivateLink attachment connection has been deleted;
 	Phase string `json:"phase,omitempty"`
 	// Error code if PrivateLink attachment connection is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`

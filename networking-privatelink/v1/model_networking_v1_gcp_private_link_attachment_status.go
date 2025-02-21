@@ -34,22 +34,22 @@ import (
 	"reflect"
 )
 
-// NetworkingV1GcpPrivateLinkAttachmentStatus GCP PrivateLink attachment represents reserved capacity in zonal GCP PSC Service attachments.  A PSC Endpoint can be connected to the Service attachment corresponding to each zone.
+// NetworkingV1GcpPrivateLinkAttachmentStatus GCP PrivateLink attachment represents reserved capacity in a GCP PSC Service attachment.  A PSC Endpoint can be connected to the Service attachment.
 type NetworkingV1GcpPrivateLinkAttachmentStatus struct {
 	// PrivateLinkAttachmentStatus kind.
 	Kind string `json:"kind,omitempty"`
-	// Array of GCP PSC Service attachments that can be used to connect PSC Endpoints for each zone.
-	ServiceAttachments []NetworkingV1GcpPscServiceAttachment `json:"service_attachments,omitempty"`
+	// GCP PSC Service attachment that can be used to connect to a PSC Endpoint.
+	ServiceAttachment NetworkingV1GcpPscServiceAttachment `json:"service_attachment,omitempty"`
 }
 
 // NewNetworkingV1GcpPrivateLinkAttachmentStatus instantiates a new NetworkingV1GcpPrivateLinkAttachmentStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1GcpPrivateLinkAttachmentStatus(kind string, serviceAttachments []NetworkingV1GcpPscServiceAttachment) *NetworkingV1GcpPrivateLinkAttachmentStatus {
+func NewNetworkingV1GcpPrivateLinkAttachmentStatus(kind string, serviceAttachment NetworkingV1GcpPscServiceAttachment) *NetworkingV1GcpPrivateLinkAttachmentStatus {
 	this := NetworkingV1GcpPrivateLinkAttachmentStatus{}
 	this.Kind = kind
-	this.ServiceAttachments = serviceAttachments
+	this.ServiceAttachment = serviceAttachment
 	return &this
 }
 
@@ -85,34 +85,34 @@ func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) SetKind(v string) {
 	o.Kind = v
 }
 
-// GetServiceAttachments returns the ServiceAttachments field value
-func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachments() []NetworkingV1GcpPscServiceAttachment {
+// GetServiceAttachment returns the ServiceAttachment field value
+func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachment() NetworkingV1GcpPscServiceAttachment {
 	if o == nil {
-		var ret []NetworkingV1GcpPscServiceAttachment
+		var ret NetworkingV1GcpPscServiceAttachment
 		return ret
 	}
 
-	return o.ServiceAttachments
+	return o.ServiceAttachment
 }
 
-// GetServiceAttachmentsOk returns a tuple with the ServiceAttachments field value
+// GetServiceAttachmentOk returns a tuple with the ServiceAttachment field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachmentsOk() (*[]NetworkingV1GcpPscServiceAttachment, bool) {
+func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) GetServiceAttachmentOk() (*NetworkingV1GcpPscServiceAttachment, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ServiceAttachments, true
+	return &o.ServiceAttachment, true
 }
 
-// SetServiceAttachments sets field value
-func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) SetServiceAttachments(v []NetworkingV1GcpPscServiceAttachment) {
-	o.ServiceAttachments = v
+// SetServiceAttachment sets field value
+func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) SetServiceAttachment(v NetworkingV1GcpPscServiceAttachment) {
+	o.ServiceAttachment = v
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) Redact() {
 	o.recurseRedact(&o.Kind)
-	o.recurseRedact(&o.ServiceAttachments)
+	o.recurseRedact(&o.ServiceAttachment)
 }
 
 func (o *NetworkingV1GcpPrivateLinkAttachmentStatus) recurseRedact(v interface{}) {
@@ -151,7 +151,7 @@ func (o NetworkingV1GcpPrivateLinkAttachmentStatus) MarshalJSON() ([]byte, error
 		toSerialize["kind"] = o.Kind
 	}
 	if true {
-		toSerialize["service_attachments"] = o.ServiceAttachments
+		toSerialize["service_attachment"] = o.ServiceAttachment
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

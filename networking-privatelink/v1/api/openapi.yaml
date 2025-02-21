@@ -327,14 +327,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -342,7 +342,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -355,7 +355,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -369,7 +369,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000",
+            "path": "/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -394,7 +394,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -403,7 +403,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1%2Cprod-aws-useast1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&status.phase=PROVISIONING%2CREADY&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments?spec.display_name=prod-gcp-us-central1,prod-aws-useast1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&status.phase=PROVISIONING,READY&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1052,14 +1052,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1067,7 +1067,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1080,7 +1080,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/private-link-attachments/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1094,7 +1094,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-attachments/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1119,7 +1119,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1128,7 +1128,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1381,14 +1381,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1396,7 +1396,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1409,7 +1409,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-attachments/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1423,7 +1423,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-attachments/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1448,7 +1448,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1457,7 +1457,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1794,7 +1794,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","environment":{"id":"env-00000","environment":"string"}}}'
@@ -1805,7 +1805,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1814,7 +1814,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachments/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\
@@ -1836,7 +1836,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/private-link-attachments/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/private-link-attachments/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1850,7 +1850,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachments/%7Bid%7D",
+            "path": "/networking/v1/private-link-attachments/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1884,7 +1884,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1896,7 +1896,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachments/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -1924,7 +1924,7 @@ paths:
         explode: true
         in: query
         name: spec.private_link_attachment
-        required: true
+        required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
@@ -2867,14 +2867,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2882,7 +2882,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2895,7 +2895,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/private-link-attachment-connections/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2909,7 +2909,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-attachment-connections/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2934,7 +2934,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2943,7 +2943,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3201,14 +3201,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3216,7 +3216,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3229,7 +3229,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-attachment-connections/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3243,7 +3243,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-attachment-connections/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3268,7 +3268,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3277,7 +3277,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3598,7 +3598,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-gcp-us-central1-a","cloud":{"kind":"AwsPrivateLinkAttachmentConnection","vpc_endpoint_id":"vpce-00000000000000000"},"environment":{"id":"env-00000","environment":"string"},"private_link_attachment":{"id":"string","environment":"string"}}}'
@@ -3609,7 +3609,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-gcp-us-central1-a\",\"cloud\":{\"kind\":\"AwsPrivateLinkAttachmentConnection\",\"vpc_endpoint_id\":\"vpce-00000000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"private_link_attachment\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -3618,7 +3618,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-gcp-us-central1-a\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAttachmentConnection\\\
           \",\\\"vpc_endpoint_id\\\":\\\"vpce-00000000000000000\\\"},\\\"environment\\\
@@ -3642,7 +3642,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/private-link-attachment-connections/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/private-link-attachment-connections/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3656,7 +3656,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-attachment-connections/%7Bid%7D",
+            "path": "/networking/v1/private-link-attachment-connections/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -3693,7 +3693,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -3705,7 +3705,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-attachment-connections/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -4115,6 +4115,10 @@ components:
               FAILED: PrivateLink attachment connection is in a failed state;
 
               DEPROVISIONING: PrivateLink attachment connection deprovisioning is in progress;
+
+              DISCONNECTED:|
+                PrivateLink attachment connection is in a disconnected state. This means the
+                private endpoint associated with this PrivateLink attachment connection has been deleted;
           example: READY
           readOnly: true
           type: string
@@ -4123,6 +4127,7 @@ components:
           - READY
           - FAILED
           - DEPROVISIONING
+          - DISCONNECTED
         error_code:
           description: Error code if PrivateLink attachment connection is in a failed
             state. May be used for programmatic error checking.
@@ -4203,7 +4208,7 @@ components:
           description: |
             Azure PrivateLink service that can be used to connect to a PrivateEndpoint.
           readOnly: true
-          type: string
+          type: object
       required:
       - kind
       - private_link_service
@@ -4230,9 +4235,9 @@ components:
       type: object
     networking.v1.GcpPrivateLinkAttachmentStatus:
       description: |
-        GCP PrivateLink attachment represents reserved capacity in zonal
-        GCP PSC Service attachments.  A PSC Endpoint can be connected to
-        the Service attachment corresponding to each zone.
+        GCP PrivateLink attachment represents reserved capacity in a
+        GCP PSC Service attachment.  A PSC Endpoint can be connected to
+        the Service attachment.
       properties:
         kind:
           description: PrivateLinkAttachmentStatus kind.
@@ -4240,39 +4245,32 @@ components:
           - GcpPrivateLinkAttachmentStatus
           readOnly: true
           type: string
-        service_attachments:
+        service_attachment:
+          allOf:
+          - $ref: '#/components/schemas/networking.v1.GcpPscServiceAttachment'
           description: |
-            Array of GCP PSC Service attachments that can be used to connect
-            PSC Endpoints for each zone.
-          items:
-            $ref: '#/components/schemas/networking.v1.GcpPscServiceAttachment'
+            GCP PSC Service attachment that can be used to connect
+            to a PSC Endpoint.
           readOnly: true
-          type: array
+          type: object
       required:
       - kind
-      - service_attachments
+      - service_attachment
       type: object
     networking.v1.GcpPscServiceAttachment:
       description: |
-        GCP PSC Service attachment for a zone with reserved capacity to
+        GCP PSC Service attachment with reserved capacity to
         connect a PSC Endpoint.
       properties:
-        zone:
-          description: Zone associated with the PSC Service attachment.
-          example: us-central1-a
-          minLength: 1
-          readOnly: true
-          type: string
         private_service_connect_service_attachment:
           description: Id of a Private Service Connect Service Attachment in Confluent
             Cloud.
-          example: projects/example-project/regions/us-central1/serviceAttachments/plt-abcdef-service-attachment-us-central1-a
+          example: projects/example-project/regions/us-central1/serviceAttachments/plt-abcdef-service-attachment-us-central1
           minLength: 1
           readOnly: true
           type: string
       required:
       - private_service_connect_service_attachment
-      - zone
       type: object
     networking.v1.AwsPrivateLinkAttachmentConnectionStatus:
       description: Status of a connection to an AWS PrivateLink attachment.
@@ -4301,29 +4299,21 @@ components:
       - vpc_endpoint_service_name
       type: object
     networking.v1.AzurePrivateLinkAttachmentConnectionStatus:
-      description: Status of an Azure PrivateLink attachment connection for an availability
-        zone.
+      description: Status of a Azure PrivateLink attachment connection.
       properties:
         kind:
           description: PrivateLinkAttachmentConnectionStatus kind.
           enum:
           - AzurePrivateLinkAttachmentConnectionStatus
           type: string
-        zone:
-          description: Availability zone associated with the Azure PrivateLink service.
-          example: "1"
-          minLength: 1
-          readOnly: true
-          type: string
         private_link_service_alias:
-          description: Azure PrivateLink service alias for the availability zone.
+          description: Azure PrivateLink service alias.
           example: pls-plt-abcdef-az3.38748da8-3322-42f7-b97a-6448c21af653.centralus.azure.privatelinkservice
           minLength: 1
           readOnly: true
           type: string
         private_link_service_resource_id:
-          description: Azure PrivateLink service resource id for the availability
-            zone.
+          description: Azure PrivateLink service resource id.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/s-abcde/providers/Microsoft.Network/privateLinkServices/pls-plt-abcdef-az3
           minLength: 1
           readOnly: true
@@ -4331,7 +4321,7 @@ components:
         private_endpoint_resource_id:
           description: |
             Resource Id of the PrivateEndpoint (if any) that is connected to
-            the PrivateLink service for this availability zone.
+            the PrivateLink service.
           example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testvpc/providers/Microsoft.Network/privateEndpoints/pe-plt-abcdef-az3
           minLength: 1
           readOnly: true
@@ -4341,24 +4331,17 @@ components:
       - private_endpoint_resource_id
       - private_link_service_alias
       - private_link_service_resource_id
-      - zone
       type: object
     networking.v1.GcpPrivateLinkAttachmentConnectionStatus:
-      description: Status of a GCP PrivateLink attachment connection for a zone.
+      description: Status of GCP PrivateLink attachment connection.
       properties:
         kind:
           description: PrivateLinkAttachmentConnectionStatus kind.
           enum:
           - GcpPrivateLinkAttachmentConnectionStatus
           type: string
-        zone:
-          description: Zone associated with the GCP PrivateLink attachment connection.
-          example: us-central1-a
-          minLength: 1
-          readOnly: true
-          type: string
         private_service_connect_service_attachment:
-          description: GCP Private Service Connect ServiceAttachment for the zone.
+          description: GCP Private Service Connect ServiceAttachment.
           example: projects/example-project/regions/us-central1/serviceAttachments/plt-abcdef-service-attachment-us-central1-a
           minLength: 1
           readOnly: true
@@ -4373,7 +4356,6 @@ components:
       - kind
       - private_service_connect_connection_id
       - private_service_connect_service_attachment
-      - zone
       type: object
     networking.v1.AwsPrivateLinkAttachmentConnection:
       description: Represents a connection between an AWS VPC Endpoint and an Endpoint
