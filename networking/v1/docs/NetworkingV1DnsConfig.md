@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Resolution** | **string** | Network DNS resolution | 
+**Resolution** | **string** | Network DNS resolution type. | 
 
 ## Methods
 

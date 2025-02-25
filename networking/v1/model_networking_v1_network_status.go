@@ -38,15 +38,19 @@ import (
 // NetworkingV1NetworkStatus The status of the Network
 type NetworkingV1NetworkStatus struct {
 	// The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;
-	Phase                    string                               `json:"phase,omitempty"`
-	SupportedConnectionTypes NetworkingV1SupportedConnectionTypes `json:"supported_connection_types,omitempty"`
-	ActiveConnectionTypes    NetworkingV1ConnectionTypes          `json:"active_connection_types,omitempty"`
+	Phase string `json:"phase,omitempty"`
+	// The connection types this network supports.
+	SupportedConnectionTypes []string `json:"supported_connection_types,omitempty"`
+	// The connection types requested for use with the network.
+	ActiveConnectionTypes []string `json:"active_connection_types,omitempty"`
 	// Error code if network is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if network is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
 	// The root DNS domain for the network if applicable. Present on networks that support PrivateLink.
 	DnsDomain *string `json:"dns_domain,omitempty"`
+	// The endpoint suffix for the network if applicable. It is the concatination of the subdomain separator (ex: '.' or '-') and the dns domain. For a flink endpoint written as: \"flink.$nid.$region.$cloud.confluent.cloud\" the endpoint_suffix would be \".$nid.$region.$cloud.confluent.cloud\". The full endpoint can be optained by concatenating \"flink\" + endpoint_suffix.
+	EndpointSuffix *string `json:"endpoint_suffix,omitempty"`
 	// The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains.
 	ZonalSubdomains *map[string]string `json:"zonal_subdomains,omitempty"`
 	// The cloud-specific network details. These will be populated when the network reaches the READY state.
@@ -59,7 +63,7 @@ type NetworkingV1NetworkStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes NetworkingV1SupportedConnectionTypes, activeConnectionTypes NetworkingV1ConnectionTypes) *NetworkingV1NetworkStatus {
+func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes []string, activeConnectionTypes []string) *NetworkingV1NetworkStatus {
 	this := NetworkingV1NetworkStatus{}
 	this.Phase = phase
 	this.SupportedConnectionTypes = supportedConnectionTypes
@@ -100,9 +104,9 @@ func (o *NetworkingV1NetworkStatus) SetPhase(v string) {
 }
 
 // GetSupportedConnectionTypes returns the SupportedConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1SupportedConnectionTypes {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() []string {
 	if o == nil {
-		var ret NetworkingV1SupportedConnectionTypes
+		var ret []string
 		return ret
 	}
 
@@ -111,7 +115,7 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() NetworkingV1Su
 
 // GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*NetworkingV1SupportedConnectionTypes, bool) {
+func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*[]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,14 +123,14 @@ func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Networking
 }
 
 // SetSupportedConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v NetworkingV1SupportedConnectionTypes) {
+func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v []string) {
 	o.SupportedConnectionTypes = v
 }
 
 // GetActiveConnectionTypes returns the ActiveConnectionTypes field value
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1ConnectionTypes {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() []string {
 	if o == nil {
-		var ret NetworkingV1ConnectionTypes
+		var ret []string
 		return ret
 	}
 
@@ -135,7 +139,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() NetworkingV1Conne
 
 // GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field value
 // and a boolean to check if the value has been set.
-func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1ConnectionTypes, bool) {
+func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*[]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -143,7 +147,7 @@ func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*NetworkingV1C
 }
 
 // SetActiveConnectionTypes sets field value
-func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v NetworkingV1ConnectionTypes) {
+func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v []string) {
 	o.ActiveConnectionTypes = v
 }
 
@@ -241,6 +245,38 @@ func (o *NetworkingV1NetworkStatus) HasDnsDomain() bool {
 // SetDnsDomain gets a reference to the given string and assigns it to the DnsDomain field.
 func (o *NetworkingV1NetworkStatus) SetDnsDomain(v string) {
 	o.DnsDomain = &v
+}
+
+// GetEndpointSuffix returns the EndpointSuffix field value if set, zero value otherwise.
+func (o *NetworkingV1NetworkStatus) GetEndpointSuffix() string {
+	if o == nil || o.EndpointSuffix == nil {
+		var ret string
+		return ret
+	}
+	return *o.EndpointSuffix
+}
+
+// GetEndpointSuffixOk returns a tuple with the EndpointSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1NetworkStatus) GetEndpointSuffixOk() (*string, bool) {
+	if o == nil || o.EndpointSuffix == nil {
+		return nil, false
+	}
+	return o.EndpointSuffix, true
+}
+
+// HasEndpointSuffix returns a boolean if a field has been set.
+func (o *NetworkingV1NetworkStatus) HasEndpointSuffix() bool {
+	if o != nil && o.EndpointSuffix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEndpointSuffix gets a reference to the given string and assigns it to the EndpointSuffix field.
+func (o *NetworkingV1NetworkStatus) SetEndpointSuffix(v string) {
+	o.EndpointSuffix = &v
 }
 
 // GetZonalSubdomains returns the ZonalSubdomains field value if set, zero value otherwise.
@@ -347,6 +383,7 @@ func (o *NetworkingV1NetworkStatus) Redact() {
 	o.recurseRedact(o.ErrorCode)
 	o.recurseRedact(o.ErrorMessage)
 	o.recurseRedact(o.DnsDomain)
+	o.recurseRedact(o.EndpointSuffix)
 	o.recurseRedact(o.ZonalSubdomains)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.IdleSince)
@@ -401,6 +438,9 @@ func (o NetworkingV1NetworkStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.DnsDomain != nil {
 		toSerialize["dns_domain"] = o.DnsDomain
+	}
+	if o.EndpointSuffix != nil {
+		toSerialize["endpoint_suffix"] = o.EndpointSuffix
 	}
 	if o.ZonalSubdomains != nil {
 		toSerialize["zonal_subdomains"] = o.ZonalSubdomains

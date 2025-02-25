@@ -5,11 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The lifecyle phase of the network:  PROVISIONING:  network provisioning is in progress;  READY:  network is ready;  FAILED: provisioning failed;  DEPROVISIONING: network deprovisioning is in progress;  | [readonly] 
-**SupportedConnectionTypes** | [**Set**](set.md) |  | [readonly] 
-**ActiveConnectionTypes** | [**Set**](set.md) |  | [readonly] 
+**SupportedConnectionTypes** | **[]string** | The connection types this network supports. | [readonly] 
+**ActiveConnectionTypes** | **[]string** | The connection types requested for use with the network. | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if network is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if network is in a failed state | [optional] [readonly] 
 **DnsDomain** | Pointer to **string** | The root DNS domain for the network if applicable. Present on networks that support PrivateLink. | [optional] [readonly] 
+**EndpointSuffix** | Pointer to **string** | The endpoint suffix for the network if applicable. It is the concatination of the subdomain separator (ex: &#39;.&#39; or &#39;-&#39;) and the dns domain. For a flink endpoint written as: \&quot;flink.$nid.$region.$cloud.confluent.cloud\&quot; the endpoint_suffix would be \&quot;.$nid.$region.$cloud.confluent.cloud\&quot;. The full endpoint can be optained by concatenating \&quot;flink\&quot; + endpoint_suffix.  | [optional] [readonly] 
 **ZonalSubdomains** | Pointer to **map[string]string** | The DNS subdomain for each zone. Present on networks that support PrivateLink. Keys are zones and values are DNS domains.  | [optional] [readonly] 
 **Cloud** | Pointer to [**NetworkingV1NetworkStatusCloudOneOf**](NetworkingV1NetworkStatusCloudOneOf.md) | The cloud-specific network details. These will be populated when the network reaches the READY state. | [optional] [readonly] 
 **IdleSince** | Pointer to **time.Time** | The date and time when the network becomes idle | [optional] [readonly] 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkingV1NetworkStatus
 
-`func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes Set, activeConnectionTypes Set, ) *NetworkingV1NetworkStatus`
+`func NewNetworkingV1NetworkStatus(phase string, supportedConnectionTypes []string, activeConnectionTypes []string, ) *NetworkingV1NetworkStatus`
 
 NewNetworkingV1NetworkStatus instantiates a new NetworkingV1NetworkStatus object
 This constructor will assign default values to properties that have it defined,
@@ -55,40 +56,40 @@ SetPhase sets Phase field to given value.
 
 ### GetSupportedConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() Set`
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypes() []string`
 
 GetSupportedConnectionTypes returns the SupportedConnectionTypes field if non-nil, zero value otherwise.
 
 ### GetSupportedConnectionTypesOk
 
-`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*Set, bool)`
+`func (o *NetworkingV1NetworkStatus) GetSupportedConnectionTypesOk() (*[]string, bool)`
 
 GetSupportedConnectionTypesOk returns a tuple with the SupportedConnectionTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSupportedConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v Set)`
+`func (o *NetworkingV1NetworkStatus) SetSupportedConnectionTypes(v []string)`
 
 SetSupportedConnectionTypes sets SupportedConnectionTypes field to given value.
 
 
 ### GetActiveConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() Set`
+`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypes() []string`
 
 GetActiveConnectionTypes returns the ActiveConnectionTypes field if non-nil, zero value otherwise.
 
 ### GetActiveConnectionTypesOk
 
-`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*Set, bool)`
+`func (o *NetworkingV1NetworkStatus) GetActiveConnectionTypesOk() (*[]string, bool)`
 
 GetActiveConnectionTypesOk returns a tuple with the ActiveConnectionTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActiveConnectionTypes
 
-`func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v Set)`
+`func (o *NetworkingV1NetworkStatus) SetActiveConnectionTypes(v []string)`
 
 SetActiveConnectionTypes sets ActiveConnectionTypes field to given value.
 
@@ -167,6 +168,31 @@ SetDnsDomain sets DnsDomain field to given value.
 `func (o *NetworkingV1NetworkStatus) HasDnsDomain() bool`
 
 HasDnsDomain returns a boolean if a field has been set.
+
+### GetEndpointSuffix
+
+`func (o *NetworkingV1NetworkStatus) GetEndpointSuffix() string`
+
+GetEndpointSuffix returns the EndpointSuffix field if non-nil, zero value otherwise.
+
+### GetEndpointSuffixOk
+
+`func (o *NetworkingV1NetworkStatus) GetEndpointSuffixOk() (*string, bool)`
+
+GetEndpointSuffixOk returns a tuple with the EndpointSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndpointSuffix
+
+`func (o *NetworkingV1NetworkStatus) SetEndpointSuffix(v string)`
+
+SetEndpointSuffix sets EndpointSuffix field to given value.
+
+### HasEndpointSuffix
+
+`func (o *NetworkingV1NetworkStatus) HasEndpointSuffix() bool`
+
+HasEndpointSuffix returns a boolean if a field has been set.
 
 ### GetZonalSubdomains
 
