@@ -150,15 +150,6 @@ tags:
     ## The Network Link Service Associations Model
     <SchemaDefinition schemaRef="#/components/schemas/networking.v1.NetworkLinkServiceAssociation" />
   name: Network Link Service Associations (networking/v1)
-- description: |-
-    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-    A gateway is a resource that defines network access to Confluent cloud resources.
-
-
-    ## The Gateways Model
-    <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Gateway" />
-  name: Gateways (networking/v1)
 paths:
   /networking/v1/networks:
     get:
@@ -465,14 +456,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -480,7 +471,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -493,7 +484,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -507,7 +498,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000",
+            "path": "/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -532,7 +523,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -541,7 +532,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1%2Cprod-aws-us-east1&spec.cloud=GCP%2CAWS&spec.region=us-central1%2Cus-east-1&spec.connection_types=peering%2Cprivatelink&spec.cidr=10.200.0.0%2F16&status.phase=PROVISIONING%2CREADY&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks?spec.display_name=prod-gcp-us-central1,prod-aws-us-east1&spec.cloud=GCP,AWS&spec.region=us-central1,us-east-1&spec.connection_types=peering,privatelink&spec.cidr=10.200.0.0/16&status.phase=PROVISIONING,READY&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -866,13 +857,13 @@ paths:
             --url https://api.confluent.cloud/networking/v1/networks \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"CHASED_PRIVATE"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"string"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/networks")
             .post(body)
@@ -892,9 +883,9 @@ paths:
           ,\\\"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\
           \"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\"\
           cidr\\\":\\\"10.20.0.0/27\\\"}],\\\"dns_config\\\":{\\\"resolution\\\":\\\
-          \"CHASED_PRIVATE\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"\
-          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          \"string\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -905,7 +896,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -959,7 +950,7 @@ paths:
                 {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
                 {zone_id: 'use1-az3', cidr: '10.20.0.0/27'}
               ],
-              dns_config: {resolution: 'CHASED_PRIVATE'},
+              dns_config: {resolution: 'string'},
               reserved_cidr: '172.20.255.0/24',
               environment: {id: 'env-00000', environment: 'string'}
             }
@@ -977,7 +968,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -986,7 +977,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/networks/{id}:
     delete:
@@ -1209,14 +1200,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1224,7 +1215,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1237,7 +1228,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/networks/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/networks/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1251,7 +1242,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/networks/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/networks/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1276,7 +1267,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1285,7 +1276,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1539,14 +1530,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1554,7 +1545,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1567,7 +1558,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/networks/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/networks/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1581,7 +1572,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/networks/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/networks/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1606,7 +1597,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1615,7 +1606,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1953,18 +1944,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/networks/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/networks/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"CHASED_PRIVATE"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"prod-aws-us-east1","cloud":"AWS","region":"us-east-1","connection_types":["PRIVATELINK"],"cidr":"10.200.0.0/16","zones":["use1-az1","use1-az2","use1-az3"],"zones_info":[{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"},{"zone_id":"use1-az3","cidr":"10.20.0.0/27"}],"dns_config":{"resolution":"string"},"reserved_cidr":"172.20.255.0/24","environment":{"id":"env-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/networks/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1973,7 +1964,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/networks/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-aws-us-east1\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"\
           us-east-1\\\",\\\"connection_types\\\":[\\\"PRIVATELINK\\\"],\\\"cidr\\\"\
@@ -1982,9 +1973,9 @@ paths:
           ,\\\"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\
           \"cidr\\\":\\\"10.20.0.0/27\\\"},{\\\"zone_id\\\":\\\"use1-az3\\\",\\\"\
           cidr\\\":\\\"10.20.0.0/27\\\"}],\\\"dns_config\\\":{\\\"resolution\\\":\\\
-          \"CHASED_PRIVATE\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"\
-          environment\\\":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          \"string\\\"},\\\"reserved_cidr\\\":\\\"172.20.255.0/24\\\",\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\"\
+          )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1995,14 +1986,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/networks/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/networks/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2016,7 +2007,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/networks/%7Bid%7D",
+            "path": "/networking/v1/networks/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2049,7 +2040,7 @@ paths:
                 {zone_id: 'use1-az3', cidr: '10.20.0.0/27'},
                 {zone_id: 'use1-az3', cidr: '10.20.0.0/27'}
               ],
-              dns_config: {resolution: 'CHASED_PRIVATE'},
+              dns_config: {resolution: 'string'},
               reserved_cidr: '172.20.255.0/24',
               environment: {id: 'env-00000', environment: 'string'}
             }
@@ -2060,23 +2051,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/networks/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/networks/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"CHASED_PRIVATE\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-aws-us-east1\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"connection_types\":[\"PRIVATELINK\"],\"cidr\":\"10.200.0.0/16\",\"zones\":[\"use1-az1\",\"use1-az2\",\"use1-az3\"],\"zones_info\":[{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"},{\"zone_id\":\"use1-az3\",\"cidr\":\"10.20.0.0/27\"}],\"dns_config\":{\"resolution\":\"string\"},\"reserved_cidr\":\"172.20.255.0/24\",\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/peerings:
     get:
@@ -2353,14 +2344,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001' \
+            --url 'https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001")
+            .url("https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2368,7 +2359,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2381,7 +2372,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001", headers=headers)
+          conn.request("GET", "/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2395,7 +2386,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001",
+            "path": "/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2420,7 +2411,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2429,7 +2420,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1%2Cprod-peering-use1&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings?spec.display_name=prod-peering-uscentral1,prod-peering-use1&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3095,14 +3086,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3110,7 +3101,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3123,7 +3114,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/peerings/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/peerings/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3137,7 +3128,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/peerings/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/peerings/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3162,7 +3153,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3171,7 +3162,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3429,14 +3420,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -3444,7 +3435,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -3457,7 +3448,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/peerings/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/peerings/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3471,7 +3462,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/peerings/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/peerings/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -3496,7 +3487,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -3505,7 +3496,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3847,7 +3838,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/peerings/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-peering-use1","cloud":{"kind":"AwsPeering","account":"000000000000","vpc":"vpc-00000000000000000","routes":["10.108.16.0/21"],"customer_region":"us-east-1"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
@@ -3858,7 +3849,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-peering-use1\",\"cloud\":{\"kind\":\"AwsPeering\",\"account\":\"000000000000\",\"vpc\":\"vpc-00000000000000000\",\"routes\":[\"10.108.16.0/21\"],\"customer_region\":\"us-east-1\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/peerings/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -3867,7 +3858,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/peerings/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-peering-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPeering\\\"\
           ,\\\"account\\\":\\\"000000000000\\\",\\\"vpc\\\":\\\"vpc-00000000000000000\\\
@@ -3892,7 +3883,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/peerings/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/peerings/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -3906,7 +3897,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/peerings/%7Bid%7D",
+            "path": "/networking/v1/peerings/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -3946,7 +3937,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/peerings/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -3958,7 +3949,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/peerings/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -4239,14 +4230,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001' \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001")
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4254,7 +4245,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -4267,7 +4258,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001", headers=headers)
+          conn.request("GET", "/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -4281,7 +4272,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001",
+            "path": "/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -4306,7 +4297,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -4315,7 +4306,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1%2Cprod-tgw-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments?spec.display_name=prod-tgw-use1,prod-tgw-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4982,14 +4973,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4997,7 +4988,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -5010,7 +5001,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/transit-gateway-attachments/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -5024,7 +5015,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/transit-gateway-attachments/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -5049,7 +5040,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -5058,7 +5049,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -5316,14 +5307,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -5331,7 +5322,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -5344,7 +5335,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/transit-gateway-attachments/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -5358,7 +5349,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/transit-gateway-attachments/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -5383,7 +5374,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -5392,7 +5383,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -5734,7 +5725,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-tgw-use1","cloud":{"kind":"AwsTransitGatewayAttachment","ram_share_arn":"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx","transit_gateway_id":"tgw-xxxxxxxxxxxxxxxxx","routes":["100.64.0.0/10","10.0.0.0/8","192.168.0.0/16","172.16.0.0/12"]},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
@@ -5745,7 +5736,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-tgw-use1\",\"cloud\":{\"kind\":\"AwsTransitGatewayAttachment\",\"ram_share_arn\":\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\",\"transit_gateway_id\":\"tgw-xxxxxxxxxxxxxxxxx\",\"routes\":[\"100.64.0.0/10\",\"10.0.0.0/8\",\"192.168.0.0/16\",\"172.16.0.0/12\"]},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -5754,7 +5745,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-tgw-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsTransitGatewayAttachment\\\
           \",\\\"ram_share_arn\\\":\\\"arn:aws:ram:us-west-3:000000000000:resource-share/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx\\\
@@ -5781,7 +5772,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/transit-gateway-attachments/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/transit-gateway-attachments/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -5795,7 +5786,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/transit-gateway-attachments/%7Bid%7D",
+            "path": "/networking/v1/transit-gateway-attachments/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -5834,7 +5825,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -5846,7 +5837,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/transit-gateway-attachments/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -6127,14 +6118,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001")
+            .url("https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -6142,7 +6133,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -6155,7 +6146,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -6169,7 +6160,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001",
+            "path": "/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -6194,7 +6185,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -6203,7 +6194,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1%2Cprod-pl-usw2&status.phase=PROVISIONING%2CREADY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses?spec.display_name=prod-pl-use1,prod-pl-usw2&status.phase=PROVISIONING,READY&environment=env-00000&spec.network=n-00000,n-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -6862,14 +6853,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -6877,7 +6868,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -6890,7 +6881,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/private-link-accesses/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -6904,7 +6895,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-accesses/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -6929,7 +6920,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -6938,7 +6929,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -7196,14 +7187,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -7211,7 +7202,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -7224,7 +7215,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/private-link-accesses/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -7238,7 +7229,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/private-link-accesses/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -7263,7 +7254,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -7272,7 +7263,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -7614,7 +7605,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/private-link-accesses/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-pl-use1","cloud":{"kind":"AwsPrivateLinkAccess","account":"000000000000"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"}}}'
@@ -7625,7 +7616,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-pl-use1\",\"cloud\":{\"kind\":\"AwsPrivateLinkAccess\",\"account\":\"000000000000\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -7634,7 +7625,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/private-link-accesses/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-pl-use1\\\",\\\"cloud\\\":{\\\"kind\\\":\\\"AwsPrivateLinkAccess\\\
           \",\\\"account\\\":\\\"000000000000\\\"},\\\"environment\\\":{\\\"id\\\"\
@@ -7658,7 +7649,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/private-link-accesses/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/private-link-accesses/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -7672,7 +7663,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/private-link-accesses/%7Bid%7D",
+            "path": "/networking/v1/private-link-accesses/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -7706,7 +7697,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/private-link-accesses/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -7718,7 +7709,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/private-link-accesses/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -7998,14 +7989,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001")
+            .url("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -8013,7 +8004,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -8026,7 +8017,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -8040,7 +8031,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001",
+            "path": "/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -8065,7 +8056,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -8074,7 +8065,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls%2Cdev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000%2Cn-00001");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services?spec.display_name=prod-net-1-nls,dev-net-1-nls&status.phase=READY&environment=env-00000&spec.network=n-00000,n-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -8732,14 +8723,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -8747,7 +8738,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -8760,7 +8751,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/network-link-services/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/network-link-services/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -8774,7 +8765,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-services/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/network-link-services/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -8799,7 +8790,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -8808,7 +8799,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -9065,14 +9056,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -9080,7 +9071,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -9093,7 +9084,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-services/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-services/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -9107,7 +9098,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-services/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/network-link-services/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -9132,7 +9123,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -9141,7 +9132,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -9482,7 +9473,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-services/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-net-1-nls","description":"Allow connections from analytics hub","accept":{"environments":["string"],"networks":["string"]},"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
@@ -9493,7 +9484,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-net-1-nls\",\"description\":\"Allow connections from analytics hub\",\"accept\":{\"environments\":[\"string\"],\"networks\":[\"string\"]},\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/network-link-services/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -9502,7 +9493,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-services/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-net-1-nls\\\",\\\"description\\\":\\\"Allow connections from analytics\
           \ hub\\\",\\\"accept\\\":{\\\"environments\\\":[\\\"string\\\"],\\\"networks\\\
@@ -9526,7 +9517,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/network-link-services/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/network-link-services/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -9540,7 +9531,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-services/%7Bid%7D",
+            "path": "/networking/v1/network-link-services/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -9575,7 +9566,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-services/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -9587,7 +9578,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-services/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -9885,14 +9876,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -9900,7 +9891,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -9913,7 +9904,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -9927,7 +9918,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000",
+            "path": "/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -9952,7 +9943,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -9961,7 +9952,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle%2Cdev-net-1-nle&status.phase=READY%2CPENDING_ACCEPT&environment=env-00000&spec.network=n-00000%2Cn-00001&spec.network_link_service=nls-abcde%2Cnls-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints?spec.display_name=prod-net-1-nle,dev-net-1-nle&status.phase=READY,PENDING_ACCEPT&environment=env-00000&spec.network=n-00000,n-00001&spec.network_link_service=nls-abcde,nls-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -10629,14 +10620,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -10644,7 +10635,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -10657,7 +10648,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/network-link-endpoints/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -10671,7 +10662,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/network-link-endpoints/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -10696,7 +10687,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -10705,7 +10696,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -10968,14 +10959,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -10983,7 +10974,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -10996,7 +10987,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-endpoints/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11010,7 +11001,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/network-link-endpoints/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -11035,7 +11026,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -11044,7 +11035,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -11391,7 +11382,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-net-1-nle","description":"Connect to Network - analytics hub","environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"},"network_link_service":{"id":"string","environment":"string"}}}'
@@ -11402,7 +11393,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-net-1-nle\",\"description\":\"Connect to Network - analytics hub\",\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"network_link_service\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -11411,7 +11402,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-net-1-nle\\\",\\\"description\\\":\\\"Connect to Network - analytics\
           \ hub\\\",\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\
@@ -11435,7 +11426,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/network-link-endpoints/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/network-link-endpoints/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11449,7 +11440,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-endpoints/%7Bid%7D",
+            "path": "/networking/v1/network-link-endpoints/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -11484,7 +11475,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -11496,7 +11487,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-endpoints/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -11762,14 +11753,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -11777,7 +11768,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -11790,7 +11781,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -11804,7 +11795,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000",
+            "path": "/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -11829,7 +11820,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -11838,7 +11829,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY%2CPENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-service-associations?status.phase=READY,PENDING_ACCEPT&spec.network_link_service=nls-abcde&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -12107,14 +12098,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -12122,7 +12113,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -12135,7 +12126,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -12149,7 +12140,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000",
+            "path": "/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -12174,7 +12165,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -12183,650 +12174,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-service-associations/%7Bid%7D?spec.network_link_service=nls-abcde&environment=env-00000");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
-  /networking/v1/gateways:
-    get:
-      description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-        Retrieve a sorted, filtered, paginated list of all gateways.
-      operationId: listNetworkingV1Gateways
-      parameters:
-      - description: Filter the results by exact match for environment.
-        example: env-00000
-        explode: true
-        in: query
-        name: environment
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: A pagination size for collection requests.
-        explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          default: 10
-          maximum: 1000
-          type: integer
-          x-max-page-items: 1000
-        style: form
-      - description: An opaque pagination token for collection requests.
-        explode: true
-        in: query
-        name: page_token
-        required: false
-        schema:
-          maxLength: 255
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/networking.v1.GatewayList'
-                - properties:
-                    data:
-                      items:
-                        properties:
-                          spec:
-                            properties:
-                              environment:
-                                example:
-                                  id: env-00000
-                                  related: https://api.confluent.cloud/v2/environments/env-00000
-                                  resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
-                            type: object
-                      type: array
-                  type: object
-          description: Gateway.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Retry-After:
-              description: The number of seconds to wait until the rate limit window
-                resets. Only sent when the rate limit is reached.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - cloud-api-key: []
-      - confluent-sts-access-token: []
-      summary: List of Gateways
-      tags:
-      - Gateways (networking/v1)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/gateways?environment=env-00000' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways?environment=env-00000\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/networking/v1/gateways?environment=env-00000", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/gateways?environment=env-00000",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways?environment=env-00000");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000");
-          var request = new RestRequest(Method.GET);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          IRestResponse response = client.Execute(request);
-  /networking/v1/gateways/{id}:
-    get:
-      description: |-
-        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-        Make a request to read a gateway.
-      operationId: getNetworkingV1Gateway
-      parameters:
-      - description: Scope the operation to the given environment.
-        example: env-00000
-        explode: true
-        in: query
-        name: environment
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: The unique identifier for the gateway.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/networking.v1.Gateway'
-                - properties:
-                    spec:
-                      required:
-                      - config
-                      - environment
-                      type: object
-                  required:
-                  - api_version
-                  - id
-                  - kind
-                  - spec
-                  - status
-                  type: object
-                - properties:
-                    spec:
-                      properties:
-                        environment:
-                          example:
-                            id: env-00000
-                            related: https://api.confluent.cloud/v2/environments/env-00000
-                            resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
-                      type: object
-                  type: object
-          description: Gateway.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "404":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "404"
-                  title: Not Found
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Not Found
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            X-RateLimit-Limit:
-              description: The maximum number of requests you're permitted to make
-                per time period.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Remaining:
-              description: The number of requests remaining in the current rate limit
-                window.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            X-RateLimit-Reset:
-              description: "The relative time in seconds until the current rate-limit\
-                \ window resets.  \n  \n**Important:** This differs from Github and\
-                \ Twitter's same-named header which uses UTC epoch seconds. We use\
-                \ relative time to avoid client/server time synchronization issues."
-              explode: false
-              schema:
-                type: integer
-              style: simple
-            Retry-After:
-              description: The number of seconds to wait until the rate limit window
-                resets. Only sent when the rate limit is reached.
-              explode: false
-              schema:
-                type: integer
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - cloud-api-key: []
-      - confluent-sts-access-token: []
-      summary: Read a Gateway
-      tags:
-      - Gateways (networking/v1)
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000")
-            .get()
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000\"\
-          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("api.confluent.cloud")
-
-          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
-
-          conn.request("GET", "/networking/v1/gateways/%7Bid%7D?environment=env-00000", headers=headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "GET",
-            "hostname": "api.confluent.cloud",
-            "port": null,
-            "path": "/networking/v1/gateways/%7Bid%7D?environment=env-00000",
-            "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/network-link-service-associations/{id}?spec.network_link_service=nls-abcde&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -13137,13 +12485,21 @@ components:
           - FAILED
           - DEPROVISIONING
         supported_connection_types:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.SupportedConnectionTypes'
+          description: The connection types this network supports.
+          items:
+            $ref: '#/components/schemas/networking.v1.ConnectionType'
+          minItems: 1
           readOnly: true
+          type: array
+          uniqueItems: true
         active_connection_types:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.ConnectionTypes'
+          description: The connection types requested for use with the network.
+          items:
+            $ref: '#/components/schemas/networking.v1.ConnectionType'
+          minItems: 1
           readOnly: true
+          type: array
+          uniqueItems: true
         error_code:
           description: Error code if network is in a failed state. May be used for
             programmatic error checking.
@@ -13159,6 +12515,16 @@ components:
           description: The root DNS domain for the network if applicable. Present
             on networks that support PrivateLink.
           example: 00000.us-east-1.aws.glb.confluent.cloud
+          readOnly: true
+          type: string
+        endpoint_suffix:
+          description: |
+            The endpoint suffix for the network if applicable. It is the concatination of the subdomain
+            separator (ex: '.' or '-') and the dns domain.
+            For a flink endpoint written as: "flink.$nid.$region.$cloud.confluent.cloud"
+            the endpoint_suffix would be ".$nid.$region.$cloud.confluent.cloud".
+            The full endpoint can be optained by concatenating "flink" + endpoint_suffix.
+          example: .00000.us-east-1.aws.glb.confluent.cloud
           readOnly: true
           type: string
         zonal_subdomains:
@@ -13799,115 +13165,11 @@ components:
       required:
       - phase
       type: object
-    networking.v1.Gateway:
-      description: |-
-        A gateway is a resource that defines network access to Confluent cloud resources.
-
-
-        ## The Gateways Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Gateway" />
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - networking/v1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - Gateway
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/networking/v1/gateways/g-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/gateway=g-12345
-        spec:
-          $ref: '#/components/schemas/networking.v1.GatewaySpec'
-        status:
-          $ref: '#/components/schemas/networking.v1.GatewayStatus'
-      type: object
-    networking.v1.GatewayStatus:
-      description: The status of the Gateway
-      properties:
-        phase:
-          description: |
-            The lifecycle phase of the gateway:
-
-              PROVISIONING: gateway provisioning is in progress;
-
-              READY:  gateway is ready;
-
-              FAILED: gateway is in a failed state;
-
-              DEPROVISIONING: gateway deprovisioning is in progress;
-          example: READY
-          readOnly: true
-          type: string
-          x-extensible-enum:
-          - PROVISIONING
-          - READY
-          - FAILED
-          - DEPROVISIONING
-        error_code:
-          description: Error code if gateway is in a failed state. May be used for
-            programmatic error checking.
-          readOnly: true
-          type: string
-        error_message:
-          description: Displayable error message if gateway is in a failed state
-          readOnly: true
-          type: string
-        cloud_gateway:
-          description: Gateway type specific status
-          discriminator:
-            mapping:
-              AwsEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
-              AzureEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
-          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
-          readOnly: true
-          type: object
-          x-one-of-name: NetworkingV1GatewayStatusCloudGatewayOneOf
-      readOnly: true
-      required:
-      - phase
-      type: object
-    networking.v1.AwsAccount:
-      description: The AWS account ID
-      example: "000000000000"
-      pattern: ^\d{12}$
-      type: string
     networking.v1.Cidr:
       description: IPv4 CIDR block
       example: 10.200.0.0/16
       pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
       type: string
-    networking.v1.DnsResolutionType:
-      default: CHASED_PRIVATE
-      description: Network DNS resolution type.
-      type: string
-      x-extensible-enum:
-      - CHASED_PRIVATE
-      - PRIVATE
     networking.v1.ConnectionType:
       description: Network connection type.
       example: PRIVATELINK
@@ -13916,27 +13178,15 @@ components:
       - PEERING
       - TRANSITGATEWAY
       - PRIVATELINK
-    networking.v1.ConnectionTypes:
-      description: The connection types requested for use with the network.
-      items:
-        $ref: '#/components/schemas/networking.v1.ConnectionType'
-      minItems: 1
-      type: array
-      uniqueItems: true
-    networking.v1.SupportedConnectionTypes:
-      description: The connection types this network supports.
-      items:
-        $ref: '#/components/schemas/networking.v1.ConnectionType'
-      minItems: 1
-      type: array
-      uniqueItems: true
     networking.v1.DnsConfig:
       description: The network DNS config
       properties:
         resolution:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.DnsResolutionType'
-          description: Network DNS resolution
+          description: Network DNS resolution type.
+          type: string
+          x-extensible-enum:
+          - CHASED_PRIVATE
+          - PRIVATE
       required:
       - resolution
       type: object
@@ -14065,10 +13315,11 @@ components:
           - AwsPeering
           type: string
         account:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.AwsAccount'
           description: The AWS account ID associated with the VPC you are peering
             with Confluent Cloud network.
+          example: "000000000000"
+          pattern: ^\d{12}$
+          type: string
         vpc:
           description: The VPC ID you are peering with Confluent Cloud network.
           example: vpc-00000000000000000
@@ -14230,12 +13481,13 @@ components:
           - AwsPrivateLinkAccess
           type: string
         account:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.AwsAccount'
           description: |
             The AWS account ID for the account containing the VPCs you want to connect from using AWS PrivateLink.
-            You can find your AWS account ID [here] (https://console.aws.amazon.com/billing/home?#/account)
+            You can find your AWS account ID [here](https://console.aws.amazon.com/billing/home?#/account)
             under **My Account** in your AWS Management Console. Must be a **12 character string**.
+          example: "000000000000"
+          pattern: ^\d{12}$
+          type: string
       required:
       - account
       - kind
@@ -14303,14 +13555,6 @@ components:
           uniqueItems: true
       title: Network Link Service
       type: object
-    networking.v1.ZonesInfo:
-      description: Cloud provider zones metadata.
-      items:
-        $ref: '#/components/schemas/networking.v1.ZoneInfo'
-      maxItems: 3
-      minItems: 3
-      type: array
-      uniqueItems: true
     networking.v1.ZoneInfo:
       description: Cloud provider zone metadata.
       properties:
@@ -14324,99 +13568,6 @@ components:
             Must be a `/27`. Required for VPC peering and AWS TransitGateway.
           example: 10.20.0.0/27
           type: string
-      type: object
-    networking.v1.AwsPeeringGatewaySpec:
-      description: AWS Peering Gateway details from AWS.
-      properties:
-        kind:
-          description: AWS Peering Gateway Spec kind type.
-          enum:
-          - AwsPeeringGatewaySpec
-          type: string
-        region:
-          description: AWS region of the Peering Gateway.
-          type: string
-      required:
-      - kind
-      - region
-      type: object
-    networking.v1.AzurePeeringGatewaySpec:
-      description: Azure Peering Gateway details from Azure.
-      properties:
-        kind:
-          description: Azure Peering Gateway Spec kind type.
-          enum:
-          - AzurePeeringGatewaySpec
-          type: string
-        region:
-          description: Azure region of the Peering Gateway.
-          type: string
-      required:
-      - kind
-      - region
-      type: object
-    networking.v1.AwsEgressPrivateLinkGatewaySpec:
-      description: AWS Egress Private Link Gateway details from AWS.
-      properties:
-        kind:
-          description: AWS Egress Private Link Gateway Spec kind type.
-          enum:
-          - AwsEgressPrivateLinkGatewaySpec
-          type: string
-        region:
-          description: AWS region of the Egress Private Link Gateway.
-          type: string
-      required:
-      - kind
-      - region
-      type: object
-    networking.v1.AzureEgressPrivateLinkGatewaySpec:
-      description: Azure Egress Private Link Gateway details from Azure.
-      properties:
-        kind:
-          description: Azure Egress Private Link Gateway Spec kind type.
-          enum:
-          - AzureEgressPrivateLinkGatewaySpec
-          type: string
-        region:
-          description: Azure region of the Egress Private Link Gateway.
-          type: string
-      required:
-      - kind
-      - region
-      type: object
-    networking.v1.AwsEgressPrivateLinkGatewayStatus:
-      description: AWS Egress Private Link Gateway details from AWS.
-      properties:
-        kind:
-          description: AWS Egress Private Link Gateway Status kind type.
-          enum:
-          - AwsEgressPrivateLinkGatewayStatus
-          type: string
-        principal_arn:
-          description: The principal ARN used by the AWS Egress Private Link Gateway.
-          example: arn:aws:iam::123456789012:cc-tenant-1-role
-          readOnly: true
-          type: string
-      required:
-      - kind
-      type: object
-    networking.v1.AzureEgressPrivateLinkGatewayStatus:
-      description: Azure Egress Private Link Gateway details from Azure.
-      properties:
-        kind:
-          description: Azure Egress Private Link Gateway Status kind type.
-          enum:
-          - AzureEgressPrivateLinkGatewayStatus
-          type: string
-        subscription:
-          description: The Azure Subscription ID associated with the Confluent Cloud
-            VPC.
-          example: 00000000-0000-0000-0000-000000000000
-          readOnly: true
-          type: string
-      required:
-      - kind
       type: object
     MultipleSearchFilter:
       description: Filter a collection by a string search for one or more values
@@ -14522,16 +13673,20 @@ components:
           type: string
           x-immutable: true
         connection_types:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.ConnectionTypes'
+          description: The connection types requested for use with the network.
+          items:
+            $ref: '#/components/schemas/networking.v1.ConnectionType'
+          minItems: 1
+          type: array
+          uniqueItems: true
           x-immutable: true
         cidr:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.Cidr'
           description: |
             The IPv4 [CIDR block](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) to used for this network.
             Must be `/16`. Required for VPC peering and AWS TransitGateway.
           example: 10.200.0.0/16
+          pattern: ^\d+\.\d+\.\d+\.\d+/\d+$
+          type: string
           x-immutable: true
         zones:
           description: |
@@ -14560,12 +13715,16 @@ components:
           uniqueItems: true
           x-immutable: true
         zones_info:
-          allOf:
-          - $ref: '#/components/schemas/networking.v1.ZonesInfo'
           description: |
             Each item represents information related to a single zone.
 
             Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+          items:
+            $ref: '#/components/schemas/networking.v1.ZoneInfo'
+          maxItems: 3
+          minItems: 3
+          type: array
+          uniqueItems: true
           x-immutable: true
         dns_config:
           allOf:
@@ -15212,96 +14371,6 @@ components:
           - $ref: '#/components/schemas/GlobalObjectReference'
           description: The environment to which this belongs.
           x-immutable: true
-      type: object
-      x-enable-id: true
-      x-enable-listmeta: true
-      x-enable-objectmeta: true
-    networking.v1.GatewayList:
-      description: |-
-        A gateway is a resource that defines network access to Confluent cloud resources.
-
-
-        ## The Gateways Model
-        <SchemaDefinition schemaRef="#/components/schemas/networking.v1.Gateway" />
-      properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - networking/v1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - GatewayList
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ListMeta'
-          - properties:
-              first:
-                example: https://api.confluent.cloud/networking/v1/gateways
-              last:
-                example: https://api.confluent.cloud/networking/v1/gateways?page_token=bcAOehAY8F16YD84Z1wT
-              prev:
-                example: https://api.confluent.cloud/networking/v1/gateways?page_token=YIXRY97wWYmwzrax4dld
-              next:
-                example: https://api.confluent.cloud/networking/v1/gateways?page_token=UvmDWOB1iwfAIBPj6EYb
-        data:
-          description: A data property that contains an array of resource items. Each
-            entry in the array is a separate resource.
-          items:
-            allOf:
-            - $ref: '#/components/schemas/networking.v1.Gateway'
-            - properties:
-                spec:
-                  required:
-                  - config
-                  - environment
-                  type: object
-              required:
-              - id
-              - metadata
-              - spec
-              - status
-              type: object
-          type: array
-          uniqueItems: true
-      required:
-      - api_version
-      - data
-      - kind
-      - metadata
-      type: object
-    networking.v1.GatewaySpec:
-      description: The desired state of the Gateway
-      properties:
-        display_name:
-          description: The name of the gateway
-          example: prod-gateway
-          type: string
-        config:
-          description: Gateway type specific configuration
-          discriminator:
-            mapping:
-              AwsPeeringGatewaySpec: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
-              AwsEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
-              AzurePeeringGatewaySpec: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
-              AzureEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
-            propertyName: kind
-          oneOf:
-          - $ref: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
-          - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
-          - $ref: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
-          - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
-          type: object
-          x-one-of-name: NetworkingV1GatewaySpecConfigOneOf
-        environment:
-          allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          description: The environment to which this belongs.
       type: object
       x-enable-id: true
       x-enable-listmeta: true
