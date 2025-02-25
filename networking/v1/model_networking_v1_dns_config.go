@@ -36,7 +36,7 @@ import (
 
 // NetworkingV1DnsConfig The network DNS config
 type NetworkingV1DnsConfig struct {
-	// Network DNS resolution
+	// Network DNS resolution type.
 	Resolution string `json:"resolution,omitempty"`
 }
 
