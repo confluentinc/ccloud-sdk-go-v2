@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
  - [ConnectV1CustomConnectorPluginUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginUploadSourceOneOf.md)
  - [ConnectV1CustomConnectorPluginVersion](docs/ConnectV1CustomConnectorPluginVersion.md)
  - [ConnectV1CustomConnectorPluginVersionList](docs/ConnectV1CustomConnectorPluginVersionList.md)
+ - [ConnectV1CustomConnectorPluginVersionUpdate](docs/ConnectV1CustomConnectorPluginVersionUpdate.md)
  - [ConnectV1CustomConnectorPluginVersionUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginVersionUploadSourceOneOf.md)
  - [ConnectV1PresignedUrl](docs/ConnectV1PresignedUrl.md)
  - [ConnectV1PresignedUrlRequest](docs/ConnectV1PresignedUrlRequest.md)
