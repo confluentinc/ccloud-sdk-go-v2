@@ -8,10 +8,8 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
-**Version** | Pointer to **string** | Version of the Custom Connector Plugin. | [optional] 
-**ReleaseNotes** | Pointer to **string** | Release Notes of the Custom Connector Plugin Version. | [optional] 
+**Version** | Pointer to **string** | Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., &#x60;1.2.3&#x60;, &#x60;1.2.3-beta&#x60;, &#x60;1.2.3-rc.123&#x60;, &#x60;1.2.3-rc.123+build.456&#x60;).  | [optional] 
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. | [optional] 
-**IsBeta** | Pointer to **string** | Flag to specify stability of the version | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginVersionUploadSourceOneOf**](ConnectV1CustomConnectorPluginVersionUploadSourceOneOf.md) | Upload source of Custom Connector Plugin Version. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 
 ## Methods
@@ -158,31 +156,6 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
-### GetReleaseNotes
-
-`func (o *ConnectV1CustomConnectorPluginVersion) GetReleaseNotes() string`
-
-GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
-
-### GetReleaseNotesOk
-
-`func (o *ConnectV1CustomConnectorPluginVersion) GetReleaseNotesOk() (*string, bool)`
-
-GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReleaseNotes
-
-`func (o *ConnectV1CustomConnectorPluginVersion) SetReleaseNotes(v string)`
-
-SetReleaseNotes sets ReleaseNotes field to given value.
-
-### HasReleaseNotes
-
-`func (o *ConnectV1CustomConnectorPluginVersion) HasReleaseNotes() bool`
-
-HasReleaseNotes returns a boolean if a field has been set.
-
 ### GetSensitiveConfigProperties
 
 `func (o *ConnectV1CustomConnectorPluginVersion) GetSensitiveConfigProperties() []string`
@@ -207,31 +180,6 @@ SetSensitiveConfigProperties sets SensitiveConfigProperties field to given value
 `func (o *ConnectV1CustomConnectorPluginVersion) HasSensitiveConfigProperties() bool`
 
 HasSensitiveConfigProperties returns a boolean if a field has been set.
-
-### GetIsBeta
-
-`func (o *ConnectV1CustomConnectorPluginVersion) GetIsBeta() string`
-
-GetIsBeta returns the IsBeta field if non-nil, zero value otherwise.
-
-### GetIsBetaOk
-
-`func (o *ConnectV1CustomConnectorPluginVersion) GetIsBetaOk() (*string, bool)`
-
-GetIsBetaOk returns a tuple with the IsBeta field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsBeta
-
-`func (o *ConnectV1CustomConnectorPluginVersion) SetIsBeta(v string)`
-
-SetIsBeta sets IsBeta field to given value.
-
-### HasIsBeta
-
-`func (o *ConnectV1CustomConnectorPluginVersion) HasIsBeta() bool`
-
-HasIsBeta returns a boolean if a field has been set.
 
 ### GetUploadSource
 
