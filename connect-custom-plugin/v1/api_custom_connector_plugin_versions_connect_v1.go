@@ -787,15 +787,15 @@ func (a *CustomConnectorPluginVersionsConnectV1ApiService) ListConnectV1CustomCo
 }
 
 type ApiUpdateConnectV1CustomConnectorPluginVersionRequest struct {
-	ctx                                   _context.Context
-	ApiService                            CustomConnectorPluginVersionsConnectV1Api
-	pluginId                              string
-	id                                    string
-	connectV1CustomConnectorPluginVersion *ConnectV1CustomConnectorPluginVersion
+	ctx                                         _context.Context
+	ApiService                                  CustomConnectorPluginVersionsConnectV1Api
+	pluginId                                    string
+	id                                          string
+	connectV1CustomConnectorPluginVersionUpdate *ConnectV1CustomConnectorPluginVersionUpdate
 }
 
-func (r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) ConnectV1CustomConnectorPluginVersion(connectV1CustomConnectorPluginVersion ConnectV1CustomConnectorPluginVersion) ApiUpdateConnectV1CustomConnectorPluginVersionRequest {
-	r.connectV1CustomConnectorPluginVersion = &connectV1CustomConnectorPluginVersion
+func (r ApiUpdateConnectV1CustomConnectorPluginVersionRequest) ConnectV1CustomConnectorPluginVersionUpdate(connectV1CustomConnectorPluginVersionUpdate ConnectV1CustomConnectorPluginVersionUpdate) ApiUpdateConnectV1CustomConnectorPluginVersionRequest {
+	r.connectV1CustomConnectorPluginVersionUpdate = &connectV1CustomConnectorPluginVersionUpdate
 	return r
 }
 
@@ -868,7 +868,7 @@ func (a *CustomConnectorPluginVersionsConnectV1ApiService) UpdateConnectV1Custom
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.connectV1CustomConnectorPluginVersion
+	localVarPostBody = r.connectV1CustomConnectorPluginVersionUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
