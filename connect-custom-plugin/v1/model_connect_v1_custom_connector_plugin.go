@@ -57,18 +57,14 @@ type ConnectV1CustomConnectorPlugin struct {
 	ConnectorType *string `json:"connector_type,omitempty"`
 	// Cloud provider where the Custom Connector Plugin archive is uploaded.
 	Cloud *string `json:"cloud,omitempty"`
-	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.
+	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the `sensitive_config_properties` of the plugin.
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
 	// Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
 	UploadSource *ConnectV1CustomConnectorPluginUploadSourceOneOf `json:"upload_source,omitempty"`
 	// Runtime language of Custom Connector Plugin.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`
-	// Version of the Custom Connector Plugin.
+	// Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., `1.2.3`, `1.2.3-beta`, `1.2.3-rc.123`, `1.2.3-rc.123+build.456`).
 	Version *string `json:"version,omitempty"`
-	// Version release notes of the Custom Connector Plugin.
-	ReleaseNotes *string `json:"release_notes,omitempty"`
-	// Flag showing stability for the version of the Custom Connector Plugin.
-	IsBeta *string `json:"is_beta,omitempty"`
 }
 
 // NewConnectV1CustomConnectorPlugin instantiates a new ConnectV1CustomConnectorPlugin object
@@ -580,70 +576,6 @@ func (o *ConnectV1CustomConnectorPlugin) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise.
-func (o *ConnectV1CustomConnectorPlugin) GetReleaseNotes() string {
-	if o == nil || o.ReleaseNotes == nil {
-		var ret string
-		return ret
-	}
-	return *o.ReleaseNotes
-}
-
-// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPlugin) GetReleaseNotesOk() (*string, bool) {
-	if o == nil || o.ReleaseNotes == nil {
-		return nil, false
-	}
-	return o.ReleaseNotes, true
-}
-
-// HasReleaseNotes returns a boolean if a field has been set.
-func (o *ConnectV1CustomConnectorPlugin) HasReleaseNotes() bool {
-	if o != nil && o.ReleaseNotes != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetReleaseNotes gets a reference to the given string and assigns it to the ReleaseNotes field.
-func (o *ConnectV1CustomConnectorPlugin) SetReleaseNotes(v string) {
-	o.ReleaseNotes = &v
-}
-
-// GetIsBeta returns the IsBeta field value if set, zero value otherwise.
-func (o *ConnectV1CustomConnectorPlugin) GetIsBeta() string {
-	if o == nil || o.IsBeta == nil {
-		var ret string
-		return ret
-	}
-	return *o.IsBeta
-}
-
-// GetIsBetaOk returns a tuple with the IsBeta field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPlugin) GetIsBetaOk() (*string, bool) {
-	if o == nil || o.IsBeta == nil {
-		return nil, false
-	}
-	return o.IsBeta, true
-}
-
-// HasIsBeta returns a boolean if a field has been set.
-func (o *ConnectV1CustomConnectorPlugin) HasIsBeta() bool {
-	if o != nil && o.IsBeta != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIsBeta gets a reference to the given string and assigns it to the IsBeta field.
-func (o *ConnectV1CustomConnectorPlugin) SetIsBeta(v string) {
-	o.IsBeta = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -661,8 +593,6 @@ func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.UploadSource)
 	o.recurseRedact(o.RuntimeLanguage)
 	o.recurseRedact(o.Version)
-	o.recurseRedact(o.ReleaseNotes)
-	o.recurseRedact(o.IsBeta)
 }
 
 func (o *ConnectV1CustomConnectorPlugin) recurseRedact(v interface{}) {
@@ -741,12 +671,6 @@ func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
 	}
 	if o.Version != nil {
 		toSerialize["version"] = o.Version
-	}
-	if o.ReleaseNotes != nil {
-		toSerialize["release_notes"] = o.ReleaseNotes
-	}
-	if o.IsBeta != nil {
-		toSerialize["is_beta"] = o.IsBeta
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

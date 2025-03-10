@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ## UpdateConnectV1CustomConnectorPluginVersion
 
-> ConnectV1CustomConnectorPluginVersion UpdateConnectV1CustomConnectorPluginVersion(ctx, pluginId, id).ConnectV1CustomConnectorPluginVersion(connectV1CustomConnectorPluginVersion).Execute()
+> ConnectV1CustomConnectorPluginVersion UpdateConnectV1CustomConnectorPluginVersion(ctx, pluginId, id).ConnectV1CustomConnectorPluginVersionUpdate(connectV1CustomConnectorPluginVersionUpdate).Execute()
 
 Update a Custom Connector Plugin Version
 
@@ -325,11 +325,11 @@ import (
 func main() {
     pluginId := "pluginId_example" // string | The Plugin
     id := "id_example" // string | The unique identifier for the custom connector plugin version.
-    connectV1CustomConnectorPluginVersion := *openapiclient.NewConnectV1CustomConnectorPluginVersion() // ConnectV1CustomConnectorPluginVersion |  (optional)
+    connectV1CustomConnectorPluginVersionUpdate := *openapiclient.NewConnectV1CustomConnectorPluginVersionUpdate() // ConnectV1CustomConnectorPluginVersionUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomConnectorPluginVersionsConnectV1Api.UpdateConnectV1CustomConnectorPluginVersion(context.Background(), pluginId, id).ConnectV1CustomConnectorPluginVersion(connectV1CustomConnectorPluginVersion).Execute()
+    resp, r, err := api_client.CustomConnectorPluginVersionsConnectV1Api.UpdateConnectV1CustomConnectorPluginVersion(context.Background(), pluginId, id).ConnectV1CustomConnectorPluginVersionUpdate(connectV1CustomConnectorPluginVersionUpdate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomConnectorPluginVersionsConnectV1Api.UpdateConnectV1CustomConnectorPluginVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **connectV1CustomConnectorPluginVersion** | [**ConnectV1CustomConnectorPluginVersion**](ConnectV1CustomConnectorPluginVersion.md) |  | 
+ **connectV1CustomConnectorPluginVersionUpdate** | [**ConnectV1CustomConnectorPluginVersionUpdate**](ConnectV1CustomConnectorPluginVersionUpdate.md) |  | 
 
 ### Return type
 
