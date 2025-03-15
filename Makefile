@@ -25,7 +25,7 @@ MK_INCLUDE_TIMEOUT_MINS ?= 240
 # If this latest validated release is breaking you, please file a ticket with DevProd describing the issue, and
 # if necessary you can temporarily override MK_INCLUDE_VERSION above the managed section headers until the bad
 # release is yanked.
-MK_INCLUDE_VERSION ?= v0.1303.0
+MK_INCLUDE_VERSION ?= v0.1315.0
 
 # Make sure we always have a copy of the latest cc-mk-include release less than $(MK_INCLUDE_TIMEOUT_MINS) old:
 # Note: The simply-expanded make variable makes sure this is run once per make invocation.
@@ -58,6 +58,7 @@ UPDATE_MK_INCLUDE := $(shell \
 	   fi \
 	   && TMP_MK_INCLUDE_DIR=$$(mktemp -d -t cc-mk-include.XXXXXXXXXX) \
 	   && $(TAR) -C $$TMP_MK_INCLUDE_DIR --strip-components=1 -zxf $(MK_INCLUDE_TIMESTAMP_FILE)T \
+	   && rm -rf $$TMP_MK_INCLUDE_DIR/tests \
 	   && rm -rf $(MK_INCLUDE_DIR) \
 	   && mv $$TMP_MK_INCLUDE_DIR $(MK_INCLUDE_DIR) \
 	   && mv -f $(MK_INCLUDE_TIMESTAMP_FILE)T $(MK_INCLUDE_TIMESTAMP_FILE) \
