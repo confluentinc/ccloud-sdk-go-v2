@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   contact:
-    email: orchestrator-team@confluent.io
-    name: Orchestrator Team
+    email: cpk@confluent.io
+    name: Kafka Control Plane Team
     url: https://confluent.slack.com/archives/CGJ0RM9L1
   title: Cluster Management for Apache Kafka API
   version: 0.0.1-alpha1
@@ -13,6 +13,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -2227,19 +2231,17 @@ components:
           - PROVISIONED
           - FAILED
         cku:
-          allOf:
-          - $ref: '#/components/schemas/cmk.v2.Cku'
           description: |
             The number of Confluent Kafka Units (CKUs) the Dedicated cluster currently has.
+          example: 2
+          format: int32
+          minimum: 1
           readOnly: true
+          type: integer
       readOnly: true
       required:
       - phase
       type: object
-    cmk.v2.Cku:
-      example: 2
-      minimum: 1
-      type: integer
     cmk.v2.Basic:
       description: |
         The basic cluster type.
@@ -2250,6 +2252,14 @@ components:
           enum:
           - Basic
           type: string
+        max_ecku:
+          description: |
+            The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
+            Kafka clusters with `HIGH` availability must have at least two eCKUs.
+          example: 2
+          format: int32
+          minimum: 1
+          type: integer
       required:
       - kind
       type: object
@@ -2263,6 +2273,14 @@ components:
           enum:
           - Standard
           type: string
+        max_ecku:
+          description: |
+            The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
+            Kafka clusters with `HIGH` availability must have at least two eCKUs.
+          example: 2
+          format: int32
+          minimum: 1
+          type: integer
       required:
       - kind
       type: object
@@ -2276,6 +2294,14 @@ components:
           enum:
           - Enterprise
           type: string
+        max_ecku:
+          description: |
+            The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
+            Kafka clusters with `HIGH` availability must have at least two eCKUs.
+          example: 2
+          format: int32
+          minimum: 1
+          type: integer
       required:
       - kind
       type: object
@@ -2290,11 +2316,13 @@ components:
           - Dedicated
           type: string
         cku:
-          allOf:
-          - $ref: '#/components/schemas/cmk.v2.Cku'
           description: |
             The number of Confluent Kafka Units (CKUs) for Dedicated cluster types.
             MULTI_ZONE dedicated clusters must have at least two CKUs.
+          example: 2
+          format: int32
+          minimum: 1
+          type: integer
         encryption_key:
           deprecated: true
           description: |
@@ -2320,7 +2348,7 @@ components:
             type: string
           maxItems: 3
           minItems: 1
-          readOnly: true
+          readOnly: false
           type: array
           uniqueItems: true
           x-immutable: true
@@ -2338,14 +2366,14 @@ components:
           enum:
           - Freight
           type: string
-        encryption_key:
-          deprecated: true
+        max_ecku:
           description: |
-            The id of the encryption key that is used to encrypt the data in the Kafka cluster.
-            (e.g. for Amazon Web Services, the Amazon Resource Name of the key).
-          example: arn:aws:kms:us-west-2:000000000000:key/0000xxxx-00xx-00xx-00xx-0000000000xx
-          type: string
-          x-immutable: true
+            The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
+            Kafka clusters with `HIGH` availability must have at least two eCKUs.
+          example: 2
+          format: int32
+          minimum: 1
+          type: integer
         zones:
           description: |
             The list of zones the cluster is in.
@@ -2467,6 +2495,8 @@ components:
           x-extensible-enum:
           - MULTI_ZONE
           - SINGLE_ZONE
+          - HIGH
+          - LOW
         cloud:
           description: The cloud service provider in which the cluster is running.
           example: GCP
@@ -2779,6 +2809,8 @@ components:
           x-extensible-enum:
           - MULTI_ZONE
           - SINGLE_ZONE
+          - HIGH
+          - LOW
         config:
           description: |
             The configuration of the Kafka cluster.
