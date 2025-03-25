@@ -2,11 +2,11 @@
 
 ## Properties
 
-Name | Type | Description                                                                                                                                                                                                                                                                 | Notes
------------- | ------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| -------------
-**Kind** | **string** | Freight cluster type.                                                                                                                                                                                                                                                       | 
-**EncryptionKey** | Pointer to **string** | The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key).                                                                                                                    | [optional] 
-**Zones** | Pointer to **[]string** | The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c). | [optional] [readonly] 
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Kind** | **string** | Freight cluster type.  | 
+**MaxEcku** | Pointer to **int32** | The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to. Kafka clusters with &#x60;HIGH&#x60; availability must have at least two eCKUs.  | [optional] 
+**Zones** | Pointer to **[]string** | The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  | [optional] [readonly] 
 
 ## Methods
 
@@ -47,30 +47,30 @@ and a boolean to check if the value has been set.
 SetKind sets Kind field to given value.
 
 
-### GetEncryptionKey
+### GetMaxEcku
 
-`func (o *CmkV2Freight) GetEncryptionKey() string`
+`func (o *CmkV2Freight) GetMaxEcku() int32`
 
-GetEncryptionKey returns the EncryptionKey field if non-nil, zero value otherwise.
+GetMaxEcku returns the MaxEcku field if non-nil, zero value otherwise.
 
-### GetEncryptionKeyOk
+### GetMaxEckuOk
 
-`func (o *CmkV2Freight) GetEncryptionKeyOk() (*string, bool)`
+`func (o *CmkV2Freight) GetMaxEckuOk() (*int32, bool)`
 
-GetEncryptionKeyOk returns a tuple with the EncryptionKey field if it's non-nil, zero value otherwise
+GetMaxEckuOk returns a tuple with the MaxEcku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEncryptionKey
+### SetMaxEcku
 
-`func (o *CmkV2Freight) SetEncryptionKey(v string)`
+`func (o *CmkV2Freight) SetMaxEcku(v int32)`
 
-SetEncryptionKey sets EncryptionKey field to given value.
+SetMaxEcku sets MaxEcku field to given value.
 
-### HasEncryptionKey
+### HasMaxEcku
 
-`func (o *CmkV2Freight) HasEncryptionKey() bool`
+`func (o *CmkV2Freight) HasMaxEcku() bool`
 
-HasEncryptionKey returns a boolean if a field has been set.
+HasMaxEcku returns a boolean if a field has been set.
 
 ### GetZones
 

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Basic cluster type.  | 
+**MaxEcku** | Pointer to **int32** | The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to. Kafka clusters with &#x60;HIGH&#x60; availability must have at least two eCKUs.  | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+
+### GetMaxEcku
+
+`func (o *CmkV2Basic) GetMaxEcku() int32`
+
+GetMaxEcku returns the MaxEcku field if non-nil, zero value otherwise.
+
+### GetMaxEckuOk
+
+`func (o *CmkV2Basic) GetMaxEckuOk() (*int32, bool)`
+
+GetMaxEckuOk returns a tuple with the MaxEcku field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxEcku
+
+`func (o *CmkV2Basic) SetMaxEcku(v int32)`
+
+SetMaxEcku sets MaxEcku field to given value.
+
+### HasMaxEcku
+
+`func (o *CmkV2Basic) HasMaxEcku() bool`
+
+HasMaxEcku returns a boolean if a field has been set.
 
 
 ### AsCmkV2ClusterSpecConfigOneOf
