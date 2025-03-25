@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the &#x60;sensitive_config_properties&#x60; of the plugin.  | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
-**Version** | Pointer to **string** | Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., &#x60;1.2.3&#x60;, &#x60;1.2.3-beta&#x60;, &#x60;1.2.3-rc.123&#x60;, &#x60;1.2.3-rc.123+build.456&#x60;).  | [optional] [default to "0.0.0"]
+**InitialPluginVersion** | Pointer to **string** | Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., &#x60;1.2.3&#x60;, &#x60;1.2.3-beta&#x60;, &#x60;1.2.3-rc.123&#x60;, &#x60;1.2.3-rc.123+build.456&#x60;).  | [optional] [default to "0.0.0"]
 
 ## Methods
 
@@ -389,30 +389,30 @@ SetRuntimeLanguage sets RuntimeLanguage field to given value.
 
 HasRuntimeLanguage returns a boolean if a field has been set.
 
-### GetVersion
+### GetInitialPluginVersion
 
-`func (o *ConnectV1CustomConnectorPlugin) GetVersion() string`
+`func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersion() string`
 
-GetVersion returns the Version field if non-nil, zero value otherwise.
+GetInitialPluginVersion returns the InitialPluginVersion field if non-nil, zero value otherwise.
 
-### GetVersionOk
+### GetInitialPluginVersionOk
 
-`func (o *ConnectV1CustomConnectorPlugin) GetVersionOk() (*string, bool)`
+`func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersionOk() (*string, bool)`
 
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+GetInitialPluginVersionOk returns a tuple with the InitialPluginVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVersion
+### SetInitialPluginVersion
 
-`func (o *ConnectV1CustomConnectorPlugin) SetVersion(v string)`
+`func (o *ConnectV1CustomConnectorPlugin) SetInitialPluginVersion(v string)`
 
-SetVersion sets Version field to given value.
+SetInitialPluginVersion sets InitialPluginVersion field to given value.
 
-### HasVersion
+### HasInitialPluginVersion
 
-`func (o *ConnectV1CustomConnectorPlugin) HasVersion() bool`
+`func (o *ConnectV1CustomConnectorPlugin) HasInitialPluginVersion() bool`
 
-HasVersion returns a boolean if a field has been set.
+HasInitialPluginVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
