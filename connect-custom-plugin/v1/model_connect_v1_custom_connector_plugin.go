@@ -64,7 +64,7 @@ type ConnectV1CustomConnectorPlugin struct {
 	// Runtime language of Custom Connector Plugin.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`
 	// Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., `1.2.3`, `1.2.3-beta`, `1.2.3-rc.123`, `1.2.3-rc.123+build.456`).
-	Version *string `json:"version,omitempty"`
+	InitialPluginVersion *string `json:"initial_plugin_version,omitempty"`
 }
 
 // NewConnectV1CustomConnectorPlugin instantiates a new ConnectV1CustomConnectorPlugin object
@@ -77,8 +77,8 @@ func NewConnectV1CustomConnectorPlugin() *ConnectV1CustomConnectorPlugin {
 	this.Cloud = &cloud
 	var runtimeLanguage string = "JAVA"
 	this.RuntimeLanguage = &runtimeLanguage
-	var version string = "0.0.0"
-	this.Version = &version
+	var initialPluginVersion string = "0.0.0"
+	this.InitialPluginVersion = &initialPluginVersion
 	return &this
 }
 
@@ -91,8 +91,8 @@ func NewConnectV1CustomConnectorPluginWithDefaults() *ConnectV1CustomConnectorPl
 	this.Cloud = &cloud
 	var runtimeLanguage string = "JAVA"
 	this.RuntimeLanguage = &runtimeLanguage
-	var version string = "0.0.0"
-	this.Version = &version
+	var initialPluginVersion string = "0.0.0"
+	this.InitialPluginVersion = &initialPluginVersion
 	return &this
 }
 
@@ -544,36 +544,36 @@ func (o *ConnectV1CustomConnectorPlugin) SetRuntimeLanguage(v string) {
 	o.RuntimeLanguage = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *ConnectV1CustomConnectorPlugin) GetVersion() string {
-	if o == nil || o.Version == nil {
+// GetInitialPluginVersion returns the InitialPluginVersion field value if set, zero value otherwise.
+func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersion() string {
+	if o == nil || o.InitialPluginVersion == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version
+	return *o.InitialPluginVersion
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetInitialPluginVersionOk returns a tuple with the InitialPluginVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPlugin) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersionOk() (*string, bool) {
+	if o == nil || o.InitialPluginVersion == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.InitialPluginVersion, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *ConnectV1CustomConnectorPlugin) HasVersion() bool {
-	if o != nil && o.Version != nil {
+// HasInitialPluginVersion returns a boolean if a field has been set.
+func (o *ConnectV1CustomConnectorPlugin) HasInitialPluginVersion() bool {
+	if o != nil && o.InitialPluginVersion != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
-func (o *ConnectV1CustomConnectorPlugin) SetVersion(v string) {
-	o.Version = &v
+// SetInitialPluginVersion gets a reference to the given string and assigns it to the InitialPluginVersion field.
+func (o *ConnectV1CustomConnectorPlugin) SetInitialPluginVersion(v string) {
+	o.InitialPluginVersion = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -592,7 +592,7 @@ func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.SensitiveConfigProperties)
 	o.recurseRedact(o.UploadSource)
 	o.recurseRedact(o.RuntimeLanguage)
-	o.recurseRedact(o.Version)
+	o.recurseRedact(o.InitialPluginVersion)
 }
 
 func (o *ConnectV1CustomConnectorPlugin) recurseRedact(v interface{}) {
@@ -669,8 +669,8 @@ func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
 	if o.RuntimeLanguage != nil {
 		toSerialize["runtime_language"] = o.RuntimeLanguage
 	}
-	if o.Version != nil {
-		toSerialize["version"] = o.Version
+	if o.InitialPluginVersion != nil {
+		toSerialize["initial_plugin_version"] = o.InitialPluginVersion
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
