@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **CatalogHttpEndpoint** | Pointer to **string** | The cluster&#39;s catalog HTTP request URL. | [optional] [readonly] 
 **PrivateHttpEndpoint** | Pointer to **string** | The cluster&#39;s private HTTP request URL. | [optional] [readonly] 
+**PrivateNetworkingConfig** | Pointer to [**SrcmV3ClusterSpecPrivateNetworkingConfig**](SrcmV3ClusterSpecPrivateNetworkingConfig.md) |  | [optional] 
 **Cloud** | Pointer to **string** | The cloud service provider in which the cluster is running. | [optional] 
 **Region** | Pointer to **string** | The cloud service provider region where the cluster is running. | [optional] 
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -156,6 +157,31 @@ SetPrivateHttpEndpoint sets PrivateHttpEndpoint field to given value.
 `func (o *SrcmV3ClusterSpec) HasPrivateHttpEndpoint() bool`
 
 HasPrivateHttpEndpoint returns a boolean if a field has been set.
+
+### GetPrivateNetworkingConfig
+
+`func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfig() SrcmV3ClusterSpecPrivateNetworkingConfig`
+
+GetPrivateNetworkingConfig returns the PrivateNetworkingConfig field if non-nil, zero value otherwise.
+
+### GetPrivateNetworkingConfigOk
+
+`func (o *SrcmV3ClusterSpec) GetPrivateNetworkingConfigOk() (*SrcmV3ClusterSpecPrivateNetworkingConfig, bool)`
+
+GetPrivateNetworkingConfigOk returns a tuple with the PrivateNetworkingConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateNetworkingConfig
+
+`func (o *SrcmV3ClusterSpec) SetPrivateNetworkingConfig(v SrcmV3ClusterSpecPrivateNetworkingConfig)`
+
+SetPrivateNetworkingConfig sets PrivateNetworkingConfig field to given value.
+
+### HasPrivateNetworkingConfig
+
+`func (o *SrcmV3ClusterSpec) HasPrivateNetworkingConfig() bool`
+
+HasPrivateNetworkingConfig returns a boolean if a field has been set.
 
 ### GetCloud
 
