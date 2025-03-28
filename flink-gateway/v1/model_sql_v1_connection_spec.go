@@ -40,7 +40,7 @@ type SqlV1ConnectionSpec struct {
 	ConnectionType *string `json:"connection_type,omitempty"`
 	// The endpoint that is used to run model inferencing.
 	Endpoint *string `json:"endpoint,omitempty"`
-	// The vendor specific authentication token details  The contents are stored as opaque bytes given in plaintext by an EnvAdmin.  In future, we would support more secure methods for distributing authentication tokens.
+	// The vendor specific authentication token details  The contents are stored as opaque bytes given in plaintext by an EnvAdmin. In future, we would support more secure methods for distributing authentication tokens.
 	AuthData *SqlV1ConnectionSpecAuthDataOneOf `json:"auth_data,omitempty"`
 }
 
