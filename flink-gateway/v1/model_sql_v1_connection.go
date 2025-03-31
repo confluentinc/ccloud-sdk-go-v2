@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// SqlV1Connection `Connection` models a reusable endpoint and auth token to authenticate the caller to use that endpoint. Only `OrgAdmins` and `EnvAdmins` will have the permissions to create, update and delete `Connections`.  `FlinkDevelopers` and `ModelResourceOwners` can later reference a `Connection` resource within their Model  creation statements.  The API allows you to list, create, read, and delete your connections. ## The Connections Model <SchemaDefinition schemaRef=\"#/components/schemas/sql.v1.Connection\" />
+// SqlV1Connection `Connection` models a reusable endpoint and auth token to authenticate the caller to use that endpoint. Only `OrganizationAdmins` and `EnvironmentAdmins` will have the permissions to create, update and delete `Connections`. `FlinkDevelopers` and `ModelResourceOwners` can later reference a `Connection` resource within their Model creation statements. The API allows you to list, create, read, and delete your connections. ## The Connections Model <SchemaDefinition schemaRef=\"#/components/schemas/sql.v1.Connection\" />
 type SqlV1Connection struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
