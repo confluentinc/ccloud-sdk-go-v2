@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/cam
+module github.com/confluentinc/ccloud-sdk-go-v2/cam
 
 go 1.22.7
 
