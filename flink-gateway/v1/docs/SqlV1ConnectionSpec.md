@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConnectionType** | Pointer to **string** | The type of this connection. | [optional] 
 **Endpoint** | Pointer to **string** | The endpoint that is used to run model inferencing. | [optional] 
-**AuthData** | Pointer to [**SqlV1ConnectionSpecAuthDataOneOf**](SqlV1ConnectionSpecAuthDataOneOf.md) | The vendor specific authentication token details  The contents are stored as opaque bytes given in plaintext by an EnvAdmin.  In future, we would support more secure methods for distributing authentication tokens.  | [optional] 
+**AuthData** | Pointer to [**SqlV1ConnectionSpecAuthDataOneOf**](SqlV1ConnectionSpecAuthDataOneOf.md) | The vendor specific authentication token details  The contents are stored as opaque bytes given in plaintext by an EnvAdmin. In future, we would support more secure methods for distributing authentication tokens.  | [optional] 
 
 ## Methods
 

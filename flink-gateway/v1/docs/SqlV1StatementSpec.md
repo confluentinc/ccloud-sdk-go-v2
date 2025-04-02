@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
 **Principal** | Pointer to **string** | The id of a principal this statement runs as. | [optional] 
+**AuthorizedPrincipals** | Pointer to **[]string** | The list of ids of the principals granting permissions to run this statement. | [optional] 
 **Stopped** | Pointer to **bool** | Indicates whether the statement should be stopped. | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetPrincipal sets Principal field to given value.
 `func (o *SqlV1StatementSpec) HasPrincipal() bool`
 
 HasPrincipal returns a boolean if a field has been set.
+
+### GetAuthorizedPrincipals
+
+`func (o *SqlV1StatementSpec) GetAuthorizedPrincipals() []string`
+
+GetAuthorizedPrincipals returns the AuthorizedPrincipals field if non-nil, zero value otherwise.
+
+### GetAuthorizedPrincipalsOk
+
+`func (o *SqlV1StatementSpec) GetAuthorizedPrincipalsOk() (*[]string, bool)`
+
+GetAuthorizedPrincipalsOk returns a tuple with the AuthorizedPrincipals field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorizedPrincipals
+
+`func (o *SqlV1StatementSpec) SetAuthorizedPrincipals(v []string)`
+
+SetAuthorizedPrincipals sets AuthorizedPrincipals field to given value.
+
+### HasAuthorizedPrincipals
+
+`func (o *SqlV1StatementSpec) HasAuthorizedPrincipals() bool`
+
+HasAuthorizedPrincipals returns a boolean if a field has been set.
 
 ### GetStopped
 

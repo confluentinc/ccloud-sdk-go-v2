@@ -44,6 +44,8 @@ type SqlV1StatementSpec struct {
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
 	// The id of a principal this statement runs as.
 	Principal *string `json:"principal,omitempty"`
+	// The list of ids of the principals granting permissions to run this statement.
+	AuthorizedPrincipals *[]string `json:"authorized_principals,omitempty"`
 	// Indicates whether the statement should be stopped.
 	Stopped *bool `json:"stopped,omitempty"`
 }
@@ -193,6 +195,38 @@ func (o *SqlV1StatementSpec) SetPrincipal(v string) {
 	o.Principal = &v
 }
 
+// GetAuthorizedPrincipals returns the AuthorizedPrincipals field value if set, zero value otherwise.
+func (o *SqlV1StatementSpec) GetAuthorizedPrincipals() []string {
+	if o == nil || o.AuthorizedPrincipals == nil {
+		var ret []string
+		return ret
+	}
+	return *o.AuthorizedPrincipals
+}
+
+// GetAuthorizedPrincipalsOk returns a tuple with the AuthorizedPrincipals field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementSpec) GetAuthorizedPrincipalsOk() (*[]string, bool) {
+	if o == nil || o.AuthorizedPrincipals == nil {
+		return nil, false
+	}
+	return o.AuthorizedPrincipals, true
+}
+
+// HasAuthorizedPrincipals returns a boolean if a field has been set.
+func (o *SqlV1StatementSpec) HasAuthorizedPrincipals() bool {
+	if o != nil && o.AuthorizedPrincipals != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorizedPrincipals gets a reference to the given []string and assigns it to the AuthorizedPrincipals field.
+func (o *SqlV1StatementSpec) SetAuthorizedPrincipals(v []string) {
+	o.AuthorizedPrincipals = &v
+}
+
 // GetStopped returns the Stopped field value if set, zero value otherwise.
 func (o *SqlV1StatementSpec) GetStopped() bool {
 	if o == nil || o.Stopped == nil {
@@ -231,6 +265,7 @@ func (o *SqlV1StatementSpec) Redact() {
 	o.recurseRedact(o.Properties)
 	o.recurseRedact(o.ComputePoolId)
 	o.recurseRedact(o.Principal)
+	o.recurseRedact(o.AuthorizedPrincipals)
 	o.recurseRedact(o.Stopped)
 }
 
@@ -277,6 +312,9 @@ func (o SqlV1StatementSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Principal != nil {
 		toSerialize["principal"] = o.Principal
+	}
+	if o.AuthorizedPrincipals != nil {
+		toSerialize["authorized_principals"] = o.AuthorizedPrincipals
 	}
 	if o.Stopped != nil {
 		toSerialize["stopped"] = o.Stopped

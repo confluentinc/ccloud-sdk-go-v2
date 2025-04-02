@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | Pointer to **string** | Plaintext Provider Kind Type  | [optional] 
-**Data** | Pointer to **string** | Base64 encoded opaque piece of sensitive information.  Scoped to an endpoint of a &#x60;Connection&#x60; resource.  | [optional] 
+**Data** | Pointer to **string** | Authentication token in plaintext JSON string. For composite tokens, provide them as JSON. This is sensitive piece of information stored as opaque bytes in an encrypted form with single level of encryption.  Scoped to an endpoint of a &#x60;Connection&#x60; resource.  | [optional] 
 
 ## Methods
 
