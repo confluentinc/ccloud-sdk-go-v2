@@ -6,7 +6,7 @@ Name | Type | Description                                                       
 ------------ | ------------- |---------------------------------------------------------------------------| -------------
 **Cloud** | **string** | Cloud provider where the Connect Artifact archive is uploaded.            | 
 **Environment** | **string** | Environment the Connect Artifact belongs to.                              | 
-**DisplayName** | **string** | Unique name of the Connect Artifact Archive per cloud, environment scope. | 
+**DisplayName** | **string** | Unique name of the Connect Artifact archive per cloud, environment scope. | 
 **Description** | Pointer to **string** | Description of the Connect Artifact.                                      | [optional] 
 **ContentFormat** | Pointer to **string** | Archive format of the Connect Artifact.                                   | [optional] [readonly] 
 **UploadSource** | Pointer to [**CamV1ConnectArtifactSpecUploadSourceOneOf**](CamV1ConnectArtifactSpecUploadSourceOneOf.md) | Upload source of the Connect Artifact.                                    | [optional] 
