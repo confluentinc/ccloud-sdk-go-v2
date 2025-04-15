@@ -57,15 +57,6 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: Filter the results by exact match for spec.region.
-        example: us-east-1
-        explode: true
-        in: query
-        name: spec.region
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
       - description: Filter the results by exact match for environment.
         example: env-00000
         explode: true
@@ -278,14 +269,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000' \
+            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000")
+            .url("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -293,7 +284,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -306,7 +297,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000", headers=headers)
+          conn.request("GET", "/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -320,7 +311,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000",
+            "path": "/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -345,7 +336,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -354,7 +345,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -374,11 +365,11 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
-      - description: Scope the operation to the given spec.region.
-        example: us-east-1
+      - description: Scope the operation to the given environment.
+        example: env-00000
         explode: true
         in: query
-        name: spec.region
+        name: environment
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -640,18 +631,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request POST \
-            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1' \
+            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"cloud":"AWS","region":"us-east-1","environment":"env-00000","display_name":"string","description":"string","upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}}'
+            --data '{"spec":{"cloud":"AWS","environment":"env-00000","display_name":"string","description":"string","upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1")
+            .url("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000")
             .post(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -660,13 +651,12 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"cloud\\\":\\\"AWS\\\
-          \",\\\"region\\\":\\\"us-east-1\\\",\\\"environment\\\":\\\"env-00000\\\"\
-          ,\\\"display_name\\\":\\\"string\\\",\\\"description\\\":\\\"string\\\"\
-          ,\\\"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\"\
-          ,\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}}\")\n\n\
-          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          \",\\\"environment\\\":\\\"env-00000\\\",\\\"display_name\\\":\\\"string\\\
+          \",\\\"description\\\":\\\"string\\\",\\\"upload_source\\\":{\\\"location\\\
+          \":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\
+          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -677,14 +667,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}"
+          payload = "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("POST", "/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1", payload, headers)
+          conn.request("POST", "/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -698,7 +688,7 @@ paths:
             "method": "POST",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1",
+            "path": "/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -721,7 +711,6 @@ paths:
           req.write(JSON.stringify({
             spec: {
               cloud: 'AWS',
-              region: 'us-east-1',
               environment: 'env-00000',
               display_name: 'string',
               description: 'string',
@@ -737,23 +726,23 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&spec.region=us-east-1");
+          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000");
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cam/v1/connect-artifacts/{id}:
     delete:
@@ -770,15 +759,6 @@ paths:
         explode: true
         in: query
         name: spec.cloud
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Scope the operation to the given spec.region.
-        example: us-east-1
-        explode: true
-        in: query
-        name: spec.region
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -996,14 +976,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000' \
+            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000")
+            .url("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1011,7 +991,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1024,7 +1004,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000", headers=headers)
+          conn.request("DELETE", "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1038,7 +1018,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000",
+            "path": "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1063,7 +1043,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1072,7 +1052,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1088,15 +1068,6 @@ paths:
         explode: true
         in: query
         name: spec.cloud
-        required: true
-        schema:
-          $ref: '#/components/schemas/SearchFilter'
-        style: form
-      - description: Scope the operation to the given spec.region.
-        example: us-east-1
-        explode: true
-        in: query
-        name: spec.region
         required: true
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -1326,14 +1297,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000' \
+            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000")
+            .url("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1341,7 +1312,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1354,7 +1325,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000", headers=headers)
+          conn.request("GET", "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1368,7 +1339,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000",
+            "path": "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1393,7 +1364,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1402,7 +1373,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&spec.region=us-east-1&environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1423,7 +1394,6 @@ paths:
                 - cloud
                 - content_format
                 - environment
-                - region
                 type: object
       responses:
         "200":
@@ -1633,13 +1603,13 @@ paths:
             --url https://api.confluent.cloud/cam/v1/presigned-upload-url \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"content_format":"JAR","cloud":"AWS","region":"us-east-1","environment":"env-00000"}'
+            --data '{"content_format":"JAR","cloud":"AWS","environment":"env-00000"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"environment\":\"env-00000\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cam/v1/presigned-upload-url")
             .post(body)
@@ -1652,10 +1622,10 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/presigned-upload-url\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"content_format\\\":\\\"JAR\\\"\
-          ,\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"environment\\\
-          \":\\\"env-00000\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          ,\\\"cloud\\\":\\\"AWS\\\",\\\"environment\\\":\\\"env-00000\\\"}\")\n\n\
+          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1664,7 +1634,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}"
+          payload = "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"environment\":\"env-00000\"}"
 
           headers = {
               'content-type': "application/json",
@@ -1705,12 +1675,7 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({
-            content_format: 'JAR',
-            cloud: 'AWS',
-            region: 'us-east-1',
-            environment: 'env-00000'
-          }));
+          req.write(JSON.stringify({content_format: 'JAR', cloud: 'AWS', environment: 'env-00000'}));
           req.end();
       - lang: C
         source: |-
@@ -1724,7 +1689,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"environment\":\"env-00000\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1733,7 +1698,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"region\":\"us-east-1\",\"environment\":\"env-00000\"}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"content_format\":\"JAR\",\"cloud\":\"AWS\",\"environment\":\"env-00000\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2066,12 +2031,6 @@ components:
           type: string
           x-extensible-enum:
           - AWS
-        region:
-          description: The Cloud provider region the Custom SMT Artifact archive is
-            uploaded.
-          example: us-east-1
-          readOnly: true
-          type: string
         environment:
           description: The Environment the uploaded Connect Artifact belongs to.
           example: env-00000
@@ -2114,19 +2073,14 @@ components:
           type: string
           x-extensible-enum:
           - AWS
-        region:
-          description: The Cloud provider region the Connect Artifact archive is uploaded.
-          example: us-east-1
-          maxLength: 60
-          type: string
         environment:
           description: Environment the Connect Artifact belongs to.
           example: env-00000
           maxLength: 255
           type: string
         display_name:
-          description: Unique name of the Connect Artifact archieve per cloud, region,
-            environment scope.
+          description: Unique name of the Connect Artifact archieve per cloud, environment
+            scope.
           maxLength: 60
           type: string
         description:
@@ -2174,7 +2128,6 @@ components:
       - cloud
       - display_name
       - environment
-      - region
       type: object
     cam.v1.Plugins:
       description: |
@@ -2235,11 +2188,6 @@ components:
           type: string
           x-extensible-enum:
           - AWS
-        region:
-          description: The Cloud provider region the Connect Artifact archive is uploaded.
-          example: us-east-1
-          maxLength: 60
-          type: string
         environment:
           description: The Environment the uploaded Connect Artifact belongs to.
           example: env-00000
