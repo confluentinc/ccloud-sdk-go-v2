@@ -44,8 +44,6 @@ type CamV1PresignedUrl struct {
 	ContentFormat *string `json:"content_format,omitempty"`
 	// Cloud provider where the Connect Artifact archive is uploaded.
 	Cloud *string `json:"cloud,omitempty"`
-	// The Cloud provider region the Custom SMT Artifact archive is uploaded.
-	Region *string `json:"region,omitempty"`
 	// The Environment the uploaded Connect Artifact belongs to.
 	Environment *string `json:"environment,omitempty"`
 	// Unique identifier of this upload.
@@ -201,38 +199,6 @@ func (o *CamV1PresignedUrl) SetCloud(v string) {
 	o.Cloud = &v
 }
 
-// GetRegion returns the Region field value if set, zero value otherwise.
-func (o *CamV1PresignedUrl) GetRegion() string {
-	if o == nil || o.Region == nil {
-		var ret string
-		return ret
-	}
-	return *o.Region
-}
-
-// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CamV1PresignedUrl) GetRegionOk() (*string, bool) {
-	if o == nil || o.Region == nil {
-		return nil, false
-	}
-	return o.Region, true
-}
-
-// HasRegion returns a boolean if a field has been set.
-func (o *CamV1PresignedUrl) HasRegion() bool {
-	if o != nil && o.Region != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *CamV1PresignedUrl) SetRegion(v string) {
-	o.Region = &v
-}
-
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *CamV1PresignedUrl) GetEnvironment() string {
 	if o == nil || o.Environment == nil {
@@ -367,7 +333,6 @@ func (o *CamV1PresignedUrl) Redact() {
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.ContentFormat)
 	o.recurseRedact(o.Cloud)
-	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
 	o.recurseRedact(o.UploadId)
 	o.recurseRedact(o.UploadUrl)
@@ -417,9 +382,6 @@ func (o CamV1PresignedUrl) MarshalJSON() ([]byte, error) {
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
-	}
-	if o.Region != nil {
-		toSerialize["region"] = o.Region
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
