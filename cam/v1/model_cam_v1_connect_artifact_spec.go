@@ -40,7 +40,7 @@ type CamV1ConnectArtifactSpec struct {
 	Cloud string `json:"cloud,omitempty"`
 	// Environment the Connect Artifact belongs to.
 	Environment string `json:"environment,omitempty"`
-	// Unique name of the Connect Artifact archieve per cloud, environment scope.
+	// Unique name of the Connect Artifact archive per cloud, environment scope.
 	DisplayName string `json:"display_name,omitempty"`
 	// Description of the Connect Artifact.
 	Description *string `json:"description,omitempty"`
