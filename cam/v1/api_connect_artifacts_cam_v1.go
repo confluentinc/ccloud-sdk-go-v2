@@ -117,7 +117,7 @@ type ApiCreateCamV1ConnectArtifactRequest struct {
 	ctx                  _context.Context
 	ApiService           ConnectArtifactsCamV1Api
 	specCloud            *string
-	specRegion           *string
+	environment          *string
 	camV1ConnectArtifact *CamV1ConnectArtifact
 }
 
@@ -127,9 +127,9 @@ func (r ApiCreateCamV1ConnectArtifactRequest) SpecCloud(specCloud string) ApiCre
 	return r
 }
 
-// Scope the operation to the given spec.region.
-func (r ApiCreateCamV1ConnectArtifactRequest) SpecRegion(specRegion string) ApiCreateCamV1ConnectArtifactRequest {
-	r.specRegion = &specRegion
+// Scope the operation to the given environment.
+func (r ApiCreateCamV1ConnectArtifactRequest) Environment(environment string) ApiCreateCamV1ConnectArtifactRequest {
+	r.environment = &environment
 	return r
 }
 func (r ApiCreateCamV1ConnectArtifactRequest) CamV1ConnectArtifact(camV1ConnectArtifact CamV1ConnectArtifact) ApiCreateCamV1ConnectArtifactRequest {
@@ -184,12 +184,12 @@ func (a *ConnectArtifactsCamV1ApiService) CreateCamV1ConnectArtifactExecute(r Ap
 	if r.specCloud == nil {
 		return localVarReturnValue, nil, reportError("specCloud is required and must be specified")
 	}
-	if r.specRegion == nil {
-		return localVarReturnValue, nil, reportError("specRegion is required and must be specified")
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
 	localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
-	localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -309,7 +309,6 @@ type ApiDeleteCamV1ConnectArtifactRequest struct {
 	ctx         _context.Context
 	ApiService  ConnectArtifactsCamV1Api
 	specCloud   *string
-	specRegion  *string
 	environment *string
 	id          string
 }
@@ -317,12 +316,6 @@ type ApiDeleteCamV1ConnectArtifactRequest struct {
 // Scope the operation to the given spec.cloud.
 func (r ApiDeleteCamV1ConnectArtifactRequest) SpecCloud(specCloud string) ApiDeleteCamV1ConnectArtifactRequest {
 	r.specCloud = &specCloud
-	return r
-}
-
-// Scope the operation to the given spec.region.
-func (r ApiDeleteCamV1ConnectArtifactRequest) SpecRegion(specRegion string) ApiDeleteCamV1ConnectArtifactRequest {
-	r.specRegion = &specRegion
 	return r
 }
 
@@ -381,15 +374,11 @@ func (a *ConnectArtifactsCamV1ApiService) DeleteCamV1ConnectArtifactExecute(r Ap
 	if r.specCloud == nil {
 		return nil, reportError("specCloud is required and must be specified")
 	}
-	if r.specRegion == nil {
-		return nil, reportError("specRegion is required and must be specified")
-	}
 	if r.environment == nil {
 		return nil, reportError("environment is required and must be specified")
 	}
 
 	localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
-	localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -489,7 +478,6 @@ type ApiGetCamV1ConnectArtifactRequest struct {
 	ctx         _context.Context
 	ApiService  ConnectArtifactsCamV1Api
 	specCloud   *string
-	specRegion  *string
 	environment *string
 	id          string
 }
@@ -497,12 +485,6 @@ type ApiGetCamV1ConnectArtifactRequest struct {
 // Scope the operation to the given spec.cloud.
 func (r ApiGetCamV1ConnectArtifactRequest) SpecCloud(specCloud string) ApiGetCamV1ConnectArtifactRequest {
 	r.specCloud = &specCloud
-	return r
-}
-
-// Scope the operation to the given spec.region.
-func (r ApiGetCamV1ConnectArtifactRequest) SpecRegion(specRegion string) ApiGetCamV1ConnectArtifactRequest {
-	r.specRegion = &specRegion
 	return r
 }
 
@@ -562,15 +544,11 @@ func (a *ConnectArtifactsCamV1ApiService) GetCamV1ConnectArtifactExecute(r ApiGe
 	if r.specCloud == nil {
 		return localVarReturnValue, nil, reportError("specCloud is required and must be specified")
 	}
-	if r.specRegion == nil {
-		return localVarReturnValue, nil, reportError("specRegion is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
 	localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
-	localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -679,7 +657,6 @@ type ApiListCamV1ConnectArtifactsRequest struct {
 	ctx         _context.Context
 	ApiService  ConnectArtifactsCamV1Api
 	specCloud   *string
-	specRegion  *string
 	environment *string
 	pageSize    *int32
 	pageToken   *string
@@ -688,12 +665,6 @@ type ApiListCamV1ConnectArtifactsRequest struct {
 // Filter the results by exact match for spec.cloud.
 func (r ApiListCamV1ConnectArtifactsRequest) SpecCloud(specCloud string) ApiListCamV1ConnectArtifactsRequest {
 	r.specCloud = &specCloud
-	return r
-}
-
-// Filter the results by exact match for spec.region.
-func (r ApiListCamV1ConnectArtifactsRequest) SpecRegion(specRegion string) ApiListCamV1ConnectArtifactsRequest {
-	r.specRegion = &specRegion
 	return r
 }
 
@@ -762,15 +733,11 @@ func (a *ConnectArtifactsCamV1ApiService) ListCamV1ConnectArtifactsExecute(r Api
 	if r.specCloud == nil {
 		return localVarReturnValue, nil, reportError("specCloud is required and must be specified")
 	}
-	if r.specRegion == nil {
-		return localVarReturnValue, nil, reportError("specRegion is required and must be specified")
-	}
 	if r.environment == nil {
 		return localVarReturnValue, nil, reportError("environment is required and must be specified")
 	}
 
 	localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
-	localVarQueryParams.Add("spec.region", parameterToString(*r.specRegion, ""))
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))

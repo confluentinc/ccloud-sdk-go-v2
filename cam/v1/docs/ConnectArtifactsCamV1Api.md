@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateCamV1ConnectArtifact
 
-> CamV1ConnectArtifact CreateCamV1ConnectArtifact(ctx).SpecCloud(specCloud).SpecRegion(specRegion).CamV1ConnectArtifact(camV1ConnectArtifact).Execute()
+> CamV1ConnectArtifact CreateCamV1ConnectArtifact(ctx).SpecCloud(specCloud).Environment(environment).CamV1ConnectArtifact(camV1ConnectArtifact).Execute()
 
 Create a new Connect Artifact.
 
@@ -33,12 +33,12 @@ import (
 
 func main() {
     specCloud := "AWS" // string | Scope the operation to the given spec.cloud.
-    specRegion := "us-east-1" // string | Scope the operation to the given spec.region.
+    environment := "env-00000" // string | Scope the operation to the given environment.
     camV1ConnectArtifact := *openapiclient.NewCamV1ConnectArtifact() // CamV1ConnectArtifact |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectArtifactsCamV1Api.CreateCamV1ConnectArtifact(context.Background()).SpecCloud(specCloud).SpecRegion(specRegion).CamV1ConnectArtifact(camV1ConnectArtifact).Execute()
+    resp, r, err := api_client.ConnectArtifactsCamV1Api.CreateCamV1ConnectArtifact(context.Background()).SpecCloud(specCloud).Environment(environment).CamV1ConnectArtifact(camV1ConnectArtifact).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectArtifactsCamV1Api.CreateCamV1ConnectArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,7 +60,7 @@ Other parameters are passed through a pointer to a apiCreateCamV1ConnectArtifact
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Scope the operation to the given spec.cloud. | 
- **specRegion** | **string** | Scope the operation to the given spec.region. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
  **camV1ConnectArtifact** | [**CamV1ConnectArtifact**](CamV1ConnectArtifact.md) |  | 
 
 ### Return type
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCamV1ConnectArtifact
 
-> DeleteCamV1ConnectArtifact(ctx, id).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).Execute()
+> DeleteCamV1ConnectArtifact(ctx, id).SpecCloud(specCloud).Environment(environment).Execute()
 
 Delete a Connect Artifact
 
@@ -103,13 +103,12 @@ import (
 
 func main() {
     specCloud := "AWS" // string | Scope the operation to the given spec.cloud.
-    specRegion := "us-east-1" // string | Scope the operation to the given spec.region.
     environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the connect artifact.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectArtifactsCamV1Api.DeleteCamV1ConnectArtifact(context.Background(), id).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).Execute()
+    resp, r, err := api_client.ConnectArtifactsCamV1Api.DeleteCamV1ConnectArtifact(context.Background(), id).SpecCloud(specCloud).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectArtifactsCamV1Api.DeleteCamV1ConnectArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,7 +132,6 @@ Other parameters are passed through a pointer to a apiDeleteCamV1ConnectArtifact
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Scope the operation to the given spec.cloud. | 
- **specRegion** | **string** | Scope the operation to the given spec.region. | 
  **environment** | **string** | Scope the operation to the given environment. | 
 
 
@@ -157,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetCamV1ConnectArtifact
 
-> CamV1ConnectArtifact GetCamV1ConnectArtifact(ctx, id).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).Execute()
+> CamV1ConnectArtifact GetCamV1ConnectArtifact(ctx, id).SpecCloud(specCloud).Environment(environment).Execute()
 
 Read a Connect Artifact
 
@@ -177,13 +175,12 @@ import (
 
 func main() {
     specCloud := "AWS" // string | Scope the operation to the given spec.cloud.
-    specRegion := "us-east-1" // string | Scope the operation to the given spec.region.
     environment := "env-00000" // string | Scope the operation to the given environment.
     id := "id_example" // string | The unique identifier for the connect artifact.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectArtifactsCamV1Api.GetCamV1ConnectArtifact(context.Background(), id).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).Execute()
+    resp, r, err := api_client.ConnectArtifactsCamV1Api.GetCamV1ConnectArtifact(context.Background(), id).SpecCloud(specCloud).Environment(environment).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectArtifactsCamV1Api.GetCamV1ConnectArtifact``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,7 +206,6 @@ Other parameters are passed through a pointer to a apiGetCamV1ConnectArtifactReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Scope the operation to the given spec.cloud. | 
- **specRegion** | **string** | Scope the operation to the given spec.region. | 
  **environment** | **string** | Scope the operation to the given environment. | 
 
 
@@ -233,7 +229,7 @@ Name | Type | Description  | Notes
 
 ## ListCamV1ConnectArtifacts
 
-> CamV1ConnectArtifactList ListCamV1ConnectArtifacts(ctx).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
+> CamV1ConnectArtifactList ListCamV1ConnectArtifacts(ctx).SpecCloud(specCloud).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Connect Artifacts
 
@@ -253,14 +249,13 @@ import (
 
 func main() {
     specCloud := "AWS" // string | Filter the results by exact match for spec.cloud.
-    specRegion := "us-east-1" // string | Filter the results by exact match for spec.region.
     environment := "env-00000" // string | Filter the results by exact match for environment.
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectArtifactsCamV1Api.ListCamV1ConnectArtifacts(context.Background()).SpecCloud(specCloud).SpecRegion(specRegion).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.ConnectArtifactsCamV1Api.ListCamV1ConnectArtifacts(context.Background()).SpecCloud(specCloud).Environment(environment).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectArtifactsCamV1Api.ListCamV1ConnectArtifacts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,7 +277,6 @@ Other parameters are passed through a pointer to a apiListCamV1ConnectArtifactsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specCloud** | **string** | Filter the results by exact match for spec.cloud. | 
- **specRegion** | **string** | Filter the results by exact match for spec.region. | 
  **environment** | **string** | Filter the results by exact match for environment. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 

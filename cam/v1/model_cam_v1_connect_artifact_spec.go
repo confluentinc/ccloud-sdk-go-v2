@@ -38,11 +38,9 @@ import (
 type CamV1ConnectArtifactSpec struct {
 	// Cloud provider where the Connect Artifact archive is uploaded.
 	Cloud string `json:"cloud,omitempty"`
-	// The Cloud provider region the Connect Artifact archive is uploaded.
-	Region string `json:"region,omitempty"`
 	// Environment the Connect Artifact belongs to.
 	Environment string `json:"environment,omitempty"`
-	// Unique name of the Connect Artifact archieve per cloud, region, environment scope.
+	// Unique name of the Connect Artifact archieve per cloud, environment scope.
 	DisplayName string `json:"display_name,omitempty"`
 	// Description of the Connect Artifact.
 	Description *string `json:"description,omitempty"`
@@ -60,10 +58,9 @@ type CamV1ConnectArtifactSpec struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCamV1ConnectArtifactSpec(cloud string, region string, environment string, displayName string) *CamV1ConnectArtifactSpec {
+func NewCamV1ConnectArtifactSpec(cloud string, environment string, displayName string) *CamV1ConnectArtifactSpec {
 	this := CamV1ConnectArtifactSpec{}
 	this.Cloud = cloud
-	this.Region = region
 	this.Environment = environment
 	this.DisplayName = displayName
 	return &this
@@ -99,30 +96,6 @@ func (o *CamV1ConnectArtifactSpec) GetCloudOk() (*string, bool) {
 // SetCloud sets field value
 func (o *CamV1ConnectArtifactSpec) SetCloud(v string) {
 	o.Cloud = v
-}
-
-// GetRegion returns the Region field value
-func (o *CamV1ConnectArtifactSpec) GetRegion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Region
-}
-
-// GetRegionOk returns a tuple with the Region field value
-// and a boolean to check if the value has been set.
-func (o *CamV1ConnectArtifactSpec) GetRegionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Region, true
-}
-
-// SetRegion sets field value
-func (o *CamV1ConnectArtifactSpec) SetRegion(v string) {
-	o.Region = v
 }
 
 // GetEnvironment returns the Environment field value
@@ -336,7 +309,6 @@ func (o *CamV1ConnectArtifactSpec) SetUsages(v []string) {
 // Redact resets all sensitive fields to their zero value.
 func (o *CamV1ConnectArtifactSpec) Redact() {
 	o.recurseRedact(&o.Cloud)
-	o.recurseRedact(&o.Region)
 	o.recurseRedact(&o.Environment)
 	o.recurseRedact(&o.DisplayName)
 	o.recurseRedact(o.Description)
@@ -380,9 +352,6 @@ func (o CamV1ConnectArtifactSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["cloud"] = o.Cloud
-	}
-	if true {
-		toSerialize["region"] = o.Region
 	}
 	if true {
 		toSerialize["environment"] = o.Environment
