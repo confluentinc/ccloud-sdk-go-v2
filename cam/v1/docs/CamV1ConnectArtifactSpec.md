@@ -2,23 +2,22 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**Cloud** | **string** | Cloud provider where the Connect Artifact archive is uploaded. | 
-**Region** | **string** | The Cloud provider region the Connect Artifact archive is uploaded. | 
-**Environment** | **string** | Environment the Connect Artifact belongs to. | 
-**DisplayName** | **string** | Unique name of the Connect Artifact archieve per cloud, region, environment scope. | 
-**Description** | Pointer to **string** | Description of the Connect Artifact. | [optional] 
-**ContentFormat** | Pointer to **string** | Archive format of the Connect Artifact. | [optional] [readonly] 
-**UploadSource** | Pointer to [**CamV1ConnectArtifactSpecUploadSourceOneOf**](CamV1ConnectArtifactSpecUploadSourceOneOf.md) | Upload source of the Connect Artifact. | [optional] 
-**Plugins** | Pointer to [**[]CamV1Plugins**](CamV1Plugins.md) | List of classes present in the Connect Artifact uploaded | [optional] [readonly] 
-**Usages** | Pointer to **[]string** | List of resource crns where this Connect artifact is being used. | [optional] [readonly] 
+Name | Type | Description                                                               | Notes
+------------ | ------------- |---------------------------------------------------------------------------| -------------
+**Cloud** | **string** | Cloud provider where the Connect Artifact archive is uploaded.            | 
+**Environment** | **string** | Environment the Connect Artifact belongs to.                              | 
+**DisplayName** | **string** | Unique name of the Connect Artifact archive per cloud, environment scope. | 
+**Description** | Pointer to **string** | Description of the Connect Artifact.                                      | [optional] 
+**ContentFormat** | Pointer to **string** | Archive format of the Connect Artifact.                                   | [optional] [readonly] 
+**UploadSource** | Pointer to [**CamV1ConnectArtifactSpecUploadSourceOneOf**](CamV1ConnectArtifactSpecUploadSourceOneOf.md) | Upload source of the Connect Artifact.                                    | [optional] 
+**Plugins** | Pointer to [**[]CamV1Plugins**](CamV1Plugins.md) | List of classes present in the Connect Artifact uploaded                  | [optional] [readonly] 
+**Usages** | Pointer to **[]string** | List of resource crns where this Connect artifact is being used.          | [optional] [readonly] 
 
 ## Methods
 
 ### NewCamV1ConnectArtifactSpec
 
-`func NewCamV1ConnectArtifactSpec(cloud string, region string, environment string, displayName string, ) *CamV1ConnectArtifactSpec`
+`func NewCamV1ConnectArtifactSpec(cloud string, environment string, displayName string, ) *CamV1ConnectArtifactSpec`
 
 NewCamV1ConnectArtifactSpec instantiates a new CamV1ConnectArtifactSpec object
 This constructor will assign default values to properties that have it defined,
@@ -51,26 +50,6 @@ and a boolean to check if the value has been set.
 `func (o *CamV1ConnectArtifactSpec) SetCloud(v string)`
 
 SetCloud sets Cloud field to given value.
-
-
-### GetRegion
-
-`func (o *CamV1ConnectArtifactSpec) GetRegion() string`
-
-GetRegion returns the Region field if non-nil, zero value otherwise.
-
-### GetRegionOk
-
-`func (o *CamV1ConnectArtifactSpec) GetRegionOk() (*string, bool)`
-
-GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegion
-
-`func (o *CamV1ConnectArtifactSpec) SetRegion(v string)`
-
-SetRegion sets Region field to given value.
 
 
 ### GetEnvironment

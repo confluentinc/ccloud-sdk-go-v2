@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Kind** | Pointer to **string** | Kind defines the object this REST resource represents. | [optional] [readonly] 
 **ContentFormat** | Pointer to **string** | Content format of the Connect Artifact archive. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | Cloud provider where the Connect Artifact archive is uploaded. | [optional] [readonly] 
-**Region** | Pointer to **string** | The Cloud provider region the Custom SMT Artifact archive is uploaded. | [optional] [readonly] 
 **Environment** | Pointer to **string** | The Environment the uploaded Connect Artifact belongs to. | [optional] [readonly] 
 **UploadId** | Pointer to **string** | Unique identifier of this upload. | [optional] [readonly] 
 **UploadUrl** | Pointer to **string** | Upload URL for the Connect Artifact archive. | [optional] [readonly] 
@@ -132,31 +131,6 @@ SetCloud sets Cloud field to given value.
 `func (o *CamV1PresignedUrl) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
-
-### GetRegion
-
-`func (o *CamV1PresignedUrl) GetRegion() string`
-
-GetRegion returns the Region field if non-nil, zero value otherwise.
-
-### GetRegionOk
-
-`func (o *CamV1PresignedUrl) GetRegionOk() (*string, bool)`
-
-GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegion
-
-`func (o *CamV1PresignedUrl) SetRegion(v string)`
-
-SetRegion sets Region field to given value.
-
-### HasRegion
-
-`func (o *CamV1PresignedUrl) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetEnvironment
 
