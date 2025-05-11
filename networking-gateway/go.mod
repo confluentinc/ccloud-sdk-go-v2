@@ -1,6 +1,6 @@
 module github.com/confluentinc/ccloud-sdk-go-v2/networking-gateway
 
-go 1.23.8
+go 1.23.9
 
 require (
 	golang.org/x/oauth2 v0.0.0-20210218202405-ba52d332ba99
