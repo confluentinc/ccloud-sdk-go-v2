@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
 **Availability** | Pointer to **string** | The availability zone configuration of the cluster  | [optional] 
 **Config** | Pointer to [**CmkV2ClusterSpecUpdateConfigOneOf**](CmkV2ClusterSpecUpdateConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
+**Endpoints** | Pointer to [**CmkV2EndpointsMap**](cmk.v2.EndpointsMap.md) | A map of endpoints for connecting to the Kafka cluster, keyed by access_point_id. Access Point ID &#39;public&#39; and &#39;privatelink&#39; are reserved. These can be used for different network access methods or regions.  | [optional] [readonly] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -102,6 +103,31 @@ SetConfig sets Config field to given value.
 `func (o *CmkV2ClusterSpecUpdate) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
+
+### GetEndpoints
+
+`func (o *CmkV2ClusterSpecUpdate) GetEndpoints() CmkV2EndpointsMap`
+
+GetEndpoints returns the Endpoints field if non-nil, zero value otherwise.
+
+### GetEndpointsOk
+
+`func (o *CmkV2ClusterSpecUpdate) GetEndpointsOk() (*CmkV2EndpointsMap, bool)`
+
+GetEndpointsOk returns a tuple with the Endpoints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndpoints
+
+`func (o *CmkV2ClusterSpecUpdate) SetEndpoints(v CmkV2EndpointsMap)`
+
+SetEndpoints sets Endpoints field to given value.
+
+### HasEndpoints
+
+`func (o *CmkV2ClusterSpecUpdate) HasEndpoints() bool`
+
+HasEndpoints returns a boolean if a field has been set.
 
 ### GetEnvironment
 

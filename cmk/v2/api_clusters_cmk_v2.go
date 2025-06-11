@@ -31,7 +31,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 	"strings"
 )
 
@@ -43,14 +42,14 @@ var (
 type ClustersCmkV2Api interface {
 
 	/*
-			CreateCmkV2Cluster Create a Cluster
+		CreateCmkV2Cluster Create a Cluster
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a cluster.
+	Make a request to create a cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateCmkV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateCmkV2ClusterRequest
 	*/
 	CreateCmkV2Cluster(ctx _context.Context) ApiCreateCmkV2ClusterRequest
 
@@ -59,15 +58,15 @@ type ClustersCmkV2Api interface {
 	CreateCmkV2ClusterExecute(r ApiCreateCmkV2ClusterRequest) (CmkV2Cluster, *_nethttp.Response, error)
 
 	/*
-			DeleteCmkV2Cluster Delete a Cluster
+		DeleteCmkV2Cluster Delete a Cluster
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a cluster.
+	Make a request to delete a cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the cluster.
-			 @return ApiDeleteCmkV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiDeleteCmkV2ClusterRequest
 	*/
 	DeleteCmkV2Cluster(ctx _context.Context, id string) ApiDeleteCmkV2ClusterRequest
 
@@ -75,15 +74,15 @@ type ClustersCmkV2Api interface {
 	DeleteCmkV2ClusterExecute(r ApiDeleteCmkV2ClusterRequest) (*_nethttp.Response, error)
 
 	/*
-			GetCmkV2Cluster Read a Cluster
+		GetCmkV2Cluster Read a Cluster
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a cluster.
+	Make a request to read a cluster.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the cluster.
-			 @return ApiGetCmkV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiGetCmkV2ClusterRequest
 	*/
 	GetCmkV2Cluster(ctx _context.Context, id string) ApiGetCmkV2ClusterRequest
 
@@ -92,14 +91,14 @@ type ClustersCmkV2Api interface {
 	GetCmkV2ClusterExecute(r ApiGetCmkV2ClusterRequest) (CmkV2Cluster, *_nethttp.Response, error)
 
 	/*
-			ListCmkV2Clusters List of Clusters
+		ListCmkV2Clusters List of Clusters
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all clusters.
+	Retrieve a sorted, filtered, paginated list of all clusters.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListCmkV2ClustersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListCmkV2ClustersRequest
 	*/
 	ListCmkV2Clusters(ctx _context.Context) ApiListCmkV2ClustersRequest
 
@@ -108,17 +107,17 @@ type ClustersCmkV2Api interface {
 	ListCmkV2ClustersExecute(r ApiListCmkV2ClustersRequest) (CmkV2ClusterList, *_nethttp.Response, error)
 
 	/*
-			UpdateCmkV2Cluster Update a Cluster
+		UpdateCmkV2Cluster Update a Cluster
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a cluster.
+	Make a request to update a cluster.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the cluster.
-			 @return ApiUpdateCmkV2ClusterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the cluster.
+		 @return ApiUpdateCmkV2ClusterRequest
 	*/
 	UpdateCmkV2Cluster(ctx _context.Context, id string) ApiUpdateCmkV2ClusterRequest
 
@@ -639,7 +638,7 @@ type ApiListCmkV2ClustersRequest struct {
 	ctx         _context.Context
 	ApiService  ClustersCmkV2Api
 	environment *string
-	specNetwork *[]string
+	specNetwork *MultipleSearchFilter
 	pageSize    *int32
 	pageToken   *string
 }
@@ -651,7 +650,7 @@ func (r ApiListCmkV2ClustersRequest) Environment(environment string) ApiListCmkV
 }
 
 // Filter the results by exact match for spec.network. Pass multiple times to see results matching any of the values.
-func (r ApiListCmkV2ClustersRequest) SpecNetwork(specNetwork []string) ApiListCmkV2ClustersRequest {
+func (r ApiListCmkV2ClustersRequest) SpecNetwork(specNetwork MultipleSearchFilter) ApiListCmkV2ClustersRequest {
 	r.specNetwork = &specNetwork
 	return r
 }
@@ -718,15 +717,7 @@ func (a *ClustersCmkV2ApiService) ListCmkV2ClustersExecute(r ApiListCmkV2Cluster
 
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	if r.specNetwork != nil {
-		t := *r.specNetwork
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("spec.network", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("spec.network", parameterToString(t, "multi"))
-		}
+		localVarQueryParams.Add("spec.network", parameterToString(*r.specNetwork, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
