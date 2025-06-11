@@ -52,6 +52,8 @@ type CmkV2ClusterSpec struct {
 	HttpEndpoint *string `json:"http_endpoint,omitempty"`
 	// The Kafka API cluster endpoint used by Kafka clients to connect to the cluster.
 	ApiEndpoint *string `json:"api_endpoint,omitempty"`
+	// A map of endpoints for connecting to the Kafka cluster, keyed by access_point_id. Access Point ID 'public' and 'privatelink' are reserved. These can be used for different network access methods or regions.
+	Endpoints *CmkV2EndpointsMap `json:"endpoints,omitempty"`
 	// The environment to which this belongs.
 	Environment *EnvScopedObjectReference `json:"environment,omitempty"`
 	// The network associated with this object.
@@ -333,6 +335,38 @@ func (o *CmkV2ClusterSpec) SetApiEndpoint(v string) {
 	o.ApiEndpoint = &v
 }
 
+// GetEndpoints returns the Endpoints field value if set, zero value otherwise.
+func (o *CmkV2ClusterSpec) GetEndpoints() CmkV2EndpointsMap {
+	if o == nil || o.Endpoints == nil {
+		var ret CmkV2EndpointsMap
+		return ret
+	}
+	return *o.Endpoints
+}
+
+// GetEndpointsOk returns a tuple with the Endpoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmkV2ClusterSpec) GetEndpointsOk() (*CmkV2EndpointsMap, bool) {
+	if o == nil || o.Endpoints == nil {
+		return nil, false
+	}
+	return o.Endpoints, true
+}
+
+// HasEndpoints returns a boolean if a field has been set.
+func (o *CmkV2ClusterSpec) HasEndpoints() bool {
+	if o != nil && o.Endpoints != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEndpoints gets a reference to the given CmkV2EndpointsMap and assigns it to the Endpoints field.
+func (o *CmkV2ClusterSpec) SetEndpoints(v CmkV2EndpointsMap) {
+	o.Endpoints = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *CmkV2ClusterSpec) GetEnvironment() EnvScopedObjectReference {
 	if o == nil || o.Environment == nil {
@@ -439,6 +473,7 @@ func (o *CmkV2ClusterSpec) Redact() {
 	o.recurseRedact(o.KafkaBootstrapEndpoint)
 	o.recurseRedact(o.HttpEndpoint)
 	o.recurseRedact(o.ApiEndpoint)
+	o.recurseRedact(o.Endpoints)
 	o.recurseRedact(o.Environment)
 	o.recurseRedact(o.Network)
 	o.recurseRedact(o.Byok)
@@ -499,6 +534,9 @@ func (o CmkV2ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.ApiEndpoint != nil {
 		toSerialize["api_endpoint"] = o.ApiEndpoint
+	}
+	if o.Endpoints != nil {
+		toSerialize["endpoints"] = o.Endpoints
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

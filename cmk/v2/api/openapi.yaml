@@ -13,6 +13,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -2394,6 +2398,52 @@ components:
       required:
       - kind
       type: object
+    cmk.v2.EndpointsMap:
+      additionalProperties:
+        $ref: '#/components/schemas/cmk.v2.Endpoints'
+      description: |
+        Map of endpoints for a Kafka cluster, keyed by access point ID.
+      example:
+        ap1pni123:
+          kafka_bootstrap_endpoint: lkc-s1232-00000.us-central1.gcp.private.confluent.cloud:9092
+          http_endpoint: https://lkc-s1232.us-central1.gcp.private.confluent.cloud:443
+          connection_type: PRIVATENETWORKINTERFACE
+        ap2platt67890:
+          kafka_bootstrap_endpoint: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
+          http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
+          connection_type: PRIVATELINK
+      readOnly: true
+      type: object
+    cmk.v2.Endpoints:
+      description: |
+        Given a gateway type, endpoints to connect to the Kafka cluster.
+      properties:
+        kafka_bootstrap_endpoint:
+          description: |
+            The bootstrap endpoint used by Kafka clients to connect to the cluster.
+          example: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
+          type: string
+        http_endpoint:
+          description: |
+            The REST endpoint for the Kafka cluster.
+          example: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:443
+          format: uri
+          type: string
+        connection_type:
+          description: |
+            The type of connection used for the endpoint.
+          example: PRIVATENETWORKINTERFACE
+          type: string
+          x-extensible-enum:
+          - PUBLIC
+          - PRIVATELINK
+          - PRIVATENETWORKINTERFACE
+      readOnly: true
+      required:
+      - connection_type
+      - http_endpoint
+      - kafka_bootstrap_endpoint
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -2550,6 +2600,23 @@ components:
           readOnly: true
           type: string
           x-immutable: true
+        endpoints:
+          allOf:
+          - $ref: '#/components/schemas/cmk.v2.EndpointsMap'
+          description: |
+            A map of endpoints for connecting to the Kafka cluster,
+            keyed by access_point_id. Access Point ID 'public' and 'privatelink' are reserved.
+            These can be used for different network access methods or regions.
+          example:
+            ap1pni123:
+              kafka_bootstrap_endpoint: lkc-s1232-00000.us-central1.gcp.private.confluent.cloud:9092
+              http_endpoint: https://lkc-s1232.us-central1.gcp.private.confluent.cloud:443
+              connection_type: PRIVATENETWORKINTERFACE
+            ap2platt67890:
+              kafka_bootstrap_endpoint: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
+              http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
+              connection_type: PRIVATELINK
+          readOnly: true
         environment:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -2829,6 +2896,23 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Enterprise'
           - $ref: '#/components/schemas/cmk.v2.Freight'
           x-one-of-name: CmkV2ClusterSpecUpdateConfigOneOf
+        endpoints:
+          allOf:
+          - $ref: '#/components/schemas/cmk.v2.EndpointsMap'
+          description: |
+            A map of endpoints for connecting to the Kafka cluster,
+            keyed by access_point_id. Access Point ID 'public' and 'privatelink' are reserved.
+            These can be used for different network access methods or regions.
+          example:
+            ap1pni123:
+              kafka_bootstrap_endpoint: lkc-s1232-00000.us-central1.gcp.private.confluent.cloud:9092
+              http_endpoint: https://lkc-s1232.us-central1.gcp.private.confluent.cloud:443
+              connection_type: PRIVATENETWORKINTERFACE
+            ap2platt67890:
+              kafka_bootstrap_endpoint: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
+              http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
+              connection_type: PRIVATELINK
+          readOnly: true
         environment:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
