@@ -36,29 +36,31 @@ import (
 
 // ListLinkConfigsResponseData struct for ListLinkConfigsResponseData
 type ListLinkConfigsResponseData struct {
-	Kind      string           `json:"kind,omitempty"`
-	Metadata  ResourceMetadata `json:"metadata,omitempty"`
-	ClusterId string           `json:"cluster_id,omitempty"`
-	Name      string           `json:"name,omitempty"`
-	Value     string           `json:"value,omitempty"`
-	IsReadOnly  bool           `json:"is_read_only,omitempty"`
-	IsSensitive bool           `json:"is_sensitive,omitempty"`
-	Source    string           `json:"source,omitempty"`
-	Synonyms  []string         `json:"synonyms,omitempty"`
-	LinkName  string           `json:"link_name,omitempty"`
+	Kind        string           `json:"kind,omitempty"`
+	Metadata    ResourceMetadata `json:"metadata,omitempty"`
+	ClusterId   string           `json:"cluster_id,omitempty"`
+	Name        string           `json:"name,omitempty"`
+	Value       string           `json:"value,omitempty"`
+	IsDefault   bool             `json:"is_default,omitempty"`
+	IsReadOnly  bool             `json:"is_read_only,omitempty"`
+	IsSensitive bool             `json:"is_sensitive,omitempty"`
+	Source      string           `json:"source,omitempty"`
+	Synonyms    []string         `json:"synonyms,omitempty"`
+	LinkName    string           `json:"link_name,omitempty"`
 }
 
 // NewListLinkConfigsResponseData instantiates a new ListLinkConfigsResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListLinkConfigsResponseData(kind string, metadata ResourceMetadata, clusterId string, name string, value string, readOnly bool, sensitive bool, source string, synonyms []string, linkName string) *ListLinkConfigsResponseData {
+func NewListLinkConfigsResponseData(kind string, metadata ResourceMetadata, clusterId string, name string, value string, isDefault bool, readOnly bool, sensitive bool, source string, synonyms []string, linkName string) *ListLinkConfigsResponseData {
 	this := ListLinkConfigsResponseData{}
 	this.Kind = kind
 	this.Metadata = metadata
 	this.ClusterId = clusterId
 	this.Name = name
 	this.Value = value
+	this.IsDefault = isDefault
 	this.IsReadOnly = readOnly
 	this.IsSensitive = sensitive
 	this.Source = source
@@ -193,6 +195,30 @@ func (o *ListLinkConfigsResponseData) GetValueOk() (*string, bool) {
 // SetValue sets field value
 func (o *ListLinkConfigsResponseData) SetValue(v string) {
 	o.Value = v
+}
+
+// GetIsDefault returns the IsDefault field value
+func (o *ListLinkConfigsResponseData) GetIsDefault() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsDefault
+}
+
+// GetIsDefaultOk returns a tuple with the IsDefault field value
+// and a boolean to check if the value has been set.
+func (o *ListLinkConfigsResponseData) GetIsDefaultOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsDefault, true
+}
+
+// SetIsDefault sets field value
+func (o *ListLinkConfigsResponseData) SetIsDefault(v bool) {
+	o.IsDefault = v
 }
 
 // GetIsReadOnly returns the IsReadOnly field value
@@ -375,6 +401,9 @@ func (o ListLinkConfigsResponseData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["value"] = o.Value
+	}
+	if true {
+		toSerialize["is_default"] = o.IsDefault
 	}
 	if true {
 		toSerialize["is_read_only"] = o.IsReadOnly
