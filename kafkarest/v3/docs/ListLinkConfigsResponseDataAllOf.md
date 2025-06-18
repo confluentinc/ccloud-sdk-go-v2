@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **ClusterId** | **string** |  | 
 **Name** | **string** |  | 
 **Value** | **string** |  | 
-**ReadOnly** | **bool** |  | 
-**Sensitive** | **bool** |  | 
+**IsDefault** | **bool** |  | 
+**IsReadOnly** | **bool** |  | 
+**IsSensitive** | **bool** |  | 
 **Source** | **string** |  | 
 **Synonyms** | **[]string** |  | 
 **LinkName** | **string** |  | 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewListLinkConfigsResponseDataAllOf
 
-`func NewListLinkConfigsResponseDataAllOf(clusterId string, name string, value string, readOnly bool, sensitive bool, source string, synonyms []string, linkName string, ) *ListLinkConfigsResponseDataAllOf`
+`func NewListLinkConfigsResponseDataAllOf(clusterId string, name string, value string, isDefault bool, isReadOnly bool, isSensitive bool, source string, synonyms []string, linkName string, ) *ListLinkConfigsResponseDataAllOf`
 
 NewListLinkConfigsResponseDataAllOf instantiates a new ListLinkConfigsResponseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -92,44 +93,64 @@ and a boolean to check if the value has been set.
 SetValue sets Value field to given value.
 
 
-### GetReadOnly
+### GetIsDefault
 
-`func (o *ListLinkConfigsResponseDataAllOf) GetReadOnly() bool`
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsDefault() bool`
 
-GetReadOnly returns the ReadOnly field if non-nil, zero value otherwise.
+GetIsDefault returns the IsDefault field if non-nil, zero value otherwise.
 
-### GetReadOnlyOk
+### GetIsDefaultOk
 
-`func (o *ListLinkConfigsResponseDataAllOf) GetReadOnlyOk() (*bool, bool)`
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsDefaultOk() (*bool, bool)`
 
-GetReadOnlyOk returns a tuple with the ReadOnly field if it's non-nil, zero value otherwise
+GetIsDefaultOk returns a tuple with the IsDefault field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReadOnly
+### SetIsDefault
 
-`func (o *ListLinkConfigsResponseDataAllOf) SetReadOnly(v bool)`
+`func (o *ListLinkConfigsResponseDataAllOf) SetIsDefault(v bool)`
 
-SetReadOnly sets ReadOnly field to given value.
+SetIsDefault sets IsDefault field to given value.
 
 
-### GetSensitive
+### GetIsReadOnly
 
-`func (o *ListLinkConfigsResponseDataAllOf) GetSensitive() bool`
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsReadOnly() bool`
 
-GetSensitive returns the Sensitive field if non-nil, zero value otherwise.
+GetIsReadOnly returns the IsReadOnly field if non-nil, zero value otherwise.
 
-### GetSensitiveOk
+### GetIsReadOnlyOk
 
-`func (o *ListLinkConfigsResponseDataAllOf) GetSensitiveOk() (*bool, bool)`
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsReadOnlyOk() (*bool, bool)`
 
-GetSensitiveOk returns a tuple with the Sensitive field if it's non-nil, zero value otherwise
+GetIsReadOnlyOk returns a tuple with the IsReadOnly field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSensitive
+### SetIsReadOnly
 
-`func (o *ListLinkConfigsResponseDataAllOf) SetSensitive(v bool)`
+`func (o *ListLinkConfigsResponseDataAllOf) SetIsReadOnly(v bool)`
 
-SetSensitive sets Sensitive field to given value.
+SetIsReadOnly sets IsReadOnly field to given value.
+
+
+### GetIsSensitive
+
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsSensitive() bool`
+
+GetIsSensitive returns the IsSensitive field if non-nil, zero value otherwise.
+
+### GetIsSensitiveOk
+
+`func (o *ListLinkConfigsResponseDataAllOf) GetIsSensitiveOk() (*bool, bool)`
+
+GetIsSensitiveOk returns a tuple with the IsSensitive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSensitive
+
+`func (o *ListLinkConfigsResponseDataAllOf) SetIsSensitive(v bool)`
+
+SetIsSensitive sets IsSensitive field to given value.
 
 
 ### GetSource
