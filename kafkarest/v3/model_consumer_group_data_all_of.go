@@ -36,28 +36,33 @@ import (
 
 // ConsumerGroupDataAllOf struct for ConsumerGroupDataAllOf
 type ConsumerGroupDataAllOf struct {
-	ClusterId         string        `json:"cluster_id,omitempty"`
-	ConsumerGroupId   string        `json:"consumer_group_id,omitempty"`
-	IsSimple          bool          `json:"is_simple,omitempty"`
-	PartitionAssignor string        `json:"partition_assignor,omitempty"`
-	State             string        `json:"state,omitempty"`
-	Coordinator       Relationship  `json:"coordinator,omitempty"`
-	Consumer          *Relationship `json:"consumer,omitempty"`
-	LagSummary        Relationship  `json:"lag_summary,omitempty"`
+	ClusterId            string       `json:"cluster_id,omitempty"`
+	ConsumerGroupId      string       `json:"consumer_group_id,omitempty"`
+	IsSimple             bool         `json:"is_simple,omitempty"`
+	PartitionAssignor    string       `json:"partition_assignor,omitempty"`
+	State                string       `json:"state,omitempty"`
+	Type                 string       `json:"type,omitempty"`
+	IsMixedConsumerGroup bool         `json:"is_mixed_consumer_group,omitempty"`
+	Coordinator          Relationship `json:"coordinator,omitempty"`
+	Consumers            Relationship `json:"consumers,omitempty"`
+	LagSummary           Relationship `json:"lag_summary,omitempty"`
 }
 
 // NewConsumerGroupDataAllOf instantiates a new ConsumerGroupDataAllOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConsumerGroupDataAllOf(clusterId string, consumerGroupId string, isSimple bool, partitionAssignor string, state string, coordinator Relationship, lagSummary Relationship) *ConsumerGroupDataAllOf {
+func NewConsumerGroupDataAllOf(clusterId string, consumerGroupId string, isSimple bool, partitionAssignor string, state string, type_ string, isMixedConsumerGroup bool, coordinator Relationship, consumers Relationship, lagSummary Relationship) *ConsumerGroupDataAllOf {
 	this := ConsumerGroupDataAllOf{}
 	this.ClusterId = clusterId
 	this.ConsumerGroupId = consumerGroupId
 	this.IsSimple = isSimple
 	this.PartitionAssignor = partitionAssignor
 	this.State = state
+	this.Type = type_
+	this.IsMixedConsumerGroup = isMixedConsumerGroup
 	this.Coordinator = coordinator
+	this.Consumers = consumers
 	this.LagSummary = lagSummary
 	return &this
 }
@@ -190,6 +195,54 @@ func (o *ConsumerGroupDataAllOf) SetState(v string) {
 	o.State = v
 }
 
+// GetType returns the Type field value
+func (o *ConsumerGroupDataAllOf) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ConsumerGroupDataAllOf) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ConsumerGroupDataAllOf) SetType(v string) {
+	o.Type = v
+}
+
+// GetIsMixedConsumerGroup returns the IsMixedConsumerGroup field value
+func (o *ConsumerGroupDataAllOf) GetIsMixedConsumerGroup() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsMixedConsumerGroup
+}
+
+// GetIsMixedConsumerGroupOk returns a tuple with the IsMixedConsumerGroup field value
+// and a boolean to check if the value has been set.
+func (o *ConsumerGroupDataAllOf) GetIsMixedConsumerGroupOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsMixedConsumerGroup, true
+}
+
+// SetIsMixedConsumerGroup sets field value
+func (o *ConsumerGroupDataAllOf) SetIsMixedConsumerGroup(v bool) {
+	o.IsMixedConsumerGroup = v
+}
+
 // GetCoordinator returns the Coordinator field value
 func (o *ConsumerGroupDataAllOf) GetCoordinator() Relationship {
 	if o == nil {
@@ -214,36 +267,28 @@ func (o *ConsumerGroupDataAllOf) SetCoordinator(v Relationship) {
 	o.Coordinator = v
 }
 
-// GetConsumer returns the Consumer field value if set, zero value otherwise.
-func (o *ConsumerGroupDataAllOf) GetConsumer() Relationship {
-	if o == nil || o.Consumer == nil {
+// GetConsumers returns the Consumers field value
+func (o *ConsumerGroupDataAllOf) GetConsumers() Relationship {
+	if o == nil {
 		var ret Relationship
 		return ret
 	}
-	return *o.Consumer
+
+	return o.Consumers
 }
 
-// GetConsumerOk returns a tuple with the Consumer field value if set, nil otherwise
+// GetConsumersOk returns a tuple with the Consumers field value
 // and a boolean to check if the value has been set.
-func (o *ConsumerGroupDataAllOf) GetConsumerOk() (*Relationship, bool) {
-	if o == nil || o.Consumer == nil {
+func (o *ConsumerGroupDataAllOf) GetConsumersOk() (*Relationship, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Consumer, true
+	return &o.Consumers, true
 }
 
-// HasConsumer returns a boolean if a field has been set.
-func (o *ConsumerGroupDataAllOf) HasConsumer() bool {
-	if o != nil && o.Consumer != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConsumer gets a reference to the given Relationship and assigns it to the Consumer field.
-func (o *ConsumerGroupDataAllOf) SetConsumer(v Relationship) {
-	o.Consumer = &v
+// SetConsumers sets field value
+func (o *ConsumerGroupDataAllOf) SetConsumers(v Relationship) {
+	o.Consumers = v
 }
 
 // GetLagSummary returns the LagSummary field value
@@ -277,8 +322,10 @@ func (o *ConsumerGroupDataAllOf) Redact() {
 	o.recurseRedact(&o.IsSimple)
 	o.recurseRedact(&o.PartitionAssignor)
 	o.recurseRedact(&o.State)
+	o.recurseRedact(&o.Type)
+	o.recurseRedact(&o.IsMixedConsumerGroup)
 	o.recurseRedact(&o.Coordinator)
-	o.recurseRedact(o.Consumer)
+	o.recurseRedact(&o.Consumers)
 	o.recurseRedact(&o.LagSummary)
 }
 
@@ -330,10 +377,16 @@ func (o ConsumerGroupDataAllOf) MarshalJSON() ([]byte, error) {
 		toSerialize["state"] = o.State
 	}
 	if true {
+		toSerialize["type"] = o.Type
+	}
+	if true {
+		toSerialize["is_mixed_consumer_group"] = o.IsMixedConsumerGroup
+	}
+	if true {
 		toSerialize["coordinator"] = o.Coordinator
 	}
-	if o.Consumer != nil {
-		toSerialize["consumer"] = o.Consumer
+	if true {
+		toSerialize["consumers"] = o.Consumers
 	}
 	if true {
 		toSerialize["lag_summary"] = o.LagSummary
