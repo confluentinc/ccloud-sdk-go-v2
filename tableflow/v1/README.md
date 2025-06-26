@@ -112,8 +112,6 @@ Class | Method | HTTP request | Description
  - [TableflowV1CatalogIntegrationSpec](docs/TableflowV1CatalogIntegrationSpec.md)
  - [TableflowV1CatalogIntegrationSpecConfigOneOf](docs/TableflowV1CatalogIntegrationSpecConfigOneOf.md)
  - [TableflowV1CatalogIntegrationStatus](docs/TableflowV1CatalogIntegrationStatus.md)
- - [TableflowV1CatalogIntegrationUnitySpec](docs/TableflowV1CatalogIntegrationUnitySpec.md)
- - [TableflowV1CatalogIntegrationUnityUpdateSpec](docs/TableflowV1CatalogIntegrationUnityUpdateSpec.md)
  - [TableflowV1CatalogIntegrationUpdateRequest](docs/TableflowV1CatalogIntegrationUpdateRequest.md)
  - [TableflowV1CatalogIntegrationUpdateSpec](docs/TableflowV1CatalogIntegrationUpdateSpec.md)
  - [TableflowV1CatalogIntegrationUpdateSpecConfigOneOf](docs/TableflowV1CatalogIntegrationUpdateSpecConfigOneOf.md)
@@ -132,6 +130,34 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ### resource-api-key

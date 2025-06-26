@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

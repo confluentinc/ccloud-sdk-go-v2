@@ -35,7 +35,6 @@ import (
 type TableflowV1CatalogIntegrationUpdateSpecConfigOneOf struct {
 	TableflowV1CatalogIntegrationAwsGlueUpdateSpec   *TableflowV1CatalogIntegrationAwsGlueUpdateSpec
 	TableflowV1CatalogIntegrationSnowflakeUpdateSpec *TableflowV1CatalogIntegrationSnowflakeUpdateSpec
-	TableflowV1CatalogIntegrationUnityUpdateSpec     *TableflowV1CatalogIntegrationUnityUpdateSpec
 }
 
 // TableflowV1CatalogIntegrationAwsGlueUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationAwsGlueUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
@@ -46,11 +45,6 @@ func TableflowV1CatalogIntegrationAwsGlueUpdateSpecAsTableflowV1CatalogIntegrati
 // TableflowV1CatalogIntegrationSnowflakeUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationSnowflakeUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
 func TableflowV1CatalogIntegrationSnowflakeUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf(v *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) TableflowV1CatalogIntegrationUpdateSpecConfigOneOf {
 	return TableflowV1CatalogIntegrationUpdateSpecConfigOneOf{TableflowV1CatalogIntegrationSnowflakeUpdateSpec: v}
-}
-
-// TableflowV1CatalogIntegrationUnityUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationUnityUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
-func TableflowV1CatalogIntegrationUnityUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf(v *TableflowV1CatalogIntegrationUnityUpdateSpec) TableflowV1CatalogIntegrationUpdateSpecConfigOneOf {
-	return TableflowV1CatalogIntegrationUpdateSpecConfigOneOf{TableflowV1CatalogIntegrationUnityUpdateSpec: v}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
@@ -87,18 +81,6 @@ func (dst *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) UnmarshalJSON(dat
 		}
 	}
 
-	// check if the discriminator value is 'Unity'
-	if jsonDict["kind"] == "Unity" {
-		// try to unmarshal JSON data into TableflowV1CatalogIntegrationUnityUpdateSpec
-		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationUnityUpdateSpec)
-		if err == nil {
-			return nil // data stored in dst.TableflowV1CatalogIntegrationUnityUpdateSpec, return on the first match
-		} else {
-			dst.TableflowV1CatalogIntegrationUnityUpdateSpec = nil
-			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationUnityUpdateSpec: %s", err.Error())
-		}
-	}
-
 	// check if the discriminator value is 'tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
 	if jsonDict["kind"] == "tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec" {
 		// try to unmarshal JSON data into TableflowV1CatalogIntegrationAwsGlueUpdateSpec
@@ -123,18 +105,6 @@ func (dst *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) UnmarshalJSON(dat
 		}
 	}
 
-	// check if the discriminator value is 'tableflow.v1.CatalogIntegrationUnityUpdateSpec'
-	if jsonDict["kind"] == "tableflow.v1.CatalogIntegrationUnityUpdateSpec" {
-		// try to unmarshal JSON data into TableflowV1CatalogIntegrationUnityUpdateSpec
-		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationUnityUpdateSpec)
-		if err == nil {
-			return nil // data stored in dst.TableflowV1CatalogIntegrationUnityUpdateSpec, return on the first match
-		} else {
-			dst.TableflowV1CatalogIntegrationUnityUpdateSpec = nil
-			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationUnityUpdateSpec: %s", err.Error())
-		}
-	}
-
 	return nil
 }
 
@@ -156,14 +126,6 @@ func (src TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) MarshalJSON() ([]b
 		return buffer.Bytes(), err
 	}
 
-	if src.TableflowV1CatalogIntegrationUnityUpdateSpec != nil {
-		buffer := &bytes.Buffer{}
-		encoder := json.NewEncoder(buffer)
-		encoder.SetEscapeHTML(false)
-		err := encoder.Encode(&src.TableflowV1CatalogIntegrationUnityUpdateSpec)
-		return buffer.Bytes(), err
-	}
-
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -175,10 +137,6 @@ func (obj *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) GetActualInstance
 
 	if obj.TableflowV1CatalogIntegrationSnowflakeUpdateSpec != nil {
 		return obj.TableflowV1CatalogIntegrationSnowflakeUpdateSpec
-	}
-
-	if obj.TableflowV1CatalogIntegrationUnityUpdateSpec != nil {
-		return obj.TableflowV1CatalogIntegrationUnityUpdateSpec
 	}
 
 	// all schemas are nil
