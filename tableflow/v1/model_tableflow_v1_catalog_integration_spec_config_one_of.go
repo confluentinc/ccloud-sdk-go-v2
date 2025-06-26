@@ -33,20 +33,19 @@ import (
 
 // TableflowV1CatalogIntegrationSpecConfigOneOf - struct for TableflowV1CatalogIntegrationSpecConfigOneOf
 type TableflowV1CatalogIntegrationSpecConfigOneOf struct {
-	TableflowV1CatalogIntegrationAwsGlueSpec *TableflowV1CatalogIntegrationAwsGlueSpec
+	TableflowV1CatalogIntegrationAwsGlueSpec   *TableflowV1CatalogIntegrationAwsGlueSpec
 	TableflowV1CatalogIntegrationSnowflakeSpec *TableflowV1CatalogIntegrationSnowflakeSpec
 }
 
 // TableflowV1CatalogIntegrationAwsGlueSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationAwsGlueSpec wrapped in TableflowV1CatalogIntegrationSpecConfigOneOf
 func TableflowV1CatalogIntegrationAwsGlueSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf(v *TableflowV1CatalogIntegrationAwsGlueSpec) TableflowV1CatalogIntegrationSpecConfigOneOf {
-	return TableflowV1CatalogIntegrationSpecConfigOneOf{ TableflowV1CatalogIntegrationAwsGlueSpec: v}
+	return TableflowV1CatalogIntegrationSpecConfigOneOf{TableflowV1CatalogIntegrationAwsGlueSpec: v}
 }
 
 // TableflowV1CatalogIntegrationSnowflakeSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationSnowflakeSpec wrapped in TableflowV1CatalogIntegrationSpecConfigOneOf
 func TableflowV1CatalogIntegrationSnowflakeSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf(v *TableflowV1CatalogIntegrationSnowflakeSpec) TableflowV1CatalogIntegrationSpecConfigOneOf {
-	return TableflowV1CatalogIntegrationSpecConfigOneOf{ TableflowV1CatalogIntegrationSnowflakeSpec: v}
+	return TableflowV1CatalogIntegrationSpecConfigOneOf{TableflowV1CatalogIntegrationSnowflakeSpec: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -131,7 +130,7 @@ func (src TableflowV1CatalogIntegrationSpecConfigOneOf) MarshalJSON() ([]byte, e
 }
 
 // Get the actual instance
-func (obj *TableflowV1CatalogIntegrationSpecConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *TableflowV1CatalogIntegrationSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.TableflowV1CatalogIntegrationAwsGlueSpec != nil {
 		return obj.TableflowV1CatalogIntegrationAwsGlueSpec
 	}
@@ -183,5 +182,3 @@ func (v *NullableTableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

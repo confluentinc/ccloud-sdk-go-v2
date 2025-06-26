@@ -41,14 +41,14 @@ var (
 type RegionsTableflowV1Api interface {
 
 	/*
-	ListTableflowV1Regions List of Regions
+			ListTableflowV1Regions List of Regions
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all regions.
+		Retrieve a sorted, filtered, paginated list of all regions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListTableflowV1RegionsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListTableflowV1RegionsRequest
 	*/
 	ListTableflowV1Regions(ctx _context.Context) ApiListTableflowV1RegionsRequest
 
@@ -61,11 +61,11 @@ Retrieve a sorted, filtered, paginated list of all regions.
 type RegionsTableflowV1ApiService service
 
 type ApiListTableflowV1RegionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService RegionsTableflowV1Api
-	cloud *string
-	pageSize *int32
-	pageToken *string
+	cloud      *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // Filter the results by exact match for cloud.
@@ -73,11 +73,13 @@ func (r ApiListTableflowV1RegionsRequest) Cloud(cloud string) ApiListTableflowV1
 	r.cloud = &cloud
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListTableflowV1RegionsRequest) PageSize(pageSize int32) ApiListTableflowV1RegionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListTableflowV1RegionsRequest) PageToken(pageToken string) ApiListTableflowV1RegionsRequest {
 	r.pageToken = &pageToken
@@ -95,18 +97,19 @@ ListTableflowV1Regions List of Regions
 
 Retrieve a sorted, filtered, paginated list of all regions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListTableflowV1RegionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListTableflowV1RegionsRequest
 */
 func (a *RegionsTableflowV1ApiService) ListTableflowV1Regions(ctx _context.Context) ApiListTableflowV1RegionsRequest {
 	return ApiListTableflowV1RegionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return TableflowV1RegionList
+//
+//	@return TableflowV1RegionList
 func (a *RegionsTableflowV1ApiService) ListTableflowV1RegionsExecute(r ApiListTableflowV1RegionsRequest) (TableflowV1RegionList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | The storage type.  | 
+**TablePath** | Pointer to **string** | The current storage path where the data and metadata is stored for this table | [optional] [readonly] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+
+### GetTablePath
+
+`func (o *TableflowV1ManagedStorageSpec) GetTablePath() string`
+
+GetTablePath returns the TablePath field if non-nil, zero value otherwise.
+
+### GetTablePathOk
+
+`func (o *TableflowV1ManagedStorageSpec) GetTablePathOk() (*string, bool)`
+
+GetTablePathOk returns a tuple with the TablePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTablePath
+
+`func (o *TableflowV1ManagedStorageSpec) SetTablePath(v string)`
+
+SetTablePath sets TablePath field to given value.
+
+### HasTablePath
+
+`func (o *TableflowV1ManagedStorageSpec) HasTablePath() bool`
+
+HasTablePath returns a boolean if a field has been set.
 
 
 ### AsTableflowV1TableflowTopicSpecStorageOneOf

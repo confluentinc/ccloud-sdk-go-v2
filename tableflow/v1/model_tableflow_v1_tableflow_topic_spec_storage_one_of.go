@@ -33,20 +33,19 @@ import (
 
 // TableflowV1TableflowTopicSpecStorageOneOf - struct for TableflowV1TableflowTopicSpecStorageOneOf
 type TableflowV1TableflowTopicSpecStorageOneOf struct {
-	TableflowV1ByobAwsSpec *TableflowV1ByobAwsSpec
+	TableflowV1ByobAwsSpec        *TableflowV1ByobAwsSpec
 	TableflowV1ManagedStorageSpec *TableflowV1ManagedStorageSpec
 }
 
 // TableflowV1ByobAwsSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1ByobAwsSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
 func TableflowV1ByobAwsSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *TableflowV1ByobAwsSpec) TableflowV1TableflowTopicSpecStorageOneOf {
-	return TableflowV1TableflowTopicSpecStorageOneOf{ TableflowV1ByobAwsSpec: v}
+	return TableflowV1TableflowTopicSpecStorageOneOf{TableflowV1ByobAwsSpec: v}
 }
 
 // TableflowV1ManagedStorageSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1ManagedStorageSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
 func TableflowV1ManagedStorageSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *TableflowV1ManagedStorageSpec) TableflowV1TableflowTopicSpecStorageOneOf {
-	return TableflowV1TableflowTopicSpecStorageOneOf{ TableflowV1ManagedStorageSpec: v}
+	return TableflowV1TableflowTopicSpecStorageOneOf{TableflowV1ManagedStorageSpec: v}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte) error {
@@ -131,7 +130,7 @@ func (src TableflowV1TableflowTopicSpecStorageOneOf) MarshalJSON() ([]byte, erro
 }
 
 // Get the actual instance
-func (obj *TableflowV1TableflowTopicSpecStorageOneOf) GetActualInstance() (interface{}) {
+func (obj *TableflowV1TableflowTopicSpecStorageOneOf) GetActualInstance() interface{} {
 	if obj.TableflowV1ByobAwsSpec != nil {
 		return obj.TableflowV1ByobAwsSpec
 	}
@@ -183,5 +182,3 @@ func (v *NullableTableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

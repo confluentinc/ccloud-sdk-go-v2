@@ -41,7 +41,7 @@ type TableflowV1CatalogIntegrationUpdateSpec struct {
 	// Indicates whether the Catalog Integration should be suspended.
 	Suspended *bool `json:"suspended,omitempty"`
 	// The integration config
-	Config TableflowV1CatalogIntegrationUpdateSpecConfigOneOf `json:"config,omitempty"`
+	Config *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which the target Kafka cluster belongs.
 	Environment GlobalObjectReference `json:"environment,omitempty"`
 	// The kafka cluster of the topic for which Tableflow is enabled
@@ -52,9 +52,8 @@ type TableflowV1CatalogIntegrationUpdateSpec struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTableflowV1CatalogIntegrationUpdateSpec(config TableflowV1CatalogIntegrationUpdateSpecConfigOneOf, environment GlobalObjectReference, kafkaCluster EnvScopedObjectReference) *TableflowV1CatalogIntegrationUpdateSpec {
+func NewTableflowV1CatalogIntegrationUpdateSpec(environment GlobalObjectReference, kafkaCluster EnvScopedObjectReference) *TableflowV1CatalogIntegrationUpdateSpec {
 	this := TableflowV1CatalogIntegrationUpdateSpec{}
-	this.Config = config
 	this.Environment = environment
 	this.KafkaCluster = kafkaCluster
 	return &this
@@ -132,28 +131,36 @@ func (o *TableflowV1CatalogIntegrationUpdateSpec) SetSuspended(v bool) {
 	o.Suspended = &v
 }
 
-// GetConfig returns the Config field value
+// GetConfig returns the Config field value if set, zero value otherwise.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) GetConfig() TableflowV1CatalogIntegrationUpdateSpecConfigOneOf {
-	if o == nil {
+	if o == nil || o.Config == nil {
 		var ret TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
 		return ret
 	}
-
-	return o.Config
+	return *o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) GetConfigOk() (*TableflowV1CatalogIntegrationUpdateSpecConfigOneOf, bool) {
-	if o == nil  {
+	if o == nil || o.Config == nil {
 		return nil, false
 	}
-	return &o.Config, true
+	return o.Config, true
 }
 
-// SetConfig sets field value
+// HasConfig returns a boolean if a field has been set.
+func (o *TableflowV1CatalogIntegrationUpdateSpec) HasConfig() bool {
+	if o != nil && o.Config != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfig gets a reference to the given TableflowV1CatalogIntegrationUpdateSpecConfigOneOf and assigns it to the Config field.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) SetConfig(v TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) {
-	o.Config = v
+	o.Config = &v
 }
 
 // GetEnvironment returns the Environment field value
@@ -169,7 +176,7 @@ func (o *TableflowV1CatalogIntegrationUpdateSpec) GetEnvironment() GlobalObjectR
 // GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) GetEnvironmentOk() (*GlobalObjectReference, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Environment, true
@@ -193,7 +200,7 @@ func (o *TableflowV1CatalogIntegrationUpdateSpec) GetKafkaCluster() EnvScopedObj
 // GetKafkaClusterOk returns a tuple with the KafkaCluster field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) GetKafkaClusterOk() (*EnvScopedObjectReference, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.KafkaCluster, true
@@ -206,41 +213,41 @@ func (o *TableflowV1CatalogIntegrationUpdateSpec) SetKafkaCluster(v EnvScopedObj
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationUpdateSpec) Redact() {
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Suspended)
-    o.recurseRedact(&o.Config)
-    o.recurseRedact(&o.Environment)
-    o.recurseRedact(&o.KafkaCluster)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Suspended)
+	o.recurseRedact(o.Config)
+	o.recurseRedact(&o.Environment)
+	o.recurseRedact(&o.KafkaCluster)
 }
 
 func (o *TableflowV1CatalogIntegrationUpdateSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1CatalogIntegrationUpdateSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1CatalogIntegrationUpdateSpec) MarshalJSON() ([]byte, error) {
@@ -251,7 +258,7 @@ func (o TableflowV1CatalogIntegrationUpdateSpec) MarshalJSON() ([]byte, error) {
 	if o.Suspended != nil {
 		toSerialize["suspended"] = o.Suspended
 	}
-	if true {
+	if o.Config != nil {
 		toSerialize["config"] = o.Config
 	}
 	if true {
@@ -306,5 +313,3 @@ func (v *NullableTableflowV1CatalogIntegrationUpdateSpec) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
