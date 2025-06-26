@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the catalog integration | [optional] 
 **Suspended** | Pointer to **bool** | Indicates whether the Catalog Integration should be suspended. | [optional] 
-**Config** | [**TableflowV1CatalogIntegrationUpdateSpecConfigOneOf**](TableflowV1CatalogIntegrationUpdateSpecConfigOneOf.md) | The integration config | 
+**Config** | Pointer to [**TableflowV1CatalogIntegrationUpdateSpecConfigOneOf**](TableflowV1CatalogIntegrationUpdateSpecConfigOneOf.md) | The integration config | [optional] 
 **Environment** | [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which the target Kafka cluster belongs. | 
 **KafkaCluster** | [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The kafka cluster of the topic for which Tableflow is enabled | 
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewTableflowV1CatalogIntegrationUpdateSpec
 
-`func NewTableflowV1CatalogIntegrationUpdateSpec(config TableflowV1CatalogIntegrationUpdateSpecConfigOneOf, environment GlobalObjectReference, kafkaCluster EnvScopedObjectReference, ) *TableflowV1CatalogIntegrationUpdateSpec`
+`func NewTableflowV1CatalogIntegrationUpdateSpec(environment GlobalObjectReference, kafkaCluster EnvScopedObjectReference, ) *TableflowV1CatalogIntegrationUpdateSpec`
 
 NewTableflowV1CatalogIntegrationUpdateSpec instantiates a new TableflowV1CatalogIntegrationUpdateSpec object
 This constructor will assign default values to properties that have it defined,
@@ -98,6 +98,11 @@ and a boolean to check if the value has been set.
 
 SetConfig sets Config field to given value.
 
+### HasConfig
+
+`func (o *TableflowV1CatalogIntegrationUpdateSpec) HasConfig() bool`
+
+HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 

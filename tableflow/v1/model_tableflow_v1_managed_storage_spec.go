@@ -36,8 +36,10 @@ import (
 
 // TableflowV1ManagedStorageSpec The storage config for confluent managed Tableflow enabled topic.
 type TableflowV1ManagedStorageSpec struct {
-	// The storage type. 
+	// The storage type.
 	Kind string `json:"kind,omitempty"`
+	// The current storage path where the data and metadata is stored for this table
+	TablePath *string `json:"table_path,omitempty"`
 }
 
 // NewTableflowV1ManagedStorageSpec instantiates a new TableflowV1ManagedStorageSpec object
@@ -71,7 +73,7 @@ func (o *TableflowV1ManagedStorageSpec) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1ManagedStorageSpec) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -82,45 +84,81 @@ func (o *TableflowV1ManagedStorageSpec) SetKind(v string) {
 	o.Kind = v
 }
 
+// GetTablePath returns the TablePath field value if set, zero value otherwise.
+func (o *TableflowV1ManagedStorageSpec) GetTablePath() string {
+	if o == nil || o.TablePath == nil {
+		var ret string
+		return ret
+	}
+	return *o.TablePath
+}
+
+// GetTablePathOk returns a tuple with the TablePath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1ManagedStorageSpec) GetTablePathOk() (*string, bool) {
+	if o == nil || o.TablePath == nil {
+		return nil, false
+	}
+	return o.TablePath, true
+}
+
+// HasTablePath returns a boolean if a field has been set.
+func (o *TableflowV1ManagedStorageSpec) HasTablePath() bool {
+	if o != nil && o.TablePath != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTablePath gets a reference to the given string and assigns it to the TablePath field.
+func (o *TableflowV1ManagedStorageSpec) SetTablePath(v string) {
+	o.TablePath = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1ManagedStorageSpec) Redact() {
-    o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(o.TablePath)
 }
 
 func (o *TableflowV1ManagedStorageSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1ManagedStorageSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1ManagedStorageSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
+	}
+	if o.TablePath != nil {
+		toSerialize["table_path"] = o.TablePath
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -168,5 +206,3 @@ func (v *NullableTableflowV1ManagedStorageSpec) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

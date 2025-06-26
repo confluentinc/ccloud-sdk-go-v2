@@ -4478,6 +4478,12 @@ components:
           example: cspi-stgce89r7
           type: string
           x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          readOnly: true
+          type: string
       required:
       - bucket_name
       - kind
@@ -4493,6 +4499,12 @@ components:
           - Managed
           type: string
           x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          readOnly: true
+          type: string
       required:
       - kind
       type: object
@@ -4662,7 +4674,6 @@ components:
           example:
             id: lkc-00000
       required:
-      - config
       - environment
       - kafka_cluster
       type: object
