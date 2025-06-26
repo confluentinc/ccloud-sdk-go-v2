@@ -14,6 +14,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -256,7 +260,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Regions
       tags:
       - Regions (tableflow/v1)
@@ -584,7 +587,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Tableflow Topics
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -968,7 +970,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Create a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -1317,7 +1318,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Delete a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -1659,7 +1659,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Read a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -2055,7 +2054,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Update a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -2422,7 +2420,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Catalog Integrations
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -2806,7 +2803,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Create a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3147,7 +3143,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Delete a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3490,7 +3485,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Read a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3874,7 +3868,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Update a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -4478,6 +4471,12 @@ components:
           example: cspi-stgce89r7
           type: string
           x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          readOnly: true
+          type: string
       required:
       - bucket_name
       - kind
@@ -4493,6 +4492,12 @@ components:
           - Managed
           type: string
           x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          readOnly: true
+          type: string
       required:
       - kind
       type: object
@@ -4547,6 +4552,34 @@ components:
       - kind
       - warehouse
       type: object
+    tableflow.v1.CatalogIntegrationUnitySpec:
+      description: The catalog integration connection config for Unity Catalog.
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - Unity
+          type: string
+        workspace_endpoint:
+          description: The workspace URL of the Unity Catalog.
+          example: https://user1.cloud.databricks.com
+          type: string
+        catalog_name:
+          description: The storage credential name of the Unity Catalog.
+          type: string
+        client_id:
+          description: The client ID of the catalog integration.
+          type: string
+        client_secret:
+          description: The client secret of the catalog integration.
+          type: string
+      required:
+      - catalog_name
+      - client_id
+      - client_secret
+      - kind
+      - workspace_endpoint
+      type: object
     tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec:
       description: The catalog integration connection config for Snowflake Open Catalog
         (update operations).
@@ -4585,6 +4618,30 @@ components:
           - AwsGlue
           type: string
           x-immutable: true
+      required:
+      - kind
+      type: object
+    tableflow.v1.CatalogIntegrationUnityUpdateSpec:
+      description: The catalog integration connection config for Unity Catalog.
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - Unity
+          type: string
+        workspace_endpoint:
+          description: The workspace URL of the Unity Catalog.
+          example: https://user1.cloud.databricks.com
+          type: string
+        catalog_name:
+          description: The storage credential name of the Unity Catalog.
+          type: string
+        client_id:
+          description: The client ID of the catalog integration.
+          type: string
+        client_secret:
+          description: The client secret of the catalog integration.
+          type: string
       required:
       - kind
       type: object
@@ -4643,10 +4700,12 @@ components:
             mapping:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
+              Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
         environment:
@@ -4662,7 +4721,6 @@ components:
           example:
             id: lkc-00000
       required:
-      - config
       - environment
       - kafka_cluster
       type: object
@@ -4921,10 +4979,12 @@ components:
             mapping:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
+              Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationSpecConfigOneOf
         environment:
@@ -5257,11 +5317,3 @@ components:
         API Key Secret as the password.
       scheme: basic
       type: http
-    confluent-sts-access-token:
-      description: Authenticate with Confluent API using this credentials (JSON Web
-        Tokens) following OAuth 2.0.
-      flows:
-        clientCredentials:
-          scopes: {}
-          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
-      type: oauth2

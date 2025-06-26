@@ -39,10 +39,10 @@ type TableflowV1TableflowTopicUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind *string `json:"kind,omitempty"`
-	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	Spec *TableflowV1TableflowTopicSpecUpdate `json:"spec,omitempty"`
-	Status *TableflowV1TableflowTopicStatus `json:"status,omitempty"`
+	Kind     *string                              `json:"kind,omitempty"`
+	Metadata *ObjectMeta                          `json:"metadata,omitempty"`
+	Spec     *TableflowV1TableflowTopicSpecUpdate `json:"spec,omitempty"`
+	Status   *TableflowV1TableflowTopicStatus     `json:"status,omitempty"`
 }
 
 // NewTableflowV1TableflowTopicUpdate instantiates a new TableflowV1TableflowTopicUpdate object
@@ -224,41 +224,41 @@ func (o *TableflowV1TableflowTopicUpdate) SetStatus(v TableflowV1TableflowTopicS
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1TableflowTopicUpdate) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.Spec)
-    o.recurseRedact(o.Status)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.Spec)
+	o.recurseRedact(o.Status)
 }
 
 func (o *TableflowV1TableflowTopicUpdate) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1TableflowTopicUpdate) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1TableflowTopicUpdate) MarshalJSON() ([]byte, error) {
@@ -324,5 +324,3 @@ func (v *NullableTableflowV1TableflowTopicUpdate) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -36,11 +36,11 @@ import (
 
 // TableflowV1CatalogIntegrationStatus The status of the Catalog Integration
 type TableflowV1CatalogIntegrationStatus struct {
-	// The lifecycle phase of the catalog integration:    PENDING: sync to catalog integration is pending;    CONNECTED: catalog integration is connected and syncing;    FAILED: catalog integration failed. 
+	// The lifecycle phase of the catalog integration:    PENDING: sync to catalog integration is pending;    CONNECTED: catalog integration is connected and syncing;    FAILED: catalog integration failed.
 	Phase *string `json:"phase,omitempty"`
 	// Displayable error message if catalog integration is in a failed state.
 	ErrorMessage *string `json:"error_message,omitempty"`
-	// The date and time at which the catalog was last synced. It is represented in RFC3339 format and is in UTC. 
+	// The date and time at which the catalog was last synced. It is represented in RFC3339 format and is in UTC.
 	LastSyncAt *string `json:"last_sync_at,omitempty"`
 }
 
@@ -159,39 +159,39 @@ func (o *TableflowV1CatalogIntegrationStatus) SetLastSyncAt(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationStatus) Redact() {
-    o.recurseRedact(o.Phase)
-    o.recurseRedact(o.ErrorMessage)
-    o.recurseRedact(o.LastSyncAt)
+	o.recurseRedact(o.Phase)
+	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(o.LastSyncAt)
 }
 
 func (o *TableflowV1CatalogIntegrationStatus) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1CatalogIntegrationStatus) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1CatalogIntegrationStatus) MarshalJSON() ([]byte, error) {
@@ -251,5 +251,3 @@ func (v *NullableTableflowV1CatalogIntegrationStatus) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

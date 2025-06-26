@@ -36,7 +36,7 @@ import (
 
 // TableflowV1ByobAwsSpec The Tableflow storage config for BYOB enabled topic in AWS
 type TableflowV1ByobAwsSpec struct {
-	// The storage type 
+	// The storage type
 	Kind string `json:"kind,omitempty"`
 	// Bucket name
 	BucketName string `json:"bucket_name,omitempty"`
@@ -44,6 +44,8 @@ type TableflowV1ByobAwsSpec struct {
 	BucketRegion *string `json:"bucket_region,omitempty"`
 	// The provider integration id
 	ProviderIntegrationId string `json:"provider_integration_id,omitempty"`
+	// The current storage path where the data and metadata is stored for this table
+	TablePath *string `json:"table_path,omitempty"`
 }
 
 // NewTableflowV1ByobAwsSpec instantiates a new TableflowV1ByobAwsSpec object
@@ -79,7 +81,7 @@ func (o *TableflowV1ByobAwsSpec) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1ByobAwsSpec) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -103,7 +105,7 @@ func (o *TableflowV1ByobAwsSpec) GetBucketName() string {
 // GetBucketNameOk returns a tuple with the BucketName field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1ByobAwsSpec) GetBucketNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BucketName, true
@@ -159,7 +161,7 @@ func (o *TableflowV1ByobAwsSpec) GetProviderIntegrationId() string {
 // GetProviderIntegrationIdOk returns a tuple with the ProviderIntegrationId field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1ByobAwsSpec) GetProviderIntegrationIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ProviderIntegrationId, true
@@ -170,42 +172,75 @@ func (o *TableflowV1ByobAwsSpec) SetProviderIntegrationId(v string) {
 	o.ProviderIntegrationId = v
 }
 
+// GetTablePath returns the TablePath field value if set, zero value otherwise.
+func (o *TableflowV1ByobAwsSpec) GetTablePath() string {
+	if o == nil || o.TablePath == nil {
+		var ret string
+		return ret
+	}
+	return *o.TablePath
+}
+
+// GetTablePathOk returns a tuple with the TablePath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1ByobAwsSpec) GetTablePathOk() (*string, bool) {
+	if o == nil || o.TablePath == nil {
+		return nil, false
+	}
+	return o.TablePath, true
+}
+
+// HasTablePath returns a boolean if a field has been set.
+func (o *TableflowV1ByobAwsSpec) HasTablePath() bool {
+	if o != nil && o.TablePath != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTablePath gets a reference to the given string and assigns it to the TablePath field.
+func (o *TableflowV1ByobAwsSpec) SetTablePath(v string) {
+	o.TablePath = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1ByobAwsSpec) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.BucketName)
-    o.recurseRedact(o.BucketRegion)
-    o.recurseRedact(&o.ProviderIntegrationId)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.BucketName)
+	o.recurseRedact(o.BucketRegion)
+	o.recurseRedact(&o.ProviderIntegrationId)
+	o.recurseRedact(o.TablePath)
 }
 
 func (o *TableflowV1ByobAwsSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1ByobAwsSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1ByobAwsSpec) MarshalJSON() ([]byte, error) {
@@ -221,6 +256,9 @@ func (o TableflowV1ByobAwsSpec) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["provider_integration_id"] = o.ProviderIntegrationId
+	}
+	if o.TablePath != nil {
+		toSerialize["table_path"] = o.TablePath
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -268,5 +306,3 @@ func (v *NullableTableflowV1ByobAwsSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -33,20 +33,25 @@ import (
 
 // TableflowV1CatalogIntegrationSpecConfigOneOf - struct for TableflowV1CatalogIntegrationSpecConfigOneOf
 type TableflowV1CatalogIntegrationSpecConfigOneOf struct {
-	TableflowV1CatalogIntegrationAwsGlueSpec *TableflowV1CatalogIntegrationAwsGlueSpec
+	TableflowV1CatalogIntegrationAwsGlueSpec   *TableflowV1CatalogIntegrationAwsGlueSpec
 	TableflowV1CatalogIntegrationSnowflakeSpec *TableflowV1CatalogIntegrationSnowflakeSpec
+	TableflowV1CatalogIntegrationUnitySpec     *TableflowV1CatalogIntegrationUnitySpec
 }
 
 // TableflowV1CatalogIntegrationAwsGlueSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationAwsGlueSpec wrapped in TableflowV1CatalogIntegrationSpecConfigOneOf
 func TableflowV1CatalogIntegrationAwsGlueSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf(v *TableflowV1CatalogIntegrationAwsGlueSpec) TableflowV1CatalogIntegrationSpecConfigOneOf {
-	return TableflowV1CatalogIntegrationSpecConfigOneOf{ TableflowV1CatalogIntegrationAwsGlueSpec: v}
+	return TableflowV1CatalogIntegrationSpecConfigOneOf{TableflowV1CatalogIntegrationAwsGlueSpec: v}
 }
 
 // TableflowV1CatalogIntegrationSnowflakeSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationSnowflakeSpec wrapped in TableflowV1CatalogIntegrationSpecConfigOneOf
 func TableflowV1CatalogIntegrationSnowflakeSpecAsTableflowV1CatalogIntegrationSpecConfigOneOf(v *TableflowV1CatalogIntegrationSnowflakeSpec) TableflowV1CatalogIntegrationSpecConfigOneOf {
-	return TableflowV1CatalogIntegrationSpecConfigOneOf{ TableflowV1CatalogIntegrationSnowflakeSpec: v}
+	return TableflowV1CatalogIntegrationSpecConfigOneOf{TableflowV1CatalogIntegrationSnowflakeSpec: v}
 }
 
+// TableflowV1CatalogIntegrationUnitySpecAsTableflowV1CatalogIntegrationSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationUnitySpec wrapped in TableflowV1CatalogIntegrationSpecConfigOneOf
+func TableflowV1CatalogIntegrationUnitySpecAsTableflowV1CatalogIntegrationSpecConfigOneOf(v *TableflowV1CatalogIntegrationUnitySpec) TableflowV1CatalogIntegrationSpecConfigOneOf {
+	return TableflowV1CatalogIntegrationSpecConfigOneOf{TableflowV1CatalogIntegrationUnitySpec: v}
+}
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(data []byte) error {
@@ -82,6 +87,18 @@ func (dst *TableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(data []by
 		}
 	}
 
+	// check if the discriminator value is 'Unity'
+	if jsonDict["kind"] == "Unity" {
+		// try to unmarshal JSON data into TableflowV1CatalogIntegrationUnitySpec
+		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationUnitySpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1CatalogIntegrationUnitySpec, return on the first match
+		} else {
+			dst.TableflowV1CatalogIntegrationUnitySpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationSpecConfigOneOf as TableflowV1CatalogIntegrationUnitySpec: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'tableflow.v1.CatalogIntegrationAwsGlueSpec'
 	if jsonDict["kind"] == "tableflow.v1.CatalogIntegrationAwsGlueSpec" {
 		// try to unmarshal JSON data into TableflowV1CatalogIntegrationAwsGlueSpec
@@ -106,6 +123,18 @@ func (dst *TableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(data []by
 		}
 	}
 
+	// check if the discriminator value is 'tableflow.v1.CatalogIntegrationUnitySpec'
+	if jsonDict["kind"] == "tableflow.v1.CatalogIntegrationUnitySpec" {
+		// try to unmarshal JSON data into TableflowV1CatalogIntegrationUnitySpec
+		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationUnitySpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1CatalogIntegrationUnitySpec, return on the first match
+		} else {
+			dst.TableflowV1CatalogIntegrationUnitySpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationSpecConfigOneOf as TableflowV1CatalogIntegrationUnitySpec: %s", err.Error())
+		}
+	}
+
 	return nil
 }
 
@@ -127,17 +156,29 @@ func (src TableflowV1CatalogIntegrationSpecConfigOneOf) MarshalJSON() ([]byte, e
 		return buffer.Bytes(), err
 	}
 
+	if src.TableflowV1CatalogIntegrationUnitySpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.TableflowV1CatalogIntegrationUnitySpec)
+		return buffer.Bytes(), err
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
 // Get the actual instance
-func (obj *TableflowV1CatalogIntegrationSpecConfigOneOf) GetActualInstance() (interface{}) {
+func (obj *TableflowV1CatalogIntegrationSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.TableflowV1CatalogIntegrationAwsGlueSpec != nil {
 		return obj.TableflowV1CatalogIntegrationAwsGlueSpec
 	}
 
 	if obj.TableflowV1CatalogIntegrationSnowflakeSpec != nil {
 		return obj.TableflowV1CatalogIntegrationSnowflakeSpec
+	}
+
+	if obj.TableflowV1CatalogIntegrationUnitySpec != nil {
+		return obj.TableflowV1CatalogIntegrationUnitySpec
 	}
 
 	// all schemas are nil
@@ -183,5 +224,3 @@ func (v *NullableTableflowV1CatalogIntegrationSpecConfigOneOf) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

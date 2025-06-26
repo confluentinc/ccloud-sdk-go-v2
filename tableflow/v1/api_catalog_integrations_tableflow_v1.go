@@ -42,14 +42,14 @@ var (
 type CatalogIntegrationsTableflowV1Api interface {
 
 	/*
-	CreateTableflowV1CatalogIntegration Create a Catalog Integration
+			CreateTableflowV1CatalogIntegration Create a Catalog Integration
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create a catalog integration.
+		Make a request to create a catalog integration.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateTableflowV1CatalogIntegrationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateTableflowV1CatalogIntegrationRequest
 	*/
 	CreateTableflowV1CatalogIntegration(ctx _context.Context) ApiCreateTableflowV1CatalogIntegrationRequest
 
@@ -58,15 +58,15 @@ Make a request to create a catalog integration.
 	CreateTableflowV1CatalogIntegrationExecute(r ApiCreateTableflowV1CatalogIntegrationRequest) (TableflowV1CatalogIntegration, *_nethttp.Response, error)
 
 	/*
-	DeleteTableflowV1CatalogIntegration Delete a Catalog Integration
+			DeleteTableflowV1CatalogIntegration Delete a Catalog Integration
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete a catalog integration.
+		Make a request to delete a catalog integration.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the catalog integration.
-	 @return ApiDeleteTableflowV1CatalogIntegrationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the catalog integration.
+			 @return ApiDeleteTableflowV1CatalogIntegrationRequest
 	*/
 	DeleteTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiDeleteTableflowV1CatalogIntegrationRequest
 
@@ -74,15 +74,15 @@ Make a request to delete a catalog integration.
 	DeleteTableflowV1CatalogIntegrationExecute(r ApiDeleteTableflowV1CatalogIntegrationRequest) (*_nethttp.Response, error)
 
 	/*
-	GetTableflowV1CatalogIntegration Read a Catalog Integration
+			GetTableflowV1CatalogIntegration Read a Catalog Integration
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a catalog integration.
+		Make a request to read a catalog integration.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the catalog integration.
-	 @return ApiGetTableflowV1CatalogIntegrationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the catalog integration.
+			 @return ApiGetTableflowV1CatalogIntegrationRequest
 	*/
 	GetTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiGetTableflowV1CatalogIntegrationRequest
 
@@ -91,14 +91,14 @@ Make a request to read a catalog integration.
 	GetTableflowV1CatalogIntegrationExecute(r ApiGetTableflowV1CatalogIntegrationRequest) (TableflowV1CatalogIntegration, *_nethttp.Response, error)
 
 	/*
-	ListTableflowV1CatalogIntegrations List of Catalog Integrations
+			ListTableflowV1CatalogIntegrations List of Catalog Integrations
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all catalog integrations.
+		Retrieve a sorted, filtered, paginated list of all catalog integrations.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListTableflowV1CatalogIntegrationsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListTableflowV1CatalogIntegrationsRequest
 	*/
 	ListTableflowV1CatalogIntegrations(ctx _context.Context) ApiListTableflowV1CatalogIntegrationsRequest
 
@@ -107,17 +107,17 @@ Retrieve a sorted, filtered, paginated list of all catalog integrations.
 	ListTableflowV1CatalogIntegrationsExecute(r ApiListTableflowV1CatalogIntegrationsRequest) (TableflowV1CatalogIntegrationList, *_nethttp.Response, error)
 
 	/*
-	UpdateTableflowV1CatalogIntegration Update a Catalog Integration
+			UpdateTableflowV1CatalogIntegration Update a Catalog Integration
 
-	[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update a catalog integration.
+		Make a request to update a catalog integration.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the catalog integration.
-	 @return ApiUpdateTableflowV1CatalogIntegrationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the catalog integration.
+			 @return ApiUpdateTableflowV1CatalogIntegrationRequest
 	*/
 	UpdateTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiUpdateTableflowV1CatalogIntegrationRequest
 
@@ -130,8 +130,8 @@ Make a request to update a catalog integration.
 type CatalogIntegrationsTableflowV1ApiService service
 
 type ApiCreateTableflowV1CatalogIntegrationRequest struct {
-	ctx _context.Context
-	ApiService CatalogIntegrationsTableflowV1Api
+	ctx                           _context.Context
+	ApiService                    CatalogIntegrationsTableflowV1Api
 	tableflowV1CatalogIntegration *TableflowV1CatalogIntegration
 }
 
@@ -151,18 +151,19 @@ CreateTableflowV1CatalogIntegration Create a Catalog Integration
 
 Make a request to create a catalog integration.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTableflowV1CatalogIntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTableflowV1CatalogIntegrationRequest
 */
 func (a *CatalogIntegrationsTableflowV1ApiService) CreateTableflowV1CatalogIntegration(ctx _context.Context) ApiCreateTableflowV1CatalogIntegrationRequest {
 	return ApiCreateTableflowV1CatalogIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return TableflowV1CatalogIntegration
+//
+//	@return TableflowV1CatalogIntegration
 func (a *CatalogIntegrationsTableflowV1ApiService) CreateTableflowV1CatalogIntegrationExecute(r ApiCreateTableflowV1CatalogIntegrationRequest) (TableflowV1CatalogIntegration, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -300,11 +301,11 @@ func (a *CatalogIntegrationsTableflowV1ApiService) CreateTableflowV1CatalogInteg
 }
 
 type ApiDeleteTableflowV1CatalogIntegrationRequest struct {
-	ctx _context.Context
-	ApiService CatalogIntegrationsTableflowV1Api
-	environment *string
+	ctx              _context.Context
+	ApiService       CatalogIntegrationsTableflowV1Api
+	environment      *string
 	specKafkaCluster *string
-	id string
+	id               string
 }
 
 // Scope the operation to the given environment.
@@ -312,6 +313,7 @@ func (r ApiDeleteTableflowV1CatalogIntegrationRequest) Environment(environment s
 	r.environment = &environment
 	return r
 }
+
 // Scope the operation to the given spec.kafka_cluster.
 func (r ApiDeleteTableflowV1CatalogIntegrationRequest) SpecKafkaCluster(specKafkaCluster string) ApiDeleteTableflowV1CatalogIntegrationRequest {
 	r.specKafkaCluster = &specKafkaCluster
@@ -329,15 +331,15 @@ DeleteTableflowV1CatalogIntegration Delete a Catalog Integration
 
 Make a request to delete a catalog integration.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the catalog integration.
- @return ApiDeleteTableflowV1CatalogIntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the catalog integration.
+	@return ApiDeleteTableflowV1CatalogIntegrationRequest
 */
 func (a *CatalogIntegrationsTableflowV1ApiService) DeleteTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiDeleteTableflowV1CatalogIntegrationRequest {
 	return ApiDeleteTableflowV1CatalogIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -466,11 +468,11 @@ func (a *CatalogIntegrationsTableflowV1ApiService) DeleteTableflowV1CatalogInteg
 }
 
 type ApiGetTableflowV1CatalogIntegrationRequest struct {
-	ctx _context.Context
-	ApiService CatalogIntegrationsTableflowV1Api
-	environment *string
+	ctx              _context.Context
+	ApiService       CatalogIntegrationsTableflowV1Api
+	environment      *string
 	specKafkaCluster *string
-	id string
+	id               string
 }
 
 // Scope the operation to the given environment.
@@ -478,6 +480,7 @@ func (r ApiGetTableflowV1CatalogIntegrationRequest) Environment(environment stri
 	r.environment = &environment
 	return r
 }
+
 // Scope the operation to the given spec.kafka_cluster.
 func (r ApiGetTableflowV1CatalogIntegrationRequest) SpecKafkaCluster(specKafkaCluster string) ApiGetTableflowV1CatalogIntegrationRequest {
 	r.specKafkaCluster = &specKafkaCluster
@@ -495,20 +498,21 @@ GetTableflowV1CatalogIntegration Read a Catalog Integration
 
 Make a request to read a catalog integration.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the catalog integration.
- @return ApiGetTableflowV1CatalogIntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the catalog integration.
+	@return ApiGetTableflowV1CatalogIntegrationRequest
 */
 func (a *CatalogIntegrationsTableflowV1ApiService) GetTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiGetTableflowV1CatalogIntegrationRequest {
 	return ApiGetTableflowV1CatalogIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return TableflowV1CatalogIntegration
+//
+//	@return TableflowV1CatalogIntegration
 func (a *CatalogIntegrationsTableflowV1ApiService) GetTableflowV1CatalogIntegrationExecute(r ApiGetTableflowV1CatalogIntegrationRequest) (TableflowV1CatalogIntegration, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -643,12 +647,12 @@ func (a *CatalogIntegrationsTableflowV1ApiService) GetTableflowV1CatalogIntegrat
 }
 
 type ApiListTableflowV1CatalogIntegrationsRequest struct {
-	ctx _context.Context
-	ApiService CatalogIntegrationsTableflowV1Api
-	environment *string
+	ctx              _context.Context
+	ApiService       CatalogIntegrationsTableflowV1Api
+	environment      *string
 	specKafkaCluster *string
-	pageSize *int32
-	pageToken *string
+	pageSize         *int32
+	pageToken        *string
 }
 
 // Filter the results by exact match for environment.
@@ -656,16 +660,19 @@ func (r ApiListTableflowV1CatalogIntegrationsRequest) Environment(environment st
 	r.environment = &environment
 	return r
 }
+
 // Filter the results by exact match for spec.kafka_cluster.
 func (r ApiListTableflowV1CatalogIntegrationsRequest) SpecKafkaCluster(specKafkaCluster string) ApiListTableflowV1CatalogIntegrationsRequest {
 	r.specKafkaCluster = &specKafkaCluster
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListTableflowV1CatalogIntegrationsRequest) PageSize(pageSize int32) ApiListTableflowV1CatalogIntegrationsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListTableflowV1CatalogIntegrationsRequest) PageToken(pageToken string) ApiListTableflowV1CatalogIntegrationsRequest {
 	r.pageToken = &pageToken
@@ -683,18 +690,19 @@ ListTableflowV1CatalogIntegrations List of Catalog Integrations
 
 Retrieve a sorted, filtered, paginated list of all catalog integrations.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListTableflowV1CatalogIntegrationsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListTableflowV1CatalogIntegrationsRequest
 */
 func (a *CatalogIntegrationsTableflowV1ApiService) ListTableflowV1CatalogIntegrations(ctx _context.Context) ApiListTableflowV1CatalogIntegrationsRequest {
 	return ApiListTableflowV1CatalogIntegrationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return TableflowV1CatalogIntegrationList
+//
+//	@return TableflowV1CatalogIntegrationList
 func (a *CatalogIntegrationsTableflowV1ApiService) ListTableflowV1CatalogIntegrationsExecute(r ApiListTableflowV1CatalogIntegrationsRequest) (TableflowV1CatalogIntegrationList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -824,9 +832,9 @@ func (a *CatalogIntegrationsTableflowV1ApiService) ListTableflowV1CatalogIntegra
 }
 
 type ApiUpdateTableflowV1CatalogIntegrationRequest struct {
-	ctx _context.Context
-	ApiService CatalogIntegrationsTableflowV1Api
-	id string
+	ctx                                        _context.Context
+	ApiService                                 CatalogIntegrationsTableflowV1Api
+	id                                         string
 	tableflowV1CatalogIntegrationUpdateRequest *TableflowV1CatalogIntegrationUpdateRequest
 }
 
@@ -846,22 +854,21 @@ UpdateTableflowV1CatalogIntegration Update a Catalog Integration
 
 Make a request to update a catalog integration.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the catalog integration.
- @return ApiUpdateTableflowV1CatalogIntegrationRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the catalog integration.
+	@return ApiUpdateTableflowV1CatalogIntegrationRequest
 */
 func (a *CatalogIntegrationsTableflowV1ApiService) UpdateTableflowV1CatalogIntegration(ctx _context.Context, id string) ApiUpdateTableflowV1CatalogIntegrationRequest {
 	return ApiUpdateTableflowV1CatalogIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return TableflowV1CatalogIntegration
+//
+//	@return TableflowV1CatalogIntegration
 func (a *CatalogIntegrationsTableflowV1ApiService) UpdateTableflowV1CatalogIntegrationExecute(r ApiUpdateTableflowV1CatalogIntegrationRequest) (TableflowV1CatalogIntegration, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch

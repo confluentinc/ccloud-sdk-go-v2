@@ -40,9 +40,9 @@ type TableflowV1TableFlowTopicConfigsSpec struct {
 	EnableCompaction *bool `json:"enable_compaction,omitempty"`
 	// This flag determines whether to enable partitioning for the Tableflow enabled topic.
 	EnablePartitioning *bool `json:"enable_partitioning,omitempty"`
-	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration)  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours). 
+	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration)  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours).
 	RetentionMs *string `json:"retention_ms,omitempty"`
-	// The strategy to handle record failures in the Tableflow enabled topic during materialization.  For `SKIP`, we skip the bad records and move to the next record,  and for `SUSPEND`, we suspend the materialization of the topic. 
+	// The strategy to handle record failures in the Tableflow enabled topic during materialization.  For `SKIP`, we skip the bad records and move to the next record,  and for `SUSPEND`, we suspend the materialization of the topic.
 	RecordFailureStrategy *string `json:"record_failure_strategy,omitempty"`
 }
 
@@ -197,40 +197,40 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) SetRecordFailureStrategy(v string
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1TableFlowTopicConfigsSpec) Redact() {
-    o.recurseRedact(o.EnableCompaction)
-    o.recurseRedact(o.EnablePartitioning)
-    o.recurseRedact(o.RetentionMs)
-    o.recurseRedact(o.RecordFailureStrategy)
+	o.recurseRedact(o.EnableCompaction)
+	o.recurseRedact(o.EnablePartitioning)
+	o.recurseRedact(o.RetentionMs)
+	o.recurseRedact(o.RecordFailureStrategy)
 }
 
 func (o *TableflowV1TableFlowTopicConfigsSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1TableFlowTopicConfigsSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1TableFlowTopicConfigsSpec) MarshalJSON() ([]byte, error) {
@@ -293,5 +293,3 @@ func (v *NullableTableflowV1TableFlowTopicConfigsSpec) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

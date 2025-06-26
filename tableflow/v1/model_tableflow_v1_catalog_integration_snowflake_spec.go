@@ -38,7 +38,7 @@ import (
 type TableflowV1CatalogIntegrationSnowflakeSpec struct {
 	// The type of the catalog integration.
 	Kind string `json:"kind,omitempty"`
-	// The catalog integration connection endpoint for Snowflake Open Catalog. 
+	// The catalog integration connection endpoint for Snowflake Open Catalog.
 	Endpoint string `json:"endpoint,omitempty"`
 	// The client ID of the catalog integration.
 	ClientId string `json:"client_id,omitempty"`
@@ -86,7 +86,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -110,7 +110,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetEndpoint() string {
 // GetEndpointOk returns a tuple with the Endpoint field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetEndpointOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Endpoint, true
@@ -134,7 +134,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetClientIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClientId, true
@@ -158,7 +158,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetClientSecret() string {
 // GetClientSecretOk returns a tuple with the ClientSecret field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetClientSecretOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ClientSecret, true
@@ -182,7 +182,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetWarehouse() string {
 // GetWarehouseOk returns a tuple with the Warehouse field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetWarehouseOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Warehouse, true
@@ -206,7 +206,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetAllowedScope() string {
 // GetAllowedScopeOk returns a tuple with the AllowedScope field value
 // and a boolean to check if the value has been set.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetAllowedScopeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AllowedScope, true
@@ -219,42 +219,42 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) SetAllowedScope(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) Redact() {
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Endpoint)
-    o.recurseRedact(&o.ClientId)
-    o.recurseRedact(&o.ClientSecret)
-    o.recurseRedact(&o.Warehouse)
-    o.recurseRedact(&o.AllowedScope)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Endpoint)
+	o.recurseRedact(&o.ClientId)
+	o.recurseRedact(&o.ClientSecret)
+	o.recurseRedact(&o.Warehouse)
+	o.recurseRedact(&o.AllowedScope)
 }
 
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o TableflowV1CatalogIntegrationSnowflakeSpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TableflowV1CatalogIntegrationSnowflakeSpec) MarshalJSON() ([]byte, error) {
@@ -323,5 +323,3 @@ func (v *NullableTableflowV1CatalogIntegrationSnowflakeSpec) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
