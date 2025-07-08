@@ -14,6 +14,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -51,6 +55,18 @@ tags:
     ## The Custom Connector Plugin Versions Model
     <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorPluginVersion" />
   name: Custom Connector Plugin Versions (connect/v1)
+- description: |-
+    [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Connector Runtimes](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Connector%20Runtimes-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+    List of supported runtime languages for Custom Connector Plugin. The list defines the supported
+    entries for confluent.custom.connect.plugin.runtime attribute in CustomConnectorPlugin object.
+    Each entry also defines the set of supported java versions for that runtime which can be specified during
+    connector provisioning via the confluent.custom.connect.plugin.java.version attribute.
+
+
+    ## The Custom Connector Runtimes Model
+    <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorRuntime" />
+  name: Custom Connector Runtimes (connect/v1)
 paths:
   /connect/v1/custom-connector-plugins:
     get:
@@ -3757,6 +3773,299 @@ paths:
           request.AddParameter("application/json", "{\"version\":\"string\",\"sensitive_config_properties\":[\"passwords\",\"keys\",\"tokens\"],\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: Plugin Versioning APIs EA
+  /connect/v1/custom-connector-runtimes:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Connector Runtimes](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Connector%20Runtimes-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+        Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
+      operationId: listConnectV1CustomConnectorRuntimes
+      parameters:
+      - description: A pagination size for collection requests.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          maximum: 100
+          type: integer
+          x-max-page-items: 500
+        style: form
+      - description: An opaque pagination token for collection requests.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/connect.v1.CustomConnectorRuntimeList'
+          description: Custom Connector Runtime.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: List of Custom Connector Runtimes
+      tags:
+      - Custom Connector Runtimes (connect/v1)
+      x-request-access-name: Custom Connector Runtimes
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.confluent.cloud/connect/v1/custom-connector-runtimes \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/connect/v1/custom-connector-runtimes")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/connect/v1/custom-connector-runtimes\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/connect/v1/custom-connector-runtimes", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/connect/v1/custom-connector-runtimes",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/connect/v1/custom-connector-runtimes");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/connect/v1/custom-connector-runtimes");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    x-request-access-name: Custom Connector Runtimes
 components:
   responses:
     BadRequestError:
@@ -4263,6 +4572,86 @@ components:
           x-immutable: true
           x-one-of-name: ConnectV1CustomConnectorPluginVersionUploadSourceOneOf
       type: object
+    connect.v1.CustomConnectorRuntime:
+      description: |-
+        List of supported runtime languages for Custom Connector Plugin. The list defines the supported
+        entries for confluent.custom.connect.plugin.runtime attribute in CustomConnectorPlugin object.
+        Each entry also defines the set of supported java versions for that runtime which can be specified during
+        connector provisioning via the confluent.custom.connect.plugin.java.version attribute.
+
+
+        ## The Custom Connector Runtimes Model
+        <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorRuntime" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - connect/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - CustomConnectorRuntime
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        custom_connect_plugin_runtime_name:
+          description: |
+            Name of the runtime that is being used while provisioning a custom connector. This corresponds to
+            the property custom.connect.plugin.runtime in the connector configuration.
+          example: 3.9.0
+          readOnly: true
+          type: string
+        runtime_ak_version:
+          description: The underlying version of Apache Kafka which bundles the connect
+            runtime
+          example: 3.9.0
+          readOnly: true
+          type: string
+        supported_java_versions:
+          description: List of supported Java versions
+          example:
+          - "11"
+          - "17"
+          items:
+            type: string
+          readOnly: true
+          type: array
+        product_maturity:
+          description: |
+            The product maturity phase for the plugin runtime.
+            EA (Early Access), GA (Generally Available), or Preview.
+          example: GA
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - EA
+          - GA
+          - PREVIEW
+        end_of_life_at:
+          description: End of Life date for the runtime
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the runtime
+          example: Custom Connector Plugin runtime using AK 3.9.0 and supporting Java
+            11 and 17
+          readOnly: true
+          type: string
+      type: object
     connect.v1.PresignedUrlRequest:
       description: |
         Request schema of the presigned upload URL.
@@ -4441,6 +4830,59 @@ components:
               - metadata
               - upload_source
               - version
+              type: object
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    connect.v1.CustomConnectorRuntimeList:
+      description: |-
+        List of supported runtime languages for Custom Connector Plugin. The list defines the supported
+        entries for confluent.custom.connect.plugin.runtime attribute in CustomConnectorPlugin object.
+        Each entry also defines the set of supported java versions for that runtime which can be specified during
+        connector provisioning via the confluent.custom.connect.plugin.java.version attribute.
+
+
+        ## The Custom Connector Runtimes Model
+        <SchemaDefinition schemaRef="#/components/schemas/connect.v1.CustomConnectorRuntime" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - connect/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - CustomConnectorRuntimeList
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ListMeta'
+          - properties:
+              first:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-runtimes
+              last:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-runtimes?page_token=bcAOehAY8F16YD84Z1wT
+              prev:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-runtimes?page_token=YIXRY97wWYmwzrax4dld
+              next:
+                example: https://api.confluent.cloud/connect/v1/custom-connector-runtimes?page_token=UvmDWOB1iwfAIBPj6EYb
+        data:
+          description: A data property that contains an array of resource items. Each
+            entry in the array is a separate resource.
+          items:
+            allOf:
+            - $ref: '#/components/schemas/connect.v1.CustomConnectorRuntime'
+            - required:
+              - id
               type: object
           type: array
           uniqueItems: true

@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 *CustomConnectorPluginsConnectV1Api* | [**GetConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#getconnectv1customconnectorplugin) | **Get** /connect/v1/custom-connector-plugins/{id} | Read a Custom Connector Plugin
 *CustomConnectorPluginsConnectV1Api* | [**ListConnectV1CustomConnectorPlugins**](docs/CustomConnectorPluginsConnectV1Api.md#listconnectv1customconnectorplugins) | **Get** /connect/v1/custom-connector-plugins | List of Custom Connector Plugins
 *CustomConnectorPluginsConnectV1Api* | [**UpdateConnectV1CustomConnectorPlugin**](docs/CustomConnectorPluginsConnectV1Api.md#updateconnectv1customconnectorplugin) | **Patch** /connect/v1/custom-connector-plugins/{id} | Update a Custom Connector Plugin
+*CustomConnectorRuntimesConnectV1Api* | [**ListConnectV1CustomConnectorRuntimes**](docs/CustomConnectorRuntimesConnectV1Api.md#listconnectv1customconnectorruntimes) | **Get** /connect/v1/custom-connector-runtimes | List of Custom Connector Runtimes
 *PresignedUrlsConnectV1Api* | [**PresignedUploadUrlConnectV1PresignedUrl**](docs/PresignedUrlsConnectV1Api.md#presigneduploadurlconnectv1presignedurl) | **Post** /connect/v1/presigned-upload-url | Request a presigned upload URL for a new Custom Connector Plugin.
 
 
@@ -103,6 +104,8 @@ Class | Method | HTTP request | Description
  - [ConnectV1CustomConnectorPluginVersionList](docs/ConnectV1CustomConnectorPluginVersionList.md)
  - [ConnectV1CustomConnectorPluginVersionUpdate](docs/ConnectV1CustomConnectorPluginVersionUpdate.md)
  - [ConnectV1CustomConnectorPluginVersionUploadSourceOneOf](docs/ConnectV1CustomConnectorPluginVersionUploadSourceOneOf.md)
+ - [ConnectV1CustomConnectorRuntime](docs/ConnectV1CustomConnectorRuntime.md)
+ - [ConnectV1CustomConnectorRuntimeList](docs/ConnectV1CustomConnectorRuntimeList.md)
  - [ConnectV1PresignedUrl](docs/ConnectV1PresignedUrl.md)
  - [ConnectV1PresignedUrlRequest](docs/ConnectV1PresignedUrlRequest.md)
  - [ConnectV1UploadSourcePresignedUrl](docs/ConnectV1UploadSourcePresignedUrl.md)
