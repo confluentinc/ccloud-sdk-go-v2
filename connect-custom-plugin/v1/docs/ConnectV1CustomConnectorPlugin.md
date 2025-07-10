@@ -15,10 +15,9 @@ Name | Type | Description | Notes
 **ConnectorClass** | Pointer to **string** | Java class or alias for connector. You can get connector class from connector documentation provided by developer. | [optional] 
 **ConnectorType** | Pointer to **string** | Custom Connector type.  | [optional] 
 **Cloud** | Pointer to **string** | Cloud provider where the Custom Connector Plugin archive is uploaded. | [optional] [default to "AWS"]
-**SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the &#x60;sensitive_config_properties&#x60; of the plugin.  | [optional] 
+**SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.  | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUploadSourceOneOf**](ConnectV1CustomConnectorPluginUploadSourceOneOf.md) | Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
-**InitialPluginVersion** | Pointer to **string** | Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., &#x60;1.2.3&#x60;, &#x60;1.2.3-beta&#x60;, &#x60;1.2.3-rc.123&#x60;, &#x60;1.2.3-rc.123+build.456&#x60;).  | [optional] [default to "0.0.0"]
 
 ## Methods
 
@@ -388,31 +387,6 @@ SetRuntimeLanguage sets RuntimeLanguage field to given value.
 `func (o *ConnectV1CustomConnectorPlugin) HasRuntimeLanguage() bool`
 
 HasRuntimeLanguage returns a boolean if a field has been set.
-
-### GetInitialPluginVersion
-
-`func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersion() string`
-
-GetInitialPluginVersion returns the InitialPluginVersion field if non-nil, zero value otherwise.
-
-### GetInitialPluginVersionOk
-
-`func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersionOk() (*string, bool)`
-
-GetInitialPluginVersionOk returns a tuple with the InitialPluginVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInitialPluginVersion
-
-`func (o *ConnectV1CustomConnectorPlugin) SetInitialPluginVersion(v string)`
-
-SetInitialPluginVersion sets InitialPluginVersion field to given value.
-
-### HasInitialPluginVersion
-
-`func (o *ConnectV1CustomConnectorPlugin) HasInitialPluginVersion() bool`
-
-HasInitialPluginVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

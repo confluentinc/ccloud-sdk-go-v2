@@ -79,12 +79,6 @@ Convenience method to wrap this instance of ConnectV1UploadSourcePresignedUrl in
 
 Convenience method to wrap this instance of ConnectV1UploadSourcePresignedUrl in ConnectV1CustomConnectorPluginUploadSourceOneOf
 
-### AsConnectV1CustomConnectorPluginVersionUploadSourceOneOf
-
-`func (s *ConnectV1UploadSourcePresignedUrl) AsConnectV1CustomConnectorPluginVersionUploadSourceOneOf() ConnectV1CustomConnectorPluginVersionUploadSourceOneOf`
-
-Convenience method to wrap this instance of ConnectV1UploadSourcePresignedUrl in ConnectV1CustomConnectorPluginVersionUploadSourceOneOf
-
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

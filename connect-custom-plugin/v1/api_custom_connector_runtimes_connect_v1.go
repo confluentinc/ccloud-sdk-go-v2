@@ -43,7 +43,7 @@ type CustomConnectorRuntimesConnectV1Api interface {
 	/*
 		ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 
-		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Connector Runtimes](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Connector%20Runtimes-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 
@@ -86,7 +86,7 @@ func (r ApiListConnectV1CustomConnectorRuntimesRequest) Execute() (ConnectV1Cust
 /*
 ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 
-[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Connector Runtimes](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Connector%20Runtimes-%23bc8540)](mailto:ccloud-api-access+connect-v1-early-access@confluent.io?subject=Request%20to%20join%20connect/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20connect/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 

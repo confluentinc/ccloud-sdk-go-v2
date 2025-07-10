@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **ContentFormat** | Pointer to **string** | Archive format of Custom Connector Plugin. | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of Custom Connector Plugin. | [optional] 
 **DocumentationLink** | Pointer to **string** | Document link of Custom Connector Plugin. | [optional] 
-**SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the &#x60;sensitive_config_properties&#x60; of the plugin.  | [optional] 
+**SensitiveConfigProperties** | Pointer to **[]string** | A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.  | [optional] 
 **UploadSource** | Pointer to [**ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf**](ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf.md) | Upload source of Custom Connector Plugin. Only required in &#x60;create&#x60; request, will be ignored in &#x60;read&#x60;, &#x60;update&#x60; or &#x60;list&#x60;. | [optional] 
 **RuntimeLanguage** | Pointer to **string** | Runtime language of Custom Connector Plugin. | [optional] [default to "JAVA"]
 
