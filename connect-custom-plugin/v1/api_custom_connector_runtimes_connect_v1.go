@@ -41,14 +41,14 @@ var (
 type CustomConnectorRuntimesConnectV1Api interface {
 
 	/*
-		ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
+			ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
+		Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListConnectV1CustomConnectorRuntimesRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListConnectV1CustomConnectorRuntimesRequest
 	*/
 	ListConnectV1CustomConnectorRuntimes(ctx _context.Context) ApiListConnectV1CustomConnectorRuntimesRequest
 
