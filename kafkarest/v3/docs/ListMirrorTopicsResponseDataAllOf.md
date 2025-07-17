@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **NumPartitions** | **int32** |  | 
 **MirrorLags** | [**MirrorLags**](MirrorLags.md) |  | 
 **MirrorStatus** | [**MirrorTopicStatus**](MirrorTopicStatus.md) |  | 
+**MirrorTopicError** | Pointer to **string** |  | [optional] 
 **StateTimeMs** | **int64** |  | 
 **MirrorStateTransitionErrors** | Pointer to [**[]LinkTaskError**](LinkTaskError.md) |  | [optional] 
 
@@ -151,6 +152,31 @@ and a boolean to check if the value has been set.
 
 SetMirrorStatus sets MirrorStatus field to given value.
 
+
+### GetMirrorTopicError
+
+`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicError() string`
+
+GetMirrorTopicError returns the MirrorTopicError field if non-nil, zero value otherwise.
+
+### GetMirrorTopicErrorOk
+
+`func (o *ListMirrorTopicsResponseDataAllOf) GetMirrorTopicErrorOk() (*string, bool)`
+
+GetMirrorTopicErrorOk returns a tuple with the MirrorTopicError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMirrorTopicError
+
+`func (o *ListMirrorTopicsResponseDataAllOf) SetMirrorTopicError(v string)`
+
+SetMirrorTopicError sets MirrorTopicError field to given value.
+
+### HasMirrorTopicError
+
+`func (o *ListMirrorTopicsResponseDataAllOf) HasMirrorTopicError() bool`
+
+HasMirrorTopicError returns a boolean if a field has been set.
 
 ### GetStateTimeMs
 
