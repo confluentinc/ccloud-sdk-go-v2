@@ -44,6 +44,7 @@ type ListMirrorTopicsResponseData struct {
 	NumPartitions               int32             `json:"num_partitions,omitempty"`
 	MirrorLags                  MirrorLags        `json:"mirror_lags,omitempty"`
 	MirrorStatus                MirrorTopicStatus `json:"mirror_status,omitempty"`
+	MirrorTopicError            *string           `json:"mirror_topic_error,omitempty"`
 	StateTimeMs                 int64             `json:"state_time_ms,omitempty"`
 	MirrorStateTransitionErrors *[]LinkTaskError  `json:"mirror_state_transition_errors,omitempty"`
 }
@@ -266,6 +267,38 @@ func (o *ListMirrorTopicsResponseData) SetMirrorStatus(v MirrorTopicStatus) {
 	o.MirrorStatus = v
 }
 
+// GetMirrorTopicError returns the MirrorTopicError field value if set, zero value otherwise.
+func (o *ListMirrorTopicsResponseData) GetMirrorTopicError() string {
+	if o == nil || o.MirrorTopicError == nil {
+		var ret string
+		return ret
+	}
+	return *o.MirrorTopicError
+}
+
+// GetMirrorTopicErrorOk returns a tuple with the MirrorTopicError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListMirrorTopicsResponseData) GetMirrorTopicErrorOk() (*string, bool) {
+	if o == nil || o.MirrorTopicError == nil {
+		return nil, false
+	}
+	return o.MirrorTopicError, true
+}
+
+// HasMirrorTopicError returns a boolean if a field has been set.
+func (o *ListMirrorTopicsResponseData) HasMirrorTopicError() bool {
+	if o != nil && o.MirrorTopicError != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMirrorTopicError gets a reference to the given string and assigns it to the MirrorTopicError field.
+func (o *ListMirrorTopicsResponseData) SetMirrorTopicError(v string) {
+	o.MirrorTopicError = &v
+}
+
 // GetStateTimeMs returns the StateTimeMs field value
 func (o *ListMirrorTopicsResponseData) GetStateTimeMs() int64 {
 	if o == nil {
@@ -332,6 +365,7 @@ func (o *ListMirrorTopicsResponseData) Redact() {
 	o.recurseRedact(&o.NumPartitions)
 	o.recurseRedact(&o.MirrorLags)
 	o.recurseRedact(&o.MirrorStatus)
+	o.recurseRedact(o.MirrorTopicError)
 	o.recurseRedact(&o.StateTimeMs)
 	o.recurseRedact(o.MirrorStateTransitionErrors)
 }
@@ -391,6 +425,9 @@ func (o ListMirrorTopicsResponseData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["mirror_status"] = o.MirrorStatus
+	}
+	if o.MirrorTopicError != nil {
+		toSerialize["mirror_topic_error"] = o.MirrorTopicError
 	}
 	if true {
 		toSerialize["state_time_ms"] = o.StateTimeMs

@@ -16330,6 +16330,21 @@ components:
       - PENDING_SETUP_FOR_RESTORE
       - PENDING_RESTORE
       type: string
+    MirrorTopicError:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - NOT_SET
+      - NO_ERROR
+      - SOURCE_TOPIC_MAY_BE_DELETED
+      - SOURCE_TOPIC_ID_CHANGED
+      - SOURCE_PARTITIONS_DECREASED
+      - NON_MONOTONIC_LOG_APPEND_EPOCH
+      - UNEXPECTED_TRUNCATION
+      - UNSUPPORTED_MESSAGE_FORMAT
+      - NON_MONOTONIC_SOURCE_EPOCH
+      - ILLEGAL_STATE
+      - UNSUPPORTED_MIRROR_STATE
     AnyUnevenLoadStatus:
       type: string
       x-extensible-enum:
@@ -17484,6 +17499,21 @@ components:
           $ref: '#/components/schemas/MirrorLags'
         mirror_status:
           $ref: '#/components/schemas/MirrorTopicStatus'
+        mirror_topic_error:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - NOT_SET
+          - NO_ERROR
+          - SOURCE_TOPIC_MAY_BE_DELETED
+          - SOURCE_TOPIC_ID_CHANGED
+          - SOURCE_PARTITIONS_DECREASED
+          - NON_MONOTONIC_LOG_APPEND_EPOCH
+          - UNEXPECTED_TRUNCATION
+          - UNSUPPORTED_MESSAGE_FORMAT
+          - NON_MONOTONIC_SOURCE_EPOCH
+          - ILLEGAL_STATE
+          - UNSUPPORTED_MIRROR_STATE
         state_time_ms:
           format: int64
           type: integer
