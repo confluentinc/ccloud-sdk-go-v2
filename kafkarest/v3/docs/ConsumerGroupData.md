@@ -11,15 +11,17 @@ Name | Type | Description | Notes
 **IsSimple** | **bool** |  | 
 **PartitionAssignor** | **string** |  | 
 **State** | **string** |  | 
+**Type** | **string** |  | 
+**IsMixedConsumerGroup** | **bool** |  | 
 **Coordinator** | [**Relationship**](Relationship.md) |  | 
-**Consumer** | Pointer to [**Relationship**](Relationship.md) |  | [optional] 
+**Consumers** | [**Relationship**](Relationship.md) |  | 
 **LagSummary** | [**Relationship**](Relationship.md) |  | 
 
 ## Methods
 
 ### NewConsumerGroupData
 
-`func NewConsumerGroupData(kind string, metadata ResourceMetadata, clusterId string, consumerGroupId string, isSimple bool, partitionAssignor string, state string, coordinator Relationship, lagSummary Relationship, ) *ConsumerGroupData`
+`func NewConsumerGroupData(kind string, metadata ResourceMetadata, clusterId string, consumerGroupId string, isSimple bool, partitionAssignor string, state string, type_ string, isMixedConsumerGroup bool, coordinator Relationship, consumers Relationship, lagSummary Relationship, ) *ConsumerGroupData`
 
 NewConsumerGroupData instantiates a new ConsumerGroupData object
 This constructor will assign default values to properties that have it defined,
@@ -174,6 +176,46 @@ and a boolean to check if the value has been set.
 SetState sets State field to given value.
 
 
+### GetType
+
+`func (o *ConsumerGroupData) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *ConsumerGroupData) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *ConsumerGroupData) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetIsMixedConsumerGroup
+
+`func (o *ConsumerGroupData) GetIsMixedConsumerGroup() bool`
+
+GetIsMixedConsumerGroup returns the IsMixedConsumerGroup field if non-nil, zero value otherwise.
+
+### GetIsMixedConsumerGroupOk
+
+`func (o *ConsumerGroupData) GetIsMixedConsumerGroupOk() (*bool, bool)`
+
+GetIsMixedConsumerGroupOk returns a tuple with the IsMixedConsumerGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMixedConsumerGroup
+
+`func (o *ConsumerGroupData) SetIsMixedConsumerGroup(v bool)`
+
+SetIsMixedConsumerGroup sets IsMixedConsumerGroup field to given value.
+
+
 ### GetCoordinator
 
 `func (o *ConsumerGroupData) GetCoordinator() Relationship`
@@ -194,30 +236,25 @@ and a boolean to check if the value has been set.
 SetCoordinator sets Coordinator field to given value.
 
 
-### GetConsumer
+### GetConsumers
 
-`func (o *ConsumerGroupData) GetConsumer() Relationship`
+`func (o *ConsumerGroupData) GetConsumers() Relationship`
 
-GetConsumer returns the Consumer field if non-nil, zero value otherwise.
+GetConsumers returns the Consumers field if non-nil, zero value otherwise.
 
-### GetConsumerOk
+### GetConsumersOk
 
-`func (o *ConsumerGroupData) GetConsumerOk() (*Relationship, bool)`
+`func (o *ConsumerGroupData) GetConsumersOk() (*Relationship, bool)`
 
-GetConsumerOk returns a tuple with the Consumer field if it's non-nil, zero value otherwise
+GetConsumersOk returns a tuple with the Consumers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConsumer
+### SetConsumers
 
-`func (o *ConsumerGroupData) SetConsumer(v Relationship)`
+`func (o *ConsumerGroupData) SetConsumers(v Relationship)`
 
-SetConsumer sets Consumer field to given value.
+SetConsumers sets Consumers field to given value.
 
-### HasConsumer
-
-`func (o *ConsumerGroupData) HasConsumer() bool`
-
-HasConsumer returns a boolean if a field has been set.
 
 ### GetLagSummary
 

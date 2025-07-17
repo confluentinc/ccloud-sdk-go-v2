@@ -2306,6 +2306,8 @@ paths:
                   is_simple: false
                   partition_assignor: org.apache.kafka.clients.consumer.RoundRobinAssignor
                   state: STABLE
+                  type: CLASSIC
+                  is_mixed_consumer_group: false
                   coordinator:
                     related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
                   consumers:
@@ -2321,6 +2323,8 @@ paths:
                   is_simple: false
                   partition_assignor: org.apache.kafka.clients.consumer.StickyAssignor
                   state: PREPARING_REBALANCE
+                  type: CLASSIC
+                  is_mixed_consumer_group: false
                   coordinator:
                     related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/2
                   consumers:
@@ -2336,6 +2340,8 @@ paths:
                   is_simple: false
                   partition_assignor: org.apache.kafka.clients.consumer.RangeAssignor
                   state: DEAD
+                  type: CLASSIC
+                  is_mixed_consumer_group: false
                   coordinator:
                     related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/3
                   consumers:
@@ -2554,6 +2560,8 @@ paths:
                 is_simple: false
                 partition_assignor: org.apache.kafka.clients.consumer.RoundRobinAssignor
                 state: STABLE
+                type: CLASSIC
+                is_mixed_consumer_group: false
                 coordinator:
                   related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
                 consumers:
@@ -4878,7 +4886,8 @@ paths:
       description: |-
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Increase the number of partitions for a topic.
+        Increase the number of partitions for a topic. To update other topic
+        configurations, see https://docs.confluent.io/cloud/current/api.html#tag/Configs-(v3)/operation/updateKafkaTopicConfig.
       operationId: updatePartitionCountKafkaTopic
       parameters:
       - description: The Kafka cluster ID.
@@ -6111,7 +6120,9 @@ paths:
       description: |-
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-        Update the configuration parameter with given `name`.
+        Update the configuration parameter with given `name`. To update the
+        number of partitions, see
+        https://docs.confluent.io/cloud/current/api.html#tag/Topic-(v3)/operation/updatePartitionCountKafkaTopic.
       operationId: updateKafkaTopicConfig
       parameters:
       - description: The Kafka cluster ID.
@@ -8603,14 +8614,13 @@ paths:
                   cluster_id: 1Rh_4htxSuen7RYGvGmgNw
                   name: consumer.offset.sync.ms
                   value: "3825940"
-                  default: false
-                  read_only: false
-                  sensitive: false
+                  is_default: false
+                  is_read_only: false
+                  is_sensitive: false
                   source: DYNAMIC_CLUSTER_LINK_CONFIG
                   synonyms:
                   - cosm
                   link_name: link-db-1
-                  link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
                 - kind: KafkaLinkConfigData
                   metadata:
                     self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/1Rh_4htxSuen7RYGvGmgNw/links/my-new-link-1
@@ -8618,14 +8628,13 @@ paths:
                   cluster_id: 1Rh_4htxSuen7RYGvGmgNw
                   name: acl.sync.ms
                   value: "5000"
-                  default: false
-                  read_only: false
-                  sensitive: false
+                  is_default: false
+                  is_read_only: false
+                  is_sensitive: false
                   source: DYNAMIC_CLUSTER_LINK_CONFIG
                   synonyms:
                   - asm
                   link_name: link-db-1
-                  link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
               schema:
                 $ref: '#/components/schemas/ListLinkConfigsResponseDataList'
           description: Config name and value
@@ -9017,17 +9026,13 @@ paths:
                 cluster_id: 1Rh_4htxSuen7RYGvGmgNw
                 name: consumer.offset.sync.ms
                 value: "3825940"
-                default: false
-                read_only: false
-                sensitive: false
+                is_default: false
+                is_read_only: false
+                is_sensitive: false
                 source: DYNAMIC_CLUSTER_LINK_CONFIG
                 synonyms:
                 - cosm
                 link_name: link-db-1
-                link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
-                topics:
-                - topic-db-1
-                - topic-db-2
               schema:
                 $ref: '#/components/schemas/ListLinkConfigsResponseData'
           description: Config name and value
@@ -12923,7 +12928,7 @@ components:
                   value: "30000"
                 - name: sasl.mechanism
                   value: PLAIN
-                - name: sasl.protocol
+                - name: security.protocol
                   value: SASL_SSL
                 - name: sasl.jaas.config
                   value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
@@ -12939,31 +12944,31 @@ components:
                   value: SOURCE
                 - name: sasl.mechanism
                   value: PLAIN
-                - name: sasl.protocol
+                - name: security.protocol
                   value: SASL_SSL
                 - name: sasl.jaas.config
                   value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
-                    required username='<Kafka API Key>' password='<Kafka API Secret>';
+                    required username='<Remote Kafka API Key>' password='<Remote Kafka
+                    API Secret>';
+                - name: local.sasl.mechanism
+                  value: PLAIN
+                - name: local.security.protocol
+                  value: SASL_SSL
+                - name: local.sasl.jaas.config
+                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
+                    required username='<Local Kafka API Key>' password='<Local Kafka
+                    API Secret>';
             source_initiated_link_at_destination_cluster:
               description: Create a source initiated cluster link at destination cluster
               value:
                 destination_cluster_id: cluster-1
                 configs:
-                - name: bootstrap.servers
-                  value: cluster-1-bootstrap-server
                 - name: link.mode
                   value: DESTINATION
                 - name: connection.mode
                   value: INBOUND
                 - name: acl.sync.enable
                   value: "false"
-                - name: sasl.mechanism
-                  value: PLAIN
-                - name: sasl.protocol
-                  value: SASL_SSL
-                - name: sasl.jaas.config
-                  value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
-                    required username='<Kafka API Key>' password='<Kafka API Secret>';
             bidirectional_link_east:
               description: Create a bidirectional cluster link in east
               value:
@@ -12977,7 +12982,7 @@ components:
                   value: west.
                 - name: sasl.mechanism
                   value: PLAIN
-                - name: sasl.protocol
+                - name: security.protocol
                   value: SASL_SSL
                 - name: sasl.jaas.config
                   value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
@@ -12996,7 +13001,7 @@ components:
                   value: east.
                 - name: sasl.mechanism
                   value: PLAIN
-                - name: sasl.protocol
+                - name: security.protocol
                   value: SASL_SSL
                 - name: sasl.jaas.config
                   value: sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule
@@ -13273,6 +13278,8 @@ components:
             is_simple: false
             partition_assignor: org.apache.kafka.clients.consumer.RoundRobinAssignor
             state: STABLE
+            type: CLASSIC
+            is_mixed_consumer_group: false
             coordinator:
               related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
             consumers:
@@ -13755,6 +13762,8 @@ components:
               is_simple: false
               partition_assignor: org.apache.kafka.clients.consumer.RoundRobinAssignor
               state: STABLE
+              type: CLASSIC
+              is_mixed_consumer_group: false
               coordinator:
                 related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
               consumers:
@@ -13770,6 +13779,8 @@ components:
               is_simple: false
               partition_assignor: org.apache.kafka.clients.consumer.StickyAssignor
               state: PREPARING_REBALANCE
+              type: CLASSIC
+              is_mixed_consumer_group: false
               coordinator:
                 related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/2
               consumers:
@@ -13785,6 +13796,8 @@ components:
               is_simple: false
               partition_assignor: org.apache.kafka.clients.consumer.RangeAssignor
               state: DEAD
+              type: CLASSIC
+              is_mixed_consumer_group: false
               coordinator:
                 related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/3
               consumers:
@@ -15101,14 +15114,13 @@ components:
               cluster_id: 1Rh_4htxSuen7RYGvGmgNw
               name: consumer.offset.sync.ms
               value: "3825940"
-              default: false
-              read_only: false
-              sensitive: false
+              is_default: false
+              is_read_only: false
+              is_sensitive: false
               source: DYNAMIC_CLUSTER_LINK_CONFIG
               synonyms:
               - cosm
               link_name: link-db-1
-              link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
             - kind: KafkaLinkConfigData
               metadata:
                 self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/1Rh_4htxSuen7RYGvGmgNw/links/my-new-link-1
@@ -15116,14 +15128,13 @@ components:
               cluster_id: 1Rh_4htxSuen7RYGvGmgNw
               name: acl.sync.ms
               value: "5000"
-              default: false
-              read_only: false
-              sensitive: false
+              is_default: false
+              is_read_only: false
+              is_sensitive: false
               source: DYNAMIC_CLUSTER_LINK_CONFIG
               synonyms:
               - asm
               link_name: link-db-1
-              link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
           schema:
             $ref: '#/components/schemas/ListLinkConfigsResponseDataList'
       description: Config name and value
@@ -15138,17 +15149,13 @@ components:
             cluster_id: 1Rh_4htxSuen7RYGvGmgNw
             name: consumer.offset.sync.ms
             value: "3825940"
-            default: false
-            read_only: false
-            sensitive: false
+            is_default: false
+            is_read_only: false
+            is_sensitive: false
             source: DYNAMIC_CLUSTER_LINK_CONFIG
             synonyms:
             - cosm
             link_name: link-db-1
-            link_id: 7840644d-f7d8-4844-a577-a10ef3df31df
-            topics:
-            - topic-db-1
-            - topic-db-2
           schema:
             $ref: '#/components/schemas/ListLinkConfigsResponseData'
       description: Config name and value
@@ -15689,9 +15696,18 @@ components:
       - UNKNOWN
       - PREPARING_REBALANCE
       - COMPLETING_REBALANCE
+      - ASSIGNING
+      - RECONCILING
       - STABLE
       - DEAD
       - EMPTY
+    ConsumerGroupType:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - CLASSIC
+      - CONSUMER
+      - SHARE
     ConsumerLagData:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -16314,6 +16330,21 @@ components:
       - PENDING_SETUP_FOR_RESTORE
       - PENDING_RESTORE
       type: string
+    MirrorTopicError:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - NOT_SET
+      - NO_ERROR
+      - SOURCE_TOPIC_MAY_BE_DELETED
+      - SOURCE_TOPIC_ID_CHANGED
+      - SOURCE_PARTITIONS_DECREASED
+      - NON_MONOTONIC_LOG_APPEND_EPOCH
+      - UNEXPECTED_TRUNCATION
+      - UNSUPPORTED_MESSAGE_FORMAT
+      - NON_MONOTONIC_SOURCE_EPOCH
+      - ILLEGAL_STATE
+      - UNSUPPORTED_MIRROR_STATE
     AnyUnevenLoadStatus:
       type: string
       x-extensible-enum:
@@ -16711,12 +16742,23 @@ components:
           - UNKNOWN
           - PREPARING_REBALANCE
           - COMPLETING_REBALANCE
+          - ASSIGNING
+          - RECONCILING
           - STABLE
           - DEAD
           - EMPTY
+        type:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - CLASSIC
+          - CONSUMER
+          - SHARE
+        is_mixed_consumer_group:
+          type: boolean
         coordinator:
           $ref: '#/components/schemas/Relationship'
-        consumer:
+        consumers:
           $ref: '#/components/schemas/Relationship'
         lag_summary:
           $ref: '#/components/schemas/Relationship'
@@ -16725,10 +16767,12 @@ components:
       - consumer_group_id
       - consumers
       - coordinator
+      - is_mixed_consumer_group
       - is_simple
       - lag_summary
       - partition_assignor
       - state
+      - type
       type: object
     ConsumerGroupDataList_allOf:
       properties:
@@ -17405,9 +17449,11 @@ components:
           type: string
         value:
           type: string
-        read_only:
+        is_default:
           type: boolean
-        sensitive:
+        is_read_only:
+          type: boolean
+        is_sensitive:
           type: boolean
         source:
           type: string
@@ -17421,11 +17467,11 @@ components:
           type: string
       required:
       - cluster_id
-      - default
+      - is_default
+      - is_read_only
+      - is_sensitive
       - link_name
       - name
-      - read_only
-      - sensitive
       - source
       - synonyms
       - value
@@ -17453,6 +17499,21 @@ components:
           $ref: '#/components/schemas/MirrorLags'
         mirror_status:
           $ref: '#/components/schemas/MirrorTopicStatus'
+        mirror_topic_error:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - NOT_SET
+          - NO_ERROR
+          - SOURCE_TOPIC_MAY_BE_DELETED
+          - SOURCE_TOPIC_ID_CHANGED
+          - SOURCE_PARTITIONS_DECREASED
+          - NON_MONOTONIC_LOG_APPEND_EPOCH
+          - UNEXPECTED_TRUNCATION
+          - UNSUPPORTED_MESSAGE_FORMAT
+          - NON_MONOTONIC_SOURCE_EPOCH
+          - ILLEGAL_STATE
+          - UNSUPPORTED_MIRROR_STATE
         state_time_ms:
           format: int64
           type: integer
