@@ -57,14 +57,12 @@ type ConnectV1CustomConnectorPlugin struct {
 	ConnectorType *string `json:"connector_type,omitempty"`
 	// Cloud provider where the Custom Connector Plugin archive is uploaded.
 	Cloud *string `json:"cloud,omitempty"`
-	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the `sensitive_config_properties` of the plugin.
+	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
 	// Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
 	UploadSource *ConnectV1CustomConnectorPluginUploadSourceOneOf `json:"upload_source,omitempty"`
 	// Runtime language of Custom Connector Plugin.
 	RuntimeLanguage *string `json:"runtime_language,omitempty"`
-	// Initial Version of the Custom Connector Plugin. The version must comply with SemVer (e.g., `1.2.3`, `1.2.3-beta`, `1.2.3-rc.123`, `1.2.3-rc.123+build.456`).
-	InitialPluginVersion *string `json:"initial_plugin_version,omitempty"`
 }
 
 // NewConnectV1CustomConnectorPlugin instantiates a new ConnectV1CustomConnectorPlugin object
@@ -77,8 +75,6 @@ func NewConnectV1CustomConnectorPlugin() *ConnectV1CustomConnectorPlugin {
 	this.Cloud = &cloud
 	var runtimeLanguage string = "JAVA"
 	this.RuntimeLanguage = &runtimeLanguage
-	var initialPluginVersion string = "0.0.0"
-	this.InitialPluginVersion = &initialPluginVersion
 	return &this
 }
 
@@ -91,8 +87,6 @@ func NewConnectV1CustomConnectorPluginWithDefaults() *ConnectV1CustomConnectorPl
 	this.Cloud = &cloud
 	var runtimeLanguage string = "JAVA"
 	this.RuntimeLanguage = &runtimeLanguage
-	var initialPluginVersion string = "0.0.0"
-	this.InitialPluginVersion = &initialPluginVersion
 	return &this
 }
 
@@ -544,38 +538,6 @@ func (o *ConnectV1CustomConnectorPlugin) SetRuntimeLanguage(v string) {
 	o.RuntimeLanguage = &v
 }
 
-// GetInitialPluginVersion returns the InitialPluginVersion field value if set, zero value otherwise.
-func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersion() string {
-	if o == nil || o.InitialPluginVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.InitialPluginVersion
-}
-
-// GetInitialPluginVersionOk returns a tuple with the InitialPluginVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPlugin) GetInitialPluginVersionOk() (*string, bool) {
-	if o == nil || o.InitialPluginVersion == nil {
-		return nil, false
-	}
-	return o.InitialPluginVersion, true
-}
-
-// HasInitialPluginVersion returns a boolean if a field has been set.
-func (o *ConnectV1CustomConnectorPlugin) HasInitialPluginVersion() bool {
-	if o != nil && o.InitialPluginVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetInitialPluginVersion gets a reference to the given string and assigns it to the InitialPluginVersion field.
-func (o *ConnectV1CustomConnectorPlugin) SetInitialPluginVersion(v string) {
-	o.InitialPluginVersion = &v
-}
-
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -592,7 +554,6 @@ func (o *ConnectV1CustomConnectorPlugin) Redact() {
 	o.recurseRedact(o.SensitiveConfigProperties)
 	o.recurseRedact(o.UploadSource)
 	o.recurseRedact(o.RuntimeLanguage)
-	o.recurseRedact(o.InitialPluginVersion)
 }
 
 func (o *ConnectV1CustomConnectorPlugin) recurseRedact(v interface{}) {
@@ -668,9 +629,6 @@ func (o ConnectV1CustomConnectorPlugin) MarshalJSON() ([]byte, error) {
 	}
 	if o.RuntimeLanguage != nil {
 		toSerialize["runtime_language"] = o.RuntimeLanguage
-	}
-	if o.InitialPluginVersion != nil {
-		toSerialize["initial_plugin_version"] = o.InitialPluginVersion
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

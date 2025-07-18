@@ -51,7 +51,7 @@ type ConnectV1CustomConnectorPluginUpdate struct {
 	Description *string `json:"description,omitempty"`
 	// Document link of Custom Connector Plugin.
 	DocumentationLink *string `json:"documentation_link,omitempty"`
-	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector. - If the plugin has **only one version**, these properties apply to that version. - If the plugin has **multiple versions**, each version maintains its own set of sensitive properties and does not inherit or use the `sensitive_config_properties` of the plugin.
+	// A sensitive property is a connector configuration property that must be hidden after a user enters property value when setting up connector.
 	SensitiveConfigProperties *[]string `json:"sensitive_config_properties,omitempty"`
 	// Upload source of Custom Connector Plugin. Only required in `create` request, will be ignored in `read`, `update` or `list`.
 	UploadSource *ConnectV1CustomConnectorPluginUpdateUploadSourceOneOf `json:"upload_source,omitempty"`

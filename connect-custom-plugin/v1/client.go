@@ -64,9 +64,9 @@ type APIClient struct {
 
 	// API Services
 
-	CustomConnectorPluginVersionsConnectV1Api CustomConnectorPluginVersionsConnectV1Api
-
 	CustomConnectorPluginsConnectV1Api CustomConnectorPluginsConnectV1Api
+
+	CustomConnectorRuntimesConnectV1Api CustomConnectorRuntimesConnectV1Api
 
 	PresignedUrlsConnectV1Api PresignedUrlsConnectV1Api
 }
@@ -87,8 +87,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.CustomConnectorPluginVersionsConnectV1Api = (*CustomConnectorPluginVersionsConnectV1ApiService)(&c.common)
 	c.CustomConnectorPluginsConnectV1Api = (*CustomConnectorPluginsConnectV1ApiService)(&c.common)
+	c.CustomConnectorRuntimesConnectV1Api = (*CustomConnectorRuntimesConnectV1ApiService)(&c.common)
 	c.PresignedUrlsConnectV1Api = (*PresignedUrlsConnectV1ApiService)(&c.common)
 
 	return c
