@@ -34,23 +34,23 @@ import (
 	"reflect"
 )
 
-// ConnectV1CustomConnectorPluginVersionList CustomConnectorPluginVersion objects represent Custom Connector Plugin Versions on Confluent Cloud. The API allows you to list, create, read, update, and delete your Custom Connector Plugin Versions.   ## The Custom Connector Plugin Versions Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorPluginVersion\" />
-type ConnectV1CustomConnectorPluginVersionList struct {
+// ConnectV1CustomConnectorRuntimeList List of supported runtime languages for Custom Connector Plugin. The list defines the supported entries for confluent.custom.connect.plugin.runtime attribute in CustomConnectorPlugin object. Each entry also defines the set of supported java versions for that runtime which can be specified during connector provisioning via the confluent.custom.connect.plugin.java.version attribute.   ## The Custom Connector Runtimes Model <SchemaDefinition schemaRef=\"#/components/schemas/connect.v1.CustomConnectorRuntime\" />
+type ConnectV1CustomConnectorRuntimeList struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
 	Kind     string   `json:"kind,omitempty"`
 	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []ConnectV1CustomConnectorPluginVersion `json:"data,omitempty"`
+	Data []ConnectV1CustomConnectorRuntime `json:"data,omitempty"`
 }
 
-// NewConnectV1CustomConnectorPluginVersionList instantiates a new ConnectV1CustomConnectorPluginVersionList object
+// NewConnectV1CustomConnectorRuntimeList instantiates a new ConnectV1CustomConnectorRuntimeList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectV1CustomConnectorPluginVersionList(apiVersion string, kind string, metadata ListMeta, data []ConnectV1CustomConnectorPluginVersion) *ConnectV1CustomConnectorPluginVersionList {
-	this := ConnectV1CustomConnectorPluginVersionList{}
+func NewConnectV1CustomConnectorRuntimeList(apiVersion string, kind string, metadata ListMeta, data []ConnectV1CustomConnectorRuntime) *ConnectV1CustomConnectorRuntimeList {
+	this := ConnectV1CustomConnectorRuntimeList{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
@@ -58,16 +58,16 @@ func NewConnectV1CustomConnectorPluginVersionList(apiVersion string, kind string
 	return &this
 }
 
-// NewConnectV1CustomConnectorPluginVersionListWithDefaults instantiates a new ConnectV1CustomConnectorPluginVersionList object
+// NewConnectV1CustomConnectorRuntimeListWithDefaults instantiates a new ConnectV1CustomConnectorRuntimeList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectV1CustomConnectorPluginVersionListWithDefaults() *ConnectV1CustomConnectorPluginVersionList {
-	this := ConnectV1CustomConnectorPluginVersionList{}
+func NewConnectV1CustomConnectorRuntimeListWithDefaults() *ConnectV1CustomConnectorRuntimeList {
+	this := ConnectV1CustomConnectorRuntimeList{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value
-func (o *ConnectV1CustomConnectorPluginVersionList) GetApiVersion() string {
+func (o *ConnectV1CustomConnectorRuntimeList) GetApiVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -78,7 +78,7 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPluginVersionList) GetApiVersionOk() (*string, bool) {
+func (o *ConnectV1CustomConnectorRuntimeList) GetApiVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,12 +86,12 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetApiVersionOk() (*string, 
 }
 
 // SetApiVersion sets field value
-func (o *ConnectV1CustomConnectorPluginVersionList) SetApiVersion(v string) {
+func (o *ConnectV1CustomConnectorRuntimeList) SetApiVersion(v string) {
 	o.ApiVersion = v
 }
 
 // GetKind returns the Kind field value
-func (o *ConnectV1CustomConnectorPluginVersionList) GetKind() string {
+func (o *ConnectV1CustomConnectorRuntimeList) GetKind() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -102,7 +102,7 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPluginVersionList) GetKindOk() (*string, bool) {
+func (o *ConnectV1CustomConnectorRuntimeList) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -110,12 +110,12 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetKindOk() (*string, bool) 
 }
 
 // SetKind sets field value
-func (o *ConnectV1CustomConnectorPluginVersionList) SetKind(v string) {
+func (o *ConnectV1CustomConnectorRuntimeList) SetKind(v string) {
 	o.Kind = v
 }
 
 // GetMetadata returns the Metadata field value
-func (o *ConnectV1CustomConnectorPluginVersionList) GetMetadata() ListMeta {
+func (o *ConnectV1CustomConnectorRuntimeList) GetMetadata() ListMeta {
 	if o == nil {
 		var ret ListMeta
 		return ret
@@ -126,7 +126,7 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetMetadata() ListMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPluginVersionList) GetMetadataOk() (*ListMeta, bool) {
+func (o *ConnectV1CustomConnectorRuntimeList) GetMetadataOk() (*ListMeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,14 +134,14 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetMetadataOk() (*ListMeta, 
 }
 
 // SetMetadata sets field value
-func (o *ConnectV1CustomConnectorPluginVersionList) SetMetadata(v ListMeta) {
+func (o *ConnectV1CustomConnectorRuntimeList) SetMetadata(v ListMeta) {
 	o.Metadata = v
 }
 
 // GetData returns the Data field value
-func (o *ConnectV1CustomConnectorPluginVersionList) GetData() []ConnectV1CustomConnectorPluginVersion {
+func (o *ConnectV1CustomConnectorRuntimeList) GetData() []ConnectV1CustomConnectorRuntime {
 	if o == nil {
-		var ret []ConnectV1CustomConnectorPluginVersion
+		var ret []ConnectV1CustomConnectorRuntime
 		return ret
 	}
 
@@ -150,7 +150,7 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetData() []ConnectV1CustomC
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ConnectV1CustomConnectorPluginVersionList) GetDataOk() (*[]ConnectV1CustomConnectorPluginVersion, bool) {
+func (o *ConnectV1CustomConnectorRuntimeList) GetDataOk() (*[]ConnectV1CustomConnectorRuntime, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -158,19 +158,19 @@ func (o *ConnectV1CustomConnectorPluginVersionList) GetDataOk() (*[]ConnectV1Cus
 }
 
 // SetData sets field value
-func (o *ConnectV1CustomConnectorPluginVersionList) SetData(v []ConnectV1CustomConnectorPluginVersion) {
+func (o *ConnectV1CustomConnectorRuntimeList) SetData(v []ConnectV1CustomConnectorRuntime) {
 	o.Data = v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ConnectV1CustomConnectorPluginVersionList) Redact() {
+func (o *ConnectV1CustomConnectorRuntimeList) Redact() {
 	o.recurseRedact(&o.ApiVersion)
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.Metadata)
 	o.recurseRedact(&o.Data)
 }
 
-func (o *ConnectV1CustomConnectorPluginVersionList) recurseRedact(v interface{}) {
+func (o *ConnectV1CustomConnectorRuntimeList) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -195,12 +195,12 @@ func (o *ConnectV1CustomConnectorPluginVersionList) recurseRedact(v interface{})
 	}
 }
 
-func (o ConnectV1CustomConnectorPluginVersionList) zeroField(v interface{}) {
+func (o ConnectV1CustomConnectorRuntimeList) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ConnectV1CustomConnectorPluginVersionList) MarshalJSON() ([]byte, error) {
+func (o ConnectV1CustomConnectorRuntimeList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["api_version"] = o.ApiVersion
@@ -221,34 +221,34 @@ func (o ConnectV1CustomConnectorPluginVersionList) MarshalJSON() ([]byte, error)
 	return buffer.Bytes(), err
 }
 
-type NullableConnectV1CustomConnectorPluginVersionList struct {
-	value *ConnectV1CustomConnectorPluginVersionList
+type NullableConnectV1CustomConnectorRuntimeList struct {
+	value *ConnectV1CustomConnectorRuntimeList
 	isSet bool
 }
 
-func (v NullableConnectV1CustomConnectorPluginVersionList) Get() *ConnectV1CustomConnectorPluginVersionList {
+func (v NullableConnectV1CustomConnectorRuntimeList) Get() *ConnectV1CustomConnectorRuntimeList {
 	return v.value
 }
 
-func (v *NullableConnectV1CustomConnectorPluginVersionList) Set(val *ConnectV1CustomConnectorPluginVersionList) {
+func (v *NullableConnectV1CustomConnectorRuntimeList) Set(val *ConnectV1CustomConnectorRuntimeList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectV1CustomConnectorPluginVersionList) IsSet() bool {
+func (v NullableConnectV1CustomConnectorRuntimeList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectV1CustomConnectorPluginVersionList) Unset() {
+func (v *NullableConnectV1CustomConnectorRuntimeList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectV1CustomConnectorPluginVersionList(val *ConnectV1CustomConnectorPluginVersionList) *NullableConnectV1CustomConnectorPluginVersionList {
-	return &NullableConnectV1CustomConnectorPluginVersionList{value: val, isSet: true}
+func NewNullableConnectV1CustomConnectorRuntimeList(val *ConnectV1CustomConnectorRuntimeList) *NullableConnectV1CustomConnectorRuntimeList {
+	return &NullableConnectV1CustomConnectorRuntimeList{value: val, isSet: true}
 }
 
-func (v NullableConnectV1CustomConnectorPluginVersionList) MarshalJSON() ([]byte, error) {
+func (v NullableConnectV1CustomConnectorRuntimeList) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -256,7 +256,7 @@ func (v NullableConnectV1CustomConnectorPluginVersionList) MarshalJSON() ([]byte
 	return buffer.Bytes(), err
 }
 
-func (v *NullableConnectV1CustomConnectorPluginVersionList) UnmarshalJSON(src []byte) error {
+func (v *NullableConnectV1CustomConnectorRuntimeList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

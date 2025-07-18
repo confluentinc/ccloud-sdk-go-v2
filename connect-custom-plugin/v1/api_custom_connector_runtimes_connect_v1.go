@@ -38,55 +38,63 @@ var (
 	_ _context.Context
 )
 
-type PresignedUrlsConnectV1Api interface {
+type CustomConnectorRuntimesConnectV1Api interface {
 
 	/*
-			PresignedUploadUrlConnectV1PresignedUrl Request a presigned upload URL for a new Custom Connector Plugin.
+			ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 
 			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Request a presigned upload URL to upload a Custom Connector Plugin archive.
+		Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiPresignedUploadUrlConnectV1PresignedUrlRequest
+			 @return ApiListConnectV1CustomConnectorRuntimesRequest
 	*/
-	PresignedUploadUrlConnectV1PresignedUrl(ctx _context.Context) ApiPresignedUploadUrlConnectV1PresignedUrlRequest
+	ListConnectV1CustomConnectorRuntimes(ctx _context.Context) ApiListConnectV1CustomConnectorRuntimesRequest
 
-	// PresignedUploadUrlConnectV1PresignedUrlExecute executes the request
-	//  @return ConnectV1PresignedUrl
-	PresignedUploadUrlConnectV1PresignedUrlExecute(r ApiPresignedUploadUrlConnectV1PresignedUrlRequest) (ConnectV1PresignedUrl, *_nethttp.Response, error)
+	// ListConnectV1CustomConnectorRuntimesExecute executes the request
+	//  @return ConnectV1CustomConnectorRuntimeList
+	ListConnectV1CustomConnectorRuntimesExecute(r ApiListConnectV1CustomConnectorRuntimesRequest) (ConnectV1CustomConnectorRuntimeList, *_nethttp.Response, error)
 }
 
-// PresignedUrlsConnectV1ApiService PresignedUrlsConnectV1Api service
-type PresignedUrlsConnectV1ApiService service
+// CustomConnectorRuntimesConnectV1ApiService CustomConnectorRuntimesConnectV1Api service
+type CustomConnectorRuntimesConnectV1ApiService service
 
-type ApiPresignedUploadUrlConnectV1PresignedUrlRequest struct {
-	ctx                          _context.Context
-	ApiService                   PresignedUrlsConnectV1Api
-	connectV1PresignedUrlRequest *ConnectV1PresignedUrlRequest
+type ApiListConnectV1CustomConnectorRuntimesRequest struct {
+	ctx        _context.Context
+	ApiService CustomConnectorRuntimesConnectV1Api
+	pageSize   *int32
+	pageToken  *string
 }
 
-func (r ApiPresignedUploadUrlConnectV1PresignedUrlRequest) ConnectV1PresignedUrlRequest(connectV1PresignedUrlRequest ConnectV1PresignedUrlRequest) ApiPresignedUploadUrlConnectV1PresignedUrlRequest {
-	r.connectV1PresignedUrlRequest = &connectV1PresignedUrlRequest
+// A pagination size for collection requests.
+func (r ApiListConnectV1CustomConnectorRuntimesRequest) PageSize(pageSize int32) ApiListConnectV1CustomConnectorRuntimesRequest {
+	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiPresignedUploadUrlConnectV1PresignedUrlRequest) Execute() (ConnectV1PresignedUrl, *_nethttp.Response, error) {
-	return r.ApiService.PresignedUploadUrlConnectV1PresignedUrlExecute(r)
+// An opaque pagination token for collection requests.
+func (r ApiListConnectV1CustomConnectorRuntimesRequest) PageToken(pageToken string) ApiListConnectV1CustomConnectorRuntimesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+func (r ApiListConnectV1CustomConnectorRuntimesRequest) Execute() (ConnectV1CustomConnectorRuntimeList, *_nethttp.Response, error) {
+	return r.ApiService.ListConnectV1CustomConnectorRuntimesExecute(r)
 }
 
 /*
-PresignedUploadUrlConnectV1PresignedUrl Request a presigned upload URL for a new Custom Connector Plugin.
+ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 
 [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Request a presigned upload URL to upload a Custom Connector Plugin archive.
+Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiPresignedUploadUrlConnectV1PresignedUrlRequest
+	@return ApiListConnectV1CustomConnectorRuntimesRequest
 */
-func (a *PresignedUrlsConnectV1ApiService) PresignedUploadUrlConnectV1PresignedUrl(ctx _context.Context) ApiPresignedUploadUrlConnectV1PresignedUrlRequest {
-	return ApiPresignedUploadUrlConnectV1PresignedUrlRequest{
+func (a *CustomConnectorRuntimesConnectV1ApiService) ListConnectV1CustomConnectorRuntimes(ctx _context.Context) ApiListConnectV1CustomConnectorRuntimesRequest {
+	return ApiListConnectV1CustomConnectorRuntimesRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -94,30 +102,36 @@ func (a *PresignedUrlsConnectV1ApiService) PresignedUploadUrlConnectV1PresignedU
 
 // Execute executes the request
 //
-//	@return ConnectV1PresignedUrl
-func (a *PresignedUrlsConnectV1ApiService) PresignedUploadUrlConnectV1PresignedUrlExecute(r ApiPresignedUploadUrlConnectV1PresignedUrlRequest) (ConnectV1PresignedUrl, *_nethttp.Response, error) {
+//	@return ConnectV1CustomConnectorRuntimeList
+func (a *CustomConnectorRuntimesConnectV1ApiService) ListConnectV1CustomConnectorRuntimesExecute(r ApiListConnectV1CustomConnectorRuntimesRequest) (ConnectV1CustomConnectorRuntimeList, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ConnectV1PresignedUrl
+		localVarReturnValue  ConnectV1CustomConnectorRuntimeList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresignedUrlsConnectV1ApiService.PresignedUploadUrlConnectV1PresignedUrl")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomConnectorRuntimesConnectV1ApiService.ListConnectV1CustomConnectorRuntimes")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/connect/v1/presigned-upload-url"
+	localVarPath := localBasePath + "/connect/v1/custom-connector-runtimes"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageToken != nil {
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -133,8 +147,6 @@ func (a *PresignedUrlsConnectV1ApiService) PresignedUploadUrlConnectV1PresignedU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.connectV1PresignedUrlRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -178,16 +190,6 @@ func (a *PresignedUrlsConnectV1ApiService) PresignedUploadUrlConnectV1PresignedU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
