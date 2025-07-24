@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
  - [CmkV2ClusterStatus](docs/CmkV2ClusterStatus.md)
  - [CmkV2ClusterUpdate](docs/CmkV2ClusterUpdate.md)
  - [CmkV2Dedicated](docs/CmkV2Dedicated.md)
+ - [CmkV2Endpoints](docs/CmkV2Endpoints.md)
  - [CmkV2Enterprise](docs/CmkV2Enterprise.md)
  - [CmkV2Freight](docs/CmkV2Freight.md)
  - [CmkV2Standard](docs/CmkV2Standard.md)
