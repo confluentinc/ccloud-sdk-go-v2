@@ -13,6 +13,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -948,14 +952,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -963,7 +967,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -976,7 +980,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/org/v2/environments/%7Bid%7D", headers=headers)
+          conn.request("DELETE", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -990,7 +994,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1015,7 +1019,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1024,7 +1028,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1250,14 +1254,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1265,7 +1269,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1278,7 +1282,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/environments/%7Bid%7D", headers=headers)
+          conn.request("GET", "/org/v2/environments/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1292,7 +1296,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1317,7 +1321,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1326,7 +1330,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1632,7 +1636,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/org/v2/environments/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/environments/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"display_name":"prod-finance01","stream_governance_config":{"package":"string"}}'
@@ -1643,7 +1647,7 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"prod-finance01\",\"stream_governance_config\":{\"package\":\"string\"}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/environments/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/environments/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -1652,7 +1656,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/environments/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"prod-finance01\\\
           \",\\\"stream_governance_config\\\":{\\\"package\\\":\\\"string\\\"}}\"\
           )\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
@@ -1673,7 +1677,7 @@ paths:
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/org/v2/environments/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/org/v2/environments/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1687,7 +1691,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/environments/%7Bid%7D",
+            "path": "/org/v2/environments/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -1714,7 +1718,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/environments/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
@@ -1726,7 +1730,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/environments/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
@@ -2245,14 +2249,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/org/v2/organizations/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/organizations/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/organizations/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2260,7 +2264,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2273,7 +2277,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/org/v2/organizations/%7Bid%7D", headers=headers)
+          conn.request("GET", "/org/v2/organizations/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2287,7 +2291,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/organizations/%7Bid%7D",
+            "path": "/org/v2/organizations/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2312,7 +2316,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2321,7 +2325,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2626,18 +2630,18 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/org/v2/organizations/%7Bid%7D \
+            --url 'https://api.confluent.cloud/org/v2/organizations/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"Finance Org","jit_enabled":true}'
+            --data '{"display_name":"Finance Org","jit_enabled":true,"scim_enabled":true}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D")
+            .url("https://api.confluent.cloud/org/v2/organizations/{id}")
             .patch(body)
             .addHeader("content-type", "application/json")
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
@@ -2646,13 +2650,13 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"Finance Org\\\
-          \",\\\"jit_enabled\\\":true}\")\n\n\treq, _ := http.NewRequest(\"PATCH\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \",\\\"jit_enabled\\\":true,\\\"scim_enabled\\\":true}\")\n\n\treq, _ :=\
+          \ http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -2660,14 +2664,14 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}"
+          payload = "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}"
 
           headers = {
               'content-type': "application/json",
               'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/org/v2/organizations/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/org/v2/organizations/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2681,7 +2685,7 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/org/v2/organizations/%7Bid%7D",
+            "path": "/org/v2/organizations/{id}",
             "headers": {
               "content-type": "application/json",
               "Authorization": "Basic REPLACE_BASIC_AUTH"
@@ -2701,30 +2705,30 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({display_name: 'Finance Org', jit_enabled: true}));
+          req.write(JSON.stringify({display_name: 'Finance Org', jit_enabled: true, scim_enabled: true}));
           req.end();
       - lang: C
         source: |-
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/org/v2/organizations/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "content-type: application/json");
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/org/v2/organizations/{id}");
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\",\"jit_enabled\":true}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -3075,6 +3079,10 @@ components:
         jit_enabled:
           description: The flag to toggle Just-In-Time user provisioning for SSO-enabled
             organization. Available for early access only.
+          type: boolean
+        scim_enabled:
+          description: The flag to toggle SCIM user provisioning for an SSO-enabled
+            organization.
           type: boolean
       type: object
     org.v2.StreamGovernanceConfig:
