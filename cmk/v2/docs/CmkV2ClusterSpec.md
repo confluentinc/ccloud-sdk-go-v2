@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **KafkaBootstrapEndpoint** | Pointer to **string** | The bootstrap endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
 **HttpEndpoint** | Pointer to **string** | The cluster HTTP request URL. | [optional] [readonly] 
 **ApiEndpoint** | Pointer to **string** | The Kafka API cluster endpoint used by Kafka clients to connect to the cluster. | [optional] [readonly] 
+**Endpoints** | Pointer to [**ModelMap**](map.md) | A map of endpoints for connecting to the Kafka cluster, keyed by access_point_id. Access Point ID &#39;public&#39; and &#39;privatelink&#39; are reserved. These can be used for different network access methods or regions.  | [optional] [readonly] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 **Network** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The network associated with this object. | [optional] 
 **Byok** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The byok associated with this object. | [optional] 
@@ -234,6 +235,31 @@ SetApiEndpoint sets ApiEndpoint field to given value.
 `func (o *CmkV2ClusterSpec) HasApiEndpoint() bool`
 
 HasApiEndpoint returns a boolean if a field has been set.
+
+### GetEndpoints
+
+`func (o *CmkV2ClusterSpec) GetEndpoints() ModelMap`
+
+GetEndpoints returns the Endpoints field if non-nil, zero value otherwise.
+
+### GetEndpointsOk
+
+`func (o *CmkV2ClusterSpec) GetEndpointsOk() (*ModelMap, bool)`
+
+GetEndpointsOk returns a tuple with the Endpoints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndpoints
+
+`func (o *CmkV2ClusterSpec) SetEndpoints(v ModelMap)`
+
+SetEndpoints sets Endpoints field to given value.
+
+### HasEndpoints
+
+`func (o *CmkV2ClusterSpec) HasEndpoints() bool`
+
+HasEndpoints returns a boolean if a field has been set.
 
 ### GetEnvironment
 
