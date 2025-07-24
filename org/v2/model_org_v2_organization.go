@@ -47,6 +47,8 @@ type OrgV2Organization struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// The flag to toggle Just-In-Time user provisioning for SSO-enabled organization. Available for early access only.
 	JitEnabled *bool `json:"jit_enabled,omitempty"`
+	// The flag to toggle SCIM user provisioning for an SSO-enabled organization.
+	ScimEnabled *bool `json:"scim_enabled,omitempty"`
 }
 
 // NewOrgV2Organization instantiates a new OrgV2Organization object
@@ -258,6 +260,38 @@ func (o *OrgV2Organization) SetJitEnabled(v bool) {
 	o.JitEnabled = &v
 }
 
+// GetScimEnabled returns the ScimEnabled field value if set, zero value otherwise.
+func (o *OrgV2Organization) GetScimEnabled() bool {
+	if o == nil || o.ScimEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ScimEnabled
+}
+
+// GetScimEnabledOk returns a tuple with the ScimEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrgV2Organization) GetScimEnabledOk() (*bool, bool) {
+	if o == nil || o.ScimEnabled == nil {
+		return nil, false
+	}
+	return o.ScimEnabled, true
+}
+
+// HasScimEnabled returns a boolean if a field has been set.
+func (o *OrgV2Organization) HasScimEnabled() bool {
+	if o != nil && o.ScimEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScimEnabled gets a reference to the given bool and assigns it to the ScimEnabled field.
+func (o *OrgV2Organization) SetScimEnabled(v bool) {
+	o.ScimEnabled = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -266,6 +300,7 @@ func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.JitEnabled)
+	o.recurseRedact(o.ScimEnabled)
 }
 
 func (o *OrgV2Organization) recurseRedact(v interface{}) {
@@ -317,6 +352,9 @@ func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
 	}
 	if o.JitEnabled != nil {
 		toSerialize["jit_enabled"] = o.JitEnabled
+	}
+	if o.ScimEnabled != nil {
+		toSerialize["scim_enabled"] = o.ScimEnabled
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
