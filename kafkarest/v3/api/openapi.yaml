@@ -31,6 +31,8 @@ tags:
   name: Records (v3)
 - description: '[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
   name: Cluster Linking (v3)
+- description: '[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)'
+  name: Share Group (v3)
 paths:
   /kafka/v3/clusters/{cluster_id}:
     get:
@@ -494,7 +496,11 @@ paths:
         schema:
           $ref: '#/components/schemas/AclPatternType'
         style: form
-      - description: The ACL principal. This is the Service Account name or user name.
+      - description: |-
+          The ACL principal. This is the Service Account name or user name.
+          Supports both legacy `User:` format (numeric IDs) and new `UserV2:`
+          format (sa-xxx format) for service accounts. Use `UserV2:*` to
+          retrieve service accounts in the new format.
         explode: true
         in: query
         name: principal
@@ -721,7 +727,12 @@ paths:
     get:
       description: |-
         [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
+        - When calling `/acls` without the `principal` parameter, service
+          accounts are returned in numeric ID format (e.g., `User:12345`).
+        - To retrieve service accounts in the `sa-xxx` format, use
+          `/acls?principal=UserV2:*`.
+        - The `principal` parameter supports both legacy `User:` format and
+          new `UserV2:` format for service accounts.
         Return a list of ACLs that match the search criteria.
       operationId: getKafkaAcls
       parameters:
@@ -758,7 +769,11 @@ paths:
         schema:
           $ref: '#/components/schemas/AclPatternType'
         style: form
-      - description: The ACL principal. This is the Service Account name or user name.
+      - description: |-
+          The ACL principal. This is the Service Account name or user name.
+          Supports both legacy `User:` format (numeric IDs) and new `UserV2:`
+          format (sa-xxx format) for service accounts. Use `UserV2:*` to
+          retrieve service accounts in the new format.
         explode: true
         in: query
         name: principal
@@ -12424,6 +12439,1189 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("undefined", "{\"mirror_topic_names\":[\"string\"],\"mirror_topic_name_pattern\":\"string\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/share-groups:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        Return the list of share groups that belong to the specified
+        Kafka cluster.
+      operationId: listKafkaShareGroups
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaShareGroupList
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups
+                  next: null
+                data:
+                - kind: KafkaShareGroup
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1
+                  cluster_id: cluster-1
+                  share_group_id: share-group-1
+                  state: STABLE
+                  coordinator:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
+                  consumers:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+                  consumer_count: 2
+                  partition_count: 3
+                  assigned_topic_partitions:
+                  - kind: KafkaShareGroupTopicPartition
+                    metadata:
+                      self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/0
+                      resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:0
+                    topic_name: topic-1
+                    partition_id: 0
+                    partition:
+                      related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+                - kind: KafkaShareGroup
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-2
+                  cluster_id: cluster-1
+                  share_group_id: share-group-2
+                  state: EMPTY
+                  coordinator:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/2
+                  consumers:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2/consumers
+                  consumer_count: 2
+                  partition_count: 3
+                  assigned_topic_partitions:
+                  - kind: KafkaShareGroupTopicPartition
+                    metadata:
+                      self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2/assigned-topic-partitions/topic-1/0
+                      resource_name: crn:///kafka=cluster-1/share-group=share-group-2/topic-partition=topic-1:0
+                    topic_name: topic-1
+                    partition_id: 0
+                    partition:
+                      related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+              schema:
+                $ref: '#/components/schemas/ShareGroupDataList'
+          description: The list of share groups.
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "403":
+          content:
+            application/json:
+              examples:
+                kafka_authorization_failed:
+                  description: Thrown when the caller is not authorized to perform
+                    the underlying operation.
+                  value:
+                    error_code: 40301
+                    message: Request is not authorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authorization error. Kafka authorization
+            failures will contain error code 40301 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: List Share Groups
+      tags:
+      - Share Group (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/share-groups", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/share-groups",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        Return the share group specified by the ``group_id``.
+      operationId: getKafkaShareGroup
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The group ID.
+        example: group-1
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaShareGroup
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1
+                  resource_name: crn:///kafka=cluster-1/share-group=share-group-1
+                cluster_id: cluster-1
+                share_group_id: share-group-1
+                state: STABLE
+                coordinator:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
+                consumers:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+                consumer_count: 2
+                partition_count: 3
+                assigned_topic_partitions:
+                - kind: KafkaShareGroupTopicPartition
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/0
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:0
+                  topic_name: topic-1
+                  partition_id: 0
+                  partition:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+                - kind: KafkaShareGroupTopicPartition
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/1
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:1
+                  topic_name: topic-1
+                  partition_id: 1
+                  partition:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/1
+              schema:
+                $ref: '#/components/schemas/ShareGroupData'
+          description: The share group.
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "403":
+          content:
+            application/json:
+              examples:
+                kafka_authorization_failed:
+                  description: Thrown when the caller is not authorized to perform
+                    the underlying operation.
+                  value:
+                    error_code: 40301
+                    message: Request is not authorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authorization error. Kafka authorization
+            failures will contain error code 40301 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: Get Share Group
+      tags:
+      - Share Group (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1 \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/share-groups/group-1", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/share-groups/group-1",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        Return a list of consumers that belong to the specified share
+        group.
+      operationId: listKafkaShareGroupConsumers
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The group ID.
+        example: group-1
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaShareConsumerList
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+                  next: null
+                data:
+                - kind: KafkaShareGroupConsumer
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-1
+                  client_id: client-1
+                  assignments:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+                - kind: KafkaShareGroupConsumer
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-2
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-2
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-2
+                  client_id: client-2
+                  assignments:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-2/assignments
+                - kind: KafkaShareGroupConsumer
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-3
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-3
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-3
+                  client_id: client-3
+                  assignments:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-3/assignments
+              schema:
+                $ref: '#/components/schemas/ShareGroupConsumerDataList'
+          description: The list of consumers.
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "403":
+          content:
+            application/json:
+              examples:
+                kafka_authorization_failed:
+                  description: Thrown when the caller is not authorized to perform
+                    the underlying operation.
+                  value:
+                    error_code: 40301
+                    message: Request is not authorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authorization error. Kafka authorization
+            failures will contain error code 40301 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: List Share Group Consumers
+      tags:
+      - Share Group (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        Return the consumer specified by the ``consumer_id``.
+      operationId: getKafkaShareGroupConsumer
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The group ID.
+        example: group-1
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The consumer ID.
+        example: consumer-1
+        explode: false
+        in: path
+        name: consumer_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaShareGroupConsumer
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1
+                  resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1
+                cluster_id: cluster-1
+                group_id: share-group-1
+                consumer_id: consumer-1
+                client_id: client-1
+                assignments:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+              schema:
+                $ref: '#/components/schemas/ShareGroupConsumerData'
+          description: The consumer.
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "403":
+          content:
+            application/json:
+              examples:
+                kafka_authorization_failed:
+                  description: Thrown when the caller is not authorized to perform
+                    the underlying operation.
+                  value:
+                    error_code: 40301
+                    message: Request is not authorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authorization error. Kafka authorization
+            failures will contain error code 40301 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: Get Share Group Consumer
+      tags:
+      - Share Group (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1 \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+  /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}/assignments:
+    get:
+      description: |-
+        [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+        Return the consumer assignments specified by the ``consumer_id``.
+      operationId: listKafkaShareGroupConsumerAssignments
+      parameters:
+      - description: The Kafka cluster ID.
+        example: cluster-1
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The group ID.
+        example: group-1
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The consumer ID.
+        example: consumer-1
+        explode: false
+        in: path
+        name: consumer_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                kind: KafkaConsumerAssignmentList
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+                  next: null
+                data:
+                - kind: KafkaShareGroupConsumerAssignment
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-1/partitions/1
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=1/partition=1
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-1
+                  topic_name: topic-1
+                  partition_id: 1
+                  partition:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/1
+                - kind: KafkaShareGroupConsumerAssignment
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-2/partitions/2
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=2/partition=2
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-1
+                  topic_name: topic-2
+                  partition_id: 2
+                  partition:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions/2
+                - kind: KafkaShareGroupConsumerAssignment
+                  metadata:
+                    self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-3/partitions/3
+                    resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=3/partition=3
+                  cluster_id: cluster-1
+                  group_id: share-group-1
+                  consumer_id: consumer-1
+                  topic_name: topic-3
+                  partition_id: 3
+                  partition:
+                    related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-3/partitions/3
+              schema:
+                $ref: '#/components/schemas/ShareGroupConsumerAssignmentDataList'
+          description: The list of share group assignments.
+        "400":
+          content:
+            application/json:
+              examples:
+                bad_request_cannot_deserialize:
+                  description: Thrown when trying to deserialize an integer from non-integer
+                    data.
+                  value:
+                    error_code: 400
+                    message: 'Cannot deserialize value of type `java.lang.Integer`
+                      from String "A": not a valid `java.lang.Integer` value'
+                unsupported_version_exception:
+                  description: Thrown when the version of this API is not supported
+                    in the underlying Kafka cluster.
+                  value:
+                    error_code: 40035
+                    message: The version of this API is not supported in the underlying
+                      Kafka cluster.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a bad request error. It could be caused by an unexpected
+            request body format or other forms of request validation failure.
+        "401":
+          content:
+            application/json:
+              examples:
+                kafka_authentication_failed:
+                  description: Thrown when using Basic authentication with wrong Kafka
+                    credentials.
+                  value:
+                    error_code: 40101
+                    message: Authentication failed
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authentication error. Kafka authentication
+            failures will contain error code 40101 in the response body.
+        "403":
+          content:
+            application/json:
+              examples:
+                kafka_authorization_failed:
+                  description: Thrown when the caller is not authorized to perform
+                    the underlying operation.
+                  value:
+                    error_code: 40301
+                    message: Request is not authorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Indicates a client authorization error. Kafka authorization
+            failures will contain error code 40301 in the response body.
+        "429":
+          content:
+            text/html:
+              example:
+                description: A sample response from Jetty's DoSFilter.
+                value: <html> <head> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+                  <title>Error 429 Too Many Requests</title> </head> <body> <h2>HTTP
+                  ERROR 429 Too Many Requests</h2> <table> <tr> <th>URI:</th> <td>/v3/clusters/my-cluster</td>
+                  </tr> <tr> <th>STATUS:</th> <td>429</td> </tr> <tr> <th>MESSAGE:</th>
+                  <td>Too Many Requests</td> </tr> <tr> <th>SERVLET:</th> <td>default</td>
+                  </tr> </table> </body> </html>
+              schema:
+                type: string
+          description: Indicates that a rate limit threshold has been reached, and
+            the client should retry again later.
+        "5XX":
+          content:
+            application/json:
+              examples:
+                generic_internal_server_error:
+                  description: Thrown for generic HTTP 500 errors.
+                  value:
+                    error_code: 500
+                    message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A server-side problem that might not be addressable from the
+            client side. Retriable Kafka errors will contain error code 50003 in the
+            response body.
+      security:
+      - resource-api-key: []
+      - external-access-token: []
+      summary: List Share Group Consumer Assignments
+      tags:
+      - Share Group (v3)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("pkc-00000.region.provider.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "pkc-00000.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/group-1/consumers/consumer-1/assignments");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
 components:
   parameters:
     AclHost:
@@ -12490,7 +13688,11 @@ components:
         $ref: '#/components/schemas/AclPermission'
       style: form
     AclPrincipal:
-      description: The ACL principal. This is the Service Account name or user name.
+      description: |-
+        The ACL principal. This is the Service Account name or user name.
+        Supports both legacy `User:` format (numeric IDs) and new `UserV2:`
+        format (sa-xxx format) for service accounts. Use `UserV2:*` to
+        retrieve service accounts in the new format.
       explode: true
       in: query
       name: principal
@@ -12571,6 +13773,16 @@ components:
       explode: false
       in: path
       name: consumer_id
+      required: true
+      schema:
+        type: string
+      style: simple
+    GroupId:
+      description: The group ID.
+      example: group-1
+      explode: false
+      in: path
+      name: group_id
       required: true
       schema:
         type: string
@@ -13412,6 +14624,60 @@ components:
           schema:
             $ref: '#/components/schemas/ReplicaData'
       description: The replica.
+    GetShareGroupResponse:
+      content:
+        application/json:
+          example:
+            kind: KafkaShareGroup
+            metadata:
+              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1
+              resource_name: crn:///kafka=cluster-1/share-group=share-group-1
+            cluster_id: cluster-1
+            share_group_id: share-group-1
+            state: STABLE
+            coordinator:
+              related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
+            consumers:
+              related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+            consumer_count: 2
+            partition_count: 3
+            assigned_topic_partitions:
+            - kind: KafkaShareGroupTopicPartition
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/0
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:0
+              topic_name: topic-1
+              partition_id: 0
+              partition:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+            - kind: KafkaShareGroupTopicPartition
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/1
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:1
+              topic_name: topic-1
+              partition_id: 1
+              partition:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/1
+          schema:
+            $ref: '#/components/schemas/ShareGroupData'
+      description: The share group.
+    GetShareGroupConsumerResponse:
+      content:
+        application/json:
+          example:
+            kind: KafkaShareGroupConsumer
+            metadata:
+              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1
+              resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1
+            cluster_id: cluster-1
+            group_id: share-group-1
+            consumer_id: consumer-1
+            client_id: client-1
+            assignments:
+              related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+          schema:
+            $ref: '#/components/schemas/ShareGroupConsumerData'
+      description: The consumer.
     GetTopicConfigResponse:
       content:
         application/json:
@@ -14005,6 +15271,149 @@ components:
           schema:
             $ref: '#/components/schemas/ReplicaDataList'
       description: The list of replicas.
+    ListShareGroupConsumerAssignmentsResponse:
+      content:
+        application/json:
+          example:
+            kind: KafkaConsumerAssignmentList
+            metadata:
+              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+              next: null
+            data:
+            - kind: KafkaShareGroupConsumerAssignment
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-1/partitions/1
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=1/partition=1
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-1
+              topic_name: topic-1
+              partition_id: 1
+              partition:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/1
+            - kind: KafkaShareGroupConsumerAssignment
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-2/partitions/2
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=2/partition=2
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-1
+              topic_name: topic-2
+              partition_id: 2
+              partition:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions/2
+            - kind: KafkaShareGroupConsumerAssignment
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments/topic-3/partitions/3
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1/assignment=topic=3/partition=3
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-1
+              topic_name: topic-3
+              partition_id: 3
+              partition:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-3/partitions/3
+          schema:
+            $ref: '#/components/schemas/ShareGroupConsumerAssignmentDataList'
+      description: The list of share group assignments.
+    ListShareGroupsResponse:
+      content:
+        application/json:
+          example:
+            kind: KafkaShareGroupList
+            metadata:
+              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups
+              next: null
+            data:
+            - kind: KafkaShareGroup
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1
+              cluster_id: cluster-1
+              share_group_id: share-group-1
+              state: STABLE
+              coordinator:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/1
+              consumers:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+              consumer_count: 2
+              partition_count: 3
+              assigned_topic_partitions:
+              - kind: KafkaShareGroupTopicPartition
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/assigned-topic-partitions/topic-1/0
+                  resource_name: crn:///kafka=cluster-1/share-group=share-group-1/topic-partition=topic-1:0
+                topic_name: topic-1
+                partition_id: 0
+                partition:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+            - kind: KafkaShareGroup
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-2
+              cluster_id: cluster-1
+              share_group_id: share-group-2
+              state: EMPTY
+              coordinator:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/brokers/2
+              consumers:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2/consumers
+              consumer_count: 2
+              partition_count: 3
+              assigned_topic_partitions:
+              - kind: KafkaShareGroupTopicPartition
+                metadata:
+                  self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-2/assigned-topic-partitions/topic-1/0
+                  resource_name: crn:///kafka=cluster-1/share-group=share-group-2/topic-partition=topic-1:0
+                topic_name: topic-1
+                partition_id: 0
+                partition:
+                  related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1/partitions/0
+          schema:
+            $ref: '#/components/schemas/ShareGroupDataList'
+      description: The list of share groups.
+    ListShareGroupConsumersResponse:
+      content:
+        application/json:
+          example:
+            kind: KafkaShareConsumerList
+            metadata:
+              self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers
+              next: null
+            data:
+            - kind: KafkaShareGroupConsumer
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-1
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-1
+              client_id: client-1
+              assignments:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-1/assignments
+            - kind: KafkaShareGroupConsumer
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-2
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-2
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-2
+              client_id: client-2
+              assignments:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-2/assignments
+            - kind: KafkaShareGroupConsumer
+              metadata:
+                self: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-3
+                resource_name: crn:///kafka=cluster-1/share-group=share-group-1/consumer=consumer-3
+              cluster_id: cluster-1
+              group_id: share-group-1
+              consumer_id: consumer-3
+              client_id: client-3
+              assignments:
+                related: https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/share-groups/share-group-1/consumers/consumer-3/assignments
+          schema:
+            $ref: '#/components/schemas/ShareGroupConsumerDataList'
+      description: The list of consumers.
     ListTopicConfigsResponse:
       content:
         application/json:
@@ -15925,6 +17334,43 @@ components:
       required:
       - self
       type: object
+    ShareGroupConsumerAssignmentData:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/ShareGroupConsumerAssignmentData_allOf'
+    ShareGroupConsumerAssignmentDataList:
+      allOf:
+      - $ref: '#/components/schemas/ResourceCollection'
+      - $ref: '#/components/schemas/ShareGroupConsumerAssignmentDataList_allOf'
+    ShareGroupDataList:
+      allOf:
+      - $ref: '#/components/schemas/ResourceCollection'
+      - $ref: '#/components/schemas/ShareGroupDataList_allOf'
+    ShareGroupData:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/ShareGroupData_allOf'
+    ShareGroupState:
+      type: string
+      x-extensible-enum:
+      - UNKNOWN
+      - PREPARING_REBALANCE
+      - COMPLETING_REBALANCE
+      - STABLE
+      - DEAD
+      - EMPTY
+    ShareGroupTopicPartitionData:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/ShareGroupTopicPartitionData_allOf'
+    ShareGroupConsumerData:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/ShareGroupConsumerData_allOf'
+    ShareGroupConsumerDataList:
+      allOf:
+      - $ref: '#/components/schemas/ResourceCollection'
+      - $ref: '#/components/schemas/ShareGroupConsumerDataList_allOf'
     TopicConfigData:
       allOf:
       - $ref: '#/components/schemas/AbstractConfigData'
@@ -16963,6 +18409,133 @@ components:
         data:
           items:
             $ref: '#/components/schemas/ReplicaData'
+          type: array
+      required:
+      - data
+      type: object
+    ShareGroupConsumerAssignmentData_allOf:
+      properties:
+        cluster_id:
+          type: string
+        group_id:
+          type: string
+        consumer_id:
+          type: string
+        topic_name:
+          type: string
+        partition_id:
+          type: integer
+        partition:
+          $ref: '#/components/schemas/Relationship'
+      required:
+      - cluster_id
+      - consumer_id
+      - group_id
+      - partition
+      - partition_id
+      - topic_name
+      type: object
+    ShareGroupConsumerAssignmentDataList_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ShareGroupConsumerAssignmentData'
+          type: array
+      required:
+      - data
+      type: object
+    ShareGroupDataList_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ShareGroupData'
+          type: array
+      required:
+      - data
+      type: object
+    ShareGroupData_allOf:
+      properties:
+        cluster_id:
+          type: string
+        share_group_id:
+          type: string
+        state:
+          type: string
+          x-extensible-enum:
+          - UNKNOWN
+          - PREPARING_REBALANCE
+          - COMPLETING_REBALANCE
+          - STABLE
+          - DEAD
+          - EMPTY
+        coordinator:
+          $ref: '#/components/schemas/Relationship'
+        consumers:
+          $ref: '#/components/schemas/Relationship'
+        consumer_count:
+          description: Number of consumers in this share group
+          format: int32
+          type: integer
+        partition_count:
+          description: Total number of partitions assigned to this share group across
+            all consumers
+          format: int32
+          type: integer
+        assigned_topic_partitions:
+          description: List of topic-partitions assigned to this share group, including
+            those from empty groups
+          items:
+            $ref: '#/components/schemas/ShareGroupTopicPartitionData'
+          type: array
+      required:
+      - cluster_id
+      - consumer_count
+      - consumers
+      - coordinator
+      - partition_count
+      - share_group_id
+      - state
+      type: object
+    ShareGroupTopicPartitionData_allOf:
+      properties:
+        topic_name:
+          description: The name of the topic
+          type: string
+        partition_id:
+          description: The partition ID
+          format: int32
+          type: integer
+        partition:
+          $ref: '#/components/schemas/Relationship'
+      required:
+      - partition
+      - partition_id
+      - topic_name
+      type: object
+    ShareGroupConsumerData_allOf:
+      properties:
+        cluster_id:
+          type: string
+        group_id:
+          type: string
+        consumer_id:
+          type: string
+        client_id:
+          type: string
+        assignments:
+          $ref: '#/components/schemas/Relationship'
+      required:
+      - assignments
+      - client_id
+      - cluster_id
+      - consumer_id
+      - group_id
+      type: object
+    ShareGroupConsumerDataList_allOf:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ShareGroupConsumerData'
           type: array
       required:
       - data

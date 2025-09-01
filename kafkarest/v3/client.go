@@ -78,6 +78,8 @@ type APIClient struct {
 
 	RecordsV3Api RecordsV3Api
 
+	ShareGroupV3Api ShareGroupV3Api
+
 	TopicV3Api TopicV3Api
 }
 
@@ -104,6 +106,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ConsumerGroupV3Api = (*ConsumerGroupV3ApiService)(&c.common)
 	c.PartitionV3Api = (*PartitionV3ApiService)(&c.common)
 	c.RecordsV3Api = (*RecordsV3ApiService)(&c.common)
+	c.ShareGroupV3Api = (*ShareGroupV3ApiService)(&c.common)
 	c.TopicV3Api = (*TopicV3ApiService)(&c.common)
 
 	return c

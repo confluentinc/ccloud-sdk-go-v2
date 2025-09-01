@@ -126,6 +126,11 @@ Class | Method | HTTP request | Description
 *PartitionV3Api* | [**GetKafkaPartition**](docs/PartitionV3Api.md#getkafkapartition) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} | Get Partition
 *PartitionV3Api* | [**ListKafkaPartitions**](docs/PartitionV3Api.md#listkafkapartitions) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions | List Partitions
 *RecordsV3Api* | [**ProduceRecord**](docs/RecordsV3Api.md#producerecord) | **Post** /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records | Produce Records
+*ShareGroupV3Api* | [**GetKafkaShareGroup**](docs/ShareGroupV3Api.md#getkafkasharegroup) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id} | Get Share Group
+*ShareGroupV3Api* | [**GetKafkaShareGroupConsumer**](docs/ShareGroupV3Api.md#getkafkasharegroupconsumer) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id} | Get Share Group Consumer
+*ShareGroupV3Api* | [**ListKafkaShareGroupConsumerAssignments**](docs/ShareGroupV3Api.md#listkafkasharegroupconsumerassignments) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}/assignments | List Share Group Consumer Assignments
+*ShareGroupV3Api* | [**ListKafkaShareGroupConsumers**](docs/ShareGroupV3Api.md#listkafkasharegroupconsumers) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers | List Share Group Consumers
+*ShareGroupV3Api* | [**ListKafkaShareGroups**](docs/ShareGroupV3Api.md#listkafkasharegroups) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups | List Share Groups
 *TopicV3Api* | [**CreateKafkaTopic**](docs/TopicV3Api.md#createkafkatopic) | **Post** /kafka/v3/clusters/{cluster_id}/topics | Create Topic
 *TopicV3Api* | [**DeleteKafkaTopic**](docs/TopicV3Api.md#deletekafkatopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 *TopicV3Api* | [**GetKafkaTopic**](docs/TopicV3Api.md#getkafkatopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
@@ -268,6 +273,20 @@ Class | Method | HTTP request | Description
  - [ResourceCollection](docs/ResourceCollection.md)
  - [ResourceCollectionMetadata](docs/ResourceCollectionMetadata.md)
  - [ResourceMetadata](docs/ResourceMetadata.md)
+ - [ShareGroupConsumerAssignmentData](docs/ShareGroupConsumerAssignmentData.md)
+ - [ShareGroupConsumerAssignmentDataAllOf](docs/ShareGroupConsumerAssignmentDataAllOf.md)
+ - [ShareGroupConsumerAssignmentDataList](docs/ShareGroupConsumerAssignmentDataList.md)
+ - [ShareGroupConsumerAssignmentDataListAllOf](docs/ShareGroupConsumerAssignmentDataListAllOf.md)
+ - [ShareGroupConsumerData](docs/ShareGroupConsumerData.md)
+ - [ShareGroupConsumerDataAllOf](docs/ShareGroupConsumerDataAllOf.md)
+ - [ShareGroupConsumerDataList](docs/ShareGroupConsumerDataList.md)
+ - [ShareGroupConsumerDataListAllOf](docs/ShareGroupConsumerDataListAllOf.md)
+ - [ShareGroupData](docs/ShareGroupData.md)
+ - [ShareGroupDataAllOf](docs/ShareGroupDataAllOf.md)
+ - [ShareGroupDataList](docs/ShareGroupDataList.md)
+ - [ShareGroupDataListAllOf](docs/ShareGroupDataListAllOf.md)
+ - [ShareGroupTopicPartitionData](docs/ShareGroupTopicPartitionData.md)
+ - [ShareGroupTopicPartitionDataAllOf](docs/ShareGroupTopicPartitionDataAllOf.md)
  - [TopicConfigData](docs/TopicConfigData.md)
  - [TopicConfigDataAllOf](docs/TopicConfigDataAllOf.md)
  - [TopicConfigDataList](docs/TopicConfigDataList.md)

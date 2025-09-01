@@ -94,7 +94,12 @@ type ACLV3Api interface {
 			GetKafkaAcls List ACLs
 
 			[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
+		- When calling `/acls` without the `principal` parameter, service
+		  accounts are returned in numeric ID format (e.g., `User:12345`).
+		- To retrieve service accounts in the `sa-xxx` format, use
+		  `/acls?principal=UserV2:*`.
+		- The `principal` parameter supports both legacy `User:` format and
+		  new `UserV2:` format for service accounts.
 		Return a list of ACLs that match the search criteria.
 
 			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -462,7 +467,7 @@ func (r ApiDeleteKafkaAclsRequest) ResourceName(resourceName string) ApiDeleteKa
 	return r
 }
 
-// The ACL principal. This is the Service Account name or user name.
+// The ACL principal. This is the Service Account name or user name. Supports both legacy &#x60;User:&#x60; format (numeric IDs) and new &#x60;UserV2:&#x60; format (sa-xxx format) for service accounts. Use &#x60;UserV2:*&#x60; to retrieve service accounts in the new format.
 func (r ApiDeleteKafkaAclsRequest) Principal(principal string) ApiDeleteKafkaAclsRequest {
 	r.principal = &principal
 	return r
@@ -681,7 +686,7 @@ func (r ApiGetKafkaAclsRequest) PatternType(patternType string) ApiGetKafkaAclsR
 	return r
 }
 
-// The ACL principal. This is the Service Account name or user name.
+// The ACL principal. This is the Service Account name or user name. Supports both legacy &#x60;User:&#x60; format (numeric IDs) and new &#x60;UserV2:&#x60; format (sa-xxx format) for service accounts. Use &#x60;UserV2:*&#x60; to retrieve service accounts in the new format.
 func (r ApiGetKafkaAclsRequest) Principal(principal string) ApiGetKafkaAclsRequest {
 	r.principal = &principal
 	return r
@@ -713,6 +718,12 @@ func (r ApiGetKafkaAclsRequest) Execute() (AclDataList, *_nethttp.Response, erro
 GetKafkaAcls List ACLs
 
 [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+  - When calling `/acls` without the `principal` parameter, service
+    accounts are returned in numeric ID format (e.g., `User:12345`).
+  - To retrieve service accounts in the `sa-xxx` format, use
+    `/acls?principal=UserV2:*`.
+  - The `principal` parameter supports both legacy `User:` format and
+    new `UserV2:` format for service accounts.
 
 Return a list of ACLs that match the search criteria.
 
