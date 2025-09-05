@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io
@@ -26,6 +26,7 @@ Contact: cire-storage@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,15 +34,15 @@ import (
 	"reflect"
 )
 
-// ByokV1KeyList `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.  Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS and Azure. This API allows you to upload and retrieve self-managed keys on Confluent Cloud.   Related guide: [Confluent Cloud Bring Your Own Key (BYOK) Management API](https://docs.confluent.io/cloud/current/clusters/byok/index.html).  ## The Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/byok.v1.Key\" />
+// ByokV1KeyList `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.  Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP. This API allows you to upload and retrieve self-managed keys on Confluent Cloud.   Related guide: [Confluent Cloud Bring Your Own Key (BYOK) Management API](https://docs.confluent.io/cloud/current/clusters/byok/index.html).  ## The Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/byok.v1.Key\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
 type ByokV1KeyList struct {
 	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion string `json:"api_version"`
+	ApiVersion string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
-	Kind string `json:"kind"`
-	Metadata ListMeta `json:"metadata"`
+	Kind     string   `json:"kind,omitempty"`
+	Metadata ListMeta `json:"metadata,omitempty"`
 	// A data property that contains an array of resource items. Each entry in the array is a separate resource.
-	Data []ByokV1Key `json:"data"`
+	Data []ByokV1Key `json:"data,omitempty"`
 }
 
 // NewByokV1KeyList instantiates a new ByokV1KeyList object
@@ -78,7 +79,7 @@ func (o *ByokV1KeyList) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1KeyList) GetApiVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ApiVersion, true
@@ -102,7 +103,7 @@ func (o *ByokV1KeyList) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1KeyList) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -126,7 +127,7 @@ func (o *ByokV1KeyList) GetMetadata() ListMeta {
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1KeyList) GetMetadataOk() (*ListMeta, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Metadata, true
@@ -150,7 +151,7 @@ func (o *ByokV1KeyList) GetData() []ByokV1Key {
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1KeyList) GetDataOk() (*[]ByokV1Key, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -163,40 +164,40 @@ func (o *ByokV1KeyList) SetData(v []ByokV1Key) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ByokV1KeyList) Redact() {
-    o.recurseRedact(&o.ApiVersion)
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.Metadata)
-    o.recurseRedact(&o.Data)
+	o.recurseRedact(&o.ApiVersion)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.Metadata)
+	o.recurseRedact(&o.Data)
 }
 
 func (o *ByokV1KeyList) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ByokV1KeyList) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ByokV1KeyList) MarshalJSON() ([]byte, error) {
@@ -213,7 +214,11 @@ func (o ByokV1KeyList) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["data"] = o.Data
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableByokV1KeyList struct {
@@ -244,12 +249,14 @@ func NewNullableByokV1KeyList(val *ByokV1KeyList) *NullableByokV1KeyList {
 }
 
 func (v NullableByokV1KeyList) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableByokV1KeyList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

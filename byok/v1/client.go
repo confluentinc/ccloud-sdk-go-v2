@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io

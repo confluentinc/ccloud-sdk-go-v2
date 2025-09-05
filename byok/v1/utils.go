@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io
@@ -26,6 +26,7 @@ Contact: cire-storage@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -298,7 +299,11 @@ func NewNullableString(val *string) *NullableString {
 }
 
 func (v NullableString) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableString) UnmarshalJSON(src []byte) error {

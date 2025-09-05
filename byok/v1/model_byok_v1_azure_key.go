@@ -15,7 +15,7 @@
 /*
 Key Management API for BYOK
 
-Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters. 
+Upload and retrieve self-managed keys on dedicated Confluent Cloud clusters.
 
 API version: 0.0.1
 Contact: cire-storage@confluent.io
@@ -26,6 +26,7 @@ Contact: cire-storage@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -33,18 +34,18 @@ import (
 	"reflect"
 )
 
-// ByokV1AzureKey The Azure BYOK details. 
+// ByokV1AzureKey The Azure BYOK details.
 type ByokV1AzureKey struct {
-	// The Application ID created for this key-environment combination. 
+	// The Application ID created for this key-environment combination.
 	ApplicationId *string `json:"application_id,omitempty"`
-	// The unique Key Object Identifier URL of an Azure Key Vault key. 
-	KeyId string `json:"key_id"`
-	// Key Vault ID containing the key 
-	KeyVaultId string `json:"key_vault_id"`
-	// BYOK kind type. 
-	Kind string `json:"kind"`
-	// Tenant ID (uuid) hosting the Key Vault containing the key 
-	TenantId string `json:"tenant_id"`
+	// The unique Key Object Identifier URL without version of an Azure Key Vault key.
+	KeyId string `json:"key_id,omitempty"`
+	// Key Vault ID containing the key
+	KeyVaultId string `json:"key_vault_id,omitempty"`
+	// BYOK kind type.
+	Kind string `json:"kind,omitempty"`
+	// Tenant ID (uuid) hosting the Key Vault containing the key
+	TenantId string `json:"tenant_id,omitempty"`
 }
 
 // NewByokV1AzureKey instantiates a new ByokV1AzureKey object
@@ -113,7 +114,7 @@ func (o *ByokV1AzureKey) GetKeyId() string {
 // GetKeyIdOk returns a tuple with the KeyId field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1AzureKey) GetKeyIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.KeyId, true
@@ -137,7 +138,7 @@ func (o *ByokV1AzureKey) GetKeyVaultId() string {
 // GetKeyVaultIdOk returns a tuple with the KeyVaultId field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1AzureKey) GetKeyVaultIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.KeyVaultId, true
@@ -161,7 +162,7 @@ func (o *ByokV1AzureKey) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1AzureKey) GetKindOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Kind, true
@@ -185,7 +186,7 @@ func (o *ByokV1AzureKey) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value
 // and a boolean to check if the value has been set.
 func (o *ByokV1AzureKey) GetTenantIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TenantId, true
@@ -198,41 +199,41 @@ func (o *ByokV1AzureKey) SetTenantId(v string) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ByokV1AzureKey) Redact() {
-    o.recurseRedact(o.ApplicationId)
-    o.recurseRedact(&o.KeyId)
-    o.recurseRedact(&o.KeyVaultId)
-    o.recurseRedact(&o.Kind)
-    o.recurseRedact(&o.TenantId)
+	o.recurseRedact(o.ApplicationId)
+	o.recurseRedact(&o.KeyId)
+	o.recurseRedact(&o.KeyVaultId)
+	o.recurseRedact(&o.Kind)
+	o.recurseRedact(&o.TenantId)
 }
 
 func (o *ByokV1AzureKey) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ByokV1AzureKey) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ByokV1AzureKey) MarshalJSON() ([]byte, error) {
@@ -252,7 +253,11 @@ func (o ByokV1AzureKey) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["tenant_id"] = o.TenantId
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableByokV1AzureKey struct {
@@ -283,12 +288,14 @@ func NewNullableByokV1AzureKey(val *ByokV1AzureKey) *NullableByokV1AzureKey {
 }
 
 func (v NullableByokV1AzureKey) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableByokV1AzureKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -84,15 +84,19 @@ Class | Method | HTTP request | Description
 *KeysByokV1Api* | [**DeleteByokV1Key**](docs/KeysByokV1Api.md#deletebyokv1key) | **Delete** /byok/v1/keys/{id} | Delete a Key
 *KeysByokV1Api* | [**GetByokV1Key**](docs/KeysByokV1Api.md#getbyokv1key) | **Get** /byok/v1/keys/{id} | Read a Key
 *KeysByokV1Api* | [**ListByokV1Keys**](docs/KeysByokV1Api.md#listbyokv1keys) | **Get** /byok/v1/keys | List of Keys
+*KeysByokV1Api* | [**UpdateByokV1Key**](docs/KeysByokV1Api.md#updatebyokv1key) | **Patch** /byok/v1/keys/{id} | Update a Key
 
 
 ## Documentation For Models
 
  - [ByokV1AwsKey](docs/ByokV1AwsKey.md)
  - [ByokV1AzureKey](docs/ByokV1AzureKey.md)
+ - [ByokV1GcpKey](docs/ByokV1GcpKey.md)
  - [ByokV1Key](docs/ByokV1Key.md)
  - [ByokV1KeyKeyOneOf](docs/ByokV1KeyKeyOneOf.md)
  - [ByokV1KeyList](docs/ByokV1KeyList.md)
+ - [ByokV1KeyUpdate](docs/ByokV1KeyUpdate.md)
+ - [ByokV1KeyValidation](docs/ByokV1KeyValidation.md)
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
@@ -105,7 +109,7 @@ Class | Method | HTTP request | Description
 
 
 
-### api-key
+### cloud-api-key
 
 - **Type**: HTTP basic authentication
 
@@ -116,6 +120,34 @@ auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAut
     UserName: "username",
     Password: "password",
 })
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent-sts-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 
