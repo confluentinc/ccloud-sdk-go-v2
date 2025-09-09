@@ -178,7 +178,7 @@ func main() {
     operation := "operation_example" // string | The ACL operation.
     permission := "permission_example" // string | The ACL permission.
     resourceName := "resourceName_example" // string | The ACL resource name. (optional)
-    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. (optional)
+    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. Supports both legacy `User:` format (numeric IDs) and new `UserV2:` format (sa-xxx format) for service accounts. Use `UserV2:*` to retrieve service accounts in the new format. (optional)
     host := "host_example" // string | The ACL host. (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
  **operation** | **string** | The ACL operation. | 
  **permission** | **string** | The ACL permission. | 
  **resourceName** | **string** | The ACL resource name. | 
- **principal** | **string** | The ACL principal. This is the Service Account name or user name. | 
+ **principal** | **string** | The ACL principal. This is the Service Account name or user name. Supports both legacy &#x60;User:&#x60; format (numeric IDs) and new &#x60;UserV2:&#x60; format (sa-xxx format) for service accounts. Use &#x60;UserV2:*&#x60; to retrieve service accounts in the new format. | 
  **host** | **string** | The ACL host. | 
 
 ### Return type
@@ -260,7 +260,7 @@ func main() {
     resourceType := openapiclient.AclResourceType("UNKNOWN") // AclResourceType | The ACL resource type. (optional)
     resourceName := "resourceName_example" // string | The ACL resource name. (optional)
     patternType := "patternType_example" // string | The ACL pattern type. (optional)
-    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. (optional)
+    principal := "principal_example" // string | The ACL principal. This is the Service Account name or user name. Supports both legacy `User:` format (numeric IDs) and new `UserV2:` format (sa-xxx format) for service accounts. Use `UserV2:*` to retrieve service accounts in the new format. (optional)
     host := "host_example" // string | The ACL host. (optional)
     operation := "operation_example" // string | The ACL operation. (optional)
     permission := "permission_example" // string | The ACL permission. (optional)
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
  **resourceType** | [**AclResourceType**](AclResourceType.md) | The ACL resource type. | 
  **resourceName** | **string** | The ACL resource name. | 
  **patternType** | **string** | The ACL pattern type. | 
- **principal** | **string** | The ACL principal. This is the Service Account name or user name. | 
+ **principal** | **string** | The ACL principal. This is the Service Account name or user name. Supports both legacy &#x60;User:&#x60; format (numeric IDs) and new &#x60;UserV2:&#x60; format (sa-xxx format) for service accounts. Use &#x60;UserV2:*&#x60; to retrieve service accounts in the new format. | 
  **host** | **string** | The ACL host. | 
  **operation** | **string** | The ACL operation. | 
  **permission** | **string** | The ACL permission. | 
