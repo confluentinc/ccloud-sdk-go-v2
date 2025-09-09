@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnableCompaction** | Pointer to **bool** | This flag determines whether to enable compaction for the Tableflow enabled topic. | [optional] [readonly] 
 **EnablePartitioning** | Pointer to **bool** | This flag determines whether to enable partitioning for the Tableflow enabled topic. | [optional] [readonly] 
-**RetentionMs** | Pointer to **string** | The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration)  The default value is \&quot;604800000\&quot; milliseconds (equivalent to 7 days).  The minimum allowed value is \&quot;86400000\&quot; milliseconds (equivalent to 24 hours).  | [optional] 
+**RetentionMs** | Pointer to **string** | The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).  The default value is \&quot;604800000\&quot; milliseconds (equivalent to 7 days).  The minimum allowed value is \&quot;86400000\&quot; milliseconds (equivalent to 24 hours).  | [optional] 
 **RecordFailureStrategy** | Pointer to **string** | The strategy to handle record failures in the Tableflow enabled topic during materialization.  For &#x60;SKIP&#x60;, we skip the bad records and move to the next record,  and for &#x60;SUSPEND&#x60;, we suspend the materialization of the topic.  | [optional] [default to "SUSPEND"]
+**ErrorHandling** | Pointer to [**TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf**](TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf.md) | The error mode to handle record failures in the Tableflow enabled topic during materialization.  for &#x60;SKIP&#x60;, we skip the bad records and move to the next record,  for &#x60;SUSPEND&#x60;, we suspend the materialization of the topic,  and for &#x60;LOG&#x60;, we log the bad records to the DLQ and continue processing the rest of the records.  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetRecordFailureStrategy sets RecordFailureStrategy field to given value.
 `func (o *TableflowV1TableFlowTopicConfigsSpec) HasRecordFailureStrategy() bool`
 
 HasRecordFailureStrategy returns a boolean if a field has been set.
+
+### GetErrorHandling
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) GetErrorHandling() TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf`
+
+GetErrorHandling returns the ErrorHandling field if non-nil, zero value otherwise.
+
+### GetErrorHandlingOk
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) GetErrorHandlingOk() (*TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf, bool)`
+
+GetErrorHandlingOk returns a tuple with the ErrorHandling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorHandling
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) SetErrorHandling(v TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf)`
+
+SetErrorHandling sets ErrorHandling field to given value.
+
+### HasErrorHandling
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) HasErrorHandling() bool`
+
+HasErrorHandling returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

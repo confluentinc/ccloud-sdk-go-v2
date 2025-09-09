@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ## ListTableflowV1TableflowTopics
 
-> TableflowV1TableflowTopicList ListTableflowV1TableflowTopics(ctx).Environment(environment).SpecKafkaCluster(specKafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
+> TableflowV1TableflowTopicList ListTableflowV1TableflowTopics(ctx).Environment(environment).SpecKafkaCluster(specKafkaCluster).SpecTableFormats(specTableFormats).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Tableflow Topics
 
@@ -247,12 +247,13 @@ import (
 func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     specKafkaCluster := "lkc-00000" // string | Filter the results by exact match for spec.kafka_cluster.
+    specTableFormats := *openapiclient.NewMultipleSearchFilter() // MultipleSearchFilter | Filter the results by exact match for spec.table_formats. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableflowTopicsTableflowV1Api.ListTableflowV1TableflowTopics(context.Background()).Environment(environment).SpecKafkaCluster(specKafkaCluster).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.TableflowTopicsTableflowV1Api.ListTableflowV1TableflowTopics(context.Background()).Environment(environment).SpecKafkaCluster(specKafkaCluster).SpecTableFormats(specTableFormats).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableflowTopicsTableflowV1Api.ListTableflowV1TableflowTopics``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,6 +276,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **environment** | **string** | Filter the results by exact match for environment. | 
  **specKafkaCluster** | **string** | Filter the results by exact match for spec.kafka_cluster. | 
+ **specTableFormats** | [**MultipleSearchFilter**](MultipleSearchFilter.md) | Filter the results by exact match for spec.table_formats. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -284,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -356,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
