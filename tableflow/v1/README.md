@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
  - [Failure](docs/Failure.md)
  - [GlobalObjectReference](docs/GlobalObjectReference.md)
  - [ListMeta](docs/ListMeta.md)
+ - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
  - [TableflowV1ByobAwsSpec](docs/TableflowV1ByobAwsSpec.md)
@@ -112,52 +113,32 @@ Class | Method | HTTP request | Description
  - [TableflowV1CatalogIntegrationSpec](docs/TableflowV1CatalogIntegrationSpec.md)
  - [TableflowV1CatalogIntegrationSpecConfigOneOf](docs/TableflowV1CatalogIntegrationSpecConfigOneOf.md)
  - [TableflowV1CatalogIntegrationStatus](docs/TableflowV1CatalogIntegrationStatus.md)
+ - [TableflowV1CatalogIntegrationUnitySpec](docs/TableflowV1CatalogIntegrationUnitySpec.md)
+ - [TableflowV1CatalogIntegrationUnityUpdateSpec](docs/TableflowV1CatalogIntegrationUnityUpdateSpec.md)
  - [TableflowV1CatalogIntegrationUpdateRequest](docs/TableflowV1CatalogIntegrationUpdateRequest.md)
  - [TableflowV1CatalogIntegrationUpdateSpec](docs/TableflowV1CatalogIntegrationUpdateSpec.md)
  - [TableflowV1CatalogIntegrationUpdateSpecConfigOneOf](docs/TableflowV1CatalogIntegrationUpdateSpecConfigOneOf.md)
+ - [TableflowV1CatalogSyncStatus](docs/TableflowV1CatalogSyncStatus.md)
+ - [TableflowV1ErrorHandlingLog](docs/TableflowV1ErrorHandlingLog.md)
+ - [TableflowV1ErrorHandlingSkip](docs/TableflowV1ErrorHandlingSkip.md)
+ - [TableflowV1ErrorHandlingSuspend](docs/TableflowV1ErrorHandlingSuspend.md)
  - [TableflowV1ManagedStorageSpec](docs/TableflowV1ManagedStorageSpec.md)
  - [TableflowV1Region](docs/TableflowV1Region.md)
  - [TableflowV1RegionList](docs/TableflowV1RegionList.md)
  - [TableflowV1TableFlowTopicConfigsSpec](docs/TableflowV1TableFlowTopicConfigsSpec.md)
+ - [TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf](docs/TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf.md)
  - [TableflowV1TableflowTopic](docs/TableflowV1TableflowTopic.md)
  - [TableflowV1TableflowTopicList](docs/TableflowV1TableflowTopicList.md)
  - [TableflowV1TableflowTopicSpec](docs/TableflowV1TableflowTopicSpec.md)
  - [TableflowV1TableflowTopicSpecStorageOneOf](docs/TableflowV1TableflowTopicSpecStorageOneOf.md)
  - [TableflowV1TableflowTopicSpecUpdate](docs/TableflowV1TableflowTopicSpecUpdate.md)
  - [TableflowV1TableflowTopicStatus](docs/TableflowV1TableflowTopicStatus.md)
+ - [TableflowV1TableflowTopicStatusFailingTableFormats](docs/TableflowV1TableflowTopicStatusFailingTableFormats.md)
  - [TableflowV1TableflowTopicUpdate](docs/TableflowV1TableflowTopicUpdate.md)
 
 
 ## Documentation For Authorization
 
-
-
-### confluent-sts-access-token
-
-
-- **Type**: OAuth
-- **Flow**: application
-- **Authorization URL**: 
-- **Scopes**: N/A
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
-
-```golang
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
-```
 
 
 ### resource-api-key

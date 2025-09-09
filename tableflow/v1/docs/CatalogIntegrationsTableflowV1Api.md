@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[confluent-sts-access-token](../README.md#confluent-sts-access-token), [resource-api-key](../README.md#resource-api-key)
+[resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

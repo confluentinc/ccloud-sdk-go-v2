@@ -40,14 +40,21 @@ type TableflowV1TableflowTopicStatus struct {
 	Phase *string `json:"phase,omitempty"`
 	// Displayable error message if Tableflow topic is in an error state
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// List of associated catalogs and their synchronization statuses for this Tableflow topic.
+	CatalogSyncStatuses *[]TableflowV1CatalogSyncStatus `json:"catalog_sync_statuses,omitempty"`
+	// List of failing table formats for the Tableflow-enabled topic, including error details.
+	FailingTableFormats *[]TableflowV1TableflowTopicStatusFailingTableFormats `json:"failing_table_formats,omitempty"`
+	// The write mode for the Tableflow-enabled topic, determining how data is written to the table.
+	WriteMode string `json:"write_mode,omitempty"`
 }
 
 // NewTableflowV1TableflowTopicStatus instantiates a new TableflowV1TableflowTopicStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTableflowV1TableflowTopicStatus() *TableflowV1TableflowTopicStatus {
+func NewTableflowV1TableflowTopicStatus(writeMode string) *TableflowV1TableflowTopicStatus {
 	this := TableflowV1TableflowTopicStatus{}
+	this.WriteMode = writeMode
 	return &this
 }
 
@@ -123,10 +130,101 @@ func (o *TableflowV1TableflowTopicStatus) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetCatalogSyncStatuses returns the CatalogSyncStatuses field value if set, zero value otherwise.
+func (o *TableflowV1TableflowTopicStatus) GetCatalogSyncStatuses() []TableflowV1CatalogSyncStatus {
+	if o == nil || o.CatalogSyncStatuses == nil {
+		var ret []TableflowV1CatalogSyncStatus
+		return ret
+	}
+	return *o.CatalogSyncStatuses
+}
+
+// GetCatalogSyncStatusesOk returns a tuple with the CatalogSyncStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1TableflowTopicStatus) GetCatalogSyncStatusesOk() (*[]TableflowV1CatalogSyncStatus, bool) {
+	if o == nil || o.CatalogSyncStatuses == nil {
+		return nil, false
+	}
+	return o.CatalogSyncStatuses, true
+}
+
+// HasCatalogSyncStatuses returns a boolean if a field has been set.
+func (o *TableflowV1TableflowTopicStatus) HasCatalogSyncStatuses() bool {
+	if o != nil && o.CatalogSyncStatuses != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCatalogSyncStatuses gets a reference to the given []TableflowV1CatalogSyncStatus and assigns it to the CatalogSyncStatuses field.
+func (o *TableflowV1TableflowTopicStatus) SetCatalogSyncStatuses(v []TableflowV1CatalogSyncStatus) {
+	o.CatalogSyncStatuses = &v
+}
+
+// GetFailingTableFormats returns the FailingTableFormats field value if set, zero value otherwise.
+func (o *TableflowV1TableflowTopicStatus) GetFailingTableFormats() []TableflowV1TableflowTopicStatusFailingTableFormats {
+	if o == nil || o.FailingTableFormats == nil {
+		var ret []TableflowV1TableflowTopicStatusFailingTableFormats
+		return ret
+	}
+	return *o.FailingTableFormats
+}
+
+// GetFailingTableFormatsOk returns a tuple with the FailingTableFormats field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1TableflowTopicStatus) GetFailingTableFormatsOk() (*[]TableflowV1TableflowTopicStatusFailingTableFormats, bool) {
+	if o == nil || o.FailingTableFormats == nil {
+		return nil, false
+	}
+	return o.FailingTableFormats, true
+}
+
+// HasFailingTableFormats returns a boolean if a field has been set.
+func (o *TableflowV1TableflowTopicStatus) HasFailingTableFormats() bool {
+	if o != nil && o.FailingTableFormats != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFailingTableFormats gets a reference to the given []TableflowV1TableflowTopicStatusFailingTableFormats and assigns it to the FailingTableFormats field.
+func (o *TableflowV1TableflowTopicStatus) SetFailingTableFormats(v []TableflowV1TableflowTopicStatusFailingTableFormats) {
+	o.FailingTableFormats = &v
+}
+
+// GetWriteMode returns the WriteMode field value
+func (o *TableflowV1TableflowTopicStatus) GetWriteMode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.WriteMode
+}
+
+// GetWriteModeOk returns a tuple with the WriteMode field value
+// and a boolean to check if the value has been set.
+func (o *TableflowV1TableflowTopicStatus) GetWriteModeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.WriteMode, true
+}
+
+// SetWriteMode sets field value
+func (o *TableflowV1TableflowTopicStatus) SetWriteMode(v string) {
+	o.WriteMode = v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1TableflowTopicStatus) Redact() {
 	o.recurseRedact(o.Phase)
 	o.recurseRedact(o.ErrorMessage)
+	o.recurseRedact(o.CatalogSyncStatuses)
+	o.recurseRedact(o.FailingTableFormats)
+	o.recurseRedact(&o.WriteMode)
 }
 
 func (o *TableflowV1TableflowTopicStatus) recurseRedact(v interface{}) {
@@ -166,6 +264,15 @@ func (o TableflowV1TableflowTopicStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.ErrorMessage != nil {
 		toSerialize["error_message"] = o.ErrorMessage
+	}
+	if o.CatalogSyncStatuses != nil {
+		toSerialize["catalog_sync_statuses"] = o.CatalogSyncStatuses
+	}
+	if o.FailingTableFormats != nil {
+		toSerialize["failing_table_formats"] = o.FailingTableFormats
+	}
+	if true {
+		toSerialize["write_mode"] = o.WriteMode
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
