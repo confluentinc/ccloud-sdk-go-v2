@@ -256,7 +256,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Regions
       tags:
       - Regions (tableflow/v1)
@@ -352,6 +351,18 @@ paths:
         Retrieve a sorted, filtered, paginated list of all tableflow topics.
       operationId: listTableflowV1TableflowTopics
       parameters:
+      - description: Filter the results by exact match for spec.table_formats. Pass
+          multiple times to see results matching any of the values.
+        example:
+        - DELTA
+        - ICEBERG
+        explode: true
+        in: query
+        name: spec.table_formats
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: Filter the results by exact match for environment.
         example: env-00000
         explode: true
@@ -584,7 +595,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Tableflow Topics
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -592,14 +602,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000' \
+            --url 'https://api.confluent.cloud/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000")
+            .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -607,7 +617,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -620,7 +630,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000", headers=headers)
+          conn.request("GET", "/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -634,7 +644,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000",
+            "path": "/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -659,7 +669,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -668,7 +678,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/tableflow/v1/tableflow-topics?environment=env-00000&spec.kafka_cluster=lkc-00000");
+          var client = new RestClient("https://api.confluent.cloud/tableflow/v1/tableflow-topics?spec.table_formats=DELTA,ICEBERG&environment=env-00000&spec.kafka_cluster=lkc-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -723,6 +733,7 @@ paths:
                       type: object
                   required:
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -968,7 +979,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Create a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -979,13 +989,13 @@ paths:
             --url https://api.confluent.cloud/tableflow/v1/tableflow-topics \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","record_failure_strategy":"SUSPEND"},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"lkc-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"}},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"lkc-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics")
             .post(body)
@@ -999,23 +1009,24 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/tableflow/v1/tableflow-topics\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"topic_1\\\",\\\"suspended\\\":false,\\\"config\\\":{\\\"retention_ms\\\
-          \":\\\"7776000000\\\",\\\"record_failure_strategy\\\":\\\"SUSPEND\\\"},\\\
-          \"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\"bucket_1\\\
-          \",\\\"provider_integration_id\\\":\\\"cspi-stgce89r7\\\"},\\\"table_formats\\\
-          \":[\\\"DELTA\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\
-          \"kafka_cluster\\\":{\\\"id\\\":\\\"lkc-00000\\\",\\\"environment\\\":\\\
-          \"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \":\\\"7776000000\\\",\\\"record_failure_strategy\\\":\\\"SUSPEND\\\",\\\
+          \"error_handling\\\":{\\\"mode\\\":\\\"SUSPEND\\\"}},\\\"storage\\\":{\\\
+          \"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\"bucket_1\\\",\\\"provider_integration_id\\\
+          \":\\\"cspi-stgce89r7\\\"},\\\"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"\
+          lkc-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1060,7 +1071,11 @@ paths:
             spec: {
               display_name: 'topic_1',
               suspended: false,
-              config: {retention_ms: '7776000000', record_failure_strategy: 'SUSPEND'},
+              config: {
+                retention_ms: '7776000000',
+                record_failure_strategy: 'SUSPEND',
+                error_handling: {mode: 'SUSPEND'}
+              },
               storage: {
                 kind: 'ByobAws',
                 bucket_name: 'bucket_1',
@@ -1084,7 +1099,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1093,7 +1108,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /tableflow/v1/tableflow-topics/{display_name}:
     delete:
@@ -1317,7 +1332,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Delete a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -1457,6 +1471,7 @@ paths:
                   - api_version
                   - kind
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -1659,7 +1674,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Read a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -1800,6 +1814,7 @@ paths:
                   - api_version
                   - kind
                   - spec
+                  - status
                   type: object
                 - properties:
                     spec:
@@ -2055,7 +2070,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Update a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -2066,13 +2080,13 @@ paths:
             --url 'https://api.confluent.cloud/tableflow/v1/tableflow-topics/{display_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","record_failure_strategy":"SUSPEND"},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"}},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics/{display_name}")
             .patch(body)
@@ -2086,23 +2100,24 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/tableflow/v1/tableflow-topics/{display_name}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"topic_1\\\",\\\"suspended\\\":false,\\\"config\\\":{\\\"retention_ms\\\
-          \":\\\"7776000000\\\",\\\"record_failure_strategy\\\":\\\"SUSPEND\\\"},\\\
-          \"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\"bucket_1\\\
-          \",\\\"provider_integration_id\\\":\\\"cspi-stgce89r7\\\"},\\\"table_formats\\\
-          \":[\\\"DELTA\\\"],\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\
-          \"kafka_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"\
-          string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \":\\\"7776000000\\\",\\\"record_failure_strategy\\\":\\\"SUSPEND\\\",\\\
+          \"error_handling\\\":{\\\"mode\\\":\\\"SUSPEND\\\"}},\\\"storage\\\":{\\\
+          \"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\"bucket_1\\\",\\\"provider_integration_id\\\
+          \":\\\"cspi-stgce89r7\\\"},\\\"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"\
+          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2147,7 +2162,11 @@ paths:
             spec: {
               display_name: 'topic_1',
               suspended: false,
-              config: {retention_ms: '7776000000', record_failure_strategy: 'SUSPEND'},
+              config: {
+                retention_ms: '7776000000',
+                record_failure_strategy: 'SUSPEND',
+                error_handling: {mode: 'SUSPEND'}
+              },
               storage: {
                 kind: 'ByobAws',
                 bucket_name: 'bucket_1',
@@ -2171,7 +2190,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2180,7 +2199,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /tableflow/v1/catalog-integrations:
     get:
@@ -2422,7 +2441,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: List of Catalog Integrations
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -2806,7 +2824,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Create a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3147,7 +3164,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Delete a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3490,7 +3506,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Read a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3874,7 +3889,6 @@ paths:
               style: simple
       security:
       - resource-api-key: []
-      - confluent-sts-access-token: []
       summary: Update a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -4333,7 +4347,38 @@ components:
           example: Could not enable catalog integration
           readOnly: true
           type: string
+        catalog_sync_statuses:
+          description: |
+            List of associated catalogs and their synchronization statuses for this Tableflow topic.
+          items:
+            $ref: '#/components/schemas/tableflow.v1.CatalogSyncStatus'
+          readOnly: true
+          type: array
+        failing_table_formats:
+          description: |
+            List of failing table formats for the Tableflow-enabled topic, including error details.
+          example:
+          - format: ICEBERG
+            error_message: Schema validation failed
+          - format: DELTA
+            error_message: Connection timeout
+          items:
+            $ref: '#/components/schemas/tableflow_v1_TableflowTopicStatus_failing_table_formats'
+          readOnly: true
+          type: array
+        write_mode:
+          description: |
+            The write mode for the Tableflow-enabled topic, determining how data is written to the table.
+          example: APPEND
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - APPEND
+          - UPSERT
+          - UPSERT_HISTORY
       readOnly: true
+      required:
+      - write_mode
       type: object
     tableflow.v1.CatalogIntegration:
       description: |-
@@ -4431,7 +4476,7 @@ components:
         retention_ms:
           description: |
             The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta)
-            to retain in the table for the Tableflow-enabled topic (snapshot/version expiration)
+            to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).
 
             The default value is "604800000" milliseconds (equivalent to 7 days).
 
@@ -4441,6 +4486,7 @@ components:
           type: string
         record_failure_strategy:
           default: SUSPEND
+          deprecated: true
           description: |
             The strategy to handle record failures in the Tableflow enabled topic during materialization.
 
@@ -4451,6 +4497,27 @@ components:
           x-extensible-enum:
           - SUSPEND
           - SKIP
+        error_handling:
+          description: |
+            The error mode to handle record failures in the Tableflow enabled topic during materialization.
+
+            for `SKIP`, we skip the bad records and move to the next record,
+
+            for `SUSPEND`, we suspend the materialization of the topic,
+
+            and for `LOG`, we log the bad records to the DLQ and continue processing the rest of the records.
+          discriminator:
+            mapping:
+              SUSPEND: '#/components/schemas/tableflow.v1.ErrorHandlingSuspend'
+              SKIP: '#/components/schemas/tableflow.v1.ErrorHandlingSkip'
+              LOG: '#/components/schemas/tableflow.v1.ErrorHandlingLog'
+            propertyName: mode
+          oneOf:
+          - $ref: '#/components/schemas/tableflow.v1.ErrorHandlingSuspend'
+          - $ref: '#/components/schemas/tableflow.v1.ErrorHandlingSkip'
+          - $ref: '#/components/schemas/tableflow.v1.ErrorHandlingLog'
+          type: object
+          x-one-of-name: TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf
       type: object
     tableflow.v1.ByobAwsSpec:
       description: The Tableflow storage config for BYOB enabled topic in AWS
@@ -4481,7 +4548,7 @@ components:
         table_path:
           description: The current storage path where the data and metadata is stored
             for this table
-          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          example: s3://dummy-bucket-name-1/10011010/11101100/org-1/env-2/lkc-3/v1/tableId
           readOnly: true
           type: string
       required:
@@ -4502,7 +4569,7 @@ components:
         table_path:
           description: The current storage path where the data and metadata is stored
             for this table
-          example: s3://dummy-bucket-name-1//10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          example: s3://dummy-bucket-name-1/10011010/11101100/org-1/env-2/lkc-3/v1/tableId
           readOnly: true
           type: string
       required:
@@ -4559,6 +4626,35 @@ components:
       - kind
       - warehouse
       type: object
+    tableflow.v1.CatalogIntegrationUnitySpec:
+      description: The catalog integration connection config for Unity Catalog.
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - Unity
+          type: string
+        workspace_endpoint:
+          description: The Databricks workspace URL associated with the Unity Catalog.
+          example: https://user1.cloud.databricks.com
+          type: string
+        catalog_name:
+          description: The name of the catalog within Unity Catalog.
+          type: string
+        client_id:
+          description: The OAuth client ID used to authenticate with the Unity Catalog.
+          type: string
+        client_secret:
+          description: The OAuth client secret used for authentication with the Unity
+            Catalog.
+          type: string
+      required:
+      - catalog_name
+      - client_id
+      - client_secret
+      - kind
+      - workspace_endpoint
+      type: object
     tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec:
       description: The catalog integration connection config for Snowflake Open Catalog
         (update operations).
@@ -4597,6 +4693,31 @@ components:
           - AwsGlue
           type: string
           x-immutable: true
+      required:
+      - kind
+      type: object
+    tableflow.v1.CatalogIntegrationUnityUpdateSpec:
+      description: The catalog integration connection config for Unity Catalog.
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - Unity
+          type: string
+        workspace_endpoint:
+          description: The Databricks workspace URL associated with the Unity Catalog.
+          example: https://user1.cloud.databricks.com
+          type: string
+        catalog_name:
+          description: The name of the catalog within Unity Catalog.
+          type: string
+        client_id:
+          description: The OAuth client ID used to authenticate with the Unity Catalog.
+          type: string
+        client_secret:
+          description: The OAuth client secret used for authentication with the Unity
+            Catalog.
+          type: string
       required:
       - kind
       type: object
@@ -4655,10 +4776,12 @@ components:
             mapping:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
+              Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
         environment:
@@ -4677,9 +4800,111 @@ components:
       - environment
       - kafka_cluster
       type: object
+    tableflow.v1.ErrorHandlingSuspend:
+      description: |
+        Configuration for the `SUSPEND` error handling mode.
+      properties:
+        mode:
+          description: |
+            The error handling mode for the Tableflow enabled topic.
+
+            In this mode, the materialization of the topic is suspended in case of record failures.
+          enum:
+          - SUSPEND
+          type: string
+      required:
+      - mode
+      type: object
+    tableflow.v1.ErrorHandlingSkip:
+      description: |
+        Configuration for the `SKIP` error handling mode.
+      properties:
+        mode:
+          description: |
+            The error handling mode for the Tableflow enabled topic.
+
+            In this mode, the bad records are skipped and the materialization continues with the next record.
+          enum:
+          - SKIP
+          type: string
+      required:
+      - mode
+      type: object
+    tableflow.v1.ErrorHandlingLog:
+      description: |
+        Configuration for the `LOG` error handling mode.
+      properties:
+        mode:
+          description: |
+            The error handling mode for the Tableflow enabled topic.
+
+            In this mode, the bad records are logged to a dead-letter queue (DLQ) topic and the
+
+            materialization continues with the next record.
+          enum:
+          - LOG
+          type: string
+        target:
+          default: error_log
+          description: |
+            The topic to which the bad records will be logged in case of `LOG` error handling mode.
+
+            Creates the topic if it doesn't already exist; otherwise, the operation is idempotent and no action is taken.
+
+            Default topic is `error_log`.
+          type: string
+      required:
+      - mode
+      type: object
+    tableflow.v1.CatalogSyncStatus:
+      description: The synchronization status of an external catalog for a Tableflow
+        topic
+      properties:
+        catalog_integration_id:
+          description: The ID of the catalog integration
+          example: tci-12345
+          type: string
+        catalog_type:
+          description: The type of the external catalog
+          example: AWS_GLUE
+          type: string
+          x-extensible-enum:
+          - AWS_GLUE
+          - SNOWFLAKE
+          - UNITY
+        sync_status:
+          description: |
+            The current synchronization status:
+
+              PENDING: sync is pending;
+
+              SYNCED: successfully synced;
+
+              FAILED: sync failed;
+
+              DISCONNECTED: catalog integration is disconnected.
+          example: SYNCED
+          type: string
+          x-extensible-enum:
+          - PENDING
+          - SYNCED
+          - FAILED
+          - DISCONNECTED
+        error_message:
+          description: |
+            Error message if the sync failed. This field is only present when `sync_status` is `FAILED`.
+          example: 'Failed to connect to catalog: authentication error'
+          nullable: true
+          type: string
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
+    MultipleSearchFilter:
+      description: Filter a collection by a string search for one or more values
+      items:
+        type: string
+      type: array
     tableflow.v1.RegionList:
       description: |-
         `Region` objects represent cloud provider regions where Tableflow can be enabled.
@@ -4784,6 +5009,7 @@ components:
               required:
               - metadata
               - spec
+              - status
               type: object
           type: array
           uniqueItems: true
@@ -4932,10 +5158,12 @@ components:
             mapping:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
+              Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationSpecConfigOneOf
         environment:
@@ -5247,6 +5475,21 @@ components:
         status:
           $ref: '#/components/schemas/tableflow.v1.TableflowTopicStatus'
       type: object
+    tableflow_v1_TableflowTopicStatus_failing_table_formats:
+      properties:
+        format:
+          description: The name of the table format (e.g., DELTA, ICEBERG).
+          type: string
+          x-extensible-enum:
+          - DELTA
+          - ICEBERG
+        error_message:
+          description: The error message for the failing table format.
+          type: string
+      required:
+      - error_message
+      - format
+      type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
@@ -5268,11 +5511,3 @@ components:
         API Key Secret as the password.
       scheme: basic
       type: http
-    confluent-sts-access-token:
-      description: Authenticate with Confluent API using this credentials (JSON Web
-        Tokens) following OAuth 2.0.
-      flows:
-        clientCredentials:
-          scopes: {}
-          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
-      type: oauth2

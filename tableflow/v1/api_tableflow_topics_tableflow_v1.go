@@ -651,6 +651,7 @@ type ApiListTableflowV1TableflowTopicsRequest struct {
 	ApiService       TableflowTopicsTableflowV1Api
 	environment      *string
 	specKafkaCluster *string
+	specTableFormats *MultipleSearchFilter
 	pageSize         *int32
 	pageToken        *string
 }
@@ -664,6 +665,12 @@ func (r ApiListTableflowV1TableflowTopicsRequest) Environment(environment string
 // Filter the results by exact match for spec.kafka_cluster.
 func (r ApiListTableflowV1TableflowTopicsRequest) SpecKafkaCluster(specKafkaCluster string) ApiListTableflowV1TableflowTopicsRequest {
 	r.specKafkaCluster = &specKafkaCluster
+	return r
+}
+
+// Filter the results by exact match for spec.table_formats. Pass multiple times to see results matching any of the values.
+func (r ApiListTableflowV1TableflowTopicsRequest) SpecTableFormats(specTableFormats MultipleSearchFilter) ApiListTableflowV1TableflowTopicsRequest {
+	r.specTableFormats = &specTableFormats
 	return r
 }
 
@@ -730,6 +737,9 @@ func (a *TableflowTopicsTableflowV1ApiService) ListTableflowV1TableflowTopicsExe
 		return localVarReturnValue, nil, reportError("specKafkaCluster is required and must be specified")
 	}
 
+	if r.specTableFormats != nil {
+		localVarQueryParams.Add("spec.table_formats", parameterToString(*r.specTableFormats, ""))
+	}
 	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	localVarQueryParams.Add("spec.kafka_cluster", parameterToString(*r.specKafkaCluster, ""))
 	if r.pageSize != nil {

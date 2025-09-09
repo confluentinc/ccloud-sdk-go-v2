@@ -40,10 +40,13 @@ type TableflowV1TableFlowTopicConfigsSpec struct {
 	EnableCompaction *bool `json:"enable_compaction,omitempty"`
 	// This flag determines whether to enable partitioning for the Tableflow enabled topic.
 	EnablePartitioning *bool `json:"enable_partitioning,omitempty"`
-	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration)  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours).
+	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours).
 	RetentionMs *string `json:"retention_ms,omitempty"`
 	// The strategy to handle record failures in the Tableflow enabled topic during materialization.  For `SKIP`, we skip the bad records and move to the next record,  and for `SUSPEND`, we suspend the materialization of the topic.
+	// Deprecated
 	RecordFailureStrategy *string `json:"record_failure_strategy,omitempty"`
+	// The error mode to handle record failures in the Tableflow enabled topic during materialization.  for `SKIP`, we skip the bad records and move to the next record,  for `SUSPEND`, we suspend the materialization of the topic,  and for `LOG`, we log the bad records to the DLQ and continue processing the rest of the records.
+	ErrorHandling *TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf `json:"error_handling,omitempty"`
 }
 
 // NewTableflowV1TableFlowTopicConfigsSpec instantiates a new TableflowV1TableFlowTopicConfigsSpec object
@@ -164,6 +167,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) SetRetentionMs(v string) {
 }
 
 // GetRecordFailureStrategy returns the RecordFailureStrategy field value if set, zero value otherwise.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetRecordFailureStrategy() string {
 	if o == nil || o.RecordFailureStrategy == nil {
 		var ret string
@@ -174,6 +178,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) GetRecordFailureStrategy() string
 
 // GetRecordFailureStrategyOk returns a tuple with the RecordFailureStrategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetRecordFailureStrategyOk() (*string, bool) {
 	if o == nil || o.RecordFailureStrategy == nil {
 		return nil, false
@@ -191,8 +196,41 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) HasRecordFailureStrategy() bool {
 }
 
 // SetRecordFailureStrategy gets a reference to the given string and assigns it to the RecordFailureStrategy field.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) SetRecordFailureStrategy(v string) {
 	o.RecordFailureStrategy = &v
+}
+
+// GetErrorHandling returns the ErrorHandling field value if set, zero value otherwise.
+func (o *TableflowV1TableFlowTopicConfigsSpec) GetErrorHandling() TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf {
+	if o == nil || o.ErrorHandling == nil {
+		var ret TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf
+		return ret
+	}
+	return *o.ErrorHandling
+}
+
+// GetErrorHandlingOk returns a tuple with the ErrorHandling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1TableFlowTopicConfigsSpec) GetErrorHandlingOk() (*TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf, bool) {
+	if o == nil || o.ErrorHandling == nil {
+		return nil, false
+	}
+	return o.ErrorHandling, true
+}
+
+// HasErrorHandling returns a boolean if a field has been set.
+func (o *TableflowV1TableFlowTopicConfigsSpec) HasErrorHandling() bool {
+	if o != nil && o.ErrorHandling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorHandling gets a reference to the given TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf and assigns it to the ErrorHandling field.
+func (o *TableflowV1TableFlowTopicConfigsSpec) SetErrorHandling(v TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf) {
+	o.ErrorHandling = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -201,6 +239,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) Redact() {
 	o.recurseRedact(o.EnablePartitioning)
 	o.recurseRedact(o.RetentionMs)
 	o.recurseRedact(o.RecordFailureStrategy)
+	o.recurseRedact(o.ErrorHandling)
 }
 
 func (o *TableflowV1TableFlowTopicConfigsSpec) recurseRedact(v interface{}) {
@@ -246,6 +285,9 @@ func (o TableflowV1TableFlowTopicConfigsSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.RecordFailureStrategy != nil {
 		toSerialize["record_failure_strategy"] = o.RecordFailureStrategy
+	}
+	if o.ErrorHandling != nil {
+		toSerialize["error_handling"] = o.ErrorHandling
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
