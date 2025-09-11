@@ -15,13 +15,17 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-    Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
+    Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP.
     This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -31,7 +35,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
 
     ## Quotas and Limits
-    This resource is subject to the following quotas:
+    This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
     | Quota | Description |
     | --- | --- |
@@ -46,6 +50,15 @@ paths:
         Retrieve a sorted, filtered, paginated list of all keys.
       operationId: listByokV1Keys
       parameters:
+      - description: Filter the results by a partial search of display_name.
+        example: Key for billing cluster
+        explode: true
+        in: query
+        name: display_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: Filter the results by exact match for provider.
         example: AWS
         explode: true
@@ -60,6 +73,34 @@ paths:
         explode: true
         in: query
         name: state
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Filter the results by exact match for validation_phase.
+        explode: true
+        in: query
+        name: validation_phase
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          Filter keys by the cloud region where they are deployed.
+        example: us-west-2
+        explode: true
+        in: query
+        name: validation_region
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          Filters results by a partial match on the key identifier: key_arn for AWS, key_id for Azure and GCP.
+        example: vault-name
+        explode: true
+        in: query
+        name: key
         required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -98,6 +139,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -183,6 +247,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -205,7 +299,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Keys
       tags:
       - Keys (byok/v1)
@@ -213,14 +308,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/byok/v1/keys?provider=AWS&state=IN_USE' \
+            --url 'https://api.confluent.cloud/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/byok/v1/keys?provider=AWS&state=IN_USE")
+            .url("https://api.confluent.cloud/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -228,7 +323,8 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys?provider=AWS&state=IN_USE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys?display_name=Key\
+          \ for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -241,7 +337,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/byok/v1/keys?provider=AWS&state=IN_USE", headers=headers)
+          conn.request("GET", "/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -255,7 +351,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/byok/v1/keys?provider=AWS&state=IN_USE",
+            "path": "/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -280,7 +376,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys?provider=AWS&state=IN_USE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -289,7 +385,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys?provider=AWS&state=IN_USE");
+          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys?display_name=Key for billing cluster&provider=AWS&state=IN_USE&validation_phase=SOME_STRING_VALUE&validation_region=us-west-2&key=vault-name");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -325,6 +421,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
             Location:
               description: Key resource uri
@@ -492,6 +611,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -514,7 +663,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Create a Key
       tags:
       - Keys (byok/v1)
@@ -525,13 +675,13 @@ paths:
             --url https://api.confluent.cloud/byok/v1/keys \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"key":{"key_arn":"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab","kind":"AwsKey"}}'
+            --data '{"key":{"key_arn":"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab","kind":"AwsKey"},"display_name":"Key for billing cluster"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/byok/v1/keys")
             .post(body)
@@ -545,19 +695,19 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"key\\\":{\\\"key_arn\\\":\\\"\
           arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\\\
-          \",\\\"kind\\\":\\\"AwsKey\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
-          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"kind\\\":\\\"AwsKey\\\"},\\\"display_name\\\":\\\"Key for billing\
+          \ cluster\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"}}"
+          payload = "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}"
 
           headers = {
               'content-type': "application/json",
@@ -602,7 +752,8 @@ paths:
             key: {
               key_arn: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab',
               kind: 'AwsKey'
-            }
+            },
+            display_name: 'Key for billing cluster'
           }));
           req.end();
       - lang: C
@@ -617,7 +768,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -626,7 +777,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /byok/v1/keys/{id}:
     delete:
@@ -653,6 +804,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -756,6 +930,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -778,7 +982,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Delete a Key
       tags:
       - Keys (byok/v1)
@@ -786,14 +991,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://api.confluent.cloud/byok/v1/keys/%7Bid%7D \
+            --url 'https://api.confluent.cloud/byok/v1/keys/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/byok/v1/keys/%7Bid%7D")
+            .url("https://api.confluent.cloud/byok/v1/keys/{id}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -801,7 +1006,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -814,7 +1019,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/byok/v1/keys/%7Bid%7D", headers=headers)
+          conn.request("DELETE", "/byok/v1/keys/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -828,7 +1033,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/byok/v1/keys/%7Bid%7D",
+            "path": "/byok/v1/keys/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -853,7 +1058,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -862,7 +1067,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys/{id}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -895,6 +1100,7 @@ paths:
                   - kind
                   - provider
                   - state
+                  - validation
                   type: object
           description: Key.
           headers:
@@ -903,6 +1109,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1006,6 +1235,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1028,7 +1287,8 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Key
       tags:
       - Keys (byok/v1)
@@ -1036,14 +1296,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://api.confluent.cloud/byok/v1/keys/%7Bid%7D \
+            --url 'https://api.confluent.cloud/byok/v1/keys/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/byok/v1/keys/%7Bid%7D")
+            .url("https://api.confluent.cloud/byok/v1/keys/{id}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1051,7 +1311,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys/%7Bid%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys/{id}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1064,7 +1324,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/byok/v1/keys/%7Bid%7D", headers=headers)
+          conn.request("GET", "/byok/v1/keys/{id}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1078,7 +1338,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/byok/v1/keys/%7Bid%7D",
+            "path": "/byok/v1/keys/{id}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1103,7 +1363,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys/{id}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1112,9 +1372,421 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys/{id}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to update a key.
+
+      operationId: updateByokV1Key
+      parameters:
+      - description: The unique identifier for the key.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/byok.v1.KeyUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/byok.v1.Key'
+                - required:
+                  - api_version
+                  - id
+                  - key
+                  - kind
+                  - provider
+                  - state
+                  - validation
+                  type: object
+          description: Key.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "402":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "402"
+                  code: quota_exceeded
+                  title: Kafka Clusters Per Org Quota Exceeded
+                  detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request would exceed one or more quotas.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Over Quota
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Update a Key
+      tags:
+      - Keys (byok/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/byok/v1/keys/{id}' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"key":{"key_arn":"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab","kind":"AwsKey"},"display_name":"Key for billing cluster"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/byok/v1/keys/{id}")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/byok/v1/keys/{id}\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"key\\\":{\\\"key_arn\\\":\\\"\
+          arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\\\
+          \",\\\"kind\\\":\\\"AwsKey\\\"},\\\"display_name\\\":\\\"Key for billing\
+          \ cluster\\\"}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/byok/v1/keys/{id}", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/byok/v1/keys/{id}",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            key: {
+              key_arn: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab',
+              kind: 'AwsKey'
+            },
+            display_name: 'Key for billing cluster'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/byok/v1/keys/{id}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/byok/v1/keys/{id}");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"key\":{\"key_arn\":\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\",\"kind\":\"AwsKey\"},\"display_name\":\"Key for billing cluster\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -1291,6 +1963,36 @@ components:
           schema:
             type: string
           style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -1317,7 +2019,7 @@ components:
       description: |-
         `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
+        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP.
         This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -1327,7 +2029,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -1368,9 +2070,11 @@ components:
           description: |
             The cloud-specific key details.
 
-            For AWS please provide the corresponding `key_arn`.
-            For Azure please provide the corresponding `key_id`.
-            For GCP please provide the corresponding `key_id`.
+            For AWS, provide the corresponding `key_arn`.
+
+            For Azure, provide the corresponding `key_id`.
+
+            For GCP, provide the corresponding `key_id`.
           discriminator:
             mapping:
               AwsKey: '#/components/schemas/byok.v1.AwsKey'
@@ -1384,6 +2088,12 @@ components:
           type: object
           x-immutable: true
           x-one-of-name: ByokV1KeyKeyOneOf
+        display_name:
+          description: |
+            The human-readable name of the key object.
+          example: Key for billing cluster
+          type: string
+          x-immutable: false
         provider:
           description: The cloud provider of the Key.
           example: AWS
@@ -1391,19 +2101,69 @@ components:
           type: string
           x-extensible-enum:
           - AWS
-          - AZURE
+          - Azure
           - GCP
         state:
           description: |
             The state of the key:
-              AVAILABLE: key can be used for a Kafka cluster provisioning
-              IN_USE: key is already in use by a Kafka cluster provisioning
+
+              AVAILABLE: key can be used for a Kafka cluster provisioning.
+
+              IN_USE: key is already in use by a Kafka cluster provisioning.
           example: IN_USE
           readOnly: true
           type: string
           x-extensible-enum:
           - AVAILABLE
           - IN_USE
+        validation:
+          allOf:
+          - $ref: '#/components/schemas/byok.v1.KeyValidation'
+          description: |
+            The validation details of the key.
+          readOnly: true
+      type: object
+    byok.v1.KeyValidation:
+      description: |
+        The validation details of the key.
+      properties:
+        phase:
+          description: |
+            The validation phase of the key:
+
+              INITIALIZING: Initial phase for new keys awaiting first successful validation.
+
+              VALID: Last validation attempt succeeded.
+
+              INVALID: Last validation attempt failed.
+          example: VALID
+          type: string
+          x-extensible-enum:
+          - INITIALIZING
+          - VALID
+          - INVALID
+        message:
+          description: |
+            A message describing validation events.
+          example: Access to key denied.
+          type: string
+        since:
+          description: |
+            The timestamp since which the key is in the current validation phase.
+            Changes to the validation message or phase will update this timestamp.
+          example: 2024-03-20T15:30:00Z
+          format: date-time
+          type: string
+        region:
+          description: |
+            The cloud region where the key is deployed. This value is computed by the
+            API after the key is successfully validated.
+          example: us-west-2
+          readOnly: true
+          type: string
+      required:
+      - phase
+      - since
       type: object
     byok.v1.AwsKey:
       description: |
@@ -1510,7 +2270,7 @@ components:
       description: |-
         `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
 
-        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure and GCP.
+        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP.
         This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
 
 
@@ -1520,7 +2280,7 @@ components:
         <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
 
         ## Quotas and Limits
-        This resource is subject to the following quotas:
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
 
         | Quota | Description |
         | --- | --- |
@@ -1563,6 +2323,7 @@ components:
               - metadata
               - provider
               - state
+              - validation
               type: object
           type: array
           uniqueItems: true
@@ -1737,6 +2498,92 @@ components:
         source:
           $ref: '#/components/schemas/Error_source'
       type: object
+    byok.v1.KeyUpdate:
+      description: |-
+        `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.
+
+        Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP.
+        This API allows you to upload and retrieve self-managed keys on Confluent Cloud.
+
+
+        Related guide: [Confluent Cloud Bring Your Own Key (BYOK) Management API](https://docs.confluent.io/cloud/current/clusters/byok/index.html).
+
+        ## The Keys Model
+        <SchemaDefinition schemaRef="#/components/schemas/byok.v1.Key" />
+
+        ## Quotas and Limits
+        This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):
+
+        | Quota | Description |
+        | --- | --- |
+        | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - byok/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Key
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/byok/v1/keys/cck-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-12345
+        display_name:
+          description: |
+            The human-readable name of the key object.
+          example: Key for billing cluster
+          type: string
+          x-immutable: false
+        provider:
+          description: The cloud provider of the Key.
+          example: AWS
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AWS
+          - Azure
+          - GCP
+        state:
+          description: |
+            The state of the key:
+
+              AVAILABLE: key can be used for a Kafka cluster provisioning.
+
+              IN_USE: key is already in use by a Kafka cluster provisioning.
+          example: IN_USE
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - AVAILABLE
+          - IN_USE
+        validation:
+          allOf:
+          - $ref: '#/components/schemas/byok.v1.KeyValidation'
+          description: |
+            The validation details of the key.
+          readOnly: true
+      type: object
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
@@ -1752,8 +2599,16 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

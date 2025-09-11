@@ -105,6 +105,25 @@ type KeysByokV1Api interface {
 	// ListByokV1KeysExecute executes the request
 	//  @return ByokV1KeyList
 	ListByokV1KeysExecute(r ApiListByokV1KeysRequest) (ByokV1KeyList, *_nethttp.Response, error)
+
+	/*
+		UpdateByokV1Key Update a Key
+
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Make a request to update a key.
+
+
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the key.
+		 @return ApiUpdateByokV1KeyRequest
+	*/
+	UpdateByokV1Key(ctx _context.Context, id string) ApiUpdateByokV1KeyRequest
+
+	// UpdateByokV1KeyExecute executes the request
+	//  @return ByokV1Key
+	UpdateByokV1KeyExecute(r ApiUpdateByokV1KeyRequest) (ByokV1Key, *_nethttp.Response, error)
 }
 
 // KeysByokV1ApiService KeysByokV1Api service
@@ -594,12 +613,22 @@ func (a *KeysByokV1ApiService) GetByokV1KeyExecute(r ApiGetByokV1KeyRequest) (By
 }
 
 type ApiListByokV1KeysRequest struct {
-	ctx        _context.Context
-	ApiService KeysByokV1Api
-	provider   *string
-	state      *string
-	pageSize   *int32
-	pageToken  *string
+	ctx              _context.Context
+	ApiService       KeysByokV1Api
+	displayName      *string
+	provider         *string
+	state            *string
+	validationPhase  *string
+	validationRegion *string
+	key              *string
+	pageSize         *int32
+	pageToken        *string
+}
+
+// Filter the results by a partial search of display_name.
+func (r ApiListByokV1KeysRequest) DisplayName(displayName string) ApiListByokV1KeysRequest {
+	r.displayName = &displayName
+	return r
 }
 
 // Filter the results by exact match for provider.
@@ -611,6 +640,24 @@ func (r ApiListByokV1KeysRequest) Provider(provider string) ApiListByokV1KeysReq
 // Filter the results by exact match for state.
 func (r ApiListByokV1KeysRequest) State(state string) ApiListByokV1KeysRequest {
 	r.state = &state
+	return r
+}
+
+// Filter the results by exact match for validation_phase.
+func (r ApiListByokV1KeysRequest) ValidationPhase(validationPhase string) ApiListByokV1KeysRequest {
+	r.validationPhase = &validationPhase
+	return r
+}
+
+// Filter keys by the cloud region where they are deployed.
+func (r ApiListByokV1KeysRequest) ValidationRegion(validationRegion string) ApiListByokV1KeysRequest {
+	r.validationRegion = &validationRegion
+	return r
+}
+
+// Filters results by a partial match on the key identifier: key_arn for AWS, key_id for Azure and GCP.
+func (r ApiListByokV1KeysRequest) Key(key string) ApiListByokV1KeysRequest {
+	r.key = &key
 	return r
 }
 
@@ -671,11 +718,23 @@ func (a *KeysByokV1ApiService) ListByokV1KeysExecute(r ApiListByokV1KeysRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.displayName != nil {
+		localVarQueryParams.Add("display_name", parameterToString(*r.displayName, ""))
+	}
 	if r.provider != nil {
 		localVarQueryParams.Add("provider", parameterToString(*r.provider, ""))
 	}
 	if r.state != nil {
 		localVarQueryParams.Add("state", parameterToString(*r.state, ""))
+	}
+	if r.validationPhase != nil {
+		localVarQueryParams.Add("validation_phase", parameterToString(*r.validationPhase, ""))
+	}
+	if r.validationRegion != nil {
+		localVarQueryParams.Add("validation_region", parameterToString(*r.validationRegion, ""))
+	}
+	if r.key != nil {
+		localVarQueryParams.Add("key", parameterToString(*r.key, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -743,6 +802,201 @@ func (a *KeysByokV1ApiService) ListByokV1KeysExecute(r ApiListByokV1KeysRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateByokV1KeyRequest struct {
+	ctx             _context.Context
+	ApiService      KeysByokV1Api
+	id              string
+	byokV1KeyUpdate *ByokV1KeyUpdate
+}
+
+func (r ApiUpdateByokV1KeyRequest) ByokV1KeyUpdate(byokV1KeyUpdate ByokV1KeyUpdate) ApiUpdateByokV1KeyRequest {
+	r.byokV1KeyUpdate = &byokV1KeyUpdate
+	return r
+}
+
+func (r ApiUpdateByokV1KeyRequest) Execute() (ByokV1Key, *_nethttp.Response, error) {
+	return r.ApiService.UpdateByokV1KeyExecute(r)
+}
+
+/*
+UpdateByokV1Key Update a Key
+
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a key.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the key.
+	@return ApiUpdateByokV1KeyRequest
+*/
+func (a *KeysByokV1ApiService) UpdateByokV1Key(ctx _context.Context, id string) ApiUpdateByokV1KeyRequest {
+	return ApiUpdateByokV1KeyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ByokV1Key
+func (a *KeysByokV1ApiService) UpdateByokV1KeyExecute(r ApiUpdateByokV1KeyRequest) (ByokV1Key, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ByokV1Key
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KeysByokV1ApiService.UpdateByokV1Key")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/byok/v1/keys/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.byokV1KeyUpdate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
