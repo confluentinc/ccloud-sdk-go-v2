@@ -34,8 +34,8 @@ import (
 	"reflect"
 )
 
-// ByokV1Key `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.  Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP. This API allows you to upload and retrieve self-managed keys on Confluent Cloud.   Related guide: [Confluent Cloud Bring Your Own Key (BYOK) Management API](https://docs.confluent.io/cloud/current/clusters/byok/index.html).  ## The Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/byok.v1.Key\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
-type ByokV1Key struct {
+// ByokV1KeyUpdate `Key` objects represent customer managed keys on dedicated Confluent Cloud clusters.  Keys are used to protect data at rest stored in your dedicated Confluent Cloud clusters on AWS, Azure, and GCP. This API allows you to upload and retrieve self-managed keys on Confluent Cloud.   Related guide: [Confluent Cloud Bring Your Own Key (BYOK) Management API](https://docs.confluent.io/cloud/current/clusters/byok/index.html).  ## The Keys Model <SchemaDefinition schemaRef=\"#/components/schemas/byok.v1.Key\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `byok.max_keys.per_org` | BYOK keys in one Confluent Cloud organisation. |
+type ByokV1KeyUpdate struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -43,8 +43,6 @@ type ByokV1Key struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// The cloud-specific key details.  For AWS, provide the corresponding `key_arn`.  For Azure, provide the corresponding `key_id`.  For GCP, provide the corresponding `key_id`.
-	Key *ByokV1KeyKeyOneOf `json:"key,omitempty"`
 	// The human-readable name of the key object.
 	DisplayName *string `json:"display_name,omitempty"`
 	// The cloud provider of the Key.
@@ -55,25 +53,25 @@ type ByokV1Key struct {
 	Validation *ByokV1KeyValidation `json:"validation,omitempty"`
 }
 
-// NewByokV1Key instantiates a new ByokV1Key object
+// NewByokV1KeyUpdate instantiates a new ByokV1KeyUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewByokV1Key() *ByokV1Key {
-	this := ByokV1Key{}
+func NewByokV1KeyUpdate() *ByokV1KeyUpdate {
+	this := ByokV1KeyUpdate{}
 	return &this
 }
 
-// NewByokV1KeyWithDefaults instantiates a new ByokV1Key object
+// NewByokV1KeyUpdateWithDefaults instantiates a new ByokV1KeyUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewByokV1KeyWithDefaults() *ByokV1Key {
-	this := ByokV1Key{}
+func NewByokV1KeyUpdateWithDefaults() *ByokV1KeyUpdate {
+	this := ByokV1KeyUpdate{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *ByokV1Key) GetApiVersion() string {
+func (o *ByokV1KeyUpdate) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -83,7 +81,7 @@ func (o *ByokV1Key) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetApiVersionOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -91,7 +89,7 @@ func (o *ByokV1Key) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *ByokV1Key) HasApiVersion() bool {
+func (o *ByokV1KeyUpdate) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -100,12 +98,12 @@ func (o *ByokV1Key) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *ByokV1Key) SetApiVersion(v string) {
+func (o *ByokV1KeyUpdate) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *ByokV1Key) GetKind() string {
+func (o *ByokV1KeyUpdate) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -115,7 +113,7 @@ func (o *ByokV1Key) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetKindOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -123,7 +121,7 @@ func (o *ByokV1Key) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *ByokV1Key) HasKind() bool {
+func (o *ByokV1KeyUpdate) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -132,12 +130,12 @@ func (o *ByokV1Key) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *ByokV1Key) SetKind(v string) {
+func (o *ByokV1KeyUpdate) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ByokV1Key) GetId() string {
+func (o *ByokV1KeyUpdate) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -147,7 +145,7 @@ func (o *ByokV1Key) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetIdOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -155,7 +153,7 @@ func (o *ByokV1Key) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *ByokV1Key) HasId() bool {
+func (o *ByokV1KeyUpdate) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -164,12 +162,12 @@ func (o *ByokV1Key) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ByokV1Key) SetId(v string) {
+func (o *ByokV1KeyUpdate) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *ByokV1Key) GetMetadata() ObjectMeta {
+func (o *ByokV1KeyUpdate) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -179,7 +177,7 @@ func (o *ByokV1Key) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *ByokV1KeyUpdate) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -187,7 +185,7 @@ func (o *ByokV1Key) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *ByokV1Key) HasMetadata() bool {
+func (o *ByokV1KeyUpdate) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -196,44 +194,12 @@ func (o *ByokV1Key) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *ByokV1Key) SetMetadata(v ObjectMeta) {
+func (o *ByokV1KeyUpdate) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetKey returns the Key field value if set, zero value otherwise.
-func (o *ByokV1Key) GetKey() ByokV1KeyKeyOneOf {
-	if o == nil || o.Key == nil {
-		var ret ByokV1KeyKeyOneOf
-		return ret
-	}
-	return *o.Key
-}
-
-// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetKeyOk() (*ByokV1KeyKeyOneOf, bool) {
-	if o == nil || o.Key == nil {
-		return nil, false
-	}
-	return o.Key, true
-}
-
-// HasKey returns a boolean if a field has been set.
-func (o *ByokV1Key) HasKey() bool {
-	if o != nil && o.Key != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKey gets a reference to the given ByokV1KeyKeyOneOf and assigns it to the Key field.
-func (o *ByokV1Key) SetKey(v ByokV1KeyKeyOneOf) {
-	o.Key = &v
-}
-
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *ByokV1Key) GetDisplayName() string {
+func (o *ByokV1KeyUpdate) GetDisplayName() string {
 	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
@@ -243,7 +209,7 @@ func (o *ByokV1Key) GetDisplayName() string {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetDisplayNameOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetDisplayNameOk() (*string, bool) {
 	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
@@ -251,7 +217,7 @@ func (o *ByokV1Key) GetDisplayNameOk() (*string, bool) {
 }
 
 // HasDisplayName returns a boolean if a field has been set.
-func (o *ByokV1Key) HasDisplayName() bool {
+func (o *ByokV1KeyUpdate) HasDisplayName() bool {
 	if o != nil && o.DisplayName != nil {
 		return true
 	}
@@ -260,12 +226,12 @@ func (o *ByokV1Key) HasDisplayName() bool {
 }
 
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *ByokV1Key) SetDisplayName(v string) {
+func (o *ByokV1KeyUpdate) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
 // GetProvider returns the Provider field value if set, zero value otherwise.
-func (o *ByokV1Key) GetProvider() string {
+func (o *ByokV1KeyUpdate) GetProvider() string {
 	if o == nil || o.Provider == nil {
 		var ret string
 		return ret
@@ -275,7 +241,7 @@ func (o *ByokV1Key) GetProvider() string {
 
 // GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetProviderOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetProviderOk() (*string, bool) {
 	if o == nil || o.Provider == nil {
 		return nil, false
 	}
@@ -283,7 +249,7 @@ func (o *ByokV1Key) GetProviderOk() (*string, bool) {
 }
 
 // HasProvider returns a boolean if a field has been set.
-func (o *ByokV1Key) HasProvider() bool {
+func (o *ByokV1KeyUpdate) HasProvider() bool {
 	if o != nil && o.Provider != nil {
 		return true
 	}
@@ -292,12 +258,12 @@ func (o *ByokV1Key) HasProvider() bool {
 }
 
 // SetProvider gets a reference to the given string and assigns it to the Provider field.
-func (o *ByokV1Key) SetProvider(v string) {
+func (o *ByokV1KeyUpdate) SetProvider(v string) {
 	o.Provider = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *ByokV1Key) GetState() string {
+func (o *ByokV1KeyUpdate) GetState() string {
 	if o == nil || o.State == nil {
 		var ret string
 		return ret
@@ -307,7 +273,7 @@ func (o *ByokV1Key) GetState() string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetStateOk() (*string, bool) {
+func (o *ByokV1KeyUpdate) GetStateOk() (*string, bool) {
 	if o == nil || o.State == nil {
 		return nil, false
 	}
@@ -315,7 +281,7 @@ func (o *ByokV1Key) GetStateOk() (*string, bool) {
 }
 
 // HasState returns a boolean if a field has been set.
-func (o *ByokV1Key) HasState() bool {
+func (o *ByokV1KeyUpdate) HasState() bool {
 	if o != nil && o.State != nil {
 		return true
 	}
@@ -324,12 +290,12 @@ func (o *ByokV1Key) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
-func (o *ByokV1Key) SetState(v string) {
+func (o *ByokV1KeyUpdate) SetState(v string) {
 	o.State = &v
 }
 
 // GetValidation returns the Validation field value if set, zero value otherwise.
-func (o *ByokV1Key) GetValidation() ByokV1KeyValidation {
+func (o *ByokV1KeyUpdate) GetValidation() ByokV1KeyValidation {
 	if o == nil || o.Validation == nil {
 		var ret ByokV1KeyValidation
 		return ret
@@ -339,7 +305,7 @@ func (o *ByokV1Key) GetValidation() ByokV1KeyValidation {
 
 // GetValidationOk returns a tuple with the Validation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ByokV1Key) GetValidationOk() (*ByokV1KeyValidation, bool) {
+func (o *ByokV1KeyUpdate) GetValidationOk() (*ByokV1KeyValidation, bool) {
 	if o == nil || o.Validation == nil {
 		return nil, false
 	}
@@ -347,7 +313,7 @@ func (o *ByokV1Key) GetValidationOk() (*ByokV1KeyValidation, bool) {
 }
 
 // HasValidation returns a boolean if a field has been set.
-func (o *ByokV1Key) HasValidation() bool {
+func (o *ByokV1KeyUpdate) HasValidation() bool {
 	if o != nil && o.Validation != nil {
 		return true
 	}
@@ -356,24 +322,23 @@ func (o *ByokV1Key) HasValidation() bool {
 }
 
 // SetValidation gets a reference to the given ByokV1KeyValidation and assigns it to the Validation field.
-func (o *ByokV1Key) SetValidation(v ByokV1KeyValidation) {
+func (o *ByokV1KeyUpdate) SetValidation(v ByokV1KeyValidation) {
 	o.Validation = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ByokV1Key) Redact() {
+func (o *ByokV1KeyUpdate) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.Key)
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.Provider)
 	o.recurseRedact(o.State)
 	o.recurseRedact(o.Validation)
 }
 
-func (o *ByokV1Key) recurseRedact(v interface{}) {
+func (o *ByokV1KeyUpdate) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -398,12 +363,12 @@ func (o *ByokV1Key) recurseRedact(v interface{}) {
 	}
 }
 
-func (o ByokV1Key) zeroField(v interface{}) {
+func (o ByokV1KeyUpdate) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ByokV1Key) MarshalJSON() ([]byte, error) {
+func (o ByokV1KeyUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -416,9 +381,6 @@ func (o ByokV1Key) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if o.Key != nil {
-		toSerialize["key"] = o.Key
 	}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
@@ -439,34 +401,34 @@ func (o ByokV1Key) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableByokV1Key struct {
-	value *ByokV1Key
+type NullableByokV1KeyUpdate struct {
+	value *ByokV1KeyUpdate
 	isSet bool
 }
 
-func (v NullableByokV1Key) Get() *ByokV1Key {
+func (v NullableByokV1KeyUpdate) Get() *ByokV1KeyUpdate {
 	return v.value
 }
 
-func (v *NullableByokV1Key) Set(val *ByokV1Key) {
+func (v *NullableByokV1KeyUpdate) Set(val *ByokV1KeyUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableByokV1Key) IsSet() bool {
+func (v NullableByokV1KeyUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableByokV1Key) Unset() {
+func (v *NullableByokV1KeyUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableByokV1Key(val *ByokV1Key) *NullableByokV1Key {
-	return &NullableByokV1Key{value: val, isSet: true}
+func NewNullableByokV1KeyUpdate(val *ByokV1KeyUpdate) *NullableByokV1KeyUpdate {
+	return &NullableByokV1KeyUpdate{value: val, isSet: true}
 }
 
-func (v NullableByokV1Key) MarshalJSON() ([]byte, error) {
+func (v NullableByokV1KeyUpdate) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -474,7 +436,7 @@ func (v NullableByokV1Key) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableByokV1Key) UnmarshalJSON(src []byte) error {
+func (v *NullableByokV1KeyUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
