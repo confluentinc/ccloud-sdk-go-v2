@@ -643,7 +643,7 @@ type ApiListSqlv1ConnectionsRequest struct {
 	pageToken          *string
 }
 
-// Filter the results by exact match for spec.connection_type
+// Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
 func (r ApiListSqlv1ConnectionsRequest) SpecConnectionType(specConnectionType string) ApiListSqlv1ConnectionsRequest {
 	r.specConnectionType = &specConnectionType
 	return r
