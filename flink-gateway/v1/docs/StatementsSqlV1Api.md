@@ -296,7 +296,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
+ **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | 
+ **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
  **labelSelector** | **string** | A comma-separated label selector to filter the statements. | 
 
