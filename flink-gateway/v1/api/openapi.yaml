@@ -1840,7 +1840,9 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Filter the results by exact match for spec.compute_pool.
+      - description: |-
+          Filter the results by exact match for spec.compute_pool_id.
+          When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
         example: lfcp-00000
         explode: true
         in: query
@@ -2137,7 +2139,6 @@ paths:
               - properties:
                   spec:
                     required:
-                    - compute_pool_id
                     - statement
                     type: object
                 required:
@@ -2154,7 +2155,6 @@ paths:
                 - properties:
                     spec:
                       required:
-                      - compute_pool_id
                       - statement
                       - statement_name
                       type: object
@@ -2795,7 +2795,6 @@ paths:
                 - properties:
                     spec:
                       required:
-                      - compute_pool_id
                       - statement
                       - statement_name
                       type: object
@@ -3074,7 +3073,6 @@ paths:
                 - properties:
                     spec:
                       required:
-                      - compute_pool_id
                       - statement
                       - statement_name
                       type: object
@@ -4610,7 +4608,6 @@ components:
             - properties:
                 spec:
                   required:
-                  - compute_pool_id
                   - statement
                   type: object
               required:
@@ -4721,7 +4718,9 @@ components:
           maximum: 8192
           type: object
         compute_pool_id:
-          description: The id associated with the compute pool in context.
+          description: "The id associated with the compute pool in context. \nIf not\
+                      \ specified, the statement will use the default compute pool. The default\
+                      \ pool is automatically determined by the system."
           example: fcp-00000
           maxLength: 255
           type: string

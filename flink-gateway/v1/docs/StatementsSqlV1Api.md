@@ -261,7 +261,7 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
-    specComputePoolId := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool. (optional)
+    specComputePoolId := "lfcp-00000" // string | Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
     labelSelector := "labelSelector_example" // string | A comma-separated label selector to filter the statements. (optional)
@@ -296,8 +296,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool. | 
- **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
+ **specComputePoolId** | **string** | Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
  **labelSelector** | **string** | A comma-separated label selector to filter the statements. | 
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
-**ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. | [optional] 
+**ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | [optional]
 **Principal** | Pointer to **string** | The id of a principal this statement runs as. | [optional] 
 **AuthorizedPrincipals** | Pointer to **[]string** | The list of ids of the principals granting permissions to run this statement. | [optional] 
 **Stopped** | Pointer to **bool** | Indicates whether the statement should be stopped. | [optional] 
