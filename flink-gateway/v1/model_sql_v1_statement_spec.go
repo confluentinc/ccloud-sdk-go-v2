@@ -40,7 +40,7 @@ type SqlV1StatementSpec struct {
 	Statement *string `json:"statement,omitempty"`
 	// A map (key-value pairs) of statement properties.
 	Properties *map[string]string `json:"properties,omitempty"`
-	// The id associated with the compute pool in context.
+	// The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
 	// The id of a principal this statement runs as.
 	Principal *string `json:"principal,omitempty"`
