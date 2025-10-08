@@ -20,6 +20,7 @@ tags:
 
     A Compute Pool represents a set of compute resources that is used to run your Queries.
     The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
+    Note that the Compute Pool API supports a limited pagination API, only the `next` field will be populated.
 
 
     ## The Compute Pools Model
@@ -35,6 +36,17 @@ tags:
     ## The Regions Model
     <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.Region" />
   name: Regions (fcpm/v2)
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    `OrgComputePoolConfig` manages compute pool configuration settings for an organization.
+    The API allows you to read and update organization-wide settings such as whether default pools are enabled
+    and their maximum CFU limits.
+
+
+    ## The Org Compute Pool Configs Model
+    <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.OrgComputePoolConfig" />
+  name: Org Compute Pool Configs (fcpm/v2)
 paths:
   /fcpm/v2/compute-pools:
     get:
@@ -683,13 +695,13 @@ paths:
             --url https://api.confluent.cloud/fcpm/v2/compute-pools \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":5,"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":5,"enable_ai":false,"default_pool":false,"environment":{"id":"env-00000"},"network":{"id":"n-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/fcpm/v2/compute-pools")
             .post(body)
@@ -703,11 +715,12 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\
-          \"us-west-1\\\",\\\"max_cfu\\\":5,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \"},\\\"network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"\
-          string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \"us-west-1\\\",\\\"max_cfu\\\":5,\\\"enable_ai\\\":false,\\\"default_pool\\\
+          \":false,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\
+          \":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -716,7 +729,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -763,6 +776,8 @@ paths:
               cloud: 'AWS',
               region: 'us-west-1',
               max_cfu: 5,
+              enable_ai: false,
+              default_pool: false,
               environment: {id: 'env-00000'},
               network: {id: 'n-00000', environment: 'string'}
             }
@@ -780,7 +795,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -789,7 +804,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /fcpm/v2/compute-pools/{id}:
     delete:
@@ -1749,13 +1764,13 @@ paths:
             --url 'https://api.confluent.cloud/fcpm/v2/compute-pools/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":5,"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"flink_compute_pool_0","cloud":"AWS","region":"us-west-1","max_cfu":5,"enable_ai":false,"default_pool":false,"environment":{"id":"env-00000"},"network":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/fcpm/v2/compute-pools/{id}")
             .patch(body)
@@ -1769,11 +1784,12 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pools/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"flink_compute_pool_0\\\",\\\"cloud\\\":\\\"AWS\\\",\\\"region\\\":\\\
-          \"us-west-1\\\",\\\"max_cfu\\\":5,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \"},\\\"network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"\
-          string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \"us-west-1\\\",\\\"max_cfu\\\":5,\\\"enable_ai\\\":false,\\\"default_pool\\\
+          \":false,\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\"},\\\"network\\\
+          \":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\
+          \n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
           fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
@@ -1782,7 +1798,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1829,6 +1845,8 @@ paths:
               cloud: 'AWS',
               region: 'us-west-1',
               max_cfu: 5,
+              enable_ai: false,
+              default_pool: false,
               environment: {id: 'env-00000'},
               network: {id: 'string', environment: 'string'}
             }
@@ -1846,7 +1864,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1855,7 +1873,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"flink_compute_pool_0\",\"cloud\":\"AWS\",\"region\":\"us-west-1\",\"max_cfu\":5,\"enable_ai\":false,\"default_pool\":false,\"environment\":{\"id\":\"env-00000\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /fcpm/v2/regions:
     get:
@@ -2166,6 +2184,667 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+  /fcpm/v2/compute-pool-config:
+    get:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to read an org compute pool config.
+      operationId: getFcpmV2OrgComputePoolConfig
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.OrgComputePoolConfig'
+                - required:
+                  - api_version
+                  - kind
+                  type: object
+          description: Org Compute Pool Config.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Read an Org Compute Pool Config
+      tags:
+      - Org Compute Pool Configs (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.confluent.cloud/fcpm/v2/compute-pool-config \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pool-config")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pool-config\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "/fcpm/v2/compute-pool-config", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/compute-pool-config",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pool-config");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pool-config");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    patch:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to update an org compute pool config.
+      operationId: updateFcpmV2OrgComputePoolConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/fcpm.v2.OrgComputePoolConfigUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/fcpm.v2.OrgComputePoolConfig'
+                - required:
+                  - api_version
+                  - kind
+                  type: object
+          description: Org Compute Pool Config.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      summary: Update an Org Compute Pool Config
+      tags:
+      - Org Compute Pool Configs (fcpm/v2)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url https://api.confluent.cloud/fcpm/v2/compute-pool-config \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"default_pool_enabled":true,"default_pool_max_cfu":20}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"default_pool_enabled\":true,\"default_pool_max_cfu\":20}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/fcpm/v2/compute-pool-config")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/fcpm/v2/compute-pool-config\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"default_pool_enabled\\\
+          \":true,\\\"default_pool_max_cfu\\\":20}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"default_pool_enabled\":true,\"default_pool_max_cfu\":20}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/fcpm/v2/compute-pool-config", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/fcpm/v2/compute-pool-config",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({spec: {default_pool_enabled: true, default_pool_max_cfu: 20}}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/fcpm/v2/compute-pool-config");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"default_pool_enabled\":true,\"default_pool_max_cfu\":20}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/fcpm/v2/compute-pool-config");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"default_pool_enabled\":true,\"default_pool_max_cfu\":20}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
 components:
   responses:
     BadRequestError:
@@ -2397,6 +3076,7 @@ components:
       description: |-
         A Compute Pool represents a set of compute resources that is used to run your Queries.
         The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
+        Note that the Compute Pool API supports a limited pagination API, only the `next` field will be populated.
 
 
         ## The Compute Pools Model
@@ -2538,6 +3218,38 @@ components:
           type: string
           x-immutable: true
       type: object
+    fcpm.v2.OrgComputePoolConfig:
+      description: |-
+        `OrgComputePoolConfig` manages compute pool configuration settings for an organization.
+        The API allows you to read and update organization-wide settings such as whether default pools are enabled
+        and their maximum CFU limits.
+
+
+        ## The Org Compute Pool Configs Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.OrgComputePoolConfig" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - OrgComputePoolConfig
+          readOnly: true
+          type: string
+        organization_id:
+          description: The ID of the organization.
+          example: 9bb441c4-edef-46ac-8a41-c49e44a3fd9a
+          readOnly: true
+          type: string
+          x-immutable: true
+        spec:
+          $ref: '#/components/schemas/fcpm_v2_OrgComputePoolConfig_spec'
+      type: object
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -2545,6 +3257,7 @@ components:
       description: |-
         A Compute Pool represents a set of compute resources that is used to run your Queries.
         The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
+        Note that the Compute Pool API supports a limited pagination API, only the `next` field will be populated.
 
 
         ## The Compute Pools Model
@@ -2641,6 +3354,20 @@ components:
           - 30
           - 40
           - 50
+          x-immutable: false
+        enable_ai:
+          default: false
+          description: |
+            The flag to enable AI computing using Ray for the Flink compute pool. It's available in the Early Access API
+            lifecycle stage only.
+          type: boolean
+          x-immutable: true
+        default_pool:
+          default: false
+          description: |
+            The flag to indicate whether the Flink compute pool is a default compute pool or not.
+            Only one default compute pool per environment and region is allowed.
+          type: boolean
           x-immutable: false
         environment:
           allOf:
@@ -2956,6 +3683,13 @@ components:
           - 40
           - 50
           x-immutable: false
+        default_pool:
+          default: false
+          description: |
+            The flag to indicate whether the Flink compute pool is a default compute pool or not.
+            Only one default compute pool per environment and region is allowed.
+          type: boolean
+          x-immutable: false
         environment:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
@@ -2968,6 +3702,7 @@ components:
       description: |-
         A Compute Pool represents a set of compute resources that is used to run your Queries.
         The resources (CPUs, memory,…) provided by a Compute Pool are shared between all Queries that use it.
+        Note that the Compute Pool API supports a limited pagination API, only the `next` field will be populated.
 
 
         ## The Compute Pools Model
@@ -3009,6 +3744,59 @@ components:
         status:
           $ref: '#/components/schemas/fcpm.v2.ComputePoolStatus'
       type: object
+    fcpm.v2.OrgComputePoolConfigUpdate:
+      description: |-
+        `OrgComputePoolConfig` manages compute pool configuration settings for an organization.
+        The API allows you to read and update organization-wide settings such as whether default pools are enabled
+        and their maximum CFU limits.
+
+
+        ## The Org Compute Pool Configs Model
+        <SchemaDefinition schemaRef="#/components/schemas/fcpm.v2.OrgComputePoolConfig" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - fcpm/v2
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - OrgComputePoolConfig
+          readOnly: true
+          type: string
+        spec:
+          $ref: '#/components/schemas/fcpm_v2_OrgComputePoolConfig_spec'
+      type: object
+    fcpm_v2_OrgComputePoolConfig_spec:
+      description: The desired state of the organization-level Compute Pool configuration
+      properties:
+        default_pool_enabled:
+          default: true
+          description: |
+            Whether default compute pools are enabled for the organization.
+            When enabled, environments can have default compute pools created automatically.
+          type: boolean
+          x-immutable: false
+        default_pool_max_cfu:
+          description: |
+            Maximum number of Confluent Flink Units (CFUs) that default compute pools
+            in this organization should auto-scale to.
+          example: 20
+          format: int32
+          type: integer
+          x-extensible-enum:
+          - 5
+          - 10
+          - 20
+          - 30
+          - 40
+          - 50
+          x-immutable: false
+      type: object
+      x-immutable: false
     Error_source:
       description: If this error was caused by a particular part of the API request,
         the source will point to the query string parameter or request body property
