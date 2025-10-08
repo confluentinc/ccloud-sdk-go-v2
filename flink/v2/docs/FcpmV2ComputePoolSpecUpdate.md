@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the Flink compute pool. | [optional] 
 **MaxCfu** | Pointer to **int32** | Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.  | [optional] 
+**DefaultPool** | Pointer to **bool** | The flag to indicate whether the Flink compute pool is a default compute pool or not. Only one default compute pool per environment and region is allowed.  | [optional] [default to false]
 **Environment** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetMaxCfu sets MaxCfu field to given value.
 `func (o *FcpmV2ComputePoolSpecUpdate) HasMaxCfu() bool`
 
 HasMaxCfu returns a boolean if a field has been set.
+
+### GetDefaultPool
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetDefaultPool() bool`
+
+GetDefaultPool returns the DefaultPool field if non-nil, zero value otherwise.
+
+### GetDefaultPoolOk
+
+`func (o *FcpmV2ComputePoolSpecUpdate) GetDefaultPoolOk() (*bool, bool)`
+
+GetDefaultPoolOk returns a tuple with the DefaultPool field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultPool
+
+`func (o *FcpmV2ComputePoolSpecUpdate) SetDefaultPool(v bool)`
+
+SetDefaultPool sets DefaultPool field to given value.
+
+### HasDefaultPool
+
+`func (o *FcpmV2ComputePoolSpecUpdate) HasDefaultPool() bool`
+
+HasDefaultPool returns a boolean if a field has been set.
 
 ### GetEnvironment
 

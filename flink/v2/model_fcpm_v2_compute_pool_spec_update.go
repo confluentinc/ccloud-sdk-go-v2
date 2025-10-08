@@ -40,6 +40,8 @@ type FcpmV2ComputePoolSpecUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
 	MaxCfu *int32 `json:"max_cfu,omitempty"`
+	// The flag to indicate whether the Flink compute pool is a default compute pool or not. Only one default compute pool per environment and region is allowed.
+	DefaultPool *bool `json:"default_pool,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 }
@@ -50,6 +52,8 @@ type FcpmV2ComputePoolSpecUpdate struct {
 // will change when the set of required properties is changed
 func NewFcpmV2ComputePoolSpecUpdate() *FcpmV2ComputePoolSpecUpdate {
 	this := FcpmV2ComputePoolSpecUpdate{}
+	var defaultPool bool = false
+	this.DefaultPool = &defaultPool
 	return &this
 }
 
@@ -58,6 +62,8 @@ func NewFcpmV2ComputePoolSpecUpdate() *FcpmV2ComputePoolSpecUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewFcpmV2ComputePoolSpecUpdateWithDefaults() *FcpmV2ComputePoolSpecUpdate {
 	this := FcpmV2ComputePoolSpecUpdate{}
+	var defaultPool bool = false
+	this.DefaultPool = &defaultPool
 	return &this
 }
 
@@ -125,6 +131,38 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetMaxCfu(v int32) {
 	o.MaxCfu = &v
 }
 
+// GetDefaultPool returns the DefaultPool field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolSpecUpdate) GetDefaultPool() bool {
+	if o == nil || o.DefaultPool == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DefaultPool
+}
+
+// GetDefaultPoolOk returns a tuple with the DefaultPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2ComputePoolSpecUpdate) GetDefaultPoolOk() (*bool, bool) {
+	if o == nil || o.DefaultPool == nil {
+		return nil, false
+	}
+	return o.DefaultPool, true
+}
+
+// HasDefaultPool returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolSpecUpdate) HasDefaultPool() bool {
+	if o != nil && o.DefaultPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultPool gets a reference to the given bool and assigns it to the DefaultPool field.
+func (o *FcpmV2ComputePoolSpecUpdate) SetDefaultPool(v bool) {
+	o.DefaultPool = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *FcpmV2ComputePoolSpecUpdate) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
@@ -161,6 +199,7 @@ func (o *FcpmV2ComputePoolSpecUpdate) SetEnvironment(v GlobalObjectReference) {
 func (o *FcpmV2ComputePoolSpecUpdate) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.MaxCfu)
+	o.recurseRedact(o.DefaultPool)
 	o.recurseRedact(o.Environment)
 }
 
@@ -201,6 +240,9 @@ func (o FcpmV2ComputePoolSpecUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxCfu != nil {
 		toSerialize["max_cfu"] = o.MaxCfu
+	}
+	if o.DefaultPool != nil {
+		toSerialize["default_pool"] = o.DefaultPool
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

@@ -44,6 +44,10 @@ type FcpmV2ComputePoolSpec struct {
 	Region *string `json:"region,omitempty"`
 	// Maximum number of Confluent Flink Units (CFUs) that the Flink compute pool should auto-scale to.
 	MaxCfu *int32 `json:"max_cfu,omitempty"`
+	// The flag to enable AI computing using Ray for the Flink compute pool. It's available in the Early Access API lifecycle stage only.
+	EnableAi *bool `json:"enable_ai,omitempty"`
+	// The flag to indicate whether the Flink compute pool is a default compute pool or not. Only one default compute pool per environment and region is allowed.
+	DefaultPool *bool `json:"default_pool,omitempty"`
 	// The environment to which this belongs.
 	Environment *GlobalObjectReference `json:"environment,omitempty"`
 	// The network to which this belongs.
@@ -56,6 +60,10 @@ type FcpmV2ComputePoolSpec struct {
 // will change when the set of required properties is changed
 func NewFcpmV2ComputePoolSpec() *FcpmV2ComputePoolSpec {
 	this := FcpmV2ComputePoolSpec{}
+	var enableAi bool = false
+	this.EnableAi = &enableAi
+	var defaultPool bool = false
+	this.DefaultPool = &defaultPool
 	return &this
 }
 
@@ -64,6 +72,10 @@ func NewFcpmV2ComputePoolSpec() *FcpmV2ComputePoolSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewFcpmV2ComputePoolSpecWithDefaults() *FcpmV2ComputePoolSpec {
 	this := FcpmV2ComputePoolSpec{}
+	var enableAi bool = false
+	this.EnableAi = &enableAi
+	var defaultPool bool = false
+	this.DefaultPool = &defaultPool
 	return &this
 }
 
@@ -195,6 +207,70 @@ func (o *FcpmV2ComputePoolSpec) SetMaxCfu(v int32) {
 	o.MaxCfu = &v
 }
 
+// GetEnableAi returns the EnableAi field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolSpec) GetEnableAi() bool {
+	if o == nil || o.EnableAi == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableAi
+}
+
+// GetEnableAiOk returns a tuple with the EnableAi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2ComputePoolSpec) GetEnableAiOk() (*bool, bool) {
+	if o == nil || o.EnableAi == nil {
+		return nil, false
+	}
+	return o.EnableAi, true
+}
+
+// HasEnableAi returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolSpec) HasEnableAi() bool {
+	if o != nil && o.EnableAi != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableAi gets a reference to the given bool and assigns it to the EnableAi field.
+func (o *FcpmV2ComputePoolSpec) SetEnableAi(v bool) {
+	o.EnableAi = &v
+}
+
+// GetDefaultPool returns the DefaultPool field value if set, zero value otherwise.
+func (o *FcpmV2ComputePoolSpec) GetDefaultPool() bool {
+	if o == nil || o.DefaultPool == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DefaultPool
+}
+
+// GetDefaultPoolOk returns a tuple with the DefaultPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpmV2ComputePoolSpec) GetDefaultPoolOk() (*bool, bool) {
+	if o == nil || o.DefaultPool == nil {
+		return nil, false
+	}
+	return o.DefaultPool, true
+}
+
+// HasDefaultPool returns a boolean if a field has been set.
+func (o *FcpmV2ComputePoolSpec) HasDefaultPool() bool {
+	if o != nil && o.DefaultPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultPool gets a reference to the given bool and assigns it to the DefaultPool field.
+func (o *FcpmV2ComputePoolSpec) SetDefaultPool(v bool) {
+	o.DefaultPool = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *FcpmV2ComputePoolSpec) GetEnvironment() GlobalObjectReference {
 	if o == nil || o.Environment == nil {
@@ -265,6 +341,8 @@ func (o *FcpmV2ComputePoolSpec) Redact() {
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.MaxCfu)
+	o.recurseRedact(o.EnableAi)
+	o.recurseRedact(o.DefaultPool)
 	o.recurseRedact(o.Environment)
 	o.recurseRedact(o.Network)
 }
@@ -312,6 +390,12 @@ func (o FcpmV2ComputePoolSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxCfu != nil {
 		toSerialize["max_cfu"] = o.MaxCfu
+	}
+	if o.EnableAi != nil {
+		toSerialize["enable_ai"] = o.EnableAi
+	}
+	if o.DefaultPool != nil {
+		toSerialize["default_pool"] = o.DefaultPool
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
