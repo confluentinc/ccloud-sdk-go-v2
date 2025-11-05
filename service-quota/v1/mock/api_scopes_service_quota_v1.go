@@ -8,21 +8,23 @@ import (
 	context "context"
 	net_http "net/http"
 	sync "sync"
+
+	github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1 "github.com/confluentinc/ccloud-sdk-go-v2/service-quota/v1"
 )
 
-// MockScopesServiceQuotaV1Api is a mock of ScopesServiceQuotaV1Api interface
-type MockScopesServiceQuotaV1Api struct {
+// ScopesServiceQuotaV1Api is a mock of ScopesServiceQuotaV1Api interface
+type ScopesServiceQuotaV1Api struct {
 	lockGetServiceQuotaV1Scope sync.Mutex
-	GetServiceQuotaV1ScopeFunc func(ctx context.Context, id string) ApiGetServiceQuotaV1ScopeRequest
+	GetServiceQuotaV1ScopeFunc func(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest
 
 	lockGetServiceQuotaV1ScopeExecute sync.Mutex
-	GetServiceQuotaV1ScopeExecuteFunc func(r ApiGetServiceQuotaV1ScopeRequest) (ServiceQuotaV1Scope, *net_http.Response, error)
+	GetServiceQuotaV1ScopeExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest) (github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ServiceQuotaV1Scope, *net_http.Response, error)
 
 	lockListServiceQuotaV1Scopes sync.Mutex
-	ListServiceQuotaV1ScopesFunc func(ctx context.Context) ApiListServiceQuotaV1ScopesRequest
+	ListServiceQuotaV1ScopesFunc func(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest
 
 	lockListServiceQuotaV1ScopesExecute sync.Mutex
-	ListServiceQuotaV1ScopesExecuteFunc func(r ApiListServiceQuotaV1ScopesRequest) (ServiceQuotaV1ScopeList, *net_http.Response, error)
+	ListServiceQuotaV1ScopesExecuteFunc func(r github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest) (github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ServiceQuotaV1ScopeList, *net_http.Response, error)
 
 	calls struct {
 		GetServiceQuotaV1Scope []struct {
@@ -30,24 +32,24 @@ type MockScopesServiceQuotaV1Api struct {
 			Id  string
 		}
 		GetServiceQuotaV1ScopeExecute []struct {
-			R ApiGetServiceQuotaV1ScopeRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest
 		}
 		ListServiceQuotaV1Scopes []struct {
 			Ctx context.Context
 		}
 		ListServiceQuotaV1ScopesExecute []struct {
-			R ApiListServiceQuotaV1ScopesRequest
+			R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest
 		}
 	}
 }
 
 // GetServiceQuotaV1Scope mocks base method by wrapping the associated func.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1Scope(ctx context.Context, id string) ApiGetServiceQuotaV1ScopeRequest {
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1Scope(ctx context.Context, id string) github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest {
 	m.lockGetServiceQuotaV1Scope.Lock()
 	defer m.lockGetServiceQuotaV1Scope.Unlock()
 
 	if m.GetServiceQuotaV1ScopeFunc == nil {
-		panic("mocker: MockScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeFunc is nil but MockScopesServiceQuotaV1Api.GetServiceQuotaV1Scope was called.")
+		panic("mocker: ScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeFunc is nil but ScopesServiceQuotaV1Api.GetServiceQuotaV1Scope was called.")
 	}
 
 	call := struct {
@@ -64,7 +66,7 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1Scope(ctx context.Context
 }
 
 // GetServiceQuotaV1ScopeCalled returns true if GetServiceQuotaV1Scope was called at least once.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalled() bool {
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalled() bool {
 	m.lockGetServiceQuotaV1Scope.Lock()
 	defer m.lockGetServiceQuotaV1Scope.Unlock()
 
@@ -72,7 +74,7 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalled() bool {
 }
 
 // GetServiceQuotaV1ScopeCalls returns the calls made to GetServiceQuotaV1Scope.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalls() []struct {
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalls() []struct {
 	Ctx context.Context
 	Id  string
 } {
@@ -83,16 +85,16 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeCalls() []struct {
 }
 
 // GetServiceQuotaV1ScopeExecute mocks base method by wrapping the associated func.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecute(r ApiGetServiceQuotaV1ScopeRequest) (ServiceQuotaV1Scope, *net_http.Response, error) {
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecute(r github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest) (github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ServiceQuotaV1Scope, *net_http.Response, error) {
 	m.lockGetServiceQuotaV1ScopeExecute.Lock()
 	defer m.lockGetServiceQuotaV1ScopeExecute.Unlock()
 
 	if m.GetServiceQuotaV1ScopeExecuteFunc == nil {
-		panic("mocker: MockScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeExecuteFunc is nil but MockScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeExecute was called.")
+		panic("mocker: ScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeExecuteFunc is nil but ScopesServiceQuotaV1Api.GetServiceQuotaV1ScopeExecute was called.")
 	}
 
 	call := struct {
-		R ApiGetServiceQuotaV1ScopeRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest
 	}{
 		R: r,
 	}
@@ -103,7 +105,7 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecute(r ApiGetServ
 }
 
 // GetServiceQuotaV1ScopeExecuteCalled returns true if GetServiceQuotaV1ScopeExecute was called at least once.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalled() bool {
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalled() bool {
 	m.lockGetServiceQuotaV1ScopeExecute.Lock()
 	defer m.lockGetServiceQuotaV1ScopeExecute.Unlock()
 
@@ -111,8 +113,8 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalled() bool
 }
 
 // GetServiceQuotaV1ScopeExecuteCalls returns the calls made to GetServiceQuotaV1ScopeExecute.
-func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalls() []struct {
-	R ApiGetServiceQuotaV1ScopeRequest
+func (m *ScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiGetServiceQuotaV1ScopeRequest
 } {
 	m.lockGetServiceQuotaV1ScopeExecute.Lock()
 	defer m.lockGetServiceQuotaV1ScopeExecute.Unlock()
@@ -121,12 +123,12 @@ func (m *MockScopesServiceQuotaV1Api) GetServiceQuotaV1ScopeExecuteCalls() []str
 }
 
 // ListServiceQuotaV1Scopes mocks base method by wrapping the associated func.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1Scopes(ctx context.Context) ApiListServiceQuotaV1ScopesRequest {
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1Scopes(ctx context.Context) github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest {
 	m.lockListServiceQuotaV1Scopes.Lock()
 	defer m.lockListServiceQuotaV1Scopes.Unlock()
 
 	if m.ListServiceQuotaV1ScopesFunc == nil {
-		panic("mocker: MockScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesFunc is nil but MockScopesServiceQuotaV1Api.ListServiceQuotaV1Scopes was called.")
+		panic("mocker: ScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesFunc is nil but ScopesServiceQuotaV1Api.ListServiceQuotaV1Scopes was called.")
 	}
 
 	call := struct {
@@ -141,7 +143,7 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1Scopes(ctx context.Conte
 }
 
 // ListServiceQuotaV1ScopesCalled returns true if ListServiceQuotaV1Scopes was called at least once.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalled() bool {
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalled() bool {
 	m.lockListServiceQuotaV1Scopes.Lock()
 	defer m.lockListServiceQuotaV1Scopes.Unlock()
 
@@ -149,7 +151,7 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalled() bool {
 }
 
 // ListServiceQuotaV1ScopesCalls returns the calls made to ListServiceQuotaV1Scopes.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalls() []struct {
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalls() []struct {
 	Ctx context.Context
 } {
 	m.lockListServiceQuotaV1Scopes.Lock()
@@ -159,16 +161,16 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesCalls() []struct {
 }
 
 // ListServiceQuotaV1ScopesExecute mocks base method by wrapping the associated func.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecute(r ApiListServiceQuotaV1ScopesRequest) (ServiceQuotaV1ScopeList, *net_http.Response, error) {
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecute(r github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest) (github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ServiceQuotaV1ScopeList, *net_http.Response, error) {
 	m.lockListServiceQuotaV1ScopesExecute.Lock()
 	defer m.lockListServiceQuotaV1ScopesExecute.Unlock()
 
 	if m.ListServiceQuotaV1ScopesExecuteFunc == nil {
-		panic("mocker: MockScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesExecuteFunc is nil but MockScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesExecute was called.")
+		panic("mocker: ScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesExecuteFunc is nil but ScopesServiceQuotaV1Api.ListServiceQuotaV1ScopesExecute was called.")
 	}
 
 	call := struct {
-		R ApiListServiceQuotaV1ScopesRequest
+		R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest
 	}{
 		R: r,
 	}
@@ -179,7 +181,7 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecute(r ApiListS
 }
 
 // ListServiceQuotaV1ScopesExecuteCalled returns true if ListServiceQuotaV1ScopesExecute was called at least once.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalled() bool {
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalled() bool {
 	m.lockListServiceQuotaV1ScopesExecute.Lock()
 	defer m.lockListServiceQuotaV1ScopesExecute.Unlock()
 
@@ -187,8 +189,8 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalled() bo
 }
 
 // ListServiceQuotaV1ScopesExecuteCalls returns the calls made to ListServiceQuotaV1ScopesExecute.
-func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalls() []struct {
-	R ApiListServiceQuotaV1ScopesRequest
+func (m *ScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalls() []struct {
+	R github_com_confluentinc_ccloud_sdk_go_v2_service_quota_v1.ApiListServiceQuotaV1ScopesRequest
 } {
 	m.lockListServiceQuotaV1ScopesExecute.Lock()
 	defer m.lockListServiceQuotaV1ScopesExecute.Unlock()
@@ -197,7 +199,7 @@ func (m *MockScopesServiceQuotaV1Api) ListServiceQuotaV1ScopesExecuteCalls() []s
 }
 
 // Reset resets the calls made to the mocked methods.
-func (m *MockScopesServiceQuotaV1Api) Reset() {
+func (m *ScopesServiceQuotaV1Api) Reset() {
 	m.lockGetServiceQuotaV1Scope.Lock()
 	m.calls.GetServiceQuotaV1Scope = nil
 	m.lockGetServiceQuotaV1Scope.Unlock()
