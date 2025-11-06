@@ -33,8 +33,14 @@ import (
 
 // TableflowV1TableflowTopicSpecStorageOneOf - struct for TableflowV1TableflowTopicSpecStorageOneOf
 type TableflowV1TableflowTopicSpecStorageOneOf struct {
+	TableflowV1AzureAdlsSpec      *TableflowV1AzureAdlsSpec
 	TableflowV1ByobAwsSpec        *TableflowV1ByobAwsSpec
 	TableflowV1ManagedStorageSpec *TableflowV1ManagedStorageSpec
+}
+
+// TableflowV1AzureAdlsSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1AzureAdlsSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
+func TableflowV1AzureAdlsSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *TableflowV1AzureAdlsSpec) TableflowV1TableflowTopicSpecStorageOneOf {
+	return TableflowV1TableflowTopicSpecStorageOneOf{TableflowV1AzureAdlsSpec: v}
 }
 
 // TableflowV1ByobAwsSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1ByobAwsSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
@@ -55,6 +61,18 @@ func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &jsonDict)
 	if err != nil {
 		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+	}
+
+	// check if the discriminator value is 'AzureDataLakeStorageGen2'
+	if jsonDict["kind"] == "AzureDataLakeStorageGen2" {
+		// try to unmarshal JSON data into TableflowV1AzureAdlsSpec
+		err = json.Unmarshal(data, &dst.TableflowV1AzureAdlsSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1AzureAdlsSpec, return on the first match
+		} else {
+			dst.TableflowV1AzureAdlsSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1TableflowTopicSpecStorageOneOf as TableflowV1AzureAdlsSpec: %s", err.Error())
+		}
 	}
 
 	// check if the discriminator value is 'ByobAws'
@@ -78,6 +96,18 @@ func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte)
 		} else {
 			dst.TableflowV1ManagedStorageSpec = nil
 			return fmt.Errorf("Failed to unmarshal TableflowV1TableflowTopicSpecStorageOneOf as TableflowV1ManagedStorageSpec: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'tableflow.v1.AzureAdlsSpec'
+	if jsonDict["kind"] == "tableflow.v1.AzureAdlsSpec" {
+		// try to unmarshal JSON data into TableflowV1AzureAdlsSpec
+		err = json.Unmarshal(data, &dst.TableflowV1AzureAdlsSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1AzureAdlsSpec, return on the first match
+		} else {
+			dst.TableflowV1AzureAdlsSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1TableflowTopicSpecStorageOneOf as TableflowV1AzureAdlsSpec: %s", err.Error())
 		}
 	}
 
@@ -110,6 +140,14 @@ func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte)
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TableflowV1TableflowTopicSpecStorageOneOf) MarshalJSON() ([]byte, error) {
+	if src.TableflowV1AzureAdlsSpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.TableflowV1AzureAdlsSpec)
+		return buffer.Bytes(), err
+	}
+
 	if src.TableflowV1ByobAwsSpec != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -131,6 +169,10 @@ func (src TableflowV1TableflowTopicSpecStorageOneOf) MarshalJSON() ([]byte, erro
 
 // Get the actual instance
 func (obj *TableflowV1TableflowTopicSpecStorageOneOf) GetActualInstance() interface{} {
+	if obj.TableflowV1AzureAdlsSpec != nil {
+		return obj.TableflowV1AzureAdlsSpec
+	}
+
 	if obj.TableflowV1ByobAwsSpec != nil {
 		return obj.TableflowV1ByobAwsSpec
 	}
