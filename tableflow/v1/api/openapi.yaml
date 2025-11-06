@@ -4575,6 +4575,49 @@ components:
       required:
       - kind
       type: object
+    tableflow.v1.AzureAdlsSpec:
+      description: The Tableflow storage config for customer-owned Azure Data Lake
+        Storage Gen2
+      properties:
+        kind:
+          description: |
+            The storage type.
+          enum:
+          - AzureDataLakeStorageGen2
+          type: string
+          x-immutable: true
+        storage_account_name:
+          description: Storage Account Name
+          example: confluentstorage1
+          type: string
+          x-immutable: true
+        container_name:
+          description: Container name
+          example: container-tableflow
+          type: string
+          x-immutable: true
+        storage_region:
+          description: Storage account region
+          example: centralus
+          readOnly: true
+          type: string
+        provider_integration_id:
+          description: The provider integration id
+          example: cspi-6nxn5
+          type: string
+          x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: abfss://container@account.dfs.core.windows.net/10011010/11101100/org/env/lkc/v1/tableId
+          readOnly: true
+          type: string
+      required:
+      - container_name
+      - kind
+      - provider_integration_id
+      - storage_account_name
+      type: object
     tableflow.v1.CatalogIntegrationAwsGlueSpec:
       description: The catalog integration Glue connection config.
       properties:
@@ -5044,10 +5087,12 @@ components:
             mapping:
               ByobAws: '#/components/schemas/tableflow.v1.ByobAwsSpec'
               Managed: '#/components/schemas/tableflow.v1.ManagedStorageSpec'
+              AzureDataLakeStorageGen2: '#/components/schemas/tableflow.v1.AzureAdlsSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.ByobAwsSpec'
           - $ref: '#/components/schemas/tableflow.v1.ManagedStorageSpec'
+          - $ref: '#/components/schemas/tableflow.v1.AzureAdlsSpec'
           type: object
           x-immutable: true
           x-one-of-name: TableflowV1TableflowTopicSpecStorageOneOf

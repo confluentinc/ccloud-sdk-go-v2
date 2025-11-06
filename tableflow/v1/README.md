@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
  - [MultipleSearchFilter](docs/MultipleSearchFilter.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
+ - [TableflowV1AzureAdlsSpec](docs/TableflowV1AzureAdlsSpec.md)
  - [TableflowV1ByobAwsSpec](docs/TableflowV1ByobAwsSpec.md)
  - [TableflowV1CatalogIntegration](docs/TableflowV1CatalogIntegration.md)
  - [TableflowV1CatalogIntegrationAwsGlueSpec](docs/TableflowV1CatalogIntegrationAwsGlueSpec.md)
