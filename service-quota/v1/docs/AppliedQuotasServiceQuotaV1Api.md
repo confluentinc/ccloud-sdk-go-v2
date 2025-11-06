@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetServiceQuotaV1AppliedQuota
 
-> ServiceQuotaV1AppliedQuota GetServiceQuotaV1AppliedQuota(ctx, id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Execute()
+> ServiceQuotaV1AppliedQuota GetServiceQuotaV1AppliedQuota(ctx, id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).IdentityProvider(identityProvider).CertificateAuthority(certificateAuthority).Execute()
 
 Read an Applied Quota
 
@@ -34,10 +34,12 @@ func main() {
     environment := "env-00000" // string | The environment ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \"ENVIRONMENT\" or \"NETWORK\" or \"KAFKA_CLUSTER\".  (optional)
     network := "n-12034" // string | The network ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \"NETWORK\".  (optional)
     kafkaCluster := "lkc-00000" // string | The kafka cluster ID the quota is associated with. This field is required only when the scope of quota is \"KAFKA_CLUSTER\".  (optional)
+    identityProvider := "op-12345" // string | The identity provider ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \"IDENTITY_PROVIDER\".  (optional)
+    certificateAuthority := "op-abc123" // string | The certificate authority ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \"CERTIFICATE_AUTHORITY\".  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotasServiceQuotaV1Api.GetServiceQuotaV1AppliedQuota(context.Background(), id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Execute()
+    resp, r, err := api_client.AppliedQuotasServiceQuotaV1Api.GetServiceQuotaV1AppliedQuota(context.Background(), id).Environment(environment).Network(network).KafkaCluster(kafkaCluster).IdentityProvider(identityProvider).CertificateAuthority(certificateAuthority).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotasServiceQuotaV1Api.GetServiceQuotaV1AppliedQuota``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +68,8 @@ Name | Type | Description  | Notes
  **environment** | **string** | The environment ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;ENVIRONMENT\&quot; or \&quot;NETWORK\&quot; or \&quot;KAFKA_CLUSTER\&quot;.  | 
  **network** | **string** | The network ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;NETWORK\&quot;.  | 
  **kafkaCluster** | **string** | The kafka cluster ID the quota is associated with. This field is required only when the scope of quota is \&quot;KAFKA_CLUSTER\&quot;.  | 
+ **identityProvider** | **string** | The identity provider ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;IDENTITY_PROVIDER\&quot;.  | 
+ **certificateAuthority** | **string** | The certificate authority ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;CERTIFICATE_AUTHORITY\&quot;.  | 
 
 ### Return type
 
@@ -73,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 
@@ -87,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## ListServiceQuotaV1AppliedQuotas
 
-> ServiceQuotaV1AppliedQuotaList ListServiceQuotaV1AppliedQuotas(ctx).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
+> ServiceQuotaV1AppliedQuotaList ListServiceQuotaV1AppliedQuotas(ctx).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).IdentityProvider(identityProvider).CertificateAuthority(certificateAuthority).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Applied Quotas
 
@@ -110,13 +114,15 @@ func main() {
     environment := "env-00000" // string | The environment ID the quota is associated with.  (optional)
     network := "n-12034" // string | The network ID the quota is associated with.  (optional)
     kafkaCluster := "lkc-00000" // string | The kafka cluster ID the quota is associated with.  (optional)
+    identityProvider := "op-12345" // string | The identity provider ID the quota is associated with.  (optional)
+    certificateAuthority := "op-abc123" // string | The certificate authority ID the quota is associated with.  (optional)
     id := "iam.max_environments.per_org" // string | The id (quota code) that this quota belongs to.  (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AppliedQuotasServiceQuotaV1Api.ListServiceQuotaV1AppliedQuotas(context.Background()).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.AppliedQuotasServiceQuotaV1Api.ListServiceQuotaV1AppliedQuotas(context.Background()).Scope(scope).Environment(environment).Network(network).KafkaCluster(kafkaCluster).IdentityProvider(identityProvider).CertificateAuthority(certificateAuthority).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AppliedQuotasServiceQuotaV1Api.ListServiceQuotaV1AppliedQuotas``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -141,6 +147,8 @@ Name | Type | Description  | Notes
  **environment** | **string** | The environment ID the quota is associated with.  | 
  **network** | **string** | The network ID the quota is associated with.  | 
  **kafkaCluster** | **string** | The kafka cluster ID the quota is associated with.  | 
+ **identityProvider** | **string** | The identity provider ID the quota is associated with.  | 
+ **certificateAuthority** | **string** | The certificate authority ID the quota is associated with.  | 
  **id** | **string** | The id (quota code) that this quota belongs to.  | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
@@ -151,7 +159,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token)
 
 ### HTTP request headers
 

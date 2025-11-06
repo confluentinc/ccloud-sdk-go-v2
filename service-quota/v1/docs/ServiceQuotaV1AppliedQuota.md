@@ -13,11 +13,13 @@ Name | Type | Description | Notes
 **DefaultLimit** | Pointer to **int32** | The default service quota value.  | [optional] 
 **AppliedLimit** | Pointer to **int32** | The latest applied service quota value, taking into account any limit adjustments.  | [optional] 
 **Usage** | Pointer to **int32** | Show the quota usage value if the quota usage is available for this quota.  | [optional] 
-**User** | Pointer to [**ObjectReference**](ObjectReference.md) | The user associated with this object. | [optional] 
-**Organization** | Pointer to [**ObjectReference**](ObjectReference.md) | A unique organization id to associate a specific organization to this quota. May be &#x60;null&#x60; if not associated with a organization. | [optional] 
-**Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a environment. | [optional] 
-**Network** | Pointer to [**ObjectReference**](ObjectReference.md) | The network ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a network. | [optional] 
-**KafkaCluster** | Pointer to [**ObjectReference**](ObjectReference.md) | The kafka cluster ID the quota is associated with.  May be &#x60;null&#x60; if not associated with a kafka_cluster. | [optional] 
+**User** | Pointer to [**GlobalObjectReference**](GlobalObjectReference.md) | The user associated with this object. | [optional] 
+**Organization** | Pointer to [**NullableGlobalObjectReference**](GlobalObjectReference.md) | A unique organization id to associate a specific organization to this quota. | [optional] 
+**Environment** | Pointer to [**NullableGlobalObjectReference**](GlobalObjectReference.md) | The environment ID the quota is associated with.  | [optional] 
+**Network** | Pointer to [**NullableEnvScopedObjectReference**](EnvScopedObjectReference.md) | The network ID the quota is associated with.  | [optional] 
+**KafkaCluster** | Pointer to [**NullableEnvScopedObjectReference**](EnvScopedObjectReference.md) | The kafka cluster ID the quota is associated with.  | [optional] 
+**IdentityProvider** | Pointer to [**NullableGlobalObjectReference**](GlobalObjectReference.md) | The identity provider ID the quota is associated with.  | [optional] 
+**CertificateAuthority** | Pointer to [**NullableGlobalObjectReference**](GlobalObjectReference.md) | The certificate authority ID the quota is associated with.  | [optional] 
 
 ## Methods
 
@@ -265,20 +267,20 @@ HasUsage returns a boolean if a field has been set.
 
 ### GetUser
 
-`func (o *ServiceQuotaV1AppliedQuota) GetUser() ObjectReference`
+`func (o *ServiceQuotaV1AppliedQuota) GetUser() GlobalObjectReference`
 
 GetUser returns the User field if non-nil, zero value otherwise.
 
 ### GetUserOk
 
-`func (o *ServiceQuotaV1AppliedQuota) GetUserOk() (*ObjectReference, bool)`
+`func (o *ServiceQuotaV1AppliedQuota) GetUserOk() (*GlobalObjectReference, bool)`
 
 GetUserOk returns a tuple with the User field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUser
 
-`func (o *ServiceQuotaV1AppliedQuota) SetUser(v ObjectReference)`
+`func (o *ServiceQuotaV1AppliedQuota) SetUser(v GlobalObjectReference)`
 
 SetUser sets User field to given value.
 
@@ -290,20 +292,20 @@ HasUser returns a boolean if a field has been set.
 
 ### GetOrganization
 
-`func (o *ServiceQuotaV1AppliedQuota) GetOrganization() ObjectReference`
+`func (o *ServiceQuotaV1AppliedQuota) GetOrganization() GlobalObjectReference`
 
 GetOrganization returns the Organization field if non-nil, zero value otherwise.
 
 ### GetOrganizationOk
 
-`func (o *ServiceQuotaV1AppliedQuota) GetOrganizationOk() (*ObjectReference, bool)`
+`func (o *ServiceQuotaV1AppliedQuota) GetOrganizationOk() (*GlobalObjectReference, bool)`
 
 GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrganization
 
-`func (o *ServiceQuotaV1AppliedQuota) SetOrganization(v ObjectReference)`
+`func (o *ServiceQuotaV1AppliedQuota) SetOrganization(v GlobalObjectReference)`
 
 SetOrganization sets Organization field to given value.
 
@@ -313,22 +315,32 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ServiceQuotaV1AppliedQuota) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetEnvironment
 
-`func (o *ServiceQuotaV1AppliedQuota) GetEnvironment() ObjectReference`
+`func (o *ServiceQuotaV1AppliedQuota) GetEnvironment() GlobalObjectReference`
 
 GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
 ### GetEnvironmentOk
 
-`func (o *ServiceQuotaV1AppliedQuota) GetEnvironmentOk() (*ObjectReference, bool)`
+`func (o *ServiceQuotaV1AppliedQuota) GetEnvironmentOk() (*GlobalObjectReference, bool)`
 
 GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironment
 
-`func (o *ServiceQuotaV1AppliedQuota) SetEnvironment(v ObjectReference)`
+`func (o *ServiceQuotaV1AppliedQuota) SetEnvironment(v GlobalObjectReference)`
 
 SetEnvironment sets Environment field to given value.
 
@@ -338,22 +350,32 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
+### SetEnvironmentNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetEnvironmentNil(b bool)`
+
+ SetEnvironmentNil sets the value for Environment to be an explicit nil
+
+### UnsetEnvironment
+`func (o *ServiceQuotaV1AppliedQuota) UnsetEnvironment()`
+
+UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 ### GetNetwork
 
-`func (o *ServiceQuotaV1AppliedQuota) GetNetwork() ObjectReference`
+`func (o *ServiceQuotaV1AppliedQuota) GetNetwork() EnvScopedObjectReference`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *ServiceQuotaV1AppliedQuota) GetNetworkOk() (*ObjectReference, bool)`
+`func (o *ServiceQuotaV1AppliedQuota) GetNetworkOk() (*EnvScopedObjectReference, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *ServiceQuotaV1AppliedQuota) SetNetwork(v ObjectReference)`
+`func (o *ServiceQuotaV1AppliedQuota) SetNetwork(v EnvScopedObjectReference)`
 
 SetNetwork sets Network field to given value.
 
@@ -363,22 +385,32 @@ SetNetwork sets Network field to given value.
 
 HasNetwork returns a boolean if a field has been set.
 
+### SetNetworkNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetNetworkNil(b bool)`
+
+ SetNetworkNil sets the value for Network to be an explicit nil
+
+### UnsetNetwork
+`func (o *ServiceQuotaV1AppliedQuota) UnsetNetwork()`
+
+UnsetNetwork ensures that no value is present for Network, not even an explicit nil
 ### GetKafkaCluster
 
-`func (o *ServiceQuotaV1AppliedQuota) GetKafkaCluster() ObjectReference`
+`func (o *ServiceQuotaV1AppliedQuota) GetKafkaCluster() EnvScopedObjectReference`
 
 GetKafkaCluster returns the KafkaCluster field if non-nil, zero value otherwise.
 
 ### GetKafkaClusterOk
 
-`func (o *ServiceQuotaV1AppliedQuota) GetKafkaClusterOk() (*ObjectReference, bool)`
+`func (o *ServiceQuotaV1AppliedQuota) GetKafkaClusterOk() (*EnvScopedObjectReference, bool)`
 
 GetKafkaClusterOk returns a tuple with the KafkaCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKafkaCluster
 
-`func (o *ServiceQuotaV1AppliedQuota) SetKafkaCluster(v ObjectReference)`
+`func (o *ServiceQuotaV1AppliedQuota) SetKafkaCluster(v EnvScopedObjectReference)`
 
 SetKafkaCluster sets KafkaCluster field to given value.
 
@@ -388,6 +420,86 @@ SetKafkaCluster sets KafkaCluster field to given value.
 
 HasKafkaCluster returns a boolean if a field has been set.
 
+### SetKafkaClusterNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetKafkaClusterNil(b bool)`
+
+ SetKafkaClusterNil sets the value for KafkaCluster to be an explicit nil
+
+### UnsetKafkaCluster
+`func (o *ServiceQuotaV1AppliedQuota) UnsetKafkaCluster()`
+
+UnsetKafkaCluster ensures that no value is present for KafkaCluster, not even an explicit nil
+### GetIdentityProvider
+
+`func (o *ServiceQuotaV1AppliedQuota) GetIdentityProvider() GlobalObjectReference`
+
+GetIdentityProvider returns the IdentityProvider field if non-nil, zero value otherwise.
+
+### GetIdentityProviderOk
+
+`func (o *ServiceQuotaV1AppliedQuota) GetIdentityProviderOk() (*GlobalObjectReference, bool)`
+
+GetIdentityProviderOk returns a tuple with the IdentityProvider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentityProvider
+
+`func (o *ServiceQuotaV1AppliedQuota) SetIdentityProvider(v GlobalObjectReference)`
+
+SetIdentityProvider sets IdentityProvider field to given value.
+
+### HasIdentityProvider
+
+`func (o *ServiceQuotaV1AppliedQuota) HasIdentityProvider() bool`
+
+HasIdentityProvider returns a boolean if a field has been set.
+
+### SetIdentityProviderNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetIdentityProviderNil(b bool)`
+
+ SetIdentityProviderNil sets the value for IdentityProvider to be an explicit nil
+
+### UnsetIdentityProvider
+`func (o *ServiceQuotaV1AppliedQuota) UnsetIdentityProvider()`
+
+UnsetIdentityProvider ensures that no value is present for IdentityProvider, not even an explicit nil
+### GetCertificateAuthority
+
+`func (o *ServiceQuotaV1AppliedQuota) GetCertificateAuthority() GlobalObjectReference`
+
+GetCertificateAuthority returns the CertificateAuthority field if non-nil, zero value otherwise.
+
+### GetCertificateAuthorityOk
+
+`func (o *ServiceQuotaV1AppliedQuota) GetCertificateAuthorityOk() (*GlobalObjectReference, bool)`
+
+GetCertificateAuthorityOk returns a tuple with the CertificateAuthority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificateAuthority
+
+`func (o *ServiceQuotaV1AppliedQuota) SetCertificateAuthority(v GlobalObjectReference)`
+
+SetCertificateAuthority sets CertificateAuthority field to given value.
+
+### HasCertificateAuthority
+
+`func (o *ServiceQuotaV1AppliedQuota) HasCertificateAuthority() bool`
+
+HasCertificateAuthority returns a boolean if a field has been set.
+
+### SetCertificateAuthorityNil
+
+`func (o *ServiceQuotaV1AppliedQuota) SetCertificateAuthorityNil(b bool)`
+
+ SetCertificateAuthorityNil sets the value for CertificateAuthority to be an explicit nil
+
+### UnsetCertificateAuthority
+`func (o *ServiceQuotaV1AppliedQuota) UnsetCertificateAuthority()`
+
+UnsetCertificateAuthority ensures that no value is present for CertificateAuthority, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,6 +26,7 @@ Contact: api-framework-team@confluent.io
 package v1
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -40,28 +41,32 @@ type ServiceQuotaV1AppliedQuota struct {
 	// Kind defines the object this REST resource represents.
 	Kind *string `json:"kind,omitempty"`
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id *string `json:"id,omitempty"`
+	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
 	// The applied scope that this quota belongs to.
 	Scope *string `json:"scope,omitempty"`
 	// A human-readable name for the quota type name.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The default service quota value. 
+	// The default service quota value.
 	DefaultLimit *int32 `json:"default_limit,omitempty"`
-	// The latest applied service quota value, taking into account any limit adjustments. 
+	// The latest applied service quota value, taking into account any limit adjustments.
 	AppliedLimit *int32 `json:"applied_limit,omitempty"`
-	// Show the quota usage value if the quota usage is available for this quota. 
+	// Show the quota usage value if the quota usage is available for this quota.
 	Usage *int32 `json:"usage,omitempty"`
 	// The user associated with this object.
-	User *ObjectReference `json:"user,omitempty"`
-	// A unique organization id to associate a specific organization to this quota. May be `null` if not associated with a organization.
-	Organization *ObjectReference `json:"organization,omitempty"`
-	// The environment ID the quota is associated with.  May be `null` if not associated with a environment.
-	Environment *ObjectReference `json:"environment,omitempty"`
-	// The network ID the quota is associated with.  May be `null` if not associated with a network.
-	Network *ObjectReference `json:"network,omitempty"`
-	// The kafka cluster ID the quota is associated with.  May be `null` if not associated with a kafka_cluster.
-	KafkaCluster *ObjectReference `json:"kafka_cluster,omitempty"`
+	User *GlobalObjectReference `json:"user,omitempty"`
+	// A unique organization id to associate a specific organization to this quota.
+	Organization NullableGlobalObjectReference `json:"organization,omitempty"`
+	// The environment ID the quota is associated with.
+	Environment NullableGlobalObjectReference `json:"environment,omitempty"`
+	// The network ID the quota is associated with.
+	Network NullableEnvScopedObjectReference `json:"network,omitempty"`
+	// The kafka cluster ID the quota is associated with.
+	KafkaCluster NullableEnvScopedObjectReference `json:"kafka_cluster,omitempty"`
+	// The identity provider ID the quota is associated with.
+	IdentityProvider NullableGlobalObjectReference `json:"identity_provider,omitempty"`
+	// The certificate authority ID the quota is associated with.
+	CertificateAuthority NullableGlobalObjectReference `json:"certificate_authority,omitempty"`
 }
 
 // NewServiceQuotaV1AppliedQuota instantiates a new ServiceQuotaV1AppliedQuota object
@@ -370,9 +375,9 @@ func (o *ServiceQuotaV1AppliedQuota) SetUsage(v int32) {
 }
 
 // GetUser returns the User field value if set, zero value otherwise.
-func (o *ServiceQuotaV1AppliedQuota) GetUser() ObjectReference {
+func (o *ServiceQuotaV1AppliedQuota) GetUser() GlobalObjectReference {
 	if o == nil || o.User == nil {
-		var ret ObjectReference
+		var ret GlobalObjectReference
 		return ret
 	}
 	return *o.User
@@ -380,7 +385,7 @@ func (o *ServiceQuotaV1AppliedQuota) GetUser() ObjectReference {
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServiceQuotaV1AppliedQuota) GetUserOk() (*ObjectReference, bool) {
+func (o *ServiceQuotaV1AppliedQuota) GetUserOk() (*GlobalObjectReference, bool) {
 	if o == nil || o.User == nil {
 		return nil, false
 	}
@@ -396,185 +401,317 @@ func (o *ServiceQuotaV1AppliedQuota) HasUser() bool {
 	return false
 }
 
-// SetUser gets a reference to the given ObjectReference and assigns it to the User field.
-func (o *ServiceQuotaV1AppliedQuota) SetUser(v ObjectReference) {
+// SetUser gets a reference to the given GlobalObjectReference and assigns it to the User field.
+func (o *ServiceQuotaV1AppliedQuota) SetUser(v GlobalObjectReference) {
 	o.User = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
-func (o *ServiceQuotaV1AppliedQuota) GetOrganization() ObjectReference {
-	if o == nil || o.Organization == nil {
-		var ret ObjectReference
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetOrganization() GlobalObjectReference {
+	if o == nil || o.Organization.Get() == nil {
+		var ret GlobalObjectReference
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServiceQuotaV1AppliedQuota) GetOrganizationOk() (*ObjectReference, bool) {
-	if o == nil || o.Organization == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetOrganizationOk() (*GlobalObjectReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ServiceQuotaV1AppliedQuota) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given ObjectReference and assigns it to the Organization field.
-func (o *ServiceQuotaV1AppliedQuota) SetOrganization(v ObjectReference) {
-	o.Organization = &v
+// SetOrganization gets a reference to the given NullableGlobalObjectReference and assigns it to the Organization field.
+func (o *ServiceQuotaV1AppliedQuota) SetOrganization(v GlobalObjectReference) {
+	o.Organization.Set(&v)
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *ServiceQuotaV1AppliedQuota) GetEnvironment() ObjectReference {
-	if o == nil || o.Environment == nil {
-		var ret ObjectReference
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetEnvironment() GlobalObjectReference {
+	if o == nil || o.Environment.Get() == nil {
+		var ret GlobalObjectReference
 		return ret
 	}
-	return *o.Environment
+	return *o.Environment.Get()
 }
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServiceQuotaV1AppliedQuota) GetEnvironmentOk() (*ObjectReference, bool) {
-	if o == nil || o.Environment == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetEnvironmentOk() (*GlobalObjectReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return o.Environment.Get(), o.Environment.IsSet()
 }
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *ServiceQuotaV1AppliedQuota) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && o.Environment.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironment gets a reference to the given ObjectReference and assigns it to the Environment field.
-func (o *ServiceQuotaV1AppliedQuota) SetEnvironment(v ObjectReference) {
-	o.Environment = &v
+// SetEnvironment gets a reference to the given NullableGlobalObjectReference and assigns it to the Environment field.
+func (o *ServiceQuotaV1AppliedQuota) SetEnvironment(v GlobalObjectReference) {
+	o.Environment.Set(&v)
 }
 
-// GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *ServiceQuotaV1AppliedQuota) GetNetwork() ObjectReference {
-	if o == nil || o.Network == nil {
-		var ret ObjectReference
+// SetEnvironmentNil sets the value for Environment to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetEnvironmentNil() {
+	o.Environment.Set(nil)
+}
+
+// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetEnvironment() {
+	o.Environment.Unset()
+}
+
+// GetNetwork returns the Network field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetNetwork() EnvScopedObjectReference {
+	if o == nil || o.Network.Get() == nil {
+		var ret EnvScopedObjectReference
 		return ret
 	}
-	return *o.Network
+	return *o.Network.Get()
 }
 
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServiceQuotaV1AppliedQuota) GetNetworkOk() (*ObjectReference, bool) {
-	if o == nil || o.Network == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetNetworkOk() (*EnvScopedObjectReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Network, true
+	return o.Network.Get(), o.Network.IsSet()
 }
 
 // HasNetwork returns a boolean if a field has been set.
 func (o *ServiceQuotaV1AppliedQuota) HasNetwork() bool {
-	if o != nil && o.Network != nil {
+	if o != nil && o.Network.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetwork gets a reference to the given ObjectReference and assigns it to the Network field.
-func (o *ServiceQuotaV1AppliedQuota) SetNetwork(v ObjectReference) {
-	o.Network = &v
+// SetNetwork gets a reference to the given NullableEnvScopedObjectReference and assigns it to the Network field.
+func (o *ServiceQuotaV1AppliedQuota) SetNetwork(v EnvScopedObjectReference) {
+	o.Network.Set(&v)
 }
 
-// GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise.
-func (o *ServiceQuotaV1AppliedQuota) GetKafkaCluster() ObjectReference {
-	if o == nil || o.KafkaCluster == nil {
-		var ret ObjectReference
+// SetNetworkNil sets the value for Network to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetNetworkNil() {
+	o.Network.Set(nil)
+}
+
+// UnsetNetwork ensures that no value is present for Network, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetNetwork() {
+	o.Network.Unset()
+}
+
+// GetKafkaCluster returns the KafkaCluster field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetKafkaCluster() EnvScopedObjectReference {
+	if o == nil || o.KafkaCluster.Get() == nil {
+		var ret EnvScopedObjectReference
 		return ret
 	}
-	return *o.KafkaCluster
+	return *o.KafkaCluster.Get()
 }
 
 // GetKafkaClusterOk returns a tuple with the KafkaCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServiceQuotaV1AppliedQuota) GetKafkaClusterOk() (*ObjectReference, bool) {
-	if o == nil || o.KafkaCluster == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetKafkaClusterOk() (*EnvScopedObjectReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KafkaCluster, true
+	return o.KafkaCluster.Get(), o.KafkaCluster.IsSet()
 }
 
 // HasKafkaCluster returns a boolean if a field has been set.
 func (o *ServiceQuotaV1AppliedQuota) HasKafkaCluster() bool {
-	if o != nil && o.KafkaCluster != nil {
+	if o != nil && o.KafkaCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetKafkaCluster gets a reference to the given ObjectReference and assigns it to the KafkaCluster field.
-func (o *ServiceQuotaV1AppliedQuota) SetKafkaCluster(v ObjectReference) {
-	o.KafkaCluster = &v
+// SetKafkaCluster gets a reference to the given NullableEnvScopedObjectReference and assigns it to the KafkaCluster field.
+func (o *ServiceQuotaV1AppliedQuota) SetKafkaCluster(v EnvScopedObjectReference) {
+	o.KafkaCluster.Set(&v)
+}
+
+// SetKafkaClusterNil sets the value for KafkaCluster to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetKafkaClusterNil() {
+	o.KafkaCluster.Set(nil)
+}
+
+// UnsetKafkaCluster ensures that no value is present for KafkaCluster, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetKafkaCluster() {
+	o.KafkaCluster.Unset()
+}
+
+// GetIdentityProvider returns the IdentityProvider field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetIdentityProvider() GlobalObjectReference {
+	if o == nil || o.IdentityProvider.Get() == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.IdentityProvider.Get()
+}
+
+// GetIdentityProviderOk returns a tuple with the IdentityProvider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetIdentityProviderOk() (*GlobalObjectReference, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IdentityProvider.Get(), o.IdentityProvider.IsSet()
+}
+
+// HasIdentityProvider returns a boolean if a field has been set.
+func (o *ServiceQuotaV1AppliedQuota) HasIdentityProvider() bool {
+	if o != nil && o.IdentityProvider.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentityProvider gets a reference to the given NullableGlobalObjectReference and assigns it to the IdentityProvider field.
+func (o *ServiceQuotaV1AppliedQuota) SetIdentityProvider(v GlobalObjectReference) {
+	o.IdentityProvider.Set(&v)
+}
+
+// SetIdentityProviderNil sets the value for IdentityProvider to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetIdentityProviderNil() {
+	o.IdentityProvider.Set(nil)
+}
+
+// UnsetIdentityProvider ensures that no value is present for IdentityProvider, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetIdentityProvider() {
+	o.IdentityProvider.Unset()
+}
+
+// GetCertificateAuthority returns the CertificateAuthority field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServiceQuotaV1AppliedQuota) GetCertificateAuthority() GlobalObjectReference {
+	if o == nil || o.CertificateAuthority.Get() == nil {
+		var ret GlobalObjectReference
+		return ret
+	}
+	return *o.CertificateAuthority.Get()
+}
+
+// GetCertificateAuthorityOk returns a tuple with the CertificateAuthority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServiceQuotaV1AppliedQuota) GetCertificateAuthorityOk() (*GlobalObjectReference, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CertificateAuthority.Get(), o.CertificateAuthority.IsSet()
+}
+
+// HasCertificateAuthority returns a boolean if a field has been set.
+func (o *ServiceQuotaV1AppliedQuota) HasCertificateAuthority() bool {
+	if o != nil && o.CertificateAuthority.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificateAuthority gets a reference to the given NullableGlobalObjectReference and assigns it to the CertificateAuthority field.
+func (o *ServiceQuotaV1AppliedQuota) SetCertificateAuthority(v GlobalObjectReference) {
+	o.CertificateAuthority.Set(&v)
+}
+
+// SetCertificateAuthorityNil sets the value for CertificateAuthority to be an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) SetCertificateAuthorityNil() {
+	o.CertificateAuthority.Set(nil)
+}
+
+// UnsetCertificateAuthority ensures that no value is present for CertificateAuthority, not even an explicit nil
+func (o *ServiceQuotaV1AppliedQuota) UnsetCertificateAuthority() {
+	o.CertificateAuthority.Unset()
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *ServiceQuotaV1AppliedQuota) Redact() {
-    o.recurseRedact(o.ApiVersion)
-    o.recurseRedact(o.Kind)
-    o.recurseRedact(o.Id)
-    o.recurseRedact(o.Metadata)
-    o.recurseRedact(o.Scope)
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.DefaultLimit)
-    o.recurseRedact(o.AppliedLimit)
-    o.recurseRedact(o.Usage)
-    o.recurseRedact(o.User)
-    o.recurseRedact(o.Organization)
-    o.recurseRedact(o.Environment)
-    o.recurseRedact(o.Network)
-    o.recurseRedact(o.KafkaCluster)
+	o.recurseRedact(o.ApiVersion)
+	o.recurseRedact(o.Kind)
+	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.Scope)
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.DefaultLimit)
+	o.recurseRedact(o.AppliedLimit)
+	o.recurseRedact(o.Usage)
+	o.recurseRedact(o.User)
+	o.recurseRedact(o.Organization)
+	o.recurseRedact(o.Environment)
+	o.recurseRedact(o.Network)
+	o.recurseRedact(o.KafkaCluster)
+	o.recurseRedact(o.IdentityProvider)
+	o.recurseRedact(o.CertificateAuthority)
 }
 
 func (o *ServiceQuotaV1AppliedQuota) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o ServiceQuotaV1AppliedQuota) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ServiceQuotaV1AppliedQuota) MarshalJSON() ([]byte, error) {
@@ -609,19 +746,29 @@ func (o ServiceQuotaV1AppliedQuota) MarshalJSON() ([]byte, error) {
 	if o.User != nil {
 		toSerialize["user"] = o.User
 	}
-	if o.Organization != nil {
-		toSerialize["organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["organization"] = o.Organization.Get()
 	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	if o.Environment.IsSet() {
+		toSerialize["environment"] = o.Environment.Get()
 	}
-	if o.Network != nil {
-		toSerialize["network"] = o.Network
+	if o.Network.IsSet() {
+		toSerialize["network"] = o.Network.Get()
 	}
-	if o.KafkaCluster != nil {
-		toSerialize["kafka_cluster"] = o.KafkaCluster
+	if o.KafkaCluster.IsSet() {
+		toSerialize["kafka_cluster"] = o.KafkaCluster.Get()
 	}
-	return json.Marshal(toSerialize)
+	if o.IdentityProvider.IsSet() {
+		toSerialize["identity_provider"] = o.IdentityProvider.Get()
+	}
+	if o.CertificateAuthority.IsSet() {
+		toSerialize["certificate_authority"] = o.CertificateAuthority.Get()
+	}
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableServiceQuotaV1AppliedQuota struct {
@@ -652,12 +799,14 @@ func NewNullableServiceQuotaV1AppliedQuota(val *ServiceQuotaV1AppliedQuota) *Nul
 }
 
 func (v NullableServiceQuotaV1AppliedQuota) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableServiceQuotaV1AppliedQuota) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

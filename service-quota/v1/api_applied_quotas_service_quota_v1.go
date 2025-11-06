@@ -42,15 +42,15 @@ var (
 type AppliedQuotasServiceQuotaV1Api interface {
 
 	/*
-	GetServiceQuotaV1AppliedQuota Read an Applied Quota
+			GetServiceQuotaV1AppliedQuota Read an Applied Quota
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read an applied quota.
+		Make a request to read an applied quota.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the applied quota.
-	 @return ApiGetServiceQuotaV1AppliedQuotaRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the applied quota.
+			 @return ApiGetServiceQuotaV1AppliedQuotaRequest
 	*/
 	GetServiceQuotaV1AppliedQuota(ctx _context.Context, id string) ApiGetServiceQuotaV1AppliedQuotaRequest
 
@@ -59,17 +59,17 @@ Make a request to read an applied quota.
 	GetServiceQuotaV1AppliedQuotaExecute(r ApiGetServiceQuotaV1AppliedQuotaRequest) (ServiceQuotaV1AppliedQuota, *_nethttp.Response, error)
 
 	/*
-	ListServiceQuotaV1AppliedQuotas List of Applied Quotas
+			ListServiceQuotaV1AppliedQuotas List of Applied Quotas
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all applied quotas.
+		Retrieve a sorted, filtered, paginated list of all applied quotas.
 
-Shows all quotas for a given scope.
+		Shows all quotas for a given scope.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListServiceQuotaV1AppliedQuotasRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListServiceQuotaV1AppliedQuotasRequest
 	*/
 	ListServiceQuotaV1AppliedQuotas(ctx _context.Context) ApiListServiceQuotaV1AppliedQuotasRequest
 
@@ -82,27 +82,43 @@ Shows all quotas for a given scope.
 type AppliedQuotasServiceQuotaV1ApiService service
 
 type ApiGetServiceQuotaV1AppliedQuotaRequest struct {
-	ctx _context.Context
-	ApiService AppliedQuotasServiceQuotaV1Api
-	id string
-	environment *string
-	network *string
-	kafkaCluster *string
+	ctx                  _context.Context
+	ApiService           AppliedQuotasServiceQuotaV1Api
+	id                   string
+	environment          *string
+	network              *string
+	kafkaCluster         *string
+	identityProvider     *string
+	certificateAuthority *string
 }
 
-// The environment ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;ENVIRONMENT\&quot; or \&quot;NETWORK\&quot; or \&quot;KAFKA_CLUSTER\&quot;. 
+// The environment ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;ENVIRONMENT\&quot; or \&quot;NETWORK\&quot; or \&quot;KAFKA_CLUSTER\&quot;.
 func (r ApiGetServiceQuotaV1AppliedQuotaRequest) Environment(environment string) ApiGetServiceQuotaV1AppliedQuotaRequest {
 	r.environment = &environment
 	return r
 }
-// The network ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;NETWORK\&quot;. 
+
+// The network ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;NETWORK\&quot;.
 func (r ApiGetServiceQuotaV1AppliedQuotaRequest) Network(network string) ApiGetServiceQuotaV1AppliedQuotaRequest {
 	r.network = &network
 	return r
 }
-// The kafka cluster ID the quota is associated with. This field is required only when the scope of quota is \&quot;KAFKA_CLUSTER\&quot;. 
+
+// The kafka cluster ID the quota is associated with. This field is required only when the scope of quota is \&quot;KAFKA_CLUSTER\&quot;.
 func (r ApiGetServiceQuotaV1AppliedQuotaRequest) KafkaCluster(kafkaCluster string) ApiGetServiceQuotaV1AppliedQuotaRequest {
 	r.kafkaCluster = &kafkaCluster
+	return r
+}
+
+// The identity provider ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;IDENTITY_PROVIDER\&quot;.
+func (r ApiGetServiceQuotaV1AppliedQuotaRequest) IdentityProvider(identityProvider string) ApiGetServiceQuotaV1AppliedQuotaRequest {
+	r.identityProvider = &identityProvider
+	return r
+}
+
+// The certificate authority ID the quota is associated with. This field is only required when retrieving a single quota and the scope of quota is \&quot;CERTIFICATE_AUTHORITY\&quot;.
+func (r ApiGetServiceQuotaV1AppliedQuotaRequest) CertificateAuthority(certificateAuthority string) ApiGetServiceQuotaV1AppliedQuotaRequest {
+	r.certificateAuthority = &certificateAuthority
 	return r
 }
 
@@ -113,24 +129,25 @@ func (r ApiGetServiceQuotaV1AppliedQuotaRequest) Execute() (ServiceQuotaV1Applie
 /*
 GetServiceQuotaV1AppliedQuota Read an Applied Quota
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an applied quota.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the applied quota.
- @return ApiGetServiceQuotaV1AppliedQuotaRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the applied quota.
+	@return ApiGetServiceQuotaV1AppliedQuotaRequest
 */
 func (a *AppliedQuotasServiceQuotaV1ApiService) GetServiceQuotaV1AppliedQuota(ctx _context.Context, id string) ApiGetServiceQuotaV1AppliedQuotaRequest {
 	return ApiGetServiceQuotaV1AppliedQuotaRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ServiceQuotaV1AppliedQuota
+//
+//	@return ServiceQuotaV1AppliedQuota
 func (a *AppliedQuotasServiceQuotaV1ApiService) GetServiceQuotaV1AppliedQuotaExecute(r ApiGetServiceQuotaV1AppliedQuotaRequest) (ServiceQuotaV1AppliedQuota, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -161,6 +178,12 @@ func (a *AppliedQuotasServiceQuotaV1ApiService) GetServiceQuotaV1AppliedQuotaExe
 	}
 	if r.kafkaCluster != nil {
 		localVarQueryParams.Add("kafka_cluster", parameterToString(*r.kafkaCluster, ""))
+	}
+	if r.identityProvider != nil {
+		localVarQueryParams.Add("identity_provider", parameterToString(*r.identityProvider, ""))
+	}
+	if r.certificateAuthority != nil {
+		localVarQueryParams.Add("certificate_authority", parameterToString(*r.certificateAuthority, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -266,47 +289,67 @@ func (a *AppliedQuotasServiceQuotaV1ApiService) GetServiceQuotaV1AppliedQuotaExe
 }
 
 type ApiListServiceQuotaV1AppliedQuotasRequest struct {
-	ctx _context.Context
-	ApiService AppliedQuotasServiceQuotaV1Api
-	scope *string
-	environment *string
-	network *string
-	kafkaCluster *string
-	id *string
-	pageSize *int32
-	pageToken *string
+	ctx                  _context.Context
+	ApiService           AppliedQuotasServiceQuotaV1Api
+	scope                *string
+	environment          *string
+	network              *string
+	kafkaCluster         *string
+	identityProvider     *string
+	certificateAuthority *string
+	id                   *string
+	pageSize             *int32
+	pageToken            *string
 }
 
-// The applied scope the quota belongs to. 
+// The applied scope the quota belongs to.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) Scope(scope string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.scope = &scope
 	return r
 }
-// The environment ID the quota is associated with. 
+
+// The environment ID the quota is associated with.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) Environment(environment string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.environment = &environment
 	return r
 }
-// The network ID the quota is associated with. 
+
+// The network ID the quota is associated with.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) Network(network string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.network = &network
 	return r
 }
-// The kafka cluster ID the quota is associated with. 
+
+// The kafka cluster ID the quota is associated with.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) KafkaCluster(kafkaCluster string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.kafkaCluster = &kafkaCluster
 	return r
 }
-// The id (quota code) that this quota belongs to. 
+
+// The identity provider ID the quota is associated with.
+func (r ApiListServiceQuotaV1AppliedQuotasRequest) IdentityProvider(identityProvider string) ApiListServiceQuotaV1AppliedQuotasRequest {
+	r.identityProvider = &identityProvider
+	return r
+}
+
+// The certificate authority ID the quota is associated with.
+func (r ApiListServiceQuotaV1AppliedQuotasRequest) CertificateAuthority(certificateAuthority string) ApiListServiceQuotaV1AppliedQuotasRequest {
+	r.certificateAuthority = &certificateAuthority
+	return r
+}
+
+// The id (quota code) that this quota belongs to.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) Id(id string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.id = &id
 	return r
 }
+
 // A pagination size for collection requests.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) PageSize(pageSize int32) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListServiceQuotaV1AppliedQuotasRequest) PageToken(pageToken string) ApiListServiceQuotaV1AppliedQuotasRequest {
 	r.pageToken = &pageToken
@@ -320,25 +363,25 @@ func (r ApiListServiceQuotaV1AppliedQuotasRequest) Execute() (ServiceQuotaV1Appl
 /*
 ListServiceQuotaV1AppliedQuotas List of Applied Quotas
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all applied quotas.
 
 Shows all quotas for a given scope.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListServiceQuotaV1AppliedQuotasRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListServiceQuotaV1AppliedQuotasRequest
 */
 func (a *AppliedQuotasServiceQuotaV1ApiService) ListServiceQuotaV1AppliedQuotas(ctx _context.Context) ApiListServiceQuotaV1AppliedQuotasRequest {
 	return ApiListServiceQuotaV1AppliedQuotasRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ServiceQuotaV1AppliedQuotaList
+//
+//	@return ServiceQuotaV1AppliedQuotaList
 func (a *AppliedQuotasServiceQuotaV1ApiService) ListServiceQuotaV1AppliedQuotasExecute(r ApiListServiceQuotaV1AppliedQuotasRequest) (ServiceQuotaV1AppliedQuotaList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -372,6 +415,12 @@ func (a *AppliedQuotasServiceQuotaV1ApiService) ListServiceQuotaV1AppliedQuotasE
 	}
 	if r.kafkaCluster != nil {
 		localVarQueryParams.Add("kafka_cluster", parameterToString(*r.kafkaCluster, ""))
+	}
+	if r.identityProvider != nil {
+		localVarQueryParams.Add("identity_provider", parameterToString(*r.identityProvider, ""))
+	}
+	if r.certificateAuthority != nil {
+		localVarQueryParams.Add("certificate_authority", parameterToString(*r.certificateAuthority, ""))
 	}
 	if r.id != nil {
 		localVarQueryParams.Add("id", parameterToString(*r.id, ""))
