@@ -15,7 +15,7 @@ servers:
   url: https://api.confluent.cloud
 tags:
 - description: |-
-    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     A `quota` object represents a quota configuration for a specific Confluent Cloud resource.
     Use this API to retrieve an individual quota or list of quotas for a given scope.
@@ -27,7 +27,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/service-quota.v1.AppliedQuota" />
   name: Applied Quotas (service-quota/v1)
 - description: |-
-    [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     Gets a list of all available scopes for applied quotas.
 
@@ -41,7 +41,7 @@ paths:
   /service-quota/v1/applied-quotas:
     get:
       description: |
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all applied quotas.
 
@@ -84,6 +84,26 @@ paths:
         explode: true
         in: query
         name: kafka_cluster
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          The identity provider ID the quota is associated with.
+        example: op-12345
+        explode: true
+        in: query
+        name: identity_provider
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          The certificate authority ID the quota is associated with.
+        example: op-abc123
+        explode: true
+        in: query
+        name: certificate_authority
         required: false
         schema:
           $ref: '#/components/schemas/SearchFilter'
@@ -139,21 +159,37 @@ paths:
                               id: b3a17773-05cc-4431-9560-433fb4613da8
                               related: https://api.confluent.cloud/partner/v2/organizations/b3a17773-05cc-4431-9560-433fb4613da8
                               resource_name: https://api.confluent.cloud/organization=b3a17773-05cc-4431-9560-433fb4613da8
+                            nullable: true
                           environment:
                             example:
                               id: env-00000
                               related: https://api.confluent.cloud/org/v2/environments/env-00000
                               resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                            nullable: true
                           network:
                             example:
                               id: n-12034
                               related: https://api.confluent.cloud/networking/v1/networks/n-12034
-                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-12034
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-12034
+                            nullable: true
                           kafka_cluster:
                             example:
                               id: lkc-00000
                               related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
                               resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
+                            nullable: true
+                          identity_provider:
+                            example:
+                              id: op-12345
+                              related: https://api.confluent.cloud/iam/v2/identity-providers/op-12345
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-provider=op-12345
+                            nullable: true
+                          certificate_authority:
+                            example:
+                              id: op-abc123
+                              related: https://api.confluent.cloud/iam/v2/certificate-authorities/op-abc123
+                              resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/certificate-authority=op-abc123
+                            nullable: true
                       type: array
                   type: object
           description: Applied Quota.
@@ -163,6 +199,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -248,6 +307,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -270,23 +359,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Applied Quotas
       tags:
       - Applied Quotas (service-quota/v1)
-      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -294,7 +383,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -307,7 +396,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -321,7 +410,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -346,7 +435,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -355,15 +444,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=SOME_STRING_VALUE&environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE&id=SOME_STRING_VALUE&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas?scope=ORGANIZATION&environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123&id=iam.max_environments.per_org");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v1
   /service-quota/v1/applied-quotas/{id}:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read an applied quota.
       operationId: getServiceQuotaV1AppliedQuota
@@ -403,6 +491,30 @@ paths:
         schema:
           $ref: '#/components/schemas/SearchFilter'
         style: form
+      - description: |
+          The identity provider ID the quota is associated with.
+          This field is only required when retrieving a single quota and
+          the scope of quota is "IDENTITY_PROVIDER".
+        example: op-12345
+        explode: true
+        in: query
+        name: identity_provider
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: |
+          The certificate authority ID the quota is associated with.
+          This field is only required when retrieving a single quota and
+          the scope of quota is "CERTIFICATE_AUTHORITY".
+        example: op-abc123
+        explode: true
+        in: query
+        name: certificate_authority
+        required: false
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
       - description: The unique identifier for the applied quota.
         explode: false
         in: path
@@ -438,21 +550,37 @@ paths:
                         id: b3a17773-05cc-4431-9560-433fb4613da8
                         related: https://api.confluent.cloud/partner/v2/organizations/b3a17773-05cc-4431-9560-433fb4613da8
                         resource_name: https://api.confluent.cloud/organization=b3a17773-05cc-4431-9560-433fb4613da8
+                      nullable: true
                     environment:
                       example:
                         id: env-00000
                         related: https://api.confluent.cloud/org/v2/environments/env-00000
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000
+                      nullable: true
                     network:
                       example:
                         id: n-12034
                         related: https://api.confluent.cloud/networking/v1/networks/n-12034
-                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/network=n-12034
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-12034
+                      nullable: true
                     kafka_cluster:
                       example:
                         id: lkc-00000
                         related: https://api.confluent.cloud/cmk/v2/clusters/lkc-00000
                         resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-00000
+                      nullable: true
+                    identity_provider:
+                      example:
+                        id: op-12345
+                        related: https://api.confluent.cloud/iam/v2/identity-providers/op-12345
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/identity-provider=op-12345
+                      nullable: true
+                    certificate_authority:
+                      example:
+                        id: op-abc123
+                        related: https://api.confluent.cloud/iam/v2/certificate-authorities/op-abc123
+                        resource_name: https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/certificate-authority=op-abc123
+                      nullable: true
                   type: object
           description: Applied Quota.
           headers:
@@ -461,6 +589,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -564,6 +715,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -586,23 +767,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read an Applied Quota
       tags:
       - Applied Quotas (service-quota/v1)
-      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -610,7 +791,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -623,7 +804,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -637,7 +818,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -662,7 +843,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -671,15 +852,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=SOME_STRING_VALUE&network=SOME_STRING_VALUE&kafka_cluster=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/applied-quotas/{id}?environment=env-00000&network=n-12034&kafka_cluster=lkc-00000&identity_provider=op-12345&certificate_authority=op-abc123");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v1
   /service-quota/v1/scopes:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted, filtered, paginated list of all scopes.
       operationId: listServiceQuotaV1Scopes
@@ -719,6 +899,29 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "400":
           content:
             application/json:
@@ -803,6 +1006,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -825,23 +1058,23 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: List of Scopes
       tags:
       - Scopes (service-quota/v1)
-      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url https://api.confluent.cloud/service-quota/v1/scopes \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/service-quota/v1/scopes")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -849,7 +1082,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/service-quota/v1/scopes\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -862,7 +1095,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/service-quota/v1/scopes", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -876,7 +1109,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/service-quota/v1/scopes",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -901,7 +1134,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/service-quota/v1/scopes");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -910,15 +1143,14 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/scopes?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/service-quota/v1/scopes");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v1
   /service-quota/v1/scopes/{id}:
     get:
       description: |-
-        [![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to read a scope.
       operationId: getServiceQuotaV1Scope
@@ -951,6 +1183,29 @@ paths:
               explode: false
               schema:
                 type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
               style: simple
         "400":
           content:
@@ -1054,6 +1309,36 @@ paths:
               schema:
                 type: string
               style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
         "500":
           content:
             application/json:
@@ -1076,11 +1361,11 @@ paths:
                 type: string
               style: simple
       security:
-      - api-key: []
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
       summary: Read a Scope
       tags:
       - Scopes (service-quota/v1)
-      x-request-access-name: Service Quota v1
       x-codeSamples:
       - lang: Shell
         source: |-
@@ -1165,7 +1450,6 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
-    x-request-access-name: Service Quota v1
 components:
   responses:
     BadRequestError:
@@ -1341,6 +1625,36 @@ components:
           schema:
             type: string
           style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
     DefaultSystemError:
       content:
         application/json:
@@ -1416,6 +1730,8 @@ components:
           - KAFKA_CLUSTER
           - SERVICE_ACCOUNT
           - USER_ACCOUNT
+          - IDENTITY_PROVIDER
+          - CERTIFICATE_AUTHORITY
         display_name:
           description: A human-readable name for the quota type name.
           example: Kafka Cluster Per Organization
@@ -1438,38 +1754,49 @@ components:
           type: integer
         user:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: The user associated with this object.
           x-immutable: true
         organization:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          - nullable: true
+          - $ref: '#/components/schemas/GlobalObjectReference'
           description: A unique organization id to associate a specific organization
-            to this quota. May be `null` if not associated with a organization.
+            to this quota.
+          nullable: true
         environment:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          - nullable: true
-          description: |-
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: |
             The environment ID the quota is associated with.
-             May be `null` if not associated with a environment.
+          nullable: true
           x-immutable: true
         network:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          - nullable: true
-          description: |-
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          description: |
             The network ID the quota is associated with.
-             May be `null` if not associated with a network.
+          nullable: true
           x-immutable: true
         kafka_cluster:
           allOf:
-          - $ref: '#/components/schemas/ObjectReference'
-          - nullable: true
-          description: |-
+          - $ref: '#/components/schemas/EnvScopedObjectReference'
+          description: |
             The kafka cluster ID the quota is associated with.
-             May be `null` if not associated with a kafka_cluster.
+          nullable: true
+          x-immutable: true
+        identity_provider:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: |
+            The identity provider ID the quota is associated with.
+          nullable: true
+          x-immutable: true
+        certificate_authority:
+          allOf:
+          - $ref: '#/components/schemas/GlobalObjectReference'
+          description: |
+            The certificate authority ID the quota is associated with.
+          nullable: true
           x-immutable: true
       type: object
     service-quota.v1.Scope:
@@ -1759,6 +2086,63 @@ components:
       - related
       - resource_name
       type: object
+    GlobalObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    EnvScopedObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
     Failure:
       description: Provides information about problems encountered while performing
         an operation.
@@ -1813,8 +2197,16 @@ components:
           type: string
       type: object
   securitySchemes:
-    api-key:
-      description: Authenticate with API Keys using HTTP Basic Auth. Treat the API
-        Key ID as the username and API Key Secret as the password.
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2

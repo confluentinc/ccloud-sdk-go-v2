@@ -42,15 +42,15 @@ var (
 type ScopesServiceQuotaV1Api interface {
 
 	/*
-	GetServiceQuotaV1Scope Read a Scope
+			GetServiceQuotaV1Scope Read a Scope
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read a scope.
+		Make a request to read a scope.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the scope.
-	 @return ApiGetServiceQuotaV1ScopeRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the scope.
+			 @return ApiGetServiceQuotaV1ScopeRequest
 	*/
 	GetServiceQuotaV1Scope(ctx _context.Context, id string) ApiGetServiceQuotaV1ScopeRequest
 
@@ -59,14 +59,14 @@ Make a request to read a scope.
 	GetServiceQuotaV1ScopeExecute(r ApiGetServiceQuotaV1ScopeRequest) (ServiceQuotaV1Scope, *_nethttp.Response, error)
 
 	/*
-	ListServiceQuotaV1Scopes List of Scopes
+			ListServiceQuotaV1Scopes List of Scopes
 
-	[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all scopes.
+		Retrieve a sorted, filtered, paginated list of all scopes.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListServiceQuotaV1ScopesRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListServiceQuotaV1ScopesRequest
 	*/
 	ListServiceQuotaV1Scopes(ctx _context.Context) ApiListServiceQuotaV1ScopesRequest
 
@@ -79,11 +79,10 @@ Retrieve a sorted, filtered, paginated list of all scopes.
 type ScopesServiceQuotaV1ApiService service
 
 type ApiGetServiceQuotaV1ScopeRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService ScopesServiceQuotaV1Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetServiceQuotaV1ScopeRequest) Execute() (ServiceQuotaV1Scope, *_nethttp.Response, error) {
 	return r.ApiService.GetServiceQuotaV1ScopeExecute(r)
@@ -92,24 +91,25 @@ func (r ApiGetServiceQuotaV1ScopeRequest) Execute() (ServiceQuotaV1Scope, *_neth
 /*
 GetServiceQuotaV1Scope Read a Scope
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read a scope.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the scope.
- @return ApiGetServiceQuotaV1ScopeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the scope.
+	@return ApiGetServiceQuotaV1ScopeRequest
 */
 func (a *ScopesServiceQuotaV1ApiService) GetServiceQuotaV1Scope(ctx _context.Context, id string) ApiGetServiceQuotaV1ScopeRequest {
 	return ApiGetServiceQuotaV1ScopeRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ServiceQuotaV1Scope
+//
+//	@return ServiceQuotaV1Scope
 func (a *ScopesServiceQuotaV1ApiService) GetServiceQuotaV1ScopeExecute(r ApiGetServiceQuotaV1ScopeRequest) (ServiceQuotaV1Scope, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -236,10 +236,10 @@ func (a *ScopesServiceQuotaV1ApiService) GetServiceQuotaV1ScopeExecute(r ApiGetS
 }
 
 type ApiListServiceQuotaV1ScopesRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService ScopesServiceQuotaV1Api
-	pageSize *int32
-	pageToken *string
+	pageSize   *int32
+	pageToken  *string
 }
 
 // A pagination size for collection requests.
@@ -247,6 +247,7 @@ func (r ApiListServiceQuotaV1ScopesRequest) PageSize(pageSize int32) ApiListServ
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListServiceQuotaV1ScopesRequest) PageToken(pageToken string) ApiListServiceQuotaV1ScopesRequest {
 	r.pageToken = &pageToken
@@ -260,22 +261,23 @@ func (r ApiListServiceQuotaV1ScopesRequest) Execute() (ServiceQuotaV1ScopeList, 
 /*
 ListServiceQuotaV1Scopes List of Scopes
 
-[![Open Preview](https://img.shields.io/badge/Lifecycle%20Stage-Open%20Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all scopes.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListServiceQuotaV1ScopesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListServiceQuotaV1ScopesRequest
 */
 func (a *ScopesServiceQuotaV1ApiService) ListServiceQuotaV1Scopes(ctx _context.Context) ApiListServiceQuotaV1ScopesRequest {
 	return ApiListServiceQuotaV1ScopesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ServiceQuotaV1ScopeList
+//
+//	@return ServiceQuotaV1ScopeList
 func (a *ScopesServiceQuotaV1ApiService) ListServiceQuotaV1ScopesExecute(r ApiListServiceQuotaV1ScopesRequest) (ServiceQuotaV1ScopeList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
