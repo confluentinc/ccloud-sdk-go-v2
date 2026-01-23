@@ -1,6 +1,6 @@
 name: ccloud-sdk-go-v2
 lang: go
-lang_version: "1.24.11"
+lang_version: "1.24.12"
 git:
   enable: true
 github:
