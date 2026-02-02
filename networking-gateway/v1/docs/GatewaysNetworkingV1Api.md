@@ -222,7 +222,9 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1Gateways
 
-> NetworkingV1GatewayList ListNetworkingV1Gateways(ctx).Environment(environment).GatewayType(gatewayType).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
+ **gatewayType** | **[]string** | Filter the results by exact match for gateway_type. Pass multiple times to see results matching any of the values. | 
+ **id** | **[]string** | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. | 
+> NetworkingV1GatewayList ListNetworkingV1Gateways(ctx).Environment(environment).GatewayType(gatewayType).Id(id).SpecConfigRegion(specConfigRegion).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Gateways
 
@@ -244,12 +246,15 @@ func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     gatewayType := []string{"Inner_example"} // []string | Filter the results by exact match for gateway_type. Pass multiple times to see results matching any of the values. (optional)
     id := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
+    specConfigRegion := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 100)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.GatewaysNetworkingV1Api.ListNetworkingV1Gateways(context.Background()).Environment(environment).GatewayType(gatewayType).Id(id).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.GatewaysNetworkingV1Api.ListNetworkingV1Gateways(context.Background()).Environment(environment).GatewayType(gatewayType).Id(id).SpecConfigRegion(specConfigRegion).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GatewaysNetworkingV1Api.ListNetworkingV1Gateways``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -273,6 +278,9 @@ Name | Type | Description  | Notes
  **environment** | **string** | Filter the results by exact match for environment. | 
  **gatewayType** | **[]string** | Filter the results by exact match for gateway_type. Pass multiple times to see results matching any of the values. | 
  **id** | **[]string** | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. | 
+ **specConfigRegion** | **[]string** | Filter the results by exact match for spec.config.region. Pass multiple times to see results matching any of the values. | 
+ **specDisplayName** | **[]string** | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. | 
+ **statusPhase** | **[]string** | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. | 
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 100]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 

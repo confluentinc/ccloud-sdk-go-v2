@@ -43,14 +43,14 @@ var (
 type GatewaysNetworkingV1Api interface {
 
 	/*
-		CreateNetworkingV1Gateway Create a Gateway
+			CreateNetworkingV1Gateway Create a Gateway
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to create a gateway.
+		Make a request to create a gateway.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiCreateNetworkingV1GatewayRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateNetworkingV1GatewayRequest
 	*/
 	CreateNetworkingV1Gateway(ctx _context.Context) ApiCreateNetworkingV1GatewayRequest
 
@@ -59,15 +59,15 @@ type GatewaysNetworkingV1Api interface {
 	CreateNetworkingV1GatewayExecute(r ApiCreateNetworkingV1GatewayRequest) (NetworkingV1Gateway, *_nethttp.Response, error)
 
 	/*
-		DeleteNetworkingV1Gateway Delete a Gateway
+			DeleteNetworkingV1Gateway Delete a Gateway
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to delete a gateway.
+		Make a request to delete a gateway.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the gateway.
-		 @return ApiDeleteNetworkingV1GatewayRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the gateway.
+			 @return ApiDeleteNetworkingV1GatewayRequest
 	*/
 	DeleteNetworkingV1Gateway(ctx _context.Context, id string) ApiDeleteNetworkingV1GatewayRequest
 
@@ -75,15 +75,15 @@ type GatewaysNetworkingV1Api interface {
 	DeleteNetworkingV1GatewayExecute(r ApiDeleteNetworkingV1GatewayRequest) (*_nethttp.Response, error)
 
 	/*
-		GetNetworkingV1Gateway Read a Gateway
+			GetNetworkingV1Gateway Read a Gateway
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read a gateway.
+		Make a request to read a gateway.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the gateway.
-		 @return ApiGetNetworkingV1GatewayRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the gateway.
+			 @return ApiGetNetworkingV1GatewayRequest
 	*/
 	GetNetworkingV1Gateway(ctx _context.Context, id string) ApiGetNetworkingV1GatewayRequest
 
@@ -92,14 +92,14 @@ type GatewaysNetworkingV1Api interface {
 	GetNetworkingV1GatewayExecute(r ApiGetNetworkingV1GatewayRequest) (NetworkingV1Gateway, *_nethttp.Response, error)
 
 	/*
-		ListNetworkingV1Gateways List of Gateways
+			ListNetworkingV1Gateways List of Gateways
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all gateways.
+		Retrieve a sorted, filtered, paginated list of all gateways.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListNetworkingV1GatewaysRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListNetworkingV1GatewaysRequest
 	*/
 	ListNetworkingV1Gateways(ctx _context.Context) ApiListNetworkingV1GatewaysRequest
 
@@ -108,17 +108,17 @@ type GatewaysNetworkingV1Api interface {
 	ListNetworkingV1GatewaysExecute(r ApiListNetworkingV1GatewaysRequest) (NetworkingV1GatewayList, *_nethttp.Response, error)
 
 	/*
-		UpdateNetworkingV1Gateway Update a Gateway
+			UpdateNetworkingV1Gateway Update a Gateway
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update a gateway.
+		Make a request to update a gateway.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the gateway.
-		 @return ApiUpdateNetworkingV1GatewayRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the gateway.
+			 @return ApiUpdateNetworkingV1GatewayRequest
 	*/
 	UpdateNetworkingV1Gateway(ctx _context.Context, id string) ApiUpdateNetworkingV1GatewayRequest
 
@@ -636,13 +636,16 @@ func (a *GatewaysNetworkingV1ApiService) GetNetworkingV1GatewayExecute(r ApiGetN
 }
 
 type ApiListNetworkingV1GatewaysRequest struct {
-	ctx         _context.Context
-	ApiService  GatewaysNetworkingV1Api
-	environment *string
-	gatewayType *[]string
-	id          *[]string
-	pageSize    *int32
-	pageToken   *string
+	ctx              _context.Context
+	ApiService       GatewaysNetworkingV1Api
+	environment      *string
+	gatewayType      *[]string
+	id               *[]string
+	specConfigRegion *[]string
+	specDisplayName  *[]string
+	statusPhase      *[]string
+	pageSize         *int32
+	pageToken        *string
 }
 
 // Filter the results by exact match for environment.
@@ -660,6 +663,24 @@ func (r ApiListNetworkingV1GatewaysRequest) GatewayType(gatewayType []string) Ap
 // Filter the results by exact match for id. Pass multiple times to see results matching any of the values.
 func (r ApiListNetworkingV1GatewaysRequest) Id(id []string) ApiListNetworkingV1GatewaysRequest {
 	r.id = &id
+	return r
+}
+
+// Filter the results by exact match for spec.config.region. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1GatewaysRequest) SpecConfigRegion(specConfigRegion []string) ApiListNetworkingV1GatewaysRequest {
+	r.specConfigRegion = &specConfigRegion
+	return r
+}
+
+// Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1GatewaysRequest) SpecDisplayName(specDisplayName []string) ApiListNetworkingV1GatewaysRequest {
+	r.specDisplayName = &specDisplayName
+	return r
+}
+
+// Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values.
+func (r ApiListNetworkingV1GatewaysRequest) StatusPhase(statusPhase []string) ApiListNetworkingV1GatewaysRequest {
+	r.statusPhase = &statusPhase
 	return r
 }
 
@@ -744,6 +765,39 @@ func (a *GatewaysNetworkingV1ApiService) ListNetworkingV1GatewaysExecute(r ApiLi
 			}
 		} else {
 			localVarQueryParams.Add("id", parameterToString(t, "multi"))
+		}
+	}
+	if r.specConfigRegion != nil {
+		t := *r.specConfigRegion
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.config.region", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.config.region", parameterToString(t, "multi"))
+		}
+	}
+	if r.specDisplayName != nil {
+		t := *r.specDisplayName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("spec.display_name", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("spec.display_name", parameterToString(t, "multi"))
+		}
+	}
+	if r.statusPhase != nil {
+		t := *r.statusPhase
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status.phase", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status.phase", parameterToString(t, "multi"))
 		}
 	}
 	if r.pageSize != nil {

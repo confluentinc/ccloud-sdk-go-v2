@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | The name of the gateway. | [optional] 
-**Config** | Pointer to [**NetworkingV1GatewaySpecConfigOneOf**](NetworkingV1GatewaySpecConfigOneOf.md) | Gateway type specific configuration. | [optional] 
+**Config** | Pointer to [**NetworkingV1GatewaySpecConfigOneOf**](NetworkingV1GatewaySpecConfigOneOf.md) | Gateway type specific configuration. Please note that Peering configs are not supported in Create requests. | [optional] 
 **Environment** | Pointer to [**ObjectReference**](ObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods

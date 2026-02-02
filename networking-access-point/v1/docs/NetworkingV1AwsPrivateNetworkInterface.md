@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | AwsPrivateNetworkInterface kind. | 
 **NetworkInterfaces** | Pointer to **[]string** | List of the IDs of the Elastic Network Interfaces. | [optional] 
 **Account** | Pointer to **string** | The AWS account ID associated with the ENIs you are using for the Confluent Private Network Interface. | [optional] 
+**EgressRoutes** | Pointer to **[]string** | List of egress CIDRs (IPv4) for egress PNI. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,31 @@ SetAccount sets Account field to given value.
 `func (o *NetworkingV1AwsPrivateNetworkInterface) HasAccount() bool`
 
 HasAccount returns a boolean if a field has been set.
+
+### GetEgressRoutes
+
+`func (o *NetworkingV1AwsPrivateNetworkInterface) GetEgressRoutes() []string`
+
+GetEgressRoutes returns the EgressRoutes field if non-nil, zero value otherwise.
+
+### GetEgressRoutesOk
+
+`func (o *NetworkingV1AwsPrivateNetworkInterface) GetEgressRoutesOk() (*[]string, bool)`
+
+GetEgressRoutesOk returns a tuple with the EgressRoutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEgressRoutes
+
+`func (o *NetworkingV1AwsPrivateNetworkInterface) SetEgressRoutes(v []string)`
+
+SetEgressRoutes sets EgressRoutes field to given value.
+
+### HasEgressRoutes
+
+`func (o *NetworkingV1AwsPrivateNetworkInterface) HasEgressRoutes() bool`
+
+HasEgressRoutes returns a boolean if a field has been set.
 
 
 ### AsNetworkingV1AccessPointSpecConfigOneOf

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Phase** | **string** | The lifecycle phase of the gateway:    CREATED: gateway exists without an Access Point.    PROVISIONING: gateway provisioning is in progress;    READY:  gateway is ready;    FAILED: gateway is in a failed state;    DEPROVISIONING: gateway deprovisioning is in progress;  | [readonly] 
+**Phase** | **string** | The lifecycle phase of the gateway:    CREATED: gateway exists without an Access Point.    PROVISIONING: gateway provisioning is in progress;    READY:  gateway is ready;    FAILED: gateway is in a failed state;    DEPROVISIONING: gateway deprovisioning is in progress;    EXPIRED: gateway has timed out waiting for connections, can only be deleted;  | [readonly] 
 **ErrorCode** | Pointer to **string** | Error code if gateway is in a failed state. May be used for programmatic error checking. | [optional] [readonly] 
 **ErrorMessage** | Pointer to **string** | Displayable error message if gateway is in a failed state | [optional] [readonly] 
-**CloudGateway** | Pointer to [**NetworkingV1GatewayStatusCloudGatewayOneOf**](NetworkingV1GatewayStatusCloudGatewayOneOf.md) | Gateway type specific status | [optional] [readonly] 
+**CloudGateway** | Pointer to [**NetworkingV1GatewayStatusCloudGatewayOneOf**](NetworkingV1GatewayStatusCloudGatewayOneOf.md) | Gateway type specific status. | [optional] [readonly] 
 
 ## Methods
 

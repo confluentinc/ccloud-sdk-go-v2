@@ -73,6 +73,42 @@ paths:
         schema:
           $ref: '#/components/schemas/MultipleSearchFilter'
         style: form
+      - description: Filter the results by exact match for spec.config.region. Pass
+          multiple times to see results matching any of the values.
+        example:
+        - us-east-1
+        - us-west-2
+        explode: true
+        in: query
+        name: spec.config.region
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
+      - description: Filter the results by exact match for spec.display_name. Pass
+          multiple times to see results matching any of the values.
+        example:
+        - prod-gateway-ingress-use1
+        - prod-gateway-ingress-use2
+        explode: true
+        in: query
+        name: spec.display_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
+      - description: Filter the results by exact match for status.phase. Pass multiple
+          times to see results matching any of the values.
+        example:
+        - PROVISIONING
+        - READY
+        explode: true
+        in: query
+        name: status.phase
+        required: false
+        schema:
+          $ref: '#/components/schemas/MultipleSearchFilter'
+        style: form
       - description: A pagination size for collection requests.
         explode: true
         in: query
@@ -290,14 +326,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \
+            --url 'https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE")
+            .url("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -305,7 +341,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -318,7 +354,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE", headers=headers)
+          conn.request("GET", "/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -332,7 +368,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE",
+            "path": "/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -357,7 +393,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -366,7 +402,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink&gateway_type=AzureEgressPrivateLink&id=gw-1&id=gw-2&page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways?environment=env-00000&gateway_type=AwsEgressPrivateLink,AzureEgressPrivateLink&id=gw-1,gw-2&spec.config.region=us-east-1,us-west-2&spec.display_name=prod-gateway-ingress-use1,prod-gateway-ingress-use2&status.phase=PROVISIONING,READY");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -697,8 +733,8 @@ paths:
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/networking/v1/gateways")
             .post(body)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
@@ -709,10 +745,10 @@ paths:
           :\\\"prod-gateway\\\",\\\"config\\\":{\\\"kind\\\":\\\"AwsEgressPrivateLinkGatewaySpec\\\
           \",\\\"region\\\":\\\"string\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
           \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
-          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
-          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -723,8 +759,8 @@ paths:
           payload = "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
-              'Authorization': "Basic REPLACE_BASIC_AUTH",
-              'content-type': "application/json"
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
           conn.request("POST", "/networking/v1/gateways", payload, headers)
@@ -743,8 +779,8 @@ paths:
             "port": null,
             "path": "/networking/v1/gateways",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH",
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -777,8 +813,8 @@ paths:
           curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
@@ -788,8 +824,8 @@ paths:
         source: |-
           var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways");
           var request = new RestRequest(Method.POST);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /networking/v1/gateways/{id}:
@@ -1013,14 +1049,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url 'https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1028,7 +1064,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1041,7 +1077,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/networking/v1/gateways/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("DELETE", "/networking/v1/gateways/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1055,7 +1091,7 @@ paths:
             "method": "DELETE",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/gateways/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/gateways/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1080,7 +1116,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1089,7 +1125,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1341,14 +1377,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000' \
+            --url 'https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000")
+            .url("https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1356,7 +1392,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1369,7 +1405,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/networking/v1/gateways/%7Bid%7D?environment=env-00000", headers=headers)
+          conn.request("GET", "/networking/v1/gateways/{id}?environment=env-00000", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1383,7 +1419,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/gateways/%7Bid%7D?environment=env-00000",
+            "path": "/networking/v1/gateways/{id}?environment=env-00000",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1408,7 +1444,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1417,7 +1453,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D?environment=env-00000");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/{id}?environment=env-00000");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1753,7 +1789,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request PATCH \
-            --url https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D \
+            --url 'https://api.confluent.cloud/networking/v1/gateways/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
             --data '{"spec":{"display_name":"prod-gateway","config":{"kind":"AwsEgressPrivateLinkGatewaySpec","region":"string"},"environment":{"id":"env-00000","environment":"string"}}}'
@@ -1764,24 +1800,24 @@ paths:
           MediaType mediaType = MediaType.parse("application/json");
           RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D")
+            .url("https://api.confluent.cloud/networking/v1/gateways/{id}")
             .patch(body)
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
 
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/networking/v1/gateways/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"prod-gateway\\\",\\\"config\\\":{\\\"kind\\\":\\\"AwsEgressPrivateLinkGatewaySpec\\\
           \",\\\"region\\\":\\\"string\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
           \",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\treq.Header.Add(\"content-type\", \"application/json\")\n\n\tres, _\
-          \ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ :=\
-          \ ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
           \n}"
       - lang: Python
         source: |-
@@ -1792,11 +1828,11 @@ paths:
           payload = "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}"
 
           headers = {
-              'Authorization': "Basic REPLACE_BASIC_AUTH",
-              'content-type': "application/json"
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
               }
 
-          conn.request("PATCH", "/networking/v1/gateways/%7Bid%7D", payload, headers)
+          conn.request("PATCH", "/networking/v1/gateways/{id}", payload, headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1810,10 +1846,10 @@ paths:
             "method": "PATCH",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/networking/v1/gateways/%7Bid%7D",
+            "path": "/networking/v1/gateways/{id}",
             "headers": {
-              "Authorization": "Basic REPLACE_BASIC_AUTH",
-              "content-type": "application/json"
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
           };
 
@@ -1843,11 +1879,11 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/networking/v1/gateways/{id}");
 
           struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
           curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}");
@@ -1855,10 +1891,10 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/%7Bid%7D");
+          var client = new RestClient("https://api.confluent.cloud/networking/v1/gateways/{id}");
           var request = new RestRequest(Method.PATCH);
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"prod-gateway\",\"config\":{\"kind\":\"AwsEgressPrivateLinkGatewaySpec\",\"region\":\"string\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
@@ -2155,6 +2191,8 @@ components:
               FAILED: gateway is in a failed state;
 
               DEPROVISIONING: gateway deprovisioning is in progress;
+
+              EXPIRED: gateway has timed out waiting for connections, can only be deleted;
           example: READY
           readOnly: true
           type: string
@@ -2164,6 +2202,7 @@ components:
           - READY
           - FAILED
           - DEPROVISIONING
+          - EXPIRED
         error_code:
           description: Error code if gateway is in a failed state. May be used for
             programmatic error checking.
@@ -2174,17 +2213,19 @@ components:
           readOnly: true
           type: string
         cloud_gateway:
-          description: Gateway type specific status
+          description: Gateway type specific status.
           discriminator:
             mapping:
               AwsPrivateNetworkInterfaceGatewayStatus: '#/components/schemas/networking.v1.AwsPrivateNetworkInterfaceGatewayStatus'
               AwsEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
+              AwsIngressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewayStatus'
               AzureEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
               GcpPeeringGatewayStatus: '#/components/schemas/networking.v1.GcpPeeringGatewayStatus'
               GcpEgressPrivateServiceConnectGatewayStatus: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectGatewayStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
+          - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterfaceGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.GcpPeeringGatewayStatus'
@@ -2263,6 +2304,21 @@ components:
       - kind
       - region
       type: object
+    networking.v1.AwsIngressPrivateLinkGatewaySpec:
+      description: AWS Ingress Private Link Gateway details from AWS.
+      properties:
+        kind:
+          description: AWS Ingress Private Link Gateway Spec kind type.
+          enum:
+          - AwsIngressPrivateLinkGatewaySpec
+          type: string
+        region:
+          description: AWS region of the Ingress Private Link Gateway.
+          type: string
+      required:
+      - kind
+      - region
+      type: object
     networking.v1.AzureEgressPrivateLinkGatewaySpec:
       description: Azure Egress Private Link Gateway details from Azure.
       properties:
@@ -2336,6 +2392,23 @@ components:
         principal_arn:
           description: The principal ARN used by the AWS Egress Private Link Gateway.
           example: arn:aws:iam::123456789012:cc-tenant-1-role
+          readOnly: true
+          type: string
+      required:
+      - kind
+      type: object
+    networking.v1.AwsIngressPrivateLinkGatewayStatus:
+      description: AWS Ingress Private Link Gateway details from AWS.
+      properties:
+        kind:
+          description: AWS Ingress Private Link Gateway Status kind type.
+          enum:
+          - AwsIngressPrivateLinkGatewayStatus
+          type: string
+        vpc_endpoint_service_name:
+          description: The ID of the AWS VPC Endpoint Service that can be used to
+            establish connections for all zones.
+          example: com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000
           readOnly: true
           type: string
       required:
@@ -2472,12 +2545,14 @@ components:
           example: prod-gateway
           type: string
         config:
-          description: Gateway type specific configuration.
+          description: Gateway type specific configuration. Please note that Peering
+            configs are not supported in Create requests.
           discriminator:
             mapping:
               AwsPrivateNetworkInterfaceGatewaySpec: '#/components/schemas/networking.v1.AwsPrivateNetworkInterfaceGatewaySpec'
               AwsPeeringGatewaySpec: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
               AwsEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
+              AwsIngressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewaySpec'
               AzurePeeringGatewaySpec: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
               AzureEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
               GcpPeeringGatewaySpec: '#/components/schemas/networking.v1.GcpPeeringGatewaySpec'
@@ -2486,6 +2561,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterfaceGatewaySpec'
+          - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
