@@ -94,6 +94,8 @@ Class | Method | HTTP request | Description
  - [ListMeta](docs/ListMeta.md)
  - [NetworkingV1AwsEgressPrivateLinkGatewaySpec](docs/NetworkingV1AwsEgressPrivateLinkGatewaySpec.md)
  - [NetworkingV1AwsEgressPrivateLinkGatewayStatus](docs/NetworkingV1AwsEgressPrivateLinkGatewayStatus.md)
+ - [NetworkingV1AwsIngressPrivateLinkGatewaySpec](docs/NetworkingV1AwsIngressPrivateLinkGatewaySpec.md)
+ - [NetworkingV1AwsIngressPrivateLinkGatewayStatus](docs/NetworkingV1AwsIngressPrivateLinkGatewayStatus.md)
  - [NetworkingV1AwsPeeringGatewaySpec](docs/NetworkingV1AwsPeeringGatewaySpec.md)
  - [NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec](docs/NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec.md)
  - [NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus](docs/NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus.md)

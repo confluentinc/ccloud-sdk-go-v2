@@ -4044,11 +4044,13 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
+              AwsIngressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpointStatus'
               AzureEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
               GcpEgressPrivateServiceConnectEndpointStatus: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
+          - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
           readOnly: true
@@ -4169,6 +4171,25 @@ components:
       - kind
       - vpc_endpoint_service_name
       type: object
+    networking.v1.AwsIngressPrivateLinkEndpoint:
+      description: AWS Ingress Private Link Endpoint.
+      properties:
+        kind:
+          description: AwsIngressPrivateLinkEndpoint kind.
+          enum:
+          - AwsIngressPrivateLinkEndpoint
+          type: string
+        vpc_endpoint_id:
+          description: ID of a VPC Endpoint that will be connected to the VPC Endpoint
+            service.
+          example: vpce-00000000000000000
+          minLength: 1
+          type: string
+          x-immutable: true
+      required:
+      - kind
+      - vpc_endpoint_id
+      type: object
     networking.v1.AzureEgressPrivateLinkEndpoint:
       description: Azure Private Endpoint.
       properties:
@@ -4245,6 +4266,36 @@ components:
       - vpc_endpoint_dns_name
       - vpc_endpoint_id
       title: AWS
+      type: object
+    networking.v1.AwsIngressPrivateLinkEndpointStatus:
+      description: Status of an AWS Ingress Private Link Endpoint.
+      properties:
+        kind:
+          description: AwsIngressPrivateLinkEndpointStatus kind.
+          enum:
+          - AwsIngressPrivateLinkEndpointStatus
+          type: string
+        vpc_endpoint_service_name:
+          description: ID of the Confluent Cloud VPC Endpoint service used for PrivateLink.
+          example: com.amazonaws.vpce.us-west-2.vpce-svc-00000000000000000
+          readOnly: true
+          type: string
+        vpc_endpoint_id:
+          description: ID of the VPC Endpoint used for connecting to the VPC Endpoint
+            service.
+          example: vpce-00000000000000000
+          readOnly: true
+          type: string
+        dns_domain:
+          description: DNS domain name used to configure the Private Hosted Zone for
+            the Access Point.
+          example: ap123abc.us-west-2.aws.accesspoint.confluent.cloud
+          readOnly: true
+          type: string
+      required:
+      - kind
+      - vpc_endpoint_id
+      - vpc_endpoint_service_name
       type: object
     networking.v1.AzureEgressPrivateLinkEndpointStatus:
       description: Status of an Azure Private Endpoint.
@@ -4353,9 +4404,54 @@ components:
           - eni-00000000000000003
           - eni-00000000000000004
           - eni-00000000000000005
+          - eni-00000000000000006
+          - eni-00000000000000007
+          - eni-00000000000000008
+          - eni-00000000000000009
+          - eni-00000000000000010
+          - eni-00000000000000011
+          - eni-00000000000000012
+          - eni-00000000000000013
+          - eni-00000000000000014
+          - eni-00000000000000015
+          - eni-00000000000000016
+          - eni-00000000000000017
+          - eni-00000000000000018
+          - eni-00000000000000019
+          - eni-00000000000000020
+          - eni-00000000000000021
+          - eni-00000000000000022
+          - eni-00000000000000023
+          - eni-00000000000000024
+          - eni-00000000000000025
+          - eni-00000000000000026
+          - eni-00000000000000027
+          - eni-00000000000000028
+          - eni-00000000000000029
+          - eni-00000000000000030
+          - eni-00000000000000031
+          - eni-00000000000000032
+          - eni-00000000000000033
+          - eni-00000000000000034
+          - eni-00000000000000035
+          - eni-00000000000000036
+          - eni-00000000000000037
+          - eni-00000000000000038
+          - eni-00000000000000039
+          - eni-00000000000000040
+          - eni-00000000000000041
+          - eni-00000000000000042
+          - eni-00000000000000043
+          - eni-00000000000000044
+          - eni-00000000000000045
+          - eni-00000000000000046
+          - eni-00000000000000047
+          - eni-00000000000000048
+          - eni-00000000000000049
+          - eni-00000000000000050
           items:
             type: string
-          minItems: 6
+          minItems: 51
           type: array
           uniqueItems: true
         account:
@@ -4364,6 +4460,18 @@ components:
           example: "000000000000"
           pattern: ^\d{12}$
           type: string
+          x-immutable: true
+        egress_routes:
+          description: List of egress CIDRs (IPv4) for egress PNI.
+          example:
+          - 10.0.0.0/16
+          - 10.1.0.0/16
+          - 10.2.0.0/16
+          - 172.16.0.0/16
+          items:
+            type: string
+          type: array
+          uniqueItems: true
       required:
       - kind
       type: object
@@ -4448,12 +4556,14 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+              AwsIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
               AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
               GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
@@ -4785,12 +4895,14 @@ components:
           discriminator:
             mapping:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+              AwsIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
               AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
               GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
