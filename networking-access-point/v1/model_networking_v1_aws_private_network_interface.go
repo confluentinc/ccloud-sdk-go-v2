@@ -42,6 +42,8 @@ type NetworkingV1AwsPrivateNetworkInterface struct {
 	NetworkInterfaces *[]string `json:"network_interfaces,omitempty"`
 	// The AWS account ID associated with the ENIs you are using for the Confluent Private Network Interface.
 	Account *string `json:"account,omitempty"`
+	// List of egress CIDRs (IPv4) for egress PNI.
+	EgressRoutes *[]string `json:"egress_routes,omitempty"`
 }
 
 // NewNetworkingV1AwsPrivateNetworkInterface instantiates a new NetworkingV1AwsPrivateNetworkInterface object
@@ -150,11 +152,44 @@ func (o *NetworkingV1AwsPrivateNetworkInterface) SetAccount(v string) {
 	o.Account = &v
 }
 
+// GetEgressRoutes returns the EgressRoutes field value if set, zero value otherwise.
+func (o *NetworkingV1AwsPrivateNetworkInterface) GetEgressRoutes() []string {
+	if o == nil || o.EgressRoutes == nil {
+		var ret []string
+		return ret
+	}
+	return *o.EgressRoutes
+}
+
+// GetEgressRoutesOk returns a tuple with the EgressRoutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkingV1AwsPrivateNetworkInterface) GetEgressRoutesOk() (*[]string, bool) {
+	if o == nil || o.EgressRoutes == nil {
+		return nil, false
+	}
+	return o.EgressRoutes, true
+}
+
+// HasEgressRoutes returns a boolean if a field has been set.
+func (o *NetworkingV1AwsPrivateNetworkInterface) HasEgressRoutes() bool {
+	if o != nil && o.EgressRoutes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEgressRoutes gets a reference to the given []string and assigns it to the EgressRoutes field.
+func (o *NetworkingV1AwsPrivateNetworkInterface) SetEgressRoutes(v []string) {
+	o.EgressRoutes = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *NetworkingV1AwsPrivateNetworkInterface) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(o.NetworkInterfaces)
 	o.recurseRedact(o.Account)
+	o.recurseRedact(o.EgressRoutes)
 }
 
 func (o *NetworkingV1AwsPrivateNetworkInterface) recurseRedact(v interface{}) {
@@ -197,6 +232,9 @@ func (o NetworkingV1AwsPrivateNetworkInterface) MarshalJSON() ([]byte, error) {
 	}
 	if o.Account != nil {
 		toSerialize["account"] = o.Account
+	}
+	if o.EgressRoutes != nil {
+		toSerialize["egress_routes"] = o.EgressRoutes
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

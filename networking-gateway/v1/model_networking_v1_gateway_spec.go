@@ -38,7 +38,7 @@ import (
 type NetworkingV1GatewaySpec struct {
 	// The name of the gateway.
 	DisplayName *string `json:"display_name,omitempty"`
-	// Gateway type specific configuration.
+	// Gateway type specific configuration. Please note that Peering configs are not supported in Create requests.
 	Config *NetworkingV1GatewaySpecConfigOneOf `json:"config,omitempty"`
 	// The environment to which this belongs.
 	Environment *ObjectReference `json:"environment,omitempty"`

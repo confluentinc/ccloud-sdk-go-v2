@@ -36,13 +36,13 @@ import (
 
 // NetworkingV1GatewayStatus The status of the Gateway
 type NetworkingV1GatewayStatus struct {
-	// The lifecycle phase of the gateway:    CREATED: gateway exists without an Access Point.    PROVISIONING: gateway provisioning is in progress;    READY:  gateway is ready;    FAILED: gateway is in a failed state;    DEPROVISIONING: gateway deprovisioning is in progress;
+	// The lifecycle phase of the gateway:    CREATED: gateway exists without an Access Point.    PROVISIONING: gateway provisioning is in progress;    READY:  gateway is ready;    FAILED: gateway is in a failed state;    DEPROVISIONING: gateway deprovisioning is in progress;    EXPIRED: gateway has timed out waiting for connections, can only be deleted;
 	Phase string `json:"phase,omitempty"`
 	// Error code if gateway is in a failed state. May be used for programmatic error checking.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// Displayable error message if gateway is in a failed state
 	ErrorMessage *string `json:"error_message,omitempty"`
-	// Gateway type specific status
+	// Gateway type specific status.
 	CloudGateway *NetworkingV1GatewayStatusCloudGatewayOneOf `json:"cloud_gateway,omitempty"`
 }
 

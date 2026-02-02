@@ -34,6 +34,7 @@ import (
 // NetworkingV1AccessPointStatusConfigOneOf - struct for NetworkingV1AccessPointStatusConfigOneOf
 type NetworkingV1AccessPointStatusConfigOneOf struct {
 	NetworkingV1AwsEgressPrivateLinkEndpointStatus           *NetworkingV1AwsEgressPrivateLinkEndpointStatus
+	NetworkingV1AwsIngressPrivateLinkEndpointStatus          *NetworkingV1AwsIngressPrivateLinkEndpointStatus
 	NetworkingV1AzureEgressPrivateLinkEndpointStatus         *NetworkingV1AzureEgressPrivateLinkEndpointStatus
 	NetworkingV1GcpEgressPrivateServiceConnectEndpointStatus *NetworkingV1GcpEgressPrivateServiceConnectEndpointStatus
 }
@@ -41,6 +42,11 @@ type NetworkingV1AccessPointStatusConfigOneOf struct {
 // NetworkingV1AwsEgressPrivateLinkEndpointStatusAsNetworkingV1AccessPointStatusConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkEndpointStatus wrapped in NetworkingV1AccessPointStatusConfigOneOf
 func NetworkingV1AwsEgressPrivateLinkEndpointStatusAsNetworkingV1AccessPointStatusConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkEndpointStatus) NetworkingV1AccessPointStatusConfigOneOf {
 	return NetworkingV1AccessPointStatusConfigOneOf{NetworkingV1AwsEgressPrivateLinkEndpointStatus: v}
+}
+
+// NetworkingV1AwsIngressPrivateLinkEndpointStatusAsNetworkingV1AccessPointStatusConfigOneOf is a convenience function that returns NetworkingV1AwsIngressPrivateLinkEndpointStatus wrapped in NetworkingV1AccessPointStatusConfigOneOf
+func NetworkingV1AwsIngressPrivateLinkEndpointStatusAsNetworkingV1AccessPointStatusConfigOneOf(v *NetworkingV1AwsIngressPrivateLinkEndpointStatus) NetworkingV1AccessPointStatusConfigOneOf {
+	return NetworkingV1AccessPointStatusConfigOneOf{NetworkingV1AwsIngressPrivateLinkEndpointStatus: v}
 }
 
 // NetworkingV1AzureEgressPrivateLinkEndpointStatusAsNetworkingV1AccessPointStatusConfigOneOf is a convenience function that returns NetworkingV1AzureEgressPrivateLinkEndpointStatus wrapped in NetworkingV1AccessPointStatusConfigOneOf
@@ -72,6 +78,18 @@ func (dst *NetworkingV1AccessPointStatusConfigOneOf) UnmarshalJSON(data []byte) 
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpointStatus = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointStatusConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpointStatus: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'AwsIngressPrivateLinkEndpointStatus'
+	if jsonDict["kind"] == "AwsIngressPrivateLinkEndpointStatus" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressPrivateLinkEndpointStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointStatusConfigOneOf as NetworkingV1AwsIngressPrivateLinkEndpointStatus: %s", err.Error())
 		}
 	}
 
@@ -108,6 +126,18 @@ func (dst *NetworkingV1AccessPointStatusConfigOneOf) UnmarshalJSON(data []byte) 
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkEndpointStatus = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointStatusConfigOneOf as NetworkingV1AwsEgressPrivateLinkEndpointStatus: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.AwsIngressPrivateLinkEndpointStatus'
+	if jsonDict["kind"] == "networking.v1.AwsIngressPrivateLinkEndpointStatus" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressPrivateLinkEndpointStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressPrivateLinkEndpointStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1AccessPointStatusConfigOneOf as NetworkingV1AwsIngressPrivateLinkEndpointStatus: %s", err.Error())
 		}
 	}
 
@@ -148,6 +178,14 @@ func (src NetworkingV1AccessPointStatusConfigOneOf) MarshalJSON() ([]byte, error
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1AwsIngressPrivateLinkEndpointStatus != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsIngressPrivateLinkEndpointStatus)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1AzureEgressPrivateLinkEndpointStatus != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -171,6 +209,10 @@ func (src NetworkingV1AccessPointStatusConfigOneOf) MarshalJSON() ([]byte, error
 func (obj *NetworkingV1AccessPointStatusConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsEgressPrivateLinkEndpointStatus != nil {
 		return obj.NetworkingV1AwsEgressPrivateLinkEndpointStatus
+	}
+
+	if obj.NetworkingV1AwsIngressPrivateLinkEndpointStatus != nil {
+		return obj.NetworkingV1AwsIngressPrivateLinkEndpointStatus
 	}
 
 	if obj.NetworkingV1AzureEgressPrivateLinkEndpointStatus != nil {

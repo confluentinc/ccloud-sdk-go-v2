@@ -34,6 +34,7 @@ import (
 // NetworkingV1GatewaySpecConfigOneOf - struct for NetworkingV1GatewaySpecConfigOneOf
 type NetworkingV1GatewaySpecConfigOneOf struct {
 	NetworkingV1AwsEgressPrivateLinkGatewaySpec           *NetworkingV1AwsEgressPrivateLinkGatewaySpec
+	NetworkingV1AwsIngressPrivateLinkGatewaySpec          *NetworkingV1AwsIngressPrivateLinkGatewaySpec
 	NetworkingV1AwsPeeringGatewaySpec                     *NetworkingV1AwsPeeringGatewaySpec
 	NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec     *NetworkingV1AwsPrivateNetworkInterfaceGatewaySpec
 	NetworkingV1AzureEgressPrivateLinkGatewaySpec         *NetworkingV1AzureEgressPrivateLinkGatewaySpec
@@ -45,6 +46,11 @@ type NetworkingV1GatewaySpecConfigOneOf struct {
 // NetworkingV1AwsEgressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
 func NetworkingV1AwsEgressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf(v *NetworkingV1AwsEgressPrivateLinkGatewaySpec) NetworkingV1GatewaySpecConfigOneOf {
 	return NetworkingV1GatewaySpecConfigOneOf{NetworkingV1AwsEgressPrivateLinkGatewaySpec: v}
+}
+
+// NetworkingV1AwsIngressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1AwsIngressPrivateLinkGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
+func NetworkingV1AwsIngressPrivateLinkGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf(v *NetworkingV1AwsIngressPrivateLinkGatewaySpec) NetworkingV1GatewaySpecConfigOneOf {
+	return NetworkingV1GatewaySpecConfigOneOf{NetworkingV1AwsIngressPrivateLinkGatewaySpec: v}
 }
 
 // NetworkingV1AwsPeeringGatewaySpecAsNetworkingV1GatewaySpecConfigOneOf is a convenience function that returns NetworkingV1AwsPeeringGatewaySpec wrapped in NetworkingV1GatewaySpecConfigOneOf
@@ -96,6 +102,18 @@ func (dst *NetworkingV1GatewaySpecConfigOneOf) UnmarshalJSON(data []byte) error 
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkGatewaySpec = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkGatewaySpec: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'AwsIngressPrivateLinkGatewaySpec'
+	if jsonDict["kind"] == "AwsIngressPrivateLinkGatewaySpec" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressPrivateLinkGatewaySpec
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1AwsIngressPrivateLinkGatewaySpec: %s", err.Error())
 		}
 	}
 
@@ -180,6 +198,18 @@ func (dst *NetworkingV1GatewaySpecConfigOneOf) UnmarshalJSON(data []byte) error 
 		} else {
 			dst.NetworkingV1AwsEgressPrivateLinkGatewaySpec = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1AwsEgressPrivateLinkGatewaySpec: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.AwsIngressPrivateLinkGatewaySpec'
+	if jsonDict["kind"] == "networking.v1.AwsIngressPrivateLinkGatewaySpec" {
+		// try to unmarshal JSON data into NetworkingV1AwsIngressPrivateLinkGatewaySpec
+		err = json.Unmarshal(data, &dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec, return on the first match
+		} else {
+			dst.NetworkingV1AwsIngressPrivateLinkGatewaySpec = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewaySpecConfigOneOf as NetworkingV1AwsIngressPrivateLinkGatewaySpec: %s", err.Error())
 		}
 	}
 
@@ -268,6 +298,14 @@ func (src NetworkingV1GatewaySpecConfigOneOf) MarshalJSON() ([]byte, error) {
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1AwsIngressPrivateLinkGatewaySpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AwsIngressPrivateLinkGatewaySpec)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1AwsPeeringGatewaySpec != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -323,6 +361,10 @@ func (src NetworkingV1GatewaySpecConfigOneOf) MarshalJSON() ([]byte, error) {
 func (obj *NetworkingV1GatewaySpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.NetworkingV1AwsEgressPrivateLinkGatewaySpec != nil {
 		return obj.NetworkingV1AwsEgressPrivateLinkGatewaySpec
+	}
+
+	if obj.NetworkingV1AwsIngressPrivateLinkGatewaySpec != nil {
+		return obj.NetworkingV1AwsIngressPrivateLinkGatewaySpec
 	}
 
 	if obj.NetworkingV1AwsPeeringGatewaySpec != nil {
