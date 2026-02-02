@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/endpoint
+module github.com/confluentinc/ccloud-sdk-go-v2/endpoint
 
 go 1.24.12
 

@@ -1,4 +1,4 @@
-module github.com/confluentinc/ccloud-sdk-go-v2-internal/networking-gateway
+module github.com/confluentinc/ccloud-sdk-go-v2/networking-gateway
 
 go 1.24.12
 
