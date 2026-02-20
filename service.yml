@@ -11,6 +11,11 @@ semaphore:
   branches:
     - master
     - /^v\d+\.\d+\.\d+$/
+  managed_sections:
+    - version
+    - name
+    - agent
+    - global_job_config
 make:
   enable: true
   enable_updates: true
