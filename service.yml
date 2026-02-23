@@ -1,6 +1,6 @@
 name: ccloud-sdk-go-v2
 lang: go
-lang_version: "1.24.12"
+lang_version: "1.25.7"
 git:
   enable: true
 github:
@@ -11,6 +11,11 @@ semaphore:
   branches:
     - master
     - /^v\d+\.\d+\.\d+$/
+  managed_sections:
+    - version
+    - name
+    - agent
+    - global_job_config
 make:
   enable: true
   enable_updates: true
