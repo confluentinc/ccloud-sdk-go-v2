@@ -55,6 +55,8 @@ type IamV2UpdateCertRequest struct {
 	CrlUrl *string `json:"crl_url,omitempty"`
 	// The PEM encoded string containing the CRL for this certificate authority. Defaults to this over `crl_url` if available.
 	CrlChain *string `json:"crl_chain,omitempty"`
+	// Whether to require CRL validation on client certificates.
+	RequireCrlOnClientCertificate *bool `json:"require_crl_on_client_certificate,omitempty"`
 }
 
 // NewIamV2UpdateCertRequest instantiates a new IamV2UpdateCertRequest object
@@ -394,6 +396,38 @@ func (o *IamV2UpdateCertRequest) SetCrlChain(v string) {
 	o.CrlChain = &v
 }
 
+// GetRequireCrlOnClientCertificate returns the RequireCrlOnClientCertificate field value if set, zero value otherwise.
+func (o *IamV2UpdateCertRequest) GetRequireCrlOnClientCertificate() bool {
+	if o == nil || o.RequireCrlOnClientCertificate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireCrlOnClientCertificate
+}
+
+// GetRequireCrlOnClientCertificateOk returns a tuple with the RequireCrlOnClientCertificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2UpdateCertRequest) GetRequireCrlOnClientCertificateOk() (*bool, bool) {
+	if o == nil || o.RequireCrlOnClientCertificate == nil {
+		return nil, false
+	}
+	return o.RequireCrlOnClientCertificate, true
+}
+
+// HasRequireCrlOnClientCertificate returns a boolean if a field has been set.
+func (o *IamV2UpdateCertRequest) HasRequireCrlOnClientCertificate() bool {
+	if o != nil && o.RequireCrlOnClientCertificate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireCrlOnClientCertificate gets a reference to the given bool and assigns it to the RequireCrlOnClientCertificate field.
+func (o *IamV2UpdateCertRequest) SetRequireCrlOnClientCertificate(v bool) {
+	o.RequireCrlOnClientCertificate = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2UpdateCertRequest) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -406,6 +440,7 @@ func (o *IamV2UpdateCertRequest) Redact() {
 	o.recurseRedact(o.CertificateChainFilename)
 	o.recurseRedact(o.CrlUrl)
 	o.recurseRedact(o.CrlChain)
+	o.recurseRedact(o.RequireCrlOnClientCertificate)
 }
 
 func (o *IamV2UpdateCertRequest) recurseRedact(v interface{}) {
@@ -469,6 +504,9 @@ func (o IamV2UpdateCertRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.CrlChain != nil {
 		toSerialize["crl_chain"] = o.CrlChain
+	}
+	if o.RequireCrlOnClientCertificate != nil {
+		toSerialize["require_crl_on_client_certificate"] = o.RequireCrlOnClientCertificate
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
