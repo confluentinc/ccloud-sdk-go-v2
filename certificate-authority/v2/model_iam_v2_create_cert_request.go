@@ -56,7 +56,7 @@ type IamV2CreateCertRequest struct {
 	// The PEM encoded string containing the CRL for this certificate authority. Defaults to this over `crl_url` if available.
 	CrlChain *string `json:"crl_chain,omitempty"`
 	// Whether to require CRL validation on client certificates.
-	RequireCrlOnClientCertificate *bool `json:"require_crl_on_client_certificate,omitempty"`
+	RequireCrlOnClientCert *bool `json:"require_crl_on_client_cert,omitempty"`
 }
 
 // NewIamV2CreateCertRequest instantiates a new IamV2CreateCertRequest object
@@ -396,36 +396,36 @@ func (o *IamV2CreateCertRequest) SetCrlChain(v string) {
 	o.CrlChain = &v
 }
 
-// GetRequireCrlOnClientCertificate returns the RequireCrlOnClientCertificate field value if set, zero value otherwise.
-func (o *IamV2CreateCertRequest) GetRequireCrlOnClientCertificate() bool {
-	if o == nil || o.RequireCrlOnClientCertificate == nil {
+// GetRequireCrlOnClientCert returns the RequireCrlOnClientCert field value if set, zero value otherwise.
+func (o *IamV2CreateCertRequest) GetRequireCrlOnClientCert() bool {
+	if o == nil || o.RequireCrlOnClientCert == nil {
 		var ret bool
 		return ret
 	}
-	return *o.RequireCrlOnClientCertificate
+	return *o.RequireCrlOnClientCert
 }
 
-// GetRequireCrlOnClientCertificateOk returns a tuple with the RequireCrlOnClientCertificate field value if set, nil otherwise
+// GetRequireCrlOnClientCertOk returns a tuple with the RequireCrlOnClientCert field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2CreateCertRequest) GetRequireCrlOnClientCertificateOk() (*bool, bool) {
-	if o == nil || o.RequireCrlOnClientCertificate == nil {
+func (o *IamV2CreateCertRequest) GetRequireCrlOnClientCertOk() (*bool, bool) {
+	if o == nil || o.RequireCrlOnClientCert == nil {
 		return nil, false
 	}
-	return o.RequireCrlOnClientCertificate, true
+	return o.RequireCrlOnClientCert, true
 }
 
-// HasRequireCrlOnClientCertificate returns a boolean if a field has been set.
-func (o *IamV2CreateCertRequest) HasRequireCrlOnClientCertificate() bool {
-	if o != nil && o.RequireCrlOnClientCertificate != nil {
+// HasRequireCrlOnClientCert returns a boolean if a field has been set.
+func (o *IamV2CreateCertRequest) HasRequireCrlOnClientCert() bool {
+	if o != nil && o.RequireCrlOnClientCert != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetRequireCrlOnClientCertificate gets a reference to the given bool and assigns it to the RequireCrlOnClientCertificate field.
-func (o *IamV2CreateCertRequest) SetRequireCrlOnClientCertificate(v bool) {
-	o.RequireCrlOnClientCertificate = &v
+// SetRequireCrlOnClientCert gets a reference to the given bool and assigns it to the RequireCrlOnClientCert field.
+func (o *IamV2CreateCertRequest) SetRequireCrlOnClientCert(v bool) {
+	o.RequireCrlOnClientCert = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
@@ -440,7 +440,7 @@ func (o *IamV2CreateCertRequest) Redact() {
 	o.recurseRedact(o.CertificateChainFilename)
 	o.recurseRedact(o.CrlUrl)
 	o.recurseRedact(o.CrlChain)
-	o.recurseRedact(o.RequireCrlOnClientCertificate)
+	o.recurseRedact(o.RequireCrlOnClientCert)
 }
 
 func (o *IamV2CreateCertRequest) recurseRedact(v interface{}) {
@@ -505,8 +505,8 @@ func (o IamV2CreateCertRequest) MarshalJSON() ([]byte, error) {
 	if o.CrlChain != nil {
 		toSerialize["crl_chain"] = o.CrlChain
 	}
-	if o.RequireCrlOnClientCertificate != nil {
-		toSerialize["require_crl_on_client_certificate"] = o.RequireCrlOnClientCertificate
+	if o.RequireCrlOnClientCert != nil {
+		toSerialize["require_crl_on_client_cert"] = o.RequireCrlOnClientCert
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
