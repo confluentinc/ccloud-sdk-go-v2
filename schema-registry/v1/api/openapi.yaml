@@ -6484,6 +6484,15 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -6911,6 +6920,15 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -7313,6 +7331,15 @@ paths:
         required: false
         schema:
           type: boolean
+        style: form
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: ""
+          type: string
         style: form
       requestBody:
         content:
@@ -7816,6 +7843,15 @@ paths:
         required: false
         schema:
           type: boolean
+        style: form
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: ""
+          type: string
         style: form
       requestBody:
         content:
@@ -10549,6 +10585,16 @@ components:
           $ref: '#/components/schemas/Metadata'
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
+        schemaTagsToAdd:
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
+        schemaTagsToRemove:
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
+        propagateSchemaTags:
+          type: boolean
       type: object
     ExporterUpdateRequest:
       description: Exporter update request
@@ -10735,11 +10781,19 @@ components:
             named by the alias. That means that any reference to this subject
             will be replaced by the alias.
           type: string
+        aliasForDeks:
+          type: string
         normalize:
           description: |-
             If true, then schemas are automatically normalized when registered or
             when passed during lookups. This means that clients do not have to
             pass the "normalize" query parameter to have normalization occur.
+          type: boolean
+        validateFields:
+          type: boolean
+        validateNewSchemas:
+          type: boolean
+        validateRules:
           type: boolean
         compatibilityLevel:
           description: Compatibility Level
@@ -10753,6 +10807,8 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+        compatibilityPolicy:
+          type: string
         compatibilityGroup:
           description: |-
             Only schemas that belong to the same compatibility group will be
@@ -10789,11 +10845,19 @@ components:
             named by the alias. That means that any reference to this subject
             will be replaced by the alias.
           type: string
+        aliasForDeks:
+          type: string
         normalize:
           description: |-
             If true, then schemas are automatically normalized when registered
             or when passed during lookups. This means that clients do not have
             to pass the "normalize" query parameter to have normalization occur.
+          type: boolean
+        validateFields:
+          type: boolean
+        validateNewSchemas:
+          type: boolean
+        validateRules:
           type: boolean
         compatibility:
           description: Compatibility Level
@@ -10807,6 +10871,8 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+        compatibilityPolicy:
+          type: string
         compatibilityGroup:
           description: |-
             Only schemas that belong to the same compatibility group will be
@@ -10865,8 +10931,23 @@ components:
           version: 1
         schemaType: AVRO
       properties:
+        subject:
+          description: "Name of the subject. In Confluent Cloud, this field is returned\
+            \ only if Confluent-Accept-Unknown-Properties header is passed in"
+          type: string
+        version:
+          description: "Version number. In Confluent Cloud, this field is returned\
+            \ only if Confluent-Accept-Unknown-Properties header is passed in"
+          format: int32
+          type: integer
+        guid:
+          description: "Globally unique identifier of the schema. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: string
         schemaType:
-          description: Schema type
+          description: "Schema type. In Confluent Cloud, this field is returned only\
+            \ if Confluent-Accept-Unknown-Properties header is passed in"
           example: AVRO
           type: string
         schema:
@@ -10878,11 +10959,31 @@ components:
           items:
             $ref: '#/components/schemas/SchemaReference'
           type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleSet:
+          $ref: '#/components/schemas/RuleSet'
+        schemaTags:
+          description: Schema tags
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
         maxId:
           description: Maximum ID
           example: 1
           format: int32
           type: integer
+        ts:
+          description: "Timestamp when the schema was created. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          format: int64
+          type: integer
+        deleted:
+          description: "Whether the schema has been deleted. In Confluent Cloud, this\
+            \ field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: boolean
       type: object
     Schema:
       description: Schema
@@ -10983,8 +11084,14 @@ components:
           example: 100001
           format: int32
           type: integer
+        guid:
+          description: "Globally unique identifier of the schema. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: string
         schemaType:
-          description: Schema type
+          description: "Schema type. In Confluent Cloud, this field is returned only\
+            \ if Confluent-Accept-Unknown-Properties header is passed in"
           example: AVRO
           type: string
         references:
@@ -11000,6 +11107,22 @@ components:
           $ref: '#/components/schemas/Metadata'
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
+        schemaTags:
+          description: Schema tags
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
+        ts:
+          description: "Timestamp when the schema was created. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          format: int64
+          type: integer
+        deleted:
+          description: "Whether the schema has been deleted. In Confluent Cloud, this\
+            \ field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: boolean
       type: object
     SubjectVersion:
       description: Subject version pair
@@ -11037,6 +11160,47 @@ components:
           example: 100001
           format: int32
           type: integer
+        version:
+          description: "Version number. In Confluent Cloud, this field is returned\
+            \ only if Confluent-Accept-Unknown-Properties header is passed in"
+          format: int32
+          type: integer
+        guid:
+          description: "Globally unique identifier of the schema. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: string
+        schemaType:
+          description: "Schema type. In Confluent Cloud, this field is returned only\
+            \ if Confluent-Accept-Unknown-Properties header is passed in"
+          type: string
+        references:
+          description: "References to other schemas. In Confluent Cloud, this field\
+            \ is returned only if Confluent-Accept-Unknown-Properties header is passed\
+            \ in"
+          items:
+            $ref: '#/components/schemas/SchemaReference'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleSet:
+          $ref: '#/components/schemas/RuleSet'
+        schema:
+          description: "Schema definition string. In Confluent Cloud, this field is\
+            \ returned only if Confluent-Accept-Unknown-Properties header is passed\
+            \ in"
+          type: string
+        ts:
+          description: "Timestamp when the schema was created. In Confluent Cloud,\
+            \ this field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          format: int64
+          type: integer
+        deleted:
+          description: "Whether the schema has been deleted. In Confluent Cloud, this\
+            \ field is returned only if Confluent-Accept-Unknown-Properties header\
+            \ is passed in"
+          type: boolean
       type: object
     Dek:
       example:
@@ -11268,6 +11432,18 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           type: array
+        encodingRules:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
+        enableAt:
+          enum:
+          - ALL
+          - CLIENT
+          - GATEWAY
+          - SERVER
+          - NONE
+          type: string
       type: object
     Rule:
       description: Rule
@@ -11337,6 +11513,25 @@ components:
         disabled:
           description: Whether the rule is disabled
           type: boolean
+      type: object
+    SchemaEntity:
+      properties:
+        entityPath:
+          type: string
+        entityType:
+          enum:
+          - sr_record
+          - sr_field
+          type: string
+      type: object
+    SchemaTags:
+      properties:
+        schemaEntity:
+          $ref: '#/components/schemas/SchemaEntity'
+        tags:
+          items:
+            type: string
+          type: array
       type: object
     Config_defaultMetadata:
       description: Default value for the metadata to be used during schema registration.
