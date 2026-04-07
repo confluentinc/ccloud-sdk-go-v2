@@ -131,6 +131,18 @@ Class | Method | HTTP request | Description
 *ShareGroupV3Api* | [**ListKafkaShareGroupConsumerAssignments**](docs/ShareGroupV3Api.md#listkafkasharegroupconsumerassignments) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}/assignments | List Share Group Consumer Assignments
 *ShareGroupV3Api* | [**ListKafkaShareGroupConsumers**](docs/ShareGroupV3Api.md#listkafkasharegroupconsumers) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers | List Share Group Consumers
 *ShareGroupV3Api* | [**ListKafkaShareGroups**](docs/ShareGroupV3Api.md#listkafkasharegroups) | **Get** /kafka/v3/clusters/{cluster_id}/share-groups | List Share Groups
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroup**](docs/StreamsGroupV3Api.md#getkafkastreamsgroup) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id} | Get Streams Group
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupMember**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupmember) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id} | Get Streams Group Member
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupMemberAssignmentTaskPartitions**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupmemberassignmenttaskpartitions) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type}/subtopologies/{subtopology_id} | List Streams Group Assignments Task Partitions of a Specific Type and Subtopology
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupMemberAssignments**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupmemberassignments) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments | Get Streams Group Member Assignments
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupmembertargetassignmenttaskpartitions) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type}/subtopologies/{subtopology_id} | List Streams Group Target Assignments Task Partitions of a Specific Type and Subtopology
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupMemberTargetAssignments**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupmembertargetassignments) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments | Get Streams Group Member Target Assignments
+*StreamsGroupV3Api* | [**GetKafkaStreamsGroupSubtopology**](docs/StreamsGroupV3Api.md#getkafkastreamsgroupsubtopology) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies/{subtopology_id} | Get Streams Group Subtopology
+*StreamsGroupV3Api* | [**ListKafkaStreamsGroupMemberAssignmentTasks**](docs/StreamsGroupV3Api.md#listkafkastreamsgroupmemberassignmenttasks) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type} | List Streams Group Assignments of a Specific Type
+*StreamsGroupV3Api* | [**ListKafkaStreamsGroupMemberTargetAssignmentTasks**](docs/StreamsGroupV3Api.md#listkafkastreamsgroupmembertargetassignmenttasks) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type} | List Streams Group Target Assignments of a Specific Type
+*StreamsGroupV3Api* | [**ListKafkaStreamsGroupMembers**](docs/StreamsGroupV3Api.md#listkafkastreamsgroupmembers) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members | List Streams Group Members
+*StreamsGroupV3Api* | [**ListKafkaStreamsGroupSubtopologies**](docs/StreamsGroupV3Api.md#listkafkastreamsgroupsubtopologies) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies | List Streams Group Subtopologies
+*StreamsGroupV3Api* | [**ListKafkaStreamsGroups**](docs/StreamsGroupV3Api.md#listkafkastreamsgroups) | **Get** /kafka/v3/clusters/{cluster_id}/streams-groups | List Streams Groups
 *TopicV3Api* | [**CreateKafkaTopic**](docs/TopicV3Api.md#createkafkatopic) | **Post** /kafka/v3/clusters/{cluster_id}/topics | Create Topic
 *TopicV3Api* | [**DeleteKafkaTopic**](docs/TopicV3Api.md#deletekafkatopic) | **Delete** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Delete Topic
 *TopicV3Api* | [**GetKafkaTopic**](docs/TopicV3Api.md#getkafkatopic) | **Get** /kafka/v3/clusters/{cluster_id}/topics/{topic_name} | Get Topic
@@ -287,6 +299,24 @@ Class | Method | HTTP request | Description
  - [ShareGroupDataListAllOf](docs/ShareGroupDataListAllOf.md)
  - [ShareGroupTopicPartitionData](docs/ShareGroupTopicPartitionData.md)
  - [ShareGroupTopicPartitionDataAllOf](docs/ShareGroupTopicPartitionDataAllOf.md)
+ - [StreamsGroupData](docs/StreamsGroupData.md)
+ - [StreamsGroupDataAllOf](docs/StreamsGroupDataAllOf.md)
+ - [StreamsGroupDataList](docs/StreamsGroupDataList.md)
+ - [StreamsGroupDataListAllOf](docs/StreamsGroupDataListAllOf.md)
+ - [StreamsGroupMemberAssignmentData](docs/StreamsGroupMemberAssignmentData.md)
+ - [StreamsGroupMemberAssignmentDataAllOf](docs/StreamsGroupMemberAssignmentDataAllOf.md)
+ - [StreamsGroupMemberData](docs/StreamsGroupMemberData.md)
+ - [StreamsGroupMemberDataAllOf](docs/StreamsGroupMemberDataAllOf.md)
+ - [StreamsGroupMemberDataList](docs/StreamsGroupMemberDataList.md)
+ - [StreamsGroupMemberDataListAllOf](docs/StreamsGroupMemberDataListAllOf.md)
+ - [StreamsGroupSubtopologyData](docs/StreamsGroupSubtopologyData.md)
+ - [StreamsGroupSubtopologyDataAllOf](docs/StreamsGroupSubtopologyDataAllOf.md)
+ - [StreamsGroupSubtopologyDataList](docs/StreamsGroupSubtopologyDataList.md)
+ - [StreamsGroupSubtopologyDataListAllOf](docs/StreamsGroupSubtopologyDataListAllOf.md)
+ - [StreamsTaskData](docs/StreamsTaskData.md)
+ - [StreamsTaskDataAllOf](docs/StreamsTaskDataAllOf.md)
+ - [StreamsTaskDataList](docs/StreamsTaskDataList.md)
+ - [StreamsTaskDataListAllOf](docs/StreamsTaskDataListAllOf.md)
  - [TopicConfigData](docs/TopicConfigData.md)
  - [TopicConfigDataAllOf](docs/TopicConfigDataAllOf.md)
  - [TopicConfigDataList](docs/TopicConfigDataList.md)
