@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name of the cluster. | [optional] 
 **Availability** | Pointer to **string** | The availability zone configuration of the cluster  | [optional] 
 **Config** | Pointer to [**CmkV2ClusterSpecUpdateConfigOneOf**](CmkV2ClusterSpecUpdateConfigOneOf.md) | The configuration of the Kafka cluster.  Note: Clusters can be upgraded from Basic to Standard, but cannot be downgraded from Standard to Basic.  | [optional] 
-**Endpoints** | Pointer to [**ModelMap**](map.md) | A map of endpoints for connecting to the Kafka cluster, keyed by access_point_id. Access Point ID &#39;public&#39; and &#39;privatelink&#39; are reserved. These can be used for different network access methods or regions.  | [optional] [readonly] 
+**Endpoints** | Pointer to [**ModelMap**](map.md) | A map of endpoints for connecting to the Kafka cluster, keyed by access_point_id. Access Point ID &#39;PUBLIC&#39; and &#39;PRIVATE_LINK&#39; are reserved. These can be used for different network access methods or regions.  | [optional] [readonly] 
+**DeletionProtection** | Pointer to **bool** | Enable deletion protection for the cluster | [optional] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetEndpoints sets Endpoints field to given value.
 `func (o *CmkV2ClusterSpecUpdate) HasEndpoints() bool`
 
 HasEndpoints returns a boolean if a field has been set.
+
+### GetDeletionProtection
+
+`func (o *CmkV2ClusterSpecUpdate) GetDeletionProtection() bool`
+
+GetDeletionProtection returns the DeletionProtection field if non-nil, zero value otherwise.
+
+### GetDeletionProtectionOk
+
+`func (o *CmkV2ClusterSpecUpdate) GetDeletionProtectionOk() (*bool, bool)`
+
+GetDeletionProtectionOk returns a tuple with the DeletionProtection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeletionProtection
+
+`func (o *CmkV2ClusterSpecUpdate) SetDeletionProtection(v bool)`
+
+SetDeletionProtection sets DeletionProtection field to given value.
+
+### HasDeletionProtection
+
+`func (o *CmkV2ClusterSpecUpdate) HasDeletionProtection() bool`
+
+HasDeletionProtection returns a boolean if a field has been set.
 
 ### GetEnvironment
 

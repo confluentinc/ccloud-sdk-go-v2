@@ -4,6 +4,12 @@ info:
     email: cpk@confluent.io
     name: Kafka Control Plane Team
     url: https://confluent.slack.com/archives/CGJ0RM9L1
+  description: |
+    The Cluster Management for Apache Kafka API provides comprehensive management
+    capabilities for Apache Kafka clusters on Confluent Cloud.
+    This API allows you to create, configure, monitor, and manage Kafka clusters
+    with different configurations including Basic, Standard, Dedicated, Enterprise,
+    and Freight cluster types.
   title: Cluster Management for Apache Kafka API
   version: 0.0.1-alpha1
   x-api-id: 529cdc50-185d-11ea-8d71-362b9e155667
@@ -43,6 +49,15 @@ paths:
         Retrieve a sorted, filtered, paginated list of all clusters.
       operationId: listCmkV2Clusters
       parameters:
+      - description: Filter the results where spec.deletion_protection is true or
+          false.
+        explode: true
+        in: query
+        name: spec.deletion_protection
+        required: false
+        schema:
+          $ref: '#/components/schemas/BooleanFilter'
+        style: form
       - description: Filter the results by exact match for environment.
         example: env-00000
         explode: true
@@ -291,14 +306,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001' \
+            --url 'https://api.confluent.cloud/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001")
+            .url("https://api.confluent.cloud/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -306,7 +321,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -319,7 +334,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
+          conn.request("GET", "/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -333,7 +348,7 @@ paths:
             "method": "GET",
             "hostname": "api.confluent.cloud",
             "port": null,
-            "path": "/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001",
+            "path": "/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -358,7 +373,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -367,7 +382,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?environment=env-00000&spec.network=n-00000,n-00001");
+          var client = new RestClient("https://api.confluent.cloud/cmk/v2/clusters?spec.deletion_protection=SOME_BOOLEAN_VALUE&environment=env-00000&spec.network=n-00000,n-00001");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -712,13 +727,13 @@ paths:
             --url https://api.confluent.cloud/cmk/v2/clusters \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"},"byok":{"id":"cck-00000"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"deletion_protection":true,"environment":{"id":"env-00000","environment":"string"},"network":{"id":"n-00000","environment":"string"},"byok":{"id":"cck-00000"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters")
             .post(body)
@@ -733,21 +748,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
-          \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          n-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"byok\\\":{\\\"id\\\"\
-          :\\\"cck-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"kind\\\":\\\"Basic\\\"},\\\"deletion_protection\\\":true,\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
+          network\\\":{\\\"id\\\":\\\"n-00000\\\",\\\"environment\\\":\\\"string\\\
+          \"},\\\"byok\\\":{\\\"id\\\":\\\"cck-00000\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -795,6 +811,7 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
+              deletion_protection: true,
               environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'n-00000', environment: 'string'},
               byok: {id: 'cck-00000'}
@@ -813,7 +830,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -822,7 +839,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"n-00000\",\"environment\":\"string\"},\"byok\":{\"id\":\"cck-00000\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cmk/v2/clusters/{id}:
     delete:
@@ -1816,13 +1833,13 @@ paths:
             --url 'https://api.confluent.cloud/cmk/v2/clusters/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"},"byok":{"id":"string"}}}'
+            --data '{"spec":{"display_name":"ProdKafkaCluster","availability":"SINGLE_ZONE","cloud":"GCP","region":"us-east4","config":{"kind":"Basic"},"deletion_protection":true,"environment":{"id":"env-00000","environment":"string"},"network":{"id":"string","environment":"string"},"byok":{"id":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cmk/v2/clusters/{id}")
             .patch(body)
@@ -1837,21 +1854,22 @@ paths:
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
           :\\\"ProdKafkaCluster\\\",\\\"availability\\\":\\\"SINGLE_ZONE\\\",\\\"\
           cloud\\\":\\\"GCP\\\",\\\"region\\\":\\\"us-east4\\\",\\\"config\\\":{\\\
-          \"kind\\\":\\\"Basic\\\"},\\\"environment\\\":{\\\"id\\\":\\\"env-00000\\\
-          \",\\\"environment\\\":\\\"string\\\"},\\\"network\\\":{\\\"id\\\":\\\"\
-          string\\\",\\\"environment\\\":\\\"string\\\"},\\\"byok\\\":{\\\"id\\\"\
-          :\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \"kind\\\":\\\"Basic\\\"},\\\"deletion_protection\\\":true,\\\"environment\\\
+          \":{\\\"id\\\":\\\"env-00000\\\",\\\"environment\\\":\\\"string\\\"},\\\"\
+          network\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\":\\\"string\\\"\
+          },\\\"byok\\\":{\\\"id\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1899,6 +1917,7 @@ paths:
               cloud: 'GCP',
               region: 'us-east4',
               config: {kind: 'Basic'},
+              deletion_protection: true,
               environment: {id: 'env-00000', environment: 'string'},
               network: {id: 'string', environment: 'string'},
               byok: {id: 'string'}
@@ -1917,7 +1936,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1926,7 +1945,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"ProdKafkaCluster\",\"availability\":\"SINGLE_ZONE\",\"cloud\":\"GCP\",\"region\":\"us-east4\",\"config\":{\"kind\":\"Basic\"},\"deletion_protection\":true,\"environment\":{\"id\":\"env-00000\",\"environment\":\"string\"},\"network\":{\"id\":\"string\",\"environment\":\"string\"},\"byok\":{\"id\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -2193,7 +2212,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: lkc-f3a90de
           maxLength: 255
           readOnly: true
           type: string
@@ -2251,7 +2270,7 @@ components:
         max_ecku:
           description: |
             The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
-            Kafka clusters with `HIGH` availability must have at least two eCKUs.
+            For more details, see [Maximum eCKU requirements](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#minimum-maximum-ecku-requirements).
           example: 2
           format: int32
           minimum: 1
@@ -2273,6 +2292,7 @@ components:
           description: |
             The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
             Kafka clusters with `HIGH` availability must have at least two eCKUs.
+            For more details, see [Maximum eCKU requirements](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#minimum-maximum-ecku-requirements).
           example: 2
           format: int32
           minimum: 1
@@ -2294,6 +2314,7 @@ components:
           description: |
             The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
             Kafka clusters with `HIGH` availability must have at least two eCKUs.
+            For more details, see [Maximum eCKU requirements](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#minimum-maximum-ecku-requirements).
           example: 2
           format: int32
           minimum: 1
@@ -2348,6 +2369,15 @@ components:
           type: array
           uniqueItems: true
           x-immutable: true
+        release_priority:
+          default: REGULAR
+          description: |
+            Specifies the release priority for cluster updates. Defaults to REGULAR. Clusters with PRIORITY are updated before clusters with REGULAR.
+          example: REGULAR
+          type: string
+          x-extensible-enum:
+          - REGULAR
+          - PRIORITY
       required:
       - cku
       - kind
@@ -2366,6 +2396,7 @@ components:
           description: |
             The maximum number of Elastic Confluent Kafka Units (eCKUs) that Kafka clusters should auto-scale to.
             Kafka clusters with `HIGH` availability must have at least two eCKUs.
+            For more details, see [Maximum eCKU requirements](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#minimum-maximum-ecku-requirements).
           example: 2
           format: int32
           minimum: 1
@@ -2403,14 +2434,13 @@ components:
         ap1pni123:
           kafka_bootstrap_endpoint: lkc-s1232-00000.us-central1.gcp.private.confluent.cloud:9092
           http_endpoint: https://lkc-s1232.us-central1.gcp.private.confluent.cloud:443
-          connection_type: PRIVATENETWORKINTERFACE
+          connection_type: PRIVATE_NETWORK_INTERFACE
         ap2platt67890:
           kafka_bootstrap_endpoint: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
           http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
-          connection_type: PRIVATELINK
+          connection_type: PRIVATE_LINK
       readOnly: true
       type: object
-      x-go-type: map[string]Endpoints
     cmk.v2.Endpoints:
       description: |
         Given a gateway type, endpoints to connect to the Kafka cluster.
@@ -2429,18 +2459,21 @@ components:
         connection_type:
           description: |
             The type of connection used for the endpoint.
-          example: PRIVATENETWORKINTERFACE
+          example: PRIVATE_NETWORK_INTERFACE
           type: string
           x-extensible-enum:
           - PUBLIC
-          - PRIVATELINK
-          - PRIVATENETWORKINTERFACE
+          - PRIVATE_LINK
+          - PRIVATE_NETWORK_INTERFACE
       readOnly: true
       required:
       - connection_type
       - http_endpoint
       - kafka_bootstrap_endpoint
       type: object
+    BooleanFilter:
+      description: Filter for whether this value is true or false.
+      type: boolean
     SearchFilter:
       description: Filter a collection by a string search
       type: string
@@ -2577,22 +2610,32 @@ components:
           - $ref: '#/components/schemas/cmk.v2.Freight'
           x-one-of-name: CmkV2ClusterSpecConfigOneOf
         kafka_bootstrap_endpoint:
-          description: The bootstrap endpoint used by Kafka clients to connect to
-            the cluster.
+          deprecated: true
+          description: |
+            The bootstrap endpoint used by Kafka clients to connect to the cluster.
+
+            DEPRECATED - Please use the `endpoints` attribute instead.
           example: lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092
           readOnly: true
           type: string
           x-immutable: true
         http_endpoint:
-          description: The cluster HTTP request URL.
+          deprecated: true
+          description: |
+            The cluster HTTP request URL.
+
+            DEPRECATED - Please use the `endpoints` attribute instead.
           example: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
           format: uri
           readOnly: true
           type: string
           x-immutable: true
         api_endpoint:
-          description: The Kafka API cluster endpoint used by Kafka clients to connect
-            to the cluster.
+          deprecated: true
+          description: |
+            The Kafka API cluster endpoint used by Kafka clients to connect to the cluster.
+
+            DEPRECATED - Please use the `endpoints` attribute instead.
           example: https://pkac-00000.us-west-2.aws.confluent.cloud
           readOnly: true
           type: string
@@ -2602,7 +2645,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.EndpointsMap'
           description: |
             A map of endpoints for connecting to the Kafka cluster,
-            keyed by access_point_id. Access Point ID 'public' and 'privatelink' are reserved.
+            keyed by access_point_id. Access Point ID 'PUBLIC' and 'PRIVATE_LINK' are reserved.
             These can be used for different network access methods or regions.
           example:
             ap1pni123:
@@ -2614,7 +2657,9 @@ components:
               http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
               connection_type: PRIVATELINK
           readOnly: true
-          type: object
+        deletion_protection:
+          description: Enable deletion protection for the cluster
+          type: boolean
         environment:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -2627,7 +2672,12 @@ components:
         byok:
           allOf:
           - $ref: '#/components/schemas/GlobalObjectReference'
-          description: The byok associated with this object.
+          description: |
+            Note: For Pre-BYOK v1 clusters, API responses might show both
+            `encryption_key` and `byok`.
+            To manage Pre-BYOK v1 keys, refer to:
+            https://docs.confluent.io/cloud/current/security/encrypt/byok/legacy-byok.html
+            #manage-pre-byok-api-v1-self-managed-encryption-keys
           x-immutable: true
       type: object
       x-enable-id: true
@@ -2899,7 +2949,7 @@ components:
           - $ref: '#/components/schemas/cmk.v2.EndpointsMap'
           description: |
             A map of endpoints for connecting to the Kafka cluster,
-            keyed by access_point_id. Access Point ID 'public' and 'privatelink' are reserved.
+            keyed by access_point_id. Access Point ID 'PUBLIC' and 'PRIVATE_LINK' are reserved.
             These can be used for different network access methods or regions.
           example:
             ap1pni123:
@@ -2911,7 +2961,9 @@ components:
               http_endpoint: https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud
               connection_type: PRIVATELINK
           readOnly: true
-          type: object
+        deletion_protection:
+          description: Enable deletion protection for the cluster
+          type: boolean
         environment:
           allOf:
           - $ref: '#/components/schemas/EnvScopedObjectReference'
@@ -2958,7 +3010,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: lkc-f3a90de
           maxLength: 255
           readOnly: true
           type: string
