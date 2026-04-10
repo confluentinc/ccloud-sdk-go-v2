@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Cku** | **int32** | The number of Confluent Kafka Units (CKUs) for Dedicated cluster types. MULTI_ZONE dedicated clusters must have at least two CKUs.  | 
 **EncryptionKey** | Pointer to **string** | The id of the encryption key that is used to encrypt the data in the Kafka cluster. (e.g. for Amazon Web Services, the Amazon Resource Name of the key).  | [optional] 
 **Zones** | Pointer to **[]string** | The list of zones the cluster is in.  On AWS, zones are AWS [AZ IDs](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)  (e.g. use1-az3)  On GCP, zones are GCP [zones](https://cloud.google.com/compute/docs/regions-zones)  (e.g. us-central1-c).  | [optional] 
+**ReleasePriority** | Pointer to **string** | Specifies the release priority for cluster updates. Defaults to REGULAR. Clusters with PRIORITY are updated before clusters with REGULAR.  | [optional] [default to "REGULAR"]
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetZones sets Zones field to given value.
 `func (o *CmkV2Dedicated) HasZones() bool`
 
 HasZones returns a boolean if a field has been set.
+
+### GetReleasePriority
+
+`func (o *CmkV2Dedicated) GetReleasePriority() string`
+
+GetReleasePriority returns the ReleasePriority field if non-nil, zero value otherwise.
+
+### GetReleasePriorityOk
+
+`func (o *CmkV2Dedicated) GetReleasePriorityOk() (*string, bool)`
+
+GetReleasePriorityOk returns a tuple with the ReleasePriority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleasePriority
+
+`func (o *CmkV2Dedicated) SetReleasePriority(v string)`
+
+SetReleasePriority sets ReleasePriority field to given value.
+
+### HasReleasePriority
+
+`func (o *CmkV2Dedicated) HasReleasePriority() bool`
+
+HasReleasePriority returns a boolean if a field has been set.
 
 
 ### AsCmkV2ClusterSpecConfigOneOf
