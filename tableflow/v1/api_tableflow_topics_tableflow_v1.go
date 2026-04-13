@@ -42,14 +42,14 @@ var (
 type TableflowTopicsTableflowV1Api interface {
 
 	/*
-			CreateTableflowV1TableflowTopic Create a Tableflow Topic
+		CreateTableflowV1TableflowTopic Create a Tableflow Topic
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a tableflow topic.
+	Make a request to create a tableflow topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateTableflowV1TableflowTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateTableflowV1TableflowTopicRequest
 	*/
 	CreateTableflowV1TableflowTopic(ctx _context.Context) ApiCreateTableflowV1TableflowTopicRequest
 
@@ -58,15 +58,15 @@ type TableflowTopicsTableflowV1Api interface {
 	CreateTableflowV1TableflowTopicExecute(r ApiCreateTableflowV1TableflowTopicRequest) (TableflowV1TableflowTopic, *_nethttp.Response, error)
 
 	/*
-			DeleteTableflowV1TableflowTopic Delete a Tableflow Topic
+		DeleteTableflowV1TableflowTopic Delete a Tableflow Topic
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a tableflow topic.
+	Make a request to delete a tableflow topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param displayName The name of the Kafka topic for which Tableflow is enabled.
-			 @return ApiDeleteTableflowV1TableflowTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param displayName The name of the Kafka topic for which Tableflow is enabled.
+		 @return ApiDeleteTableflowV1TableflowTopicRequest
 	*/
 	DeleteTableflowV1TableflowTopic(ctx _context.Context, displayName string) ApiDeleteTableflowV1TableflowTopicRequest
 
@@ -74,15 +74,15 @@ type TableflowTopicsTableflowV1Api interface {
 	DeleteTableflowV1TableflowTopicExecute(r ApiDeleteTableflowV1TableflowTopicRequest) (*_nethttp.Response, error)
 
 	/*
-			GetTableflowV1TableflowTopic Read a Tableflow Topic
+		GetTableflowV1TableflowTopic Read a Tableflow Topic
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a tableflow topic.
+	Make a request to read a tableflow topic.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param displayName The name of the Kafka topic for which Tableflow is enabled.
-			 @return ApiGetTableflowV1TableflowTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param displayName The name of the Kafka topic for which Tableflow is enabled.
+		 @return ApiGetTableflowV1TableflowTopicRequest
 	*/
 	GetTableflowV1TableflowTopic(ctx _context.Context, displayName string) ApiGetTableflowV1TableflowTopicRequest
 
@@ -91,14 +91,14 @@ type TableflowTopicsTableflowV1Api interface {
 	GetTableflowV1TableflowTopicExecute(r ApiGetTableflowV1TableflowTopicRequest) (TableflowV1TableflowTopic, *_nethttp.Response, error)
 
 	/*
-			ListTableflowV1TableflowTopics List of Tableflow Topics
+		ListTableflowV1TableflowTopics List of Tableflow Topics
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all tableflow topics.
+	Retrieve a sorted, filtered, paginated list of all tableflow topics.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListTableflowV1TableflowTopicsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListTableflowV1TableflowTopicsRequest
 	*/
 	ListTableflowV1TableflowTopics(ctx _context.Context) ApiListTableflowV1TableflowTopicsRequest
 
@@ -107,17 +107,17 @@ type TableflowTopicsTableflowV1Api interface {
 	ListTableflowV1TableflowTopicsExecute(r ApiListTableflowV1TableflowTopicsRequest) (TableflowV1TableflowTopicList, *_nethttp.Response, error)
 
 	/*
-			UpdateTableflowV1TableflowTopic Update a Tableflow Topic
+		UpdateTableflowV1TableflowTopic Update a Tableflow Topic
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to update a tableflow topic.
+	Make a request to update a tableflow topic.
 
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param displayName The name of the Kafka topic for which Tableflow is enabled.
-			 @return ApiUpdateTableflowV1TableflowTopicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param displayName The name of the Kafka topic for which Tableflow is enabled.
+		 @return ApiUpdateTableflowV1TableflowTopicRequest
 	*/
 	UpdateTableflowV1TableflowTopic(ctx _context.Context, displayName string) ApiUpdateTableflowV1TableflowTopicRequest
 

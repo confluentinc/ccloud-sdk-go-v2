@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **EnableCompaction** | Pointer to **bool** | This flag determines whether to enable compaction for the Tableflow enabled topic. | [optional] [readonly] 
 **EnablePartitioning** | Pointer to **bool** | This flag determines whether to enable partitioning for the Tableflow enabled topic. | [optional] [readonly] 
 **RetentionMs** | Pointer to **string** | The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).  The default value is \&quot;604800000\&quot; milliseconds (equivalent to 7 days).  The minimum allowed value is \&quot;86400000\&quot; milliseconds (equivalent to 24 hours).  | [optional] 
+**DataRetentionMs** | Pointer to **string** | The maximum age, in milliseconds, of data to retain in the table for the Tableflow-enabled topic.  The minimum allowed value is \&quot;2592000000\&quot; milliseconds (equivalent to 30 days).  | [optional] 
 **RecordFailureStrategy** | Pointer to **string** | The strategy to handle record failures in the Tableflow enabled topic during materialization.  For &#x60;SKIP&#x60;, we skip the bad records and move to the next record,  and for &#x60;SUSPEND&#x60;, we suspend the materialization of the topic.  | [optional] [default to "SUSPEND"]
 **ErrorHandling** | Pointer to [**TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf**](TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf.md) | The error mode to handle record failures in the Tableflow enabled topic during materialization.  for &#x60;SKIP&#x60;, we skip the bad records and move to the next record,  for &#x60;SUSPEND&#x60;, we suspend the materialization of the topic,  and for &#x60;LOG&#x60;, we log the bad records to the DLQ and continue processing the rest of the records.  | [optional] 
 
@@ -103,6 +104,31 @@ SetRetentionMs sets RetentionMs field to given value.
 `func (o *TableflowV1TableFlowTopicConfigsSpec) HasRetentionMs() bool`
 
 HasRetentionMs returns a boolean if a field has been set.
+
+### GetDataRetentionMs
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) GetDataRetentionMs() string`
+
+GetDataRetentionMs returns the DataRetentionMs field if non-nil, zero value otherwise.
+
+### GetDataRetentionMsOk
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) GetDataRetentionMsOk() (*string, bool)`
+
+GetDataRetentionMsOk returns a tuple with the DataRetentionMs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataRetentionMs
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) SetDataRetentionMs(v string)`
+
+SetDataRetentionMs sets DataRetentionMs field to given value.
+
+### HasDataRetentionMs
+
+`func (o *TableflowV1TableFlowTopicConfigsSpec) HasDataRetentionMs() bool`
+
+HasDataRetentionMs returns a boolean if a field has been set.
 
 ### GetRecordFailureStrategy
 

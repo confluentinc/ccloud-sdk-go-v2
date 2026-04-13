@@ -41,14 +41,14 @@ var (
 type RegionsTableflowV1Api interface {
 
 	/*
-			ListTableflowV1Regions List of Regions
+		ListTableflowV1Regions List of Regions
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all regions.
+	Retrieve a sorted, filtered, paginated list of all regions.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListTableflowV1RegionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListTableflowV1RegionsRequest
 	*/
 	ListTableflowV1Regions(ctx _context.Context) ApiListTableflowV1RegionsRequest
 

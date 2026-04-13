@@ -42,6 +42,8 @@ type TableflowV1TableFlowTopicConfigsSpec struct {
 	EnablePartitioning *bool `json:"enable_partitioning,omitempty"`
 	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours).
 	RetentionMs *string `json:"retention_ms,omitempty"`
+	// The maximum age, in milliseconds, of data to retain in the table for the Tableflow-enabled topic.  The minimum allowed value is \"2592000000\" milliseconds (equivalent to 30 days).
+	DataRetentionMs *string `json:"data_retention_ms,omitempty"`
 	// The strategy to handle record failures in the Tableflow enabled topic during materialization.  For `SKIP`, we skip the bad records and move to the next record,  and for `SUSPEND`, we suspend the materialization of the topic.
 	// Deprecated
 	RecordFailureStrategy *string `json:"record_failure_strategy,omitempty"`
@@ -166,6 +168,38 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) SetRetentionMs(v string) {
 	o.RetentionMs = &v
 }
 
+// GetDataRetentionMs returns the DataRetentionMs field value if set, zero value otherwise.
+func (o *TableflowV1TableFlowTopicConfigsSpec) GetDataRetentionMs() string {
+	if o == nil || o.DataRetentionMs == nil {
+		var ret string
+		return ret
+	}
+	return *o.DataRetentionMs
+}
+
+// GetDataRetentionMsOk returns a tuple with the DataRetentionMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1TableFlowTopicConfigsSpec) GetDataRetentionMsOk() (*string, bool) {
+	if o == nil || o.DataRetentionMs == nil {
+		return nil, false
+	}
+	return o.DataRetentionMs, true
+}
+
+// HasDataRetentionMs returns a boolean if a field has been set.
+func (o *TableflowV1TableFlowTopicConfigsSpec) HasDataRetentionMs() bool {
+	if o != nil && o.DataRetentionMs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDataRetentionMs gets a reference to the given string and assigns it to the DataRetentionMs field.
+func (o *TableflowV1TableFlowTopicConfigsSpec) SetDataRetentionMs(v string) {
+	o.DataRetentionMs = &v
+}
+
 // GetRecordFailureStrategy returns the RecordFailureStrategy field value if set, zero value otherwise.
 // Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetRecordFailureStrategy() string {
@@ -238,6 +272,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) Redact() {
 	o.recurseRedact(o.EnableCompaction)
 	o.recurseRedact(o.EnablePartitioning)
 	o.recurseRedact(o.RetentionMs)
+	o.recurseRedact(o.DataRetentionMs)
 	o.recurseRedact(o.RecordFailureStrategy)
 	o.recurseRedact(o.ErrorHandling)
 }
@@ -282,6 +317,9 @@ func (o TableflowV1TableFlowTopicConfigsSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.RetentionMs != nil {
 		toSerialize["retention_ms"] = o.RetentionMs
+	}
+	if o.DataRetentionMs != nil {
+		toSerialize["data_retention_ms"] = o.DataRetentionMs
 	}
 	if o.RecordFailureStrategy != nil {
 		toSerialize["record_failure_strategy"] = o.RecordFailureStrategy
