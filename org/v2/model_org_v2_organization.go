@@ -59,10 +59,6 @@ type OrgV2Organization struct {
 // will change when the set of required properties is changed
 func NewOrgV2Organization() *OrgV2Organization {
 	this := OrgV2Organization{}
-	var scimEnabled bool = false
-	this.ScimEnabled = &scimEnabled
-	var scimGroupEnabled bool = false
-	this.ScimGroupEnabled = &scimGroupEnabled
 	return &this
 }
 
@@ -71,10 +67,6 @@ func NewOrgV2Organization() *OrgV2Organization {
 // but it doesn't guarantee that properties required by API are set
 func NewOrgV2OrganizationWithDefaults() *OrgV2Organization {
 	this := OrgV2Organization{}
-	var scimEnabled bool = false
-	this.ScimEnabled = &scimEnabled
-	var scimGroupEnabled bool = false
-	this.ScimGroupEnabled = &scimGroupEnabled
 	return &this
 }
 

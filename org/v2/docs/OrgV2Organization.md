@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the Organization | [optional] 
 **JitEnabled** | Pointer to **bool** | The flag to toggle Just-In-Time user provisioning for SSO-enabled organization. Available for early access only. | [optional] 
-**ScimEnabled** | Pointer to **bool** | The flag to toggle SCIM user provisioning for an SSO-enabled organization. | [optional] [default to false]
-**ScimGroupEnabled** | Pointer to **bool** | The flag to toggle SCIM group provisioning for an SSO-enabled organization. | [optional] [default to false]
+**ScimEnabled** | Pointer to **bool** | The flag to toggle SCIM user provisioning for an SSO-enabled organization. | [optional] 
+**ScimGroupEnabled** | Pointer to **bool** | The flag to toggle SCIM group provisioning for an SSO-enabled organization. | [optional] 
 
 ## Methods
 
