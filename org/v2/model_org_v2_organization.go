@@ -49,6 +49,8 @@ type OrgV2Organization struct {
 	JitEnabled *bool `json:"jit_enabled,omitempty"`
 	// The flag to toggle SCIM user provisioning for an SSO-enabled organization.
 	ScimEnabled *bool `json:"scim_enabled,omitempty"`
+	// The flag to toggle SCIM group provisioning for an SSO-enabled organization.
+	ScimGroupEnabled *bool `json:"scim_group_enabled,omitempty"`
 }
 
 // NewOrgV2Organization instantiates a new OrgV2Organization object
@@ -57,6 +59,10 @@ type OrgV2Organization struct {
 // will change when the set of required properties is changed
 func NewOrgV2Organization() *OrgV2Organization {
 	this := OrgV2Organization{}
+	var scimEnabled bool = false
+	this.ScimEnabled = &scimEnabled
+	var scimGroupEnabled bool = false
+	this.ScimGroupEnabled = &scimGroupEnabled
 	return &this
 }
 
@@ -65,6 +71,10 @@ func NewOrgV2Organization() *OrgV2Organization {
 // but it doesn't guarantee that properties required by API are set
 func NewOrgV2OrganizationWithDefaults() *OrgV2Organization {
 	this := OrgV2Organization{}
+	var scimEnabled bool = false
+	this.ScimEnabled = &scimEnabled
+	var scimGroupEnabled bool = false
+	this.ScimGroupEnabled = &scimGroupEnabled
 	return &this
 }
 
@@ -292,6 +302,38 @@ func (o *OrgV2Organization) SetScimEnabled(v bool) {
 	o.ScimEnabled = &v
 }
 
+// GetScimGroupEnabled returns the ScimGroupEnabled field value if set, zero value otherwise.
+func (o *OrgV2Organization) GetScimGroupEnabled() bool {
+	if o == nil || o.ScimGroupEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ScimGroupEnabled
+}
+
+// GetScimGroupEnabledOk returns a tuple with the ScimGroupEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrgV2Organization) GetScimGroupEnabledOk() (*bool, bool) {
+	if o == nil || o.ScimGroupEnabled == nil {
+		return nil, false
+	}
+	return o.ScimGroupEnabled, true
+}
+
+// HasScimGroupEnabled returns a boolean if a field has been set.
+func (o *OrgV2Organization) HasScimGroupEnabled() bool {
+	if o != nil && o.ScimGroupEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScimGroupEnabled gets a reference to the given bool and assigns it to the ScimGroupEnabled field.
+func (o *OrgV2Organization) SetScimGroupEnabled(v bool) {
+	o.ScimGroupEnabled = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -301,6 +343,7 @@ func (o *OrgV2Organization) Redact() {
 	o.recurseRedact(o.DisplayName)
 	o.recurseRedact(o.JitEnabled)
 	o.recurseRedact(o.ScimEnabled)
+	o.recurseRedact(o.ScimGroupEnabled)
 }
 
 func (o *OrgV2Organization) recurseRedact(v interface{}) {
@@ -355,6 +398,9 @@ func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
 	}
 	if o.ScimEnabled != nil {
 		toSerialize["scim_enabled"] = o.ScimEnabled
+	}
+	if o.ScimGroupEnabled != nil {
+		toSerialize["scim_group_enabled"] = o.ScimGroupEnabled
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
