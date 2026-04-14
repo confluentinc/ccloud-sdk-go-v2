@@ -2629,13 +2629,13 @@ paths:
             --url 'https://api.confluent.cloud/org/v2/organizations/{id}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"display_name":"Finance Org","jit_enabled":true,"scim_enabled":true}'
+            --data '{"display_name":"Finance Org","jit_enabled":true,"scim_enabled":true,"scim_group_enabled":true}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}");
+          RequestBody body = RequestBody.create(mediaType, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true,\"scim_group_enabled\":true}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/org/v2/organizations/{id}")
             .patch(body)
@@ -2648,19 +2648,19 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/org/v2/organizations/{id}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"display_name\\\":\\\"Finance Org\\\
-          \",\\\"jit_enabled\\\":true,\\\"scim_enabled\\\":true}\")\n\n\treq, _ :=\
-          \ http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
-          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
-          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
-          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"jit_enabled\\\":true,\\\"scim_enabled\\\":true,\\\"scim_group_enabled\\\
+          \":true}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\t\
+          req.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}"
+          payload = "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true,\"scim_group_enabled\":true}"
 
           headers = {
               'content-type': "application/json",
@@ -2701,7 +2701,12 @@ paths:
             });
           });
 
-          req.write(JSON.stringify({display_name: 'Finance Org', jit_enabled: true, scim_enabled: true}));
+          req.write(JSON.stringify({
+            display_name: 'Finance Org',
+            jit_enabled: true,
+            scim_enabled: true,
+            scim_group_enabled: true
+          }));
           req.end();
       - lang: C
         source: |-
@@ -2715,7 +2720,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true,\"scim_group_enabled\":true}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2724,7 +2729,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"display_name\":\"Finance Org\",\"jit_enabled\":true,\"scim_enabled\":true,\"scim_group_enabled\":true}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -3078,6 +3083,10 @@ components:
           type: boolean
         scim_enabled:
           description: The flag to toggle SCIM user provisioning for an SSO-enabled
+            organization.
+          type: boolean
+        scim_group_enabled:
+          description: The flag to toggle SCIM group provisioning for an SSO-enabled
             organization.
           type: boolean
       type: object
