@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateBusinessMetadataDefs
 
-> []BusinessMetadataDefResponse CreateBusinessMetadataDefs(ctx).BusinessMetadataDef(businessMetadataDef).Execute()
+> []BusinessMetadataDefResponse CreateBusinessMetadataDefs(ctx).Array(array).Execute()
 
 Bulk Create Business Metadata Definitions
 
@@ -38,11 +38,11 @@ import (
 )
 
 func main() {
-    businessMetadataDef := []openapiclient.BusinessMetadataDef{*openapiclient.NewBusinessMetadataDef()} // []BusinessMetadataDef | The business metadata definitions to create (optional)
+    array := TODO // Array | The business metadata definitions to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TypesV1Api.CreateBusinessMetadataDefs(context.Background()).BusinessMetadataDef(businessMetadataDef).Execute()
+    resp, r, err := api_client.TypesV1Api.CreateBusinessMetadataDefs(context.Background()).Array(array).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TypesV1Api.CreateBusinessMetadataDefs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiCreateBusinessMetadataDefs
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **businessMetadataDef** | [**[]BusinessMetadataDef**](BusinessMetadataDef.md) | The business metadata definitions to create | 
+ **array** | [**Array**](Array.md) | The business metadata definitions to create | 
 
 ### Return type
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## CreateTagDefs
 
-> []TagDefResponse CreateTagDefs(ctx).TagDef(tagDef).Execute()
+> []TagDefResponse CreateTagDefs(ctx).Array(array).Execute()
 
 Bulk Create Tag Definitions
 
@@ -104,11 +104,11 @@ import (
 )
 
 func main() {
-    tagDef := []openapiclient.TagDef{*openapiclient.NewTagDef()} // []TagDef | The tag definitions to create (optional)
+    array := TODO // Array | The tag definitions to create (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TypesV1Api.CreateTagDefs(context.Background()).TagDef(tagDef).Execute()
+    resp, r, err := api_client.TypesV1Api.CreateTagDefs(context.Background()).Array(array).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TypesV1Api.CreateTagDefs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +129,7 @@ Other parameters are passed through a pointer to a apiCreateTagDefsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tagDef** | [**[]TagDef**](TagDef.md) | The tag definitions to create | 
+ **array** | [**Array**](Array.md) | The tag definitions to create | 
 
 ### Return type
 
@@ -559,7 +559,7 @@ Name | Type | Description  | Notes
 
 ## UpdateBusinessMetadataDefs
 
-> []BusinessMetadataDefResponse UpdateBusinessMetadataDefs(ctx).BusinessMetadataDef(businessMetadataDef).Execute()
+> []BusinessMetadataDefResponse UpdateBusinessMetadataDefs(ctx).Array(array).Execute()
 
 Bulk Update Business Metadata Definitions
 
@@ -578,11 +578,11 @@ import (
 )
 
 func main() {
-    businessMetadataDef := []openapiclient.BusinessMetadataDef{*openapiclient.NewBusinessMetadataDef()} // []BusinessMetadataDef | The business metadata definitions to update (optional)
+    array := TODO // Array | The business metadata definitions to update (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TypesV1Api.UpdateBusinessMetadataDefs(context.Background()).BusinessMetadataDef(businessMetadataDef).Execute()
+    resp, r, err := api_client.TypesV1Api.UpdateBusinessMetadataDefs(context.Background()).Array(array).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TypesV1Api.UpdateBusinessMetadataDefs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -603,7 +603,7 @@ Other parameters are passed through a pointer to a apiUpdateBusinessMetadataDefs
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **businessMetadataDef** | [**[]BusinessMetadataDef**](BusinessMetadataDef.md) | The business metadata definitions to update | 
+ **array** | [**Array**](Array.md) | The business metadata definitions to update | 
 
 ### Return type
 
@@ -625,7 +625,7 @@ Name | Type | Description  | Notes
 
 ## UpdateTagDefs
 
-> []TagDefResponse UpdateTagDefs(ctx).TagDef(tagDef).Execute()
+> []TagDefResponse UpdateTagDefs(ctx).Array(array).Execute()
 
 Bulk Update Tag Definitions
 
@@ -644,11 +644,11 @@ import (
 )
 
 func main() {
-    tagDef := []openapiclient.TagDef{*openapiclient.NewTagDef()} // []TagDef | The tag definitions to update (optional)
+    array := TODO // Array | The tag definitions to update (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TypesV1Api.UpdateTagDefs(context.Background()).TagDef(tagDef).Execute()
+    resp, r, err := api_client.TypesV1Api.UpdateTagDefs(context.Background()).Array(array).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TypesV1Api.UpdateTagDefs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -669,7 +669,7 @@ Other parameters are passed through a pointer to a apiUpdateTagDefsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tagDef** | [**[]TagDef**](TagDef.md) | The tag definitions to update | 
+ **array** | [**Array**](Array.md) | The tag definitions to update | 
 
 ### Return type
 

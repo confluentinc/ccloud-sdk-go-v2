@@ -217,14 +217,14 @@ type EntityV1Api interface {
 type EntityV1ApiService service
 
 type ApiCreateBusinessMetadataRequest struct {
-	ctx              _context.Context
-	ApiService       EntityV1Api
-	businessMetadata *[]BusinessMetadata
+	ctx        _context.Context
+	ApiService EntityV1Api
+	array      *Array
 }
 
 // The business metadata
-func (r ApiCreateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiCreateBusinessMetadataRequest {
-	r.businessMetadata = &businessMetadata
+func (r ApiCreateBusinessMetadataRequest) Array(array Array) ApiCreateBusinessMetadataRequest {
+	r.array = &array
 	return r
 }
 
@@ -239,8 +239,8 @@ CreateBusinessMetadata Bulk Create Business Metadata
 
 Bulk API to create multiple business metadata.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBusinessMetadataRequest
 */
 func (a *EntityV1ApiService) CreateBusinessMetadata(ctx _context.Context) ApiCreateBusinessMetadataRequest {
 	return ApiCreateBusinessMetadataRequest{
@@ -250,7 +250,8 @@ func (a *EntityV1ApiService) CreateBusinessMetadata(ctx _context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -290,7 +291,7 @@ func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.businessMetadata
+	localVarPostBody = r.array
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -370,12 +371,12 @@ func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMe
 type ApiCreateTagsRequest struct {
 	ctx        _context.Context
 	ApiService EntityV1Api
-	tag        *[]Tag
+	array      *Array
 }
 
 // The tags
-func (r ApiCreateTagsRequest) Tag(tag []Tag) ApiCreateTagsRequest {
-	r.tag = &tag
+func (r ApiCreateTagsRequest) Array(array Array) ApiCreateTagsRequest {
+	r.array = &array
 	return r
 }
 
@@ -390,8 +391,8 @@ CreateTags Bulk Create Tags
 
 Bulk API to create multiple tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTagsRequest
 */
 func (a *EntityV1ApiService) CreateTags(ctx _context.Context) ApiCreateTagsRequest {
 	return ApiCreateTagsRequest{
@@ -401,7 +402,8 @@ func (a *EntityV1ApiService) CreateTags(ctx _context.Context) ApiCreateTagsReque
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *EntityV1ApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -441,7 +443,7 @@ func (a *EntityV1ApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tag
+	localVarPostBody = r.array
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -547,11 +549,11 @@ DeleteBusinessMetadata Delete a Business Metadata for an Entity
 
 Delete a business metadata on an entity.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @param bmName The name of the business metadata
- @return ApiDeleteBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@param bmName The name of the business metadata
+	@return ApiDeleteBusinessMetadataRequest
 */
 func (a *EntityV1ApiService) DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) ApiDeleteBusinessMetadataRequest {
 	return ApiDeleteBusinessMetadataRequest{
@@ -690,11 +692,11 @@ DeleteTag Delete a Tag for an Entity
 
 Delete a tag for an entity.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @param tagName The name of the tag
- @return ApiDeleteTagRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@param tagName The name of the tag
+	@return ApiDeleteTagRequest
 */
 func (a *EntityV1ApiService) DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) ApiDeleteTagRequest {
 	return ApiDeleteTagRequest{
@@ -833,10 +835,10 @@ GetBusinessMetadata Read Business Metadata for an Entity
 Gets the list of business metadata for a given entity represented
 by a qualified name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetBusinessMetadataRequest
 */
 func (a *EntityV1ApiService) GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ApiGetBusinessMetadataRequest {
 	return ApiGetBusinessMetadataRequest{
@@ -848,7 +850,8 @@ func (a *EntityV1ApiService) GetBusinessMetadata(ctx _context.Context, typeName 
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *EntityV1ApiService) GetBusinessMetadataExecute(r ApiGetBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1007,10 +1010,10 @@ GetByUniqueAttributes Read an Entity
 
 Fetch complete definition of an entity given its type and unique attribute.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetByUniqueAttributesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetByUniqueAttributesRequest
 */
 func (a *EntityV1ApiService) GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) ApiGetByUniqueAttributesRequest {
 	return ApiGetByUniqueAttributesRequest{
@@ -1022,7 +1025,8 @@ func (a *EntityV1ApiService) GetByUniqueAttributes(ctx _context.Context, typeNam
 }
 
 // Execute executes the request
-//  @return EntityWithExtInfo
+//
+//	@return EntityWithExtInfo
 func (a *EntityV1ApiService) GetByUniqueAttributesExecute(r ApiGetByUniqueAttributesRequest) (EntityWithExtInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1173,10 +1177,10 @@ GetTags Read Tags for an Entity
 
 Gets the list of tags for a given entity represented by a qualified name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetTagsRequest
 */
 func (a *EntityV1ApiService) GetTags(ctx _context.Context, typeName string, qualifiedName string) ApiGetTagsRequest {
 	return ApiGetTagsRequest{
@@ -1188,7 +1192,8 @@ func (a *EntityV1ApiService) GetTags(ctx _context.Context, typeName string, qual
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *EntityV1ApiService) GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1338,8 +1343,8 @@ PartialEntityUpdate Update an Entity Attribute
 
 Partially update an entity attribute.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPartialEntityUpdateRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPartialEntityUpdateRequest
 */
 func (a *EntityV1ApiService) PartialEntityUpdate(ctx _context.Context) ApiPartialEntityUpdateRequest {
 	return ApiPartialEntityUpdateRequest{
@@ -1349,7 +1354,8 @@ func (a *EntityV1ApiService) PartialEntityUpdate(ctx _context.Context) ApiPartia
 }
 
 // Execute executes the request
-//  @return EntityPartialUpdateResponse
+//
+//	@return EntityPartialUpdateResponse
 func (a *EntityV1ApiService) PartialEntityUpdateExecute(r ApiPartialEntityUpdateRequest) (EntityPartialUpdateResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1477,14 +1483,14 @@ func (a *EntityV1ApiService) PartialEntityUpdateExecute(r ApiPartialEntityUpdate
 }
 
 type ApiUpdateBusinessMetadataRequest struct {
-	ctx              _context.Context
-	ApiService       EntityV1Api
-	businessMetadata *[]BusinessMetadata
+	ctx        _context.Context
+	ApiService EntityV1Api
+	array      *Array
 }
 
 // The business metadata
-func (r ApiUpdateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiUpdateBusinessMetadataRequest {
-	r.businessMetadata = &businessMetadata
+func (r ApiUpdateBusinessMetadataRequest) Array(array Array) ApiUpdateBusinessMetadataRequest {
+	r.array = &array
 	return r
 }
 
@@ -1499,8 +1505,8 @@ UpdateBusinessMetadata Bulk Update Business Metadata
 
 Bulk API to update multiple business metadata.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateBusinessMetadataRequest
 */
 func (a *EntityV1ApiService) UpdateBusinessMetadata(ctx _context.Context) ApiUpdateBusinessMetadataRequest {
 	return ApiUpdateBusinessMetadataRequest{
@@ -1510,7 +1516,8 @@ func (a *EntityV1ApiService) UpdateBusinessMetadata(ctx _context.Context) ApiUpd
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1550,7 +1557,7 @@ func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.businessMetadata
+	localVarPostBody = r.array
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1630,12 +1637,12 @@ func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMe
 type ApiUpdateTagsRequest struct {
 	ctx        _context.Context
 	ApiService EntityV1Api
-	tag        *[]Tag
+	array      *Array
 }
 
 // The tags
-func (r ApiUpdateTagsRequest) Tag(tag []Tag) ApiUpdateTagsRequest {
-	r.tag = &tag
+func (r ApiUpdateTagsRequest) Array(array Array) ApiUpdateTagsRequest {
+	r.array = &array
 	return r
 }
 
@@ -1650,8 +1657,8 @@ UpdateTags Bulk Update Tags
 
 Bulk API to update multiple tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTagsRequest
 */
 func (a *EntityV1ApiService) UpdateTags(ctx _context.Context) ApiUpdateTagsRequest {
 	return ApiUpdateTagsRequest{
@@ -1661,7 +1668,8 @@ func (a *EntityV1ApiService) UpdateTags(ctx _context.Context) ApiUpdateTagsReque
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *EntityV1ApiService) UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1701,7 +1709,7 @@ func (a *EntityV1ApiService) UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tag
+	localVarPostBody = r.array
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
