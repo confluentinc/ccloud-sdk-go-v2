@@ -230,8 +230,8 @@ CreateBusinessMetadataDefs Bulk Create Business Metadata Definitions
 
 Bulk create API for business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBusinessMetadataDefsRequest
 */
 func (a *TypesV1ApiService) CreateBusinessMetadataDefs(ctx _context.Context) ApiCreateBusinessMetadataDefsRequest {
 	return ApiCreateBusinessMetadataDefsRequest{
@@ -241,7 +241,8 @@ func (a *TypesV1ApiService) CreateBusinessMetadataDefs(ctx _context.Context) Api
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *TypesV1ApiService) CreateBusinessMetadataDefsExecute(r ApiCreateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -381,8 +382,8 @@ CreateTagDefs Bulk Create Tag Definitions
 
 Bulk create API for tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTagDefsRequest
 */
 func (a *TypesV1ApiService) CreateTagDefs(ctx _context.Context) ApiCreateTagDefsRequest {
 	return ApiCreateTagDefsRequest{
@@ -392,7 +393,8 @@ func (a *TypesV1ApiService) CreateTagDefs(ctx _context.Context) ApiCreateTagDefs
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *TypesV1ApiService) CreateTagDefsExecute(r ApiCreateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -536,9 +538,9 @@ DeleteBusinessMetadataDef Delete Business Metadata Definition
 
 Delete API for business metadata definition identified by its name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param bmName The name of the business metadata definition
- @return ApiDeleteBusinessMetadataDefRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param bmName The name of the business metadata definition
+	@return ApiDeleteBusinessMetadataDefRequest
 */
 func (a *TypesV1ApiService) DeleteBusinessMetadataDef(ctx _context.Context, bmName string) ApiDeleteBusinessMetadataDefRequest {
 	return ApiDeleteBusinessMetadataDefRequest{
@@ -671,9 +673,9 @@ DeleteTagDef Delete Tag Definition
 
 Delete API for tag definition identified by its name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tagName The name of the tag definition
- @return ApiDeleteTagDefRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param tagName The name of the tag definition
+	@return ApiDeleteTagDefRequest
 */
 func (a *TypesV1ApiService) DeleteTagDef(ctx _context.Context, tagName string) ApiDeleteTagDefRequest {
 	return ApiDeleteTagDefRequest{
@@ -812,8 +814,8 @@ GetAllBusinessMetadataDefs Bulk Read Business Metadata Definitions
 
 Bulk retrieval API for retrieving business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAllBusinessMetadataDefsRequest
 */
 func (a *TypesV1ApiService) GetAllBusinessMetadataDefs(ctx _context.Context) ApiGetAllBusinessMetadataDefsRequest {
 	return ApiGetAllBusinessMetadataDefsRequest{
@@ -823,7 +825,8 @@ func (a *TypesV1ApiService) GetAllBusinessMetadataDefs(ctx _context.Context) Api
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *TypesV1ApiService) GetAllBusinessMetadataDefsExecute(r ApiGetAllBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -964,8 +967,8 @@ GetAllTagDefs Bulk Read Tag Definitions
 
 Bulk retrieval API for retrieving tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAllTagDefsRequest
 */
 func (a *TypesV1ApiService) GetAllTagDefs(ctx _context.Context) ApiGetAllTagDefsRequest {
 	return ApiGetAllTagDefsRequest{
@@ -975,7 +978,8 @@ func (a *TypesV1ApiService) GetAllTagDefs(ctx _context.Context) ApiGetAllTagDefs
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *TypesV1ApiService) GetAllTagDefsExecute(r ApiGetAllTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1110,9 +1114,9 @@ GetBusinessMetadataDefByName Read Business Metadata Definition
 
 Get the business metadata definition with the given name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param bmName The name of the business metadata definition
- @return ApiGetBusinessMetadataDefByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param bmName The name of the business metadata definition
+	@return ApiGetBusinessMetadataDefByNameRequest
 */
 func (a *TypesV1ApiService) GetBusinessMetadataDefByName(ctx _context.Context, bmName string) ApiGetBusinessMetadataDefByNameRequest {
 	return ApiGetBusinessMetadataDefByNameRequest{
@@ -1123,7 +1127,8 @@ func (a *TypesV1ApiService) GetBusinessMetadataDefByName(ctx _context.Context, b
 }
 
 // Execute executes the request
-//  @return BusinessMetadataDef
+//
+//	@return BusinessMetadataDef
 func (a *TypesV1ApiService) GetBusinessMetadataDefByNameExecute(r ApiGetBusinessMetadataDefByNameRequest) (BusinessMetadataDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1266,9 +1271,9 @@ GetTagDefByName Read Tag Definition
 
 Get the tag definition with the given name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tagName The name of the tag definiton
- @return ApiGetTagDefByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param tagName The name of the tag definiton
+	@return ApiGetTagDefByNameRequest
 */
 func (a *TypesV1ApiService) GetTagDefByName(ctx _context.Context, tagName string) ApiGetTagDefByNameRequest {
 	return ApiGetTagDefByNameRequest{
@@ -1279,7 +1284,8 @@ func (a *TypesV1ApiService) GetTagDefByName(ctx _context.Context, tagName string
 }
 
 // Execute executes the request
-//  @return TagDef
+//
+//	@return TagDef
 func (a *TypesV1ApiService) GetTagDefByNameExecute(r ApiGetTagDefByNameRequest) (TagDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1428,8 +1434,8 @@ UpdateBusinessMetadataDefs Bulk Update Business Metadata Definitions
 
 Bulk update API for business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateBusinessMetadataDefsRequest
 */
 func (a *TypesV1ApiService) UpdateBusinessMetadataDefs(ctx _context.Context) ApiUpdateBusinessMetadataDefsRequest {
 	return ApiUpdateBusinessMetadataDefsRequest{
@@ -1439,7 +1445,8 @@ func (a *TypesV1ApiService) UpdateBusinessMetadataDefs(ctx _context.Context) Api
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *TypesV1ApiService) UpdateBusinessMetadataDefsExecute(r ApiUpdateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1579,8 +1586,8 @@ UpdateTagDefs Bulk Update Tag Definitions
 
 Bulk update API for tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTagDefsRequest
 */
 func (a *TypesV1ApiService) UpdateTagDefs(ctx _context.Context) ApiUpdateTagDefsRequest {
 	return ApiUpdateTagDefsRequest{
@@ -1590,7 +1597,8 @@ func (a *TypesV1ApiService) UpdateTagDefs(ctx _context.Context) ApiUpdateTagDefs
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *TypesV1ApiService) UpdateTagDefsExecute(r ApiUpdateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut

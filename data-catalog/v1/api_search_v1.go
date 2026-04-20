@@ -140,7 +140,7 @@ func (r ApiSearchUsingAttributeRequest) Deleted(deleted bool) ApiSearchUsingAttr
 	return r
 }
 
-// Limit the result set to only include the specified number of entries
+// Limit the result set to only include the specified number of entries (maximum 500)
 func (r ApiSearchUsingAttributeRequest) Limit(limit int32) ApiSearchUsingAttributeRequest {
 	r.limit = &limit
 	return r
@@ -163,8 +163,8 @@ SearchUsingAttribute Search by Attribute
 
 Retrieve data for the specified attribute search query.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchUsingAttributeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchUsingAttributeRequest
 */
 func (a *SearchV1ApiService) SearchUsingAttribute(ctx _context.Context) ApiSearchUsingAttributeRequest {
 	return ApiSearchUsingAttributeRequest{
@@ -174,7 +174,8 @@ func (a *SearchV1ApiService) SearchUsingAttribute(ctx _context.Context) ApiSearc
 }
 
 // Execute executes the request
-//  @return SearchResult
+//
+//	@return SearchResult
 func (a *SearchV1ApiService) SearchUsingAttributeExecute(r ApiSearchUsingAttributeRequest) (SearchResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -397,7 +398,7 @@ func (r ApiSearchUsingBasicRequest) Deleted(deleted bool) ApiSearchUsingBasicReq
 	return r
 }
 
-// Limit the result set to only include the specified number of entries
+// Limit the result set to only include the specified number of entries (maximum 500)
 func (r ApiSearchUsingBasicRequest) Limit(limit int32) ApiSearchUsingBasicRequest {
 	r.limit = &limit
 	return r
@@ -420,8 +421,8 @@ SearchUsingBasic Search by Fulltext Query
 
 Retrieve data for the specified fulltext query.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchUsingBasicRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchUsingBasicRequest
 */
 func (a *SearchV1ApiService) SearchUsingBasic(ctx _context.Context) ApiSearchUsingBasicRequest {
 	return ApiSearchUsingBasicRequest{
@@ -431,7 +432,8 @@ func (a *SearchV1ApiService) SearchUsingBasic(ctx _context.Context) ApiSearchUsi
 }
 
 // Execute executes the request
-//  @return SearchResult
+//
+//	@return SearchResult
 func (a *SearchV1ApiService) SearchUsingBasicExecute(r ApiSearchUsingBasicRequest) (SearchResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
