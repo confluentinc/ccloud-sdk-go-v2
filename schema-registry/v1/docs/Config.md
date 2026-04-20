@@ -5,8 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Alias** | Pointer to **string** | If alias is specified, then this subject is an alias for the subject named by the alias. That means that any reference to this subject will be replaced by the alias. | [optional] 
+**AliasForDeks** | Pointer to **string** | If aliasForDeks is specified, then this subject is an alias for the  subject named by the alias when accessing DEKs. That means that any  reference to this subject will be replaced by the alias when accessing DEKs. | [optional] 
 **Normalize** | Pointer to **bool** | If true, then schemas are automatically normalized when registered or when passed during lookups. This means that clients do not have to pass the \&quot;normalize\&quot; query parameter to have normalization occur. | [optional] 
+**ValidateFields** | Pointer to **bool** | If true, then additional validation will be performed for fields. | [optional] 
+**ValidateNewSchemas** | Pointer to **bool** | If true, then additional validation will be performed for new schemas. | [optional] 
+**ValidateRules** | Pointer to **bool** | If true, then additional validation will be performed for rules. | [optional] 
 **CompatibilityLevel** | Pointer to **string** | Compatibility Level | [optional] 
+**CompatibilityPolicy** | Pointer to **string** | Compatibility policy | [optional] 
 **CompatibilityGroup** | Pointer to **string** | Only schemas that belong to the same compatibility group will be checked for compatibility. | [optional] 
 **DefaultMetadata** | Pointer to [**ConfigDefaultMetadata**](ConfigDefaultMetadata.md) |  | [optional] 
 **OverrideMetadata** | Pointer to [**ConfigOverrideMetadata**](ConfigOverrideMetadata.md) |  | [optional] 
@@ -57,6 +62,31 @@ SetAlias sets Alias field to given value.
 
 HasAlias returns a boolean if a field has been set.
 
+### GetAliasForDeks
+
+`func (o *Config) GetAliasForDeks() string`
+
+GetAliasForDeks returns the AliasForDeks field if non-nil, zero value otherwise.
+
+### GetAliasForDeksOk
+
+`func (o *Config) GetAliasForDeksOk() (*string, bool)`
+
+GetAliasForDeksOk returns a tuple with the AliasForDeks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAliasForDeks
+
+`func (o *Config) SetAliasForDeks(v string)`
+
+SetAliasForDeks sets AliasForDeks field to given value.
+
+### HasAliasForDeks
+
+`func (o *Config) HasAliasForDeks() bool`
+
+HasAliasForDeks returns a boolean if a field has been set.
+
 ### GetNormalize
 
 `func (o *Config) GetNormalize() bool`
@@ -82,6 +112,81 @@ SetNormalize sets Normalize field to given value.
 
 HasNormalize returns a boolean if a field has been set.
 
+### GetValidateFields
+
+`func (o *Config) GetValidateFields() bool`
+
+GetValidateFields returns the ValidateFields field if non-nil, zero value otherwise.
+
+### GetValidateFieldsOk
+
+`func (o *Config) GetValidateFieldsOk() (*bool, bool)`
+
+GetValidateFieldsOk returns a tuple with the ValidateFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateFields
+
+`func (o *Config) SetValidateFields(v bool)`
+
+SetValidateFields sets ValidateFields field to given value.
+
+### HasValidateFields
+
+`func (o *Config) HasValidateFields() bool`
+
+HasValidateFields returns a boolean if a field has been set.
+
+### GetValidateNewSchemas
+
+`func (o *Config) GetValidateNewSchemas() bool`
+
+GetValidateNewSchemas returns the ValidateNewSchemas field if non-nil, zero value otherwise.
+
+### GetValidateNewSchemasOk
+
+`func (o *Config) GetValidateNewSchemasOk() (*bool, bool)`
+
+GetValidateNewSchemasOk returns a tuple with the ValidateNewSchemas field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateNewSchemas
+
+`func (o *Config) SetValidateNewSchemas(v bool)`
+
+SetValidateNewSchemas sets ValidateNewSchemas field to given value.
+
+### HasValidateNewSchemas
+
+`func (o *Config) HasValidateNewSchemas() bool`
+
+HasValidateNewSchemas returns a boolean if a field has been set.
+
+### GetValidateRules
+
+`func (o *Config) GetValidateRules() bool`
+
+GetValidateRules returns the ValidateRules field if non-nil, zero value otherwise.
+
+### GetValidateRulesOk
+
+`func (o *Config) GetValidateRulesOk() (*bool, bool)`
+
+GetValidateRulesOk returns a tuple with the ValidateRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateRules
+
+`func (o *Config) SetValidateRules(v bool)`
+
+SetValidateRules sets ValidateRules field to given value.
+
+### HasValidateRules
+
+`func (o *Config) HasValidateRules() bool`
+
+HasValidateRules returns a boolean if a field has been set.
+
 ### GetCompatibilityLevel
 
 `func (o *Config) GetCompatibilityLevel() string`
@@ -106,6 +211,31 @@ SetCompatibilityLevel sets CompatibilityLevel field to given value.
 `func (o *Config) HasCompatibilityLevel() bool`
 
 HasCompatibilityLevel returns a boolean if a field has been set.
+
+### GetCompatibilityPolicy
+
+`func (o *Config) GetCompatibilityPolicy() string`
+
+GetCompatibilityPolicy returns the CompatibilityPolicy field if non-nil, zero value otherwise.
+
+### GetCompatibilityPolicyOk
+
+`func (o *Config) GetCompatibilityPolicyOk() (*string, bool)`
+
+GetCompatibilityPolicyOk returns a tuple with the CompatibilityPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompatibilityPolicy
+
+`func (o *Config) SetCompatibilityPolicy(v string)`
+
+SetCompatibilityPolicy sets CompatibilityPolicy field to given value.
+
+### HasCompatibilityPolicy
+
+`func (o *Config) HasCompatibilityPolicy() bool`
+
+HasCompatibilityPolicy returns a boolean if a field has been set.
 
 ### GetCompatibilityGroup
 

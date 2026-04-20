@@ -36,14 +36,22 @@ import (
 
 // Kek struct for Kek
 type Kek struct {
-	Name     *string            `json:"name,omitempty"`
-	KmsType  *string            `json:"kmsType,omitempty"`
-	KmsKeyId *string            `json:"kmsKeyId,omitempty"`
+	// Name of the kek
+	Name *string `json:"name,omitempty"`
+	// KMS type of the kek
+	KmsType *string `json:"kmsType,omitempty"`
+	// KMS key ID of the kek
+	KmsKeyId *string `json:"kmsKeyId,omitempty"`
+	// Properties of the kek
 	KmsProps *map[string]string `json:"kmsProps,omitempty"`
-	Doc      *string            `json:"doc,omitempty"`
-	Shared   *bool              `json:"shared,omitempty"`
-	Ts       *int64             `json:"ts,omitempty"`
-	Deleted  *bool              `json:"deleted,omitempty"`
+	// Description of the kek
+	Doc *string `json:"doc,omitempty"`
+	// Whether the kek is shared
+	Shared *bool `json:"shared,omitempty"`
+	// Timestamp of the kek
+	Ts *int64 `json:"ts,omitempty"`
+	// Whether the kek is deleted
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewKek instantiates a new Kek object

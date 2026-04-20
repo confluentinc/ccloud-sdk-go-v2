@@ -36,12 +36,20 @@ import (
 
 // CreateKekRequest struct for CreateKekRequest
 type CreateKekRequest struct {
-	Name     *string            `json:"name,omitempty"`
-	KmsType  *string            `json:"kmsType,omitempty"`
-	KmsKeyId *string            `json:"kmsKeyId,omitempty"`
+	// Name of the kek
+	Name *string `json:"name,omitempty"`
+	// KMS type of the kek
+	KmsType *string `json:"kmsType,omitempty"`
+	// KMS key ID of the kek
+	KmsKeyId *string `json:"kmsKeyId,omitempty"`
+	// Properties of the kek
 	KmsProps *map[string]string `json:"kmsProps,omitempty"`
-	Doc      *string            `json:"doc,omitempty"`
-	Shared   *bool              `json:"shared,omitempty"`
+	// Description of the kek
+	Doc *string `json:"doc,omitempty"`
+	// Whether the kek is shared
+	Shared *bool `json:"shared,omitempty"`
+	// Whether the kek is deleted
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewCreateKekRequest instantiates a new CreateKekRequest object
@@ -253,6 +261,38 @@ func (o *CreateKekRequest) SetShared(v bool) {
 	o.Shared = &v
 }
 
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *CreateKekRequest) GetDeleted() bool {
+	if o == nil || o.Deleted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateKekRequest) GetDeletedOk() (*bool, bool) {
+	if o == nil || o.Deleted == nil {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *CreateKekRequest) HasDeleted() bool {
+	if o != nil && o.Deleted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *CreateKekRequest) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateKekRequest) Redact() {
 	o.recurseRedact(o.Name)
@@ -261,6 +301,7 @@ func (o *CreateKekRequest) Redact() {
 	o.recurseRedact(o.KmsProps)
 	o.recurseRedact(o.Doc)
 	o.recurseRedact(o.Shared)
+	o.recurseRedact(o.Deleted)
 }
 
 func (o *CreateKekRequest) recurseRedact(v interface{}) {
@@ -312,6 +353,9 @@ func (o CreateKekRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Shared != nil {
 		toSerialize["shared"] = o.Shared
+	}
+	if o.Deleted != nil {
+		toSerialize["deleted"] = o.Deleted
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

@@ -139,7 +139,6 @@ type ApiGetSchemaRequest struct {
 	id         int32
 	subject    *string
 	format     *string
-	fetchMaxId *bool
 }
 
 // Name of the subject
@@ -148,15 +147,9 @@ func (r ApiGetSchemaRequest) Subject(subject string) ApiGetSchemaRequest {
 	return r
 }
 
-// Desired output format, dependent on schema type
+// Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.)
 func (r ApiGetSchemaRequest) Format(format string) ApiGetSchemaRequest {
 	r.format = &format
-	return r
-}
-
-// Whether to fetch the maximum schema identifier that exists
-func (r ApiGetSchemaRequest) FetchMaxId(fetchMaxId bool) ApiGetSchemaRequest {
-	r.fetchMaxId = &fetchMaxId
 	return r
 }
 
@@ -169,9 +162,9 @@ GetSchema Get schema string by ID
 
 Retrieves the schema string identified by the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetSchemaRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetSchemaRequest
 */
 func (a *SchemasV1ApiService) GetSchema(ctx _context.Context, id int32) ApiGetSchemaRequest {
 	return ApiGetSchemaRequest{
@@ -182,7 +175,8 @@ func (a *SchemasV1ApiService) GetSchema(ctx _context.Context, id int32) ApiGetSc
 }
 
 // Execute executes the request
-//  @return SchemaString
+//
+//	@return SchemaString
 func (a *SchemasV1ApiService) GetSchemaExecute(r ApiGetSchemaRequest) (SchemaString, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -210,9 +204,6 @@ func (a *SchemasV1ApiService) GetSchemaExecute(r ApiGetSchemaRequest) (SchemaStr
 	}
 	if r.format != nil {
 		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
-	}
-	if r.fetchMaxId != nil {
-		localVarQueryParams.Add("fetchMaxId", parameterToString(*r.fetchMaxId, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -332,7 +323,7 @@ func (r ApiGetSchemaOnlyRequest) Subject(subject string) ApiGetSchemaOnlyRequest
 	return r
 }
 
-// Desired output format, dependent on schema type
+// Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.)
 func (r ApiGetSchemaOnlyRequest) Format(format string) ApiGetSchemaOnlyRequest {
 	r.format = &format
 	return r
@@ -347,9 +338,9 @@ GetSchemaOnly Get schema by ID
 
 Retrieves the schema identified by the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetSchemaOnlyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetSchemaOnlyRequest
 */
 func (a *SchemasV1ApiService) GetSchemaOnly(ctx _context.Context, id int32) ApiGetSchemaOnlyRequest {
 	return ApiGetSchemaOnlyRequest{
@@ -360,7 +351,8 @@ func (a *SchemasV1ApiService) GetSchemaOnly(ctx _context.Context, id int32) ApiG
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *SchemasV1ApiService) GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -507,8 +499,8 @@ GetSchemaTypes List supported schema types
 
 Retrieve the schema types supported by this registry.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchemaTypesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchemaTypesRequest
 */
 func (a *SchemasV1ApiService) GetSchemaTypes(ctx _context.Context) ApiGetSchemaTypesRequest {
 	return ApiGetSchemaTypesRequest{
@@ -518,7 +510,8 @@ func (a *SchemasV1ApiService) GetSchemaTypes(ctx _context.Context) ApiGetSchemaT
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *SchemasV1ApiService) GetSchemaTypesExecute(r ApiGetSchemaTypesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -638,8 +631,10 @@ type ApiGetSchemasRequest struct {
 	ctx           _context.Context
 	ApiService    SchemasV1Api
 	subjectPrefix *string
+	aliases       *bool
 	deleted       *bool
 	latestOnly    *bool
+	ruleType      *string
 	offset        *int32
 	limit         *int32
 }
@@ -647,6 +642,12 @@ type ApiGetSchemasRequest struct {
 // Filters results by the respective subject prefix
 func (r ApiGetSchemasRequest) SubjectPrefix(subjectPrefix string) ApiGetSchemasRequest {
 	r.subjectPrefix = &subjectPrefix
+	return r
+}
+
+// Whether to include aliases in the search
+func (r ApiGetSchemasRequest) Aliases(aliases bool) ApiGetSchemasRequest {
+	r.aliases = &aliases
 	return r
 }
 
@@ -659,6 +660,12 @@ func (r ApiGetSchemasRequest) Deleted(deleted bool) ApiGetSchemasRequest {
 // Whether to return latest schema versions only for each matching subject
 func (r ApiGetSchemasRequest) LatestOnly(latestOnly bool) ApiGetSchemasRequest {
 	r.latestOnly = &latestOnly
+	return r
+}
+
+// Filters results by the given rule type
+func (r ApiGetSchemasRequest) RuleType(ruleType string) ApiGetSchemasRequest {
+	r.ruleType = &ruleType
 	return r
 }
 
@@ -683,8 +690,8 @@ GetSchemas List schemas
 
 Get the schemas matching the specified parameters.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchemasRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchemasRequest
 */
 func (a *SchemasV1ApiService) GetSchemas(ctx _context.Context) ApiGetSchemasRequest {
 	return ApiGetSchemasRequest{
@@ -694,7 +701,8 @@ func (a *SchemasV1ApiService) GetSchemas(ctx _context.Context) ApiGetSchemasRequ
 }
 
 // Execute executes the request
-//  @return []Schema
+//
+//	@return []Schema
 func (a *SchemasV1ApiService) GetSchemasExecute(r ApiGetSchemasRequest) ([]Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -719,11 +727,17 @@ func (a *SchemasV1ApiService) GetSchemasExecute(r ApiGetSchemasRequest) ([]Schem
 	if r.subjectPrefix != nil {
 		localVarQueryParams.Add("subjectPrefix", parameterToString(*r.subjectPrefix, ""))
 	}
+	if r.aliases != nil {
+		localVarQueryParams.Add("aliases", parameterToString(*r.aliases, ""))
+	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
 	if r.latestOnly != nil {
 		localVarQueryParams.Add("latestOnly", parameterToString(*r.latestOnly, ""))
+	}
+	if r.ruleType != nil {
+		localVarQueryParams.Add("ruleType", parameterToString(*r.ruleType, ""))
 	}
 	if r.offset != nil {
 		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
@@ -830,7 +844,10 @@ type ApiGetSubjectsRequest struct {
 	ApiService SchemasV1Api
 	id         int32
 	subject    *string
+	format     *string
 	deleted    *bool
+	offset     *int32
+	limit      *int32
 }
 
 // Filters results by the respective subject
@@ -839,9 +856,27 @@ func (r ApiGetSubjectsRequest) Subject(subject string) ApiGetSubjectsRequest {
 	return r
 }
 
+// Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.)
+func (r ApiGetSubjectsRequest) Format(format string) ApiGetSubjectsRequest {
+	r.format = &format
+	return r
+}
+
 // Whether to include subjects where the schema was deleted
 func (r ApiGetSubjectsRequest) Deleted(deleted bool) ApiGetSubjectsRequest {
 	r.deleted = &deleted
+	return r
+}
+
+// Pagination offset for results
+func (r ApiGetSubjectsRequest) Offset(offset int32) ApiGetSubjectsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Pagination size for results. Ignored if negative
+func (r ApiGetSubjectsRequest) Limit(limit int32) ApiGetSubjectsRequest {
+	r.limit = &limit
 	return r
 }
 
@@ -854,9 +889,9 @@ GetSubjects List subjects associated to schema ID
 
 Retrieves all the subjects associated with a particular schema ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetSubjectsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetSubjectsRequest
 */
 func (a *SchemasV1ApiService) GetSubjects(ctx _context.Context, id int32) ApiGetSubjectsRequest {
 	return ApiGetSubjectsRequest{
@@ -867,7 +902,8 @@ func (a *SchemasV1ApiService) GetSubjects(ctx _context.Context, id int32) ApiGet
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *SchemasV1ApiService) GetSubjectsExecute(r ApiGetSubjectsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -893,8 +929,17 @@ func (a *SchemasV1ApiService) GetSubjectsExecute(r ApiGetSubjectsRequest) ([]str
 	if r.subject != nil {
 		localVarQueryParams.Add("subject", parameterToString(*r.subject, ""))
 	}
+	if r.format != nil {
+		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
+	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
+	}
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1006,6 +1051,8 @@ type ApiGetVersionsRequest struct {
 	id         int32
 	subject    *string
 	deleted    *bool
+	offset     *int32
+	limit      *int32
 }
 
 // Filters results by the respective subject
@@ -1020,6 +1067,18 @@ func (r ApiGetVersionsRequest) Deleted(deleted bool) ApiGetVersionsRequest {
 	return r
 }
 
+// Pagination offset for results
+func (r ApiGetVersionsRequest) Offset(offset int32) ApiGetVersionsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Pagination size for results. Ignored if negative
+func (r ApiGetVersionsRequest) Limit(limit int32) ApiGetVersionsRequest {
+	r.limit = &limit
+	return r
+}
+
 func (r ApiGetVersionsRequest) Execute() ([]SubjectVersion, *_nethttp.Response, error) {
 	return r.ApiService.GetVersionsExecute(r)
 }
@@ -1029,9 +1088,9 @@ GetVersions List subject-versions associated to schema ID
 
 Get all the subject-version pairs associated with the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetVersionsRequest
 */
 func (a *SchemasV1ApiService) GetVersions(ctx _context.Context, id int32) ApiGetVersionsRequest {
 	return ApiGetVersionsRequest{
@@ -1042,7 +1101,8 @@ func (a *SchemasV1ApiService) GetVersions(ctx _context.Context, id int32) ApiGet
 }
 
 // Execute executes the request
-//  @return []SubjectVersion
+//
+//	@return []SubjectVersion
 func (a *SchemasV1ApiService) GetVersionsExecute(r ApiGetVersionsRequest) ([]SubjectVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -1070,6 +1130,12 @@ func (a *SchemasV1ApiService) GetVersionsExecute(r ApiGetVersionsRequest) ([]Sub
 	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
+	}
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

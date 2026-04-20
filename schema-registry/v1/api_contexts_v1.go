@@ -61,6 +61,20 @@ type ContextsV1ApiService service
 type ApiListContextsRequest struct {
 	ctx        _context.Context
 	ApiService ContextsV1Api
+	offset     *int32
+	limit      *int32
+}
+
+// Pagination offset for results
+func (r ApiListContextsRequest) Offset(offset int32) ApiListContextsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Pagination size for results. Ignored if negative
+func (r ApiListContextsRequest) Limit(limit int32) ApiListContextsRequest {
+	r.limit = &limit
+	return r
 }
 
 func (r ApiListContextsRequest) Execute() ([]string, *_nethttp.Response, error) {
@@ -72,8 +86,8 @@ ListContexts List contexts
 
 Retrieves a list of contexts.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListContextsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListContextsRequest
 */
 func (a *ContextsV1ApiService) ListContexts(ctx _context.Context) ApiListContextsRequest {
 	return ApiListContextsRequest{
@@ -83,7 +97,8 @@ func (a *ContextsV1ApiService) ListContexts(ctx _context.Context) ApiListContext
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *ContextsV1ApiService) ListContextsExecute(r ApiListContextsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -105,6 +120,12 @@ func (a *ContextsV1ApiService) ListContextsExecute(r ApiListContextsRequest) ([]
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

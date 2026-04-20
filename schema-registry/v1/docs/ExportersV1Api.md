@@ -4,17 +4,17 @@ All URIs are relative to *https://psrc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteExporter**](ExportersV1Api.md#DeleteExporter) | **Delete** /exporters/{name} | Delete schema exporter by name.
-[**GetExporterConfigByName**](ExportersV1Api.md#GetExporterConfigByName) | **Get** /exporters/{name}/config | Gets schema exporter config by name.
-[**GetExporterInfoByName**](ExportersV1Api.md#GetExporterInfoByName) | **Get** /exporters/{name} | Gets schema exporter by name.
-[**GetExporterStatusByName**](ExportersV1Api.md#GetExporterStatusByName) | **Get** /exporters/{name}/status | Gets schema exporter status by name.
-[**ListExporters**](ExportersV1Api.md#ListExporters) | **Get** /exporters | Gets all schema exporters.
-[**PauseExporterByName**](ExportersV1Api.md#PauseExporterByName) | **Put** /exporters/{name}/pause | Pause schema exporter by name.
-[**RegisterExporter**](ExportersV1Api.md#RegisterExporter) | **Post** /exporters | Creates a new schema exporter.
-[**ResetExporterByName**](ExportersV1Api.md#ResetExporterByName) | **Put** /exporters/{name}/reset | Reset schema exporter by name.
-[**ResumeExporterByName**](ExportersV1Api.md#ResumeExporterByName) | **Put** /exporters/{name}/resume | Resume schema exporter by name.
-[**UpdateExporterConfigByName**](ExportersV1Api.md#UpdateExporterConfigByName) | **Put** /exporters/{name}/config | Update schema exporter config by name.
-[**UpdateExporterInfo**](ExportersV1Api.md#UpdateExporterInfo) | **Put** /exporters/{name} | Update schema exporter by name.
+[**DeleteExporter**](ExportersV1Api.md#DeleteExporter) | **Delete** /exporters/{name} | Delete schema exporter by name
+[**GetExporterConfigByName**](ExportersV1Api.md#GetExporterConfigByName) | **Get** /exporters/{name}/config | Gets schema exporter config by name
+[**GetExporterInfoByName**](ExportersV1Api.md#GetExporterInfoByName) | **Get** /exporters/{name} | Gets schema exporter by name
+[**GetExporterStatusByName**](ExportersV1Api.md#GetExporterStatusByName) | **Get** /exporters/{name}/status | Gets schema exporter status by name
+[**ListExporters**](ExportersV1Api.md#ListExporters) | **Get** /exporters | Gets all schema exporters
+[**PauseExporterByName**](ExportersV1Api.md#PauseExporterByName) | **Put** /exporters/{name}/pause | Pause schema exporter by name
+[**RegisterExporter**](ExportersV1Api.md#RegisterExporter) | **Post** /exporters | Creates a new schema exporter
+[**ResetExporterByName**](ExportersV1Api.md#ResetExporterByName) | **Put** /exporters/{name}/reset | Reset schema exporter by name
+[**ResumeExporterByName**](ExportersV1Api.md#ResumeExporterByName) | **Put** /exporters/{name}/resume | Resume schema exporter by name
+[**UpdateExporterConfigByName**](ExportersV1Api.md#UpdateExporterConfigByName) | **Put** /exporters/{name}/config | Update schema exporter config by name
+[**UpdateExporterInfo**](ExportersV1Api.md#UpdateExporterInfo) | **Put** /exporters/{name} | Update schema exporter by name
 
 
 
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 > DeleteExporter(ctx, name).Execute()
 
-Delete schema exporter by name.
+Delete schema exporter by name
 
 
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > ExporterConfigResponse GetExporterConfigByName(ctx, name).Execute()
 
-Gets schema exporter config by name.
+Gets schema exporter config by name
 
 
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 > ExporterReference GetExporterInfoByName(ctx, name).Execute()
 
-Gets schema exporter by name.
+Gets schema exporter by name
 
 
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 > ExporterStatusResponse GetExporterStatusByName(ctx, name).Execute()
 
-Gets schema exporter status by name.
+Gets schema exporter status by name
 
 
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 > []string ListExporters(ctx).Execute()
 
-Gets all schema exporters.
+Gets all schema exporters
 
 
 
@@ -361,7 +361,7 @@ Other parameters are passed through a pointer to a apiListExportersRequest struc
 
 > ExporterResponse PauseExporterByName(ctx, name).Execute()
 
-Pause schema exporter by name.
+Pause schema exporter by name
 
 
 
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 > ExporterResponse RegisterExporter(ctx).ExporterReference(exporterReference).Execute()
 
-Creates a new schema exporter.
+Creates a new schema exporter
 
 
 
@@ -497,7 +497,7 @@ Name | Type | Description  | Notes
 
 > ExporterResponse ResetExporterByName(ctx, name).Execute()
 
-Reset schema exporter by name.
+Reset schema exporter by name
 
 
 
@@ -567,7 +567,7 @@ Name | Type | Description  | Notes
 
 > ExporterResponse ResumeExporterByName(ctx, name).Execute()
 
-Resume schema exporter by name.
+Resume schema exporter by name
 
 
 
@@ -637,7 +637,7 @@ Name | Type | Description  | Notes
 
 > ExporterResponse UpdateExporterConfigByName(ctx, name).ExporterConfigResponse(exporterConfigResponse).Execute()
 
-Update schema exporter config by name.
+Update schema exporter config by name
 
 
 
@@ -709,7 +709,7 @@ Name | Type | Description  | Notes
 
 > ExporterResponse UpdateExporterInfo(ctx, name).ExporterUpdateRequest(exporterUpdateRequest).Execute()
 
-Update schema exporter by name.
+Update schema exporter by name
 
 
 

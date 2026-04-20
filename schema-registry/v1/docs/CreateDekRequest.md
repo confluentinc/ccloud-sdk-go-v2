@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Subject** | Pointer to **string** |  | [optional] 
-**Version** | Pointer to **int32** |  | [optional] 
-**Algorithm** | Pointer to **string** |  | [optional] 
-**EncryptedKeyMaterial** | Pointer to **string** |  | [optional] 
+**Subject** | Pointer to **string** | Subject of the dek | [optional] 
+**Version** | Pointer to **int32** | Version of the dek | [optional] 
+**Algorithm** | Pointer to **string** | Algorithm of the dek | [optional] 
+**EncryptedKeyMaterial** | Pointer to **string** | Encrypted key material of the dek | [optional] 
+**Deleted** | Pointer to **bool** | Whether the dek is deleted | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetEncryptedKeyMaterial sets EncryptedKeyMaterial field to given value.
 `func (o *CreateDekRequest) HasEncryptedKeyMaterial() bool`
 
 HasEncryptedKeyMaterial returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *CreateDekRequest) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *CreateDekRequest) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *CreateDekRequest) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *CreateDekRequest) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

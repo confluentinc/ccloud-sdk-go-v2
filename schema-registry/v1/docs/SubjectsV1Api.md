@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteSchemaVersion**](SubjectsV1Api.md#DeleteSchemaVersion) | **Delete** /subjects/{subject}/versions/{version} | Delete schema version
 [**DeleteSubject**](SubjectsV1Api.md#DeleteSubject) | **Delete** /subjects/{subject} | Delete subject
+[**GetLatestWithMetadata**](SubjectsV1Api.md#GetLatestWithMetadata) | **Get** /subjects/{subject}/metadata | Retrieve the latest version with the given metadata.
 [**GetReferencedBy**](SubjectsV1Api.md#GetReferencedBy) | **Get** /subjects/{subject}/versions/{version}/referencedby | List schemas referencing a schema
 [**GetSchemaByVersion**](SubjectsV1Api.md#GetSchemaByVersion) | **Get** /subjects/{subject}/versions/{version} | Get schema by version
 [**GetSchemaOnly1**](SubjectsV1Api.md#GetSchemaOnly1) | **Get** /subjects/{subject}/versions/{version}/schema | Get schema string by version
@@ -163,9 +164,87 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetLatestWithMetadata
+
+> Schema GetLatestWithMetadata(ctx, subject).Key(key).Value(value).Format(format).Deleted(deleted).Execute()
+
+Retrieve the latest version with the given metadata.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    subject := "subject_example" // string | Subject under which the schema will be registered
+    key := "key_example" // string | The metadata key. Add \"?key=key\" at the end of the request to match a metadata key. This query parameter can appear multiple times. Each instance is matched with a corresponding value query parameter, in order. (optional)
+    value := "value_example" // string | The metadata value. Add \"?value=value\" at the end of the request to match a metadata value. This query parameter can appear multiple times. Each instance is matched with a corresponding key query parameter, in order. (optional)
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
+    deleted := true // bool | Whether to lookup deleted schemas (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SubjectsV1Api.GetLatestWithMetadata(context.Background(), subject).Key(key).Value(value).Format(format).Deleted(deleted).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.GetLatestWithMetadata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetLatestWithMetadata`: Schema
+    fmt.Fprintf(os.Stdout, "Response from `SubjectsV1Api.GetLatestWithMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**subject** | **string** | Subject under which the schema will be registered | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLatestWithMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **key** | **string** | The metadata key. Add \&quot;?key&#x3D;key\&quot; at the end of the request to match a metadata key. This query parameter can appear multiple times. Each instance is matched with a corresponding value query parameter, in order. | 
+ **value** | **string** | The metadata value. Add \&quot;?value&#x3D;value\&quot; at the end of the request to match a metadata value. This query parameter can appear multiple times. Each instance is matched with a corresponding key query parameter, in order. | 
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
+ **deleted** | **bool** | Whether to lookup deleted schemas | 
+
+### Return type
+
+[**Schema**](Schema.md)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetReferencedBy
 
-> []int32 GetReferencedBy(ctx, subject, version).Execute()
+> []int32 GetReferencedBy(ctx, subject, version).Offset(offset).Limit(limit).Execute()
 
 List schemas referencing a schema
 
@@ -186,10 +265,12 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the subject
     version := "version_example" // string | Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.GetReferencedBy(context.Background(), subject, version).Execute()
+    resp, r, err := api_client.SubjectsV1Api.GetReferencedBy(context.Background(), subject, version).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.GetReferencedBy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -217,6 +298,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -238,7 +321,7 @@ Name | Type | Description  | Notes
 
 ## GetSchemaByVersion
 
-> Schema GetSchemaByVersion(ctx, subject, version).Deleted(deleted).Execute()
+> Schema GetSchemaByVersion(ctx, subject, version).Format(format).Deleted(deleted).Execute()
 
 Get schema by version
 
@@ -259,11 +342,12 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the subject
     version := "version_example" // string | Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
     deleted := true // bool | Whether to include deleted schema (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.GetSchemaByVersion(context.Background(), subject, version).Deleted(deleted).Execute()
+    resp, r, err := api_client.SubjectsV1Api.GetSchemaByVersion(context.Background(), subject, version).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.GetSchemaByVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -291,6 +375,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
  **deleted** | **bool** | Whether to include deleted schema | 
 
 ### Return type
@@ -313,7 +398,7 @@ Name | Type | Description  | Notes
 
 ## GetSchemaOnly1
 
-> string GetSchemaOnly1(ctx, subject, version).Deleted(deleted).Execute()
+> string GetSchemaOnly1(ctx, subject, version).Format(format).Deleted(deleted).Execute()
 
 Get schema string by version
 
@@ -334,11 +419,12 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the subject
     version := "version_example" // string | Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    format := "format_example" // string | Desired output format, dependent on schema type (optional)
     deleted := true // bool | Whether to include deleted schema (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.GetSchemaOnly1(context.Background(), subject, version).Deleted(deleted).Execute()
+    resp, r, err := api_client.SubjectsV1Api.GetSchemaOnly1(context.Background(), subject, version).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.GetSchemaOnly1``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -366,6 +452,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **format** | **string** | Desired output format, dependent on schema type | 
  **deleted** | **bool** | Whether to include deleted schema | 
 
 ### Return type
@@ -388,7 +475,7 @@ Name | Type | Description  | Notes
 
 ## List
 
-> []string List(ctx).SubjectPrefix(subjectPrefix).Deleted(deleted).Execute()
+> []string List(ctx).SubjectPrefix(subjectPrefix).Deleted(deleted).DeletedOnly(deletedOnly).Offset(offset).Limit(limit).Execute()
 
 List subjects
 
@@ -409,10 +496,13 @@ import (
 func main() {
     subjectPrefix := "subjectPrefix_example" // string | Subject name prefix (optional) (default to ":*:")
     deleted := true // bool | Whether to look up deleted subjects (optional)
+    deletedOnly := true // bool | Whether to return deleted subjects only (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.List(context.Background()).SubjectPrefix(subjectPrefix).Deleted(deleted).Execute()
+    resp, r, err := api_client.SubjectsV1Api.List(context.Background()).SubjectPrefix(subjectPrefix).Deleted(deleted).DeletedOnly(deletedOnly).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.List``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,6 +525,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subjectPrefix** | **string** | Subject name prefix | [default to &quot;:*:&quot;]
  **deleted** | **bool** | Whether to look up deleted subjects | 
+ **deletedOnly** | **bool** | Whether to return deleted subjects only | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -456,7 +549,7 @@ Name | Type | Description  | Notes
 
 ## ListVersions
 
-> []int32 ListVersions(ctx, subject).Deleted(deleted).Execute()
+> []int32 ListVersions(ctx, subject).Deleted(deleted).DeletedOnly(deletedOnly).Offset(offset).Limit(limit).Execute()
 
 List versions under subject
 
@@ -477,10 +570,13 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the subject
     deleted := true // bool | Whether to include deleted schemas (optional)
+    deletedOnly := true // bool | Whether to return deleted schemas only (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.ListVersions(context.Background(), subject).Deleted(deleted).Execute()
+    resp, r, err := api_client.SubjectsV1Api.ListVersions(context.Background(), subject).Deleted(deleted).DeletedOnly(deletedOnly).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.ListVersions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -507,6 +603,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **deleted** | **bool** | Whether to include deleted schemas | 
+ **deletedOnly** | **bool** | Whether to return deleted schemas only | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -528,7 +627,7 @@ Name | Type | Description  | Notes
 
 ## LookUpSchemaUnderSubject
 
-> Schema LookUpSchemaUnderSubject(ctx, subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Deleted(deleted).Execute()
+> Schema LookUpSchemaUnderSubject(ctx, subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Format(format).Deleted(deleted).Execute()
 
 Lookup schema under subject
 
@@ -550,11 +649,12 @@ func main() {
     subject := "subject_example" // string | Subject under which the schema will be registered
     registerSchemaRequest := *openapiclient.NewRegisterSchemaRequest() // RegisterSchemaRequest | Schema
     normalize := true // bool | Whether to lookup the normalized schema (optional)
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
     deleted := true // bool | Whether to lookup deleted schemas (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.LookUpSchemaUnderSubject(context.Background(), subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Deleted(deleted).Execute()
+    resp, r, err := api_client.SubjectsV1Api.LookUpSchemaUnderSubject(context.Background(), subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.LookUpSchemaUnderSubject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -582,6 +682,7 @@ Name | Type | Description  | Notes
 
  **registerSchemaRequest** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md) | Schema | 
  **normalize** | **bool** | Whether to lookup the normalized schema | 
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
  **deleted** | **bool** | Whether to lookup deleted schemas | 
 
 ### Return type
@@ -604,7 +705,7 @@ Name | Type | Description  | Notes
 
 ## Register
 
-> RegisterSchemaResponse Register(ctx, subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Execute()
+> RegisterSchemaResponse Register(ctx, subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Format(format).Execute()
 
 Register schema under a subject
 
@@ -626,10 +727,11 @@ func main() {
     subject := "subject_example" // string | Name of the subject
     registerSchemaRequest := *openapiclient.NewRegisterSchemaRequest() // RegisterSchemaRequest | Schema
     normalize := true // bool | Whether to register the normalized schema (optional)
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SubjectsV1Api.Register(context.Background(), subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Execute()
+    resp, r, err := api_client.SubjectsV1Api.Register(context.Background(), subject).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Format(format).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SubjectsV1Api.Register``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -657,6 +759,7 @@ Name | Type | Description  | Notes
 
  **registerSchemaRequest** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md) | Schema | 
  **normalize** | **bool** | Whether to register the normalized schema | 
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
 
 ### Return type
 
