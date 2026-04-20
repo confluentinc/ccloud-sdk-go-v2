@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KmsProps** | Pointer to **map[string]string** |  | [optional] 
-**Doc** | Pointer to **string** |  | [optional] 
-**Shared** | Pointer to **bool** |  | [optional] 
+**KmsProps** | Pointer to **map[string]string** | Properties of the kek | [optional] 
+**Doc** | Pointer to **string** | Description of the kek | [optional] 
+**Shared** | Pointer to **bool** | Whether the kek is shared | [optional] 
 
 ## Methods
 

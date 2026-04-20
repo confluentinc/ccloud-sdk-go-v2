@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **Schema** | Pointer to **string** | Schema definition string | [optional] 
 **Metadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
 **RuleSet** | Pointer to [**NullableRuleSet**](RuleSet.md) |  | [optional] 
+**SchemaTagsToAdd** | Pointer to [**[]SchemaTags**](SchemaTags.md) |  | [optional] 
+**SchemaTagsToRemove** | Pointer to [**[]SchemaTags**](SchemaTags.md) |  | [optional] 
+**PropagateSchemaTags** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -226,6 +229,81 @@ HasRuleSet returns a boolean if a field has been set.
 `func (o *RegisterSchemaRequest) UnsetRuleSet()`
 
 UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
+### GetSchemaTagsToAdd
+
+`func (o *RegisterSchemaRequest) GetSchemaTagsToAdd() []SchemaTags`
+
+GetSchemaTagsToAdd returns the SchemaTagsToAdd field if non-nil, zero value otherwise.
+
+### GetSchemaTagsToAddOk
+
+`func (o *RegisterSchemaRequest) GetSchemaTagsToAddOk() (*[]SchemaTags, bool)`
+
+GetSchemaTagsToAddOk returns a tuple with the SchemaTagsToAdd field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaTagsToAdd
+
+`func (o *RegisterSchemaRequest) SetSchemaTagsToAdd(v []SchemaTags)`
+
+SetSchemaTagsToAdd sets SchemaTagsToAdd field to given value.
+
+### HasSchemaTagsToAdd
+
+`func (o *RegisterSchemaRequest) HasSchemaTagsToAdd() bool`
+
+HasSchemaTagsToAdd returns a boolean if a field has been set.
+
+### GetSchemaTagsToRemove
+
+`func (o *RegisterSchemaRequest) GetSchemaTagsToRemove() []SchemaTags`
+
+GetSchemaTagsToRemove returns the SchemaTagsToRemove field if non-nil, zero value otherwise.
+
+### GetSchemaTagsToRemoveOk
+
+`func (o *RegisterSchemaRequest) GetSchemaTagsToRemoveOk() (*[]SchemaTags, bool)`
+
+GetSchemaTagsToRemoveOk returns a tuple with the SchemaTagsToRemove field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaTagsToRemove
+
+`func (o *RegisterSchemaRequest) SetSchemaTagsToRemove(v []SchemaTags)`
+
+SetSchemaTagsToRemove sets SchemaTagsToRemove field to given value.
+
+### HasSchemaTagsToRemove
+
+`func (o *RegisterSchemaRequest) HasSchemaTagsToRemove() bool`
+
+HasSchemaTagsToRemove returns a boolean if a field has been set.
+
+### GetPropagateSchemaTags
+
+`func (o *RegisterSchemaRequest) GetPropagateSchemaTags() bool`
+
+GetPropagateSchemaTags returns the PropagateSchemaTags field if non-nil, zero value otherwise.
+
+### GetPropagateSchemaTagsOk
+
+`func (o *RegisterSchemaRequest) GetPropagateSchemaTagsOk() (*bool, bool)`
+
+GetPropagateSchemaTagsOk returns a tuple with the PropagateSchemaTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPropagateSchemaTags
+
+`func (o *RegisterSchemaRequest) SetPropagateSchemaTags(v bool)`
+
+SetPropagateSchemaTags sets PropagateSchemaTags field to given value.
+
+### HasPropagateSchemaTags
+
+`func (o *RegisterSchemaRequest) HasPropagateSchemaTags() bool`
+
+HasPropagateSchemaTags returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

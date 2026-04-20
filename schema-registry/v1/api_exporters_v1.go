@@ -42,7 +42,7 @@ var (
 type ExportersV1Api interface {
 
 	/*
-		DeleteExporter Delete schema exporter by name.
+		DeleteExporter Delete schema exporter by name
 
 		Deletes the schema exporter.
 
@@ -56,7 +56,7 @@ type ExportersV1Api interface {
 	DeleteExporterExecute(r ApiDeleteExporterRequest) (*_nethttp.Response, error)
 
 	/*
-		GetExporterConfigByName Gets schema exporter config by name.
+		GetExporterConfigByName Gets schema exporter config by name
 
 		Retrieves the config of the schema exporter.
 
@@ -71,7 +71,7 @@ type ExportersV1Api interface {
 	GetExporterConfigByNameExecute(r ApiGetExporterConfigByNameRequest) (ExporterConfigResponse, *_nethttp.Response, error)
 
 	/*
-		GetExporterInfoByName Gets schema exporter by name.
+		GetExporterInfoByName Gets schema exporter by name
 
 		Retrieves the information of the schema exporter.
 
@@ -86,7 +86,7 @@ type ExportersV1Api interface {
 	GetExporterInfoByNameExecute(r ApiGetExporterInfoByNameRequest) (ExporterReference, *_nethttp.Response, error)
 
 	/*
-		GetExporterStatusByName Gets schema exporter status by name.
+		GetExporterStatusByName Gets schema exporter status by name
 
 		Retrieves the status of the schema exporter.
 
@@ -101,7 +101,7 @@ type ExportersV1Api interface {
 	GetExporterStatusByNameExecute(r ApiGetExporterStatusByNameRequest) (ExporterStatusResponse, *_nethttp.Response, error)
 
 	/*
-		ListExporters Gets all schema exporters.
+		ListExporters Gets all schema exporters
 
 		Retrieves a list of schema exporters that have been created.
 
@@ -115,7 +115,7 @@ type ExportersV1Api interface {
 	ListExportersExecute(r ApiListExportersRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-		PauseExporterByName Pause schema exporter by name.
+		PauseExporterByName Pause schema exporter by name
 
 		Pauses the state of the schema exporter.
 
@@ -130,7 +130,7 @@ type ExportersV1Api interface {
 	PauseExporterByNameExecute(r ApiPauseExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		RegisterExporter Creates a new schema exporter.
+		RegisterExporter Creates a new schema exporter
 
 		Creates a new schema exporter. All attributes in request body are optional except config.
 
@@ -144,7 +144,7 @@ type ExportersV1Api interface {
 	RegisterExporterExecute(r ApiRegisterExporterRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		ResetExporterByName Reset schema exporter by name.
+		ResetExporterByName Reset schema exporter by name
 
 		Reset the state of the schema exporter.
 
@@ -159,7 +159,7 @@ type ExportersV1Api interface {
 	ResetExporterByNameExecute(r ApiResetExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		ResumeExporterByName Resume schema exporter by name.
+		ResumeExporterByName Resume schema exporter by name
 
 		Resume running of the schema exporter.
 
@@ -174,9 +174,9 @@ type ExportersV1Api interface {
 	ResumeExporterByNameExecute(r ApiResumeExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		UpdateExporterConfigByName Update schema exporter config by name.
+		UpdateExporterConfigByName Update schema exporter config by name
 
-		Retrieves the config of the schema exporter.
+		Updates the configuration of the schema exporter.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param name Name of the exporter
@@ -189,7 +189,7 @@ type ExportersV1Api interface {
 	UpdateExporterConfigByNameExecute(r ApiUpdateExporterConfigByNameRequest) (ExporterResponse, *_nethttp.Response, error)
 
 	/*
-		UpdateExporterInfo Update schema exporter by name.
+		UpdateExporterInfo Update schema exporter by name
 
 		Updates the information or configurations of the schema exporter. All attributes in request body are optional.
 
@@ -218,13 +218,13 @@ func (r ApiDeleteExporterRequest) Execute() (*_nethttp.Response, error) {
 }
 
 /*
-DeleteExporter Delete schema exporter by name.
+DeleteExporter Delete schema exporter by name
 
 Deletes the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiDeleteExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiDeleteExporterRequest
 */
 func (a *ExportersV1ApiService) DeleteExporter(ctx _context.Context, name string) ApiDeleteExporterRequest {
 	return ApiDeleteExporterRequest{
@@ -361,13 +361,13 @@ func (r ApiGetExporterConfigByNameRequest) Execute() (ExporterConfigResponse, *_
 }
 
 /*
-GetExporterConfigByName Gets schema exporter config by name.
+GetExporterConfigByName Gets schema exporter config by name
 
 Retrieves the config of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiGetExporterConfigByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiGetExporterConfigByNameRequest
 */
 func (a *ExportersV1ApiService) GetExporterConfigByName(ctx _context.Context, name string) ApiGetExporterConfigByNameRequest {
 	return ApiGetExporterConfigByNameRequest{
@@ -378,7 +378,8 @@ func (a *ExportersV1ApiService) GetExporterConfigByName(ctx _context.Context, na
 }
 
 // Execute executes the request
-//  @return ExporterConfigResponse
+//
+//	@return ExporterConfigResponse
 func (a *ExportersV1ApiService) GetExporterConfigByNameExecute(r ApiGetExporterConfigByNameRequest) (ExporterConfigResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -515,13 +516,13 @@ func (r ApiGetExporterInfoByNameRequest) Execute() (ExporterReference, *_nethttp
 }
 
 /*
-GetExporterInfoByName Gets schema exporter by name.
+GetExporterInfoByName Gets schema exporter by name
 
 Retrieves the information of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiGetExporterInfoByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiGetExporterInfoByNameRequest
 */
 func (a *ExportersV1ApiService) GetExporterInfoByName(ctx _context.Context, name string) ApiGetExporterInfoByNameRequest {
 	return ApiGetExporterInfoByNameRequest{
@@ -532,7 +533,8 @@ func (a *ExportersV1ApiService) GetExporterInfoByName(ctx _context.Context, name
 }
 
 // Execute executes the request
-//  @return ExporterReference
+//
+//	@return ExporterReference
 func (a *ExportersV1ApiService) GetExporterInfoByNameExecute(r ApiGetExporterInfoByNameRequest) (ExporterReference, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -669,13 +671,13 @@ func (r ApiGetExporterStatusByNameRequest) Execute() (ExporterStatusResponse, *_
 }
 
 /*
-GetExporterStatusByName Gets schema exporter status by name.
+GetExporterStatusByName Gets schema exporter status by name
 
 Retrieves the status of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiGetExporterStatusByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiGetExporterStatusByNameRequest
 */
 func (a *ExportersV1ApiService) GetExporterStatusByName(ctx _context.Context, name string) ApiGetExporterStatusByNameRequest {
 	return ApiGetExporterStatusByNameRequest{
@@ -686,7 +688,8 @@ func (a *ExportersV1ApiService) GetExporterStatusByName(ctx _context.Context, na
 }
 
 // Execute executes the request
-//  @return ExporterStatusResponse
+//
+//	@return ExporterStatusResponse
 func (a *ExportersV1ApiService) GetExporterStatusByNameExecute(r ApiGetExporterStatusByNameRequest) (ExporterStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -822,12 +825,12 @@ func (r ApiListExportersRequest) Execute() ([]string, *_nethttp.Response, error)
 }
 
 /*
-ListExporters Gets all schema exporters.
+ListExporters Gets all schema exporters
 
 Retrieves a list of schema exporters that have been created.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListExportersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListExportersRequest
 */
 func (a *ExportersV1ApiService) ListExporters(ctx _context.Context) ApiListExportersRequest {
 	return ApiListExportersRequest{
@@ -837,7 +840,8 @@ func (a *ExportersV1ApiService) ListExporters(ctx _context.Context) ApiListExpor
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *ExportersV1ApiService) ListExportersExecute(r ApiListExportersRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -963,13 +967,13 @@ func (r ApiPauseExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.Re
 }
 
 /*
-PauseExporterByName Pause schema exporter by name.
+PauseExporterByName Pause schema exporter by name
 
 Pauses the state of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiPauseExporterByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiPauseExporterByNameRequest
 */
 func (a *ExportersV1ApiService) PauseExporterByName(ctx _context.Context, name string) ApiPauseExporterByNameRequest {
 	return ApiPauseExporterByNameRequest{
@@ -980,7 +984,8 @@ func (a *ExportersV1ApiService) PauseExporterByName(ctx _context.Context, name s
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) PauseExporterByNameExecute(r ApiPauseExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1133,12 +1138,12 @@ func (r ApiRegisterExporterRequest) Execute() (ExporterResponse, *_nethttp.Respo
 }
 
 /*
-RegisterExporter Creates a new schema exporter.
+RegisterExporter Creates a new schema exporter
 
 Creates a new schema exporter. All attributes in request body are optional except config.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRegisterExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRegisterExporterRequest
 */
 func (a *ExportersV1ApiService) RegisterExporter(ctx _context.Context) ApiRegisterExporterRequest {
 	return ApiRegisterExporterRequest{
@@ -1148,7 +1153,8 @@ func (a *ExportersV1ApiService) RegisterExporter(ctx _context.Context) ApiRegist
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) RegisterExporterExecute(r ApiRegisterExporterRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1289,13 +1295,13 @@ func (r ApiResetExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.Re
 }
 
 /*
-ResetExporterByName Reset schema exporter by name.
+ResetExporterByName Reset schema exporter by name
 
 Reset the state of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiResetExporterByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResetExporterByNameRequest
 */
 func (a *ExportersV1ApiService) ResetExporterByName(ctx _context.Context, name string) ApiResetExporterByNameRequest {
 	return ApiResetExporterByNameRequest{
@@ -1306,7 +1312,8 @@ func (a *ExportersV1ApiService) ResetExporterByName(ctx _context.Context, name s
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) ResetExporterByNameExecute(r ApiResetExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1453,13 +1460,13 @@ func (r ApiResumeExporterByNameRequest) Execute() (ExporterResponse, *_nethttp.R
 }
 
 /*
-ResumeExporterByName Resume schema exporter by name.
+ResumeExporterByName Resume schema exporter by name
 
 Resume running of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiResumeExporterByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResumeExporterByNameRequest
 */
 func (a *ExportersV1ApiService) ResumeExporterByName(ctx _context.Context, name string) ApiResumeExporterByNameRequest {
 	return ApiResumeExporterByNameRequest{
@@ -1470,7 +1477,8 @@ func (a *ExportersV1ApiService) ResumeExporterByName(ctx _context.Context, name 
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) ResumeExporterByNameExecute(r ApiResumeExporterByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1624,13 +1632,13 @@ func (r ApiUpdateExporterConfigByNameRequest) Execute() (ExporterResponse, *_net
 }
 
 /*
-UpdateExporterConfigByName Update schema exporter config by name.
+UpdateExporterConfigByName Update schema exporter config by name
 
-Retrieves the config of the schema exporter.
+Updates the configuration of the schema exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiUpdateExporterConfigByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiUpdateExporterConfigByNameRequest
 */
 func (a *ExportersV1ApiService) UpdateExporterConfigByName(ctx _context.Context, name string) ApiUpdateExporterConfigByNameRequest {
 	return ApiUpdateExporterConfigByNameRequest{
@@ -1641,7 +1649,8 @@ func (a *ExportersV1ApiService) UpdateExporterConfigByName(ctx _context.Context,
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) UpdateExporterConfigByNameExecute(r ApiUpdateExporterConfigByNameRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -1800,13 +1809,13 @@ func (r ApiUpdateExporterInfoRequest) Execute() (ExporterResponse, *_nethttp.Res
 }
 
 /*
-UpdateExporterInfo Update schema exporter by name.
+UpdateExporterInfo Update schema exporter by name
 
 Updates the information or configurations of the schema exporter. All attributes in request body are optional.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiUpdateExporterInfoRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiUpdateExporterInfoRequest
 */
 func (a *ExportersV1ApiService) UpdateExporterInfo(ctx _context.Context, name string) ApiUpdateExporterInfoRequest {
 	return ApiUpdateExporterInfoRequest{
@@ -1817,7 +1826,8 @@ func (a *ExportersV1ApiService) UpdateExporterInfo(ctx _context.Context, name st
 }
 
 // Execute executes the request
-//  @return ExporterResponse
+//
+//	@return ExporterResponse
 func (a *ExportersV1ApiService) UpdateExporterInfoExecute(r ApiUpdateExporterInfoRequest) (ExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut

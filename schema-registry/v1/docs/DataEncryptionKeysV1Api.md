@@ -4,15 +4,15 @@ All URIs are relative to *https://psrc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDek**](DataEncryptionKeysV1Api.md#CreateDek) | **Post** /dek-registry/v1/keks/{name}/deks | Create a dek.
-[**DeleteDekVersion**](DataEncryptionKeysV1Api.md#DeleteDekVersion) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Delete a dek version.
-[**DeleteDekVersions**](DataEncryptionKeysV1Api.md#DeleteDekVersions) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject} | Delete all versions of a dek.
-[**GetDek**](DataEncryptionKeysV1Api.md#GetDek) | **Get** /dek-registry/v1/keks/{name}/deks/{subject} | Get a dek by subject.
-[**GetDekByVersion**](DataEncryptionKeysV1Api.md#GetDekByVersion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version.
-[**GetDekSubjects**](DataEncryptionKeysV1Api.md#GetDekSubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects.
-[**GetDekVersions**](DataEncryptionKeysV1Api.md#GetDekVersions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek.
-[**UndeleteDekVersion**](DataEncryptionKeysV1Api.md#UndeleteDekVersion) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete | Undelete a dek version.
-[**UndeleteDekVersions**](DataEncryptionKeysV1Api.md#UndeleteDekVersions) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/undelete | Undelete all versions of a dek.
+[**CreateDek**](DataEncryptionKeysV1Api.md#CreateDek) | **Post** /dek-registry/v1/keks/{name}/deks | Create a dek
+[**DeleteDekVersion**](DataEncryptionKeysV1Api.md#DeleteDekVersion) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Delete a dek version
+[**DeleteDekVersions**](DataEncryptionKeysV1Api.md#DeleteDekVersions) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject} | Delete all versions of a dek
+[**GetDek**](DataEncryptionKeysV1Api.md#GetDek) | **Get** /dek-registry/v1/keks/{name}/deks/{subject} | Get a dek by subject
+[**GetDekByVersion**](DataEncryptionKeysV1Api.md#GetDekByVersion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version
+[**GetDekSubjects**](DataEncryptionKeysV1Api.md#GetDekSubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects
+[**GetDekVersions**](DataEncryptionKeysV1Api.md#GetDekVersions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek
+[**UndeleteDekVersion**](DataEncryptionKeysV1Api.md#UndeleteDekVersion) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete | Undelete a dek version
+[**UndeleteDekVersions**](DataEncryptionKeysV1Api.md#UndeleteDekVersions) | **Post** /dek-registry/v1/keks/{name}/deks/{subject}/undelete | Undelete all versions of a dek
 
 
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 > Dek CreateDek(ctx, name).CreateDekRequest(createDekRequest).Execute()
 
-Create a dek.
+Create a dek
 
 ### Example
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > DeleteDekVersion(ctx, name, subject, version).Algorithm(algorithm).Permanent(permanent).Execute()
 
-Delete a dek version.
+Delete a dek version
 
 ### Example
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 > DeleteDekVersions(ctx, name, subject).Algorithm(algorithm).Permanent(permanent).Execute()
 
-Delete all versions of a dek.
+Delete all versions of a dek
 
 ### Example
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 > Dek GetDek(ctx, name, subject).Algorithm(algorithm).Deleted(deleted).Execute()
 
-Get a dek by subject.
+Get a dek by subject
 
 ### Example
 
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 
 > Dek GetDekByVersion(ctx, name, subject, version).Algorithm(algorithm).Deleted(deleted).Execute()
 
-Get a dek by subject and version.
+Get a dek by subject and version
 
 ### Example
 
@@ -390,9 +390,9 @@ Name | Type | Description  | Notes
 
 ## GetDekSubjects
 
-> []string GetDekSubjects(ctx, name).Deleted(deleted).Execute()
+> []string GetDekSubjects(ctx, name).Deleted(deleted).Offset(offset).Limit(limit).Execute()
 
-Get a list of dek subjects.
+Get a list of dek subjects
 
 ### Example
 
@@ -409,10 +409,12 @@ import (
 func main() {
     name := "name_example" // string | Name of the kek
     deleted := true // bool | Whether to include deleted keys (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DataEncryptionKeysV1Api.GetDekSubjects(context.Background(), name).Deleted(deleted).Execute()
+    resp, r, err := api_client.DataEncryptionKeysV1Api.GetDekSubjects(context.Background(), name).Deleted(deleted).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DataEncryptionKeysV1Api.GetDekSubjects``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -439,6 +441,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **deleted** | **bool** | Whether to include deleted keys | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -460,9 +464,9 @@ Name | Type | Description  | Notes
 
 ## GetDekVersions
 
-> []int32 GetDekVersions(ctx, name, subject).Algorithm(algorithm).Deleted(deleted).Execute()
+> []int32 GetDekVersions(ctx, name, subject).Algorithm(algorithm).Deleted(deleted).Offset(offset).Limit(limit).Execute()
 
-List versions of dek.
+List versions of dek
 
 ### Example
 
@@ -481,10 +485,12 @@ func main() {
     subject := "subject_example" // string | Subject of the dek
     algorithm := "algorithm_example" // string | Algorithm of the dek (optional)
     deleted := true // bool | Whether to include deleted keys (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DataEncryptionKeysV1Api.GetDekVersions(context.Background(), name, subject).Algorithm(algorithm).Deleted(deleted).Execute()
+    resp, r, err := api_client.DataEncryptionKeysV1Api.GetDekVersions(context.Background(), name, subject).Algorithm(algorithm).Deleted(deleted).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DataEncryptionKeysV1Api.GetDekVersions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -514,6 +520,8 @@ Name | Type | Description  | Notes
 
  **algorithm** | **string** | Algorithm of the dek | 
  **deleted** | **bool** | Whether to include deleted keys | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -537,7 +545,7 @@ Name | Type | Description  | Notes
 
 > UndeleteDekVersion(ctx, name, subject, version).Algorithm(algorithm).Execute()
 
-Undelete a dek version.
+Undelete a dek version
 
 ### Example
 
@@ -611,7 +619,7 @@ Name | Type | Description  | Notes
 
 > UndeleteDekVersions(ctx, name, subject).Algorithm(algorithm).Execute()
 
-Undelete all versions of a dek.
+Undelete all versions of a dek
 
 ### Example
 

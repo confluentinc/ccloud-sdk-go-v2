@@ -42,14 +42,22 @@ type Schema struct {
 	Version *int32 `json:"version,omitempty"`
 	// Globally unique identifier of the schema
 	Id *int32 `json:"id,omitempty"`
-	// Schema type
+	// Globally unique identifier of the schema. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Guid *string `json:"guid,omitempty"`
+	// Schema type. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
 	SchemaType *string `json:"schemaType,omitempty"`
 	// References to other schemas
 	References *[]SchemaReference `json:"references,omitempty"`
+	Metadata   NullableMetadata   `json:"metadata,omitempty"`
+	RuleSet    NullableRuleSet    `json:"ruleSet,omitempty"`
 	// Schema definition string
-	Schema   *string          `json:"schema,omitempty"`
-	Metadata NullableMetadata `json:"metadata,omitempty"`
-	RuleSet  NullableRuleSet  `json:"ruleSet,omitempty"`
+	Schema *string `json:"schema,omitempty"`
+	// Schema tags
+	SchemaTags *[]SchemaTags `json:"schemaTags,omitempty"`
+	// Timestamp when the schema was created. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Ts *int64 `json:"ts,omitempty"`
+	// Whether the schema has been deleted. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewSchema instantiates a new Schema object
@@ -165,6 +173,38 @@ func (o *Schema) SetId(v int32) {
 	o.Id = &v
 }
 
+// GetGuid returns the Guid field value if set, zero value otherwise.
+func (o *Schema) GetGuid() string {
+	if o == nil || o.Guid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Guid
+}
+
+// GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schema) GetGuidOk() (*string, bool) {
+	if o == nil || o.Guid == nil {
+		return nil, false
+	}
+	return o.Guid, true
+}
+
+// HasGuid returns a boolean if a field has been set.
+func (o *Schema) HasGuid() bool {
+	if o != nil && o.Guid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGuid gets a reference to the given string and assigns it to the Guid field.
+func (o *Schema) SetGuid(v string) {
+	o.Guid = &v
+}
+
 // GetSchemaType returns the SchemaType field value if set, zero value otherwise.
 func (o *Schema) GetSchemaType() string {
 	if o == nil || o.SchemaType == nil {
@@ -227,38 +267,6 @@ func (o *Schema) HasReferences() bool {
 // SetReferences gets a reference to the given []SchemaReference and assigns it to the References field.
 func (o *Schema) SetReferences(v []SchemaReference) {
 	o.References = &v
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise.
-func (o *Schema) GetSchema() string {
-	if o == nil || o.Schema == nil {
-		var ret string
-		return ret
-	}
-	return *o.Schema
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schema) GetSchemaOk() (*string, bool) {
-	if o == nil || o.Schema == nil {
-		return nil, false
-	}
-	return o.Schema, true
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *Schema) HasSchema() bool {
-	if o != nil && o.Schema != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given string and assigns it to the Schema field.
-func (o *Schema) SetSchema(v string) {
-	o.Schema = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -347,16 +355,148 @@ func (o *Schema) UnsetRuleSet() {
 	o.RuleSet.Unset()
 }
 
+// GetSchema returns the Schema field value if set, zero value otherwise.
+func (o *Schema) GetSchema() string {
+	if o == nil || o.Schema == nil {
+		var ret string
+		return ret
+	}
+	return *o.Schema
+}
+
+// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schema) GetSchemaOk() (*string, bool) {
+	if o == nil || o.Schema == nil {
+		return nil, false
+	}
+	return o.Schema, true
+}
+
+// HasSchema returns a boolean if a field has been set.
+func (o *Schema) HasSchema() bool {
+	if o != nil && o.Schema != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchema gets a reference to the given string and assigns it to the Schema field.
+func (o *Schema) SetSchema(v string) {
+	o.Schema = &v
+}
+
+// GetSchemaTags returns the SchemaTags field value if set, zero value otherwise.
+func (o *Schema) GetSchemaTags() []SchemaTags {
+	if o == nil || o.SchemaTags == nil {
+		var ret []SchemaTags
+		return ret
+	}
+	return *o.SchemaTags
+}
+
+// GetSchemaTagsOk returns a tuple with the SchemaTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schema) GetSchemaTagsOk() (*[]SchemaTags, bool) {
+	if o == nil || o.SchemaTags == nil {
+		return nil, false
+	}
+	return o.SchemaTags, true
+}
+
+// HasSchemaTags returns a boolean if a field has been set.
+func (o *Schema) HasSchemaTags() bool {
+	if o != nil && o.SchemaTags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaTags gets a reference to the given []SchemaTags and assigns it to the SchemaTags field.
+func (o *Schema) SetSchemaTags(v []SchemaTags) {
+	o.SchemaTags = &v
+}
+
+// GetTs returns the Ts field value if set, zero value otherwise.
+func (o *Schema) GetTs() int64 {
+	if o == nil || o.Ts == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Ts
+}
+
+// GetTsOk returns a tuple with the Ts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schema) GetTsOk() (*int64, bool) {
+	if o == nil || o.Ts == nil {
+		return nil, false
+	}
+	return o.Ts, true
+}
+
+// HasTs returns a boolean if a field has been set.
+func (o *Schema) HasTs() bool {
+	if o != nil && o.Ts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTs gets a reference to the given int64 and assigns it to the Ts field.
+func (o *Schema) SetTs(v int64) {
+	o.Ts = &v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *Schema) GetDeleted() bool {
+	if o == nil || o.Deleted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schema) GetDeletedOk() (*bool, bool) {
+	if o == nil || o.Deleted == nil {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *Schema) HasDeleted() bool {
+	if o != nil && o.Deleted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *Schema) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *Schema) Redact() {
 	o.recurseRedact(o.Subject)
 	o.recurseRedact(o.Version)
 	o.recurseRedact(o.Id)
+	o.recurseRedact(o.Guid)
 	o.recurseRedact(o.SchemaType)
 	o.recurseRedact(o.References)
-	o.recurseRedact(o.Schema)
 	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.RuleSet)
+	o.recurseRedact(o.Schema)
+	o.recurseRedact(o.SchemaTags)
+	o.recurseRedact(o.Ts)
+	o.recurseRedact(o.Deleted)
 }
 
 func (o *Schema) recurseRedact(v interface{}) {
@@ -400,20 +540,32 @@ func (o Schema) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
+	if o.Guid != nil {
+		toSerialize["guid"] = o.Guid
+	}
 	if o.SchemaType != nil {
 		toSerialize["schemaType"] = o.SchemaType
 	}
 	if o.References != nil {
 		toSerialize["references"] = o.References
 	}
-	if o.Schema != nil {
-		toSerialize["schema"] = o.Schema
-	}
 	if o.Metadata.IsSet() {
 		toSerialize["metadata"] = o.Metadata.Get()
 	}
 	if o.RuleSet.IsSet() {
 		toSerialize["ruleSet"] = o.RuleSet.Get()
+	}
+	if o.Schema != nil {
+		toSerialize["schema"] = o.Schema
+	}
+	if o.SchemaTags != nil {
+		toSerialize["schemaTags"] = o.SchemaTags
+	}
+	if o.Ts != nil {
+		toSerialize["ts"] = o.Ts
+	}
+	if o.Deleted != nil {
+		toSerialize["deleted"] = o.Deleted
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

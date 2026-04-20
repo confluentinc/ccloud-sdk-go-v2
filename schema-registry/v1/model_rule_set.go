@@ -38,6 +38,10 @@ import (
 type RuleSet struct {
 	MigrationRules *[]Rule `json:"migrationRules,omitempty"`
 	DomainRules    *[]Rule `json:"domainRules,omitempty"`
+	// Encoding rules
+	EncodingRules *[]Rule `json:"encodingRules,omitempty"`
+	// Where to enable the rule set
+	EnableAt *string `json:"enableAt,omitempty"`
 }
 
 // NewRuleSet instantiates a new RuleSet object
@@ -121,10 +125,76 @@ func (o *RuleSet) SetDomainRules(v []Rule) {
 	o.DomainRules = &v
 }
 
+// GetEncodingRules returns the EncodingRules field value if set, zero value otherwise.
+func (o *RuleSet) GetEncodingRules() []Rule {
+	if o == nil || o.EncodingRules == nil {
+		var ret []Rule
+		return ret
+	}
+	return *o.EncodingRules
+}
+
+// GetEncodingRulesOk returns a tuple with the EncodingRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleSet) GetEncodingRulesOk() (*[]Rule, bool) {
+	if o == nil || o.EncodingRules == nil {
+		return nil, false
+	}
+	return o.EncodingRules, true
+}
+
+// HasEncodingRules returns a boolean if a field has been set.
+func (o *RuleSet) HasEncodingRules() bool {
+	if o != nil && o.EncodingRules != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncodingRules gets a reference to the given []Rule and assigns it to the EncodingRules field.
+func (o *RuleSet) SetEncodingRules(v []Rule) {
+	o.EncodingRules = &v
+}
+
+// GetEnableAt returns the EnableAt field value if set, zero value otherwise.
+func (o *RuleSet) GetEnableAt() string {
+	if o == nil || o.EnableAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.EnableAt
+}
+
+// GetEnableAtOk returns a tuple with the EnableAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleSet) GetEnableAtOk() (*string, bool) {
+	if o == nil || o.EnableAt == nil {
+		return nil, false
+	}
+	return o.EnableAt, true
+}
+
+// HasEnableAt returns a boolean if a field has been set.
+func (o *RuleSet) HasEnableAt() bool {
+	if o != nil && o.EnableAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableAt gets a reference to the given string and assigns it to the EnableAt field.
+func (o *RuleSet) SetEnableAt(v string) {
+	o.EnableAt = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *RuleSet) Redact() {
 	o.recurseRedact(o.MigrationRules)
 	o.recurseRedact(o.DomainRules)
+	o.recurseRedact(o.EncodingRules)
+	o.recurseRedact(o.EnableAt)
 }
 
 func (o *RuleSet) recurseRedact(v interface{}) {
@@ -164,6 +234,12 @@ func (o RuleSet) MarshalJSON() ([]byte, error) {
 	}
 	if o.DomainRules != nil {
 		toSerialize["domainRules"] = o.DomainRules
+	}
+	if o.EncodingRules != nil {
+		toSerialize["encodingRules"] = o.EncodingRules
+	}
+	if o.EnableAt != nil {
+		toSerialize["enableAt"] = o.EnableAt
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

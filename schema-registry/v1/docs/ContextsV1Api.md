@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ListContexts
 
-> []string ListContexts(ctx).Execute()
+> []string ListContexts(ctx).Offset(offset).Limit(limit).Execute()
 
 List contexts
 
@@ -29,10 +29,12 @@ import (
 )
 
 func main() {
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ContextsV1Api.ListContexts(context.Background()).Execute()
+    resp, r, err := api_client.ContextsV1Api.ListContexts(context.Background()).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContextsV1Api.ListContexts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -44,12 +46,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListContextsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 

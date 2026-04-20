@@ -36,10 +36,16 @@ import (
 
 // CreateDekRequest struct for CreateDekRequest
 type CreateDekRequest struct {
-	Subject              *string `json:"subject,omitempty"`
-	Version              *int32  `json:"version,omitempty"`
-	Algorithm            *string `json:"algorithm,omitempty"`
+	// Subject of the dek
+	Subject *string `json:"subject,omitempty"`
+	// Version of the dek
+	Version *int32 `json:"version,omitempty"`
+	// Algorithm of the dek
+	Algorithm *string `json:"algorithm,omitempty"`
+	// Encrypted key material of the dek
 	EncryptedKeyMaterial *string `json:"encryptedKeyMaterial,omitempty"`
+	// Whether the dek is deleted
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewCreateDekRequest instantiates a new CreateDekRequest object
@@ -187,12 +193,45 @@ func (o *CreateDekRequest) SetEncryptedKeyMaterial(v string) {
 	o.EncryptedKeyMaterial = &v
 }
 
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *CreateDekRequest) GetDeleted() bool {
+	if o == nil || o.Deleted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDekRequest) GetDeletedOk() (*bool, bool) {
+	if o == nil || o.Deleted == nil {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *CreateDekRequest) HasDeleted() bool {
+	if o != nil && o.Deleted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *CreateDekRequest) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CreateDekRequest) Redact() {
 	o.recurseRedact(o.Subject)
 	o.recurseRedact(o.Version)
 	o.recurseRedact(o.Algorithm)
 	o.recurseRedact(o.EncryptedKeyMaterial)
+	o.recurseRedact(o.Deleted)
 }
 
 func (o *CreateDekRequest) recurseRedact(v interface{}) {
@@ -238,6 +277,9 @@ func (o CreateDekRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.EncryptedKeyMaterial != nil {
 		toSerialize["encryptedKeyMaterial"] = o.EncryptedKeyMaterial
+	}
+	if o.Deleted != nil {
+		toSerialize["deleted"] = o.Deleted
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

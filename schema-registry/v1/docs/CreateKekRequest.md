@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**KmsType** | Pointer to **string** |  | [optional] 
-**KmsKeyId** | Pointer to **string** |  | [optional] 
-**KmsProps** | Pointer to **map[string]string** |  | [optional] 
-**Doc** | Pointer to **string** |  | [optional] 
-**Shared** | Pointer to **bool** |  | [optional] 
+**Name** | Pointer to **string** | Name of the kek | [optional] 
+**KmsType** | Pointer to **string** | KMS type of the kek | [optional] 
+**KmsKeyId** | Pointer to **string** | KMS key ID of the kek | [optional] 
+**KmsProps** | Pointer to **map[string]string** | Properties of the kek | [optional] 
+**Doc** | Pointer to **string** | Description of the kek | [optional] 
+**Shared** | Pointer to **bool** | Whether the kek is shared | [optional] 
+**Deleted** | Pointer to **bool** | Whether the kek is deleted | [optional] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetShared sets Shared field to given value.
 `func (o *CreateKekRequest) HasShared() bool`
 
 HasShared returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *CreateKekRequest) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *CreateKekRequest) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *CreateKekRequest) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *CreateKekRequest) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
