@@ -38,7 +38,7 @@ import (
 type SubjectVersion struct {
 	// Name of the subject
 	Subject *string `json:"subject,omitempty"`
-	// Version number
+	// Version number. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
 	Version *int32 `json:"version,omitempty"`
 }
 

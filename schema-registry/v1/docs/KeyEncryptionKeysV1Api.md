@@ -4,20 +4,21 @@ All URIs are relative to *https://psrc-00000.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateKek**](KeyEncryptionKeysV1Api.md#CreateKek) | **Post** /dek-registry/v1/keks | Create a kek.
-[**DeleteKek**](KeyEncryptionKeysV1Api.md#DeleteKek) | **Delete** /dek-registry/v1/keks/{name} | Delete a kek.
-[**GetKek**](KeyEncryptionKeysV1Api.md#GetKek) | **Get** /dek-registry/v1/keks/{name} | Get a kek by name.
-[**GetKekNames**](KeyEncryptionKeysV1Api.md#GetKekNames) | **Get** /dek-registry/v1/keks | Get a list of kek names.
-[**PutKek**](KeyEncryptionKeysV1Api.md#PutKek) | **Put** /dek-registry/v1/keks/{name} | Alters a kek.
-[**UndeleteKek**](KeyEncryptionKeysV1Api.md#UndeleteKek) | **Post** /dek-registry/v1/keks/{name}/undelete | Undelete a kek.
+[**CreateKek**](KeyEncryptionKeysV1Api.md#CreateKek) | **Post** /dek-registry/v1/keks | Create a kek
+[**DeleteKek**](KeyEncryptionKeysV1Api.md#DeleteKek) | **Delete** /dek-registry/v1/keks/{name} | Delete a kek
+[**GetKek**](KeyEncryptionKeysV1Api.md#GetKek) | **Get** /dek-registry/v1/keks/{name} | Get a kek by name
+[**GetKekNames**](KeyEncryptionKeysV1Api.md#GetKekNames) | **Get** /dek-registry/v1/keks | Get a list of kek names
+[**PutKek**](KeyEncryptionKeysV1Api.md#PutKek) | **Put** /dek-registry/v1/keks/{name} | Alters a kek
+[**TestKek**](KeyEncryptionKeysV1Api.md#TestKek) | **Post** /dek-registry/v1/keks/{name}/test | Test a kek
+[**UndeleteKek**](KeyEncryptionKeysV1Api.md#UndeleteKek) | **Post** /dek-registry/v1/keks/{name}/undelete | Undelete a kek
 
 
 
 ## CreateKek
 
-> Kek CreateKek(ctx).CreateKekRequest(createKekRequest).Execute()
+> Kek CreateKek(ctx).CreateKekRequest(createKekRequest).TestSharing(testSharing).Execute()
 
-Create a kek.
+Create a kek
 
 ### Example
 
@@ -33,10 +34,11 @@ import (
 
 func main() {
     createKekRequest := *openapiclient.NewCreateKekRequest() // CreateKekRequest | The create request
+    testSharing := true // bool | Whether to test kek sharing (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KeyEncryptionKeysV1Api.CreateKek(context.Background()).CreateKekRequest(createKekRequest).Execute()
+    resp, r, err := api_client.KeyEncryptionKeysV1Api.CreateKek(context.Background()).CreateKekRequest(createKekRequest).TestSharing(testSharing).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KeyEncryptionKeysV1Api.CreateKek``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,6 +60,7 @@ Other parameters are passed through a pointer to a apiCreateKekRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createKekRequest** | [**CreateKekRequest**](CreateKekRequest.md) | The create request | 
+ **testSharing** | **bool** | Whether to test kek sharing | [default to false]
 
 ### Return type
 
@@ -81,7 +84,7 @@ Name | Type | Description  | Notes
 
 > DeleteKek(ctx, name).Permanent(permanent).Execute()
 
-Delete a kek.
+Delete a kek
 
 ### Example
 
@@ -149,7 +152,7 @@ Name | Type | Description  | Notes
 
 > Kek GetKek(ctx, name).Deleted(deleted).Execute()
 
-Get a kek by name.
+Get a kek by name
 
 ### Example
 
@@ -219,7 +222,7 @@ Name | Type | Description  | Notes
 
 > []string GetKekNames(ctx).Deleted(deleted).Execute()
 
-Get a list of kek names.
+Get a list of kek names
 
 ### Example
 
@@ -281,9 +284,9 @@ Name | Type | Description  | Notes
 
 ## PutKek
 
-> Kek PutKek(ctx, name).UpdateKekRequest(updateKekRequest).Execute()
+> Kek PutKek(ctx, name).UpdateKekRequest(updateKekRequest).TestSharing(testSharing).Execute()
 
-Alters a kek.
+Alters a kek
 
 ### Example
 
@@ -300,10 +303,11 @@ import (
 func main() {
     name := "name_example" // string | Name of the kek
     updateKekRequest := *openapiclient.NewUpdateKekRequest() // UpdateKekRequest | The update request
+    testSharing := true // bool | Whether to test kek sharing (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KeyEncryptionKeysV1Api.PutKek(context.Background(), name).UpdateKekRequest(updateKekRequest).Execute()
+    resp, r, err := api_client.KeyEncryptionKeysV1Api.PutKek(context.Background(), name).UpdateKekRequest(updateKekRequest).TestSharing(testSharing).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KeyEncryptionKeysV1Api.PutKek``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -330,6 +334,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **updateKekRequest** | [**UpdateKekRequest**](UpdateKekRequest.md) | The update request | 
+ **testSharing** | **bool** | Whether to test kek sharing | [default to false]
 
 ### Return type
 
@@ -349,11 +354,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## TestKek
+
+> Kek TestKek(ctx, name).Execute()
+
+Test a kek
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    name := "name_example" // string | Name of the kek
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KeyEncryptionKeysV1Api.TestKek(context.Background(), name).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KeyEncryptionKeysV1Api.TestKek``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `TestKek`: Kek
+    fmt.Fprintf(os.Stdout, "Response from `KeyEncryptionKeysV1Api.TestKek`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**name** | **string** | Name of the kek | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTestKekRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Kek**](Kek.md)
+
+### Authorization
+
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UndeleteKek
 
 > UndeleteKek(ctx, name).Execute()
 
-Undelete a kek.
+Undelete a kek
 
 ### Example
 

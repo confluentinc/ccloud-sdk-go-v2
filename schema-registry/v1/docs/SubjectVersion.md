@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Subject** | Pointer to **string** | Name of the subject | [optional] 
-**Version** | Pointer to **int32** | Version number | [optional] 
+**Version** | Pointer to **int32** | Version number. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in | [optional] 
 
 ## Methods
 

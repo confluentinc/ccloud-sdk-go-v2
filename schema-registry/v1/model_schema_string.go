@@ -36,14 +36,28 @@ import (
 
 // SchemaString Schema definition
 type SchemaString struct {
-	// Schema type
+	// Name of the subject. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Subject *string `json:"subject,omitempty"`
+	// Version number. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Version *int32 `json:"version,omitempty"`
+	// Globally unique identifier of the schema. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Guid *string `json:"guid,omitempty"`
+	// Schema type. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
 	SchemaType *string `json:"schemaType,omitempty"`
 	// Schema string identified by the ID
 	Schema *string `json:"schema,omitempty"`
 	// References to other schemas
 	References *[]SchemaReference `json:"references,omitempty"`
+	Metadata   NullableMetadata   `json:"metadata,omitempty"`
+	RuleSet    NullableRuleSet    `json:"ruleSet,omitempty"`
+	// Schema tags
+	SchemaTags *[]SchemaTags `json:"schemaTags,omitempty"`
 	// Maximum ID
 	MaxId *int32 `json:"maxId,omitempty"`
+	// Timestamp when the schema was created. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Ts *int64 `json:"ts,omitempty"`
+	// Whether the schema has been deleted. In Confluent Cloud, this field is returned only if Confluent-Accept-Unknown-Properties header is passed in
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewSchemaString instantiates a new SchemaString object
@@ -61,6 +75,102 @@ func NewSchemaString() *SchemaString {
 func NewSchemaStringWithDefaults() *SchemaString {
 	this := SchemaString{}
 	return &this
+}
+
+// GetSubject returns the Subject field value if set, zero value otherwise.
+func (o *SchemaString) GetSubject() string {
+	if o == nil || o.Subject == nil {
+		var ret string
+		return ret
+	}
+	return *o.Subject
+}
+
+// GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetSubjectOk() (*string, bool) {
+	if o == nil || o.Subject == nil {
+		return nil, false
+	}
+	return o.Subject, true
+}
+
+// HasSubject returns a boolean if a field has been set.
+func (o *SchemaString) HasSubject() bool {
+	if o != nil && o.Subject != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubject gets a reference to the given string and assigns it to the Subject field.
+func (o *SchemaString) SetSubject(v string) {
+	o.Subject = &v
+}
+
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *SchemaString) GetVersion() int32 {
+	if o == nil || o.Version == nil {
+		var ret int32
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetVersionOk() (*int32, bool) {
+	if o == nil || o.Version == nil {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *SchemaString) HasVersion() bool {
+	if o != nil && o.Version != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given int32 and assigns it to the Version field.
+func (o *SchemaString) SetVersion(v int32) {
+	o.Version = &v
+}
+
+// GetGuid returns the Guid field value if set, zero value otherwise.
+func (o *SchemaString) GetGuid() string {
+	if o == nil || o.Guid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Guid
+}
+
+// GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetGuidOk() (*string, bool) {
+	if o == nil || o.Guid == nil {
+		return nil, false
+	}
+	return o.Guid, true
+}
+
+// HasGuid returns a boolean if a field has been set.
+func (o *SchemaString) HasGuid() bool {
+	if o != nil && o.Guid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGuid gets a reference to the given string and assigns it to the Guid field.
+func (o *SchemaString) SetGuid(v string) {
+	o.Guid = &v
 }
 
 // GetSchemaType returns the SchemaType field value if set, zero value otherwise.
@@ -159,6 +269,124 @@ func (o *SchemaString) SetReferences(v []SchemaReference) {
 	o.References = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SchemaString) GetMetadata() Metadata {
+	if o == nil || o.Metadata.Get() == nil {
+		var ret Metadata
+		return ret
+	}
+	return *o.Metadata.Get()
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SchemaString) GetMetadataOk() (*Metadata, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Metadata.Get(), o.Metadata.IsSet()
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *SchemaString) HasMetadata() bool {
+	if o != nil && o.Metadata.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given NullableMetadata and assigns it to the Metadata field.
+func (o *SchemaString) SetMetadata(v Metadata) {
+	o.Metadata.Set(&v)
+}
+
+// SetMetadataNil sets the value for Metadata to be an explicit nil
+func (o *SchemaString) SetMetadataNil() {
+	o.Metadata.Set(nil)
+}
+
+// UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+func (o *SchemaString) UnsetMetadata() {
+	o.Metadata.Unset()
+}
+
+// GetRuleSet returns the RuleSet field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SchemaString) GetRuleSet() RuleSet {
+	if o == nil || o.RuleSet.Get() == nil {
+		var ret RuleSet
+		return ret
+	}
+	return *o.RuleSet.Get()
+}
+
+// GetRuleSetOk returns a tuple with the RuleSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SchemaString) GetRuleSetOk() (*RuleSet, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RuleSet.Get(), o.RuleSet.IsSet()
+}
+
+// HasRuleSet returns a boolean if a field has been set.
+func (o *SchemaString) HasRuleSet() bool {
+	if o != nil && o.RuleSet.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRuleSet gets a reference to the given NullableRuleSet and assigns it to the RuleSet field.
+func (o *SchemaString) SetRuleSet(v RuleSet) {
+	o.RuleSet.Set(&v)
+}
+
+// SetRuleSetNil sets the value for RuleSet to be an explicit nil
+func (o *SchemaString) SetRuleSetNil() {
+	o.RuleSet.Set(nil)
+}
+
+// UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
+func (o *SchemaString) UnsetRuleSet() {
+	o.RuleSet.Unset()
+}
+
+// GetSchemaTags returns the SchemaTags field value if set, zero value otherwise.
+func (o *SchemaString) GetSchemaTags() []SchemaTags {
+	if o == nil || o.SchemaTags == nil {
+		var ret []SchemaTags
+		return ret
+	}
+	return *o.SchemaTags
+}
+
+// GetSchemaTagsOk returns a tuple with the SchemaTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetSchemaTagsOk() (*[]SchemaTags, bool) {
+	if o == nil || o.SchemaTags == nil {
+		return nil, false
+	}
+	return o.SchemaTags, true
+}
+
+// HasSchemaTags returns a boolean if a field has been set.
+func (o *SchemaString) HasSchemaTags() bool {
+	if o != nil && o.SchemaTags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaTags gets a reference to the given []SchemaTags and assigns it to the SchemaTags field.
+func (o *SchemaString) SetSchemaTags(v []SchemaTags) {
+	o.SchemaTags = &v
+}
+
 // GetMaxId returns the MaxId field value if set, zero value otherwise.
 func (o *SchemaString) GetMaxId() int32 {
 	if o == nil || o.MaxId == nil {
@@ -191,12 +419,84 @@ func (o *SchemaString) SetMaxId(v int32) {
 	o.MaxId = &v
 }
 
+// GetTs returns the Ts field value if set, zero value otherwise.
+func (o *SchemaString) GetTs() int64 {
+	if o == nil || o.Ts == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Ts
+}
+
+// GetTsOk returns a tuple with the Ts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetTsOk() (*int64, bool) {
+	if o == nil || o.Ts == nil {
+		return nil, false
+	}
+	return o.Ts, true
+}
+
+// HasTs returns a boolean if a field has been set.
+func (o *SchemaString) HasTs() bool {
+	if o != nil && o.Ts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTs gets a reference to the given int64 and assigns it to the Ts field.
+func (o *SchemaString) SetTs(v int64) {
+	o.Ts = &v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *SchemaString) GetDeleted() bool {
+	if o == nil || o.Deleted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaString) GetDeletedOk() (*bool, bool) {
+	if o == nil || o.Deleted == nil {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *SchemaString) HasDeleted() bool {
+	if o != nil && o.Deleted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *SchemaString) SetDeleted(v bool) {
+	o.Deleted = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SchemaString) Redact() {
+	o.recurseRedact(o.Subject)
+	o.recurseRedact(o.Version)
+	o.recurseRedact(o.Guid)
 	o.recurseRedact(o.SchemaType)
 	o.recurseRedact(o.Schema)
 	o.recurseRedact(o.References)
+	o.recurseRedact(o.Metadata)
+	o.recurseRedact(o.RuleSet)
+	o.recurseRedact(o.SchemaTags)
 	o.recurseRedact(o.MaxId)
+	o.recurseRedact(o.Ts)
+	o.recurseRedact(o.Deleted)
 }
 
 func (o *SchemaString) recurseRedact(v interface{}) {
@@ -231,6 +531,15 @@ func (o SchemaString) zeroField(v interface{}) {
 
 func (o SchemaString) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Subject != nil {
+		toSerialize["subject"] = o.Subject
+	}
+	if o.Version != nil {
+		toSerialize["version"] = o.Version
+	}
+	if o.Guid != nil {
+		toSerialize["guid"] = o.Guid
+	}
 	if o.SchemaType != nil {
 		toSerialize["schemaType"] = o.SchemaType
 	}
@@ -240,8 +549,23 @@ func (o SchemaString) MarshalJSON() ([]byte, error) {
 	if o.References != nil {
 		toSerialize["references"] = o.References
 	}
+	if o.Metadata.IsSet() {
+		toSerialize["metadata"] = o.Metadata.Get()
+	}
+	if o.RuleSet.IsSet() {
+		toSerialize["ruleSet"] = o.RuleSet.Get()
+	}
+	if o.SchemaTags != nil {
+		toSerialize["schemaTags"] = o.SchemaTags
+	}
 	if o.MaxId != nil {
 		toSerialize["maxId"] = o.MaxId
+	}
+	if o.Ts != nil {
+		toSerialize["ts"] = o.Ts
+	}
+	if o.Deleted != nil {
+		toSerialize["deleted"] = o.Deleted
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

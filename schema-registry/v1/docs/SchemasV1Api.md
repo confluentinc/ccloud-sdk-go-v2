@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## GetSchema
 
-> SchemaString GetSchema(ctx, id).Subject(subject).Format(format).FetchMaxId(fetchMaxId).Execute()
+> SchemaString GetSchema(ctx, id).Subject(subject).Format(format).Execute()
 
 Get schema string by ID
 
@@ -36,12 +36,11 @@ import (
 func main() {
     id := int32(56) // int32 | Globally unique identifier of the schema
     subject := "subject_example" // string | Name of the subject (optional)
-    format := "format_example" // string | Desired output format, dependent on schema type (optional) (default to "")
-    fetchMaxId := true // bool | Whether to fetch the maximum schema identifier that exists (optional) (default to false)
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SchemasV1Api.GetSchema(context.Background(), id).Subject(subject).Format(format).FetchMaxId(fetchMaxId).Execute()
+    resp, r, err := api_client.SchemasV1Api.GetSchema(context.Background(), id).Subject(subject).Format(format).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SchemasV1Api.GetSchema``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,8 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **subject** | **string** | Name of the subject | 
- **format** | **string** | Desired output format, dependent on schema type | [default to &quot;&quot;]
- **fetchMaxId** | **bool** | Whether to fetch the maximum schema identifier that exists | [default to false]
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
 
 ### Return type
 
@@ -112,7 +110,7 @@ import (
 func main() {
     id := int32(56) // int32 | Globally unique identifier of the schema
     subject := "subject_example" // string | Name of the subject (optional)
-    format := "format_example" // string | Desired output format, dependent on schema type (optional) (default to "")
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -143,7 +141,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **subject** | **string** | Name of the subject | 
- **format** | **string** | Desired output format, dependent on schema type | [default to &quot;&quot;]
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
 
 ### Return type
 
@@ -226,7 +224,7 @@ Other parameters are passed through a pointer to a apiGetSchemaTypesRequest stru
 
 ## GetSchemas
 
-> []Schema GetSchemas(ctx).SubjectPrefix(subjectPrefix).Deleted(deleted).LatestOnly(latestOnly).Offset(offset).Limit(limit).Execute()
+> []Schema GetSchemas(ctx).SubjectPrefix(subjectPrefix).Aliases(aliases).Deleted(deleted).LatestOnly(latestOnly).RuleType(ruleType).Offset(offset).Limit(limit).Execute()
 
 List schemas
 
@@ -246,14 +244,16 @@ import (
 
 func main() {
     subjectPrefix := "subjectPrefix_example" // string | Filters results by the respective subject prefix (optional) (default to "")
+    aliases := true // bool | Whether to include aliases in the search (optional) (default to false)
     deleted := true // bool | Whether to return soft deleted schemas (optional) (default to false)
     latestOnly := true // bool | Whether to return latest schema versions only for each matching subject (optional) (default to false)
+    ruleType := "ruleType_example" // string | Filters results by the given rule type (optional) (default to "")
     offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
     limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SchemasV1Api.GetSchemas(context.Background()).SubjectPrefix(subjectPrefix).Deleted(deleted).LatestOnly(latestOnly).Offset(offset).Limit(limit).Execute()
+    resp, r, err := api_client.SchemasV1Api.GetSchemas(context.Background()).SubjectPrefix(subjectPrefix).Aliases(aliases).Deleted(deleted).LatestOnly(latestOnly).RuleType(ruleType).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SchemasV1Api.GetSchemas``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,8 +275,10 @@ Other parameters are passed through a pointer to a apiGetSchemasRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subjectPrefix** | **string** | Filters results by the respective subject prefix | [default to &quot;&quot;]
+ **aliases** | **bool** | Whether to include aliases in the search | [default to false]
  **deleted** | **bool** | Whether to return soft deleted schemas | [default to false]
  **latestOnly** | **bool** | Whether to return latest schema versions only for each matching subject | [default to false]
+ **ruleType** | **string** | Filters results by the given rule type | [default to &quot;&quot;]
  **offset** | **int32** | Pagination offset for results | [default to 0]
  **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
@@ -300,7 +302,7 @@ Name | Type | Description  | Notes
 
 ## GetSubjects
 
-> []string GetSubjects(ctx, id).Subject(subject).Deleted(deleted).Execute()
+> []string GetSubjects(ctx, id).Subject(subject).Format(format).Deleted(deleted).Offset(offset).Limit(limit).Execute()
 
 List subjects associated to schema ID
 
@@ -321,11 +323,14 @@ import (
 func main() {
     id := int32(56) // int32 | Globally unique identifier of the schema
     subject := "subject_example" // string | Filters results by the respective subject (optional)
+    format := "format_example" // string | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \" \" (default) or \"resolved\". For PROTOBUF schemas, valid values are: \" \" (default), \"ignore_extensions\", or \"serialized\" (The parameter does not apply to JSON schemas.) (optional) (default to "")
     deleted := true // bool | Whether to include subjects where the schema was deleted (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SchemasV1Api.GetSubjects(context.Background(), id).Subject(subject).Deleted(deleted).Execute()
+    resp, r, err := api_client.SchemasV1Api.GetSubjects(context.Background(), id).Subject(subject).Format(format).Deleted(deleted).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SchemasV1Api.GetSubjects``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -352,7 +357,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **subject** | **string** | Filters results by the respective subject | 
+ **format** | **string** | Desired output format, dependent on schema type. For AVRO schemas, valid values are: \&quot; \&quot; (default) or \&quot;resolved\&quot;. For PROTOBUF schemas, valid values are: \&quot; \&quot; (default), \&quot;ignore_extensions\&quot;, or \&quot;serialized\&quot; (The parameter does not apply to JSON schemas.) | [default to &quot;&quot;]
  **deleted** | **bool** | Whether to include subjects where the schema was deleted | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 
@@ -374,7 +382,7 @@ Name | Type | Description  | Notes
 
 ## GetVersions
 
-> []SubjectVersion GetVersions(ctx, id).Subject(subject).Deleted(deleted).Execute()
+> []SubjectVersion GetVersions(ctx, id).Subject(subject).Deleted(deleted).Offset(offset).Limit(limit).Execute()
 
 List subject-versions associated to schema ID
 
@@ -396,10 +404,12 @@ func main() {
     id := int32(56) // int32 | Globally unique identifier of the schema
     subject := "subject_example" // string | Filters results by the respective subject (optional)
     deleted := true // bool | Whether to include subject versions where the schema was deleted (optional)
+    offset := int32(56) // int32 | Pagination offset for results (optional) (default to 0)
+    limit := int32(56) // int32 | Pagination size for results. Ignored if negative (optional) (default to -1)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SchemasV1Api.GetVersions(context.Background(), id).Subject(subject).Deleted(deleted).Execute()
+    resp, r, err := api_client.SchemasV1Api.GetVersions(context.Background(), id).Subject(subject).Deleted(deleted).Offset(offset).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SchemasV1Api.GetVersions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -427,6 +437,8 @@ Name | Type | Description  | Notes
 
  **subject** | **string** | Filters results by the respective subject | 
  **deleted** | **bool** | Whether to include subject versions where the schema was deleted | 
+ **offset** | **int32** | Pagination offset for results | [default to 0]
+ **limit** | **int32** | Pagination size for results. Ignored if negative | [default to -1]
 
 ### Return type
 

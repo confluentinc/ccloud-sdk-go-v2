@@ -44,9 +44,11 @@ type ExporterReference struct {
 	Context *string `json:"context,omitempty"`
 	// Name of each exporter subject
 	Subjects *[]string `json:"subjects,omitempty"`
+	// Format string for the KEK name in the destination cluster, which may contain ${kek} as a placeholder for the originating KEK name. For example, dc_${kek} for the KEK aws_key will map to the destination KEK name dc_aws_key.
+	KekRenameFormat *string `json:"kekRenameFormat,omitempty"`
 	// Format string for the subject name in the destination cluster, which may contain ${subject} as a placeholder for the originating subject name. For example, dc_${subject} for the subject orders will map to the destination subject name dc_orders.
 	SubjectRenameFormat *string `json:"subjectRenameFormat,omitempty"`
-	// The map containing exporter’s configurations
+	// The map containing exporter's configurations
 	Config *map[string]string `json:"config,omitempty"`
 }
 
@@ -195,6 +197,38 @@ func (o *ExporterReference) SetSubjects(v []string) {
 	o.Subjects = &v
 }
 
+// GetKekRenameFormat returns the KekRenameFormat field value if set, zero value otherwise.
+func (o *ExporterReference) GetKekRenameFormat() string {
+	if o == nil || o.KekRenameFormat == nil {
+		var ret string
+		return ret
+	}
+	return *o.KekRenameFormat
+}
+
+// GetKekRenameFormatOk returns a tuple with the KekRenameFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExporterReference) GetKekRenameFormatOk() (*string, bool) {
+	if o == nil || o.KekRenameFormat == nil {
+		return nil, false
+	}
+	return o.KekRenameFormat, true
+}
+
+// HasKekRenameFormat returns a boolean if a field has been set.
+func (o *ExporterReference) HasKekRenameFormat() bool {
+	if o != nil && o.KekRenameFormat != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKekRenameFormat gets a reference to the given string and assigns it to the KekRenameFormat field.
+func (o *ExporterReference) SetKekRenameFormat(v string) {
+	o.KekRenameFormat = &v
+}
+
 // GetSubjectRenameFormat returns the SubjectRenameFormat field value if set, zero value otherwise.
 func (o *ExporterReference) GetSubjectRenameFormat() string {
 	if o == nil || o.SubjectRenameFormat == nil {
@@ -265,6 +299,7 @@ func (o *ExporterReference) Redact() {
 	o.recurseRedact(o.ContextType)
 	o.recurseRedact(o.Context)
 	o.recurseRedact(o.Subjects)
+	o.recurseRedact(o.KekRenameFormat)
 	o.recurseRedact(o.SubjectRenameFormat)
 	o.recurseRedact(o.Config)
 }
@@ -312,6 +347,9 @@ func (o ExporterReference) MarshalJSON() ([]byte, error) {
 	}
 	if o.Subjects != nil {
 		toSerialize["subjects"] = o.Subjects
+	}
+	if o.KekRenameFormat != nil {
+		toSerialize["kekRenameFormat"] = o.KekRenameFormat
 	}
 	if o.SubjectRenameFormat != nil {
 		toSerialize["subjectRenameFormat"] = o.SubjectRenameFormat

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**KmsType** | Pointer to **string** |  | [optional] 
-**KmsKeyId** | Pointer to **string** |  | [optional] 
-**KmsProps** | Pointer to **map[string]string** |  | [optional] 
-**Doc** | Pointer to **string** |  | [optional] 
-**Shared** | Pointer to **bool** |  | [optional] 
-**Ts** | Pointer to **int64** |  | [optional] 
-**Deleted** | Pointer to **bool** |  | [optional] 
+**Name** | Pointer to **string** | Name of the kek | [optional] 
+**KmsType** | Pointer to **string** | KMS type of the kek | [optional] 
+**KmsKeyId** | Pointer to **string** | KMS key ID of the kek | [optional] 
+**KmsProps** | Pointer to **map[string]string** | Properties of the kek | [optional] 
+**Doc** | Pointer to **string** | Description of the kek | [optional] 
+**Shared** | Pointer to **bool** | Whether the kek is shared | [optional] 
+**Ts** | Pointer to **int64** | Timestamp of the kek | [optional] 
+**Deleted** | Pointer to **bool** | Whether the kek is deleted | [optional] 
 
 ## Methods
 

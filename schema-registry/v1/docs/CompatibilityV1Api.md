@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## TestCompatibilityBySubjectName
 
-> CompatibilityCheckResponse TestCompatibilityBySubjectName(ctx, subject, version).RegisterSchemaRequest(registerSchemaRequest).Verbose(verbose).Execute()
+> CompatibilityCheckResponse TestCompatibilityBySubjectName(ctx, subject, version).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Verbose(verbose).Execute()
 
 Test schema compatibility against a particular schema subject-version
 
@@ -33,11 +33,12 @@ func main() {
     subject := "subject_example" // string | Subject of the schema version against which compatibility is to be tested
     version := "version_example" // string | Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
     registerSchemaRequest := *openapiclient.NewRegisterSchemaRequest() // RegisterSchemaRequest | Schema
+    normalize := true // bool | Whether to normalize the given schema (optional)
     verbose := true // bool | Whether to return detailed error messages (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CompatibilityV1Api.TestCompatibilityBySubjectName(context.Background(), subject, version).RegisterSchemaRequest(registerSchemaRequest).Verbose(verbose).Execute()
+    resp, r, err := api_client.CompatibilityV1Api.TestCompatibilityBySubjectName(context.Background(), subject, version).RegisterSchemaRequest(registerSchemaRequest).Normalize(normalize).Verbose(verbose).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CompatibilityV1Api.TestCompatibilityBySubjectName``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 
 
  **registerSchemaRequest** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md) | Schema | 
+ **normalize** | **bool** | Whether to normalize the given schema | 
  **verbose** | **bool** | Whether to return detailed error messages | 
 
 ### Return type

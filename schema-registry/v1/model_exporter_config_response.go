@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// ExporterConfigResponse The map containing exporter’s configurations
+// ExporterConfigResponse The map containing exporter's configurations
 type ExporterConfigResponse struct {
 	// Config SR URL
 	SchemaRegistryUrl *string `json:"schema.registry.url,omitempty"`

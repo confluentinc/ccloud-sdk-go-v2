@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KekName** | Pointer to **string** |  | [optional] 
-**Subject** | Pointer to **string** |  | [optional] 
-**Version** | Pointer to **int32** |  | [optional] 
-**Algorithm** | Pointer to **string** |  | [optional] 
-**EncryptedKeyMaterial** | Pointer to **string** |  | [optional] 
-**KeyMaterial** | Pointer to **string** |  | [optional] 
-**Ts** | Pointer to **int64** |  | [optional] 
-**Deleted** | Pointer to **bool** |  | [optional] 
+**KekName** | Pointer to **string** | Kek name of the dek | [optional] 
+**Subject** | Pointer to **string** | Subject of the dek | [optional] 
+**Version** | Pointer to **int32** | Version of the dek | [optional] 
+**Algorithm** | Pointer to **string** | Algorithm of the dek | [optional] 
+**EncryptedKeyMaterial** | Pointer to **string** | Encrypted key material of the dek | [optional] 
+**KeyMaterial** | Pointer to **string** | Raw key material of the dek | [optional] 
+**Ts** | Pointer to **int64** | Timestamp of the dek | [optional] 
+**Deleted** | Pointer to **bool** | Whether the dek is deleted | [optional] 
 
 ## Methods
 

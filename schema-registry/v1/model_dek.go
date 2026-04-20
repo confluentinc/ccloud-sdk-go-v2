@@ -36,14 +36,22 @@ import (
 
 // Dek struct for Dek
 type Dek struct {
-	KekName              *string `json:"kekName,omitempty"`
-	Subject              *string `json:"subject,omitempty"`
-	Version              *int32  `json:"version,omitempty"`
-	Algorithm            *string `json:"algorithm,omitempty"`
+	// Kek name of the dek
+	KekName *string `json:"kekName,omitempty"`
+	// Subject of the dek
+	Subject *string `json:"subject,omitempty"`
+	// Version of the dek
+	Version *int32 `json:"version,omitempty"`
+	// Algorithm of the dek
+	Algorithm *string `json:"algorithm,omitempty"`
+	// Encrypted key material of the dek
 	EncryptedKeyMaterial *string `json:"encryptedKeyMaterial,omitempty"`
-	KeyMaterial          *string `json:"keyMaterial,omitempty"`
-	Ts                   *int64  `json:"ts,omitempty"`
-	Deleted              *bool   `json:"deleted,omitempty"`
+	// Raw key material of the dek
+	KeyMaterial *string `json:"keyMaterial,omitempty"`
+	// Timestamp of the dek
+	Ts *int64 `json:"ts,omitempty"`
+	// Whether the dek is deleted
+	Deleted *bool `json:"deleted,omitempty"`
 }
 
 // NewDek instantiates a new Dek object

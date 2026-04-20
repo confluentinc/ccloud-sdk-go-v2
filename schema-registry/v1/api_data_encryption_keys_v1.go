@@ -188,9 +188,9 @@ func (r ApiCreateDekRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 CreateDek Create a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiCreateDekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiCreateDekRequest
 */
 func (a *DataEncryptionKeysV1ApiService) CreateDek(ctx _context.Context, name string) ApiCreateDekRequest {
 	return ApiCreateDekRequest{
@@ -201,7 +201,8 @@ func (a *DataEncryptionKeysV1ApiService) CreateDek(ctx _context.Context, name st
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DataEncryptionKeysV1ApiService) CreateDekExecute(r ApiCreateDekRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -312,11 +313,11 @@ func (r ApiDeleteDekVersionRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteDekVersion Delete a dek version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiDeleteDekVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiDeleteDekVersionRequest
 */
 func (a *DataEncryptionKeysV1ApiService) DeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiDeleteDekVersionRequest {
 	return ApiDeleteDekVersionRequest{
@@ -431,10 +432,10 @@ func (r ApiDeleteDekVersionsRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteDekVersions Delete all versions of a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiDeleteDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiDeleteDekVersionsRequest
 */
 func (a *DataEncryptionKeysV1ApiService) DeleteDekVersions(ctx _context.Context, name string, subject string) ApiDeleteDekVersionsRequest {
 	return ApiDeleteDekVersionsRequest{
@@ -547,10 +548,10 @@ func (r ApiGetDekRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 GetDek Get a dek by subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiGetDekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiGetDekRequest
 */
 func (a *DataEncryptionKeysV1ApiService) GetDek(ctx _context.Context, name string, subject string) ApiGetDekRequest {
 	return ApiGetDekRequest{
@@ -562,7 +563,8 @@ func (a *DataEncryptionKeysV1ApiService) GetDek(ctx _context.Context, name strin
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DataEncryptionKeysV1ApiService) GetDekExecute(r ApiGetDekRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -675,11 +677,11 @@ func (r ApiGetDekByVersionRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 GetDekByVersion Get a dek by subject and version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiGetDekByVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiGetDekByVersionRequest
 */
 func (a *DataEncryptionKeysV1ApiService) GetDekByVersion(ctx _context.Context, name string, subject string, version string) ApiGetDekByVersionRequest {
 	return ApiGetDekByVersionRequest{
@@ -692,7 +694,8 @@ func (a *DataEncryptionKeysV1ApiService) GetDekByVersion(ctx _context.Context, n
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DataEncryptionKeysV1ApiService) GetDekByVersionExecute(r ApiGetDekByVersionRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -782,6 +785,8 @@ type ApiGetDekSubjectsRequest struct {
 	ApiService DataEncryptionKeysV1Api
 	name       string
 	deleted    *bool
+	offset     *int32
+	limit      *int32
 }
 
 // Whether to include deleted keys
@@ -790,16 +795,28 @@ func (r ApiGetDekSubjectsRequest) Deleted(deleted bool) ApiGetDekSubjectsRequest
 	return r
 }
 
+// Pagination offset for results
+func (r ApiGetDekSubjectsRequest) Offset(offset int32) ApiGetDekSubjectsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Pagination size for results. Ignored if negative
+func (r ApiGetDekSubjectsRequest) Limit(limit int32) ApiGetDekSubjectsRequest {
+	r.limit = &limit
+	return r
+}
+
 func (r ApiGetDekSubjectsRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.GetDekSubjectsExecute(r)
 }
 
 /*
-GetDekSubjects Get a list of dek subjects.
+GetDekSubjects Get a list of dek subjects
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiGetDekSubjectsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiGetDekSubjectsRequest
 */
 func (a *DataEncryptionKeysV1ApiService) GetDekSubjects(ctx _context.Context, name string) ApiGetDekSubjectsRequest {
 	return ApiGetDekSubjectsRequest{
@@ -810,7 +827,8 @@ func (a *DataEncryptionKeysV1ApiService) GetDekSubjects(ctx _context.Context, na
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DataEncryptionKeysV1ApiService) GetDekSubjectsExecute(r ApiGetDekSubjectsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -835,6 +853,12 @@ func (a *DataEncryptionKeysV1ApiService) GetDekSubjectsExecute(r ApiGetDekSubjec
 
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
+	}
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -897,6 +921,8 @@ type ApiGetDekVersionsRequest struct {
 	subject    string
 	algorithm  *string
 	deleted    *bool
+	offset     *int32
+	limit      *int32
 }
 
 // Algorithm of the dek
@@ -911,17 +937,29 @@ func (r ApiGetDekVersionsRequest) Deleted(deleted bool) ApiGetDekVersionsRequest
 	return r
 }
 
+// Pagination offset for results
+func (r ApiGetDekVersionsRequest) Offset(offset int32) ApiGetDekVersionsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Pagination size for results. Ignored if negative
+func (r ApiGetDekVersionsRequest) Limit(limit int32) ApiGetDekVersionsRequest {
+	r.limit = &limit
+	return r
+}
+
 func (r ApiGetDekVersionsRequest) Execute() ([]int32, *_nethttp.Response, error) {
 	return r.ApiService.GetDekVersionsExecute(r)
 }
 
 /*
-GetDekVersions List versions of dek.
+GetDekVersions List versions of dek
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiGetDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiGetDekVersionsRequest
 */
 func (a *DataEncryptionKeysV1ApiService) GetDekVersions(ctx _context.Context, name string, subject string) ApiGetDekVersionsRequest {
 	return ApiGetDekVersionsRequest{
@@ -933,7 +971,8 @@ func (a *DataEncryptionKeysV1ApiService) GetDekVersions(ctx _context.Context, na
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *DataEncryptionKeysV1ApiService) GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -962,6 +1001,12 @@ func (a *DataEncryptionKeysV1ApiService) GetDekVersionsExecute(r ApiGetDekVersio
 	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
+	}
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1039,11 +1084,11 @@ func (r ApiUndeleteDekVersionRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteDekVersion Undelete a dek version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiUndeleteDekVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiUndeleteDekVersionRequest
 */
 func (a *DataEncryptionKeysV1ApiService) UndeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiUndeleteDekVersionRequest {
 	return ApiUndeleteDekVersionRequest{
@@ -1148,10 +1193,10 @@ func (r ApiUndeleteDekVersionsRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteDekVersions Undelete all versions of a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiUndeleteDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiUndeleteDekVersionsRequest
 */
 func (a *DataEncryptionKeysV1ApiService) UndeleteDekVersions(ctx _context.Context, name string, subject string) ApiUndeleteDekVersionsRequest {
 	return ApiUndeleteDekVersionsRequest{

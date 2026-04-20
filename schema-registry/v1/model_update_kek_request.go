@@ -36,9 +36,12 @@ import (
 
 // UpdateKekRequest struct for UpdateKekRequest
 type UpdateKekRequest struct {
+	// Properties of the kek
 	KmsProps *map[string]string `json:"kmsProps,omitempty"`
-	Doc      *string            `json:"doc,omitempty"`
-	Shared   *bool              `json:"shared,omitempty"`
+	// Description of the kek
+	Doc *string `json:"doc,omitempty"`
+	// Whether the kek is shared
+	Shared *bool `json:"shared,omitempty"`
 }
 
 // NewUpdateKekRequest instantiates a new UpdateKekRequest object

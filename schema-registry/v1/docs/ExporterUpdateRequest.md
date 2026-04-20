@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **ContextType** | Pointer to **string** | Context type of the exporter. One of CUSTOM, NONE or AUTO (default) | [optional] 
 **Context** | Pointer to **string** | Customized context of the exporter if contextType equals CUSTOM. | [optional] 
 **Subjects** | Pointer to **[]string** | Name of each exporter subject | [optional] 
+**KekRenameFormat** | Pointer to **string** | Format string for the KEK name in the destination cluster, which may contain ${kek} as a placeholder for the originating KEK name. For example, dc_${kek} for the KEK aws_key will map to the destination KEK name dc_aws_key. | [optional] 
 **SubjectRenameFormat** | Pointer to **string** | Format string for the subject name in the destination cluster, which may contain ${subject} as a placeholder for the originating subject name. For example, dc_${subject} for the subject orders will map to the destination subject name dc_orders. | [optional] 
-**Config** | Pointer to **map[string]string** | The map containing exporter’s configurations | [optional] 
+**Config** | Pointer to **map[string]string** | The map containing exporter&#39;s configurations | [optional] 
 
 ## Methods
 
@@ -103,6 +104,31 @@ SetSubjects sets Subjects field to given value.
 `func (o *ExporterUpdateRequest) HasSubjects() bool`
 
 HasSubjects returns a boolean if a field has been set.
+
+### GetKekRenameFormat
+
+`func (o *ExporterUpdateRequest) GetKekRenameFormat() string`
+
+GetKekRenameFormat returns the KekRenameFormat field if non-nil, zero value otherwise.
+
+### GetKekRenameFormatOk
+
+`func (o *ExporterUpdateRequest) GetKekRenameFormatOk() (*string, bool)`
+
+GetKekRenameFormatOk returns a tuple with the KekRenameFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKekRenameFormat
+
+`func (o *ExporterUpdateRequest) SetKekRenameFormat(v string)`
+
+SetKekRenameFormat sets KekRenameFormat field to given value.
+
+### HasKekRenameFormat
+
+`func (o *ExporterUpdateRequest) HasKekRenameFormat() bool`
+
+HasKekRenameFormat returns a boolean if a field has been set.
 
 ### GetSubjectRenameFormat
 
