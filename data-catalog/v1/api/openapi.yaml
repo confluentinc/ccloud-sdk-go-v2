@@ -4452,6 +4452,22 @@ components:
       x-summary: Internal Server Error
   schemas:
     Tag:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes: '{}'
       properties:
         typeName:
           description: The tag name
@@ -5757,6 +5773,11 @@ components:
           $ref: '#/components/schemas/ErrorMessage'
       type: object
     BusinessMetadata:
+      example:
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        attributes: '{}'
       properties:
         typeName:
           description: The business metadata name

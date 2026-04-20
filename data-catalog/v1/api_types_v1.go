@@ -208,14 +208,14 @@ type TypesV1Api interface {
 type TypesV1ApiService service
 
 type ApiCreateBusinessMetadataDefsRequest struct {
-	ctx        _context.Context
-	ApiService TypesV1Api
-	array      *Array
+	ctx                 _context.Context
+	ApiService          TypesV1Api
+	businessMetadataDef *[]BusinessMetadataDef
 }
 
 // The business metadata definitions to create
-func (r ApiCreateBusinessMetadataDefsRequest) Array(array Array) ApiCreateBusinessMetadataDefsRequest {
-	r.array = &array
+func (r ApiCreateBusinessMetadataDefsRequest) BusinessMetadataDef(businessMetadataDef []BusinessMetadataDef) ApiCreateBusinessMetadataDefsRequest {
+	r.businessMetadataDef = &businessMetadataDef
 	return r
 }
 
@@ -282,7 +282,7 @@ func (a *TypesV1ApiService) CreateBusinessMetadataDefsExecute(r ApiCreateBusines
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.businessMetadataDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -362,12 +362,12 @@ func (a *TypesV1ApiService) CreateBusinessMetadataDefsExecute(r ApiCreateBusines
 type ApiCreateTagDefsRequest struct {
 	ctx        _context.Context
 	ApiService TypesV1Api
-	array      *Array
+	tagDef     *[]TagDef
 }
 
 // The tag definitions to create
-func (r ApiCreateTagDefsRequest) Array(array Array) ApiCreateTagDefsRequest {
-	r.array = &array
+func (r ApiCreateTagDefsRequest) TagDef(tagDef []TagDef) ApiCreateTagDefsRequest {
+	r.tagDef = &tagDef
 	return r
 }
 
@@ -434,7 +434,7 @@ func (a *TypesV1ApiService) CreateTagDefsExecute(r ApiCreateTagDefsRequest) ([]T
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.tagDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1412,14 +1412,14 @@ func (a *TypesV1ApiService) GetTagDefByNameExecute(r ApiGetTagDefByNameRequest) 
 }
 
 type ApiUpdateBusinessMetadataDefsRequest struct {
-	ctx        _context.Context
-	ApiService TypesV1Api
-	array      *Array
+	ctx                 _context.Context
+	ApiService          TypesV1Api
+	businessMetadataDef *[]BusinessMetadataDef
 }
 
 // The business metadata definitions to update
-func (r ApiUpdateBusinessMetadataDefsRequest) Array(array Array) ApiUpdateBusinessMetadataDefsRequest {
-	r.array = &array
+func (r ApiUpdateBusinessMetadataDefsRequest) BusinessMetadataDef(businessMetadataDef []BusinessMetadataDef) ApiUpdateBusinessMetadataDefsRequest {
+	r.businessMetadataDef = &businessMetadataDef
 	return r
 }
 
@@ -1486,7 +1486,7 @@ func (a *TypesV1ApiService) UpdateBusinessMetadataDefsExecute(r ApiUpdateBusines
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.businessMetadataDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1566,12 +1566,12 @@ func (a *TypesV1ApiService) UpdateBusinessMetadataDefsExecute(r ApiUpdateBusines
 type ApiUpdateTagDefsRequest struct {
 	ctx        _context.Context
 	ApiService TypesV1Api
-	array      *Array
+	tagDef     *[]TagDef
 }
 
 // The tag definitions to update
-func (r ApiUpdateTagDefsRequest) Array(array Array) ApiUpdateTagDefsRequest {
-	r.array = &array
+func (r ApiUpdateTagDefsRequest) TagDef(tagDef []TagDef) ApiUpdateTagDefsRequest {
+	r.tagDef = &tagDef
 	return r
 }
 
@@ -1638,7 +1638,7 @@ func (a *TypesV1ApiService) UpdateTagDefsExecute(r ApiUpdateTagDefsRequest) ([]T
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.tagDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

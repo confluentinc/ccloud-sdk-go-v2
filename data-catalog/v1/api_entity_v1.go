@@ -217,14 +217,14 @@ type EntityV1Api interface {
 type EntityV1ApiService service
 
 type ApiCreateBusinessMetadataRequest struct {
-	ctx        _context.Context
-	ApiService EntityV1Api
-	array      *Array
+	ctx              _context.Context
+	ApiService       EntityV1Api
+	businessMetadata *[]BusinessMetadata
 }
 
 // The business metadata
-func (r ApiCreateBusinessMetadataRequest) Array(array Array) ApiCreateBusinessMetadataRequest {
-	r.array = &array
+func (r ApiCreateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiCreateBusinessMetadataRequest {
+	r.businessMetadata = &businessMetadata
 	return r
 }
 
@@ -291,7 +291,7 @@ func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.businessMetadata
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -371,12 +371,12 @@ func (a *EntityV1ApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMe
 type ApiCreateTagsRequest struct {
 	ctx        _context.Context
 	ApiService EntityV1Api
-	array      *Array
+	tag        *[]Tag
 }
 
 // The tags
-func (r ApiCreateTagsRequest) Array(array Array) ApiCreateTagsRequest {
-	r.array = &array
+func (r ApiCreateTagsRequest) Tag(tag []Tag) ApiCreateTagsRequest {
+	r.tag = &tag
 	return r
 }
 
@@ -443,7 +443,7 @@ func (a *EntityV1ApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.tag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1483,14 +1483,14 @@ func (a *EntityV1ApiService) PartialEntityUpdateExecute(r ApiPartialEntityUpdate
 }
 
 type ApiUpdateBusinessMetadataRequest struct {
-	ctx        _context.Context
-	ApiService EntityV1Api
-	array      *Array
+	ctx              _context.Context
+	ApiService       EntityV1Api
+	businessMetadata *[]BusinessMetadata
 }
 
 // The business metadata
-func (r ApiUpdateBusinessMetadataRequest) Array(array Array) ApiUpdateBusinessMetadataRequest {
-	r.array = &array
+func (r ApiUpdateBusinessMetadataRequest) BusinessMetadata(businessMetadata []BusinessMetadata) ApiUpdateBusinessMetadataRequest {
+	r.businessMetadata = &businessMetadata
 	return r
 }
 
@@ -1557,7 +1557,7 @@ func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.businessMetadata
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1637,12 +1637,12 @@ func (a *EntityV1ApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMe
 type ApiUpdateTagsRequest struct {
 	ctx        _context.Context
 	ApiService EntityV1Api
-	array      *Array
+	tag        *[]Tag
 }
 
 // The tags
-func (r ApiUpdateTagsRequest) Array(array Array) ApiUpdateTagsRequest {
-	r.array = &array
+func (r ApiUpdateTagsRequest) Tag(tag []Tag) ApiUpdateTagsRequest {
+	r.tag = &tag
 	return r
 }
 
@@ -1709,7 +1709,7 @@ func (a *EntityV1ApiService) UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.array
+	localVarPostBody = r.tag
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

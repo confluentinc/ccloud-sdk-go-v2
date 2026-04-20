@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateBusinessMetadata
 
-> []BusinessMetadataResponse CreateBusinessMetadata(ctx).Array(array).Execute()
+> []BusinessMetadataResponse CreateBusinessMetadata(ctx).BusinessMetadata(businessMetadata).Execute()
 
 Bulk Create Business Metadata
 
@@ -38,11 +38,11 @@ import (
 )
 
 func main() {
-    array := TODO // Array | The business metadata (optional)
+    businessMetadata := []openapiclient.BusinessMetadata{*openapiclient.NewBusinessMetadata()} // []BusinessMetadata | The business metadata (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EntityV1Api.CreateBusinessMetadata(context.Background()).Array(array).Execute()
+    resp, r, err := api_client.EntityV1Api.CreateBusinessMetadata(context.Background()).BusinessMetadata(businessMetadata).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.CreateBusinessMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiCreateBusinessMetadataRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **array** | [**Array**](Array.md) | The business metadata | 
+ **businessMetadata** | [**[]BusinessMetadata**](BusinessMetadata.md) | The business metadata | 
 
 ### Return type
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## CreateTags
 
-> []TagResponse CreateTags(ctx).Array(array).Execute()
+> []TagResponse CreateTags(ctx).Tag(tag).Execute()
 
 Bulk Create Tags
 
@@ -104,11 +104,11 @@ import (
 )
 
 func main() {
-    array := TODO // Array | The tags (optional)
+    tag := []openapiclient.Tag{*openapiclient.NewTag()} // []Tag | The tags (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EntityV1Api.CreateTags(context.Background()).Array(array).Execute()
+    resp, r, err := api_client.EntityV1Api.CreateTags(context.Background()).Tag(tag).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.CreateTags``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +129,7 @@ Other parameters are passed through a pointer to a apiCreateTagsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **array** | [**Array**](Array.md) | The tags | 
+ **tag** | [**[]Tag**](Tag.md) | The tags | 
 
 ### Return type
 
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 
 ## UpdateBusinessMetadata
 
-> []BusinessMetadataResponse UpdateBusinessMetadata(ctx).Array(array).Execute()
+> []BusinessMetadataResponse UpdateBusinessMetadata(ctx).BusinessMetadata(businessMetadata).Execute()
 
 Bulk Update Business Metadata
 
@@ -607,11 +607,11 @@ import (
 )
 
 func main() {
-    array := TODO // Array | The business metadata (optional)
+    businessMetadata := []openapiclient.BusinessMetadata{*openapiclient.NewBusinessMetadata()} // []BusinessMetadata | The business metadata (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EntityV1Api.UpdateBusinessMetadata(context.Background()).Array(array).Execute()
+    resp, r, err := api_client.EntityV1Api.UpdateBusinessMetadata(context.Background()).BusinessMetadata(businessMetadata).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.UpdateBusinessMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -632,7 +632,7 @@ Other parameters are passed through a pointer to a apiUpdateBusinessMetadataRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **array** | [**Array**](Array.md) | The business metadata | 
+ **businessMetadata** | [**[]BusinessMetadata**](BusinessMetadata.md) | The business metadata | 
 
 ### Return type
 
@@ -654,7 +654,7 @@ Name | Type | Description  | Notes
 
 ## UpdateTags
 
-> []TagResponse UpdateTags(ctx).Array(array).Execute()
+> []TagResponse UpdateTags(ctx).Tag(tag).Execute()
 
 Bulk Update Tags
 
@@ -673,11 +673,11 @@ import (
 )
 
 func main() {
-    array := TODO // Array | The tags (optional)
+    tag := []openapiclient.Tag{*openapiclient.NewTag()} // []Tag | The tags (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EntityV1Api.UpdateTags(context.Background()).Array(array).Execute()
+    resp, r, err := api_client.EntityV1Api.UpdateTags(context.Background()).Tag(tag).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntityV1Api.UpdateTags``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -698,7 +698,7 @@ Other parameters are passed through a pointer to a apiUpdateTagsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **array** | [**Array**](Array.md) | The tags | 
+ **tag** | [**[]Tag**](Tag.md) | The tags | 
 
 ### Return type
 
