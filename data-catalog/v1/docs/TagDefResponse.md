@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **SuperTypes** | Pointer to **[]string** | The supertypes | [optional] 
 **EntityTypes** | Pointer to **[]string** | The entity types | [optional] 
 **SubTypes** | Pointer to **[]string** | The subtypes | [optional] 
+**Color** | Pointer to **string** | Tag Definition color | [optional] 
 **Error** | Pointer to [**ErrorMessage**](ErrorMessage.md) |  | [optional] 
 
 ## Methods
@@ -440,6 +441,31 @@ SetSubTypes sets SubTypes field to given value.
 `func (o *TagDefResponse) HasSubTypes() bool`
 
 HasSubTypes returns a boolean if a field has been set.
+
+### GetColor
+
+`func (o *TagDefResponse) GetColor() string`
+
+GetColor returns the Color field if non-nil, zero value otherwise.
+
+### GetColorOk
+
+`func (o *TagDefResponse) GetColorOk() (*string, bool)`
+
+GetColorOk returns a tuple with the Color field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetColor
+
+`func (o *TagDefResponse) SetColor(v string)`
+
+SetColor sets Color field to given value.
+
+### HasColor
+
+`func (o *TagDefResponse) HasColor() bool`
+
+HasColor returns a boolean if a field has been set.
 
 ### GetError
 

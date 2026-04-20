@@ -721,14 +721,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -736,7 +736,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -749,7 +749,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D", headers=headers)
+          conn.request("DELETE", "/catalog/v1/types/businessmetadatadefs/{bmName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -763,7 +763,7 @@ paths:
             "method": "DELETE",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D",
+            "path": "/catalog/v1/types/businessmetadatadefs/{bmName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -788,7 +788,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -797,7 +797,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -887,14 +887,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -902,7 +902,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -915,7 +915,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D", headers=headers)
+          conn.request("GET", "/catalog/v1/types/businessmetadatadefs/{bmName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -929,7 +929,7 @@ paths:
             "method": "GET",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/types/businessmetadatadefs/%7BbmName%7D",
+            "path": "/catalog/v1/types/businessmetadatadefs/{bmName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -954,7 +954,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -963,7 +963,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/%7BbmName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/businessmetadatadefs/{bmName}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1426,14 +1426,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1441,7 +1441,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1454,7 +1454,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata", headers=headers)
+          conn.request("GET", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1468,7 +1468,7 @@ paths:
             "method": "GET",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata",
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1493,7 +1493,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1502,7 +1502,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -1595,14 +1595,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -1610,7 +1610,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -1623,7 +1623,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D", headers=headers)
+          conn.request("DELETE", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -1637,7 +1637,7 @@ paths:
             "method": "DELETE",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D",
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -1662,7 +1662,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -1671,7 +1671,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/businessmetadata/%7BbmName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2185,14 +2185,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2200,7 +2200,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2213,7 +2213,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D", headers=headers)
+          conn.request("GET", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2227,7 +2227,7 @@ paths:
             "method": "GET",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D",
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2252,7 +2252,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2261,7 +2261,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2362,14 +2362,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2377,7 +2377,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2390,7 +2390,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags", headers=headers)
+          conn.request("GET", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2404,7 +2404,7 @@ paths:
             "method": "GET",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags",
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2429,7 +2429,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2438,7 +2438,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -2529,13 +2529,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"referredEntities":{"property1":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true},"property2":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}},"entity":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{"property1":{},"property2":{}},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}}'
+            --data '{"referredEntities":{"property1":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true},"property2":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}},"entity":{"typeName":"string","attributes":{},"guid":"string","homeId":"string","isProxy":true,"isIncomplete":true,"provenanceType":0,"status":"ACTIVE","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"relationshipAttributes":{},"classifications":[{"typeName":"string","attributes":{},"entityGuid":"string","entityStatus":"ACTIVE","propagate":true,"validityPeriods":[{"startTime":"string","endTime":"string","timeZone":"string"}],"removePropagationsOnEntityDelete":true}],"meanings":[{"termGuid":"string","relationGuid":"string","description":"string","displayText":"string","expression":"string","createdBy":"string","steward":"string","source":"string","confidence":0,"status":"DISCOVERED"}],"customAttributes":{"property1":"string","property2":"string"},"businessAttributes":{"property1":{},"property2":{}},"labels":["string"],"proxy":true}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity")
             .put(body)
@@ -2554,43 +2554,7 @@ paths:
           \":\\\"string\\\",\\\"updatedBy\\\":\\\"string\\\",\\\"createTime\\\":0,\\\
           \"updateTime\\\":0,\\\"version\\\":0,\\\"relationshipAttributes\\\":{},\\\
           \"classifications\\\":[{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\
-          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"entityGuid\\\":\\\"string\\\
-          \",\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\
-          \":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"\
-          timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\
-          \"meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\
-          \"string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"\
-          string\\\",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\
-          \",\\\"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
-          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
-          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
-          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
-          \"],\\\"proxy\\\":true},\\\"property2\\\":{\\\"typeName\\\":\\\"string\\\
-          \",\\\"attributes\\\":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"\
-          string\\\",\\\"isProxy\\\":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\
-          \":0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"\
-          updatedBy\\\":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\
-          \"version\\\":0,\\\"relationshipAttributes\\\":{},\\\"classifications\\\"\
-          :[{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\":{\\\"property1\\\"\
-          :{},\\\"property2\\\":{}},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\
-          \":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"\
-          startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\
-          \":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\"\
-          meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\"\
-          string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"string\\\
-          \",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\",\\\
-          \"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
-          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
-          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
-          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
-          \"],\\\"proxy\\\":true}},\\\"entity\\\":{\\\"typeName\\\":\\\"string\\\"\
-          ,\\\"attributes\\\":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"string\\\
-          \",\\\"isProxy\\\":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\"\
-          :0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\
-          \":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\
-          \":0,\\\"relationshipAttributes\\\":{},\\\"classifications\\\":[{\\\"typeName\\\
-          \":\\\"string\\\",\\\"attributes\\\":{\\\"property1\\\":{},\\\"property2\\\
-          \":{}},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\
+          \":{},\\\"entityGuid\\\":\\\"string\\\",\\\"entityStatus\\\":\\\"ACTIVE\\\
           \",\\\"propagate\\\":true,\\\"validityPeriods\\\":[{\\\"startTime\\\":\\\
           \"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"timeZone\\\":\\\"string\\\
           \"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\"meanings\\\":[{\\\
@@ -2601,18 +2565,53 @@ paths:
           DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"property1\\\":\\\"string\\\
           \",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\":{\\\"property1\\\
           \":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\"],\\\"proxy\\\"\
-          :true}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          :true},\\\"property2\\\":{\\\"typeName\\\":\\\"string\\\",\\\"attributes\\\
+          \":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"string\\\",\\\"isProxy\\\
+          \":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\":0,\\\"status\\\"\
+          :\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\":\\\"\
+          string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\":0,\\\
+          \"relationshipAttributes\\\":{},\\\"classifications\\\":[{\\\"typeName\\\
+          \":\\\"string\\\",\\\"attributes\\\":{},\\\"entityGuid\\\":\\\"string\\\"\
+          ,\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\
+          \":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"\
+          timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\
+          \"meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\
+          \"string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"\
+          string\\\",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\
+          \",\\\"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
+          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
+          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
+          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
+          \"],\\\"proxy\\\":true}},\\\"entity\\\":{\\\"typeName\\\":\\\"string\\\"\
+          ,\\\"attributes\\\":{},\\\"guid\\\":\\\"string\\\",\\\"homeId\\\":\\\"string\\\
+          \",\\\"isProxy\\\":true,\\\"isIncomplete\\\":true,\\\"provenanceType\\\"\
+          :0,\\\"status\\\":\\\"ACTIVE\\\",\\\"createdBy\\\":\\\"string\\\",\\\"updatedBy\\\
+          \":\\\"string\\\",\\\"createTime\\\":0,\\\"updateTime\\\":0,\\\"version\\\
+          \":0,\\\"relationshipAttributes\\\":{},\\\"classifications\\\":[{\\\"typeName\\\
+          \":\\\"string\\\",\\\"attributes\\\":{},\\\"entityGuid\\\":\\\"string\\\"\
+          ,\\\"entityStatus\\\":\\\"ACTIVE\\\",\\\"propagate\\\":true,\\\"validityPeriods\\\
+          \":[{\\\"startTime\\\":\\\"string\\\",\\\"endTime\\\":\\\"string\\\",\\\"\
+          timeZone\\\":\\\"string\\\"}],\\\"removePropagationsOnEntityDelete\\\":true}],\\\
+          \"meanings\\\":[{\\\"termGuid\\\":\\\"string\\\",\\\"relationGuid\\\":\\\
+          \"string\\\",\\\"description\\\":\\\"string\\\",\\\"displayText\\\":\\\"\
+          string\\\",\\\"expression\\\":\\\"string\\\",\\\"createdBy\\\":\\\"string\\\
+          \",\\\"steward\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\",\\\"confidence\\\
+          \":0,\\\"status\\\":\\\"DISCOVERED\\\"}],\\\"customAttributes\\\":{\\\"\
+          property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"businessAttributes\\\
+          \":{\\\"property1\\\":{},\\\"property2\\\":{}},\\\"labels\\\":[\\\"string\\\
+          \"],\\\"proxy\\\":true}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url,\
+          \ payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\")\n\
+          \treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\t\
+          res, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}"
+          payload = "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}"
 
           headers = {
               'content-type': "application/json",
@@ -2673,7 +2672,7 @@ paths:
                 classifications: [
                   {
                     typeName: 'string',
-                    attributes: {property1: {}, property2: {}},
+                    attributes: {},
                     entityGuid: 'string',
                     entityStatus: 'ACTIVE',
                     propagate: true,
@@ -2718,7 +2717,7 @@ paths:
                 classifications: [
                   {
                     typeName: 'string',
-                    attributes: {property1: {}, property2: {}},
+                    attributes: {},
                     entityGuid: 'string',
                     entityStatus: 'ACTIVE',
                     propagate: true,
@@ -2764,7 +2763,7 @@ paths:
               classifications: [
                 {
                   typeName: 'string',
-                  attributes: {property1: {}, property2: {}},
+                  attributes: {},
                   entityGuid: 'string',
                   entityStatus: 'ACTIVE',
                   propagate: true,
@@ -2805,7 +2804,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2814,7 +2813,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{\"property1\":{},\"property2\":{}},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"referredEntities\":{\"property1\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true},\"property2\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}},\"entity\":{\"typeName\":\"string\",\"attributes\":{},\"guid\":\"string\",\"homeId\":\"string\",\"isProxy\":true,\"isIncomplete\":true,\"provenanceType\":0,\"status\":\"ACTIVE\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"relationshipAttributes\":{},\"classifications\":[{\"typeName\":\"string\",\"attributes\":{},\"entityGuid\":\"string\",\"entityStatus\":\"ACTIVE\",\"propagate\":true,\"validityPeriods\":[{\"startTime\":\"string\",\"endTime\":\"string\",\"timeZone\":\"string\"}],\"removePropagationsOnEntityDelete\":true}],\"meanings\":[{\"termGuid\":\"string\",\"relationGuid\":\"string\",\"description\":\"string\",\"displayText\":\"string\",\"expression\":\"string\",\"createdBy\":\"string\",\"steward\":\"string\",\"source\":\"string\",\"confidence\":0,\"status\":\"DISCOVERED\"}],\"customAttributes\":{\"property1\":\"string\",\"property2\":\"string\"},\"businessAttributes\":{\"property1\":{},\"property2\":{}},\"labels\":[\"string\"],\"proxy\":true}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}:
     delete:
@@ -2905,14 +2904,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -2920,7 +2919,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -2933,7 +2932,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D", headers=headers)
+          conn.request("DELETE", "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -2947,7 +2946,7 @@ paths:
             "method": "DELETE",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D",
+            "path": "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -2972,7 +2971,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -2981,7 +2980,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/%7BtypeName%7D/name/%7BqualifiedName%7D/tags/%7BtagName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -3069,13 +3068,14 @@ paths:
           type: boolean
         style: form
       - description: Limit the result set to only include the specified number of
-          entries
+          entries (maximum 500)
         explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
+          maximum: 500
           type: integer
         style: form
       - description: Start offset of the result set (useful for pagination)
@@ -3293,13 +3293,14 @@ paths:
           type: boolean
         style: form
       - description: Limit the result set to only include the specified number of
-          entries
+          entries (maximum 500)
         explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
+          maximum: 500
           type: integer
         style: form
       - description: Start offset of the result set (useful for pagination)
@@ -3695,13 +3696,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"],"color":"PURPLE_LIGHT"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .post(body)
@@ -3729,18 +3730,19 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
-          ]}]\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ],\\\"color\\\":\\\"PURPLE_LIGHT\\\"}]\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]"
 
           headers = {
               'content-type': "application/json",
@@ -3817,7 +3819,8 @@ paths:
               ],
               superTypes: ['string'],
               entityTypes: ['string'],
-              subTypes: ['string']
+              subTypes: ['string'],
+              color: 'PURPLE_LIGHT'
             }
           ]));
           req.end();
@@ -3833,7 +3836,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3842,7 +3845,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     put:
       description: |-
@@ -3925,13 +3928,13 @@ paths:
             --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"]}]'
+            --data '[{"category":"PRIMITIVE","guid":"string","createdBy":"string","updatedBy":"string","createTime":0,"updateTime":0,"version":0,"name":"string","description":"string","typeVersion":"string","serviceType":"string","options":{"property1":"string","property2":"string"},"attributeDefs":[{"name":"string","typeName":"string","isOptional":true,"cardinality":"SINGLE","valuesMinCount":0,"valuesMaxCount":0,"isUnique":true,"isIndexable":true,"includeInNotification":true,"defaultValue":"string","description":"string","searchWeight":0,"indexType":"DEFAULT","constraints":[{"type":"string","params":{"property1":{},"property2":{}}}],"options":{"property1":"string","property2":"string"},"displayName":"string"}],"superTypes":["string"],"entityTypes":["string"],"subTypes":["string"],"color":"PURPLE_LIGHT"}]'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
           Request request = new Request.Builder()
             .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs")
             .put(body)
@@ -3959,18 +3962,19 @@ paths:
           \"options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\
           \"},\\\"displayName\\\":\\\"string\\\"}],\\\"superTypes\\\":[\\\"string\\\
           \"],\\\"entityTypes\\\":[\\\"string\\\"],\\\"subTypes\\\":[\\\"string\\\"\
-          ]}]\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          ],\\\"color\\\":\\\"PURPLE_LIGHT\\\"}]\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("psrc-00000.region.provider.confluent.cloud")
 
-          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]"
+          payload = "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]"
 
           headers = {
               'content-type': "application/json",
@@ -4047,7 +4051,8 @@ paths:
               ],
               superTypes: ['string'],
               entityTypes: ['string'],
-              subTypes: ['string']
+              subTypes: ['string'],
+              color: 'PURPLE_LIGHT'
             }
           ]));
           req.end();
@@ -4063,7 +4068,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4072,7 +4077,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"]}]", ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"category\":\"PRIMITIVE\",\"guid\":\"string\",\"createdBy\":\"string\",\"updatedBy\":\"string\",\"createTime\":0,\"updateTime\":0,\"version\":0,\"name\":\"string\",\"description\":\"string\",\"typeVersion\":\"string\",\"serviceType\":\"string\",\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"attributeDefs\":[{\"name\":\"string\",\"typeName\":\"string\",\"isOptional\":true,\"cardinality\":\"SINGLE\",\"valuesMinCount\":0,\"valuesMaxCount\":0,\"isUnique\":true,\"isIndexable\":true,\"includeInNotification\":true,\"defaultValue\":\"string\",\"description\":\"string\",\"searchWeight\":0,\"indexType\":\"DEFAULT\",\"constraints\":[{\"type\":\"string\",\"params\":{\"property1\":{},\"property2\":{}}}],\"options\":{\"property1\":\"string\",\"property2\":\"string\"},\"displayName\":\"string\"}],\"superTypes\":[\"string\"],\"entityTypes\":[\"string\"],\"subTypes\":[\"string\"],\"color\":\"PURPLE_LIGHT\"}]", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /catalog/v1/types/tagdefs/{tagName}:
     delete:
@@ -4147,14 +4152,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request DELETE \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}")
             .delete(null)
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4162,7 +4167,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}\"\
           \n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -4175,7 +4180,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("DELETE", "/catalog/v1/types/tagdefs/%7BtagName%7D", headers=headers)
+          conn.request("DELETE", "/catalog/v1/types/tagdefs/{tagName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -4189,7 +4194,7 @@ paths:
             "method": "DELETE",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/types/tagdefs/%7BtagName%7D",
+            "path": "/catalog/v1/types/tagdefs/{tagName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -4214,7 +4219,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -4223,7 +4228,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
           var request = new RestRequest(Method.DELETE);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4313,14 +4318,14 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D \
+            --url 'https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
-            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D")
+            .url("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}")
             .get()
             .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
             .build();
@@ -4328,7 +4333,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
-          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}\"\
           \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
           Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -4341,7 +4346,7 @@ paths:
 
           headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
 
-          conn.request("GET", "/catalog/v1/types/tagdefs/%7BtagName%7D", headers=headers)
+          conn.request("GET", "/catalog/v1/types/tagdefs/{tagName}", headers=headers)
 
           res = conn.getresponse()
           data = res.read()
@@ -4355,7 +4360,7 @@ paths:
             "method": "GET",
             "hostname": "psrc-00000.region.provider.confluent.cloud",
             "port": null,
-            "path": "/catalog/v1/types/tagdefs/%7BtagName%7D",
+            "path": "/catalog/v1/types/tagdefs/{tagName}",
             "headers": {
               "Authorization": "Basic REPLACE_BASIC_AUTH"
             }
@@ -4380,7 +4385,7 @@ paths:
           CURL *hnd = curl_easy_init();
 
           curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
 
           struct curl_slist *headers = NULL;
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
@@ -4389,7 +4394,7 @@ paths:
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
         source: |-
-          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/%7BtagName%7D");
+          var client = new RestClient("https://psrc-00000.region.provider.confluent.cloud/catalog/v1/types/tagdefs/{tagName}");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
@@ -4528,15 +4533,12 @@ components:
         - timeZone: timeZone
           startTime: startTime
           endTime: endTime
-        attributes:
-          key: '{}'
+        attributes: '{}'
       properties:
         typeName:
           description: The tag name
           type: string
         attributes:
-          additionalProperties:
-            type: object
           description: The tag attributes
           type: object
         entityGuid:
@@ -4638,8 +4640,7 @@ components:
           - timeZone: timeZone
             startTime: startTime
             endTime: endTime
-          attributes:
-            key: '{}'
+          attributes: '{}'
         - removePropagationsOnEntityDelete: true
           entityStatus: ACTIVE
           typeName: typeName
@@ -4652,8 +4653,7 @@ components:
           - timeZone: timeZone
             startTime: startTime
             endTime: endTime
-          attributes:
-            key: '{}'
+          attributes: '{}'
         proxy: true
         createdBy: createdBy
         createTime: 6
@@ -4796,8 +4796,7 @@ components:
               - timeZone: timeZone
                 startTime: startTime
                 endTime: endTime
-              attributes:
-                key: '{}'
+              attributes: '{}'
             - removePropagationsOnEntityDelete: true
               entityStatus: ACTIVE
               typeName: typeName
@@ -4810,8 +4809,7 @@ components:
               - timeZone: timeZone
                 startTime: startTime
                 endTime: endTime
-              attributes:
-                key: '{}'
+              attributes: '{}'
             proxy: true
             createdBy: createdBy
             createTime: 6
@@ -4869,8 +4867,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           - removePropagationsOnEntityDelete: true
             entityStatus: ACTIVE
             typeName: typeName
@@ -4883,8 +4880,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           proxy: true
           createdBy: createdBy
           createTime: 6
@@ -5020,8 +5016,7 @@ components:
           - timeZone: timeZone
             startTime: startTime
             endTime: endTime
-          attributes:
-            key: '{}'
+          attributes: '{}'
         - removePropagationsOnEntityDelete: true
           entityStatus: ACTIVE
           typeName: typeName
@@ -5034,8 +5029,7 @@ components:
           - timeZone: timeZone
             startTime: startTime
             endTime: endTime
-          attributes:
-            key: '{}'
+          attributes: '{}'
         classificationNames:
         - classificationNames
         - classificationNames
@@ -5263,8 +5257,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           - removePropagationsOnEntityDelete: true
             entityStatus: ACTIVE
             typeName: typeName
@@ -5277,8 +5270,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           classificationNames:
           - classificationNames
           - classificationNames
@@ -5329,8 +5321,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           - removePropagationsOnEntityDelete: true
             entityStatus: ACTIVE
             typeName: typeName
@@ -5343,8 +5334,7 @@ components:
             - timeZone: timeZone
               startTime: startTime
               endTime: endTime
-            attributes:
-              key: '{}'
+            attributes: '{}'
           classificationNames:
           - classificationNames
           - classificationNames
@@ -5401,8 +5391,7 @@ components:
               - timeZone: timeZone
                 startTime: startTime
                 endTime: endTime
-              attributes:
-                key: '{}'
+              attributes: '{}'
             - removePropagationsOnEntityDelete: true
               entityStatus: ACTIVE
               typeName: typeName
@@ -5415,8 +5404,7 @@ components:
               - timeZone: timeZone
                 startTime: startTime
                 endTime: endTime
-              attributes:
-                key: '{}'
+              attributes: '{}'
             classificationNames:
             - classificationNames
             - classificationNames
@@ -5583,6 +5571,7 @@ components:
         - superTypes
         - superTypes
         updatedBy: updatedBy
+        color: PURPLE_LIGHT
         description: description
         updateTime: 6
         subTypes:
@@ -5723,6 +5712,26 @@ components:
             type: string
           type: array
           uniqueItems: true
+        color:
+          description: Tag Definition color
+          enum:
+          - PURPLE_LIGHT
+          - PURPLE_DARK
+          - BLUE_LIGHT
+          - BLUE_DARK
+          - GREEN_LIGHT
+          - GREEN_DARK
+          - YELLOW_LIGHT
+          - YELLOW_DARK
+          - ORANGE_LIGHT
+          - ORANGE_DARK
+          - RED_LIGHT
+          - RED_DARK
+          - MAGENTA_LIGHT
+          - MAGENTA_DARK
+          - NEUTRAL_LIGHT
+          - NEUTRAL_DARK
+          type: string
       type: object
     ErrorMessage:
       description: Error message of this operation
@@ -6094,6 +6103,7 @@ components:
         - superTypes
         - superTypes
         updatedBy: updatedBy
+        color: PURPLE_LIGHT
         description: description
         updateTime: 6
         subTypes:
@@ -6237,6 +6247,26 @@ components:
             type: string
           type: array
           uniqueItems: true
+        color:
+          description: Tag Definition color
+          enum:
+          - PURPLE_LIGHT
+          - PURPLE_DARK
+          - BLUE_LIGHT
+          - BLUE_DARK
+          - GREEN_LIGHT
+          - GREEN_DARK
+          - YELLOW_LIGHT
+          - YELLOW_DARK
+          - ORANGE_LIGHT
+          - ORANGE_DARK
+          - RED_LIGHT
+          - RED_DARK
+          - MAGENTA_LIGHT
+          - MAGENTA_DARK
+          - NEUTRAL_LIGHT
+          - NEUTRAL_DARK
+          type: string
         error:
           $ref: '#/components/schemas/ErrorMessage'
       type: object
@@ -6252,5 +6282,5 @@ components:
       flows:
         clientCredentials:
           scopes: {}
-          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+          tokenUrl: https://<oauth-identity-provider>/token
       type: oauth2
