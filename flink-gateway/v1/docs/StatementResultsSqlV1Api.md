@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

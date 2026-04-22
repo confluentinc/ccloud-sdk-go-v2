@@ -45,6 +45,8 @@ type SqlV1StatementTraits struct {
 	// Defines the column indices clients can use as upsert keys.
 	UpsertColumns *[]int32           `json:"upsert_columns,omitempty"`
 	Schema        *SqlV1ResultSchema `json:"schema,omitempty"`
+	// The names of connections that the SQL statement references (e.g., in FROM clauses).
+	ConnectionRefs *[]string `json:"connection_refs,omitempty"`
 }
 
 // NewSqlV1StatementTraits instantiates a new SqlV1StatementTraits object
@@ -224,6 +226,38 @@ func (o *SqlV1StatementTraits) SetSchema(v SqlV1ResultSchema) {
 	o.Schema = &v
 }
 
+// GetConnectionRefs returns the ConnectionRefs field value if set, zero value otherwise.
+func (o *SqlV1StatementTraits) GetConnectionRefs() []string {
+	if o == nil || o.ConnectionRefs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.ConnectionRefs
+}
+
+// GetConnectionRefsOk returns a tuple with the ConnectionRefs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementTraits) GetConnectionRefsOk() (*[]string, bool) {
+	if o == nil || o.ConnectionRefs == nil {
+		return nil, false
+	}
+	return o.ConnectionRefs, true
+}
+
+// HasConnectionRefs returns a boolean if a field has been set.
+func (o *SqlV1StatementTraits) HasConnectionRefs() bool {
+	if o != nil && o.ConnectionRefs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionRefs gets a reference to the given []string and assigns it to the ConnectionRefs field.
+func (o *SqlV1StatementTraits) SetConnectionRefs(v []string) {
+	o.ConnectionRefs = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementTraits) Redact() {
 	o.recurseRedact(o.SqlKind)
@@ -231,6 +265,7 @@ func (o *SqlV1StatementTraits) Redact() {
 	o.recurseRedact(o.IsAppendOnly)
 	o.recurseRedact(o.UpsertColumns)
 	o.recurseRedact(o.Schema)
+	o.recurseRedact(o.ConnectionRefs)
 }
 
 func (o *SqlV1StatementTraits) recurseRedact(v interface{}) {
@@ -279,6 +314,9 @@ func (o SqlV1StatementTraits) MarshalJSON() ([]byte, error) {
 	}
 	if o.Schema != nil {
 		toSerialize["schema"] = o.Schema
+	}
+	if o.ConnectionRefs != nil {
+		toSerialize["connection_refs"] = o.ConnectionRefs
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

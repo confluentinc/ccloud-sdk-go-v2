@@ -44,10 +44,10 @@ type SqlV1StatementSpec struct {
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
 	// The id of a principal this statement runs as.
 	Principal *string `json:"principal,omitempty"`
-	// The list of ids of the principals granting permissions to run this statement.
-	AuthorizedPrincipals *[]string `json:"authorized_principals,omitempty"`
 	// Indicates whether the statement should be stopped.
 	Stopped *bool `json:"stopped,omitempty"`
+	// The execution mode of the statement.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	ExecutionMode *string `json:"execution_mode,omitempty"`
 }
 
 // NewSqlV1StatementSpec instantiates a new SqlV1StatementSpec object
@@ -195,38 +195,6 @@ func (o *SqlV1StatementSpec) SetPrincipal(v string) {
 	o.Principal = &v
 }
 
-// GetAuthorizedPrincipals returns the AuthorizedPrincipals field value if set, zero value otherwise.
-func (o *SqlV1StatementSpec) GetAuthorizedPrincipals() []string {
-	if o == nil || o.AuthorizedPrincipals == nil {
-		var ret []string
-		return ret
-	}
-	return *o.AuthorizedPrincipals
-}
-
-// GetAuthorizedPrincipalsOk returns a tuple with the AuthorizedPrincipals field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SqlV1StatementSpec) GetAuthorizedPrincipalsOk() (*[]string, bool) {
-	if o == nil || o.AuthorizedPrincipals == nil {
-		return nil, false
-	}
-	return o.AuthorizedPrincipals, true
-}
-
-// HasAuthorizedPrincipals returns a boolean if a field has been set.
-func (o *SqlV1StatementSpec) HasAuthorizedPrincipals() bool {
-	if o != nil && o.AuthorizedPrincipals != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthorizedPrincipals gets a reference to the given []string and assigns it to the AuthorizedPrincipals field.
-func (o *SqlV1StatementSpec) SetAuthorizedPrincipals(v []string) {
-	o.AuthorizedPrincipals = &v
-}
-
 // GetStopped returns the Stopped field value if set, zero value otherwise.
 func (o *SqlV1StatementSpec) GetStopped() bool {
 	if o == nil || o.Stopped == nil {
@@ -259,14 +227,46 @@ func (o *SqlV1StatementSpec) SetStopped(v bool) {
 	o.Stopped = &v
 }
 
+// GetExecutionMode returns the ExecutionMode field value if set, zero value otherwise.
+func (o *SqlV1StatementSpec) GetExecutionMode() string {
+	if o == nil || o.ExecutionMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExecutionMode
+}
+
+// GetExecutionModeOk returns a tuple with the ExecutionMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementSpec) GetExecutionModeOk() (*string, bool) {
+	if o == nil || o.ExecutionMode == nil {
+		return nil, false
+	}
+	return o.ExecutionMode, true
+}
+
+// HasExecutionMode returns a boolean if a field has been set.
+func (o *SqlV1StatementSpec) HasExecutionMode() bool {
+	if o != nil && o.ExecutionMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutionMode gets a reference to the given string and assigns it to the ExecutionMode field.
+func (o *SqlV1StatementSpec) SetExecutionMode(v string) {
+	o.ExecutionMode = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementSpec) Redact() {
 	o.recurseRedact(o.Statement)
 	o.recurseRedact(o.Properties)
 	o.recurseRedact(o.ComputePoolId)
 	o.recurseRedact(o.Principal)
-	o.recurseRedact(o.AuthorizedPrincipals)
 	o.recurseRedact(o.Stopped)
+	o.recurseRedact(o.ExecutionMode)
 }
 
 func (o *SqlV1StatementSpec) recurseRedact(v interface{}) {
@@ -313,11 +313,11 @@ func (o SqlV1StatementSpec) MarshalJSON() ([]byte, error) {
 	if o.Principal != nil {
 		toSerialize["principal"] = o.Principal
 	}
-	if o.AuthorizedPrincipals != nil {
-		toSerialize["authorized_principals"] = o.AuthorizedPrincipals
-	}
 	if o.Stopped != nil {
 		toSerialize["stopped"] = o.Stopped
+	}
+	if o.ExecutionMode != nil {
+		toSerialize["execution_mode"] = o.ExecutionMode
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

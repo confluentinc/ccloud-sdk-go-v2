@@ -64,13 +64,21 @@ type APIClient struct {
 
 	// API Services
 
+	AgentsSqlV1Api AgentsSqlV1Api
+
 	ConnectionsSqlV1Api ConnectionsSqlV1Api
+
+	MaterializedTableVersionsSqlV1Api MaterializedTableVersionsSqlV1Api
+
+	MaterializedTablesSqlV1Api MaterializedTablesSqlV1Api
 
 	StatementExceptionsSqlV1Api StatementExceptionsSqlV1Api
 
 	StatementResultsSqlV1Api StatementResultsSqlV1Api
 
 	StatementsSqlV1Api StatementsSqlV1Api
+
+	ToolsSqlV1Api ToolsSqlV1Api
 }
 
 type service struct {
@@ -89,10 +97,14 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AgentsSqlV1Api = (*AgentsSqlV1ApiService)(&c.common)
 	c.ConnectionsSqlV1Api = (*ConnectionsSqlV1ApiService)(&c.common)
+	c.MaterializedTableVersionsSqlV1Api = (*MaterializedTableVersionsSqlV1ApiService)(&c.common)
+	c.MaterializedTablesSqlV1Api = (*MaterializedTablesSqlV1ApiService)(&c.common)
 	c.StatementExceptionsSqlV1Api = (*StatementExceptionsSqlV1ApiService)(&c.common)
 	c.StatementResultsSqlV1Api = (*StatementResultsSqlV1ApiService)(&c.common)
 	c.StatementsSqlV1Api = (*StatementsSqlV1ApiService)(&c.common)
+	c.ToolsSqlV1Api = (*ToolsSqlV1ApiService)(&c.common)
 
 	return c
 }

@@ -37,18 +37,26 @@ import (
 
 // SqlV1StatementStatus The status of the Statement
 type SqlV1StatementStatus struct {
-	// The lifecycle phase of the submitted SQL statement:  PENDING: SQL statement is pending execution;  RUNNING: SQL statement execution is in progress;  COMPLETED: SQL statement is completed;  DELETING: SQL statement deletion is in progress;  FAILING: SQL statement is failing;  FAILED: SQL statement execution has failed;  STOPPED: SQL statement execution has successfully been stopped;
-	Phase         string              `json:"phase,omitempty"`
-	ScalingStatus *SqlV1ScalingStatus `json:"scaling_status,omitempty"`
+	// The lifecycle phase of the submitted SQL statement:  PENDING: SQL statement is pending execution;  RUNNING: SQL statement execution is in progress;  COMPLETED: SQL statement is completed;  DELETING: SQL statement deletion is in progress;  FAILING: SQL statement is failing;  FAILED: SQL statement execution has failed;  STOPPING: SQL statement is being stopped;  STOPPED: SQL statement execution has successfully been stopped;  DEGRADED: SQL statement is experiencing reduced performance or partial failure;
+	Phase            string                 `json:"phase,omitempty"`
+	ScalingStatus    *SqlV1ScalingStatus    `json:"scaling_status,omitempty"`
+	StateLimitStatus *SqlV1StateLimitStatus `json:"state_limit_status,omitempty"`
 	// Details about the execution status of this statement.
-	Detail *string               `json:"detail,omitempty"`
-	Traits *SqlV1StatementTraits `json:"traits,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	// List of warnings encountered during statement execution.
+	Warnings *[]SqlV1StatementWarning `json:"warnings,omitempty"`
+	Traits   *SqlV1StatementTraits    `json:"traits,omitempty"`
 	// The networking type used by the submitted SQL statement:  PUBLIC: SQL statement is using public networking;  PRIVATE: SQL statement is using private networking;
 	NetworkKind *string `json:"network_kind,omitempty"`
 	// The last Kafka offsets that a statement has processed. Represented by a mapping from Kafka topic to a string representation of partitions mapped to offsets.
 	LatestOffsets *map[string]string `json:"latest_offsets,omitempty"`
 	// The date and time at which the Kafka topic offsets were added to the statement status. It is represented in RFC3339 format and is in UTC.
 	LatestOffsetsTimestamp *time.Time `json:"latest_offsets_timestamp,omitempty"`
+	// The date and time in UTC (represented as RFC3339 format) at which the statement reached its final terminal state.  This field is set when the Phase is COMPLETED, FAILED, or STOPPED.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	EndTime *time.Time `json:"end_time,omitempty"`
+	// The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from  PENDING to RUNNING until it reached a final terminal state. This field is calculated and set when  the Phase is COMPLETED, FAILED, or STOPPED.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	Duration         *string                               `json:"duration,omitempty"`
+	AffectedResource *SqlV1StatementStatusAffectedResource `json:"affected_resource,omitempty"`
 }
 
 // NewSqlV1StatementStatus instantiates a new SqlV1StatementStatus object
@@ -125,6 +133,38 @@ func (o *SqlV1StatementStatus) SetScalingStatus(v SqlV1ScalingStatus) {
 	o.ScalingStatus = &v
 }
 
+// GetStateLimitStatus returns the StateLimitStatus field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetStateLimitStatus() SqlV1StateLimitStatus {
+	if o == nil || o.StateLimitStatus == nil {
+		var ret SqlV1StateLimitStatus
+		return ret
+	}
+	return *o.StateLimitStatus
+}
+
+// GetStateLimitStatusOk returns a tuple with the StateLimitStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetStateLimitStatusOk() (*SqlV1StateLimitStatus, bool) {
+	if o == nil || o.StateLimitStatus == nil {
+		return nil, false
+	}
+	return o.StateLimitStatus, true
+}
+
+// HasStateLimitStatus returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasStateLimitStatus() bool {
+	if o != nil && o.StateLimitStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStateLimitStatus gets a reference to the given SqlV1StateLimitStatus and assigns it to the StateLimitStatus field.
+func (o *SqlV1StatementStatus) SetStateLimitStatus(v SqlV1StateLimitStatus) {
+	o.StateLimitStatus = &v
+}
+
 // GetDetail returns the Detail field value if set, zero value otherwise.
 func (o *SqlV1StatementStatus) GetDetail() string {
 	if o == nil || o.Detail == nil {
@@ -155,6 +195,38 @@ func (o *SqlV1StatementStatus) HasDetail() bool {
 // SetDetail gets a reference to the given string and assigns it to the Detail field.
 func (o *SqlV1StatementStatus) SetDetail(v string) {
 	o.Detail = &v
+}
+
+// GetWarnings returns the Warnings field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetWarnings() []SqlV1StatementWarning {
+	if o == nil || o.Warnings == nil {
+		var ret []SqlV1StatementWarning
+		return ret
+	}
+	return *o.Warnings
+}
+
+// GetWarningsOk returns a tuple with the Warnings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetWarningsOk() (*[]SqlV1StatementWarning, bool) {
+	if o == nil || o.Warnings == nil {
+		return nil, false
+	}
+	return o.Warnings, true
+}
+
+// HasWarnings returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasWarnings() bool {
+	if o != nil && o.Warnings != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWarnings gets a reference to the given []SqlV1StatementWarning and assigns it to the Warnings field.
+func (o *SqlV1StatementStatus) SetWarnings(v []SqlV1StatementWarning) {
+	o.Warnings = &v
 }
 
 // GetTraits returns the Traits field value if set, zero value otherwise.
@@ -285,15 +357,116 @@ func (o *SqlV1StatementStatus) SetLatestOffsetsTimestamp(v time.Time) {
 	o.LatestOffsetsTimestamp = &v
 }
 
+// GetEndTime returns the EndTime field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetEndTime() time.Time {
+	if o == nil || o.EndTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.EndTime
+}
+
+// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetEndTimeOk() (*time.Time, bool) {
+	if o == nil || o.EndTime == nil {
+		return nil, false
+	}
+	return o.EndTime, true
+}
+
+// HasEndTime returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasEndTime() bool {
+	if o != nil && o.EndTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTime gets a reference to the given time.Time and assigns it to the EndTime field.
+func (o *SqlV1StatementStatus) SetEndTime(v time.Time) {
+	o.EndTime = &v
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetDuration() string {
+	if o == nil || o.Duration == nil {
+		var ret string
+		return ret
+	}
+	return *o.Duration
+}
+
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetDurationOk() (*string, bool) {
+	if o == nil || o.Duration == nil {
+		return nil, false
+	}
+	return o.Duration, true
+}
+
+// HasDuration returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasDuration() bool {
+	if o != nil && o.Duration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDuration gets a reference to the given string and assigns it to the Duration field.
+func (o *SqlV1StatementStatus) SetDuration(v string) {
+	o.Duration = &v
+}
+
+// GetAffectedResource returns the AffectedResource field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetAffectedResource() SqlV1StatementStatusAffectedResource {
+	if o == nil || o.AffectedResource == nil {
+		var ret SqlV1StatementStatusAffectedResource
+		return ret
+	}
+	return *o.AffectedResource
+}
+
+// GetAffectedResourceOk returns a tuple with the AffectedResource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetAffectedResourceOk() (*SqlV1StatementStatusAffectedResource, bool) {
+	if o == nil || o.AffectedResource == nil {
+		return nil, false
+	}
+	return o.AffectedResource, true
+}
+
+// HasAffectedResource returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasAffectedResource() bool {
+	if o != nil && o.AffectedResource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAffectedResource gets a reference to the given SqlV1StatementStatusAffectedResource and assigns it to the AffectedResource field.
+func (o *SqlV1StatementStatus) SetAffectedResource(v SqlV1StatementStatusAffectedResource) {
+	o.AffectedResource = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
 	o.recurseRedact(o.ScalingStatus)
+	o.recurseRedact(o.StateLimitStatus)
 	o.recurseRedact(o.Detail)
+	o.recurseRedact(o.Warnings)
 	o.recurseRedact(o.Traits)
 	o.recurseRedact(o.NetworkKind)
 	o.recurseRedact(o.LatestOffsets)
 	o.recurseRedact(o.LatestOffsetsTimestamp)
+	o.recurseRedact(o.EndTime)
+	o.recurseRedact(o.Duration)
+	o.recurseRedact(o.AffectedResource)
 }
 
 func (o *SqlV1StatementStatus) recurseRedact(v interface{}) {
@@ -334,8 +507,14 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	if o.ScalingStatus != nil {
 		toSerialize["scaling_status"] = o.ScalingStatus
 	}
+	if o.StateLimitStatus != nil {
+		toSerialize["state_limit_status"] = o.StateLimitStatus
+	}
 	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
+	}
+	if o.Warnings != nil {
+		toSerialize["warnings"] = o.Warnings
 	}
 	if o.Traits != nil {
 		toSerialize["traits"] = o.Traits
@@ -348,6 +527,15 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.LatestOffsetsTimestamp != nil {
 		toSerialize["latest_offsets_timestamp"] = o.LatestOffsetsTimestamp
+	}
+	if o.EndTime != nil {
+		toSerialize["end_time"] = o.EndTime
+	}
+	if o.Duration != nil {
+		toSerialize["duration"] = o.Duration
+	}
+	if o.AffectedResource != nil {
+		toSerialize["affected_resource"] = o.AffectedResource
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

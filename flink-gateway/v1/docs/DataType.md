@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **Fields** | Pointer to [**[]RowFieldType**](RowFieldType.md) | The fields of the element in the data type (if applicable). | [optional] 
 **Resolution** | Pointer to **string** | The resolution of the data type (if applicable). | [optional] 
 **FractionalPrecision** | Pointer to **int32** | The fractional precision of the data type (if applicable). | [optional] 
+**ClassName** | Pointer to **string** | The class name of the structured data type (if applicable). | [optional] 
 
 ## Methods
 
@@ -299,6 +300,31 @@ SetFractionalPrecision sets FractionalPrecision field to given value.
 `func (o *DataType) HasFractionalPrecision() bool`
 
 HasFractionalPrecision returns a boolean if a field has been set.
+
+### GetClassName
+
+`func (o *DataType) GetClassName() string`
+
+GetClassName returns the ClassName field if non-nil, zero value otherwise.
+
+### GetClassNameOk
+
+`func (o *DataType) GetClassNameOk() (*string, bool)`
+
+GetClassNameOk returns a tuple with the ClassName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassName
+
+`func (o *DataType) SetClassName(v string)`
+
+SetClassName sets ClassName field to given value.
+
+### HasClassName
+
+`func (o *DataType) HasClassName() bool`
+
+HasClassName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
