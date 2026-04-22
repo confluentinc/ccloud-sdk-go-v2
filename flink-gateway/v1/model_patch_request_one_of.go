@@ -28,7 +28,6 @@ package v1
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 // PatchRequestOneOf - struct for PatchRequestOneOf
@@ -55,59 +54,7 @@ func JsonPatchRequestRemoveAsPatchRequestOneOf(v *JsonPatchRequestRemove) PatchR
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PatchRequestOneOf) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into JsonPatchRequestAddReplace
-	err = json.Unmarshal(data, &dst.JsonPatchRequestAddReplace)
-	if err == nil {
-		jsonJsonPatchRequestAddReplace, _ := json.Marshal(dst.JsonPatchRequestAddReplace)
-		if string(jsonJsonPatchRequestAddReplace) == "{}" { // empty struct
-			dst.JsonPatchRequestAddReplace = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.JsonPatchRequestAddReplace = nil
-	}
-
-	// try to unmarshal data into JsonPatchRequestMoveCopy
-	err = json.Unmarshal(data, &dst.JsonPatchRequestMoveCopy)
-	if err == nil {
-		jsonJsonPatchRequestMoveCopy, _ := json.Marshal(dst.JsonPatchRequestMoveCopy)
-		if string(jsonJsonPatchRequestMoveCopy) == "{}" { // empty struct
-			dst.JsonPatchRequestMoveCopy = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.JsonPatchRequestMoveCopy = nil
-	}
-
-	// try to unmarshal data into JsonPatchRequestRemove
-	err = json.Unmarshal(data, &dst.JsonPatchRequestRemove)
-	if err == nil {
-		jsonJsonPatchRequestRemove, _ := json.Marshal(dst.JsonPatchRequestRemove)
-		if string(jsonJsonPatchRequestRemove) == "{}" { // empty struct
-			dst.JsonPatchRequestRemove = nil
-		} else {
-			match++
-		}
-	} else {
-		dst.JsonPatchRequestRemove = nil
-	}
-
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.JsonPatchRequestAddReplace = nil
-		dst.JsonPatchRequestMoveCopy = nil
-		dst.JsonPatchRequestRemove = nil
-
-		return fmt.Errorf("Data matches more than one schema in oneOf(PatchRequestOneOf)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(PatchRequestOneOf)")
-	}
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

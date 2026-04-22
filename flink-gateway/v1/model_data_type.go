@@ -58,6 +58,8 @@ type DataType struct {
 	Resolution *string `json:"resolution,omitempty"`
 	// The fractional precision of the data type (if applicable).
 	FractionalPrecision *int32 `json:"fractional_precision,omitempty"`
+	// The class name of the structured data type (if applicable).
+	ClassName *string `json:"class_name,omitempty"`
 }
 
 // NewDataType instantiates a new DataType object
@@ -415,6 +417,38 @@ func (o *DataType) SetFractionalPrecision(v int32) {
 	o.FractionalPrecision = &v
 }
 
+// GetClassName returns the ClassName field value if set, zero value otherwise.
+func (o *DataType) GetClassName() string {
+	if o == nil || o.ClassName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClassName
+}
+
+// GetClassNameOk returns a tuple with the ClassName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataType) GetClassNameOk() (*string, bool) {
+	if o == nil || o.ClassName == nil {
+		return nil, false
+	}
+	return o.ClassName, true
+}
+
+// HasClassName returns a boolean if a field has been set.
+func (o *DataType) HasClassName() bool {
+	if o != nil && o.ClassName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClassName gets a reference to the given string and assigns it to the ClassName field.
+func (o *DataType) SetClassName(v string) {
+	o.ClassName = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *DataType) Redact() {
 	o.recurseRedact(&o.Type)
@@ -428,6 +462,7 @@ func (o *DataType) Redact() {
 	o.recurseRedact(o.Fields)
 	o.recurseRedact(o.Resolution)
 	o.recurseRedact(o.FractionalPrecision)
+	o.recurseRedact(o.ClassName)
 }
 
 func (o *DataType) recurseRedact(v interface{}) {
@@ -494,6 +529,9 @@ func (o DataType) MarshalJSON() ([]byte, error) {
 	}
 	if o.FractionalPrecision != nil {
 		toSerialize["fractional_precision"] = o.FractionalPrecision
+	}
+	if o.ClassName != nil {
+		toSerialize["class_name"] = o.ClassName
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

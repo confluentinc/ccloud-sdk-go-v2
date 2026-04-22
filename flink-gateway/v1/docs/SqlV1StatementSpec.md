@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
-**ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | [optional]
+**ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | [optional] 
 **Principal** | Pointer to **string** | The id of a principal this statement runs as. | [optional] 
-**AuthorizedPrincipals** | Pointer to **[]string** | The list of ids of the principals granting permissions to run this statement. | [optional] 
 **Stopped** | Pointer to **bool** | Indicates whether the statement should be stopped. | [optional] 
+**ExecutionMode** | Pointer to **string** | The execution mode of the statement.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] [readonly] 
 
 ## Methods
 
@@ -130,31 +130,6 @@ SetPrincipal sets Principal field to given value.
 
 HasPrincipal returns a boolean if a field has been set.
 
-### GetAuthorizedPrincipals
-
-`func (o *SqlV1StatementSpec) GetAuthorizedPrincipals() []string`
-
-GetAuthorizedPrincipals returns the AuthorizedPrincipals field if non-nil, zero value otherwise.
-
-### GetAuthorizedPrincipalsOk
-
-`func (o *SqlV1StatementSpec) GetAuthorizedPrincipalsOk() (*[]string, bool)`
-
-GetAuthorizedPrincipalsOk returns a tuple with the AuthorizedPrincipals field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthorizedPrincipals
-
-`func (o *SqlV1StatementSpec) SetAuthorizedPrincipals(v []string)`
-
-SetAuthorizedPrincipals sets AuthorizedPrincipals field to given value.
-
-### HasAuthorizedPrincipals
-
-`func (o *SqlV1StatementSpec) HasAuthorizedPrincipals() bool`
-
-HasAuthorizedPrincipals returns a boolean if a field has been set.
-
 ### GetStopped
 
 `func (o *SqlV1StatementSpec) GetStopped() bool`
@@ -179,6 +154,31 @@ SetStopped sets Stopped field to given value.
 `func (o *SqlV1StatementSpec) HasStopped() bool`
 
 HasStopped returns a boolean if a field has been set.
+
+### GetExecutionMode
+
+`func (o *SqlV1StatementSpec) GetExecutionMode() string`
+
+GetExecutionMode returns the ExecutionMode field if non-nil, zero value otherwise.
+
+### GetExecutionModeOk
+
+`func (o *SqlV1StatementSpec) GetExecutionModeOk() (*string, bool)`
+
+GetExecutionModeOk returns a tuple with the ExecutionMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionMode
+
+`func (o *SqlV1StatementSpec) SetExecutionMode(v string)`
+
+SetExecutionMode sets ExecutionMode field to given value.
+
+### HasExecutionMode
+
+`func (o *SqlV1StatementSpec) HasExecutionMode() bool`
+
+HasExecutionMode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

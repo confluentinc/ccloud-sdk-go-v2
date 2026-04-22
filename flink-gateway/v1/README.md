@@ -79,11 +79,23 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AgentsSqlV1Api* | [**CreateSqlv1Agent**](docs/AgentsSqlV1Api.md#createsqlv1agent) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents | Create an Agent
+*AgentsSqlV1Api* | [**DeleteSqlv1Agent**](docs/AgentsSqlV1Api.md#deletesqlv1agent) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} | Delete an Agent
+*AgentsSqlV1Api* | [**GetSqlv1Agent**](docs/AgentsSqlV1Api.md#getsqlv1agent) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} | Read an Agent
+*AgentsSqlV1Api* | [**ListSqlv1Agents**](docs/AgentsSqlV1Api.md#listsqlv1agents) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/agents | List all agents
+*AgentsSqlV1Api* | [**UpdateSqlv1Agent**](docs/AgentsSqlV1Api.md#updatesqlv1agent) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} | Alter an Agent
 *ConnectionsSqlV1Api* | [**CreateSqlv1Connection**](docs/ConnectionsSqlV1Api.md#createsqlv1connection) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | Create a Connection
 *ConnectionsSqlV1Api* | [**DeleteSqlv1Connection**](docs/ConnectionsSqlV1Api.md#deletesqlv1connection) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Delete a Connection
 *ConnectionsSqlV1Api* | [**GetSqlv1Connection**](docs/ConnectionsSqlV1Api.md#getsqlv1connection) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Read a Connection
 *ConnectionsSqlV1Api* | [**ListSqlv1Connections**](docs/ConnectionsSqlV1Api.md#listsqlv1connections) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections | List of Connections
 *ConnectionsSqlV1Api* | [**UpdateSqlv1Connection**](docs/ConnectionsSqlV1Api.md#updatesqlv1connection) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} | Update a Connection
+*MaterializedTableVersionsSqlV1Api* | [**GetSqlv1MaterializedTableVersion**](docs/MaterializedTableVersionsSqlV1Api.md#getsqlv1materializedtableversion) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions/{version} | Read a materialized table version
+*MaterializedTableVersionsSqlV1Api* | [**ListSqlv1MaterializedTableVersions**](docs/MaterializedTableVersionsSqlV1Api.md#listsqlv1materializedtableversions) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions | List all the versions of a materialized table
+*MaterializedTablesSqlV1Api* | [**CreateSqlv1MaterializedTable**](docs/MaterializedTablesSqlV1Api.md#createsqlv1materializedtable) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables | Create a materialized table
+*MaterializedTablesSqlV1Api* | [**DeleteSqlv1MaterializedTable**](docs/MaterializedTablesSqlV1Api.md#deletesqlv1materializedtable) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} | Delete a materialized table
+*MaterializedTablesSqlV1Api* | [**GetSqlv1MaterializedTable**](docs/MaterializedTablesSqlV1Api.md#getsqlv1materializedtable) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} | Read a materialized table
+*MaterializedTablesSqlV1Api* | [**ListSqlv1MaterializedTables**](docs/MaterializedTablesSqlV1Api.md#listsqlv1materializedtables) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/materialized-tables | List all materialized tables
+*MaterializedTablesSqlV1Api* | [**UpdateSqlv1MaterializedTable**](docs/MaterializedTablesSqlV1Api.md#updatesqlv1materializedtable) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} | Update/Evolve a materialized table
 *StatementExceptionsSqlV1Api* | [**GetSqlv1StatementExceptions**](docs/StatementExceptionsSqlV1Api.md#getsqlv1statementexceptions) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions | List of Statement Exceptions
 *StatementResultsSqlV1Api* | [**GetSqlv1StatementResult**](docs/StatementResultsSqlV1Api.md#getsqlv1statementresult) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results | Read Statement Result
 *StatementsSqlV1Api* | [**CreateSqlv1Statement**](docs/StatementsSqlV1Api.md#createsqlv1statement) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | Create a Statement
@@ -92,6 +104,10 @@ Class | Method | HTTP request | Description
 *StatementsSqlV1Api* | [**ListSqlv1Statements**](docs/StatementsSqlV1Api.md#listsqlv1statements) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
 *StatementsSqlV1Api* | [**PatchSqlv1Statement**](docs/StatementsSqlV1Api.md#patchsqlv1statement) | **Patch** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Patch a Statement
 *StatementsSqlV1Api* | [**UpdateSqlv1Statement**](docs/StatementsSqlV1Api.md#updatesqlv1statement) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
+*ToolsSqlV1Api* | [**CreateSqlv1Tool**](docs/ToolsSqlV1Api.md#createsqlv1tool) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/tools | Create a Tool
+*ToolsSqlV1Api* | [**DeleteSqlv1Tool**](docs/ToolsSqlV1Api.md#deletesqlv1tool) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Delete a Tool
+*ToolsSqlV1Api* | [**GetSqlv1Tool**](docs/ToolsSqlV1Api.md#getsqlv1tool) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Read a Tool
+*ToolsSqlV1Api* | [**ListSqlv1Tools**](docs/ToolsSqlV1Api.md#listsqlv1tools) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools | List of Tools
 
 
 ## Documentation For Models
@@ -112,14 +128,38 @@ Class | Method | HTTP request | Description
  - [PatchRequestOneOf](docs/PatchRequestOneOf.md)
  - [ResultListMeta](docs/ResultListMeta.md)
  - [RowFieldType](docs/RowFieldType.md)
+ - [SqlV1Agent](docs/SqlV1Agent.md)
+ - [SqlV1AgentList](docs/SqlV1AgentList.md)
+ - [SqlV1AgentSpec](docs/SqlV1AgentSpec.md)
+ - [SqlV1AgentStatus](docs/SqlV1AgentStatus.md)
+ - [SqlV1ColumnCommon](docs/SqlV1ColumnCommon.md)
+ - [SqlV1ColumnDetails](docs/SqlV1ColumnDetails.md)
+ - [SqlV1ComputedColumn](docs/SqlV1ComputedColumn.md)
+ - [SqlV1ComputedColumnAllOf](docs/SqlV1ComputedColumnAllOf.md)
  - [SqlV1Connection](docs/SqlV1Connection.md)
  - [SqlV1ConnectionList](docs/SqlV1ConnectionList.md)
  - [SqlV1ConnectionSpec](docs/SqlV1ConnectionSpec.md)
  - [SqlV1ConnectionSpecAuthDataOneOf](docs/SqlV1ConnectionSpecAuthDataOneOf.md)
  - [SqlV1ConnectionStatus](docs/SqlV1ConnectionStatus.md)
+ - [SqlV1Constraint](docs/SqlV1Constraint.md)
+ - [SqlV1Distribution](docs/SqlV1Distribution.md)
+ - [SqlV1MaterializedTable](docs/SqlV1MaterializedTable.md)
+ - [SqlV1MaterializedTableList](docs/SqlV1MaterializedTableList.md)
+ - [SqlV1MaterializedTableSpec](docs/SqlV1MaterializedTableSpec.md)
+ - [SqlV1MaterializedTableStatus](docs/SqlV1MaterializedTableStatus.md)
+ - [SqlV1MaterializedTableVersion](docs/SqlV1MaterializedTableVersion.md)
+ - [SqlV1MaterializedTableVersionList](docs/SqlV1MaterializedTableVersionList.md)
+ - [SqlV1MaterializedTableVersionSpec](docs/SqlV1MaterializedTableVersionSpec.md)
+ - [SqlV1MaterializedTableWarning](docs/SqlV1MaterializedTableWarning.md)
+ - [SqlV1MetadataColumn](docs/SqlV1MetadataColumn.md)
+ - [SqlV1MetadataColumnAllOf](docs/SqlV1MetadataColumnAllOf.md)
+ - [SqlV1PhysicalColumn](docs/SqlV1PhysicalColumn.md)
+ - [SqlV1PhysicalColumnAllOf](docs/SqlV1PhysicalColumnAllOf.md)
  - [SqlV1PlaintextProvider](docs/SqlV1PlaintextProvider.md)
+ - [SqlV1ResourceChange](docs/SqlV1ResourceChange.md)
  - [SqlV1ResultSchema](docs/SqlV1ResultSchema.md)
  - [SqlV1ScalingStatus](docs/SqlV1ScalingStatus.md)
+ - [SqlV1StateLimitStatus](docs/SqlV1StateLimitStatus.md)
  - [SqlV1Statement](docs/SqlV1Statement.md)
  - [SqlV1StatementException](docs/SqlV1StatementException.md)
  - [SqlV1StatementExceptionList](docs/SqlV1StatementExceptionList.md)
@@ -128,12 +168,47 @@ Class | Method | HTTP request | Description
  - [SqlV1StatementResultResults](docs/SqlV1StatementResultResults.md)
  - [SqlV1StatementSpec](docs/SqlV1StatementSpec.md)
  - [SqlV1StatementStatus](docs/SqlV1StatementStatus.md)
+ - [SqlV1StatementStatusAffectedResource](docs/SqlV1StatementStatusAffectedResource.md)
  - [SqlV1StatementTraits](docs/SqlV1StatementTraits.md)
+ - [SqlV1StatementWarning](docs/SqlV1StatementWarning.md)
+ - [SqlV1Tool](docs/SqlV1Tool.md)
+ - [SqlV1ToolList](docs/SqlV1ToolList.md)
+ - [SqlV1ToolSpec](docs/SqlV1ToolSpec.md)
+ - [SqlV1ToolStatus](docs/SqlV1ToolStatus.md)
+ - [SqlV1Watermark](docs/SqlV1Watermark.md)
  - [StatementObjectMeta](docs/StatementObjectMeta.md)
 
 
 ## Documentation For Authorization
 
+
+
+### external-access-token
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ### resource-api-key
