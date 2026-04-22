@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **IsAppendOnly** | Pointer to **bool** | Indicates the special case where results of a statement are insert/append only. | [optional] 
 **UpsertColumns** | Pointer to **[]int32** | Defines the column indices clients can use as upsert keys. | [optional] 
 **Schema** | Pointer to [**SqlV1ResultSchema**](SqlV1ResultSchema.md) |  | [optional] 
+**ConnectionRefs** | Pointer to **[]string** | The names of connections that the SQL statement references (e.g., in FROM clauses). | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetSchema sets Schema field to given value.
 `func (o *SqlV1StatementTraits) HasSchema() bool`
 
 HasSchema returns a boolean if a field has been set.
+
+### GetConnectionRefs
+
+`func (o *SqlV1StatementTraits) GetConnectionRefs() []string`
+
+GetConnectionRefs returns the ConnectionRefs field if non-nil, zero value otherwise.
+
+### GetConnectionRefsOk
+
+`func (o *SqlV1StatementTraits) GetConnectionRefsOk() (*[]string, bool)`
+
+GetConnectionRefsOk returns a tuple with the ConnectionRefs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionRefs
+
+`func (o *SqlV1StatementTraits) SetConnectionRefs(v []string)`
+
+SetConnectionRefs sets ConnectionRefs field to given value.
+
+### HasConnectionRefs
+
+`func (o *SqlV1StatementTraits) HasConnectionRefs() bool`
+
+HasConnectionRefs returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

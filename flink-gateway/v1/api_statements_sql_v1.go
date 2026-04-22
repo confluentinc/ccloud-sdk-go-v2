@@ -665,7 +665,7 @@ type ApiListSqlv1StatementsRequest struct {
 	labelSelector     *string
 }
 
-// Filter the results by exact match for spec.compute_pool.
+// Filter the results by exact match for spec.compute_pool_id. When creating statements, if compute_pool_id is not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
 func (r ApiListSqlv1StatementsRequest) SpecComputePoolId(specComputePoolId string) ApiListSqlv1StatementsRequest {
 	r.specComputePoolId = &specComputePoolId
 	return r
