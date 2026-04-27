@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | The type of the catalog integration. | 
 **ProviderIntegrationId** | **string** | The provider integration id. | 
+**CustomDatabase** | Pointer to **string** | The custom database name to use in AWS Glue. | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetProviderIntegrationId sets ProviderIntegrationId field to given value.
 
+
+### GetCustomDatabase
+
+`func (o *TableflowV1CatalogIntegrationAwsGlueSpec) GetCustomDatabase() string`
+
+GetCustomDatabase returns the CustomDatabase field if non-nil, zero value otherwise.
+
+### GetCustomDatabaseOk
+
+`func (o *TableflowV1CatalogIntegrationAwsGlueSpec) GetCustomDatabaseOk() (*string, bool)`
+
+GetCustomDatabaseOk returns a tuple with the CustomDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomDatabase
+
+`func (o *TableflowV1CatalogIntegrationAwsGlueSpec) SetCustomDatabase(v string)`
+
+SetCustomDatabase sets CustomDatabase field to given value.
+
+### HasCustomDatabase
+
+`func (o *TableflowV1CatalogIntegrationAwsGlueSpec) HasCustomDatabase() bool`
+
+HasCustomDatabase returns a boolean if a field has been set.
 
 
 ### AsTableflowV1CatalogIntegrationSpecConfigOneOf

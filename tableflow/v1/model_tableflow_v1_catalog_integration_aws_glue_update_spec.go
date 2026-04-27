@@ -38,6 +38,8 @@ import (
 type TableflowV1CatalogIntegrationAwsGlueUpdateSpec struct {
 	// The type of the catalog integration.
 	Kind string `json:"kind,omitempty"`
+	// The custom database name to use in AWS Glue.
+	CustomDatabase *string `json:"custom_database,omitempty"`
 }
 
 // NewTableflowV1CatalogIntegrationAwsGlueUpdateSpec instantiates a new TableflowV1CatalogIntegrationAwsGlueUpdateSpec object
@@ -82,9 +84,42 @@ func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) SetKind(v string) {
 	o.Kind = v
 }
 
+// GetCustomDatabase returns the CustomDatabase field value if set, zero value otherwise.
+func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) GetCustomDatabase() string {
+	if o == nil || o.CustomDatabase == nil {
+		var ret string
+		return ret
+	}
+	return *o.CustomDatabase
+}
+
+// GetCustomDatabaseOk returns a tuple with the CustomDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) GetCustomDatabaseOk() (*string, bool) {
+	if o == nil || o.CustomDatabase == nil {
+		return nil, false
+	}
+	return o.CustomDatabase, true
+}
+
+// HasCustomDatabase returns a boolean if a field has been set.
+func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) HasCustomDatabase() bool {
+	if o != nil && o.CustomDatabase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomDatabase gets a reference to the given string and assigns it to the CustomDatabase field.
+func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) SetCustomDatabase(v string) {
+	o.CustomDatabase = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) Redact() {
 	o.recurseRedact(&o.Kind)
+	o.recurseRedact(o.CustomDatabase)
 }
 
 func (o *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) recurseRedact(v interface{}) {
@@ -121,6 +156,9 @@ func (o TableflowV1CatalogIntegrationAwsGlueUpdateSpec) MarshalJSON() ([]byte, e
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["kind"] = o.Kind
+	}
+	if o.CustomDatabase != nil {
+		toSerialize["custom_database"] = o.CustomDatabase
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
