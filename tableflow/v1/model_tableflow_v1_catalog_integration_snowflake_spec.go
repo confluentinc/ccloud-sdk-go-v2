@@ -48,6 +48,8 @@ type TableflowV1CatalogIntegrationSnowflakeSpec struct {
 	Warehouse string `json:"warehouse,omitempty"`
 	// Allowed scope of the Snowflake Open Catalog.
 	AllowedScope string `json:"allowed_scope,omitempty"`
+	// The custom namespace to use in Snowflake Open Catalog.
+	CustomNamespace *string `json:"custom_namespace,omitempty"`
 }
 
 // NewTableflowV1CatalogIntegrationSnowflakeSpec instantiates a new TableflowV1CatalogIntegrationSnowflakeSpec object
@@ -217,6 +219,38 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) SetAllowedScope(v string) {
 	o.AllowedScope = v
 }
 
+// GetCustomNamespace returns the CustomNamespace field value if set, zero value otherwise.
+func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetCustomNamespace() string {
+	if o == nil || o.CustomNamespace == nil {
+		var ret string
+		return ret
+	}
+	return *o.CustomNamespace
+}
+
+// GetCustomNamespaceOk returns a tuple with the CustomNamespace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1CatalogIntegrationSnowflakeSpec) GetCustomNamespaceOk() (*string, bool) {
+	if o == nil || o.CustomNamespace == nil {
+		return nil, false
+	}
+	return o.CustomNamespace, true
+}
+
+// HasCustomNamespace returns a boolean if a field has been set.
+func (o *TableflowV1CatalogIntegrationSnowflakeSpec) HasCustomNamespace() bool {
+	if o != nil && o.CustomNamespace != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomNamespace gets a reference to the given string and assigns it to the CustomNamespace field.
+func (o *TableflowV1CatalogIntegrationSnowflakeSpec) SetCustomNamespace(v string) {
+	o.CustomNamespace = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) Redact() {
 	o.recurseRedact(&o.Kind)
@@ -225,6 +259,7 @@ func (o *TableflowV1CatalogIntegrationSnowflakeSpec) Redact() {
 	o.recurseRedact(&o.ClientSecret)
 	o.recurseRedact(&o.Warehouse)
 	o.recurseRedact(&o.AllowedScope)
+	o.recurseRedact(o.CustomNamespace)
 }
 
 func (o *TableflowV1CatalogIntegrationSnowflakeSpec) recurseRedact(v interface{}) {
@@ -276,6 +311,9 @@ func (o TableflowV1CatalogIntegrationSnowflakeSpec) MarshalJSON() ([]byte, error
 	}
 	if true {
 		toSerialize["allowed_scope"] = o.AllowedScope
+	}
+	if o.CustomNamespace != nil {
+		toSerialize["custom_namespace"] = o.CustomNamespace
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

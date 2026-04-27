@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CatalogName** | **string** | The name of the catalog within Unity Catalog. | 
 **ClientId** | **string** | The OAuth client ID used to authenticate with the Unity Catalog. | 
 **ClientSecret** | **string** | The OAuth client secret used for authentication with the Unity Catalog. | 
+**CustomSchema** | Pointer to **string** | The custom schema name to use in Unity Catalog. | [optional] 
 
 ## Methods
 
@@ -128,6 +129,31 @@ and a boolean to check if the value has been set.
 
 SetClientSecret sets ClientSecret field to given value.
 
+
+### GetCustomSchema
+
+`func (o *TableflowV1CatalogIntegrationUnitySpec) GetCustomSchema() string`
+
+GetCustomSchema returns the CustomSchema field if non-nil, zero value otherwise.
+
+### GetCustomSchemaOk
+
+`func (o *TableflowV1CatalogIntegrationUnitySpec) GetCustomSchemaOk() (*string, bool)`
+
+GetCustomSchemaOk returns a tuple with the CustomSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomSchema
+
+`func (o *TableflowV1CatalogIntegrationUnitySpec) SetCustomSchema(v string)`
+
+SetCustomSchema sets CustomSchema field to given value.
+
+### HasCustomSchema
+
+`func (o *TableflowV1CatalogIntegrationUnitySpec) HasCustomSchema() bool`
+
+HasCustomSchema returns a boolean if a field has been set.
 
 
 ### AsTableflowV1CatalogIntegrationSpecConfigOneOf

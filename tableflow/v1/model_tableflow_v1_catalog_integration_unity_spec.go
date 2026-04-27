@@ -46,6 +46,8 @@ type TableflowV1CatalogIntegrationUnitySpec struct {
 	ClientId string `json:"client_id,omitempty"`
 	// The OAuth client secret used for authentication with the Unity Catalog.
 	ClientSecret string `json:"client_secret,omitempty"`
+	// The custom schema name to use in Unity Catalog.
+	CustomSchema *string `json:"custom_schema,omitempty"`
 }
 
 // NewTableflowV1CatalogIntegrationUnitySpec instantiates a new TableflowV1CatalogIntegrationUnitySpec object
@@ -190,6 +192,38 @@ func (o *TableflowV1CatalogIntegrationUnitySpec) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
+// GetCustomSchema returns the CustomSchema field value if set, zero value otherwise.
+func (o *TableflowV1CatalogIntegrationUnitySpec) GetCustomSchema() string {
+	if o == nil || o.CustomSchema == nil {
+		var ret string
+		return ret
+	}
+	return *o.CustomSchema
+}
+
+// GetCustomSchemaOk returns a tuple with the CustomSchema field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1CatalogIntegrationUnitySpec) GetCustomSchemaOk() (*string, bool) {
+	if o == nil || o.CustomSchema == nil {
+		return nil, false
+	}
+	return o.CustomSchema, true
+}
+
+// HasCustomSchema returns a boolean if a field has been set.
+func (o *TableflowV1CatalogIntegrationUnitySpec) HasCustomSchema() bool {
+	if o != nil && o.CustomSchema != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomSchema gets a reference to the given string and assigns it to the CustomSchema field.
+func (o *TableflowV1CatalogIntegrationUnitySpec) SetCustomSchema(v string) {
+	o.CustomSchema = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationUnitySpec) Redact() {
 	o.recurseRedact(&o.Kind)
@@ -197,6 +231,7 @@ func (o *TableflowV1CatalogIntegrationUnitySpec) Redact() {
 	o.recurseRedact(&o.CatalogName)
 	o.recurseRedact(&o.ClientId)
 	o.recurseRedact(&o.ClientSecret)
+	o.recurseRedact(o.CustomSchema)
 }
 
 func (o *TableflowV1CatalogIntegrationUnitySpec) recurseRedact(v interface{}) {
@@ -245,6 +280,9 @@ func (o TableflowV1CatalogIntegrationUnitySpec) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["client_secret"] = o.ClientSecret
+	}
+	if o.CustomSchema != nil {
+		toSerialize["custom_schema"] = o.CustomSchema
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

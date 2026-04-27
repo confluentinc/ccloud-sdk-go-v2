@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ClientSecret** | Pointer to **string** | The client secret of the catalog integration. | [optional] 
 **Warehouse** | Pointer to **string** | Warehouse name of the Snowflake Open Catalog. | [optional] 
 **AllowedScope** | Pointer to **string** | Allowed scope of the Snowflake Open Catalog. | [optional] 
+**CustomNamespace** | Pointer to **string** | The custom namespace to use in Snowflake Open Catalog. | [optional] 
 
 ## Methods
 
@@ -174,6 +175,31 @@ SetAllowedScope sets AllowedScope field to given value.
 `func (o *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) HasAllowedScope() bool`
 
 HasAllowedScope returns a boolean if a field has been set.
+
+### GetCustomNamespace
+
+`func (o *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) GetCustomNamespace() string`
+
+GetCustomNamespace returns the CustomNamespace field if non-nil, zero value otherwise.
+
+### GetCustomNamespaceOk
+
+`func (o *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) GetCustomNamespaceOk() (*string, bool)`
+
+GetCustomNamespaceOk returns a tuple with the CustomNamespace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomNamespace
+
+`func (o *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) SetCustomNamespace(v string)`
+
+SetCustomNamespace sets CustomNamespace field to given value.
+
+### HasCustomNamespace
+
+`func (o *TableflowV1CatalogIntegrationSnowflakeUpdateSpec) HasCustomNamespace() bool`
+
+HasCustomNamespace returns a boolean if a field has been set.
 
 
 ### AsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf

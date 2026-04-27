@@ -40,6 +40,8 @@ type TableflowV1CatalogIntegrationAwsGlueSpec struct {
 	Kind string `json:"kind,omitempty"`
 	// The provider integration id.
 	ProviderIntegrationId string `json:"provider_integration_id,omitempty"`
+	// The custom database name to use in AWS Glue.
+	CustomDatabase *string `json:"custom_database,omitempty"`
 }
 
 // NewTableflowV1CatalogIntegrationAwsGlueSpec instantiates a new TableflowV1CatalogIntegrationAwsGlueSpec object
@@ -109,10 +111,43 @@ func (o *TableflowV1CatalogIntegrationAwsGlueSpec) SetProviderIntegrationId(v st
 	o.ProviderIntegrationId = v
 }
 
+// GetCustomDatabase returns the CustomDatabase field value if set, zero value otherwise.
+func (o *TableflowV1CatalogIntegrationAwsGlueSpec) GetCustomDatabase() string {
+	if o == nil || o.CustomDatabase == nil {
+		var ret string
+		return ret
+	}
+	return *o.CustomDatabase
+}
+
+// GetCustomDatabaseOk returns a tuple with the CustomDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableflowV1CatalogIntegrationAwsGlueSpec) GetCustomDatabaseOk() (*string, bool) {
+	if o == nil || o.CustomDatabase == nil {
+		return nil, false
+	}
+	return o.CustomDatabase, true
+}
+
+// HasCustomDatabase returns a boolean if a field has been set.
+func (o *TableflowV1CatalogIntegrationAwsGlueSpec) HasCustomDatabase() bool {
+	if o != nil && o.CustomDatabase != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomDatabase gets a reference to the given string and assigns it to the CustomDatabase field.
+func (o *TableflowV1CatalogIntegrationAwsGlueSpec) SetCustomDatabase(v string) {
+	o.CustomDatabase = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TableflowV1CatalogIntegrationAwsGlueSpec) Redact() {
 	o.recurseRedact(&o.Kind)
 	o.recurseRedact(&o.ProviderIntegrationId)
+	o.recurseRedact(o.CustomDatabase)
 }
 
 func (o *TableflowV1CatalogIntegrationAwsGlueSpec) recurseRedact(v interface{}) {
@@ -152,6 +187,9 @@ func (o TableflowV1CatalogIntegrationAwsGlueSpec) MarshalJSON() ([]byte, error) 
 	}
 	if true {
 		toSerialize["provider_integration_id"] = o.ProviderIntegrationId
+	}
+	if o.CustomDatabase != nil {
+		toSerialize["custom_database"] = o.CustomDatabase
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
