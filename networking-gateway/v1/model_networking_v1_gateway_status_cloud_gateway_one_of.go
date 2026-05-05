@@ -33,12 +33,14 @@ import (
 
 // NetworkingV1GatewayStatusCloudGatewayOneOf - struct for NetworkingV1GatewayStatusCloudGatewayOneOf
 type NetworkingV1GatewayStatusCloudGatewayOneOf struct {
-	NetworkingV1AwsEgressPrivateLinkGatewayStatus           *NetworkingV1AwsEgressPrivateLinkGatewayStatus
-	NetworkingV1AwsIngressPrivateLinkGatewayStatus          *NetworkingV1AwsIngressPrivateLinkGatewayStatus
-	NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus     *NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus
-	NetworkingV1AzureEgressPrivateLinkGatewayStatus         *NetworkingV1AzureEgressPrivateLinkGatewayStatus
-	NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus *NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus
-	NetworkingV1GcpPeeringGatewayStatus                     *NetworkingV1GcpPeeringGatewayStatus
+	NetworkingV1AwsEgressPrivateLinkGatewayStatus            *NetworkingV1AwsEgressPrivateLinkGatewayStatus
+	NetworkingV1AwsIngressPrivateLinkGatewayStatus           *NetworkingV1AwsIngressPrivateLinkGatewayStatus
+	NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus      *NetworkingV1AwsPrivateNetworkInterfaceGatewayStatus
+	NetworkingV1AzureEgressPrivateLinkGatewayStatus          *NetworkingV1AzureEgressPrivateLinkGatewayStatus
+	NetworkingV1AzureIngressPrivateLinkGatewayStatus         *NetworkingV1AzureIngressPrivateLinkGatewayStatus
+	NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus  *NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus
+	NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus *NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus
+	NetworkingV1GcpPeeringGatewayStatus                      *NetworkingV1GcpPeeringGatewayStatus
 }
 
 // NetworkingV1AwsEgressPrivateLinkGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf is a convenience function that returns NetworkingV1AwsEgressPrivateLinkGatewayStatus wrapped in NetworkingV1GatewayStatusCloudGatewayOneOf
@@ -61,9 +63,19 @@ func NetworkingV1AzureEgressPrivateLinkGatewayStatusAsNetworkingV1GatewayStatusC
 	return NetworkingV1GatewayStatusCloudGatewayOneOf{NetworkingV1AzureEgressPrivateLinkGatewayStatus: v}
 }
 
+// NetworkingV1AzureIngressPrivateLinkGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf is a convenience function that returns NetworkingV1AzureIngressPrivateLinkGatewayStatus wrapped in NetworkingV1GatewayStatusCloudGatewayOneOf
+func NetworkingV1AzureIngressPrivateLinkGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf(v *NetworkingV1AzureIngressPrivateLinkGatewayStatus) NetworkingV1GatewayStatusCloudGatewayOneOf {
+	return NetworkingV1GatewayStatusCloudGatewayOneOf{NetworkingV1AzureIngressPrivateLinkGatewayStatus: v}
+}
+
 // NetworkingV1GcpEgressPrivateServiceConnectGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf is a convenience function that returns NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus wrapped in NetworkingV1GatewayStatusCloudGatewayOneOf
 func NetworkingV1GcpEgressPrivateServiceConnectGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf(v *NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus) NetworkingV1GatewayStatusCloudGatewayOneOf {
 	return NetworkingV1GatewayStatusCloudGatewayOneOf{NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus: v}
+}
+
+// NetworkingV1GcpIngressPrivateServiceConnectGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf is a convenience function that returns NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus wrapped in NetworkingV1GatewayStatusCloudGatewayOneOf
+func NetworkingV1GcpIngressPrivateServiceConnectGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf(v *NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus) NetworkingV1GatewayStatusCloudGatewayOneOf {
+	return NetworkingV1GatewayStatusCloudGatewayOneOf{NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus: v}
 }
 
 // NetworkingV1GcpPeeringGatewayStatusAsNetworkingV1GatewayStatusCloudGatewayOneOf is a convenience function that returns NetworkingV1GcpPeeringGatewayStatus wrapped in NetworkingV1GatewayStatusCloudGatewayOneOf
@@ -129,6 +141,18 @@ func (dst *NetworkingV1GatewayStatusCloudGatewayOneOf) UnmarshalJSON(data []byte
 		}
 	}
 
+	// check if the discriminator value is 'AzureIngressPrivateLinkGatewayStatus'
+	if jsonDict["kind"] == "AzureIngressPrivateLinkGatewayStatus" {
+		// try to unmarshal JSON data into NetworkingV1AzureIngressPrivateLinkGatewayStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus, return on the first match
+		} else {
+			dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1AzureIngressPrivateLinkGatewayStatus: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'GcpEgressPrivateServiceConnectGatewayStatus'
 	if jsonDict["kind"] == "GcpEgressPrivateServiceConnectGatewayStatus" {
 		// try to unmarshal JSON data into NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus
@@ -138,6 +162,18 @@ func (dst *NetworkingV1GatewayStatusCloudGatewayOneOf) UnmarshalJSON(data []byte
 		} else {
 			dst.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'GcpIngressPrivateServiceConnectGatewayStatus'
+	if jsonDict["kind"] == "GcpIngressPrivateServiceConnectGatewayStatus" {
+		// try to unmarshal JSON data into NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus, return on the first match
+		} else {
+			dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus: %s", err.Error())
 		}
 	}
 
@@ -201,6 +237,18 @@ func (dst *NetworkingV1GatewayStatusCloudGatewayOneOf) UnmarshalJSON(data []byte
 		}
 	}
 
+	// check if the discriminator value is 'networking.v1.AzureIngressPrivateLinkGatewayStatus'
+	if jsonDict["kind"] == "networking.v1.AzureIngressPrivateLinkGatewayStatus" {
+		// try to unmarshal JSON data into NetworkingV1AzureIngressPrivateLinkGatewayStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus, return on the first match
+		} else {
+			dst.NetworkingV1AzureIngressPrivateLinkGatewayStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1AzureIngressPrivateLinkGatewayStatus: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'networking.v1.GcpEgressPrivateServiceConnectGatewayStatus'
 	if jsonDict["kind"] == "networking.v1.GcpEgressPrivateServiceConnectGatewayStatus" {
 		// try to unmarshal JSON data into NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus
@@ -210,6 +258,18 @@ func (dst *NetworkingV1GatewayStatusCloudGatewayOneOf) UnmarshalJSON(data []byte
 		} else {
 			dst.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus = nil
 			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'networking.v1.GcpIngressPrivateServiceConnectGatewayStatus'
+	if jsonDict["kind"] == "networking.v1.GcpIngressPrivateServiceConnectGatewayStatus" {
+		// try to unmarshal JSON data into NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus
+		err = json.Unmarshal(data, &dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus)
+		if err == nil {
+			return nil // data stored in dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus, return on the first match
+		} else {
+			dst.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus = nil
+			return fmt.Errorf("Failed to unmarshal NetworkingV1GatewayStatusCloudGatewayOneOf as NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus: %s", err.Error())
 		}
 	}
 
@@ -262,11 +322,27 @@ func (src NetworkingV1GatewayStatusCloudGatewayOneOf) MarshalJSON() ([]byte, err
 		return buffer.Bytes(), err
 	}
 
+	if src.NetworkingV1AzureIngressPrivateLinkGatewayStatus != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1AzureIngressPrivateLinkGatewayStatus)
+		return buffer.Bytes(), err
+	}
+
 	if src.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
 		encoder.SetEscapeHTML(false)
 		err := encoder.Encode(&src.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus)
+		return buffer.Bytes(), err
+	}
+
+	if src.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus)
 		return buffer.Bytes(), err
 	}
 
@@ -299,8 +375,16 @@ func (obj *NetworkingV1GatewayStatusCloudGatewayOneOf) GetActualInstance() inter
 		return obj.NetworkingV1AzureEgressPrivateLinkGatewayStatus
 	}
 
+	if obj.NetworkingV1AzureIngressPrivateLinkGatewayStatus != nil {
+		return obj.NetworkingV1AzureIngressPrivateLinkGatewayStatus
+	}
+
 	if obj.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus != nil {
 		return obj.NetworkingV1GcpEgressPrivateServiceConnectGatewayStatus
+	}
+
+	if obj.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus != nil {
+		return obj.NetworkingV1GcpIngressPrivateServiceConnectGatewayStatus
 	}
 
 	if obj.NetworkingV1GcpPeeringGatewayStatus != nil {

@@ -222,8 +222,6 @@ Name | Type | Description  | Notes
 
 ## ListNetworkingV1Gateways
 
- **gatewayType** | **[]string** | Filter the results by exact match for gateway_type. Pass multiple times to see results matching any of the values. | 
- **id** | **[]string** | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. | 
 > NetworkingV1GatewayList ListNetworkingV1Gateways(ctx).Environment(environment).GatewayType(gatewayType).Id(id).SpecConfigRegion(specConfigRegion).SpecDisplayName(specDisplayName).StatusPhase(statusPhase).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Gateways
@@ -246,9 +244,9 @@ func main() {
     environment := "env-00000" // string | Filter the results by exact match for environment.
     gatewayType := []string{"Inner_example"} // []string | Filter the results by exact match for gateway_type. Pass multiple times to see results matching any of the values. (optional)
     id := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
-    specConfigRegion := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
-    specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
-    statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for id. Pass multiple times to see results matching any of the values. (optional)
+    specConfigRegion := []string{"Inner_example"} // []string | Filter the results by exact match for spec.config.region. Pass multiple times to see results matching any of the values. (optional)
+    specDisplayName := []string{"Inner_example"} // []string | Filter the results by exact match for spec.display_name. Pass multiple times to see results matching any of the values. (optional)
+    statusPhase := []string{"Inner_example"} // []string | Filter the results by exact match for status.phase. Pass multiple times to see results matching any of the values. (optional)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 100)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
