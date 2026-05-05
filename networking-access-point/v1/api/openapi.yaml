@@ -3979,7 +3979,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: ap-f3a90de
           maxLength: 255
           readOnly: true
           type: string
@@ -4046,13 +4046,17 @@ components:
               AwsEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
               AwsIngressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpointStatus'
               AzureEgressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
+              AzureIngressPrivateLinkEndpointStatus: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpointStatus'
               GcpEgressPrivateServiceConnectEndpointStatus: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
+              GcpIngressPrivateServiceConnectEndpointStatus: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpointStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpointStatus'
+          - $ref: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpointStatus'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpointStatus'
+          - $ref: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpointStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1AccessPointStatusConfigOneOf
@@ -4086,7 +4090,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: dnsrec-f3a90de
           maxLength: 255
           readOnly: true
           type: string
@@ -4217,6 +4221,25 @@ components:
       - kind
       - private_link_service_resource_id
       type: object
+    networking.v1.AzureIngressPrivateLinkEndpoint:
+      description: Azure Ingress Private Link Endpoint.
+      properties:
+        kind:
+          description: AzureIngressPrivateLinkEndpoint kind.
+          enum:
+          - AzureIngressPrivateLinkEndpoint
+          type: string
+        private_endpoint_resource_id:
+          description: Resource ID of a Private Endpoint that will be connected to
+            the Private Link service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-centralus-rg/providers/Microsoft.Network/privateEndpoints/private-endpoint-azure-centralus
+          minLength: 1
+          type: string
+          x-immutable: true
+      required:
+      - kind
+      - private_endpoint_resource_id
+      type: object
     networking.v1.GcpEgressPrivateServiceConnectEndpoint:
       description: GCP Private Service Connect Endpoint.
       properties:
@@ -4240,6 +4263,23 @@ components:
       required:
       - kind
       - private_service_connect_endpoint_target
+      type: object
+    networking.v1.GcpIngressPrivateServiceConnectEndpoint:
+      description: GCP Ingress Private Service Connect Endpoint.
+      properties:
+        kind:
+          description: GcpIngressPrivateServiceConnectEndpoint kind.
+          enum:
+          - GcpIngressPrivateServiceConnectEndpoint
+          type: string
+        private_service_connect_connection_id:
+          description: The ID of the Private Service Connect connection.
+          example: "00000000000000000"
+          minLength: 1
+          type: string
+      required:
+      - kind
+      - private_service_connect_connection_id
       type: object
     networking.v1.AwsEgressPrivateLinkEndpointStatus:
       description: Status of an AWS PrivateLink Endpoint.
@@ -4338,6 +4378,42 @@ components:
       - private_endpoint_ip_address
       - private_endpoint_resource_id
       type: object
+    networking.v1.AzureIngressPrivateLinkEndpointStatus:
+      description: Status of an Azure Ingress Private Link Endpoint.
+      properties:
+        kind:
+          description: AzureIngressPrivateLinkEndpointStatus kind.
+          enum:
+          - AzureIngressPrivateLinkEndpointStatus
+          type: string
+        private_link_service_alias:
+          description: Alias of the Confluent Cloud Private Link Service.
+          example: plattg-123abc-privatelink.00000000-0000-0000-0000-000000000000.centralus.azure.privatelinkservice
+          readOnly: true
+          type: string
+        private_link_service_resource_id:
+          description: Resource ID of the Confluent Cloud Private Link Service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plattg-123abc/providers/Microsoft.Network/privateLinkServices/plattg-123abc-privatelink
+          readOnly: true
+          type: string
+        private_endpoint_resource_id:
+          description: Resource ID of the Private Endpoint used for connecting to
+            the Private Link Service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-centralus-rg/providers/Microsoft.Network/privateEndpoints/private-endpoint-azure-centralus
+          readOnly: true
+          type: string
+        dns_domain:
+          description: DNS domain name used to configure the Private DNS Zone for
+            the Access Point.
+          example: ap123abc.centralus.azure.accesspoint.confluent.cloud
+          readOnly: true
+          type: string
+      required:
+      - kind
+      - private_endpoint_resource_id
+      - private_link_service_alias
+      - private_link_service_resource_id
+      type: object
     networking.v1.GcpEgressPrivateServiceConnectEndpointStatus:
       description: Status of a GCP Private Service Connect Endpoint.
       properties:
@@ -4369,6 +4445,36 @@ components:
       - private_service_connect_endpoint_connection_id
       - private_service_connect_endpoint_ip_address
       - private_service_connect_endpoint_name
+      type: object
+    networking.v1.GcpIngressPrivateServiceConnectEndpointStatus:
+      description: Status of a GCP Ingress Private Service Connect Endpoint.
+      properties:
+        kind:
+          description: GcpIngressPrivateServiceConnectEndpointStatus kind.
+          enum:
+          - GcpIngressPrivateServiceConnectEndpointStatus
+          type: string
+        private_service_connect_service_attachment:
+          description: URI of the Private Service Connect Service Attachment in Confluent
+            Cloud.
+          example: projects/traffic-prod/regions/us-central1/serviceAttachments/plattg-abc123-service-attachment
+          readOnly: true
+          type: string
+        private_service_connect_connection_id:
+          description: The ID of the Private Service Connect connection.
+          example: "00000000000000000"
+          readOnly: true
+          type: string
+        dns_domain:
+          description: DNS domain name used to configure the DNS Zone for the Access
+            Point.
+          example: ap123abc.us-central1.gcp.accesspoint.confluent.cloud
+          readOnly: true
+          type: string
+      required:
+      - kind
+      - private_service_connect_connection_id
+      - private_service_connect_service_attachment
       type: object
     networking.v1.PrivateLinkAccessPoint:
       description: DNS record that is associated with a PrivateLink access point.
@@ -4558,15 +4664,19 @@ components:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
               AwsIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+              AzureIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpoint'
               AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
               GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+              GcpIngressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+          - $ref: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpoint'
           type: object
           x-one-of-name: NetworkingV1AccessPointSpecConfigOneOf
         environment:
@@ -4897,15 +5007,19 @@ components:
               AwsEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
               AwsIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
               AzureEgressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+              AzureIngressPrivateLinkEndpoint: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpoint'
               AwsPrivateNetworkInterface: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
               GcpEgressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+              GcpIngressPrivateServiceConnectEndpoint: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpoint'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkEndpoint'
+          - $ref: '#/components/schemas/networking.v1.AzureIngressPrivateLinkEndpoint'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterface'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectEndpoint'
+          - $ref: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectEndpoint'
           type: object
           x-one-of-name: NetworkingV1AccessPointSpecUpdateConfigOneOf
         environment:
@@ -4944,7 +5058,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: ap-f3a90de
           maxLength: 255
           readOnly: true
           type: string
@@ -5012,7 +5126,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: dnsrec-f3a90de
           maxLength: 255
           readOnly: true
           type: string

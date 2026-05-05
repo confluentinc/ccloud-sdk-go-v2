@@ -2158,7 +2158,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: gw-f3a90de
           maxLength: 255
           readOnly: true
           type: string
@@ -2220,16 +2220,20 @@ components:
               AwsEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
               AwsIngressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewayStatus'
               AzureEgressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
+              AzureIngressPrivateLinkGatewayStatus: '#/components/schemas/networking.v1.AzureIngressPrivateLinkGatewayStatus'
               GcpPeeringGatewayStatus: '#/components/schemas/networking.v1.GcpPeeringGatewayStatus'
               GcpEgressPrivateServiceConnectGatewayStatus: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectGatewayStatus'
+              GcpIngressPrivateServiceConnectGatewayStatus: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectGatewayStatus'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.AwsPrivateNetworkInterfaceGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewayStatus'
+          - $ref: '#/components/schemas/networking.v1.AzureIngressPrivateLinkGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.GcpPeeringGatewayStatus'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectGatewayStatus'
+          - $ref: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectGatewayStatus'
           readOnly: true
           type: object
           x-one-of-name: NetworkingV1GatewayStatusCloudGatewayOneOf
@@ -2334,6 +2338,21 @@ components:
       - kind
       - region
       type: object
+    networking.v1.AzureIngressPrivateLinkGatewaySpec:
+      description: Azure Ingress Private Link Gateway details from Azure.
+      properties:
+        kind:
+          description: Azure Ingress Private Link Gateway Spec kind type.
+          enum:
+          - AzureIngressPrivateLinkGatewaySpec
+          type: string
+        region:
+          description: Azure region of the Ingress Private Link Gateway.
+          type: string
+      required:
+      - kind
+      - region
+      type: object
     networking.v1.GcpPeeringGatewaySpec:
       description: GCP Peering Gateway details.
       properties:
@@ -2359,6 +2378,21 @@ components:
           type: string
         region:
           description: GCP region of the Egress Private Service Connect Gateway.
+          type: string
+      required:
+      - kind
+      - region
+      type: object
+    networking.v1.GcpIngressPrivateServiceConnectGatewaySpec:
+      description: GCP Ingress Private Service Connect Gateway details from GCP.
+      properties:
+        kind:
+          description: GCP Ingress Private Service Connect Gateway Spec kind type.
+          enum:
+          - GcpIngressPrivateServiceConnectGatewaySpec
+          type: string
+        region:
+          description: GCP region of the Ingress Private Service Connect Gateway.
           type: string
       required:
       - kind
@@ -2431,6 +2465,27 @@ components:
       required:
       - kind
       type: object
+    networking.v1.AzureIngressPrivateLinkGatewayStatus:
+      description: Azure Ingress Private Link Gateway details from Azure.
+      properties:
+        kind:
+          description: Azure Ingress Private Link Gateway Status kind type.
+          enum:
+          - AzureIngressPrivateLinkGatewayStatus
+          type: string
+        private_link_service_alias:
+          description: Alias of the Confluent Cloud Private Link Service.
+          example: plattg-123abc-privatelink.00000000-0000-0000-0000-000000000000.centralus.azure.privatelinkservice
+          readOnly: true
+          type: string
+        private_link_service_resource_id:
+          description: Resource ID of the Confluent Cloud Private Link Service.
+          example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plattg-123abc/providers/Microsoft.Network/privateLinkServices/plattg-123abc-privatelink
+          readOnly: true
+          type: string
+      required:
+      - kind
+      type: object
     networking.v1.GcpPeeringGatewayStatus:
       description: GCP Peering Gateway details from GCP.
       properties:
@@ -2458,6 +2513,23 @@ components:
         project:
           description: The GCP project used by the GCP Private Service Connect Gateway.
           example: proj-tenant-1
+          readOnly: true
+          type: string
+      required:
+      - kind
+      type: object
+    networking.v1.GcpIngressPrivateServiceConnectGatewayStatus:
+      description: GCP Ingress Private Service Connect Gateway details from GCP.
+      properties:
+        kind:
+          description: GCP Ingress Private Service Connect Gateway Status kind type.
+          enum:
+          - GcpIngressPrivateServiceConnectGatewayStatus
+          type: string
+        private_service_connect_service_attachment:
+          description: URI of the Private Service Connect Service Attachment in Confluent
+            Cloud.
+          example: projects/traffic-prod/regions/us-central1/serviceAttachments/plattg-abc123-service-attachment
           readOnly: true
           type: string
       required:
@@ -2555,8 +2627,10 @@ components:
               AwsIngressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AwsIngressPrivateLinkGatewaySpec'
               AzurePeeringGatewaySpec: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
               AzureEgressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
+              AzureIngressPrivateLinkGatewaySpec: '#/components/schemas/networking.v1.AzureIngressPrivateLinkGatewaySpec'
               GcpPeeringGatewaySpec: '#/components/schemas/networking.v1.GcpPeeringGatewaySpec'
               GcpEgressPrivateServiceConnectGatewaySpec: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectGatewaySpec'
+              GcpIngressPrivateServiceConnectGatewaySpec: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectGatewaySpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/networking.v1.AwsEgressPrivateLinkGatewaySpec'
@@ -2565,8 +2639,10 @@ components:
           - $ref: '#/components/schemas/networking.v1.AwsPeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AzurePeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.AzureEgressPrivateLinkGatewaySpec'
+          - $ref: '#/components/schemas/networking.v1.AzureIngressPrivateLinkGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.GcpPeeringGatewaySpec'
           - $ref: '#/components/schemas/networking.v1.GcpEgressPrivateServiceConnectGatewaySpec'
+          - $ref: '#/components/schemas/networking.v1.GcpIngressPrivateServiceConnectGatewaySpec'
           type: object
           x-immutable: true
           x-one-of-name: NetworkingV1GatewaySpecConfigOneOf
@@ -2792,7 +2868,7 @@ components:
             that the ID will not be reclaimed and reused after an object is deleted
             ("time"); however, it may collide with IDs for other object `kinds` or
             objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
+          example: gw-f3a90de
           maxLength: 255
           readOnly: true
           type: string
