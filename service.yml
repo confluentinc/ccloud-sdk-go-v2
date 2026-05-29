@@ -12,6 +12,6 @@ semaphore:
     - master
     - /^v\d+\.\d+\.\d+$/
 make:
-  enable: true
+  enable: false
   enable_updates: true
   update_makefile: false
