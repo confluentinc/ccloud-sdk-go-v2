@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** | The kind of distribution. | [optional] 
+**Kind** | **string** | The kind of distribution. | 
 **Keys** | Pointer to **[]string** |  | [optional] 
 **BucketCount** | Pointer to **int32** | The number of buckets. | [optional] [default to 6]
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewSqlV1Distribution
 
-`func NewSqlV1Distribution() *SqlV1Distribution`
+`func NewSqlV1Distribution(kind string) *SqlV1Distribution`
 
 NewSqlV1Distribution instantiates a new SqlV1Distribution object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
-### HasKind
-
-`func (o *SqlV1Distribution) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetKeys
 

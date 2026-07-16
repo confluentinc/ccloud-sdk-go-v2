@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ApiVersion** | **string** | APIVersion defines the schema version of this representation of a resource. | 
 **Kind** | **string** | Kind defines the object this REST resource represents. | 
 **Metadata** | [**ResultListMeta**](ResultListMeta.md) |  | 
-**Results** | Pointer to [**SqlV1StatementResultResults**](sql.v1.StatementResultResults.md) |  | [optional] 
+**Results** | Pointer to [**SqlV1StatementResultResults**](SqlV1StatementResultResults.md) |  | [optional] 
 
 ## Methods
 

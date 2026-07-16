@@ -51,9 +51,10 @@ type ToolsSqlV1Api interface {
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		 @param organizationId The unique identifier for the organization.
 		 @param environmentId The unique identifier for the environment.
+		 @param databaseName The name of the database.
 		 @return ApiCreateSqlv1ToolRequest
 	*/
-	CreateSqlv1Tool(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1ToolRequest
+	CreateSqlv1Tool(ctx _context.Context, organizationId string, environmentId string, databaseName string) ApiCreateSqlv1ToolRequest
 
 	// CreateSqlv1ToolExecute executes the request
 	//  @return SqlV1Tool
@@ -126,6 +127,7 @@ type ApiCreateSqlv1ToolRequest struct {
 	ApiService     ToolsSqlV1Api
 	organizationId string
 	environmentId  string
+	databaseName   string
 	sqlV1Tool      *SqlV1Tool
 }
 
@@ -148,14 +150,16 @@ Make a request to create a Tool.
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization.
 	@param environmentId The unique identifier for the environment.
+	@param databaseName The name of the database.
 	@return ApiCreateSqlv1ToolRequest
 */
-func (a *ToolsSqlV1ApiService) CreateSqlv1Tool(ctx _context.Context, organizationId string, environmentId string) ApiCreateSqlv1ToolRequest {
+func (a *ToolsSqlV1ApiService) CreateSqlv1Tool(ctx _context.Context, organizationId string, environmentId string, databaseName string) ApiCreateSqlv1ToolRequest {
 	return ApiCreateSqlv1ToolRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		organizationId: organizationId,
 		environmentId:  environmentId,
+		databaseName:   databaseName,
 	}
 }
 
@@ -177,9 +181,10 @@ func (a *ToolsSqlV1ApiService) CreateSqlv1ToolExecute(r ApiCreateSqlv1ToolReques
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools"
+	localVarPath := localBasePath + "/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization_id"+"}", _neturl.PathEscape(parameterToString(r.organizationId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"environment_id"+"}", _neturl.PathEscape(parameterToString(r.environmentId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"database_name"+"}", _neturl.PathEscape(parameterToString(r.databaseName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

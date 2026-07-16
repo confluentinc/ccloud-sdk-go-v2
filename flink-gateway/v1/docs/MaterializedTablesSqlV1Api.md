@@ -36,7 +36,7 @@ func main() {
     organizationId := TODO // string | The unique identifier for the organization
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the database.
-    sqlV1MaterializedTable := *openapiclient.NewSqlV1MaterializedTable("sql/v1", "Kind_example", *openapiclient.NewObjectMeta("https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements/my-statement"), "high-value-orders", "OrganizationId_example", "EnvironmentId_example", *openapiclient.NewSqlV1MaterializedTableSpec()) // SqlV1MaterializedTable |  (optional)
+    sqlV1MaterializedTable := *openapiclient.NewSqlV1MaterializedTable("sql/v1", "Kind_example", *openapiclient.NewObjectMeta("https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements/my-statement"), "high-value-orders", "OrganizationId_example", "EnvironmentId_example", *openapiclient.NewSqlV1MaterializedTableSpec()) // SqlV1MaterializedTable | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -74,11 +74,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1MaterializedTable**](sql.v1.MaterializedTable.md)
+[**SqlV1MaterializedTable**](SqlV1MaterializedTable.md)
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

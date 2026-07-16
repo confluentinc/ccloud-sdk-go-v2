@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **EndTime** | Pointer to **time.Time** | The date and time in UTC (represented as RFC3339 format) at which the statement reached its final terminal state.  This field is set when the Phase is COMPLETED, FAILED, or STOPPED.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **Duration** | Pointer to **string** | The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from  PENDING to RUNNING until it reached a final terminal state. This field is calculated and set when  the Phase is COMPLETED, FAILED, or STOPPED.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 **AffectedResource** | Pointer to [**SqlV1StatementStatusAffectedResource**](SqlV1StatementStatusAffectedResource.md) |  | [optional] 
+**Identity** | Pointer to **string** | Optional, read-only. The CRN of the authenticated principal that currently owns this statement, sourced from the upstream authentication decision. Initially populated when the statement is created and refreshed when &#x60;spec.principal&#x60; is updated, so it reflects the most recent setter rather than the original creator.  Treat as a stable, opaque, non-parsable string for storage and mapping; do not implement business logic or branching based on the identity type or string structure. The set of identity shapes may grow over time and is not considered breaking.  The &#x60;example&#x60; above illustrates the OAuth (identity-provider) shape. Set for all supported authentication methods; the CRN shape varies by auth type:    * User: &#x60;crn://confluent.cloud/organization&#x3D;12345/user&#x3D;u-abc123&#x60;   * Service account: &#x60;crn://confluent.cloud/organization&#x3D;12345/service-account&#x3D;sa-abc123&#x60;   * OAuth (identity provider): &#x60;crn://confluent.cloud/organization&#x3D;12345/identity-provider&#x3D;op-12345/identity&#x3D;alice@example.com&#x60;  For the OAuth shape, the value after &#x60;identity&#x3D;&#x60; is the JWT claim resolved by the identity provider&#39;s configured &#x60;identity_claim&#x60; (or the identity pool&#39;s &#x60;identity_claim&#x60; when a single pool is in scope) — commonly &#x60;claims.sub&#x60;, but provider-configurable. The email shown above is just one example; the actual value depends on the identity provider configuration and may be a subject UUID, a username, or any other opaque claim value.  When the request was authenticated via OAuth and authorized against multiple identity pools, this CRN also appears as &#x60;spec.principal&#x60;. May be omitted for statements created before this field was introduced.  | [optional] [readonly] 
 
 ## Methods
 
@@ -330,6 +331,31 @@ SetAffectedResource sets AffectedResource field to given value.
 `func (o *SqlV1StatementStatus) HasAffectedResource() bool`
 
 HasAffectedResource returns a boolean if a field has been set.
+
+### GetIdentity
+
+`func (o *SqlV1StatementStatus) GetIdentity() string`
+
+GetIdentity returns the Identity field if non-nil, zero value otherwise.
+
+### GetIdentityOk
+
+`func (o *SqlV1StatementStatus) GetIdentityOk() (*string, bool)`
+
+GetIdentityOk returns a tuple with the Identity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentity
+
+`func (o *SqlV1StatementStatus) SetIdentity(v string)`
+
+SetIdentity sets Identity field to given value.
+
+### HasIdentity
+
+`func (o *SqlV1StatementStatus) HasIdentity() bool`
+
+HasIdentity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
