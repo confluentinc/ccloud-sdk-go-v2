@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **OrganizationId** | **string** | The unique identifier for the organization. | [readonly] 
 **EnvironmentId** | **string** | The unique identifier for the environment. | [readonly] 
 **Spec** | [**SqlV1AgentSpec**](SqlV1AgentSpec.md) |  | 
-**Status** | Pointer to [**SqlV1AgentStatus**](sql.v1.AgentStatus.md) |  | [optional] [readonly] 
+**Status** | Pointer to [**SqlV1AgentStatus**](SqlV1AgentStatus.md) |  | [optional] [readonly] 
 
 ## Methods
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://flink.region.provider.confluent.cloud*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSqlv1Tool**](ToolsSqlV1Api.md#CreateSqlv1Tool) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/tools | Create a Tool
+[**CreateSqlv1Tool**](ToolsSqlV1Api.md#CreateSqlv1Tool) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools | Create a Tool
 [**DeleteSqlv1Tool**](ToolsSqlV1Api.md#DeleteSqlv1Tool) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Delete a Tool
 [**GetSqlv1Tool**](ToolsSqlV1Api.md#GetSqlv1Tool) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Read a Tool
 [**ListSqlv1Tools**](ToolsSqlV1Api.md#ListSqlv1Tools) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools | List of Tools
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateSqlv1Tool
 
-> SqlV1Tool CreateSqlv1Tool(ctx, organizationId, environmentId).SqlV1Tool(sqlV1Tool).Execute()
+> SqlV1Tool CreateSqlv1Tool(ctx, organizationId, environmentId, databaseName).SqlV1Tool(sqlV1Tool).Execute()
 
 Create a Tool
 
@@ -34,11 +34,12 @@ import (
 func main() {
     organizationId := TODO // string | The unique identifier for the organization.
     environmentId := "environmentId_example" // string | The unique identifier for the environment.
+    databaseName := "databaseName_example" // string | The name of the database.
     sqlV1Tool := *openapiclient.NewSqlV1Tool() // SqlV1Tool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ToolsSqlV1Api.CreateSqlv1Tool(context.Background(), organizationId, environmentId).SqlV1Tool(sqlV1Tool).Execute()
+    resp, r, err := api_client.ToolsSqlV1Api.CreateSqlv1Tool(context.Background(), organizationId, environmentId, databaseName).SqlV1Tool(sqlV1Tool).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ToolsSqlV1Api.CreateSqlv1Tool``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,6 +57,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organizationId** | [**string**](.md) | The unique identifier for the organization. | 
 **environmentId** | **string** | The unique identifier for the environment. | 
+**databaseName** | **string** | The name of the database. | 
 
 ### Other Parameters
 
@@ -66,15 +68,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+
  **sqlV1Tool** | [**SqlV1Tool**](SqlV1Tool.md) |  | 
 
 ### Return type
 
-[**SqlV1Tool**](sql.v1.Tool.md)
+[**SqlV1Tool**](SqlV1Tool.md)
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -151,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -226,11 +229,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1Tool**](sql.v1.Tool.md)
+[**SqlV1Tool**](SqlV1Tool.md)
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -310,7 +313,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

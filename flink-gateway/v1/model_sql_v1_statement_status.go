@@ -57,6 +57,8 @@ type SqlV1StatementStatus struct {
 	// The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from  PENDING to RUNNING until it reached a final terminal state. This field is calculated and set when  the Phase is COMPLETED, FAILED, or STOPPED.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	Duration         *string                               `json:"duration,omitempty"`
 	AffectedResource *SqlV1StatementStatusAffectedResource `json:"affected_resource,omitempty"`
+	// Optional, read-only. The CRN of the authenticated principal that currently owns this statement, sourced from the upstream authentication decision. Initially populated when the statement is created and refreshed when `spec.principal` is updated, so it reflects the most recent setter rather than the original creator.  Treat as a stable, opaque, non-parsable string for storage and mapping; do not implement business logic or branching based on the identity type or string structure. The set of identity shapes may grow over time and is not considered breaking.  The `example` above illustrates the OAuth (identity-provider) shape. Set for all supported authentication methods; the CRN shape varies by auth type:    * User: `crn://confluent.cloud/organization=12345/user=u-abc123`   * Service account: `crn://confluent.cloud/organization=12345/service-account=sa-abc123`   * OAuth (identity provider): `crn://confluent.cloud/organization=12345/identity-provider=op-12345/identity=alice@example.com`  For the OAuth shape, the value after `identity=` is the JWT claim resolved by the identity provider's configured `identity_claim` (or the identity pool's `identity_claim` when a single pool is in scope) — commonly `claims.sub`, but provider-configurable. The email shown above is just one example; the actual value depends on the identity provider configuration and may be a subject UUID, a username, or any other opaque claim value.  When the request was authenticated via OAuth and authorized against multiple identity pools, this CRN also appears as `spec.principal`. May be omitted for statements created before this field was introduced.
+	Identity *string `json:"identity,omitempty"`
 }
 
 // NewSqlV1StatementStatus instantiates a new SqlV1StatementStatus object
@@ -453,6 +455,38 @@ func (o *SqlV1StatementStatus) SetAffectedResource(v SqlV1StatementStatusAffecte
 	o.AffectedResource = &v
 }
 
+// GetIdentity returns the Identity field value if set, zero value otherwise.
+func (o *SqlV1StatementStatus) GetIdentity() string {
+	if o == nil || o.Identity == nil {
+		var ret string
+		return ret
+	}
+	return *o.Identity
+}
+
+// GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementStatus) GetIdentityOk() (*string, bool) {
+	if o == nil || o.Identity == nil {
+		return nil, false
+	}
+	return o.Identity, true
+}
+
+// HasIdentity returns a boolean if a field has been set.
+func (o *SqlV1StatementStatus) HasIdentity() bool {
+	if o != nil && o.Identity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentity gets a reference to the given string and assigns it to the Identity field.
+func (o *SqlV1StatementStatus) SetIdentity(v string) {
+	o.Identity = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(&o.Phase)
@@ -467,6 +501,7 @@ func (o *SqlV1StatementStatus) Redact() {
 	o.recurseRedact(o.EndTime)
 	o.recurseRedact(o.Duration)
 	o.recurseRedact(o.AffectedResource)
+	o.recurseRedact(o.Identity)
 }
 
 func (o *SqlV1StatementStatus) recurseRedact(v interface{}) {
@@ -536,6 +571,9 @@ func (o SqlV1StatementStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.AffectedResource != nil {
 		toSerialize["affected_resource"] = o.AffectedResource
+	}
+	if o.Identity != nil {
+		toSerialize["identity"] = o.Identity
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

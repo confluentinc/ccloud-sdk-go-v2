@@ -74,11 +74,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1Agent**](sql.v1.Agent.md)
+[**SqlV1Agent**](SqlV1Agent.md)
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

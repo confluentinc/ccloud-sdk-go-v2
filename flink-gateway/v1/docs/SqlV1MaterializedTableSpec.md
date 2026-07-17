@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KafkaClusterId** | Pointer to **string** | The ID of Kafka cluster hosting the Materialized Table&#39;s topic. Populated from the &#x60;kafka_cluster_id&#x60; path parameter on creation. | [optional] [readonly] 
+**KafkaClusterId** | Pointer to **string** | The ID of the Kafka cluster hosting the Materialized Table&#39;s topic. This value must match the &#x60;kafka_cluster_id&#x60; path parameter. It is immutable after creation and is ignored or rejected on update if changed. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context. If not specified, the materialized table will use the default compute pool. The default pool is automatically determined by the system. | [optional] 
 **Principal** | Pointer to **string** | The id of a principal this Materialized Table query runs as. | [optional] 
 **Stopped** | Pointer to **bool** | Indicates whether the Materialized Table query should be stopped. | [optional] 
 **TableOptions** | Pointer to **map[string]string** | Defines configuration properties for the table, equivalent to the SQL &#39;WITH&#39; clause | [optional] 
-**SessionOptions** | Pointer to **map[string]string** | Session configurations equivalent to the SQL &#39;SET&#39; statement. | [optional] 
+**SessionOptions** | Pointer to **map[string]string** | Session configurations equivalent to the SQL &#39;SET&#39; statement. Only applicable on creation; ignored on update. | [optional] 
 **Columns** | Pointer to [**[]SqlV1ColumnDetails**](SqlV1ColumnDetails.md) | Details of each column in Materialized Table resource. If columns are not specified, we infer from query. If it&#39;s specified it must be compatible with the types in the query. | [optional] 
 **Watermark** | Pointer to [**SqlV1Watermark**](SqlV1Watermark.md) |  | [optional] 
 **Constraints** | Pointer to [**[]SqlV1Constraint**](SqlV1Constraint.md) | Specify table constraints. | [optional] 
-**Distribution** | Pointer to [**SqlV1Distribution**](SqlV1Distribution.md) |  | [optional] 
+**Distribution** | Pointer to [**SqlV1Distribution**](SqlV1Distribution.md) | Only applicable on creation; ignored on update. | [optional] 
 **Query** | Pointer to **string** | Contains the query section (usually starting with a SELECT) of the latest Materialized Table. | [optional] 
 
 ## Methods
