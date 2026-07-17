@@ -70,11 +70,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1StatementResult**](sql.v1.StatementResult.md)
+[**SqlV1StatementResult**](SqlV1StatementResult.md)
 
 ### Authorization
 
-[external-access-token](../README.md#external-access-token), [resource-api-key](../README.md#resource-api-key)
+[external-access-token](../README.md#external-access-token), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 

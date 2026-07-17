@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ApiVersion** | **string** | APIVersion defines the schema version of this representation of a resource. | [readonly] 
 **Kind** | **string** | Kind defines the object this REST resource represents. | [readonly] 
 **Metadata** | [**ObjectMeta**](ObjectMeta.md) |  | 
-**Name** | **string** | The user-provided name of the resource, unique within this environment. | 
+**Name** | **string** | The user-provided name of the resource, unique within the Kafka cluster. May contain ASCII alphanumerics, &#39;.&#39;, &#39;_&#39; and &#39;-&#39;; must not be &#39;.&#39; or &#39;..&#39;; max length 249. | 
 **OrganizationId** | **string** | The unique identifier for the organization. | [readonly] 
 **EnvironmentId** | **string** | The unique identifier for the environment. | [readonly] 
 **Spec** | [**SqlV1MaterializedTableSpec**](SqlV1MaterializedTableSpec.md) |  | 
-**Status** | Pointer to [**SqlV1MaterializedTableStatus**](sql.v1.MaterializedTableStatus.md) |  | [optional] [readonly] 
+**Status** | Pointer to [**SqlV1MaterializedTableStatus**](SqlV1MaterializedTableStatus.md) |  | [optional] [readonly] 
 
 ## Methods
 

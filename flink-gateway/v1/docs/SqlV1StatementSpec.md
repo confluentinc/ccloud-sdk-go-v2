@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **Statement** | Pointer to **string** | The raw SQL text statement. | [optional] 
 **Properties** | Pointer to **map[string]string** | A map (key-value pairs) of statement properties. | [optional] 
 **ComputePoolId** | Pointer to **string** | The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system. | [optional] 
-**Principal** | Pointer to **string** | The id of a principal this statement runs as. | [optional] 
+**Principal** | Pointer to **string** | The id of the principal this statement runs as. Possible values:    * &#x60;u-abc123&#x60; — user   * &#x60;sa-abc123&#x60; — service account   * &#x60;pool-abc123&#x60; — identity pool (OAuth caller authorized     against a single pool, either explicitly supplied or     resolved by the server)   * an identity CRN equal to &#x60;status.identity&#x60; (OAuth caller     authorized against multiple identity pools)  Customers typically supply one of the short prefixed ids and read the same value back. The CRN form is server-set in the multi-pool case; clients should accept it when reading but should not need to construct it.  | [optional] 
 **Stopped** | Pointer to **bool** | Indicates whether the statement should be stopped. | [optional] 
 **ExecutionMode** | Pointer to **string** | The execution mode of the statement.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] [readonly] 
+**Scaling** | Pointer to [**SqlV1ScalingSpec**](SqlV1ScalingSpec.md) |  | [optional] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetExecutionMode sets ExecutionMode field to given value.
 `func (o *SqlV1StatementSpec) HasExecutionMode() bool`
 
 HasExecutionMode returns a boolean if a field has been set.
+
+### GetScaling
+
+`func (o *SqlV1StatementSpec) GetScaling() SqlV1ScalingSpec`
+
+GetScaling returns the Scaling field if non-nil, zero value otherwise.
+
+### GetScalingOk
+
+`func (o *SqlV1StatementSpec) GetScalingOk() (*SqlV1ScalingSpec, bool)`
+
+GetScalingOk returns a tuple with the Scaling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScaling
+
+`func (o *SqlV1StatementSpec) SetScaling(v SqlV1ScalingSpec)`
+
+SetScaling sets Scaling field to given value.
+
+### HasScaling
+
+`func (o *SqlV1StatementSpec) HasScaling() bool`
+
+HasScaling returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

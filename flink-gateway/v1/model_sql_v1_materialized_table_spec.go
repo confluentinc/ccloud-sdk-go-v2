@@ -36,7 +36,7 @@ import (
 
 // SqlV1MaterializedTableSpec The specifications of the Materialized Table.
 type SqlV1MaterializedTableSpec struct {
-	// The ID of Kafka cluster hosting the Materialized Table's topic. Populated from the `kafka_cluster_id` path parameter on creation.
+	// The ID of the Kafka cluster hosting the Materialized Table's topic. This value must match the `kafka_cluster_id` path parameter. It is immutable after creation and is ignored or rejected on update if changed.
 	KafkaClusterId *string `json:"kafka_cluster_id,omitempty"`
 	// The id associated with the compute pool in context. If not specified, the materialized table will use the default compute pool. The default pool is automatically determined by the system.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
@@ -46,13 +46,14 @@ type SqlV1MaterializedTableSpec struct {
 	Stopped *bool `json:"stopped,omitempty"`
 	// Defines configuration properties for the table, equivalent to the SQL 'WITH' clause
 	TableOptions *map[string]string `json:"table_options,omitempty"`
-	// Session configurations equivalent to the SQL 'SET' statement.
+	// Session configurations equivalent to the SQL 'SET' statement. Only applicable on creation; ignored on update.
 	SessionOptions *map[string]string `json:"session_options,omitempty"`
 	// Details of each column in Materialized Table resource. If columns are not specified, we infer from query. If it's specified it must be compatible with the types in the query.
 	Columns   *[]SqlV1ColumnDetails `json:"columns,omitempty"`
 	Watermark *SqlV1Watermark       `json:"watermark,omitempty"`
 	// Specify table constraints.
-	Constraints  *[]SqlV1Constraint `json:"constraints,omitempty"`
+	Constraints *[]SqlV1Constraint `json:"constraints,omitempty"`
+	// Only applicable on creation; ignored on update.
 	Distribution *SqlV1Distribution `json:"distribution,omitempty"`
 	// Contains the query section (usually starting with a SELECT) of the latest Materialized Table.
 	Query *string `json:"query,omitempty"`

@@ -41,7 +41,7 @@ type SqlV1MaterializedTable struct {
 	// Kind defines the object this REST resource represents.
 	Kind     string     `json:"kind,omitempty"`
 	Metadata ObjectMeta `json:"metadata,omitempty"`
-	// The user-provided name of the resource, unique within this environment.
+	// The user-provided name of the resource, unique within the Kafka cluster. May contain ASCII alphanumerics, '.', '_' and '-'; must not be '.' or '..'; max length 249.
 	Name string `json:"name,omitempty"`
 	// The unique identifier for the organization.
 	OrganizationId string `json:"organization_id,omitempty"`

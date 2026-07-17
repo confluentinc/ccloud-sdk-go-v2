@@ -44,7 +44,7 @@ type MaterializedTablesSqlV1Api interface {
 	/*
 		CreateSqlv1MaterializedTable Create a materialized table
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Create a new Materialized Table.
 
@@ -64,7 +64,7 @@ type MaterializedTablesSqlV1Api interface {
 	/*
 		DeleteSqlv1MaterializedTable Delete a materialized table
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Delete a specific Materialized Table by name.
 
@@ -84,7 +84,7 @@ type MaterializedTablesSqlV1Api interface {
 	/*
 		GetSqlv1MaterializedTable Read a materialized table
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a specific Materialized Table by name.
 
@@ -105,7 +105,7 @@ type MaterializedTablesSqlV1Api interface {
 	/*
 		ListSqlv1MaterializedTables List all materialized tables
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted and paginated list of all materialized tables.
 
@@ -124,10 +124,10 @@ type MaterializedTablesSqlV1Api interface {
 	/*
 		UpdateSqlv1MaterializedTable Update/Evolve a materialized table
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a Materialized Table's mutable fields.
-	Mutable fields include: `query`, `stopped`, `compute_pool_id`, and `principal`.
+	Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -168,7 +168,7 @@ func (r ApiCreateSqlv1MaterializedTableRequest) Execute() (SqlV1MaterializedTabl
 /*
 CreateSqlv1MaterializedTable Create a materialized table
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Create a new Materialized Table.
 
@@ -214,6 +214,9 @@ func (a *MaterializedTablesSqlV1ApiService) CreateSqlv1MaterializedTableExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.sqlV1MaterializedTable == nil {
+		return localVarReturnValue, nil, reportError("sqlV1MaterializedTable is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -346,7 +349,7 @@ func (r ApiDeleteSqlv1MaterializedTableRequest) Execute() (*_nethttp.Response, e
 /*
 DeleteSqlv1MaterializedTable Delete a materialized table
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Delete a specific Materialized Table by name.
 
@@ -503,7 +506,7 @@ func (r ApiGetSqlv1MaterializedTableRequest) Execute() (SqlV1MaterializedTable, 
 /*
 GetSqlv1MaterializedTable Read a materialized table
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a specific Materialized Table by name.
 
@@ -684,7 +687,7 @@ func (r ApiListSqlv1MaterializedTablesRequest) Execute() (SqlV1MaterializedTable
 /*
 ListSqlv1MaterializedTables List all materialized tables
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted and paginated list of all materialized tables.
 
@@ -860,10 +863,10 @@ func (r ApiUpdateSqlv1MaterializedTableRequest) Execute() (SqlV1MaterializedTabl
 /*
 UpdateSqlv1MaterializedTable Update/Evolve a materialized table
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a Materialized Table's mutable fields.
-Mutable fields include: `query`, `stopped`, `compute_pool_id`, and `principal`.
+Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization

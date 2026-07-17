@@ -44,7 +44,7 @@ type MaterializedTableVersionsSqlV1Api interface {
 	/*
 		GetSqlv1MaterializedTableVersion Read a materialized table version
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a specific version of a Materialized Table.
 
@@ -66,7 +66,7 @@ type MaterializedTableVersionsSqlV1Api interface {
 	/*
 		ListSqlv1MaterializedTableVersions List all the versions of a materialized table
 
-		[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Retrieve a sorted and paginated list of all versions for a specific Materialized Table.
 
@@ -105,7 +105,7 @@ func (r ApiGetSqlv1MaterializedTableVersionRequest) Execute() (SqlV1Materialized
 /*
 GetSqlv1MaterializedTableVersion Read a materialized table version
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a specific version of a Materialized Table.
 
@@ -294,7 +294,7 @@ func (r ApiListSqlv1MaterializedTableVersionsRequest) Execute() (SqlV1Materializ
 /*
 ListSqlv1MaterializedTableVersions List all the versions of a materialized table
 
-[![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted and paginated list of all versions for a specific Materialized Table.
 

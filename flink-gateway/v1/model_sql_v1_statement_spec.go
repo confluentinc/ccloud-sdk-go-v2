@@ -42,12 +42,13 @@ type SqlV1StatementSpec struct {
 	Properties *map[string]string `json:"properties,omitempty"`
 	// The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
-	// The id of a principal this statement runs as.
+	// The id of the principal this statement runs as. Possible values:    * `u-abc123` — user   * `sa-abc123` — service account   * `pool-abc123` — identity pool (OAuth caller authorized     against a single pool, either explicitly supplied or     resolved by the server)   * an identity CRN equal to `status.identity` (OAuth caller     authorized against multiple identity pools)  Customers typically supply one of the short prefixed ids and read the same value back. The CRN form is server-set in the multi-pool case; clients should accept it when reading but should not need to construct it.
 	Principal *string `json:"principal,omitempty"`
 	// Indicates whether the statement should be stopped.
 	Stopped *bool `json:"stopped,omitempty"`
 	// The execution mode of the statement.  Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
-	ExecutionMode *string `json:"execution_mode,omitempty"`
+	ExecutionMode *string           `json:"execution_mode,omitempty"`
+	Scaling       *SqlV1ScalingSpec `json:"scaling,omitempty"`
 }
 
 // NewSqlV1StatementSpec instantiates a new SqlV1StatementSpec object
@@ -259,6 +260,38 @@ func (o *SqlV1StatementSpec) SetExecutionMode(v string) {
 	o.ExecutionMode = &v
 }
 
+// GetScaling returns the Scaling field value if set, zero value otherwise.
+func (o *SqlV1StatementSpec) GetScaling() SqlV1ScalingSpec {
+	if o == nil || o.Scaling == nil {
+		var ret SqlV1ScalingSpec
+		return ret
+	}
+	return *o.Scaling
+}
+
+// GetScalingOk returns a tuple with the Scaling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1StatementSpec) GetScalingOk() (*SqlV1ScalingSpec, bool) {
+	if o == nil || o.Scaling == nil {
+		return nil, false
+	}
+	return o.Scaling, true
+}
+
+// HasScaling returns a boolean if a field has been set.
+func (o *SqlV1StatementSpec) HasScaling() bool {
+	if o != nil && o.Scaling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScaling gets a reference to the given SqlV1ScalingSpec and assigns it to the Scaling field.
+func (o *SqlV1StatementSpec) SetScaling(v SqlV1ScalingSpec) {
+	o.Scaling = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1StatementSpec) Redact() {
 	o.recurseRedact(o.Statement)
@@ -267,6 +300,7 @@ func (o *SqlV1StatementSpec) Redact() {
 	o.recurseRedact(o.Principal)
 	o.recurseRedact(o.Stopped)
 	o.recurseRedact(o.ExecutionMode)
+	o.recurseRedact(o.Scaling)
 }
 
 func (o *SqlV1StatementSpec) recurseRedact(v interface{}) {
@@ -318,6 +352,9 @@ func (o SqlV1StatementSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExecutionMode != nil {
 		toSerialize["execution_mode"] = o.ExecutionMode
+	}
+	if o.Scaling != nil {
+		toSerialize["scaling"] = o.Scaling
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

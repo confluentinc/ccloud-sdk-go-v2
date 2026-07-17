@@ -104,7 +104,7 @@ Class | Method | HTTP request | Description
 *StatementsSqlV1Api* | [**ListSqlv1Statements**](docs/StatementsSqlV1Api.md#listsqlv1statements) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements | List of Statements
 *StatementsSqlV1Api* | [**PatchSqlv1Statement**](docs/StatementsSqlV1Api.md#patchsqlv1statement) | **Patch** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Patch a Statement
 *StatementsSqlV1Api* | [**UpdateSqlv1Statement**](docs/StatementsSqlV1Api.md#updatesqlv1statement) | **Put** /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} | Update a Statement
-*ToolsSqlV1Api* | [**CreateSqlv1Tool**](docs/ToolsSqlV1Api.md#createsqlv1tool) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/tools | Create a Tool
+*ToolsSqlV1Api* | [**CreateSqlv1Tool**](docs/ToolsSqlV1Api.md#createsqlv1tool) | **Post** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools | Create a Tool
 *ToolsSqlV1Api* | [**DeleteSqlv1Tool**](docs/ToolsSqlV1Api.md#deletesqlv1tool) | **Delete** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Delete a Tool
 *ToolsSqlV1Api* | [**GetSqlv1Tool**](docs/ToolsSqlV1Api.md#getsqlv1tool) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} | Read a Tool
 *ToolsSqlV1Api* | [**ListSqlv1Tools**](docs/ToolsSqlV1Api.md#listsqlv1tools) | **Get** /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools | List of Tools
@@ -158,6 +158,7 @@ Class | Method | HTTP request | Description
  - [SqlV1PlaintextProvider](docs/SqlV1PlaintextProvider.md)
  - [SqlV1ResourceChange](docs/SqlV1ResourceChange.md)
  - [SqlV1ResultSchema](docs/SqlV1ResultSchema.md)
+ - [SqlV1ScalingSpec](docs/SqlV1ScalingSpec.md)
  - [SqlV1ScalingStatus](docs/SqlV1ScalingStatus.md)
  - [SqlV1StateLimitStatus](docs/SqlV1StateLimitStatus.md)
  - [SqlV1Statement](docs/SqlV1Statement.md)
@@ -207,6 +208,21 @@ import "golang.org/x/oauth2"
 
 tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
 auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### global-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
 r, err := client.Service.Operation(auth, args)
 ```
 

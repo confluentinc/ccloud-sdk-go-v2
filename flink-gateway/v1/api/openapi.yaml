@@ -69,7 +69,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1.Tool" />
   name: Tools (sql/v1)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `MaterializedTable` represents a core resource used to define and manage streaming SQL queries that persist results.
     The API allows you to list, create, read, update, and delete your materialized tables.
@@ -77,7 +77,7 @@ tags:
     <SchemaDefinition schemaRef="#/components/schemas/sql.v1.MaterializedTable" />
   name: Materialized Tables (sql/v1)
 - description: |-
-    [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
     `MaterializedTableVersion` represents a specific version of a Materialized Table, capturing the state and changes at that point in time.
     The API allows you to list and read versions of your materialized tables.
@@ -297,6 +297,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: List of Connections
       tags:
       - Connections (sql/v1)
@@ -619,6 +620,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Create a Connection
       tags:
       - Connections (sql/v1)
@@ -905,6 +907,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Delete a Connection
       tags:
       - Connections (sql/v1)
@@ -1179,6 +1182,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Read a Connection
       tags:
       - Connections (sql/v1)
@@ -1454,6 +1458,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Update a Connection
       tags:
       - Connections (sql/v1)
@@ -1768,6 +1773,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Read Statement Result
       tags:
@@ -2061,6 +2067,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: List of Statements
       tags:
@@ -2382,6 +2389,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Create a Statement
       tags:
@@ -2394,13 +2402,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false},"result":{"api_version":"sql/v1","kind":"StatementResult","metadata":{"self":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements","next":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb"},"results":{"data":[{"op":0,"row":["101","Jay",[null,"abc"],[null,"456"],"1990-01-12 12:00.12",[[null,"Alice"],["42","Bob"]]]}]}}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false,"scaling":{"baseline_cfu":2}},"result":{"api_version":"sql/v1","kind":"StatementResult","metadata":{"self":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements","next":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb"},"results":{"data":[{"op":0,"row":["101","Jay",[null,"abc"],[null,"456"],"1990-01-12 12:00.12",[[null,"Alice"],["42","Bob"]]]}]}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements")
             .post(body)
@@ -2418,9 +2426,9 @@ paths:
           \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
           \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
           \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
-          \",\\\"stopped\\\":false},\\\"result\\\":{\\\"api_version\\\":\\\"sql/v1\\\
-          \",\\\"kind\\\":\\\"StatementResult\\\",\\\"metadata\\\":{\\\"self\\\":\\\
-          \"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\\\
+          \",\\\"stopped\\\":false,\\\"scaling\\\":{\\\"baseline_cfu\\\":2}},\\\"\
+          result\\\":{\\\"api_version\\\":\\\"sql/v1\\\",\\\"kind\\\":\\\"StatementResult\\\
+          \",\\\"metadata\\\":{\\\"self\\\":\\\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\\\
           \",\\\"next\\\":\\\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\\\
           \"},\\\"results\\\":{\\\"data\\\":[{\\\"op\\\":0,\\\"row\\\":[\\\"101\\\"\
           ,\\\"Jay\\\",[null,\\\"abc\\\"],[null,\\\"456\\\"],\\\"1990-01-12 12:00.12\\\
@@ -2436,7 +2444,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2489,7 +2497,8 @@ paths:
               },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: false
+              stopped: false,
+              scaling: {baseline_cfu: 2}
             },
             result: {
               api_version: 'sql/v1',
@@ -2528,7 +2537,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2537,7 +2546,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}:
@@ -2708,6 +2717,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Delete a Statement
       tags:
@@ -2982,6 +2992,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Read a Statement
       tags:
@@ -3304,6 +3315,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Patch a Statement
       tags:
@@ -3591,6 +3603,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Update a Statement
       tags:
@@ -3603,13 +3616,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false},"result":{"api_version":"sql/v1","kind":"StatementResult","metadata":{"self":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements","next":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb"},"results":{"data":[{"op":0,"row":["101","Jay",[null,"abc"],[null,"456"],"1990-01-12 12:00.12",[[null,"Alice"],["42","Bob"]]]}]}},"metadata":{}}'
+            --data '{"name":"sql123","organization_id":"7c60d51f-b44e-4682-87d6-449835ea4de6","environment_id":"string","spec":{"statement":"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;","properties":{"sql.current-catalog":"my_environment","sql.current-database":"my_kafka_cluster"},"compute_pool_id":"fcp-00000","principal":"sa-abc123","stopped":false,"scaling":{"baseline_cfu":2}},"result":{"api_version":"sql/v1","kind":"StatementResult","metadata":{"self":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements","next":"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb"},"results":{"data":[{"op":0,"row":["101","Jay",[null,"abc"],[null,"456"],"1990-01-12 12:00.12",[[null,"Alice"],["42","Bob"]]]}]}},"metadata":{}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}")
             .put(body)
@@ -3627,9 +3640,9 @@ paths:
           \ VALUE1 = VALUE2;\\\",\\\"properties\\\":{\\\"sql.current-catalog\\\":\\\
           \"my_environment\\\",\\\"sql.current-database\\\":\\\"my_kafka_cluster\\\
           \"},\\\"compute_pool_id\\\":\\\"fcp-00000\\\",\\\"principal\\\":\\\"sa-abc123\\\
-          \",\\\"stopped\\\":false},\\\"result\\\":{\\\"api_version\\\":\\\"sql/v1\\\
-          \",\\\"kind\\\":\\\"StatementResult\\\",\\\"metadata\\\":{\\\"self\\\":\\\
-          \"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\\\
+          \",\\\"stopped\\\":false,\\\"scaling\\\":{\\\"baseline_cfu\\\":2}},\\\"\
+          result\\\":{\\\"api_version\\\":\\\"sql/v1\\\",\\\"kind\\\":\\\"StatementResult\\\
+          \",\\\"metadata\\\":{\\\"self\\\":\\\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\\\
           \",\\\"next\\\":\\\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\\\
           \"},\\\"results\\\":{\\\"data\\\":[{\\\"op\\\":0,\\\"row\\\":[\\\"101\\\"\
           ,\\\"Jay\\\",[null,\\\"abc\\\"],[null,\\\"456\\\"],\\\"1990-01-12 12:00.12\\\
@@ -3645,7 +3658,7 @@ paths:
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}"
+          payload = "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}"
 
           headers = {
               'content-type': "application/json",
@@ -3698,7 +3711,8 @@ paths:
               },
               compute_pool_id: 'fcp-00000',
               principal: 'sa-abc123',
-              stopped: false
+              stopped: false,
+              scaling: {baseline_cfu: 2}
             },
             result: {
               api_version: 'sql/v1',
@@ -3738,7 +3752,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -3747,7 +3761,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"sql123\",\"organization_id\":\"7c60d51f-b44e-4682-87d6-449835ea4de6\",\"environment_id\":\"string\",\"spec\":{\"statement\":\"SELECT * FROM TABLE WHERE VALUE1 = VALUE2;\",\"properties\":{\"sql.current-catalog\":\"my_environment\",\"sql.current-database\":\"my_kafka_cluster\"},\"compute_pool_id\":\"fcp-00000\",\"principal\":\"sa-abc123\",\"stopped\":false,\"scaling\":{\"baseline_cfu\":2}},\"result\":{\"api_version\":\"sql/v1\",\"kind\":\"StatementResult\",\"metadata\":{\"self\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-123/statements\",\"next\":\"https://flink.us-west1.aws.confluent.cloud/sql/v1/environments/env-abc123/statements?page_token=UvmDWOB1iwfAIBPj6EYb\"},\"results\":{\"data\":[{\"op\":0,\"row\":[\"101\",\"Jay\",[null,\"abc\"],[null,\"456\"],\"1990-01-12 12:00.12\",[[null,\"Alice\"],[\"42\",\"Bob\"]]]}]}},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions:
@@ -3922,6 +3936,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: List of Statement Exceptions
       tags:
@@ -4015,7 +4030,7 @@ paths:
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/materialized-tables:
     get:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted and paginated list of all materialized tables.
       operationId: listSqlv1MaterializedTables
@@ -4196,6 +4211,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: List all materialized tables
       tags:
@@ -4288,7 +4304,7 @@ paths:
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables:
     post:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Create a new Materialized Table.
       operationId: createSqlv1MaterializedTable
@@ -4327,12 +4343,14 @@ paths:
               - properties:
                   spec:
                     required:
+                    - kafka_cluster_id
                     - query
                     type: object
                 required:
                 - name
                 - spec
                 type: object
+        required: true
       responses:
         "201":
           content:
@@ -4527,6 +4545,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Create a materialized table
       tags:
@@ -4538,13 +4557,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"high-value-orders","spec":{"compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"}}'
+            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables")
             .post(body)
@@ -4557,36 +4576,36 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"high-value-orders\\\
-          \",\\\"spec\\\":{\\\"compute_pool_id\\\":\\\"lfcp-123\\\",\\\"principal\\\
-          \":\\\"sa-abc123\\\",\\\"stopped\\\":false,\\\"table_options\\\":{\\\"property1\\\
-          \":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"session_options\\\
-          \":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\
-          \"columns\\\":[{\\\"name\\\":\\\"user_id\\\",\\\"type\\\":{\\\"type\\\"\
-          :\\\"BIGINT\\\",\\\"nullable\\\":false,\\\"length\\\":0,\\\"precision\\\"\
-          :0,\\\"scale\\\":0,\\\"key_type\\\":{},\\\"value_type\\\":{},\\\"element_type\\\
-          \":{},\\\"fields\\\":[{\\\"name\\\":\\\"string\\\",\\\"field_type\\\":{},\\\
-          \"description\\\":\\\"string\\\"}],\\\"resolution\\\":\\\"string\\\",\\\"\
-          fractional_precision\\\":0,\\\"class_name\\\":\\\"string\\\"},\\\"comment\\\
-          \":\\\"string\\\",\\\"kind\\\":\\\"Physical\\\"}],\\\"watermark\\\":{\\\"\
-          column\\\":\\\"event_timestamp\\\",\\\"expression\\\":\\\"event_timestamp\
-          \ - INTERVAL '5' SECOND\\\"},\\\"constraints\\\":[{\\\"name\\\":\\\"pk_orders\\\
-          \",\\\"type\\\":\\\"PRIMARY_KEY\\\",\\\"columns\\\":[\\\"user_id\\\",\\\"\
-          product_id\\\"],\\\"enforced\\\":false}],\\\"distribution\\\":{\\\"kind\\\
-          \":\\\"HASH\\\",\\\"keys\\\":[\\\"user_id\\\"],\\\"bucket_count\\\":12},\\\
-          \"query\\\":\\\"SELECT user_id, product_id, price, quantity FROM orders\
-          \ WHERE price > 1000;\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\",\
-          \ url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"spec\\\":{\\\"kafka_cluster_id\\\":\\\"lkc-12345\\\",\\\"compute_pool_id\\\
+          \":\\\"lfcp-123\\\",\\\"principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\"\
+          :false,\\\"table_options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\
+          \":\\\"string\\\"},\\\"session_options\\\":{\\\"property1\\\":\\\"string\\\
+          \",\\\"property2\\\":\\\"string\\\"},\\\"columns\\\":[{\\\"name\\\":\\\"\
+          user_id\\\",\\\"type\\\":{\\\"type\\\":\\\"BIGINT\\\",\\\"nullable\\\":false,\\\
+          \"length\\\":0,\\\"precision\\\":0,\\\"scale\\\":0,\\\"key_type\\\":{},\\\
+          \"value_type\\\":{},\\\"element_type\\\":{},\\\"fields\\\":[{\\\"name\\\"\
+          :\\\"string\\\",\\\"field_type\\\":{},\\\"description\\\":\\\"string\\\"\
+          }],\\\"resolution\\\":\\\"string\\\",\\\"fractional_precision\\\":0,\\\"\
+          class_name\\\":\\\"string\\\"},\\\"comment\\\":\\\"string\\\",\\\"kind\\\
+          \":\\\"Physical\\\"}],\\\"watermark\\\":{\\\"column\\\":\\\"event_timestamp\\\
+          \",\\\"expression\\\":\\\"event_timestamp - INTERVAL '5' SECOND\\\"},\\\"\
+          constraints\\\":[{\\\"name\\\":\\\"pk_orders\\\",\\\"type\\\":\\\"PRIMARY_KEY\\\
+          \",\\\"columns\\\":[\\\"user_id\\\",\\\"product_id\\\"],\\\"enforced\\\"\
+          :false}],\\\"distribution\\\":{\\\"kind\\\":\\\"HASH\\\",\\\"keys\\\":[\\\
+          \"user_id\\\"],\\\"bucket_count\\\":12},\\\"query\\\":\\\"SELECT user_id,\
+          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\"}}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}"
+          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}"
 
           headers = {
               'content-type': "application/json",
@@ -4630,6 +4649,7 @@ paths:
           req.write(JSON.stringify({
             name: 'high-value-orders',
             spec: {
+              kafka_cluster_id: 'lkc-12345',
               compute_pool_id: 'lfcp-123',
               principal: 'sa-abc123',
               stopped: false,
@@ -4685,7 +4705,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4694,12 +4714,12 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   ? /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}
   : delete:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Delete a specific Materialized Table by name.
       operationId: deleteSqlv1MaterializedTable
@@ -4872,6 +4892,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Delete a materialized table
       tags:
@@ -4962,7 +4983,7 @@ paths:
           IRestResponse response = client.Execute(request);
     get:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a specific Materialized Table by name.
       operationId: getSqlv1MaterializedTable
@@ -5139,6 +5160,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Read a materialized table
       tags:
@@ -5229,10 +5251,10 @@ paths:
           IRestResponse response = client.Execute(request);
     put:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a Materialized Table's mutable fields.
-        Mutable fields include: `query`, `stopped`, `compute_pool_id`, and `principal`.
+        Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
       operationId: updateSqlv1MaterializedTable
       parameters:
       - description: The unique identifier for the organization
@@ -5275,6 +5297,10 @@ paths:
               allOf:
               - $ref: '#/components/schemas/sql.v1.MaterializedTable'
               - properties:
+                  spec:
+                    required:
+                    - kafka_cluster_id
+                    type: object
                   metadata:
                     required:
                     - resource_version
@@ -5287,7 +5313,7 @@ paths:
         description: The Materialized Table resource with updated spec fields.
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -5455,6 +5481,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Update/Evolve a materialized table
       tags:
@@ -5466,13 +5493,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"high-value-orders","spec":{"compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"},"metadata":{}}'
+            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"},"metadata":{}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}")
             .put(body)
@@ -5485,36 +5512,36 @@ paths:
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"high-value-orders\\\
-          \",\\\"spec\\\":{\\\"compute_pool_id\\\":\\\"lfcp-123\\\",\\\"principal\\\
-          \":\\\"sa-abc123\\\",\\\"stopped\\\":false,\\\"table_options\\\":{\\\"property1\\\
-          \":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\"session_options\\\
-          \":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\"string\\\"},\\\
-          \"columns\\\":[{\\\"name\\\":\\\"user_id\\\",\\\"type\\\":{\\\"type\\\"\
-          :\\\"BIGINT\\\",\\\"nullable\\\":false,\\\"length\\\":0,\\\"precision\\\"\
-          :0,\\\"scale\\\":0,\\\"key_type\\\":{},\\\"value_type\\\":{},\\\"element_type\\\
-          \":{},\\\"fields\\\":[{\\\"name\\\":\\\"string\\\",\\\"field_type\\\":{},\\\
-          \"description\\\":\\\"string\\\"}],\\\"resolution\\\":\\\"string\\\",\\\"\
-          fractional_precision\\\":0,\\\"class_name\\\":\\\"string\\\"},\\\"comment\\\
-          \":\\\"string\\\",\\\"kind\\\":\\\"Physical\\\"}],\\\"watermark\\\":{\\\"\
-          column\\\":\\\"event_timestamp\\\",\\\"expression\\\":\\\"event_timestamp\
-          \ - INTERVAL '5' SECOND\\\"},\\\"constraints\\\":[{\\\"name\\\":\\\"pk_orders\\\
-          \",\\\"type\\\":\\\"PRIMARY_KEY\\\",\\\"columns\\\":[\\\"user_id\\\",\\\"\
-          product_id\\\"],\\\"enforced\\\":false}],\\\"distribution\\\":{\\\"kind\\\
-          \":\\\"HASH\\\",\\\"keys\\\":[\\\"user_id\\\"],\\\"bucket_count\\\":12},\\\
-          \"query\\\":\\\"SELECT user_id, product_id, price, quantity FROM orders\
-          \ WHERE price > 1000;\\\"},\\\"metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          \",\\\"spec\\\":{\\\"kafka_cluster_id\\\":\\\"lkc-12345\\\",\\\"compute_pool_id\\\
+          \":\\\"lfcp-123\\\",\\\"principal\\\":\\\"sa-abc123\\\",\\\"stopped\\\"\
+          :false,\\\"table_options\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\
+          \":\\\"string\\\"},\\\"session_options\\\":{\\\"property1\\\":\\\"string\\\
+          \",\\\"property2\\\":\\\"string\\\"},\\\"columns\\\":[{\\\"name\\\":\\\"\
+          user_id\\\",\\\"type\\\":{\\\"type\\\":\\\"BIGINT\\\",\\\"nullable\\\":false,\\\
+          \"length\\\":0,\\\"precision\\\":0,\\\"scale\\\":0,\\\"key_type\\\":{},\\\
+          \"value_type\\\":{},\\\"element_type\\\":{},\\\"fields\\\":[{\\\"name\\\"\
+          :\\\"string\\\",\\\"field_type\\\":{},\\\"description\\\":\\\"string\\\"\
+          }],\\\"resolution\\\":\\\"string\\\",\\\"fractional_precision\\\":0,\\\"\
+          class_name\\\":\\\"string\\\"},\\\"comment\\\":\\\"string\\\",\\\"kind\\\
+          \":\\\"Physical\\\"}],\\\"watermark\\\":{\\\"column\\\":\\\"event_timestamp\\\
+          \",\\\"expression\\\":\\\"event_timestamp - INTERVAL '5' SECOND\\\"},\\\"\
+          constraints\\\":[{\\\"name\\\":\\\"pk_orders\\\",\\\"type\\\":\\\"PRIMARY_KEY\\\
+          \",\\\"columns\\\":[\\\"user_id\\\",\\\"product_id\\\"],\\\"enforced\\\"\
+          :false}],\\\"distribution\\\":{\\\"kind\\\":\\\"HASH\\\",\\\"keys\\\":[\\\
+          \"user_id\\\"],\\\"bucket_count\\\":12},\\\"query\\\":\\\"SELECT user_id,\
+          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\"},\\\"\
+          metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}"
+          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}"
 
           headers = {
               'content-type': "application/json",
@@ -5558,6 +5585,7 @@ paths:
           req.write(JSON.stringify({
             name: 'high-value-orders',
             spec: {
+              kafka_cluster_id: 'lkc-12345',
               compute_pool_id: 'lfcp-123',
               principal: 'sa-abc123',
               stopped: false,
@@ -5614,7 +5642,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -5623,12 +5651,12 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   ? /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions
   : get:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a sorted and paginated list of all versions for a specific Materialized Table.
       operationId: listSqlv1MaterializedTableVersions
@@ -5825,6 +5853,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: List all the versions of a materialized table
       tags:
@@ -5917,7 +5946,7 @@ paths:
   ? /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions/{version}
   : get:
       description: |
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a specific version of a Materialized Table.
       operationId: getSqlv1MaterializedTableVersion
@@ -6104,6 +6133,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Read a materialized table version
       tags:
@@ -6377,6 +6407,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: List all agents
       tags:
@@ -6708,6 +6739,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Create an Agent
       tags:
@@ -7005,6 +7037,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Delete an Agent
       tags:
@@ -7272,6 +7305,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Read an Agent
       tags:
@@ -7588,6 +7622,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       - external-access-token: []
       summary: Alter an Agent
       tags:
@@ -7710,348 +7745,6 @@ paths:
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           request.AddParameter("application/json", "{\"name\":\"chat-listener-agent\",\"spec\":{\"description\":\"An agent that listens to chat messages and creates issues\",\"model\":\"chat_listener\",\"prompt\":\"Create an issue from the content using bebb0fa3-e084-412d-a000-b02280558318 as the team ID\",\"tools\":[\"linear-mcp-tool\"],\"properties\":{\"max_iterations\":\"5\"}},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
-  /sql/v1/organizations/{organization_id}/environments/{environment_id}/tools:
-    post:
-      description: |-
-        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-
-        Make a request to create a Tool.
-      operationId: createSqlv1Tool
-      parameters:
-      - description: The unique identifier for the organization.
-        explode: false
-        in: path
-        name: organization_id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: The unique identifier for the environment.
-        explode: false
-        in: path
-        name: environment_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/sql.v1.Tool'
-              - required:
-                - name
-                - spec
-                type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/sql.v1.Tool'
-                - required:
-                  - name
-                  - spec
-                  type: object
-          description: A Tool has been successfully created.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            Location:
-              description: Tool resource uri
-              explode: false
-              schema:
-                example: https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools/{name}
-                format: uri
-                type: string
-              style: simple
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "400"
-                  code: invalid_filter
-                  title: Invalid Filter
-                  detail: The 'delorean' resource can't be filtered by 'num_doors'
-                  source:
-                    parameter: num_doors
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Bad Request
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "401"
-                  code: user_unauthenticated
-                  title: Authentication Required
-                  detail: Valid authentication credentials must be provided
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request lacks valid authentication credentials for this
-            resource.
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            WWW-Authenticate:
-              description: The unique identifier for the API request.
-              example: Basic error="invalid_key", error_description="The API Key is
-                invalid"
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Unauthorized
-        "403":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "403"
-                  code: user_unauthorized
-                  title: User Access Unauthorized
-                  detail: The user 'mcfly' is not allowed to access the 'delorean'
-                    resource without the 'plutonium' role.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The access credentials were considered insufficient to grant
-            access
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-          x-summary: Forbidden
-        "409":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "409"
-                  code: resource_already_exists
-                  title: Resource Already exists
-                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
-                    exists.
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: The request is in conflict with the current server state
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-            Location:
-              description: Resource URI of conflicting resource
-              explode: false
-              schema:
-                example: https://api.confluent.cloud/{object}/{id}
-                format: uri
-                type: string
-              style: simple
-          x-summary: Conflict
-        "422":
-          content:
-            application/json:
-              example:
-                errors:
-                - status: "422"
-                  code: invalid_configuration
-                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  title: Validation Failed
-                  detail: 'The property ''/cluster/storage_size'' of type string did
-                    not match the following type: integer'
-                  source:
-                    pointer: /cluster/storage_size
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Validation Failed
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "429":
-          description: Rate Limit Exceeded
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-        "500":
-          content:
-            application/json:
-              example:
-                errors:
-                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
-                  status: "500"
-                  code: out_of_gas
-                  title: DeLorean Out Of Gas
-                  detail: The DeLorean has run out of gas, but Doc Brown will fill
-                    'er up for you asap
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Oops, something went wrong!
-          headers:
-            X-Request-Id:
-              description: The unique identifier for the API request.
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - resource-api-key: []
-      summary: Create a Tool
-      tags:
-      - Tools (sql/v1)
-      x-request-access-name: SQL API v1
-      x-codeSamples:
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools' \
-            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
-            --header 'content-type: application/json' \
-            --data '{"name":"linear-mcp-tool","spec":{"connection":"linear-mcp-connection-streamable","function":"convert_to_celsius","comment":"string","options":{"type":"mcp","allowed_tools":"create_issue, list_issues","request_timeout":"30"}}}'
-      - lang: Java
-        source: |-
-          OkHttpClient client = new OkHttpClient();
-
-          MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}");
-          Request request = new Request.Builder()
-            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools")
-            .post(body)
-            .addHeader("content-type", "application/json")
-            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
-            .build();
-
-          Response response = client.newCall(request).execute();
-      - lang: Go
-        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
-          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools\"\
-          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"linear-mcp-tool\\\
-          \",\\\"spec\\\":{\\\"connection\\\":\\\"linear-mcp-connection-streamable\\\
-          \",\\\"function\\\":\\\"convert_to_celsius\\\",\\\"comment\\\":\\\"string\\\
-          \",\\\"options\\\":{\\\"type\\\":\\\"mcp\\\",\\\"allowed_tools\\\":\\\"\
-          create_issue, list_issues\\\",\\\"request_timeout\\\":\\\"30\\\"}}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-      - lang: Python
-        source: |-
-          import http.client
-
-          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
-
-          payload = "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}"
-
-          headers = {
-              'content-type': "application/json",
-              'Authorization': "Basic REPLACE_BASIC_AUTH"
-              }
-
-          conn.request("POST", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools", payload, headers)
-
-          res = conn.getresponse()
-          data = res.read()
-
-          print(data.decode("utf-8"))
-      - lang: Node
-        source: |-
-          const http = require("https");
-
-          const options = {
-            "method": "POST",
-            "hostname": "flink.region.provider.confluent.cloud",
-            "port": null,
-            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools",
-            "headers": {
-              "content-type": "application/json",
-              "Authorization": "Basic REPLACE_BASIC_AUTH"
-            }
-          };
-
-          const req = http.request(options, function (res) {
-            const chunks = [];
-
-            res.on("data", function (chunk) {
-              chunks.push(chunk);
-            });
-
-            res.on("end", function () {
-              const body = Buffer.concat(chunks);
-              console.log(body.toString());
-            });
-          });
-
-          req.write(JSON.stringify({
-            name: 'linear-mcp-tool',
-            spec: {
-              connection: 'linear-mcp-connection-streamable',
-              function: 'convert_to_celsius',
-              comment: 'string',
-              options: {type: 'mcp', allowed_tools: 'create_issue, list_issues', request_timeout: '30'}
-            }
-          }));
-          req.end();
-      - lang: C
-        source: |-
-          CURL *hnd = curl_easy_init();
-
-          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools");
-
-          struct curl_slist *headers = NULL;
-          headers = curl_slist_append(headers, "content-type: application/json");
-          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
-          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}");
-
-          CURLcode ret = curl_easy_perform(hnd);
-      - lang: C#
-        source: |-
-          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/tools");
-          var request = new RestRequest(Method.POST);
-          request.AddHeader("content-type", "application/json");
-          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}", ParameterType.RequestBody);
-          IRestResponse response = client.Execute(request);
-    x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools:
     get:
       description: |-
@@ -8244,6 +7937,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: List of Tools
       tags:
       - Tools (sql/v1)
@@ -8331,6 +8025,355 @@ paths:
           var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools");
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+    post:
+      description: |-
+        [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create a Tool.
+      operationId: createSqlv1Tool
+      parameters:
+      - description: The unique identifier for the organization.
+        explode: false
+        in: path
+        name: organization_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique identifier for the environment.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the database.
+        explode: false
+        in: path
+        name: database_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/sql.v1.Tool'
+              - required:
+                - name
+                - spec
+                type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/sql.v1.Tool'
+                - required:
+                  - name
+                  - spec
+                  type: object
+          description: A Tool has been successfully created.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Tool resource uri
+              explode: false
+              schema:
+                example: https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{name}
+                format: uri
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      - global-api-key: []
+      summary: Create a Tool
+      tags:
+      - Tools (sql/v1)
+      x-request-access-name: SQL API v1
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"name":"linear-mcp-tool","spec":{"connection":"linear-mcp-connection-streamable","function":"convert_to_celsius","comment":"string","options":{"type":"mcp","allowed_tools":"create_issue, list_issues","request_timeout":"30"}}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}");
+          Request request = new Request.Builder()
+            .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"name\\\":\\\"linear-mcp-tool\\\
+          \",\\\"spec\\\":{\\\"connection\\\":\\\"linear-mcp-connection-streamable\\\
+          \",\\\"function\\\":\\\"convert_to_celsius\\\",\\\"comment\\\":\\\"string\\\
+          \",\\\"options\\\":{\\\"type\\\":\\\"mcp\\\",\\\"allowed_tools\\\":\\\"\
+          create_issue, list_issues\\\",\\\"request_timeout\\\":\\\"30\\\"}}}\")\n\
+          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
+
+          payload = "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "flink.region.provider.confluent.cloud",
+            "port": null,
+            "path": "/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            name: 'linear-mcp-tool',
+            spec: {
+              connection: 'linear-mcp-connection-streamable',
+              function: 'convert_to_celsius',
+              comment: 'string',
+              options: {type: 'mcp', allowed_tools: 'create_issue, list_issues', request_timeout: '30'}
+            }
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"name\":\"linear-mcp-tool\",\"spec\":{\"connection\":\"linear-mcp-connection-streamable\",\"function\":\"convert_to_celsius\",\"comment\":\"string\",\"options\":{\"type\":\"mcp\",\"allowed_tools\":\"create_issue, list_issues\",\"request_timeout\":\"30\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
     x-request-access-name: SQL API v1
   /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name}:
@@ -8509,6 +8552,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Delete a Tool
       tags:
       - Tools (sql/v1)
@@ -8784,6 +8828,7 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
       summary: Read a Tool
       tags:
       - Tools (sql/v1)
@@ -9096,11 +9141,7 @@ components:
             > 1000;
           session_options:
             key: session_options
-          distribution:
-            kind: HASH
-            keys:
-            - user_id
-            bucket_count: 12
+          distribution: ""
           constraints:
           - enforced: false
             columns:
@@ -9148,11 +9189,12 @@ components:
                 type: object
             type: object
         name:
-          description: The user-provided name of the resource, unique within this
-            environment.
+          description: The user-provided name of the resource, unique within the Kafka
+            cluster. May contain ASCII alphanumerics, '.', '_' and '-'; must not be
+            '.' or '..'; max length 249.
           example: high-value-orders
-          maxLength: 100
-          pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
+          maxLength: 249
+          pattern: ^[a-zA-Z0-9._-]+$
           type: string
           x-immutable: true
         organization_id:
@@ -9211,11 +9253,7 @@ components:
               > 1000;
             session_options:
               key: session_options
-            distribution:
-              kind: HASH
-              keys:
-              - user_id
-              bucket_count: 12
+            distribution: ""
             constraints:
             - enforced: false
               columns:
@@ -9253,11 +9291,7 @@ components:
               > 1000;
             session_options:
               key: session_options
-            distribution:
-              kind: HASH
-              keys:
-              - user_id
-              bucket_count: 12
+            distribution: ""
             constraints:
             - enforced: false
               columns:
@@ -9319,11 +9353,7 @@ components:
           > 1000;
         session_options:
           key: session_options
-        distribution:
-          kind: HASH
-          keys:
-          - user_id
-          bucket_count: 12
+        distribution: ""
         constraints:
         - enforced: false
           columns:
@@ -9339,11 +9369,13 @@ components:
           type: PRIMARY_KEY
       properties:
         kafka_cluster_id:
-          description: The ID of Kafka cluster hosting the Materialized Table's topic.
-            Populated from the `kafka_cluster_id` path parameter on creation.
+          description: |-
+            The ID of the Kafka cluster hosting the Materialized Table's topic.
+            This value must match the `kafka_cluster_id` path parameter.
+            It is immutable after creation and is ignored or rejected on update if changed.
           example: lkc-12345
-          readOnly: true
           type: string
+          x-immutable: true
         compute_pool_id:
           description: |-
             The id associated with the compute pool in context.
@@ -9370,8 +9402,10 @@ components:
           additionalProperties:
             type: string
           description: Session configurations equivalent to the SQL 'SET' statement.
+            Only applicable on creation; ignored on update.
           maxProperties: 8192
           type: object
+          x-immutable: true
         columns:
           description: Details of each column in Materialized Table resource. If columns
             are not specified, we infer from query. If it's specified it must be compatible
@@ -9387,7 +9421,10 @@ components:
             $ref: '#/components/schemas/sql.v1.Constraint'
           type: array
         distribution:
-          $ref: '#/components/schemas/sql.v1.Distribution'
+          allOf:
+          - $ref: '#/components/schemas/sql.v1.Distribution'
+          description: Only applicable on creation; ignored on update.
+          x-immutable: true
         query:
           description: Contains the query section (usually starting with a SELECT)
             of the latest Materialized Table.
@@ -9804,11 +9841,6 @@ components:
       type: object
     sql.v1.Distribution:
       description: Distribution (bucket by) strategy.
-      example:
-        kind: HASH
-        keys:
-        - user_id
-        bucket_count: 12
       properties:
         kind:
           description: The kind of distribution.
@@ -9829,6 +9861,8 @@ components:
           format: int32
           minimum: 1
           type: integer
+      required:
+      - kind
       type: object
     sql.v1.MaterializedTableWarning:
       allOf:
@@ -9944,11 +9978,9 @@ components:
                   type: object
               required:
               - api_version
-              - environment_id
               - kind
               - metadata
               - name
-              - organization_id
               - spec
               - status
               type: object
@@ -10617,6 +10649,45 @@ components:
           type: string
         affected_resource:
           $ref: '#/components/schemas/sql_v1_StatementStatus_affected_resource'
+        identity:
+          description: |
+            Optional, read-only. The CRN of the authenticated principal that
+            currently owns this statement, sourced from the upstream
+            authentication decision. Initially populated when the statement
+            is created and refreshed when `spec.principal` is updated, so it
+            reflects the most recent setter rather than the original creator.
+
+            Treat as a stable, opaque, non-parsable string for storage and
+            mapping; do not implement business logic or branching based on
+            the identity type or string structure. The set of identity
+            shapes may grow over time and is not considered breaking.
+
+            The `example` above illustrates the OAuth (identity-provider)
+            shape. Set for all supported authentication methods; the CRN
+            shape varies by auth type:
+
+              * User: `crn://confluent.cloud/organization=12345/user=u-abc123`
+              * Service account: `crn://confluent.cloud/organization=12345/service-account=sa-abc123`
+              * OAuth (identity provider): `crn://confluent.cloud/organization=12345/identity-provider=op-12345/identity=alice@example.com`
+
+            For the OAuth shape, the value after `identity=` is the JWT
+            claim resolved by the identity provider's configured
+            `identity_claim` (or the identity pool's `identity_claim` when
+            a single pool is in scope) — commonly `claims.sub`, but
+            provider-configurable. The email shown above is just one
+            example; the actual value depends on the identity provider
+            configuration and may be a subject UUID, a username, or any
+            other opaque claim value.
+
+            When the request was authenticated via OAuth and authorized
+            against multiple identity pools, this CRN also appears as
+            `spec.principal`. May be omitted for statements created before
+            this field was introduced.
+          example: crn://confluent.cloud/organization=12345/identity-provider=op-12345/identity=alice@example.com
+          format: uri
+          maxLength: 1024
+          readOnly: true
+          type: string
       readOnly: true
       required:
       - phase
@@ -10833,9 +10904,23 @@ components:
           maxLength: 255
           type: string
         principal:
-          description: The id of a principal this statement runs as.
+          description: |
+            The id of the principal this statement runs as. Possible values:
+
+              * `u-abc123` — user
+              * `sa-abc123` — service account
+              * `pool-abc123` — identity pool (OAuth caller authorized
+                against a single pool, either explicitly supplied or
+                resolved by the server)
+              * an identity CRN equal to `status.identity` (OAuth caller
+                authorized against multiple identity pools)
+
+            Customers typically supply one of the short prefixed ids and read
+            the same value back. The CRN form is server-set in the multi-pool
+            case; clients should accept it when reading but should not need
+            to construct it.
           example: sa-abc123
-          maxLength: 255
+          maxLength: 1024
           type: string
           x-immutable: true
         stopped:
@@ -10851,6 +10936,8 @@ components:
           maxLength: 255
           readOnly: true
           type: string
+        scaling:
+          $ref: '#/components/schemas/sql.v1.ScalingSpec'
       type: object
       x-enable-listmeta: true
       x-enable-objectmeta: true
@@ -10967,6 +11054,19 @@ components:
           readOnly: true
           type: string
       type: object
+    sql.v1.ScalingSpec:
+      description: Mutable scaling configuration that can be updated for a running
+        statement.
+      properties:
+        baseline_cfu:
+          description: |
+            The baseline number of Confluent Flink Units (CFUs) targeted for the statement.
+            This is a best-effort target rather than a guarantee, and the statement may auto-scale above it.
+          example: 2
+          format: int32
+          minimum: 0
+          type: integer
+      type: object
     sql.v1.ScalingStatus:
       description: Scaling status for this statement.
       properties:
@@ -10989,7 +11089,6 @@ components:
           - POOL_EXHAUSTED
         last_updated:
           description: The last time the scaling status was updated.
-          example: 1996-03-19T01:02:03-04:05
           format: date-time
           readOnly: true
           type: string
@@ -11020,7 +11119,6 @@ components:
           - EXCEEDING_HARD_LIMIT
         last_updated:
           description: The last time the state limit status was updated.
-          example: 1996-03-19T01:02:03-04:05
           format: date-time
           readOnly: true
           type: string
@@ -11491,10 +11589,16 @@ components:
         as the username and resource-specific API Key Secret as the password.
       scheme: basic
       type: http
+    global-api-key:
+      description: Authenticate with Global API Keys using HTTP Basic Auth. Treat
+        the Global API Key ID as the username and Global API Key Secret as the password.
+      scheme: basic
+      type: http
     external-access-token:
-      description: Authenticate with OAuth 2.0.
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
       flows:
         clientCredentials:
           scopes: {}
-          tokenUrl: https://<oauth-identity-provider>/token
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
       type: oauth2

@@ -71,11 +71,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1Connection**](sql.v1.Connection.md)
+[**SqlV1Connection**](SqlV1Connection.md)
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -221,11 +221,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SqlV1Connection**](sql.v1.Connection.md)
+[**SqlV1Connection**](SqlV1Connection.md)
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -380,7 +380,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
