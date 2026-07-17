@@ -4536,6 +4536,20 @@ components:
           - $ref: '#/components/schemas/tableflow.v1.ErrorHandlingLog'
           type: object
           x-one-of-name: TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf
+        metadata_column_naming_scheme:
+          default: DEFAULT
+          description: |
+            The naming scheme for Tableflow's internal metadata columns (for example `$$offset` and `$$leader-epoch`) in the materialized table.
+
+            For `DEFAULT`, the metadata columns keep their default `$$`-prefixed names (for example `$$offset` and `$$leader-epoch`).
+
+            For `PORTABLE`, the metadata columns use portable `cflt_metadata_`-prefixed names that are queryable by engines such as Google BigQuery, with any hyphens replaced by underscores (for example `$$offset` becomes `cflt_metadata_offset` and `$$leader-epoch` becomes `cflt_metadata_leader_epoch`).
+
+            If not specified, `DEFAULT` is used.
+          type: string
+          x-extensible-enum:
+          - DEFAULT
+          - PORTABLE
       type: object
     tableflow.v1.ByobAwsSpec:
       description: The Tableflow storage config for BYOB enabled topic in AWS
