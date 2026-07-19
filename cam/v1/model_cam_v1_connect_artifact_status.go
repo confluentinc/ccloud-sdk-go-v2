@@ -38,6 +38,8 @@ import (
 type CamV1ConnectArtifactStatus struct {
 	// Specifies the current processing state of a CloudConnectArtifact.
 	Phase string `json:"phase,omitempty"`
+	// An error message for the Connect Artifact when the phase is FAILED.
+	ErrorMessage *string `json:"error_message,omitempty"`
 }
 
 // NewCamV1ConnectArtifactStatus instantiates a new CamV1ConnectArtifactStatus object
@@ -82,9 +84,42 @@ func (o *CamV1ConnectArtifactStatus) SetPhase(v string) {
 	o.Phase = v
 }
 
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
+func (o *CamV1ConnectArtifactStatus) GetErrorMessage() string {
+	if o == nil || o.ErrorMessage == nil {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMessage
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CamV1ConnectArtifactStatus) GetErrorMessageOk() (*string, bool) {
+	if o == nil || o.ErrorMessage == nil {
+		return nil, false
+	}
+	return o.ErrorMessage, true
+}
+
+// HasErrorMessage returns a boolean if a field has been set.
+func (o *CamV1ConnectArtifactStatus) HasErrorMessage() bool {
+	if o != nil && o.ErrorMessage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
+func (o *CamV1ConnectArtifactStatus) SetErrorMessage(v string) {
+	o.ErrorMessage = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CamV1ConnectArtifactStatus) Redact() {
 	o.recurseRedact(&o.Phase)
+	o.recurseRedact(o.ErrorMessage)
 }
 
 func (o *CamV1ConnectArtifactStatus) recurseRedact(v interface{}) {
@@ -121,6 +156,9 @@ func (o CamV1ConnectArtifactStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["phase"] = o.Phase
+	}
+	if o.ErrorMessage != nil {
+		toSerialize["error_message"] = o.ErrorMessage
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

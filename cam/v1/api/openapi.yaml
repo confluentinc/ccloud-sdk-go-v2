@@ -14,6 +14,10 @@ info:
 servers:
 - description: Confluent Cloud production
   url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
 tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
@@ -261,7 +265,10 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - global-api-key: []
       - confluent-sts-access-token: []
+      - confluent_auth:
+        - Describe:ConnectArtifact
       summary: List of Connect Artifacts
       tags:
       - Connect Artifacts (cam/v1)
@@ -623,7 +630,10 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - global-api-key: []
       - confluent-sts-access-token: []
+      - confluent_auth:
+        - Create:ConnectArtifact
       summary: Create a new Connect Artifact.
       tags:
       - Connect Artifacts (cam/v1)
@@ -968,7 +978,10 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - global-api-key: []
       - confluent-sts-access-token: []
+      - confluent_auth:
+        - Delete:ConnectArtifact
       summary: Delete a Connect Artifact
       tags:
       - Connect Artifacts (cam/v1)
@@ -1289,7 +1302,10 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - global-api-key: []
       - confluent-sts-access-token: []
+      - confluent_auth:
+        - Describe:ConnectArtifact
       summary: Read a Connect Artifact
       tags:
       - Connect Artifacts (cam/v1)
@@ -1592,6 +1608,9 @@ paths:
               style: simple
       security:
       - cloud-api-key: []
+      - confluent-sts-access-token: []
+      - confluent_auth:
+        - Create:ConnectArtifact
       summary: Request a presigned upload URL for a new Connect Artifact.
       tags:
       - Presigned Urls (cam/v1)
@@ -1989,6 +2008,13 @@ components:
           - PROCESSING
           - FAILED
           - READY
+        error_message:
+          description: An error message for the Connect Artifact when the phase is
+            FAILED.
+          example: No transforms found in the uploaded artifact
+          maxLength: 512
+          readOnly: true
+          type: string
       readOnly: true
       required:
       - phase
@@ -2043,7 +2069,7 @@ components:
           type: string
         upload_url:
           description: Upload URL for the Connect Artifact archive.
-          example: https://confluent-flink-artifacts-stag-us-west-2.s3.dualstack.us-west-2.amazonaws.com/
+          example: https://confluent-custom-connectors-stag-us-west-2.s3.dualstack.us-west-2.amazonaws.com/
           format: uri
           readOnly: true
           type: string
@@ -2051,7 +2077,7 @@ components:
           description: Upload form data of the Connect Artifact. All values should
             be strings.
           example:
-            bucket: confluent-flink-artifacts-stag-us-west-2
+            bucket: confluent-custom-connectors-stag-us-west-2
             key: staging/flink-artifact/2f37f0b6-f8da-4e8b-bc5f-282ebb0511be/flink-e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66/artifact.zip
             policy: string
             x-amz-algorithm: AWS4-HMAC-SHA256
@@ -2079,7 +2105,7 @@ components:
           maxLength: 255
           type: string
         display_name:
-          description: Unique name of the Connect Artifact archieve per cloud, environment
+          description: Unique name of the Connect Artifact archive per cloud, environment
             scope.
           maxLength: 60
           type: string
@@ -2116,7 +2142,7 @@ components:
           description: List of resource crns where this Connect artifact is being
             used.
           items:
-            description: crn that specifies the resource using this integration
+            description: crn that specifies the resource using this Connect Artifact
             example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/connector=my_datagen_connector
             format: uri
             pattern: ^crn://confluent\.cloud/organization=[a-f0-9\-]{36}/environment=[a-zA-Z0-9\-]+/cloud-cluster=[a-zA-Z0-9\-]+/connector=[a-zA-Z0-9\-_]+$
@@ -2458,6 +2484,11 @@ components:
         Cloud API Key ID as the username and Cloud API Key Secret as the password.
       scheme: basic
       type: http
+    global-api-key:
+      description: Authenticate with Global API Keys using HTTP Basic Auth. Treat
+        the Global API Key ID as the username and Global API Key Secret as the password.
+      scheme: basic
+      type: http
     confluent-sts-access-token:
       description: Authenticate with Confluent API using this credentials (JSON Web
         Tokens) following OAuth 2.0.
@@ -2465,4 +2496,17 @@ components:
         clientCredentials:
           scopes: {}
           tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2
+    confluent_auth:
+      description: RBAC permissions required for this endpoint
+      flows:
+        implicit:
+          authorizationUrl: https://confluent.cloud/oauth
+          scopes:
+            Create:ConnectArtifact: Create permission on ConnectArtifact resource
+              type
+            Delete:ConnectArtifact: Delete permission on ConnectArtifact resource
+              type
+            Describe:ConnectArtifact: Describe permission on ConnectArtifact resource
+              type
       type: oauth2

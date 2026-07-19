@@ -42,14 +42,14 @@ var (
 type ConnectArtifactsCamV1Api interface {
 
 	/*
-			CreateCamV1ConnectArtifact Create a new Connect Artifact.
+		CreateCamV1ConnectArtifact Create a new Connect Artifact.
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to create a connect artifact.
+	Make a request to create a connect artifact.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiCreateCamV1ConnectArtifactRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateCamV1ConnectArtifactRequest
 	*/
 	CreateCamV1ConnectArtifact(ctx _context.Context) ApiCreateCamV1ConnectArtifactRequest
 
@@ -58,18 +58,18 @@ type ConnectArtifactsCamV1Api interface {
 	CreateCamV1ConnectArtifactExecute(r ApiCreateCamV1ConnectArtifactRequest) (CamV1ConnectArtifact, *_nethttp.Response, error)
 
 	/*
-			DeleteCamV1ConnectArtifact Delete a Connect Artifact
+		DeleteCamV1ConnectArtifact Delete a Connect Artifact
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to delete a connect artifact.
+	Make a request to delete a connect artifact.
 
-		This request fails if existing workloads are using this artifact.
+	This request fails if existing workloads are using this artifact.
 
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the connect artifact.
-			 @return ApiDeleteCamV1ConnectArtifactRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the connect artifact.
+		 @return ApiDeleteCamV1ConnectArtifactRequest
 	*/
 	DeleteCamV1ConnectArtifact(ctx _context.Context, id string) ApiDeleteCamV1ConnectArtifactRequest
 
@@ -77,15 +77,15 @@ type ConnectArtifactsCamV1Api interface {
 	DeleteCamV1ConnectArtifactExecute(r ApiDeleteCamV1ConnectArtifactRequest) (*_nethttp.Response, error)
 
 	/*
-			GetCamV1ConnectArtifact Read a Connect Artifact
+		GetCamV1ConnectArtifact Read a Connect Artifact
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Make a request to read a connect artifact.
+	Make a request to read a connect artifact.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @param id The unique identifier for the connect artifact.
-			 @return ApiGetCamV1ConnectArtifactRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the connect artifact.
+		 @return ApiGetCamV1ConnectArtifactRequest
 	*/
 	GetCamV1ConnectArtifact(ctx _context.Context, id string) ApiGetCamV1ConnectArtifactRequest
 
@@ -94,14 +94,14 @@ type ConnectArtifactsCamV1Api interface {
 	GetCamV1ConnectArtifactExecute(r ApiGetCamV1ConnectArtifactRequest) (CamV1ConnectArtifact, *_nethttp.Response, error)
 
 	/*
-			ListCamV1ConnectArtifacts List of Connect Artifacts
+		ListCamV1ConnectArtifacts List of Connect Artifacts
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Retrieve a sorted, filtered, paginated list of all connect artifacts.
+	Retrieve a sorted, filtered, paginated list of all connect artifacts.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiListCamV1ConnectArtifactsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListCamV1ConnectArtifactsRequest
 	*/
 	ListCamV1ConnectArtifacts(ctx _context.Context) ApiListCamV1ConnectArtifactsRequest
 
