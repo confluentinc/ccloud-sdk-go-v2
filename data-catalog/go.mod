@@ -2,7 +2,7 @@ module github.com/confluentinc/ccloud-sdk-go-v2/data-catalog
 
 go 1.25.12
 
-require golang.org/x/oauth2 v0.0.0-20210218202405-ba52d332ba99
+require golang.org/x/oauth2 v0.36.0
 
 require (
 	github.com/golang/protobuf v1.5.0 // indirect
