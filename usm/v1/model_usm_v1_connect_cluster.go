@@ -46,6 +46,8 @@ type UsmV1ConnectCluster struct {
 	ConfluentPlatformConnectClusterId *string `json:"confluent_platform_connect_cluster_id,omitempty"`
 	// The unique identifier of the metadata Kafka cluster for the Connect Cluster.
 	KafkaClusterId *string `json:"kafka_cluster_id,omitempty"`
+	// The unique identifier of the metadata Kafka cluster for the Connect Cluster.
+	UsmKafkaClusterId *string `json:"usm_kafka_cluster_id,omitempty"`
 	// The cloud service provider where the metadata for the Connect Cluster should be stored. This field is optional. If provided, 'region' must also be provided. If neither 'cloud' nor 'region' are provided, the cloud provider of the associated metadata Kafka cluster (identified by 'kafka_cluster_id') will be used as a fallback.
 	Cloud *string `json:"cloud,omitempty"`
 	// The home region of the Confluent Platform Connect cluster where the metadata should be stored. This field is optional. If provided, 'cloud' must also be provided. If neither 'cloud' nor 'region' are provided, the home region of the associated metadata Kafka cluster (identified by 'kafka_cluster_id') will be used as a fallback.
@@ -231,6 +233,38 @@ func (o *UsmV1ConnectCluster) SetKafkaClusterId(v string) {
 	o.KafkaClusterId = &v
 }
 
+// GetUsmKafkaClusterId returns the UsmKafkaClusterId field value if set, zero value otherwise.
+func (o *UsmV1ConnectCluster) GetUsmKafkaClusterId() string {
+	if o == nil || o.UsmKafkaClusterId == nil {
+		var ret string
+		return ret
+	}
+	return *o.UsmKafkaClusterId
+}
+
+// GetUsmKafkaClusterIdOk returns a tuple with the UsmKafkaClusterId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UsmV1ConnectCluster) GetUsmKafkaClusterIdOk() (*string, bool) {
+	if o == nil || o.UsmKafkaClusterId == nil {
+		return nil, false
+	}
+	return o.UsmKafkaClusterId, true
+}
+
+// HasUsmKafkaClusterId returns a boolean if a field has been set.
+func (o *UsmV1ConnectCluster) HasUsmKafkaClusterId() bool {
+	if o != nil && o.UsmKafkaClusterId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsmKafkaClusterId gets a reference to the given string and assigns it to the UsmKafkaClusterId field.
+func (o *UsmV1ConnectCluster) SetUsmKafkaClusterId(v string) {
+	o.UsmKafkaClusterId = &v
+}
+
 // GetCloud returns the Cloud field value if set, zero value otherwise.
 func (o *UsmV1ConnectCluster) GetCloud() string {
 	if o == nil || o.Cloud == nil {
@@ -334,6 +368,7 @@ func (o *UsmV1ConnectCluster) Redact() {
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.ConfluentPlatformConnectClusterId)
 	o.recurseRedact(o.KafkaClusterId)
+	o.recurseRedact(o.UsmKafkaClusterId)
 	o.recurseRedact(o.Cloud)
 	o.recurseRedact(o.Region)
 	o.recurseRedact(o.Environment)
@@ -385,6 +420,9 @@ func (o UsmV1ConnectCluster) MarshalJSON() ([]byte, error) {
 	}
 	if o.KafkaClusterId != nil {
 		toSerialize["kafka_cluster_id"] = o.KafkaClusterId
+	}
+	if o.UsmKafkaClusterId != nil {
+		toSerialize["usm_kafka_cluster_id"] = o.UsmKafkaClusterId
 	}
 	if o.Cloud != nil {
 		toSerialize["cloud"] = o.Cloud
