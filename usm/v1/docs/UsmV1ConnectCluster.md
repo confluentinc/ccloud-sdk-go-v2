@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | ID is the \&quot;natural identifier\&quot; for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\&quot;time\&quot;); however, it may collide with IDs for other object &#x60;kinds&#x60; or objects of the same &#x60;kind&#x60; within a different scope/namespace (\&quot;space\&quot;). | [optional] [readonly] 
 **ConfluentPlatformConnectClusterId** | Pointer to **string** | The unique identifier of the Connect cluster within the Confluent Platform environment. | [optional] 
 **KafkaClusterId** | Pointer to **string** | The unique identifier of the metadata Kafka cluster for the Connect Cluster.  | [optional] 
+**UsmKafkaClusterId** | Pointer to **string** | The unique identifier of the metadata Kafka cluster for the Connect Cluster. | [optional] [readonly] 
 **Cloud** | Pointer to **string** | The cloud service provider where the metadata for the Connect Cluster should be stored. This field is optional. If provided, &#39;region&#39; must also be provided. If neither &#39;cloud&#39; nor &#39;region&#39; are provided, the cloud provider of the associated metadata Kafka cluster (identified by &#39;kafka_cluster_id&#39;) will be used as a fallback.  | [optional] 
 **Region** | Pointer to **string** | The home region of the Confluent Platform Connect cluster where the metadata should be stored. This field is optional. If provided, &#39;cloud&#39; must also be provided. If neither &#39;cloud&#39; nor &#39;region&#39; are provided, the home region of the associated metadata Kafka cluster (identified by &#39;kafka_cluster_id&#39;) will be used as a fallback.  | [optional] 
 **Environment** | Pointer to [**EnvScopedObjectReference**](EnvScopedObjectReference.md) | The environment to which this belongs. | [optional] 
@@ -156,6 +157,31 @@ SetKafkaClusterId sets KafkaClusterId field to given value.
 `func (o *UsmV1ConnectCluster) HasKafkaClusterId() bool`
 
 HasKafkaClusterId returns a boolean if a field has been set.
+
+### GetUsmKafkaClusterId
+
+`func (o *UsmV1ConnectCluster) GetUsmKafkaClusterId() string`
+
+GetUsmKafkaClusterId returns the UsmKafkaClusterId field if non-nil, zero value otherwise.
+
+### GetUsmKafkaClusterIdOk
+
+`func (o *UsmV1ConnectCluster) GetUsmKafkaClusterIdOk() (*string, bool)`
+
+GetUsmKafkaClusterIdOk returns a tuple with the UsmKafkaClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsmKafkaClusterId
+
+`func (o *UsmV1ConnectCluster) SetUsmKafkaClusterId(v string)`
+
+SetUsmKafkaClusterId sets UsmKafkaClusterId field to given value.
+
+### HasUsmKafkaClusterId
+
+`func (o *UsmV1ConnectCluster) HasUsmKafkaClusterId() bool`
+
+HasUsmKafkaClusterId returns a boolean if a field has been set.
 
 ### GetCloud
 
