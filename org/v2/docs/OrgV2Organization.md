@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**ObjectMeta**](ObjectMeta.md) |  | [optional] 
 **DisplayName** | Pointer to **string** | A human-readable name for the Organization | [optional] 
 **JitEnabled** | Pointer to **bool** | The flag to toggle Just-In-Time user provisioning for SSO-enabled organization. Available for early access only. | [optional] 
-**ScimEnabled** | Pointer to **bool** | The flag to toggle SCIM user provisioning for an SSO-enabled organization. | [optional] 
-**ScimGroupEnabled** | Pointer to **bool** | The flag to toggle SCIM group provisioning for an SSO-enabled organization. | [optional] 
 
 ## Methods
 
@@ -181,56 +179,6 @@ SetJitEnabled sets JitEnabled field to given value.
 `func (o *OrgV2Organization) HasJitEnabled() bool`
 
 HasJitEnabled returns a boolean if a field has been set.
-
-### GetScimEnabled
-
-`func (o *OrgV2Organization) GetScimEnabled() bool`
-
-GetScimEnabled returns the ScimEnabled field if non-nil, zero value otherwise.
-
-### GetScimEnabledOk
-
-`func (o *OrgV2Organization) GetScimEnabledOk() (*bool, bool)`
-
-GetScimEnabledOk returns a tuple with the ScimEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetScimEnabled
-
-`func (o *OrgV2Organization) SetScimEnabled(v bool)`
-
-SetScimEnabled sets ScimEnabled field to given value.
-
-### HasScimEnabled
-
-`func (o *OrgV2Organization) HasScimEnabled() bool`
-
-HasScimEnabled returns a boolean if a field has been set.
-
-### GetScimGroupEnabled
-
-`func (o *OrgV2Organization) GetScimGroupEnabled() bool`
-
-GetScimGroupEnabled returns the ScimGroupEnabled field if non-nil, zero value otherwise.
-
-### GetScimGroupEnabledOk
-
-`func (o *OrgV2Organization) GetScimGroupEnabledOk() (*bool, bool)`
-
-GetScimGroupEnabledOk returns a tuple with the ScimGroupEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetScimGroupEnabled
-
-`func (o *OrgV2Organization) SetScimGroupEnabled(v bool)`
-
-SetScimGroupEnabled sets ScimGroupEnabled field to given value.
-
-### HasScimGroupEnabled
-
-`func (o *OrgV2Organization) HasScimGroupEnabled() bool`
-
-HasScimGroupEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
