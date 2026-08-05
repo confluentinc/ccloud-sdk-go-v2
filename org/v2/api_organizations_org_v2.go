@@ -42,15 +42,15 @@ var (
 type OrganizationsOrgV2Api interface {
 
 	/*
-		GetOrgV2Organization Read an Organization
+			GetOrgV2Organization Read an Organization
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to read an organization.
+		Make a request to read an organization.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the organization.
-		 @return ApiGetOrgV2OrganizationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the organization.
+			 @return ApiGetOrgV2OrganizationRequest
 	*/
 	GetOrgV2Organization(ctx _context.Context, id string) ApiGetOrgV2OrganizationRequest
 
@@ -59,14 +59,14 @@ type OrganizationsOrgV2Api interface {
 	GetOrgV2OrganizationExecute(r ApiGetOrgV2OrganizationRequest) (OrgV2Organization, *_nethttp.Response, error)
 
 	/*
-		ListOrgV2Organizations List of Organizations
+			ListOrgV2Organizations List of Organizations
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Retrieve a sorted, filtered, paginated list of all organizations.
+		Retrieve a sorted, filtered, paginated list of all organizations.
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListOrgV2OrganizationsRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListOrgV2OrganizationsRequest
 	*/
 	ListOrgV2Organizations(ctx _context.Context) ApiListOrgV2OrganizationsRequest
 
@@ -75,17 +75,17 @@ type OrganizationsOrgV2Api interface {
 	ListOrgV2OrganizationsExecute(r ApiListOrgV2OrganizationsRequest) (OrgV2OrganizationList, *_nethttp.Response, error)
 
 	/*
-		UpdateOrgV2Organization Update an Organization
+			UpdateOrgV2Organization Update an Organization
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-	Make a request to update an organization.
+		Make a request to update an organization.
 
 
 
-		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the organization.
-		 @return ApiUpdateOrgV2OrganizationRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the organization.
+			 @return ApiUpdateOrgV2OrganizationRequest
 	*/
 	UpdateOrgV2Organization(ctx _context.Context, id string) ApiUpdateOrgV2OrganizationRequest
 
