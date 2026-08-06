@@ -11,6 +11,14 @@ semaphore:
   branches:
     - master
     - /^v\d+\.\d+\.\d+$/
+  tasks:
+    - name: Manual publish tag
+      branch: git-tag
+      pipeline_file: ".semaphore/git-tag.yml"
+      parameters:
+        - name: TAG
+          required: true
+          description: "Tag version to create (e.g., flink-gateway/v0.32.0)"
 make:
   enable: true
   enable_updates: true
