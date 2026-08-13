@@ -256,6 +256,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Describe:TableflowRegion
       summary: List of Regions
       tags:
       - Regions (tableflow/v1)
@@ -595,6 +598,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Describe:TableflowTopic
       summary: List of Tableflow Topics
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -979,6 +985,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - AlterTableflowConfigs:Topic
       summary: Create a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -989,13 +998,13 @@ paths:
             --url https://api.confluent.cloud/tableflow/v1/tableflow-topics \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","data_retention_ms":"2592000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"}},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"lkc-00000","environment":"string"}}}'
+            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","data_retention_ms":"2592000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"},"metadata_column_naming_scheme":"DEFAULT"},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"lkc-00000","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics")
             .post(body)
@@ -1011,12 +1020,13 @@ paths:
           :\\\"topic_1\\\",\\\"suspended\\\":false,\\\"config\\\":{\\\"retention_ms\\\
           \":\\\"7776000000\\\",\\\"data_retention_ms\\\":\\\"2592000000\\\",\\\"\
           record_failure_strategy\\\":\\\"SUSPEND\\\",\\\"error_handling\\\":{\\\"\
-          mode\\\":\\\"SUSPEND\\\"}},\\\"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\"\
-          ,\\\"bucket_name\\\":\\\"bucket_1\\\",\\\"provider_integration_id\\\":\\\
-          \"cspi-stgce89r7\\\"},\\\"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\
-          \":{\\\"id\\\":\\\"env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"\
-          lkc-00000\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          mode\\\":\\\"SUSPEND\\\"},\\\"metadata_column_naming_scheme\\\":\\\"DEFAULT\\\
+          \"},\\\"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\
+          \"bucket_1\\\",\\\"provider_integration_id\\\":\\\"cspi-stgce89r7\\\"},\\\
+          \"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\":{\\\"id\\\":\\\"\
+          env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"lkc-00000\\\",\\\"\
+          environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
           )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
           \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
           \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
@@ -1027,7 +1037,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -1076,7 +1086,8 @@ paths:
                 retention_ms: '7776000000',
                 data_retention_ms: '2592000000',
                 record_failure_strategy: 'SUSPEND',
-                error_handling: {mode: 'SUSPEND'}
+                error_handling: {mode: 'SUSPEND'},
+                metadata_column_naming_scheme: 'DEFAULT'
               },
               storage: {
                 kind: 'ByobAws',
@@ -1101,7 +1112,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -1110,7 +1121,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"lkc-00000\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /tableflow/v1/tableflow-topics/{display_name}:
     delete:
@@ -1334,6 +1345,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - AlterTableflowConfigs:Topic
       summary: Delete a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -1676,6 +1690,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - DescribeTableflowConfigs:Topic
       summary: Read a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -2072,6 +2089,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - AlterTableflowConfigs:Topic
       summary: Update a Tableflow Topic
       tags:
       - Tableflow Topics (tableflow/v1)
@@ -2082,13 +2102,13 @@ paths:
             --url 'https://api.confluent.cloud/tableflow/v1/tableflow-topics/{display_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","data_retention_ms":"2592000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"}},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"string","environment":"string"}}}'
+            --data '{"spec":{"display_name":"topic_1","suspended":false,"config":{"retention_ms":"7776000000","data_retention_ms":"2592000000","record_failure_strategy":"SUSPEND","error_handling":{"mode":"SUSPEND"},"metadata_column_naming_scheme":"DEFAULT"},"storage":{"kind":"ByobAws","bucket_name":"bucket_1","provider_integration_id":"cspi-stgce89r7"},"table_formats":["DELTA"],"environment":{"id":"env-00000"},"kafka_cluster":{"id":"string","environment":"string"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/tableflow/v1/tableflow-topics/{display_name}")
             .patch(body)
@@ -2104,23 +2124,23 @@ paths:
           :\\\"topic_1\\\",\\\"suspended\\\":false,\\\"config\\\":{\\\"retention_ms\\\
           \":\\\"7776000000\\\",\\\"data_retention_ms\\\":\\\"2592000000\\\",\\\"\
           record_failure_strategy\\\":\\\"SUSPEND\\\",\\\"error_handling\\\":{\\\"\
-          mode\\\":\\\"SUSPEND\\\"}},\\\"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\"\
-          ,\\\"bucket_name\\\":\\\"bucket_1\\\",\\\"provider_integration_id\\\":\\\
-          \"cspi-stgce89r7\\\"},\\\"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\
-          \":{\\\"id\\\":\\\"env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"\
-          string\\\",\\\"environment\\\":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"\
-          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
-          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
-          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
-          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
-          \n}"
+          mode\\\":\\\"SUSPEND\\\"},\\\"metadata_column_naming_scheme\\\":\\\"DEFAULT\\\
+          \"},\\\"storage\\\":{\\\"kind\\\":\\\"ByobAws\\\",\\\"bucket_name\\\":\\\
+          \"bucket_1\\\",\\\"provider_integration_id\\\":\\\"cspi-stgce89r7\\\"},\\\
+          \"table_formats\\\":[\\\"DELTA\\\"],\\\"environment\\\":{\\\"id\\\":\\\"\
+          env-00000\\\"},\\\"kafka_cluster\\\":{\\\"id\\\":\\\"string\\\",\\\"environment\\\
+          \":\\\"string\\\"}}}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
+          payload = "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -2169,7 +2189,8 @@ paths:
                 retention_ms: '7776000000',
                 data_retention_ms: '2592000000',
                 record_failure_strategy: 'SUSPEND',
-                error_handling: {mode: 'SUSPEND'}
+                error_handling: {mode: 'SUSPEND'},
+                metadata_column_naming_scheme: 'DEFAULT'
               },
               storage: {
                 kind: 'ByobAws',
@@ -2194,7 +2215,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -2203,7 +2224,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"}},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"topic_1\",\"suspended\":false,\"config\":{\"retention_ms\":\"7776000000\",\"data_retention_ms\":\"2592000000\",\"record_failure_strategy\":\"SUSPEND\",\"error_handling\":{\"mode\":\"SUSPEND\"},\"metadata_column_naming_scheme\":\"DEFAULT\"},\"storage\":{\"kind\":\"ByobAws\",\"bucket_name\":\"bucket_1\",\"provider_integration_id\":\"cspi-stgce89r7\"},\"table_formats\":[\"DELTA\"],\"environment\":{\"id\":\"env-00000\"},\"kafka_cluster\":{\"id\":\"string\",\"environment\":\"string\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /tableflow/v1/catalog-integrations:
     get:
@@ -2445,6 +2466,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Describe:CatalogIntegration
       summary: List of Catalog Integrations
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -2828,6 +2852,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Create:TableflowCatalogIntegration
       summary: Create a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3173,6 +3200,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Delete:TableflowCatalogIntegration
       summary: Delete a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3515,6 +3545,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Describe:TableflowCatalogIntegration
       summary: Read a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -3898,6 +3931,9 @@ paths:
               style: simple
       security:
       - resource-api-key: []
+      - global-api-key: []
+      - confluent_auth:
+        - Alter:TableflowCatalogIntegration
       summary: Update a Catalog Integration
       tags:
       - Catalog Integrations (tableflow/v1)
@@ -4377,8 +4413,9 @@ components:
           readOnly: true
           type: array
         write_mode:
+          deprecated: true
           description: |
-            The write mode for the Tableflow-enabled topic, determining how data is written to the table.
+            The write mode for the Tableflow-enabled topic, determining how data is written to the table. Deprecated
           example: APPEND
           readOnly: true
           type: string
@@ -4470,15 +4507,17 @@ components:
       description: The configs for the Tableflow enabled topic
       properties:
         enable_compaction:
+          deprecated: true
           description: This flag determines whether to enable compaction for the Tableflow
-            enabled topic.
+            enabled topic. Deprecated
           example: true
           readOnly: true
           type: boolean
           x-immutable: true
         enable_partitioning:
+          deprecated: true
           description: This flag determines whether to enable partitioning for the
-            Tableflow enabled topic.
+            Tableflow enabled topic. Deprecated
           example: true
           readOnly: true
           type: boolean
@@ -4498,7 +4537,11 @@ components:
           description: |
             The maximum age, in milliseconds, of data to retain in the table for the Tableflow-enabled topic.
 
-            The minimum allowed value is "2592000000" milliseconds (equivalent to 30 days).
+            The minimum allowed non-zero value is "2592000000" milliseconds (equivalent to 30 days).
+
+            Set to "0" to disable data retention (keep all data indefinitely).
+
+            Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
           example: "2592000000"
           format: int64
           type: string
@@ -4650,6 +4693,43 @@ components:
       - provider_integration_id
       - storage_account_name
       type: object
+    tableflow.v1.GoogleCloudStorageSpec:
+      description: The Tableflow storage config for customer-owned Google Cloud Storage
+      properties:
+        kind:
+          description: |
+            The storage type.
+          enum:
+          - GoogleCloudStorage
+          type: string
+          x-immutable: true
+        bucket_name:
+          description: Bucket name
+          example: my-gcs-bucket
+          type: string
+          x-immutable: true
+        bucket_region:
+          description: Bucket region
+          example: us-central1
+          readOnly: true
+          type: string
+          x-immutable: true
+        provider_integration_id:
+          description: The provider integration id
+          example: cspi-stgce89r7
+          type: string
+          x-immutable: true
+        table_path:
+          description: The current storage path where the data and metadata is stored
+            for this table
+          example: gs://my-gcs-bucket/10011010/11101100/org-1/env-2/lkc-3/v1/tableId
+          readOnly: true
+          type: string
+      required:
+      - bucket_name
+      - kind
+      - provider_integration_id
+      type: object
     tableflow.v1.CatalogIntegrationAwsGlueSpec:
       description: The catalog integration Glue connection config.
       properties:
@@ -4668,6 +4748,39 @@ components:
           description: The custom database name to use in AWS Glue.
           type: string
       required:
+      - kind
+      - provider_integration_id
+      type: object
+    tableflow.v1.CatalogIntegrationBigLakeMetastoreSpec:
+      description: The catalog integration connection config for BigLake Metastore.
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - BigLakeMetastore
+          type: string
+          x-immutable: true
+        provider_integration_id:
+          description: The provider integration id.
+          example: cspi-stgce89r7
+          type: string
+          x-immutable: true
+        gcp_project_id:
+          description: The GCP project id that hosts the BigLake Metastore catalog.
+          example: my-gcp-project
+          type: string
+          x-immutable: true
+        catalog_name:
+          description: The name of the catalog within BigLake Metastore.
+          example: my_biglake_catalog
+          type: string
+          x-immutable: true
+        custom_namespace:
+          description: The custom namespace to use in BigLake Metastore.
+          type: string
+      required:
+      - catalog_name
+      - gcp_project_id
       - kind
       - provider_integration_id
       type: object
@@ -4786,6 +4899,22 @@ components:
       required:
       - kind
       type: object
+    tableflow.v1.CatalogIntegrationBigLakeMetastoreUpdateSpec:
+      description: The catalog integration connection config for BigLake Metastore
+        (update operations).
+      properties:
+        kind:
+          description: The type of the catalog integration.
+          enum:
+          - BigLakeMetastore
+          type: string
+          x-immutable: true
+        custom_namespace:
+          description: The custom namespace to use in BigLake Metastore.
+          type: string
+      required:
+      - kind
+      type: object
     tableflow.v1.CatalogIntegrationUnityUpdateSpec:
       description: The catalog integration connection config for Unity Catalog.
       properties:
@@ -4870,11 +4999,13 @@ components:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
               Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
+              BigLakeMetastore: '#/components/schemas/tableflow.v1.CatalogIntegrationBigLakeMetastoreUpdateSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueUpdateSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeUpdateSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnityUpdateSpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationBigLakeMetastoreUpdateSpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
         environment:
@@ -4965,6 +5096,7 @@ components:
           - AWS_GLUE
           - SNOWFLAKE
           - UNITY
+          - BIG_LAKE_METASTORE
         sync_status:
           description: |
             The current synchronization status:
@@ -5138,11 +5270,13 @@ components:
               ByobAws: '#/components/schemas/tableflow.v1.ByobAwsSpec'
               Managed: '#/components/schemas/tableflow.v1.ManagedStorageSpec'
               AzureDataLakeStorageGen2: '#/components/schemas/tableflow.v1.AzureAdlsSpec'
+              GoogleCloudStorage: '#/components/schemas/tableflow.v1.GoogleCloudStorageSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.ByobAwsSpec'
           - $ref: '#/components/schemas/tableflow.v1.ManagedStorageSpec'
           - $ref: '#/components/schemas/tableflow.v1.AzureAdlsSpec'
+          - $ref: '#/components/schemas/tableflow.v1.GoogleCloudStorageSpec'
           type: object
           x-immutable: true
           x-one-of-name: TableflowV1TableflowTopicSpecStorageOneOf
@@ -5254,11 +5388,13 @@ components:
               AwsGlue: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
               Snowflake: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
               Unity: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
+              BigLakeMetastore: '#/components/schemas/tableflow.v1.CatalogIntegrationBigLakeMetastoreSpec'
             propertyName: kind
           oneOf:
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationAwsGlueSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationSnowflakeSpec'
           - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationUnitySpec'
+          - $ref: '#/components/schemas/tableflow.v1.CatalogIntegrationBigLakeMetastoreSpec'
           type: object
           x-one-of-name: TableflowV1CatalogIntegrationSpecConfigOneOf
         environment:
@@ -5606,3 +5742,33 @@ components:
         API Key Secret as the password.
       scheme: basic
       type: http
+    global-api-key:
+      description: Authenticate with Global API Keys using HTTP Basic Auth. Treat
+        the Global API Key ID as the username and Global API Key Secret as the password.
+      scheme: basic
+      type: http
+    confluent_auth:
+      description: RBAC permissions required for this endpoint
+      flows:
+        implicit:
+          authorizationUrl: https://confluent.cloud/oauth
+          scopes:
+            Alter:TableflowCatalogIntegration: Alter permission on TableflowCatalogIntegration
+              resource type
+            AlterTableflowConfigs:Topic: AlterTableflowConfigs permission on Topic
+              resource type
+            Create:TableflowCatalogIntegration: Create permission on TableflowCatalogIntegration
+              resource type
+            Delete:TableflowCatalogIntegration: Delete permission on TableflowCatalogIntegration
+              resource type
+            Describe:CatalogIntegration: Describe permission on CatalogIntegration
+              resource type
+            Describe:TableflowCatalogIntegration: Describe permission on TableflowCatalogIntegration
+              resource type
+            Describe:TableflowRegion: Describe permission on TableflowRegion resource
+              type
+            Describe:TableflowTopic: Describe permission on TableflowTopic resource
+              type
+            DescribeTableflowConfigs:Topic: DescribeTableflowConfigs permission on
+              Topic resource type
+      type: oauth2

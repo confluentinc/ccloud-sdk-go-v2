@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[resource-api-key](../README.md#resource-api-key)
+[confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key), [resource-api-key](../README.md#resource-api-key)
 
 ### HTTP request headers
 
