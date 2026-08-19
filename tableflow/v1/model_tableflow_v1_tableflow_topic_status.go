@@ -44,7 +44,8 @@ type TableflowV1TableflowTopicStatus struct {
 	CatalogSyncStatuses *[]TableflowV1CatalogSyncStatus `json:"catalog_sync_statuses,omitempty"`
 	// List of failing table formats for the Tableflow-enabled topic, including error details.
 	FailingTableFormats *[]TableflowV1TableflowTopicStatusFailingTableFormats `json:"failing_table_formats,omitempty"`
-	// The write mode for the Tableflow-enabled topic, determining how data is written to the table.
+	// The write mode for the Tableflow-enabled topic, determining how data is written to the table. Deprecated
+	// Deprecated
 	WriteMode string `json:"write_mode,omitempty"`
 }
 
@@ -195,6 +196,7 @@ func (o *TableflowV1TableflowTopicStatus) SetFailingTableFormats(v []TableflowV1
 }
 
 // GetWriteMode returns the WriteMode field value
+// Deprecated
 func (o *TableflowV1TableflowTopicStatus) GetWriteMode() string {
 	if o == nil {
 		var ret string
@@ -206,6 +208,7 @@ func (o *TableflowV1TableflowTopicStatus) GetWriteMode() string {
 
 // GetWriteModeOk returns a tuple with the WriteMode field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *TableflowV1TableflowTopicStatus) GetWriteModeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -214,6 +217,7 @@ func (o *TableflowV1TableflowTopicStatus) GetWriteModeOk() (*string, bool) {
 }
 
 // SetWriteMode sets field value
+// Deprecated
 func (o *TableflowV1TableflowTopicStatus) SetWriteMode(v string) {
 	o.WriteMode = v
 }

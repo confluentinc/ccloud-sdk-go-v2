@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
  - [TableflowV1CatalogIntegration](docs/TableflowV1CatalogIntegration.md)
  - [TableflowV1CatalogIntegrationAwsGlueSpec](docs/TableflowV1CatalogIntegrationAwsGlueSpec.md)
  - [TableflowV1CatalogIntegrationAwsGlueUpdateSpec](docs/TableflowV1CatalogIntegrationAwsGlueUpdateSpec.md)
+ - [TableflowV1CatalogIntegrationBigLakeMetastoreSpec](docs/TableflowV1CatalogIntegrationBigLakeMetastoreSpec.md)
+ - [TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec](docs/TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec.md)
  - [TableflowV1CatalogIntegrationList](docs/TableflowV1CatalogIntegrationList.md)
  - [TableflowV1CatalogIntegrationSnowflakeSpec](docs/TableflowV1CatalogIntegrationSnowflakeSpec.md)
  - [TableflowV1CatalogIntegrationSnowflakeUpdateSpec](docs/TableflowV1CatalogIntegrationSnowflakeUpdateSpec.md)
@@ -123,6 +125,7 @@ Class | Method | HTTP request | Description
  - [TableflowV1ErrorHandlingLog](docs/TableflowV1ErrorHandlingLog.md)
  - [TableflowV1ErrorHandlingSkip](docs/TableflowV1ErrorHandlingSkip.md)
  - [TableflowV1ErrorHandlingSuspend](docs/TableflowV1ErrorHandlingSuspend.md)
+ - [TableflowV1GoogleCloudStorageSpec](docs/TableflowV1GoogleCloudStorageSpec.md)
  - [TableflowV1ManagedStorageSpec](docs/TableflowV1ManagedStorageSpec.md)
  - [TableflowV1Region](docs/TableflowV1Region.md)
  - [TableflowV1RegionList](docs/TableflowV1RegionList.md)
@@ -140,6 +143,58 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
+
+
+### confluent_auth
+
+
+- **Type**: OAuth
+- **Flow**: implicit
+- **Authorization URL**: https://confluent.cloud/oauth
+- **Scopes**: 
+ - **Alter:TableflowCatalogIntegration**: Alter permission on TableflowCatalogIntegration resource type
+ - **AlterTableflowConfigs:Topic**: AlterTableflowConfigs permission on Topic resource type
+ - **Create:TableflowCatalogIntegration**: Create permission on TableflowCatalogIntegration resource type
+ - **Delete:TableflowCatalogIntegration**: Delete permission on TableflowCatalogIntegration resource type
+ - **Describe:CatalogIntegration**: Describe permission on CatalogIntegration resource type
+ - **Describe:TableflowCatalogIntegration**: Describe permission on TableflowCatalogIntegration resource type
+ - **Describe:TableflowRegion**: Describe permission on TableflowRegion resource type
+ - **Describe:TableflowTopic**: Describe permission on TableflowTopic resource type
+ - **DescribeTableflowConfigs:Topic**: DescribeTableflowConfigs permission on Topic resource type
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### global-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ### resource-api-key

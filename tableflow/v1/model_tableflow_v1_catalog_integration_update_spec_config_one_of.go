@@ -33,14 +33,20 @@ import (
 
 // TableflowV1CatalogIntegrationUpdateSpecConfigOneOf - struct for TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
 type TableflowV1CatalogIntegrationUpdateSpecConfigOneOf struct {
-	TableflowV1CatalogIntegrationAwsGlueUpdateSpec   *TableflowV1CatalogIntegrationAwsGlueUpdateSpec
-	TableflowV1CatalogIntegrationSnowflakeUpdateSpec *TableflowV1CatalogIntegrationSnowflakeUpdateSpec
-	TableflowV1CatalogIntegrationUnityUpdateSpec     *TableflowV1CatalogIntegrationUnityUpdateSpec
+	TableflowV1CatalogIntegrationAwsGlueUpdateSpec          *TableflowV1CatalogIntegrationAwsGlueUpdateSpec
+	TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec *TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec
+	TableflowV1CatalogIntegrationSnowflakeUpdateSpec        *TableflowV1CatalogIntegrationSnowflakeUpdateSpec
+	TableflowV1CatalogIntegrationUnityUpdateSpec            *TableflowV1CatalogIntegrationUnityUpdateSpec
 }
 
 // TableflowV1CatalogIntegrationAwsGlueUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationAwsGlueUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
 func TableflowV1CatalogIntegrationAwsGlueUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf(v *TableflowV1CatalogIntegrationAwsGlueUpdateSpec) TableflowV1CatalogIntegrationUpdateSpecConfigOneOf {
 	return TableflowV1CatalogIntegrationUpdateSpecConfigOneOf{TableflowV1CatalogIntegrationAwsGlueUpdateSpec: v}
+}
+
+// TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
+func TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf(v *TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec) TableflowV1CatalogIntegrationUpdateSpecConfigOneOf {
+	return TableflowV1CatalogIntegrationUpdateSpecConfigOneOf{TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec: v}
 }
 
 // TableflowV1CatalogIntegrationSnowflakeUpdateSpecAsTableflowV1CatalogIntegrationUpdateSpecConfigOneOf is a convenience function that returns TableflowV1CatalogIntegrationSnowflakeUpdateSpec wrapped in TableflowV1CatalogIntegrationUpdateSpecConfigOneOf
@@ -72,6 +78,18 @@ func (dst *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) UnmarshalJSON(dat
 		} else {
 			dst.TableflowV1CatalogIntegrationAwsGlueUpdateSpec = nil
 			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationAwsGlueUpdateSpec: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'BigLakeMetastore'
+	if jsonDict["kind"] == "BigLakeMetastore" {
+		// try to unmarshal JSON data into TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec
+		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec, return on the first match
+		} else {
+			dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec: %s", err.Error())
 		}
 	}
 
@@ -108,6 +126,18 @@ func (dst *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) UnmarshalJSON(dat
 		} else {
 			dst.TableflowV1CatalogIntegrationAwsGlueUpdateSpec = nil
 			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationAwsGlueUpdateSpec: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'tableflow.v1.CatalogIntegrationBigLakeMetastoreUpdateSpec'
+	if jsonDict["kind"] == "tableflow.v1.CatalogIntegrationBigLakeMetastoreUpdateSpec" {
+		// try to unmarshal JSON data into TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec
+		err = json.Unmarshal(data, &dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec, return on the first match
+		} else {
+			dst.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1CatalogIntegrationUpdateSpecConfigOneOf as TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec: %s", err.Error())
 		}
 	}
 
@@ -148,6 +178,14 @@ func (src TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) MarshalJSON() ([]b
 		return buffer.Bytes(), err
 	}
 
+	if src.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec)
+		return buffer.Bytes(), err
+	}
+
 	if src.TableflowV1CatalogIntegrationSnowflakeUpdateSpec != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -171,6 +209,10 @@ func (src TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) MarshalJSON() ([]b
 func (obj *TableflowV1CatalogIntegrationUpdateSpecConfigOneOf) GetActualInstance() interface{} {
 	if obj.TableflowV1CatalogIntegrationAwsGlueUpdateSpec != nil {
 		return obj.TableflowV1CatalogIntegrationAwsGlueUpdateSpec
+	}
+
+	if obj.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec != nil {
+		return obj.TableflowV1CatalogIntegrationBigLakeMetastoreUpdateSpec
 	}
 
 	if obj.TableflowV1CatalogIntegrationSnowflakeUpdateSpec != nil {

@@ -33,9 +33,10 @@ import (
 
 // TableflowV1TableflowTopicSpecStorageOneOf - struct for TableflowV1TableflowTopicSpecStorageOneOf
 type TableflowV1TableflowTopicSpecStorageOneOf struct {
-	TableflowV1AzureAdlsSpec      *TableflowV1AzureAdlsSpec
-	TableflowV1ByobAwsSpec        *TableflowV1ByobAwsSpec
-	TableflowV1ManagedStorageSpec *TableflowV1ManagedStorageSpec
+	TableflowV1AzureAdlsSpec          *TableflowV1AzureAdlsSpec
+	TableflowV1ByobAwsSpec            *TableflowV1ByobAwsSpec
+	TableflowV1GoogleCloudStorageSpec *TableflowV1GoogleCloudStorageSpec
+	TableflowV1ManagedStorageSpec     *TableflowV1ManagedStorageSpec
 }
 
 // TableflowV1AzureAdlsSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1AzureAdlsSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
@@ -46,6 +47,11 @@ func TableflowV1AzureAdlsSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *Tabl
 // TableflowV1ByobAwsSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1ByobAwsSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
 func TableflowV1ByobAwsSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *TableflowV1ByobAwsSpec) TableflowV1TableflowTopicSpecStorageOneOf {
 	return TableflowV1TableflowTopicSpecStorageOneOf{TableflowV1ByobAwsSpec: v}
+}
+
+// TableflowV1GoogleCloudStorageSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1GoogleCloudStorageSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
+func TableflowV1GoogleCloudStorageSpecAsTableflowV1TableflowTopicSpecStorageOneOf(v *TableflowV1GoogleCloudStorageSpec) TableflowV1TableflowTopicSpecStorageOneOf {
+	return TableflowV1TableflowTopicSpecStorageOneOf{TableflowV1GoogleCloudStorageSpec: v}
 }
 
 // TableflowV1ManagedStorageSpecAsTableflowV1TableflowTopicSpecStorageOneOf is a convenience function that returns TableflowV1ManagedStorageSpec wrapped in TableflowV1TableflowTopicSpecStorageOneOf
@@ -87,6 +93,18 @@ func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte)
 		}
 	}
 
+	// check if the discriminator value is 'GoogleCloudStorage'
+	if jsonDict["kind"] == "GoogleCloudStorage" {
+		// try to unmarshal JSON data into TableflowV1GoogleCloudStorageSpec
+		err = json.Unmarshal(data, &dst.TableflowV1GoogleCloudStorageSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1GoogleCloudStorageSpec, return on the first match
+		} else {
+			dst.TableflowV1GoogleCloudStorageSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1TableflowTopicSpecStorageOneOf as TableflowV1GoogleCloudStorageSpec: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'Managed'
 	if jsonDict["kind"] == "Managed" {
 		// try to unmarshal JSON data into TableflowV1ManagedStorageSpec
@@ -123,6 +141,18 @@ func (dst *TableflowV1TableflowTopicSpecStorageOneOf) UnmarshalJSON(data []byte)
 		}
 	}
 
+	// check if the discriminator value is 'tableflow.v1.GoogleCloudStorageSpec'
+	if jsonDict["kind"] == "tableflow.v1.GoogleCloudStorageSpec" {
+		// try to unmarshal JSON data into TableflowV1GoogleCloudStorageSpec
+		err = json.Unmarshal(data, &dst.TableflowV1GoogleCloudStorageSpec)
+		if err == nil {
+			return nil // data stored in dst.TableflowV1GoogleCloudStorageSpec, return on the first match
+		} else {
+			dst.TableflowV1GoogleCloudStorageSpec = nil
+			return fmt.Errorf("Failed to unmarshal TableflowV1TableflowTopicSpecStorageOneOf as TableflowV1GoogleCloudStorageSpec: %s", err.Error())
+		}
+	}
+
 	// check if the discriminator value is 'tableflow.v1.ManagedStorageSpec'
 	if jsonDict["kind"] == "tableflow.v1.ManagedStorageSpec" {
 		// try to unmarshal JSON data into TableflowV1ManagedStorageSpec
@@ -156,6 +186,14 @@ func (src TableflowV1TableflowTopicSpecStorageOneOf) MarshalJSON() ([]byte, erro
 		return buffer.Bytes(), err
 	}
 
+	if src.TableflowV1GoogleCloudStorageSpec != nil {
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(&src.TableflowV1GoogleCloudStorageSpec)
+		return buffer.Bytes(), err
+	}
+
 	if src.TableflowV1ManagedStorageSpec != nil {
 		buffer := &bytes.Buffer{}
 		encoder := json.NewEncoder(buffer)
@@ -175,6 +213,10 @@ func (obj *TableflowV1TableflowTopicSpecStorageOneOf) GetActualInstance() interf
 
 	if obj.TableflowV1ByobAwsSpec != nil {
 		return obj.TableflowV1ByobAwsSpec
+	}
+
+	if obj.TableflowV1GoogleCloudStorageSpec != nil {
+		return obj.TableflowV1GoogleCloudStorageSpec
 	}
 
 	if obj.TableflowV1ManagedStorageSpec != nil {
