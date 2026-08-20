@@ -49,7 +49,7 @@ type TableflowV1TableFlowTopicConfigsSpec struct {
 	RecordFailureStrategy *string `json:"record_failure_strategy,omitempty"`
 	// The error mode to handle record failures in the Tableflow enabled topic during materialization.  for `SKIP`, we skip the bad records and move to the next record,  for `SUSPEND`, we suspend the materialization of the topic,  and for `LOG`, we log the bad records to the DLQ and continue processing the rest of the records.
 	ErrorHandling *TableflowV1TableFlowTopicConfigsSpecErrorHandlingOneOf `json:"error_handling,omitempty"`
-	// The naming scheme for Tableflow's internal metadata columns (for example `$$offset` and `$$leader-epoch`) in the materialized table.  For `DEFAULT`, the metadata columns keep their default `$$`-prefixed names (for example `$$offset` and `$$leader-epoch`).  For `PORTABLE`, the metadata columns use portable `cflt_metadata_`-prefixed names that are queryable by engines such as Google BigQuery, with any hyphens replaced by underscores (for example `$$offset` becomes `cflt_metadata_offset` and `$$leader-epoch` becomes `cflt_metadata_leader_epoch`).  If not specified, `DEFAULT` is used.
+	// The naming scheme for Tableflow's internal metadata columns (for example `$$offset` and `$$leader-epoch`) in the materialized table.  For `DEFAULT`, the metadata columns keep their default `$$`-prefixed names (for example `$$offset` and `$$leader-epoch`).  For `PORTABLE`, the metadata columns use portable `cflt_metadata_`-prefixed names that are queryable by engines such as Google BigQuery, with any hyphens replaced by underscores (for example `$$offset` becomes `cflt_metadata_offset` and `$$leader-epoch` becomes `cflt_metadata_leader_epoch`).  If not specified, the default is assigned by the server based on the target cloud: `PORTABLE` for Google Cloud, and `DEFAULT` for AWS and Azure.
 	MetadataColumnNamingScheme *string `json:"metadata_column_naming_scheme,omitempty"`
 }
 
@@ -61,8 +61,6 @@ func NewTableflowV1TableFlowTopicConfigsSpec() *TableflowV1TableFlowTopicConfigs
 	this := TableflowV1TableFlowTopicConfigsSpec{}
 	var recordFailureStrategy string = "SUSPEND"
 	this.RecordFailureStrategy = &recordFailureStrategy
-	var metadataColumnNamingScheme string = "DEFAULT"
-	this.MetadataColumnNamingScheme = &metadataColumnNamingScheme
 	return &this
 }
 
@@ -73,8 +71,6 @@ func NewTableflowV1TableFlowTopicConfigsSpecWithDefaults() *TableflowV1TableFlow
 	this := TableflowV1TableFlowTopicConfigsSpec{}
 	var recordFailureStrategy string = "SUSPEND"
 	this.RecordFailureStrategy = &recordFailureStrategy
-	var metadataColumnNamingScheme string = "DEFAULT"
-	this.MetadataColumnNamingScheme = &metadataColumnNamingScheme
 	return &this
 }
 
