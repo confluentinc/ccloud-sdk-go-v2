@@ -4544,7 +4544,7 @@ components:
 
             For `PORTABLE`, the metadata columns use portable `cflt_metadata_`-prefixed names that are queryable by engines such as Google BigQuery, with any hyphens replaced by underscores (for example `$$offset` becomes `cflt_metadata_offset` and `$$leader-epoch` becomes `cflt_metadata_leader_epoch`).
 
-            If not specified, the default is assigned by the server based on the target cloud: `PORTABLE` for Google Cloud, and `DEFAULT` for AWS and Azure.
+            If not specified, the default is based on the target cloud: `PORTABLE` for Google Cloud, and `DEFAULT` for AWS and Azure.
           type: string
           x-extensible-enum:
           - DEFAULT
