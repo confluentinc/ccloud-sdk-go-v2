@@ -1,0 +1,1001 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: api-team@confluent.io
+    name: API Team
+    url: https://confluent.slack.com/app_redirect?channel=api-eng
+  description: API to collect data on Confluent Terraform Provider resource operations
+    run against Confluent Cloud
+  title: Terraform Usage API
+  version: 0.0.1
+  x-api-group: terraform-usage/v1
+  x-api-id: 6290f335-38a8-4993-86da-fab52fc71e08
+  x-audience: component-internal
+  x-tag-group: Terraform Usage API (%s)
+servers:
+- description: Confluent Cloud production
+  url: https://api.confluent.cloud
+- description: Confluent Cloud staging
+  url: https://api.stag.cpdev.cloud
+- description: Confluent Cloud development
+  url: https://api.devel.cpdev.cloud
+tags:
+- description: |-
+    [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+    `Usage` objects represent a single Confluent Terraform Provider resource operation that was run against
+    Confluent Cloud.
+    The API creates usage objects that are collected for Terraform Provider analytics.
+
+    Every attribute is metadata describing the operation itself. No attribute is defined to carry Terraform
+    configuration values, resource attribute values, or map keys or values. `resource_type` and the elements of
+    `changed_attributes` are further constrained by pattern to flat identifiers, which rejects Terraform
+    resource addresses, dotted map keys, and configuration bodies.
+
+
+    ## The Usages Model
+    <SchemaDefinition schemaRef="#/components/schemas/terraform-usage.v1.Usage" />
+  name: Usages (terraform-usage/v1)
+paths:
+  /terraform-usage/v1/usages:
+    post:
+      description: |-
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to create a usage.
+      operationId: createTerraformUsageV1Usage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/terraform-usage.v1.Usage'
+              - required:
+                - arch
+                - changed_attributes
+                - duration_ms
+                - error
+                - operation
+                - os
+                - provider_version
+                - resource_type
+                - run_id
+                - sequence
+                - started_at
+                - terraform_version
+                type: object
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - confluent-sts-access-token: []
+      - confluent_auth:
+        - None
+      summary: Create a Usage
+      tags:
+      - Usages (terraform-usage/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.confluent.cloud/terraform-usage/v1/usages \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"run_id":"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21","sequence":7,"started_at":"2026-08-14T18:04:05Z","duration_ms":1543,"os":"darwin","arch":"amd64","provider_version":"2.82.3","terraform_version":"1.14.4","resource_type":"confluent_kafka_topic","operation":"CREATE","changed_attributes":["topic_name","partitions_count"],"error":true,"stack_frames":["/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884","github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88"]}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/terraform-usage/v1/usages")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/terraform-usage/v1/usages\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"run_id\\\":\\\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\\\
+          \",\\\"sequence\\\":7,\\\"started_at\\\":\\\"2026-08-14T18:04:05Z\\\",\\\
+          \"duration_ms\\\":1543,\\\"os\\\":\\\"darwin\\\",\\\"arch\\\":\\\"amd64\\\
+          \",\\\"provider_version\\\":\\\"2.82.3\\\",\\\"terraform_version\\\":\\\"\
+          1.14.4\\\",\\\"resource_type\\\":\\\"confluent_kafka_topic\\\",\\\"operation\\\
+          \":\\\"CREATE\\\",\\\"changed_attributes\\\":[\\\"topic_name\\\",\\\"partitions_count\\\
+          \"],\\\"error\\\":true,\\\"stack_frames\\\":[\\\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\\\
+          \",\\\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\\\
+          \"]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "/terraform-usage/v1/usages", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/terraform-usage/v1/usages",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            run_id: '7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21',
+            sequence: 7,
+            started_at: '2026-08-14T18:04:05Z',
+            duration_ms: 1543,
+            os: 'darwin',
+            arch: 'amd64',
+            provider_version: '2.82.3',
+            terraform_version: '1.14.4',
+            resource_type: 'confluent_kafka_topic',
+            operation: 'CREATE',
+            changed_attributes: ['topic_name', 'partitions_count'],
+            error: true,
+            stack_frames: [
+              '/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884',
+              'github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88'
+            ]
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/terraform-usage/v1/usages");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/terraform-usage/v1/usages");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+components:
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "400"
+              code: invalid_filter
+              title: Invalid Filter
+              detail: The 'delorean' resource can't be filtered by 'num_doors'
+              source:
+                parameter: num_doors
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Bad Request
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "401"
+              code: user_unauthenticated
+              title: Authentication Required
+              detail: Valid authentication credentials must be provided
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request lacks valid authentication credentials for this resource.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        WWW-Authenticate:
+          description: The unique identifier for the API request.
+          example: Basic error="invalid_key", error_description="The API Key is invalid"
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Unauthorized
+    OverQuotaError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "402"
+              code: quota_exceeded
+              title: Kafka Clusters Per Org Quota Exceeded
+              detail: 'The request would exceed the quota: kafka_clusters_per_environment'
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request would exceed one or more quotas.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Over Quota
+    UnauthorizedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "403"
+              code: user_unauthorized
+              title: User Access Unauthorized
+              detail: The user 'mcfly' is not allowed to access the 'delorean' resource
+                without the 'plutonium' role.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The access credentials were considered insufficient to grant access
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Forbidden
+    ConflictError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "409"
+              code: resource_already_exists
+              title: Resource Already exists
+              detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                exists.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request is in conflict with the current server state
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        Location:
+          description: Resource URI of conflicting resource
+          explode: false
+          schema:
+            example: https://api.confluent.cloud/{object}/{id}
+            format: uri
+            type: string
+          style: simple
+      x-summary: Conflict
+    NotFoundError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "404"
+              title: Not Found
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Not Found
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    ValidationError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "422"
+              code: invalid_configuration
+              id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              title: Validation Failed
+              detail: 'The property ''/cluster/storage_size'' of type string did not
+                match the following type: integer'
+              source:
+                pointer: /cluster/storage_size
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Validation Failed
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    RateLimitError:
+      description: Rate Limit Exceeded
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests you're permitted to make per
+            time period.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current rate limit
+            window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: "The relative time in seconds until the current rate-limit\
+            \ window resets.  \n  \n**Important:** This differs from Github and Twitter's\
+            \ same-named header which uses UTC epoch seconds. We use relative time\
+            \ to avoid client/server time synchronization issues."
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        Retry-After:
+          description: The number of seconds to wait until the rate limit window resets.
+            Only sent when the rate limit is reached.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+    DefaultSystemError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "500"
+              code: out_of_gas
+              title: DeLorean Out Of Gas
+              detail: The DeLorean has run out of gas, but Doc Brown will fill 'er
+                up for you asap
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: Oops, something went wrong!
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+  schemas:
+    terraform-usage.v1.Usage:
+      description: |-
+        `Usage` objects represent a single Confluent Terraform Provider resource operation that was run against
+        Confluent Cloud.
+        The API creates usage objects that are collected for Terraform Provider analytics.
+
+        Every attribute is metadata describing the operation itself. No attribute is defined to carry Terraform
+        configuration values, resource attribute values, or map keys or values. `resource_type` and the elements of
+        `changed_attributes` are further constrained by pattern to flat identifiers, which rejects Terraform
+        resource addresses, dotted map keys, and configuration bodies.
+
+
+        ## The Usages Model
+        <SchemaDefinition schemaRef="#/components/schemas/terraform-usage.v1.Usage" />
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - terraform-usage/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Usage
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/terraform-usage/v1/usages/u-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/usage=u-12345
+        run_id:
+          description: |
+            Identifier generated once per provider process and shared by every operation that process reports.
+
+            This identifier is process-scoped, not workflow-scoped. Terraform Core launches a separate provider
+            process for the plan phase and for the apply phase, and a separate process for each aliased `provider`
+            block, so a `run_id` does not correlate a plan with its paired apply, nor one aliased provider instance
+            with another. Consumers must not treat it as a plan, apply, workflow, or session identifier.
+
+            The value is randomly generated per process. It must not be derived from the Terraform workspace,
+            module path, or any other user-authored name.
+          example: 7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21
+          format: uuid
+          maxLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          type: string
+        sequence:
+          description: |
+            Position of this operation in the order the provider started operations within its `run_id`, counting
+            from 1.
+
+            Values are unique within a `run_id` and increase in the order operations were started, but the set of
+            events the API receives is neither ordered nor complete. Terraform walks the resource graph
+            concurrently and each event is reported only after its operation finishes, so a lower sequence number
+            can arrive after a higher one. Reporting is best-effort and the provider stops reporting after a fixed
+            number of events in a run, so numbers can be missing and the highest value received can undercount the
+            operations the run actually performed.
+          example: 7
+          format: int32
+          minimum: 1
+          type: integer
+        started_at:
+          description: The date and time at which the operation began. It is represented
+            in RFC3339 format and is in UTC.
+          example: 2026-08-14T18:04:05Z
+          format: date-time
+          type: string
+        duration_ms:
+          description: How long the operation took, in milliseconds, measured by the
+            provider from the start of the operation until just before it returned
+          example: 1543
+          format: int32
+          minimum: 0
+          type: integer
+        os:
+          description: Operating system of the provider binary that ran the operation,
+            as reported by the Go runtime's `GOOS`
+          example: darwin
+          maxLength: 32
+          pattern: ^[a-z0-9]+$
+          type: string
+        arch:
+          description: Architecture of the provider binary that ran the operation,
+            as reported by the Go runtime's `GOARCH`
+          example: amd64
+          maxLength: 32
+          pattern: ^[a-z0-9]+$
+          type: string
+        provider_version:
+          description: Version of the Confluent Terraform Provider that ran the operation.
+            One provider process loads exactly one provider binary, so this value
+            is constant for a given `run_id`
+          example: 2.82.3
+          maxLength: 64
+          type: string
+        terraform_version:
+          description: Version of Terraform that launched the provider process, as
+            reported to the provider by Terraform Core
+          example: 1.14.4
+          maxLength: 64
+          type: string
+        resource_type:
+          description: Terraform resource type that the operation was performed on.
+            This is the resource type the provider registers, never a Terraform resource
+            address, whose second component is a user-authored name
+          example: confluent_kafka_topic
+          maxLength: 64
+          pattern: ^confluent_[a-z0-9_]+$
+          type: string
+        operation:
+          description: Operation that the provider performed on the resource. Values
+            outside the listed set are accepted so that a newer provider can report
+            an operation this version of the API does not yet name
+          example: CREATE
+          maxLength: 32
+          pattern: ^[A-Z][A-Z0-9_]*$
+          type: string
+          x-extensible-enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+          - IMPORT
+        changed_attributes:
+          description: |
+            Names of the resource's attributes that the operation changed. Empty for operations that change no
+            attributes, such as `READ` and `IMPORT`.
+
+            Only top-level attribute names declared in the provider's resource schema are reported. Attribute
+            values are never reported, and a map-typed attribute contributes only its own declared name, never the
+            map's runtime keys or values. Elements must be valid Terraform SDK field names, which rejects dotted
+            paths such as `config.cleanup.policy` and anything containing whitespace or punctuation.
+          example:
+          - topic_name
+          - partitions_count
+          items:
+            maxLength: 64
+            pattern: ^[a-z0-9_]+$
+            type: string
+          maxItems: 200
+          type: array
+        error:
+          description: If an error occurred while running the operation. Also set
+            when the operation panicked, in which case `stack_frames` is populated
+          example: true
+          type: boolean
+        stack_frames:
+          description: |
+            Source locations from the stack trace of a panic, reported only when the operation panicked.
+
+            Each entry is a Go source location of the form `<path>:<line>`, taken from the provider's own stack
+            trace and filtered to Go source lines. Panic messages, function arguments, and resource state are not
+            included. Paths are recorded when the provider binary is compiled, not when it runs, so they do not
+            describe the machine running Terraform, unless the binary was built locally rather than from an
+            official release, in which case they are paths on the machine that built it. Official release builds
+            trim the module prefix but not the Go runtime prefix, so runtime frames still carry an absolute path
+            from the release build machine.
+          example:
+          - /home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884
+          - github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88
+          items:
+            maxLength: 256
+            type: string
+          maxItems: 64
+          type: array
+      type: object
+    ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have,
+        which includes all objects users must create.
+      properties:
+        self:
+          description: Self is a Uniform Resource Locator (URL) at which an object
+            can be addressed. This URL encodes the service location, API version,
+            and other particulars necessary to locate the resource at a point in time
+          example: https://api.confluent.cloud/v2/kafka-clusters/lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        resource_name:
+          description: Resource Name is a Uniform Resource Identifier (URI) that is
+            globally unique across space and time. It is represented as a Confluent
+            Resource Name
+          example: crn://confluent.cloud/kafka=lkc-f3a90de
+          format: uri
+          readOnly: true
+          type: string
+        created_at:
+          description: The date and time at which this object was created. It is represented
+            in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        updated_at:
+          description: The date and time at which this object was last updated. It
+            is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+        deleted_at:
+          description: The date and time at which this object was (or will be) deleted.
+            It is represented in RFC3339 format and is in UTC.
+          example: 2006-01-02T15:04:05-07:00
+          format: date-time
+          readOnly: true
+          type: string
+      readOnly: true
+      required:
+      - self
+    ListMeta:
+      description: ListMeta describes metadata that resource collections may have
+      properties:
+        first:
+          description: A link to the first page of results. If a response does not
+            contain a first link, then direct navigation to the first page is not
+            supported.
+          example: https://api.confluent.cloud/v2/resourcekinds
+          format: uri
+          nullable: true
+          type: string
+        last:
+          description: A link to the last page of results. If a response does not
+            contain a last link, then direct navigation to the last page is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=bcAOehAY8F16YD84Z1wT
+          format: uri
+          nullable: true
+          type: string
+        prev:
+          description: A link to the previous page of results. If a response does
+            not contain a prev link, then either there is no previous data or backwards
+            traversal through the result set is not supported.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=YIXRY97wWYmwzrax4dld
+          format: uri
+          nullable: true
+          type: string
+        next:
+          description: A link to the next page of results. If a response does not
+            contain a next link, then there is no more data available.
+          example: https://api.confluent.cloud/v2/resourcekinds?page_token=UvmDWOB1iwfAIBPj6EYb
+          format: uri
+          nullable: true
+          type: string
+        total_size:
+          description: Number of records in the full result set. This response may
+            be paginated and have a smaller number of records.
+          example: 123
+          format: int32
+          minimum: 0
+          type: integer
+      type: object
+    ObjectReference:
+      description: ObjectReference provides information for you to locate the referred
+        object
+      properties:
+        id:
+          description: ID of the referred resource
+          maxLength: 255
+          minLength: 1
+          type: string
+        environment:
+          description: Environment of the referred resource, if env-scoped
+          maxLength: 255
+          minLength: 1
+          type: string
+        related:
+          description: API URL for accessing or modifying the referred object
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        resource_name:
+          description: CRN reference to the referred resource
+          format: uri
+          minLength: 1
+          readOnly: true
+          type: string
+        api_version:
+          description: API group and version of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind of the referred resource
+          minLength: 1
+          readOnly: true
+          type: string
+      required:
+      - id
+      - related
+      - resource_name
+      type: object
+    Failure:
+      description: Provides information about problems encountered while performing
+        an operation.
+      properties:
+        errors:
+          description: List of errors which caused this operation to fail
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - errors
+      type: object
+    Error:
+      description: Describes a particular error encountered while performing an operation.
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
+          type: string
+        status:
+          description: The HTTP status code applicable to this problem, expressed
+            as a string value.
+          type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        source:
+          $ref: '#/components/schemas/Error_source'
+      type: object
+    Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
+      properties:
+        pointer:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request
+            document [e.g. "/spec" for a spec object, or "/spec/title" for a specific
+            field].
+          type: string
+        parameter:
+          description: A string indicating which query parameter caused the error.
+          type: string
+      type: object
+  securitySchemes:
+    cloud-api-key:
+      description: Authenticate with Cloud API Keys using HTTP Basic Auth. Treat the
+        Cloud API Key ID as the username and Cloud API Key Secret as the password.
+      scheme: basic
+      type: http
+    confluent-sts-access-token:
+      description: Authenticate with Confluent API using this credentials (JSON Web
+        Tokens) following OAuth 2.0.
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: https://api.confluent.cloud/sts/v1/oauth2/token
+      type: oauth2
+    confluent_auth:
+      description: RBAC permissions required for this endpoint
+      flows:
+        implicit:
+          authorizationUrl: https://confluent.cloud/oauth
+          scopes: {}
+      type: oauth2
