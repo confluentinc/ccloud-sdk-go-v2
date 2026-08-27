@@ -28,14 +28,15 @@ package v2
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 )
 
 import (
 	"reflect"
 )
 
-// OrgV2Organization `Organization` objects represent a customer organization. An organization contains all customer resources (e.g., Environments, Kafka Clusters, Service Accounts, API Keys) and is tied to a billing agreement (including any annual commitment or support plan).  The API allows you to list, view, and update your organizations.   Related guide: [Organizations for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/hierarchy/organizations/cloud-organization.html).  ## The Organizations Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.Organization\" />  ## Quotas and Limits This resource is subject to the [following quotas](https://docs.confluent.io/cloud/current/quotas/overview.html):  | Quota | Description | | --- | --- | | `organizations_per_user` | Confluent Cloud organizations a user belongs to |
-type OrgV2Organization struct {
+// OrgV2ScimToken `ScimToken` objects represent bearer tokens used for SCIM 2.0 API authentication. The token value is only returned when the token is first created and cannot be retrieved later.   ## The Scim Tokens Model <SchemaDefinition schemaRef=\"#/components/schemas/org.v2.ScimToken\" />
+type OrgV2ScimToken struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`
 	// Kind defines the object this REST resource represents.
@@ -43,33 +44,35 @@ type OrgV2Organization struct {
 	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
 	Id       *string     `json:"id,omitempty"`
 	Metadata *ObjectMeta `json:"metadata,omitempty"`
-	// A human-readable name for the Organization
-	DisplayName *string `json:"display_name,omitempty"`
-	// The flag to toggle Just-In-Time user provisioning for SSO-enabled organization. Available for early access only.
-	JitEnabled *bool `json:"jit_enabled,omitempty"`
-	// The flag to toggle SCIM user provisioning for an SSO-enabled organization.
-	ScimEnabled *bool `json:"scim_enabled,omitempty"`
+	// The SSO connection name associated with this token.
+	ConnectionName *string `json:"connection_name,omitempty"`
+	// The SCIM bearer token. Only provided in create responses, not in `list`.
+	Token *string `json:"token,omitempty"`
+	// The date and time when the token was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The date and time when the token expires.
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
-// NewOrgV2Organization instantiates a new OrgV2Organization object
+// NewOrgV2ScimToken instantiates a new OrgV2ScimToken object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrgV2Organization() *OrgV2Organization {
-	this := OrgV2Organization{}
+func NewOrgV2ScimToken() *OrgV2ScimToken {
+	this := OrgV2ScimToken{}
 	return &this
 }
 
-// NewOrgV2OrganizationWithDefaults instantiates a new OrgV2Organization object
+// NewOrgV2ScimTokenWithDefaults instantiates a new OrgV2ScimToken object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOrgV2OrganizationWithDefaults() *OrgV2Organization {
-	this := OrgV2Organization{}
+func NewOrgV2ScimTokenWithDefaults() *OrgV2ScimToken {
+	this := OrgV2ScimToken{}
 	return &this
 }
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetApiVersion() string {
+func (o *OrgV2ScimToken) GetApiVersion() string {
 	if o == nil || o.ApiVersion == nil {
 		var ret string
 		return ret
@@ -79,7 +82,7 @@ func (o *OrgV2Organization) GetApiVersion() string {
 
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetApiVersionOk() (*string, bool) {
+func (o *OrgV2ScimToken) GetApiVersionOk() (*string, bool) {
 	if o == nil || o.ApiVersion == nil {
 		return nil, false
 	}
@@ -87,7 +90,7 @@ func (o *OrgV2Organization) GetApiVersionOk() (*string, bool) {
 }
 
 // HasApiVersion returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasApiVersion() bool {
+func (o *OrgV2ScimToken) HasApiVersion() bool {
 	if o != nil && o.ApiVersion != nil {
 		return true
 	}
@@ -96,12 +99,12 @@ func (o *OrgV2Organization) HasApiVersion() bool {
 }
 
 // SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *OrgV2Organization) SetApiVersion(v string) {
+func (o *OrgV2ScimToken) SetApiVersion(v string) {
 	o.ApiVersion = &v
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetKind() string {
+func (o *OrgV2ScimToken) GetKind() string {
 	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
@@ -111,7 +114,7 @@ func (o *OrgV2Organization) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetKindOk() (*string, bool) {
+func (o *OrgV2ScimToken) GetKindOk() (*string, bool) {
 	if o == nil || o.Kind == nil {
 		return nil, false
 	}
@@ -119,7 +122,7 @@ func (o *OrgV2Organization) GetKindOk() (*string, bool) {
 }
 
 // HasKind returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasKind() bool {
+func (o *OrgV2ScimToken) HasKind() bool {
 	if o != nil && o.Kind != nil {
 		return true
 	}
@@ -128,12 +131,12 @@ func (o *OrgV2Organization) HasKind() bool {
 }
 
 // SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *OrgV2Organization) SetKind(v string) {
+func (o *OrgV2ScimToken) SetKind(v string) {
 	o.Kind = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetId() string {
+func (o *OrgV2ScimToken) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -143,7 +146,7 @@ func (o *OrgV2Organization) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetIdOk() (*string, bool) {
+func (o *OrgV2ScimToken) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -151,7 +154,7 @@ func (o *OrgV2Organization) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasId() bool {
+func (o *OrgV2ScimToken) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -160,12 +163,12 @@ func (o *OrgV2Organization) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *OrgV2Organization) SetId(v string) {
+func (o *OrgV2ScimToken) SetId(v string) {
 	o.Id = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetMetadata() ObjectMeta {
+func (o *OrgV2ScimToken) GetMetadata() ObjectMeta {
 	if o == nil || o.Metadata == nil {
 		var ret ObjectMeta
 		return ret
@@ -175,7 +178,7 @@ func (o *OrgV2Organization) GetMetadata() ObjectMeta {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetMetadataOk() (*ObjectMeta, bool) {
+func (o *OrgV2ScimToken) GetMetadataOk() (*ObjectMeta, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -183,7 +186,7 @@ func (o *OrgV2Organization) GetMetadataOk() (*ObjectMeta, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasMetadata() bool {
+func (o *OrgV2ScimToken) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -192,118 +195,151 @@ func (o *OrgV2Organization) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *OrgV2Organization) SetMetadata(v ObjectMeta) {
+func (o *OrgV2ScimToken) SetMetadata(v ObjectMeta) {
 	o.Metadata = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+// GetConnectionName returns the ConnectionName field value if set, zero value otherwise.
+func (o *OrgV2ScimToken) GetConnectionName() string {
+	if o == nil || o.ConnectionName == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+	return *o.ConnectionName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetConnectionNameOk returns a tuple with the ConnectionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *OrgV2ScimToken) GetConnectionNameOk() (*string, bool) {
+	if o == nil || o.ConnectionName == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.ConnectionName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasConnectionName returns a boolean if a field has been set.
+func (o *OrgV2ScimToken) HasConnectionName() bool {
+	if o != nil && o.ConnectionName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *OrgV2Organization) SetDisplayName(v string) {
-	o.DisplayName = &v
+// SetConnectionName gets a reference to the given string and assigns it to the ConnectionName field.
+func (o *OrgV2ScimToken) SetConnectionName(v string) {
+	o.ConnectionName = &v
 }
 
-// GetJitEnabled returns the JitEnabled field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetJitEnabled() bool {
-	if o == nil || o.JitEnabled == nil {
-		var ret bool
+// GetToken returns the Token field value if set, zero value otherwise.
+func (o *OrgV2ScimToken) GetToken() string {
+	if o == nil || o.Token == nil {
+		var ret string
 		return ret
 	}
-	return *o.JitEnabled
+	return *o.Token
 }
 
-// GetJitEnabledOk returns a tuple with the JitEnabled field value if set, nil otherwise
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetJitEnabledOk() (*bool, bool) {
-	if o == nil || o.JitEnabled == nil {
+func (o *OrgV2ScimToken) GetTokenOk() (*string, bool) {
+	if o == nil || o.Token == nil {
 		return nil, false
 	}
-	return o.JitEnabled, true
+	return o.Token, true
 }
 
-// HasJitEnabled returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasJitEnabled() bool {
-	if o != nil && o.JitEnabled != nil {
+// HasToken returns a boolean if a field has been set.
+func (o *OrgV2ScimToken) HasToken() bool {
+	if o != nil && o.Token != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetJitEnabled gets a reference to the given bool and assigns it to the JitEnabled field.
-func (o *OrgV2Organization) SetJitEnabled(v bool) {
-	o.JitEnabled = &v
+// SetToken gets a reference to the given string and assigns it to the Token field.
+func (o *OrgV2ScimToken) SetToken(v string) {
+	o.Token = &v
 }
 
-// GetScimEnabled returns the ScimEnabled field value if set, zero value otherwise.
-func (o *OrgV2Organization) GetScimEnabled() bool {
-	if o == nil || o.ScimEnabled == nil {
-		var ret bool
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *OrgV2ScimToken) GetCreatedAt() time.Time {
+	if o == nil || o.CreatedAt == nil {
+		var ret time.Time
 		return ret
 	}
-	return *o.ScimEnabled
+	return *o.CreatedAt
 }
 
-// GetScimEnabledOk returns a tuple with the ScimEnabled field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrgV2Organization) GetScimEnabledOk() (*bool, bool) {
-	if o == nil || o.ScimEnabled == nil {
+func (o *OrgV2ScimToken) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
-	return o.ScimEnabled, true
+	return o.CreatedAt, true
 }
 
-// HasScimEnabled returns a boolean if a field has been set.
-func (o *OrgV2Organization) HasScimEnabled() bool {
-	if o != nil && o.ScimEnabled != nil {
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *OrgV2ScimToken) HasCreatedAt() bool {
+	if o != nil && o.CreatedAt != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetScimEnabled gets a reference to the given bool and assigns it to the ScimEnabled field.
-func (o *OrgV2Organization) SetScimEnabled(v bool) {
-	o.ScimEnabled = &v
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *OrgV2ScimToken) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+func (o *OrgV2ScimToken) GetExpiresAt() time.Time {
+	if o == nil || o.ExpiresAt == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpiresAt
+}
+
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrgV2ScimToken) GetExpiresAtOk() (*time.Time, bool) {
+	if o == nil || o.ExpiresAt == nil {
+		return nil, false
+	}
+	return o.ExpiresAt, true
+}
+
+// HasExpiresAt returns a boolean if a field has been set.
+func (o *OrgV2ScimToken) HasExpiresAt() bool {
+	if o != nil && o.ExpiresAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+func (o *OrgV2ScimToken) SetExpiresAt(v time.Time) {
+	o.ExpiresAt = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *OrgV2Organization) Redact() {
+func (o *OrgV2ScimToken) Redact() {
 	o.recurseRedact(o.ApiVersion)
 	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Id)
 	o.recurseRedact(o.Metadata)
-	o.recurseRedact(o.DisplayName)
-	o.recurseRedact(o.JitEnabled)
-	o.recurseRedact(o.ScimEnabled)
+	o.recurseRedact(o.ConnectionName)
+	o.Token = nil
+	o.recurseRedact(o.CreatedAt)
+	o.recurseRedact(o.ExpiresAt)
 }
 
-func (o *OrgV2Organization) recurseRedact(v interface{}) {
+func (o *OrgV2ScimToken) recurseRedact(v interface{}) {
 	type redactor interface {
 		Redact()
 	}
@@ -328,12 +364,12 @@ func (o *OrgV2Organization) recurseRedact(v interface{}) {
 	}
 }
 
-func (o OrgV2Organization) zeroField(v interface{}) {
+func (o OrgV2ScimToken) zeroField(v interface{}) {
 	p := reflect.ValueOf(v).Elem()
 	p.Set(reflect.Zero(p.Type()))
 }
 
-func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
+func (o OrgV2ScimToken) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiVersion != nil {
 		toSerialize["api_version"] = o.ApiVersion
@@ -347,14 +383,17 @@ func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
+	if o.ConnectionName != nil {
+		toSerialize["connection_name"] = o.ConnectionName
 	}
-	if o.JitEnabled != nil {
-		toSerialize["jit_enabled"] = o.JitEnabled
+	if o.Token != nil {
+		toSerialize["token"] = o.Token
 	}
-	if o.ScimEnabled != nil {
-		toSerialize["scim_enabled"] = o.ScimEnabled
+	if o.CreatedAt != nil {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if o.ExpiresAt != nil {
+		toSerialize["expires_at"] = o.ExpiresAt
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -363,34 +402,34 @@ func (o OrgV2Organization) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableOrgV2Organization struct {
-	value *OrgV2Organization
+type NullableOrgV2ScimToken struct {
+	value *OrgV2ScimToken
 	isSet bool
 }
 
-func (v NullableOrgV2Organization) Get() *OrgV2Organization {
+func (v NullableOrgV2ScimToken) Get() *OrgV2ScimToken {
 	return v.value
 }
 
-func (v *NullableOrgV2Organization) Set(val *OrgV2Organization) {
+func (v *NullableOrgV2ScimToken) Set(val *OrgV2ScimToken) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOrgV2Organization) IsSet() bool {
+func (v NullableOrgV2ScimToken) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOrgV2Organization) Unset() {
+func (v *NullableOrgV2ScimToken) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOrgV2Organization(val *OrgV2Organization) *NullableOrgV2Organization {
-	return &NullableOrgV2Organization{value: val, isSet: true}
+func NewNullableOrgV2ScimToken(val *OrgV2ScimToken) *NullableOrgV2ScimToken {
+	return &NullableOrgV2ScimToken{value: val, isSet: true}
 }
 
-func (v NullableOrgV2Organization) MarshalJSON() ([]byte, error) {
+func (v NullableOrgV2ScimToken) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -398,7 +437,7 @@ func (v NullableOrgV2Organization) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableOrgV2Organization) UnmarshalJSON(src []byte) error {
+func (v *NullableOrgV2ScimToken) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

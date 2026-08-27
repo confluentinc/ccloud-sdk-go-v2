@@ -39,120 +39,118 @@ var (
 	_ _context.Context
 )
 
-type OrganizationsOrgV2Api interface {
+type ScimTokensOrgV2Api interface {
 
 	/*
-		GetOrgV2Organization Read an Organization
+		CreateOrgV2ScimToken Create a Scim Token
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to read an organization.
+	Make a request to create a scim token.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the organization.
-		 @return ApiGetOrgV2OrganizationRequest
+		 @return ApiCreateOrgV2ScimTokenRequest
 	*/
-	GetOrgV2Organization(ctx _context.Context, id string) ApiGetOrgV2OrganizationRequest
+	CreateOrgV2ScimToken(ctx _context.Context) ApiCreateOrgV2ScimTokenRequest
 
-	// GetOrgV2OrganizationExecute executes the request
-	//  @return OrgV2Organization
-	GetOrgV2OrganizationExecute(r ApiGetOrgV2OrganizationRequest) (OrgV2Organization, *_nethttp.Response, error)
+	// CreateOrgV2ScimTokenExecute executes the request
+	//  @return OrgV2ScimToken
+	CreateOrgV2ScimTokenExecute(r ApiCreateOrgV2ScimTokenRequest) (OrgV2ScimToken, *_nethttp.Response, error)
 
 	/*
-		ListOrgV2Organizations List of Organizations
+		DeleteOrgV2ScimToken Delete a Scim Token
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Retrieve a sorted, filtered, paginated list of all organizations.
+	Make a request to delete a scim token.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @return ApiListOrgV2OrganizationsRequest
+		 @param id The unique identifier for the scim token.
+		 @return ApiDeleteOrgV2ScimTokenRequest
 	*/
-	ListOrgV2Organizations(ctx _context.Context) ApiListOrgV2OrganizationsRequest
+	DeleteOrgV2ScimToken(ctx _context.Context, id string) ApiDeleteOrgV2ScimTokenRequest
 
-	// ListOrgV2OrganizationsExecute executes the request
-	//  @return OrgV2OrganizationList
-	ListOrgV2OrganizationsExecute(r ApiListOrgV2OrganizationsRequest) (OrgV2OrganizationList, *_nethttp.Response, error)
+	// DeleteOrgV2ScimTokenExecute executes the request
+	DeleteOrgV2ScimTokenExecute(r ApiDeleteOrgV2ScimTokenRequest) (*_nethttp.Response, error)
 
 	/*
-		UpdateOrgV2Organization Update an Organization
+		ListOrgV2ScimTokens List of Scim Tokens
 
-		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-	Make a request to update an organization.
-
-
+	Retrieve a sorted, filtered, paginated list of all scim tokens.
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		 @param id The unique identifier for the organization.
-		 @return ApiUpdateOrgV2OrganizationRequest
+		 @return ApiListOrgV2ScimTokensRequest
 	*/
-	UpdateOrgV2Organization(ctx _context.Context, id string) ApiUpdateOrgV2OrganizationRequest
+	ListOrgV2ScimTokens(ctx _context.Context) ApiListOrgV2ScimTokensRequest
 
-	// UpdateOrgV2OrganizationExecute executes the request
-	//  @return OrgV2Organization
-	UpdateOrgV2OrganizationExecute(r ApiUpdateOrgV2OrganizationRequest) (OrgV2Organization, *_nethttp.Response, error)
+	// ListOrgV2ScimTokensExecute executes the request
+	//  @return OrgV2ScimTokenList
+	ListOrgV2ScimTokensExecute(r ApiListOrgV2ScimTokensRequest) (OrgV2ScimTokenList, *_nethttp.Response, error)
 }
 
-// OrganizationsOrgV2ApiService OrganizationsOrgV2Api service
-type OrganizationsOrgV2ApiService service
+// ScimTokensOrgV2ApiService ScimTokensOrgV2Api service
+type ScimTokensOrgV2ApiService service
 
-type ApiGetOrgV2OrganizationRequest struct {
-	ctx        _context.Context
-	ApiService OrganizationsOrgV2Api
-	id         string
+type ApiCreateOrgV2ScimTokenRequest struct {
+	ctx          _context.Context
+	ApiService   ScimTokensOrgV2Api
+	inlineObject *InlineObject
 }
 
-func (r ApiGetOrgV2OrganizationRequest) Execute() (OrgV2Organization, *_nethttp.Response, error) {
-	return r.ApiService.GetOrgV2OrganizationExecute(r)
+func (r ApiCreateOrgV2ScimTokenRequest) InlineObject(inlineObject InlineObject) ApiCreateOrgV2ScimTokenRequest {
+	r.inlineObject = &inlineObject
+	return r
+}
+
+func (r ApiCreateOrgV2ScimTokenRequest) Execute() (OrgV2ScimToken, *_nethttp.Response, error) {
+	return r.ApiService.CreateOrgV2ScimTokenExecute(r)
 }
 
 /*
-GetOrgV2Organization Read an Organization
+CreateOrgV2ScimToken Create a Scim Token
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Make a request to read an organization.
+Make a request to create a scim token.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the organization.
-	@return ApiGetOrgV2OrganizationRequest
+	@return ApiCreateOrgV2ScimTokenRequest
 */
-func (a *OrganizationsOrgV2ApiService) GetOrgV2Organization(ctx _context.Context, id string) ApiGetOrgV2OrganizationRequest {
-	return ApiGetOrgV2OrganizationRequest{
+func (a *ScimTokensOrgV2ApiService) CreateOrgV2ScimToken(ctx _context.Context) ApiCreateOrgV2ScimTokenRequest {
+	return ApiCreateOrgV2ScimTokenRequest{
 		ApiService: a,
 		ctx:        ctx,
-		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return OrgV2Organization
-func (a *OrganizationsOrgV2ApiService) GetOrgV2OrganizationExecute(r ApiGetOrgV2OrganizationRequest) (OrgV2Organization, *_nethttp.Response, error) {
+//	@return OrgV2ScimToken
+func (a *ScimTokensOrgV2ApiService) CreateOrgV2ScimTokenExecute(r ApiCreateOrgV2ScimTokenRequest) (OrgV2ScimToken, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  OrgV2Organization
+		localVarReturnValue  OrgV2ScimToken
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsOrgV2ApiService.GetOrgV2Organization")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScimTokensOrgV2ApiService.CreateOrgV2ScimToken")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/org/v2/organizations/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath := localBasePath + "/org/v2/scim-tokens"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -168,6 +166,8 @@ func (a *OrganizationsOrgV2ApiService) GetOrgV2OrganizationExecute(r ApiGetOrgV2
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.inlineObject
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -220,7 +220,17 @@ func (a *OrganizationsOrgV2ApiService) GetOrgV2OrganizationExecute(r ApiGetOrgV2
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -254,41 +264,186 @@ func (a *OrganizationsOrgV2ApiService) GetOrgV2OrganizationExecute(r ApiGetOrgV2
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListOrgV2OrganizationsRequest struct {
+type ApiDeleteOrgV2ScimTokenRequest struct {
 	ctx        _context.Context
-	ApiService OrganizationsOrgV2Api
+	ApiService ScimTokensOrgV2Api
+	id         string
+}
+
+func (r ApiDeleteOrgV2ScimTokenRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteOrgV2ScimTokenExecute(r)
+}
+
+/*
+DeleteOrgV2ScimToken Delete a Scim Token
+
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+Make a request to delete a scim token.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the scim token.
+	@return ApiDeleteOrgV2ScimTokenRequest
+*/
+func (a *ScimTokensOrgV2ApiService) DeleteOrgV2ScimToken(ctx _context.Context, id string) ApiDeleteOrgV2ScimTokenRequest {
+	return ApiDeleteOrgV2ScimTokenRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+func (a *ScimTokensOrgV2ApiService) DeleteOrgV2ScimTokenExecute(r ApiDeleteOrgV2ScimTokenRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScimTokensOrgV2ApiService.DeleteOrgV2ScimToken")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/org/v2/scim-tokens/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiListOrgV2ScimTokensRequest struct {
+	ctx        _context.Context
+	ApiService ScimTokensOrgV2Api
 	pageSize   *int32
 	pageToken  *string
 }
 
 // A pagination size for collection requests.
-func (r ApiListOrgV2OrganizationsRequest) PageSize(pageSize int32) ApiListOrgV2OrganizationsRequest {
+func (r ApiListOrgV2ScimTokensRequest) PageSize(pageSize int32) ApiListOrgV2ScimTokensRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // An opaque pagination token for collection requests.
-func (r ApiListOrgV2OrganizationsRequest) PageToken(pageToken string) ApiListOrgV2OrganizationsRequest {
+func (r ApiListOrgV2ScimTokensRequest) PageToken(pageToken string) ApiListOrgV2ScimTokensRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-func (r ApiListOrgV2OrganizationsRequest) Execute() (OrgV2OrganizationList, *_nethttp.Response, error) {
-	return r.ApiService.ListOrgV2OrganizationsExecute(r)
+func (r ApiListOrgV2ScimTokensRequest) Execute() (OrgV2ScimTokenList, *_nethttp.Response, error) {
+	return r.ApiService.ListOrgV2ScimTokensExecute(r)
 }
 
 /*
-ListOrgV2Organizations List of Organizations
+ListOrgV2ScimTokens List of Scim Tokens
 
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Organization v2](https://img.shields.io/badge/-Request%20Access%20To%20Organization%20v2-%23bc8540)](mailto:ccloud-api-access+org-v2-early-access@confluent.io?subject=Request%20to%20join%20org/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20org/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
 
-Retrieve a sorted, filtered, paginated list of all organizations.
+Retrieve a sorted, filtered, paginated list of all scim tokens.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListOrgV2OrganizationsRequest
+	@return ApiListOrgV2ScimTokensRequest
 */
-func (a *OrganizationsOrgV2ApiService) ListOrgV2Organizations(ctx _context.Context) ApiListOrgV2OrganizationsRequest {
-	return ApiListOrgV2OrganizationsRequest{
+func (a *ScimTokensOrgV2ApiService) ListOrgV2ScimTokens(ctx _context.Context) ApiListOrgV2ScimTokensRequest {
+	return ApiListOrgV2ScimTokensRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -296,23 +451,23 @@ func (a *OrganizationsOrgV2ApiService) ListOrgV2Organizations(ctx _context.Conte
 
 // Execute executes the request
 //
-//	@return OrgV2OrganizationList
-func (a *OrganizationsOrgV2ApiService) ListOrgV2OrganizationsExecute(r ApiListOrgV2OrganizationsRequest) (OrgV2OrganizationList, *_nethttp.Response, error) {
+//	@return OrgV2ScimTokenList
+func (a *ScimTokensOrgV2ApiService) ListOrgV2ScimTokensExecute(r ApiListOrgV2ScimTokensRequest) (OrgV2ScimTokenList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  OrgV2OrganizationList
+		localVarReturnValue  OrgV2ScimTokenList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsOrgV2ApiService.ListOrgV2Organizations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScimTokensOrgV2ApiService.ListOrgV2ScimTokens")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/org/v2/organizations"
+	localVarPath := localBasePath + "/org/v2/scim-tokens"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -384,201 +539,6 @@ func (a *OrganizationsOrgV2ApiService) ListOrgV2OrganizationsExecute(r ApiListOr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateOrgV2OrganizationRequest struct {
-	ctx               _context.Context
-	ApiService        OrganizationsOrgV2Api
-	id                string
-	orgV2Organization *OrgV2Organization
-}
-
-func (r ApiUpdateOrgV2OrganizationRequest) OrgV2Organization(orgV2Organization OrgV2Organization) ApiUpdateOrgV2OrganizationRequest {
-	r.orgV2Organization = &orgV2Organization
-	return r
-}
-
-func (r ApiUpdateOrgV2OrganizationRequest) Execute() (OrgV2Organization, *_nethttp.Response, error) {
-	return r.ApiService.UpdateOrgV2OrganizationExecute(r)
-}
-
-/*
-UpdateOrgV2Organization Update an Organization
-
-[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-
-Make a request to update an organization.
-
-	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier for the organization.
-	@return ApiUpdateOrgV2OrganizationRequest
-*/
-func (a *OrganizationsOrgV2ApiService) UpdateOrgV2Organization(ctx _context.Context, id string) ApiUpdateOrgV2OrganizationRequest {
-	return ApiUpdateOrgV2OrganizationRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return OrgV2Organization
-func (a *OrganizationsOrgV2ApiService) UpdateOrgV2OrganizationExecute(r ApiUpdateOrgV2OrganizationRequest) (OrgV2Organization, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OrgV2Organization
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsOrgV2ApiService.UpdateOrgV2Organization")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/org/v2/organizations/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.orgV2Organization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Failure
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
