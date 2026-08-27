@@ -87,6 +87,9 @@ Class | Method | HTTP request | Description
 *OrganizationsOrgV2Api* | [**GetOrgV2Organization**](docs/OrganizationsOrgV2Api.md#getorgv2organization) | **Get** /org/v2/organizations/{id} | Read an Organization
 *OrganizationsOrgV2Api* | [**ListOrgV2Organizations**](docs/OrganizationsOrgV2Api.md#listorgv2organizations) | **Get** /org/v2/organizations | List of Organizations
 *OrganizationsOrgV2Api* | [**UpdateOrgV2Organization**](docs/OrganizationsOrgV2Api.md#updateorgv2organization) | **Patch** /org/v2/organizations/{id} | Update an Organization
+*ScimTokensOrgV2Api* | [**CreateOrgV2ScimToken**](docs/ScimTokensOrgV2Api.md#createorgv2scimtoken) | **Post** /org/v2/scim-tokens | Create a Scim Token
+*ScimTokensOrgV2Api* | [**DeleteOrgV2ScimToken**](docs/ScimTokensOrgV2Api.md#deleteorgv2scimtoken) | **Delete** /org/v2/scim-tokens/{id} | Delete a Scim Token
+*ScimTokensOrgV2Api* | [**ListOrgV2ScimTokens**](docs/ScimTokensOrgV2Api.md#listorgv2scimtokens) | **Get** /org/v2/scim-tokens | List of Scim Tokens
 
 
 ## Documentation For Models
@@ -94,6 +97,7 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [ErrorSource](docs/ErrorSource.md)
  - [Failure](docs/Failure.md)
+ - [InlineObject](docs/InlineObject.md)
  - [ListMeta](docs/ListMeta.md)
  - [ObjectMeta](docs/ObjectMeta.md)
  - [ObjectReference](docs/ObjectReference.md)
@@ -101,6 +105,8 @@ Class | Method | HTTP request | Description
  - [OrgV2EnvironmentList](docs/OrgV2EnvironmentList.md)
  - [OrgV2Organization](docs/OrgV2Organization.md)
  - [OrgV2OrganizationList](docs/OrgV2OrganizationList.md)
+ - [OrgV2ScimToken](docs/OrgV2ScimToken.md)
+ - [OrgV2ScimTokenList](docs/OrgV2ScimTokenList.md)
  - [OrgV2StreamGovernanceConfig](docs/OrgV2StreamGovernanceConfig.md)
 
 
@@ -147,55 +153,6 @@ import "golang.org/x/oauth2"
 
 tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
 auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
-```
-
-
-### confluent_auth
-
-
-- **Type**: OAuth
-- **Flow**: implicit
-- **Authorization URL**: https://confluent.cloud/oauth
-- **Scopes**: 
- - **Alter:Environment**: Alter permission on Environment resource type
- - **Alter:Organization**: Alter permission on Organization resource type
- - **CreateEnvironment:Organization**: CreateEnvironment permission on Organization resource type
- - **Delete:Environment**: Delete permission on Environment resource type
- - **Describe:Environment**: Describe permission on Environment resource type
- - **Describe:Organization**: Describe permission on Organization resource type
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
-
-```golang
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
-```
-
-
-### global-api-key
-
-- **Type**: HTTP basic authentication
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
-    UserName: "username",
-    Password: "password",
-})
 r, err := client.Service.Operation(auth, args)
 ```
 
