@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **Secret** | Pointer to **string** | The API key secret. Only provided in &#x60;create&#x60; responses, not in &#x60;get&#x60; or &#x60;list&#x60;. | [optional] [readonly] 
 **DisplayName** | Pointer to **string** | A human readable name for the API key | [optional] 
 **Description** | Pointer to **string** | A human readable description for the API key | [optional] 
-**Owner** | Pointer to [**ObjectReference**](ObjectReference.md) | The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
-**Resource** | Pointer to [**ObjectReference**](ObjectReference.md) | The resource associated with this object. The resource can be one of cmk.v2.Cluster. May be &#x60;null&#x60; if not associated with a resource. | [optional] 
-**Resources** | Pointer to [**[]ObjectReference**](ObjectReference.md) | The list of resources associated with this object. Each resource can be one of Cmk.v2.cluster. | [optional] 
+**ExpiresAt** | Pointer to **string** | The UTC date on which this API key expires, as an ISO 8601 date (YYYY-MM-DD). The key remains valid through the end of this date and expires at 23:59:59Z. Once expired, the key is rejected for authentication; access to some services may continue briefly while the expiration propagates.  | [optional] 
+**CreatedBy** | Pointer to **string** | The principal ID that created this API key. | [optional] [readonly] 
+**Owner** | Pointer to [**TypedGlobalObjectReference**](TypedGlobalObjectReference.md) | The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount. | [optional] 
+**Resource** | Pointer to [**NullableTypedEnvScopedObjectReference**](TypedEnvScopedObjectReference.md) | The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345), Schema Registry Cluster ID (example: lsrc-12345), ksqlDB Cluster ID (example: lksqlc-12345), or Flink (Environment + Region pair, example: env-abc123.aws.us-east-2). May be null or omitted if not associated with a resource. For creating Cloud API key, resource id should be &#x60;CLOUD&#x60;, for creating Tableflow API key, resource id should be &#x60;TABLEFLOW&#x60;, for creating Global API key, resource id should be &#x60;GLOBAL&#x60;. The resource id is case-insensitive. [Learn more in Authentication](https://docs.confluent.io/cloud/current/api.html#section/Authentication).  Note - Flink is in the [Preview lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)  | [optional] 
 
 ## Methods
 
@@ -105,22 +106,72 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetExpiresAt
+
+`func (o *IamV2ApiKeySpec) GetExpiresAt() string`
+
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+
+### GetExpiresAtOk
+
+`func (o *IamV2ApiKeySpec) GetExpiresAtOk() (*string, bool)`
+
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresAt
+
+`func (o *IamV2ApiKeySpec) SetExpiresAt(v string)`
+
+SetExpiresAt sets ExpiresAt field to given value.
+
+### HasExpiresAt
+
+`func (o *IamV2ApiKeySpec) HasExpiresAt() bool`
+
+HasExpiresAt returns a boolean if a field has been set.
+
+### GetCreatedBy
+
+`func (o *IamV2ApiKeySpec) GetCreatedBy() string`
+
+GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
+
+### GetCreatedByOk
+
+`func (o *IamV2ApiKeySpec) GetCreatedByOk() (*string, bool)`
+
+GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedBy
+
+`func (o *IamV2ApiKeySpec) SetCreatedBy(v string)`
+
+SetCreatedBy sets CreatedBy field to given value.
+
+### HasCreatedBy
+
+`func (o *IamV2ApiKeySpec) HasCreatedBy() bool`
+
+HasCreatedBy returns a boolean if a field has been set.
+
 ### GetOwner
 
-`func (o *IamV2ApiKeySpec) GetOwner() ObjectReference`
+`func (o *IamV2ApiKeySpec) GetOwner() TypedGlobalObjectReference`
 
 GetOwner returns the Owner field if non-nil, zero value otherwise.
 
 ### GetOwnerOk
 
-`func (o *IamV2ApiKeySpec) GetOwnerOk() (*ObjectReference, bool)`
+`func (o *IamV2ApiKeySpec) GetOwnerOk() (*TypedGlobalObjectReference, bool)`
 
 GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOwner
 
-`func (o *IamV2ApiKeySpec) SetOwner(v ObjectReference)`
+`func (o *IamV2ApiKeySpec) SetOwner(v TypedGlobalObjectReference)`
 
 SetOwner sets Owner field to given value.
 
@@ -132,20 +183,20 @@ HasOwner returns a boolean if a field has been set.
 
 ### GetResource
 
-`func (o *IamV2ApiKeySpec) GetResource() ObjectReference`
+`func (o *IamV2ApiKeySpec) GetResource() TypedEnvScopedObjectReference`
 
 GetResource returns the Resource field if non-nil, zero value otherwise.
 
 ### GetResourceOk
 
-`func (o *IamV2ApiKeySpec) GetResourceOk() (*ObjectReference, bool)`
+`func (o *IamV2ApiKeySpec) GetResourceOk() (*TypedEnvScopedObjectReference, bool)`
 
 GetResourceOk returns a tuple with the Resource field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResource
 
-`func (o *IamV2ApiKeySpec) SetResource(v ObjectReference)`
+`func (o *IamV2ApiKeySpec) SetResource(v TypedEnvScopedObjectReference)`
 
 SetResource sets Resource field to given value.
 
@@ -155,31 +206,16 @@ SetResource sets Resource field to given value.
 
 HasResource returns a boolean if a field has been set.
 
-### GetResources
+### SetResourceNil
 
-`func (o *IamV2ApiKeySpec) GetResources() []ObjectReference`
+`func (o *IamV2ApiKeySpec) SetResourceNil(b bool)`
 
-GetResources returns the Resources field if non-nil, zero value otherwise.
+ SetResourceNil sets the value for Resource to be an explicit nil
 
-### GetResourcesOk
+### UnsetResource
+`func (o *IamV2ApiKeySpec) UnsetResource()`
 
-`func (o *IamV2ApiKeySpec) GetResourcesOk() (*[]ObjectReference, bool)`
-
-GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResources
-
-`func (o *IamV2ApiKeySpec) SetResources(v []ObjectReference)`
-
-SetResources sets Resources field to given value.
-
-### HasResources
-
-`func (o *IamV2ApiKeySpec) HasResources() bool`
-
-HasResources returns a boolean if a field has been set.
-
+UnsetResource ensures that no value is present for Resource, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

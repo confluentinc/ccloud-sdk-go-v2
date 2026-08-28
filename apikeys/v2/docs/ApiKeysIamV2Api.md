@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth)
 
 ### HTTP request headers
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth)
 
 ### HTTP request headers
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth)
 
 ### HTTP request headers
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## ListIamV2ApiKeys
 
-> IamV2ApiKeyList ListIamV2ApiKeys(ctx).SpecOwner(specOwner).SpecResource(specResource).PageSize(pageSize).PageToken(pageToken).Execute()
+> IamV2ApiKeyList ListIamV2ApiKeys(ctx).SpecOwner(specOwner).SpecResource(specResource).ShowExpired(showExpired).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of API Keys
 
@@ -239,12 +239,13 @@ import (
 func main() {
     specOwner := "specOwner_example" // string | Filter the results by exact match for spec.owner. (optional)
     specResource := "specResource_example" // string | Filter the results by exact match for spec.resource. (optional)
+    showExpired := true // bool | When true, include expired API keys in the results. Defaults to false. (optional) (default to false)
     pageSize := int32(56) // int32 | A pagination size for collection requests. (optional) (default to 10)
     pageToken := "pageToken_example" // string | An opaque pagination token for collection requests. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.APIKeysIamV2Api.ListIamV2ApiKeys(context.Background()).SpecOwner(specOwner).SpecResource(specResource).PageSize(pageSize).PageToken(pageToken).Execute()
+    resp, r, err := api_client.APIKeysIamV2Api.ListIamV2ApiKeys(context.Background()).SpecOwner(specOwner).SpecResource(specResource).ShowExpired(showExpired).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `APIKeysIamV2Api.ListIamV2ApiKeys``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,6 +268,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specOwner** | **string** | Filter the results by exact match for spec.owner. | 
  **specResource** | **string** | Filter the results by exact match for spec.resource. | 
+ **showExpired** | **bool** | When true, include expired API keys in the results. Defaults to false. | [default to false]
  **pageSize** | **int32** | A pagination size for collection requests. | [default to 10]
  **pageToken** | **string** | An opaque pagination token for collection requests. | 
 
@@ -276,7 +278,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth)
 
 ### HTTP request headers
 
@@ -348,7 +350,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api-key](../README.md#api-key)
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth)
 
 ### HTTP request headers
 
