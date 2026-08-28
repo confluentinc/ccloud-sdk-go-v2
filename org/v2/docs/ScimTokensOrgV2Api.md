@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrgV2ScimTokenList**](org.v2.ScimTokenList.md)
+[**OrgV2ScimTokenList**](OrgV2ScimTokenList.md)
 
 ### Authorization
 
