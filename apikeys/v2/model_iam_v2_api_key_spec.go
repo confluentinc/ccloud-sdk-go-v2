@@ -26,6 +26,7 @@ Contact: paas-team@confluent.io
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -41,12 +42,14 @@ type IamV2ApiKeySpec struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// A human readable description for the API key
 	Description *string `json:"description,omitempty"`
+	// The UTC date on which this API key expires, as an ISO 8601 date (YYYY-MM-DD). The key remains valid through the end of this date and expires at 23:59:59Z. Once expired, the key is rejected for authentication; access to some services may continue briefly while the expiration propagates.
+	ExpiresAt *string `json:"expires_at,omitempty"`
+	// The principal ID that created this API key.
+	CreatedBy *string `json:"created_by,omitempty"`
 	// The owner to which this belongs. The owner can be one of iam.v2.User, iam.v2.ServiceAccount.
-	Owner *ObjectReference `json:"owner,omitempty"`
-	// The resource associated with this object. The resource can be one of cmk.v2.Cluster. May be `null` if not associated with a resource.
-	Resource *ObjectReference `json:"resource,omitempty"`
-	// The list of resources associated with this object. Each resource can be one of Cmk.v2.cluster.
-	Resources *[]ObjectReference `json:"resources,omitempty"`
+	Owner *TypedGlobalObjectReference `json:"owner,omitempty"`
+	// The resource associated with this object. The resource can be one of Kafka Cluster ID (example: lkc-12345), Schema Registry Cluster ID (example: lsrc-12345), ksqlDB Cluster ID (example: lksqlc-12345), or Flink (Environment + Region pair, example: env-abc123.aws.us-east-2). May be null or omitted if not associated with a resource. For creating Cloud API key, resource id should be `CLOUD`, for creating Tableflow API key, resource id should be `TABLEFLOW`, for creating Global API key, resource id should be `GLOBAL`. The resource id is case-insensitive. [Learn more in Authentication](https://docs.confluent.io/cloud/current/api.html#section/Authentication).  Note - Flink is in the [Preview lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
+	Resource NullableTypedEnvScopedObjectReference `json:"resource,omitempty"`
 }
 
 // NewIamV2ApiKeySpec instantiates a new IamV2ApiKeySpec object
@@ -162,10 +165,74 @@ func (o *IamV2ApiKeySpec) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+func (o *IamV2ApiKeySpec) GetExpiresAt() string {
+	if o == nil || o.ExpiresAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExpiresAt
+}
+
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2ApiKeySpec) GetExpiresAtOk() (*string, bool) {
+	if o == nil || o.ExpiresAt == nil {
+		return nil, false
+	}
+	return o.ExpiresAt, true
+}
+
+// HasExpiresAt returns a boolean if a field has been set.
+func (o *IamV2ApiKeySpec) HasExpiresAt() bool {
+	if o != nil && o.ExpiresAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
+func (o *IamV2ApiKeySpec) SetExpiresAt(v string) {
+	o.ExpiresAt = &v
+}
+
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *IamV2ApiKeySpec) GetCreatedBy() string {
+	if o == nil || o.CreatedBy == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamV2ApiKeySpec) GetCreatedByOk() (*string, bool) {
+	if o == nil || o.CreatedBy == nil {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *IamV2ApiKeySpec) HasCreatedBy() bool {
+	if o != nil && o.CreatedBy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
+func (o *IamV2ApiKeySpec) SetCreatedBy(v string) {
+	o.CreatedBy = &v
+}
+
 // GetOwner returns the Owner field value if set, zero value otherwise.
-func (o *IamV2ApiKeySpec) GetOwner() ObjectReference {
+func (o *IamV2ApiKeySpec) GetOwner() TypedGlobalObjectReference {
 	if o == nil || o.Owner == nil {
-		var ret ObjectReference
+		var ret TypedGlobalObjectReference
 		return ret
 	}
 	return *o.Owner
@@ -173,7 +240,7 @@ func (o *IamV2ApiKeySpec) GetOwner() ObjectReference {
 
 // GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2ApiKeySpec) GetOwnerOk() (*ObjectReference, bool) {
+func (o *IamV2ApiKeySpec) GetOwnerOk() (*TypedGlobalObjectReference, bool) {
 	if o == nil || o.Owner == nil {
 		return nil, false
 	}
@@ -189,113 +256,93 @@ func (o *IamV2ApiKeySpec) HasOwner() bool {
 	return false
 }
 
-// SetOwner gets a reference to the given ObjectReference and assigns it to the Owner field.
-func (o *IamV2ApiKeySpec) SetOwner(v ObjectReference) {
+// SetOwner gets a reference to the given TypedGlobalObjectReference and assigns it to the Owner field.
+func (o *IamV2ApiKeySpec) SetOwner(v TypedGlobalObjectReference) {
 	o.Owner = &v
 }
 
-// GetResource returns the Resource field value if set, zero value otherwise.
-func (o *IamV2ApiKeySpec) GetResource() ObjectReference {
-	if o == nil || o.Resource == nil {
-		var ret ObjectReference
+// GetResource returns the Resource field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamV2ApiKeySpec) GetResource() TypedEnvScopedObjectReference {
+	if o == nil || o.Resource.Get() == nil {
+		var ret TypedEnvScopedObjectReference
 		return ret
 	}
-	return *o.Resource
+	return *o.Resource.Get()
 }
 
 // GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IamV2ApiKeySpec) GetResourceOk() (*ObjectReference, bool) {
-	if o == nil || o.Resource == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamV2ApiKeySpec) GetResourceOk() (*TypedEnvScopedObjectReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Resource, true
+	return o.Resource.Get(), o.Resource.IsSet()
 }
 
 // HasResource returns a boolean if a field has been set.
 func (o *IamV2ApiKeySpec) HasResource() bool {
-	if o != nil && o.Resource != nil {
+	if o != nil && o.Resource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResource gets a reference to the given ObjectReference and assigns it to the Resource field.
-func (o *IamV2ApiKeySpec) SetResource(v ObjectReference) {
-	o.Resource = &v
+// SetResource gets a reference to the given NullableTypedEnvScopedObjectReference and assigns it to the Resource field.
+func (o *IamV2ApiKeySpec) SetResource(v TypedEnvScopedObjectReference) {
+	o.Resource.Set(&v)
 }
 
-// GetResources returns the Resources field value if set, zero value otherwise.
-func (o *IamV2ApiKeySpec) GetResources() []ObjectReference {
-	if o == nil || o.Resources == nil {
-		var ret []ObjectReference
-		return ret
-	}
-	return *o.Resources
+// SetResourceNil sets the value for Resource to be an explicit nil
+func (o *IamV2ApiKeySpec) SetResourceNil() {
+	o.Resource.Set(nil)
 }
 
-// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamV2ApiKeySpec) GetResourcesOk() (*[]ObjectReference, bool) {
-	if o == nil || o.Resources == nil {
-		return nil, false
-	}
-	return o.Resources, true
-}
-
-// HasResources returns a boolean if a field has been set.
-func (o *IamV2ApiKeySpec) HasResources() bool {
-	if o != nil && o.Resources != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResources gets a reference to the given []ObjectReference and assigns it to the Resources field.
-func (o *IamV2ApiKeySpec) SetResources(v []ObjectReference) {
-	o.Resources = &v
+// UnsetResource ensures that no value is present for Resource, not even an explicit nil
+func (o *IamV2ApiKeySpec) UnsetResource() {
+	o.Resource.Unset()
 }
 
 // Redact resets all sensitive fields to their zero value.
 func (o *IamV2ApiKeySpec) Redact() {
-    o.Secret = nil
-    o.recurseRedact(o.DisplayName)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.Owner)
-    o.recurseRedact(o.Resource)
-    o.recurseRedact(o.Resources)
+	o.Secret = nil
+	o.recurseRedact(o.DisplayName)
+	o.recurseRedact(o.Description)
+	o.recurseRedact(o.ExpiresAt)
+	o.recurseRedact(o.CreatedBy)
+	o.recurseRedact(o.Owner)
+	o.recurseRedact(o.Resource)
 }
 
 func (o *IamV2ApiKeySpec) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
+	type redactor interface {
+		Redact()
+	}
+	if r, ok := v.(redactor); ok {
+		r.Redact()
+	} else {
+		val := reflect.ValueOf(v)
+		if val.Kind() == reflect.Ptr {
+			val = val.Elem()
+		}
+		switch val.Kind() {
+		case reflect.Slice, reflect.Array:
+			for i := 0; i < val.Len(); i++ {
+				// support data types declared without pointers
+				o.recurseRedact(val.Index(i).Interface())
+				// ... and data types that were declared without but need pointers (for Redact)
+				if val.Index(i).CanAddr() {
+					o.recurseRedact(val.Index(i).Addr().Interface())
+				}
+			}
+		}
+	}
 }
 
 func (o IamV2ApiKeySpec) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
 }
 
 func (o IamV2ApiKeySpec) MarshalJSON() ([]byte, error) {
@@ -309,16 +356,23 @@ func (o IamV2ApiKeySpec) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
+	if o.ExpiresAt != nil {
+		toSerialize["expires_at"] = o.ExpiresAt
+	}
+	if o.CreatedBy != nil {
+		toSerialize["created_by"] = o.CreatedBy
+	}
 	if o.Owner != nil {
 		toSerialize["owner"] = o.Owner
 	}
-	if o.Resource != nil {
-		toSerialize["resource"] = o.Resource
+	if o.Resource.IsSet() {
+		toSerialize["resource"] = o.Resource.Get()
 	}
-	if o.Resources != nil {
-		toSerialize["resources"] = o.Resources
-	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableIamV2ApiKeySpec struct {
@@ -349,12 +403,14 @@ func NewNullableIamV2ApiKeySpec(val *IamV2ApiKeySpec) *NullableIamV2ApiKeySpec {
 }
 
 func (v NullableIamV2ApiKeySpec) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableIamV2ApiKeySpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

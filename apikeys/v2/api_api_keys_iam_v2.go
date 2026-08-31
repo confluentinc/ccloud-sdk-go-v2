@@ -42,14 +42,14 @@ var (
 type APIKeysIamV2Api interface {
 
 	/*
-	CreateIamV2ApiKey Create an API Key
+			CreateIamV2ApiKey Create an API Key
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to create an API key.
+		Make a request to create an API key.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateIamV2ApiKeyRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiCreateIamV2ApiKeyRequest
 	*/
 	CreateIamV2ApiKey(ctx _context.Context) ApiCreateIamV2ApiKeyRequest
 
@@ -58,15 +58,15 @@ Make a request to create an API key.
 	CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error)
 
 	/*
-	DeleteIamV2ApiKey Delete an API Key
+			DeleteIamV2ApiKey Delete an API Key
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to delete an API key.
+		Make a request to delete an API key.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the API key.
-	 @return ApiDeleteIamV2ApiKeyRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the API key.
+			 @return ApiDeleteIamV2ApiKeyRequest
 	*/
 	DeleteIamV2ApiKey(ctx _context.Context, id string) ApiDeleteIamV2ApiKeyRequest
 
@@ -74,15 +74,15 @@ Make a request to delete an API key.
 	DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKeyRequest) (*_nethttp.Response, error)
 
 	/*
-	GetIamV2ApiKey Read an API Key
+			GetIamV2ApiKey Read an API Key
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to read an API key.
+		Make a request to read an API key.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the API key.
-	 @return ApiGetIamV2ApiKeyRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the API key.
+			 @return ApiGetIamV2ApiKeyRequest
 	*/
 	GetIamV2ApiKey(ctx _context.Context, id string) ApiGetIamV2ApiKeyRequest
 
@@ -91,19 +91,19 @@ Make a request to read an API key.
 	GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error)
 
 	/*
-	ListIamV2ApiKeys List of API Keys
+			ListIamV2ApiKeys List of API Keys
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Retrieve a sorted, filtered, paginated list of all API keys.
+		Retrieve a sorted, filtered, paginated list of all API keys.
 
-This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
-resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
-organization. You will only see the keys that are accessible to the account making the API request.
+		This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
+		resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
+		organization. You will only see the keys that are accessible to the account making the API request.
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListIamV2ApiKeysRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @return ApiListIamV2ApiKeysRequest
 	*/
 	ListIamV2ApiKeys(ctx _context.Context) ApiListIamV2ApiKeysRequest
 
@@ -112,17 +112,17 @@ organization. You will only see the keys that are accessible to the account maki
 	ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRequest) (IamV2ApiKeyList, *_nethttp.Response, error)
 
 	/*
-	UpdateIamV2ApiKey Update an API Key
+			UpdateIamV2ApiKey Update an API Key
 
-	[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-Make a request to update an API key.
+		Make a request to update an API key.
 
 
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id The unique identifier for the API key.
-	 @return ApiUpdateIamV2ApiKeyRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param id The unique identifier for the API key.
+			 @return ApiUpdateIamV2ApiKeyRequest
 	*/
 	UpdateIamV2ApiKey(ctx _context.Context, id string) ApiUpdateIamV2ApiKeyRequest
 
@@ -135,8 +135,8 @@ Make a request to update an API key.
 type APIKeysIamV2ApiService service
 
 type ApiCreateIamV2ApiKeyRequest struct {
-	ctx _context.Context
-	ApiService APIKeysIamV2Api
+	ctx         _context.Context
+	ApiService  APIKeysIamV2Api
 	iamV2ApiKey *IamV2ApiKey
 }
 
@@ -152,22 +152,23 @@ func (r ApiCreateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 /*
 CreateIamV2ApiKey Create an API Key
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to create an API key.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamV2ApiKeyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamV2ApiKeyRequest
 */
 func (a *APIKeysIamV2ApiService) CreateIamV2ApiKey(ctx _context.Context) ApiCreateIamV2ApiKeyRequest {
 	return ApiCreateIamV2ApiKeyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ApiKey
+//
+//	@return IamV2ApiKey
 func (a *APIKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -315,11 +316,10 @@ func (a *APIKeysIamV2ApiService) CreateIamV2ApiKeyExecute(r ApiCreateIamV2ApiKey
 }
 
 type ApiDeleteIamV2ApiKeyRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService APIKeysIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiDeleteIamV2ApiKeyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteIamV2ApiKeyExecute(r)
@@ -328,19 +328,19 @@ func (r ApiDeleteIamV2ApiKeyRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteIamV2ApiKey Delete an API Key
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to delete an API key.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the API key.
- @return ApiDeleteIamV2ApiKeyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the API key.
+	@return ApiDeleteIamV2ApiKeyRequest
 */
 func (a *APIKeysIamV2ApiService) DeleteIamV2ApiKey(ctx _context.Context, id string) ApiDeleteIamV2ApiKeyRequest {
 	return ApiDeleteIamV2ApiKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
@@ -461,11 +461,10 @@ func (a *APIKeysIamV2ApiService) DeleteIamV2ApiKeyExecute(r ApiDeleteIamV2ApiKey
 }
 
 type ApiGetIamV2ApiKeyRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService APIKeysIamV2Api
-	id string
+	id         string
 }
-
 
 func (r ApiGetIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response, error) {
 	return r.ApiService.GetIamV2ApiKeyExecute(r)
@@ -474,24 +473,25 @@ func (r ApiGetIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response, er
 /*
 GetIamV2ApiKey Read an API Key
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to read an API key.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the API key.
- @return ApiGetIamV2ApiKeyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the API key.
+	@return ApiGetIamV2ApiKeyRequest
 */
 func (a *APIKeysIamV2ApiService) GetIamV2ApiKey(ctx _context.Context, id string) ApiGetIamV2ApiKeyRequest {
 	return ApiGetIamV2ApiKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ApiKey
+//
+//	@return IamV2ApiKey
 func (a *APIKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -618,12 +618,13 @@ func (a *APIKeysIamV2ApiService) GetIamV2ApiKeyExecute(r ApiGetIamV2ApiKeyReques
 }
 
 type ApiListIamV2ApiKeysRequest struct {
-	ctx _context.Context
-	ApiService APIKeysIamV2Api
-	specOwner *string
+	ctx          _context.Context
+	ApiService   APIKeysIamV2Api
+	specOwner    *string
 	specResource *string
-	pageSize *int32
-	pageToken *string
+	showExpired  *bool
+	pageSize     *int32
+	pageToken    *string
 }
 
 // Filter the results by exact match for spec.owner.
@@ -631,16 +632,25 @@ func (r ApiListIamV2ApiKeysRequest) SpecOwner(specOwner string) ApiListIamV2ApiK
 	r.specOwner = &specOwner
 	return r
 }
+
 // Filter the results by exact match for spec.resource.
 func (r ApiListIamV2ApiKeysRequest) SpecResource(specResource string) ApiListIamV2ApiKeysRequest {
 	r.specResource = &specResource
 	return r
 }
+
+// When true, include expired API keys in the results. Defaults to false.
+func (r ApiListIamV2ApiKeysRequest) ShowExpired(showExpired bool) ApiListIamV2ApiKeysRequest {
+	r.showExpired = &showExpired
+	return r
+}
+
 // A pagination size for collection requests.
 func (r ApiListIamV2ApiKeysRequest) PageSize(pageSize int32) ApiListIamV2ApiKeysRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // An opaque pagination token for collection requests.
 func (r ApiListIamV2ApiKeysRequest) PageToken(pageToken string) ApiListIamV2ApiKeysRequest {
 	r.pageToken = &pageToken
@@ -654,7 +664,7 @@ func (r ApiListIamV2ApiKeysRequest) Execute() (IamV2ApiKeyList, *_nethttp.Respon
 /*
 ListIamV2ApiKeys List of API Keys
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Retrieve a sorted, filtered, paginated list of all API keys.
 
@@ -662,19 +672,19 @@ This can show all keys for a single owner (across resources - Kafka clusters), o
 resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
 organization. You will only see the keys that are accessible to the account making the API request.
 
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListIamV2ApiKeysRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListIamV2ApiKeysRequest
 */
 func (a *APIKeysIamV2ApiService) ListIamV2ApiKeys(ctx _context.Context) ApiListIamV2ApiKeysRequest {
 	return ApiListIamV2ApiKeysRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ApiKeyList
+//
+//	@return IamV2ApiKeyList
 func (a *APIKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRequest) (IamV2ApiKeyList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -701,6 +711,9 @@ func (a *APIKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRe
 	}
 	if r.specResource != nil {
 		localVarQueryParams.Add("spec.resource", parameterToString(*r.specResource, ""))
+	}
+	if r.showExpired != nil {
+		localVarQueryParams.Add("show_expired", parameterToString(*r.showExpired, ""))
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
@@ -802,9 +815,9 @@ func (a *APIKeysIamV2ApiService) ListIamV2ApiKeysExecute(r ApiListIamV2ApiKeysRe
 }
 
 type ApiUpdateIamV2ApiKeyRequest struct {
-	ctx _context.Context
-	ApiService APIKeysIamV2Api
-	id string
+	ctx               _context.Context
+	ApiService        APIKeysIamV2Api
+	id                string
 	iamV2ApiKeyUpdate *IamV2ApiKeyUpdate
 }
 
@@ -820,26 +833,25 @@ func (r ApiUpdateIamV2ApiKeyRequest) Execute() (IamV2ApiKey, *_nethttp.Response,
 /*
 UpdateIamV2ApiKey Update an API Key
 
-[![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update an API key.
 
-
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier for the API key.
- @return ApiUpdateIamV2ApiKeyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the API key.
+	@return ApiUpdateIamV2ApiKeyRequest
 */
 func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKey(ctx _context.Context, id string) ApiUpdateIamV2ApiKeyRequest {
 	return ApiUpdateIamV2ApiKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return IamV2ApiKey
+//
+//	@return IamV2ApiKey
 func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKeyRequest) (IamV2ApiKey, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
@@ -944,6 +956,16 @@ func (a *APIKeysIamV2ApiService) UpdateIamV2ApiKeyExecute(r ApiUpdateIamV2ApiKey
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
