@@ -1,5 +1,5 @@
 module github.com/confluentinc/ccloud-sdk-go-v2/org
 
-go 1.26.7
+go 1.26.8
 
 require golang.org/x/oauth2 v0.36.0
