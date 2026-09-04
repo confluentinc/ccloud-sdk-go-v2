@@ -36,13 +36,15 @@ import (
 
 // TableflowV1TableFlowTopicConfigsSpec The configs for the Tableflow enabled topic
 type TableflowV1TableFlowTopicConfigsSpec struct {
-	// This flag determines whether to enable compaction for the Tableflow enabled topic.
+	// This flag determines whether to enable compaction for the Tableflow enabled topic. Deprecated
+	// Deprecated
 	EnableCompaction *bool `json:"enable_compaction,omitempty"`
-	// This flag determines whether to enable partitioning for the Tableflow enabled topic.
+	// This flag determines whether to enable partitioning for the Tableflow enabled topic. Deprecated
+	// Deprecated
 	EnablePartitioning *bool `json:"enable_partitioning,omitempty"`
 	// The maximum age, in milliseconds, of snapshots (for Iceberg) or versions (for Delta) to retain in the table for the Tableflow-enabled topic (snapshot/version expiration).  The default value is \"604800000\" milliseconds (equivalent to 7 days).  The minimum allowed value is \"86400000\" milliseconds (equivalent to 24 hours).
 	RetentionMs *string `json:"retention_ms,omitempty"`
-	// The maximum age, in milliseconds, of data to retain in the table for the Tableflow-enabled topic.  The minimum allowed value is \"2592000000\" milliseconds (equivalent to 30 days).
+	// The maximum age, in milliseconds, of data to retain in the table for the Tableflow-enabled topic.  The minimum allowed non-zero value is \"2592000000\" milliseconds (equivalent to 30 days).  Set to \"0\" to disable data retention (keep all data indefinitely).  Note - The attribute is in a [Limited Availability lifecycle stage](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
 	DataRetentionMs *string `json:"data_retention_ms,omitempty"`
 	// The strategy to handle record failures in the Tableflow enabled topic during materialization.  For `SKIP`, we skip the bad records and move to the next record,  and for `SUSPEND`, we suspend the materialization of the topic.
 	// Deprecated
@@ -75,6 +77,7 @@ func NewTableflowV1TableFlowTopicConfigsSpecWithDefaults() *TableflowV1TableFlow
 }
 
 // GetEnableCompaction returns the EnableCompaction field value if set, zero value otherwise.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnableCompaction() bool {
 	if o == nil || o.EnableCompaction == nil {
 		var ret bool
@@ -85,6 +88,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnableCompaction() bool {
 
 // GetEnableCompactionOk returns a tuple with the EnableCompaction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnableCompactionOk() (*bool, bool) {
 	if o == nil || o.EnableCompaction == nil {
 		return nil, false
@@ -102,11 +106,13 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) HasEnableCompaction() bool {
 }
 
 // SetEnableCompaction gets a reference to the given bool and assigns it to the EnableCompaction field.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) SetEnableCompaction(v bool) {
 	o.EnableCompaction = &v
 }
 
 // GetEnablePartitioning returns the EnablePartitioning field value if set, zero value otherwise.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnablePartitioning() bool {
 	if o == nil || o.EnablePartitioning == nil {
 		var ret bool
@@ -117,6 +123,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnablePartitioning() bool {
 
 // GetEnablePartitioningOk returns a tuple with the EnablePartitioning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) GetEnablePartitioningOk() (*bool, bool) {
 	if o == nil || o.EnablePartitioning == nil {
 		return nil, false
@@ -134,6 +141,7 @@ func (o *TableflowV1TableFlowTopicConfigsSpec) HasEnablePartitioning() bool {
 }
 
 // SetEnablePartitioning gets a reference to the given bool and assigns it to the EnablePartitioning field.
+// Deprecated
 func (o *TableflowV1TableFlowTopicConfigsSpec) SetEnablePartitioning(v bool) {
 	o.EnablePartitioning = &v
 }

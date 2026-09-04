@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ErrorMessage** | Pointer to **string** | Displayable error message if Tableflow topic is in an error state | [optional] [readonly] 
 **CatalogSyncStatuses** | Pointer to [**[]TableflowV1CatalogSyncStatus**](TableflowV1CatalogSyncStatus.md) | List of associated catalogs and their synchronization statuses for this Tableflow topic.  | [optional] [readonly] 
 **FailingTableFormats** | Pointer to [**[]TableflowV1TableflowTopicStatusFailingTableFormats**](TableflowV1TableflowTopicStatusFailingTableFormats.md) | List of failing table formats for the Tableflow-enabled topic, including error details.  | [optional] [readonly] 
-**WriteMode** | **string** | The write mode for the Tableflow-enabled topic, determining how data is written to the table.  | [readonly] 
+**WriteMode** | **string** | The write mode for the Tableflow-enabled topic, determining how data is written to the table. Deprecated  | [readonly] 
 
 ## Methods
 
