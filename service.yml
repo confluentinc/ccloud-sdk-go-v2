@@ -20,6 +20,6 @@ semaphore:
           required: true
           description: "Tag version to create (e.g., flink-gateway/v0.32.0)"
 make:
-  enable: true
+  enable: false
   enable_updates: true
   update_makefile: false
