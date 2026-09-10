@@ -2,5 +2,5 @@ module github.com/confluentinc/ccloud-sdk-go-v2/connect-custom-plugin
 go 1.26.8
 
 require (
-	golang.org/x/oauth2 v0.36.0
+	golang.org/x/oauth2 v0.37.0
 )
