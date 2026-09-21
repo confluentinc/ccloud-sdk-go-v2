@@ -516,13 +516,13 @@ paths:
             --url https://api.confluent.cloud/cli/v1/usages \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"os":"darwin","arch":"amd64","version":"v2.7.0","command":"confluent kafka cluster create","flags":["cloud","region"],"error":true,"stack_frames":["~/.goenv/versions/1.20.4/src/runtime/panic.go:884","github.com/confluentinc/cli/internal/cmd/command.go:171"]}'
+            --data '{"os":"darwin","arch":"amd64","version":"v2.7.0","command":"confluent kafka cluster create","flags":["cloud","region"],"error":true,"stack_frames":["~/.goenv/versions/1.20.4/src/runtime/panic.go:884","github.com/confluentinc/cli/internal/cmd/command.go:171"],"agent_env_vars":["CLAUDECODE"],"agent_proc":"claude","agent_argv":"@anthropic-ai/claude-code","ide_host":"code","interactive":"ioe","chain_shape":"sasue","cmd_wrappers":["timeout"],"ci_providers":["github-actions"],"agent_tables":"builtin"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"],\"agent_env_vars\":[\"CLAUDECODE\"],\"agent_proc\":\"claude\",\"agent_argv\":\"@anthropic-ai/claude-code\",\"ide_host\":\"code\",\"interactive\":\"ioe\",\"chain_shape\":\"sasue\",\"cmd_wrappers\":[\"timeout\"],\"ci_providers\":[\"github-actions\"],\"agent_tables\":\"builtin\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cli/v1/usages")
             .post(body)
@@ -538,19 +538,24 @@ paths:
           \":\\\"amd64\\\",\\\"version\\\":\\\"v2.7.0\\\",\\\"command\\\":\\\"confluent\
           \ kafka cluster create\\\",\\\"flags\\\":[\\\"cloud\\\",\\\"region\\\"],\\\
           \"error\\\":true,\\\"stack_frames\\\":[\\\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\\\
-          \",\\\"github.com/confluentinc/cli/internal/cmd/command.go:171\\\"]}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"github.com/confluentinc/cli/internal/cmd/command.go:171\\\"],\\\"\
+          agent_env_vars\\\":[\\\"CLAUDECODE\\\"],\\\"agent_proc\\\":\\\"claude\\\"\
+          ,\\\"agent_argv\\\":\\\"@anthropic-ai/claude-code\\\",\\\"ide_host\\\":\\\
+          \"code\\\",\\\"interactive\\\":\\\"ioe\\\",\\\"chain_shape\\\":\\\"sasue\\\
+          \",\\\"cmd_wrappers\\\":[\\\"timeout\\\"],\\\"ci_providers\\\":[\\\"github-actions\\\
+          \"],\\\"agent_tables\\\":\\\"builtin\\\"}\")\n\n\treq, _ := http.NewRequest(\"\
+          POST\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}"
+          payload = "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"],\"agent_env_vars\":[\"CLAUDECODE\"],\"agent_proc\":\"claude\",\"agent_argv\":\"@anthropic-ai/claude-code\",\"ide_host\":\"code\",\"interactive\":\"ioe\",\"chain_shape\":\"sasue\",\"cmd_wrappers\":[\"timeout\"],\"ci_providers\":[\"github-actions\"],\"agent_tables\":\"builtin\"}"
 
           headers = {
               'content-type': "application/json",
@@ -601,7 +606,16 @@ paths:
             stack_frames: [
               '~/.goenv/versions/1.20.4/src/runtime/panic.go:884',
               'github.com/confluentinc/cli/internal/cmd/command.go:171'
-            ]
+            ],
+            agent_env_vars: ['CLAUDECODE'],
+            agent_proc: 'claude',
+            agent_argv: '@anthropic-ai/claude-code',
+            ide_host: 'code',
+            interactive: 'ioe',
+            chain_shape: 'sasue',
+            cmd_wrappers: ['timeout'],
+            ci_providers: ['github-actions'],
+            agent_tables: 'builtin'
           }));
           req.end();
       - lang: C
@@ -616,7 +630,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"],\"agent_env_vars\":[\"CLAUDECODE\"],\"agent_proc\":\"claude\",\"agent_argv\":\"@anthropic-ai/claude-code\",\"ide_host\":\"code\",\"interactive\":\"ioe\",\"chain_shape\":\"sasue\",\"cmd_wrappers\":[\"timeout\"],\"ci_providers\":[\"github-actions\"],\"agent_tables\":\"builtin\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -625,7 +639,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"os\":\"darwin\",\"arch\":\"amd64\",\"version\":\"v2.7.0\",\"command\":\"confluent kafka cluster create\",\"flags\":[\"cloud\",\"region\"],\"error\":true,\"stack_frames\":[\"~/.goenv/versions/1.20.4/src/runtime/panic.go:884\",\"github.com/confluentinc/cli/internal/cmd/command.go:171\"],\"agent_env_vars\":[\"CLAUDECODE\"],\"agent_proc\":\"claude\",\"agent_argv\":\"@anthropic-ai/claude-code\",\"ide_host\":\"code\",\"interactive\":\"ioe\",\"chain_shape\":\"sasue\",\"cmd_wrappers\":[\"timeout\"],\"ci_providers\":[\"github-actions\"],\"agent_tables\":\"builtin\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -945,6 +959,59 @@ components:
           items:
             type: string
           type: array
+        agent_env_vars:
+          description: Names of environment variables matched against known AI agent
+            signatures
+          example:
+          - CLAUDECODE
+          items:
+            type: string
+          type: array
+        agent_proc:
+          description: Process name of the nearest AI agent ancestor found in the
+            invoking process tree
+          example: claude
+          type: string
+        agent_argv:
+          description: Argv pattern matched on the nearest AI agent ancestor, corroborating
+            agent_proc
+          example: '@anthropic-ai/claude-code'
+          type: string
+        ide_host:
+          description: Process name of the nearest known code editor/IDE ancestor
+            found in the invoking process tree
+          example: code
+          type: string
+        interactive:
+          description: Three-character TTY state of stdin/stdout/stderr at invocation
+            time, e.g. "ioe" or "---"
+          example: ioe
+          type: string
+        chain_shape:
+          description: One character per process ancestor, encoding the shape of the
+            process tree above the CLI
+          example: sasue
+          type: string
+        cmd_wrappers:
+          description: Process names of wrapper commands found in the invoking process
+            tree, nearest first
+          example:
+          - timeout
+          items:
+            type: string
+          type: array
+        ci_providers:
+          description: Normalized CI provider identifiers detected in the environment
+          example:
+          - github-actions
+          items:
+            type: string
+          type: array
+        agent_tables:
+          description: Revision identifier of the fingerprint tables used to produce
+            the other agent-detection fields
+          example: builtin
+          type: string
       type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
