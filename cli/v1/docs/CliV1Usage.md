@@ -15,6 +15,15 @@ Name | Type | Description | Notes
 **Flags** | Pointer to **[]string** | Names of the flags passed with the CLI command | [optional] 
 **Error** | Pointer to **bool** | If an error occurred while running the CLI command | [optional] 
 **StackFrames** | Pointer to **[]string** | Line numbers of the stack trace from a panic | [optional] 
+**AgentEnvVars** | Pointer to **[]string** | Names of environment variables matched against known AI agent signatures | [optional] 
+**AgentProc** | Pointer to **string** | Process name of the nearest AI agent ancestor found in the invoking process tree | [optional] 
+**AgentArgv** | Pointer to **string** | Argv pattern matched on the nearest AI agent ancestor, corroborating agent_proc | [optional] 
+**IdeHost** | Pointer to **string** | Process name of the nearest known code editor/IDE ancestor found in the invoking process tree | [optional] 
+**Interactive** | Pointer to **string** | Three-character TTY state of stdin/stdout/stderr at invocation time, e.g. \&quot;ioe\&quot; or \&quot;---\&quot; | [optional] 
+**ChainShape** | Pointer to **string** | One character per process ancestor, encoding the shape of the process tree above the CLI | [optional] 
+**CmdWrappers** | Pointer to **[]string** | Process names of wrapper commands found in the invoking process tree, nearest first | [optional] 
+**CiProviders** | Pointer to **[]string** | Normalized CI provider identifiers detected in the environment | [optional] 
+**AgentTables** | Pointer to **string** | Revision identifier of the fingerprint tables used to produce the other agent-detection fields | [optional] 
 
 ## Methods
 
@@ -309,6 +318,231 @@ SetStackFrames sets StackFrames field to given value.
 `func (o *CliV1Usage) HasStackFrames() bool`
 
 HasStackFrames returns a boolean if a field has been set.
+
+### GetAgentEnvVars
+
+`func (o *CliV1Usage) GetAgentEnvVars() []string`
+
+GetAgentEnvVars returns the AgentEnvVars field if non-nil, zero value otherwise.
+
+### GetAgentEnvVarsOk
+
+`func (o *CliV1Usage) GetAgentEnvVarsOk() (*[]string, bool)`
+
+GetAgentEnvVarsOk returns a tuple with the AgentEnvVars field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentEnvVars
+
+`func (o *CliV1Usage) SetAgentEnvVars(v []string)`
+
+SetAgentEnvVars sets AgentEnvVars field to given value.
+
+### HasAgentEnvVars
+
+`func (o *CliV1Usage) HasAgentEnvVars() bool`
+
+HasAgentEnvVars returns a boolean if a field has been set.
+
+### GetAgentProc
+
+`func (o *CliV1Usage) GetAgentProc() string`
+
+GetAgentProc returns the AgentProc field if non-nil, zero value otherwise.
+
+### GetAgentProcOk
+
+`func (o *CliV1Usage) GetAgentProcOk() (*string, bool)`
+
+GetAgentProcOk returns a tuple with the AgentProc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentProc
+
+`func (o *CliV1Usage) SetAgentProc(v string)`
+
+SetAgentProc sets AgentProc field to given value.
+
+### HasAgentProc
+
+`func (o *CliV1Usage) HasAgentProc() bool`
+
+HasAgentProc returns a boolean if a field has been set.
+
+### GetAgentArgv
+
+`func (o *CliV1Usage) GetAgentArgv() string`
+
+GetAgentArgv returns the AgentArgv field if non-nil, zero value otherwise.
+
+### GetAgentArgvOk
+
+`func (o *CliV1Usage) GetAgentArgvOk() (*string, bool)`
+
+GetAgentArgvOk returns a tuple with the AgentArgv field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentArgv
+
+`func (o *CliV1Usage) SetAgentArgv(v string)`
+
+SetAgentArgv sets AgentArgv field to given value.
+
+### HasAgentArgv
+
+`func (o *CliV1Usage) HasAgentArgv() bool`
+
+HasAgentArgv returns a boolean if a field has been set.
+
+### GetIdeHost
+
+`func (o *CliV1Usage) GetIdeHost() string`
+
+GetIdeHost returns the IdeHost field if non-nil, zero value otherwise.
+
+### GetIdeHostOk
+
+`func (o *CliV1Usage) GetIdeHostOk() (*string, bool)`
+
+GetIdeHostOk returns a tuple with the IdeHost field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdeHost
+
+`func (o *CliV1Usage) SetIdeHost(v string)`
+
+SetIdeHost sets IdeHost field to given value.
+
+### HasIdeHost
+
+`func (o *CliV1Usage) HasIdeHost() bool`
+
+HasIdeHost returns a boolean if a field has been set.
+
+### GetInteractive
+
+`func (o *CliV1Usage) GetInteractive() string`
+
+GetInteractive returns the Interactive field if non-nil, zero value otherwise.
+
+### GetInteractiveOk
+
+`func (o *CliV1Usage) GetInteractiveOk() (*string, bool)`
+
+GetInteractiveOk returns a tuple with the Interactive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInteractive
+
+`func (o *CliV1Usage) SetInteractive(v string)`
+
+SetInteractive sets Interactive field to given value.
+
+### HasInteractive
+
+`func (o *CliV1Usage) HasInteractive() bool`
+
+HasInteractive returns a boolean if a field has been set.
+
+### GetChainShape
+
+`func (o *CliV1Usage) GetChainShape() string`
+
+GetChainShape returns the ChainShape field if non-nil, zero value otherwise.
+
+### GetChainShapeOk
+
+`func (o *CliV1Usage) GetChainShapeOk() (*string, bool)`
+
+GetChainShapeOk returns a tuple with the ChainShape field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChainShape
+
+`func (o *CliV1Usage) SetChainShape(v string)`
+
+SetChainShape sets ChainShape field to given value.
+
+### HasChainShape
+
+`func (o *CliV1Usage) HasChainShape() bool`
+
+HasChainShape returns a boolean if a field has been set.
+
+### GetCmdWrappers
+
+`func (o *CliV1Usage) GetCmdWrappers() []string`
+
+GetCmdWrappers returns the CmdWrappers field if non-nil, zero value otherwise.
+
+### GetCmdWrappersOk
+
+`func (o *CliV1Usage) GetCmdWrappersOk() (*[]string, bool)`
+
+GetCmdWrappersOk returns a tuple with the CmdWrappers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCmdWrappers
+
+`func (o *CliV1Usage) SetCmdWrappers(v []string)`
+
+SetCmdWrappers sets CmdWrappers field to given value.
+
+### HasCmdWrappers
+
+`func (o *CliV1Usage) HasCmdWrappers() bool`
+
+HasCmdWrappers returns a boolean if a field has been set.
+
+### GetCiProviders
+
+`func (o *CliV1Usage) GetCiProviders() []string`
+
+GetCiProviders returns the CiProviders field if non-nil, zero value otherwise.
+
+### GetCiProvidersOk
+
+`func (o *CliV1Usage) GetCiProvidersOk() (*[]string, bool)`
+
+GetCiProvidersOk returns a tuple with the CiProviders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCiProviders
+
+`func (o *CliV1Usage) SetCiProviders(v []string)`
+
+SetCiProviders sets CiProviders field to given value.
+
+### HasCiProviders
+
+`func (o *CliV1Usage) HasCiProviders() bool`
+
+HasCiProviders returns a boolean if a field has been set.
+
+### GetAgentTables
+
+`func (o *CliV1Usage) GetAgentTables() string`
+
+GetAgentTables returns the AgentTables field if non-nil, zero value otherwise.
+
+### GetAgentTablesOk
+
+`func (o *CliV1Usage) GetAgentTablesOk() (*string, bool)`
+
+GetAgentTablesOk returns a tuple with the AgentTables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentTables
+
+`func (o *CliV1Usage) SetAgentTables(v string)`
+
+SetAgentTables sets AgentTables field to given value.
+
+### HasAgentTables
+
+`func (o *CliV1Usage) HasAgentTables() bool`
+
+HasAgentTables returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
