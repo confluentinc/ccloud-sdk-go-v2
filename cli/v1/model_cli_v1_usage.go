@@ -57,6 +57,24 @@ type CliV1Usage struct {
 	Error *bool `json:"error,omitempty"`
 	// Line numbers of the stack trace from a panic
 	StackFrames *[]string `json:"stack_frames,omitempty"`
+	// Names of environment variables matched against known AI agent signatures
+	AgentEnvVars *[]string `json:"agent_env_vars,omitempty"`
+	// Process name of the nearest AI agent ancestor found in the invoking process tree
+	AgentProc *string `json:"agent_proc,omitempty"`
+	// Argv pattern matched on the nearest AI agent ancestor, corroborating agent_proc
+	AgentArgv *string `json:"agent_argv,omitempty"`
+	// Process name of the nearest known code editor/IDE ancestor found in the invoking process tree
+	IdeHost *string `json:"ide_host,omitempty"`
+	// Three-character TTY state of stdin/stdout/stderr at invocation time, e.g. \"ioe\" or \"---\"
+	Interactive *string `json:"interactive,omitempty"`
+	// One character per process ancestor, encoding the shape of the process tree above the CLI
+	ChainShape *string `json:"chain_shape,omitempty"`
+	// Process names of wrapper commands found in the invoking process tree, nearest first
+	CmdWrappers *[]string `json:"cmd_wrappers,omitempty"`
+	// Normalized CI provider identifiers detected in the environment
+	CiProviders *[]string `json:"ci_providers,omitempty"`
+	// Revision identifier of the fingerprint tables used to produce the other agent-detection fields
+	AgentTables *string `json:"agent_tables,omitempty"`
 }
 
 // NewCliV1Usage instantiates a new CliV1Usage object
@@ -428,6 +446,294 @@ func (o *CliV1Usage) SetStackFrames(v []string) {
 	o.StackFrames = &v
 }
 
+// GetAgentEnvVars returns the AgentEnvVars field value if set, zero value otherwise.
+func (o *CliV1Usage) GetAgentEnvVars() []string {
+	if o == nil || o.AgentEnvVars == nil {
+		var ret []string
+		return ret
+	}
+	return *o.AgentEnvVars
+}
+
+// GetAgentEnvVarsOk returns a tuple with the AgentEnvVars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetAgentEnvVarsOk() (*[]string, bool) {
+	if o == nil || o.AgentEnvVars == nil {
+		return nil, false
+	}
+	return o.AgentEnvVars, true
+}
+
+// HasAgentEnvVars returns a boolean if a field has been set.
+func (o *CliV1Usage) HasAgentEnvVars() bool {
+	if o != nil && o.AgentEnvVars != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentEnvVars gets a reference to the given []string and assigns it to the AgentEnvVars field.
+func (o *CliV1Usage) SetAgentEnvVars(v []string) {
+	o.AgentEnvVars = &v
+}
+
+// GetAgentProc returns the AgentProc field value if set, zero value otherwise.
+func (o *CliV1Usage) GetAgentProc() string {
+	if o == nil || o.AgentProc == nil {
+		var ret string
+		return ret
+	}
+	return *o.AgentProc
+}
+
+// GetAgentProcOk returns a tuple with the AgentProc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetAgentProcOk() (*string, bool) {
+	if o == nil || o.AgentProc == nil {
+		return nil, false
+	}
+	return o.AgentProc, true
+}
+
+// HasAgentProc returns a boolean if a field has been set.
+func (o *CliV1Usage) HasAgentProc() bool {
+	if o != nil && o.AgentProc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentProc gets a reference to the given string and assigns it to the AgentProc field.
+func (o *CliV1Usage) SetAgentProc(v string) {
+	o.AgentProc = &v
+}
+
+// GetAgentArgv returns the AgentArgv field value if set, zero value otherwise.
+func (o *CliV1Usage) GetAgentArgv() string {
+	if o == nil || o.AgentArgv == nil {
+		var ret string
+		return ret
+	}
+	return *o.AgentArgv
+}
+
+// GetAgentArgvOk returns a tuple with the AgentArgv field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetAgentArgvOk() (*string, bool) {
+	if o == nil || o.AgentArgv == nil {
+		return nil, false
+	}
+	return o.AgentArgv, true
+}
+
+// HasAgentArgv returns a boolean if a field has been set.
+func (o *CliV1Usage) HasAgentArgv() bool {
+	if o != nil && o.AgentArgv != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentArgv gets a reference to the given string and assigns it to the AgentArgv field.
+func (o *CliV1Usage) SetAgentArgv(v string) {
+	o.AgentArgv = &v
+}
+
+// GetIdeHost returns the IdeHost field value if set, zero value otherwise.
+func (o *CliV1Usage) GetIdeHost() string {
+	if o == nil || o.IdeHost == nil {
+		var ret string
+		return ret
+	}
+	return *o.IdeHost
+}
+
+// GetIdeHostOk returns a tuple with the IdeHost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetIdeHostOk() (*string, bool) {
+	if o == nil || o.IdeHost == nil {
+		return nil, false
+	}
+	return o.IdeHost, true
+}
+
+// HasIdeHost returns a boolean if a field has been set.
+func (o *CliV1Usage) HasIdeHost() bool {
+	if o != nil && o.IdeHost != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdeHost gets a reference to the given string and assigns it to the IdeHost field.
+func (o *CliV1Usage) SetIdeHost(v string) {
+	o.IdeHost = &v
+}
+
+// GetInteractive returns the Interactive field value if set, zero value otherwise.
+func (o *CliV1Usage) GetInteractive() string {
+	if o == nil || o.Interactive == nil {
+		var ret string
+		return ret
+	}
+	return *o.Interactive
+}
+
+// GetInteractiveOk returns a tuple with the Interactive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetInteractiveOk() (*string, bool) {
+	if o == nil || o.Interactive == nil {
+		return nil, false
+	}
+	return o.Interactive, true
+}
+
+// HasInteractive returns a boolean if a field has been set.
+func (o *CliV1Usage) HasInteractive() bool {
+	if o != nil && o.Interactive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInteractive gets a reference to the given string and assigns it to the Interactive field.
+func (o *CliV1Usage) SetInteractive(v string) {
+	o.Interactive = &v
+}
+
+// GetChainShape returns the ChainShape field value if set, zero value otherwise.
+func (o *CliV1Usage) GetChainShape() string {
+	if o == nil || o.ChainShape == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChainShape
+}
+
+// GetChainShapeOk returns a tuple with the ChainShape field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetChainShapeOk() (*string, bool) {
+	if o == nil || o.ChainShape == nil {
+		return nil, false
+	}
+	return o.ChainShape, true
+}
+
+// HasChainShape returns a boolean if a field has been set.
+func (o *CliV1Usage) HasChainShape() bool {
+	if o != nil && o.ChainShape != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChainShape gets a reference to the given string and assigns it to the ChainShape field.
+func (o *CliV1Usage) SetChainShape(v string) {
+	o.ChainShape = &v
+}
+
+// GetCmdWrappers returns the CmdWrappers field value if set, zero value otherwise.
+func (o *CliV1Usage) GetCmdWrappers() []string {
+	if o == nil || o.CmdWrappers == nil {
+		var ret []string
+		return ret
+	}
+	return *o.CmdWrappers
+}
+
+// GetCmdWrappersOk returns a tuple with the CmdWrappers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetCmdWrappersOk() (*[]string, bool) {
+	if o == nil || o.CmdWrappers == nil {
+		return nil, false
+	}
+	return o.CmdWrappers, true
+}
+
+// HasCmdWrappers returns a boolean if a field has been set.
+func (o *CliV1Usage) HasCmdWrappers() bool {
+	if o != nil && o.CmdWrappers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCmdWrappers gets a reference to the given []string and assigns it to the CmdWrappers field.
+func (o *CliV1Usage) SetCmdWrappers(v []string) {
+	o.CmdWrappers = &v
+}
+
+// GetCiProviders returns the CiProviders field value if set, zero value otherwise.
+func (o *CliV1Usage) GetCiProviders() []string {
+	if o == nil || o.CiProviders == nil {
+		var ret []string
+		return ret
+	}
+	return *o.CiProviders
+}
+
+// GetCiProvidersOk returns a tuple with the CiProviders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetCiProvidersOk() (*[]string, bool) {
+	if o == nil || o.CiProviders == nil {
+		return nil, false
+	}
+	return o.CiProviders, true
+}
+
+// HasCiProviders returns a boolean if a field has been set.
+func (o *CliV1Usage) HasCiProviders() bool {
+	if o != nil && o.CiProviders != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCiProviders gets a reference to the given []string and assigns it to the CiProviders field.
+func (o *CliV1Usage) SetCiProviders(v []string) {
+	o.CiProviders = &v
+}
+
+// GetAgentTables returns the AgentTables field value if set, zero value otherwise.
+func (o *CliV1Usage) GetAgentTables() string {
+	if o == nil || o.AgentTables == nil {
+		var ret string
+		return ret
+	}
+	return *o.AgentTables
+}
+
+// GetAgentTablesOk returns a tuple with the AgentTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CliV1Usage) GetAgentTablesOk() (*string, bool) {
+	if o == nil || o.AgentTables == nil {
+		return nil, false
+	}
+	return o.AgentTables, true
+}
+
+// HasAgentTables returns a boolean if a field has been set.
+func (o *CliV1Usage) HasAgentTables() bool {
+	if o != nil && o.AgentTables != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentTables gets a reference to the given string and assigns it to the AgentTables field.
+func (o *CliV1Usage) SetAgentTables(v string) {
+	o.AgentTables = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *CliV1Usage) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -441,6 +747,15 @@ func (o *CliV1Usage) Redact() {
 	o.recurseRedact(o.Flags)
 	o.recurseRedact(o.Error)
 	o.recurseRedact(o.StackFrames)
+	o.recurseRedact(o.AgentEnvVars)
+	o.recurseRedact(o.AgentProc)
+	o.recurseRedact(o.AgentArgv)
+	o.recurseRedact(o.IdeHost)
+	o.recurseRedact(o.Interactive)
+	o.recurseRedact(o.ChainShape)
+	o.recurseRedact(o.CmdWrappers)
+	o.recurseRedact(o.CiProviders)
+	o.recurseRedact(o.AgentTables)
 }
 
 func (o *CliV1Usage) recurseRedact(v interface{}) {
@@ -507,6 +822,33 @@ func (o CliV1Usage) MarshalJSON() ([]byte, error) {
 	}
 	if o.StackFrames != nil {
 		toSerialize["stack_frames"] = o.StackFrames
+	}
+	if o.AgentEnvVars != nil {
+		toSerialize["agent_env_vars"] = o.AgentEnvVars
+	}
+	if o.AgentProc != nil {
+		toSerialize["agent_proc"] = o.AgentProc
+	}
+	if o.AgentArgv != nil {
+		toSerialize["agent_argv"] = o.AgentArgv
+	}
+	if o.IdeHost != nil {
+		toSerialize["ide_host"] = o.IdeHost
+	}
+	if o.Interactive != nil {
+		toSerialize["interactive"] = o.Interactive
+	}
+	if o.ChainShape != nil {
+		toSerialize["chain_shape"] = o.ChainShape
+	}
+	if o.CmdWrappers != nil {
+		toSerialize["cmd_wrappers"] = o.CmdWrappers
+	}
+	if o.CiProviders != nil {
+		toSerialize["ci_providers"] = o.CiProviders
+	}
+	if o.AgentTables != nil {
+		toSerialize["agent_tables"] = o.AgentTables
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
