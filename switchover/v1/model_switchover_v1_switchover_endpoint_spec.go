@@ -42,7 +42,7 @@ type SwitchoverV1SwitchoverEndpointSpec struct {
 	ParentResourceCrn *string `json:"parent_resource_crn,omitempty"`
 	// A human-readable name for the switchover endpoint.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The name of the endpoint that should be active. For stateful pairs the control plane owns this value (it follows the pair's active member) and customers cannot set it directly; on create it may be provided as an initial value. Must match one of `endpoints[].name`.
+	// The name of the endpoint that is currently active; always one of `endpoints[].name`. Output-only: the Switchover service derives it from the pair's active member at create time and moves it on every failover. A value supplied on create is ignored.
 	Target *string `json:"target,omitempty"`
 	// The endpoint definitions, one per side (e.g. west/east). Must contain exactly 2 entries.
 	Endpoints *[]SwitchoverV1EndpointConfig `json:"endpoints,omitempty"`
