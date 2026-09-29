@@ -1,9 +1,7 @@
 name: ccloud-sdk-go-v2
 lang: go
-lang_version: "1.26.8"
+lang_version: 1.26.8
 git:
-  enable: true
-github:
   enable: true
 semaphore:
   enable: true
@@ -14,11 +12,11 @@ semaphore:
   tasks:
     - name: Manual publish tag
       branch: git-tag
-      pipeline_file: ".semaphore/git-tag.yml"
+      pipeline_file: .semaphore/git-tag.yml
       parameters:
         - name: TAG
           required: true
-          description: "Tag version to create (e.g., flink-gateway/v0.32.0)"
+          description: Tag version to create (e.g., flink-gateway/v0.32.0)
 make:
   enable: false
   enable_updates: true
