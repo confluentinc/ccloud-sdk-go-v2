@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | Specifies the current processing state of a CloudConnectArtifact. | [readonly] 
+**ErrorMessage** | Pointer to **string** | An error message for the Connect Artifact when the phase is FAILED. | [optional] [readonly] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetPhase sets Phase field to given value.
 
+
+### GetErrorMessage
+
+`func (o *CamV1ConnectArtifactStatus) GetErrorMessage() string`
+
+GetErrorMessage returns the ErrorMessage field if non-nil, zero value otherwise.
+
+### GetErrorMessageOk
+
+`func (o *CamV1ConnectArtifactStatus) GetErrorMessageOk() (*string, bool)`
+
+GetErrorMessageOk returns a tuple with the ErrorMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorMessage
+
+`func (o *CamV1ConnectArtifactStatus) SetErrorMessage(v string)`
+
+SetErrorMessage sets ErrorMessage field to given value.
+
+### HasErrorMessage
+
+`func (o *CamV1ConnectArtifactStatus) HasErrorMessage() bool`
+
+HasErrorMessage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
