@@ -41,14 +41,14 @@ var (
 type PresignedUrlsCamV1Api interface {
 
 	/*
-			PresignedUploadUrlCamV1PresignedUrl Request a presigned upload URL for a new Connect Artifact.
+		PresignedUploadUrlCamV1PresignedUrl Request a presigned upload URL for a new Connect Artifact.
 
-			[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-		Request a presigned upload URL to upload a Connect Artifact archive.
+	Request a presigned upload URL to upload a Connect Artifact archive.
 
-			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-			 @return ApiPresignedUploadUrlCamV1PresignedUrlRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiPresignedUploadUrlCamV1PresignedUrlRequest
 	*/
 	PresignedUploadUrlCamV1PresignedUrl(ctx _context.Context) ApiPresignedUploadUrlCamV1PresignedUrlRequest
 
