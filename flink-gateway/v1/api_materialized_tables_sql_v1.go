@@ -127,7 +127,11 @@ type MaterializedTablesSqlV1Api interface {
 		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 	Make a request to update a Materialized Table's mutable fields.
-	Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
+	Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints`, `table_options`, `scaling` and `start_mode`.
+
+	Re-supplying `start_mode` on update governs how the new evolved
+	version reprocesses source data; see `sql.v1.MaterializedTableStartMode`
+	for the available strategies.
 
 
 		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -866,7 +870,11 @@ UpdateSqlv1MaterializedTable Update/Evolve a materialized table
 [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
 Make a request to update a Materialized Table's mutable fields.
-Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
+Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints`, `table_options`, `scaling` and `start_mode`.
+
+Re-supplying `start_mode` on update governs how the new evolved
+version reprocesses source data; see `sql.v1.MaterializedTableStartMode`
+for the available strategies.
 
 	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organizationId The unique identifier for the organization

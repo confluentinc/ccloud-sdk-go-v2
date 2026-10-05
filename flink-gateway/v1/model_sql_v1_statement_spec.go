@@ -40,7 +40,7 @@ type SqlV1StatementSpec struct {
 	Statement *string `json:"statement,omitempty"`
 	// A map (key-value pairs) of statement properties.
 	Properties *map[string]string `json:"properties,omitempty"`
-	// The id associated with the compute pool in context.  If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
+	// The id associated with the compute pool in context. If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
 	ComputePoolId *string `json:"compute_pool_id,omitempty"`
 	// The id of the principal this statement runs as. Possible values:    * `u-abc123` — user   * `sa-abc123` — service account   * `pool-abc123` — identity pool (OAuth caller authorized     against a single pool, either explicitly supplied or     resolved by the server)   * an identity CRN equal to `status.identity` (OAuth caller     authorized against multiple identity pools)  Customers typically supply one of the short prefixed ids and read the same value back. The CRN form is server-set in the multi-pool case; clients should accept it when reading but should not need to construct it.
 	Principal *string `json:"principal,omitempty"`

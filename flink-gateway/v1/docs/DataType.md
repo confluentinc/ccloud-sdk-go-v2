@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The data type of the column. | 
+**Type** | **string** | The data type of the column, for example &#x60;INTEGER&#x60;, &#x60;VARCHAR&#x60;, &#x60;ARRAY&#x60;, &#x60;MAP&#x60;, &#x60;ROW&#x60; or &#x60;VARIANT&#x60;.  | 
 **Nullable** | **bool** | Indicates whether values in this column can be null. | 
 **Length** | Pointer to **int32** | The length of the data type. | [optional] 
 **Precision** | Pointer to **int32** | The precision of the data type. | [optional] 
