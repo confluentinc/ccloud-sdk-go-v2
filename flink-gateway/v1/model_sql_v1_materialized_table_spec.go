@@ -56,7 +56,10 @@ type SqlV1MaterializedTableSpec struct {
 	// Only applicable on creation; ignored on update.
 	Distribution *SqlV1Distribution `json:"distribution,omitempty"`
 	// Contains the query section (usually starting with a SELECT) of the latest Materialized Table.
-	Query *string `json:"query,omitempty"`
+	Query     *string                          `json:"query,omitempty"`
+	StartMode *SqlV1MaterializedTableStartMode `json:"start_mode,omitempty"`
+	// Mutable scaling configuration for this Materialized Table.
+	Scaling *SqlV1ScalingSpec `json:"scaling,omitempty"`
 }
 
 // NewSqlV1MaterializedTableSpec instantiates a new SqlV1MaterializedTableSpec object
@@ -428,6 +431,70 @@ func (o *SqlV1MaterializedTableSpec) SetQuery(v string) {
 	o.Query = &v
 }
 
+// GetStartMode returns the StartMode field value if set, zero value otherwise.
+func (o *SqlV1MaterializedTableSpec) GetStartMode() SqlV1MaterializedTableStartMode {
+	if o == nil || o.StartMode == nil {
+		var ret SqlV1MaterializedTableStartMode
+		return ret
+	}
+	return *o.StartMode
+}
+
+// GetStartModeOk returns a tuple with the StartMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1MaterializedTableSpec) GetStartModeOk() (*SqlV1MaterializedTableStartMode, bool) {
+	if o == nil || o.StartMode == nil {
+		return nil, false
+	}
+	return o.StartMode, true
+}
+
+// HasStartMode returns a boolean if a field has been set.
+func (o *SqlV1MaterializedTableSpec) HasStartMode() bool {
+	if o != nil && o.StartMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStartMode gets a reference to the given SqlV1MaterializedTableStartMode and assigns it to the StartMode field.
+func (o *SqlV1MaterializedTableSpec) SetStartMode(v SqlV1MaterializedTableStartMode) {
+	o.StartMode = &v
+}
+
+// GetScaling returns the Scaling field value if set, zero value otherwise.
+func (o *SqlV1MaterializedTableSpec) GetScaling() SqlV1ScalingSpec {
+	if o == nil || o.Scaling == nil {
+		var ret SqlV1ScalingSpec
+		return ret
+	}
+	return *o.Scaling
+}
+
+// GetScalingOk returns a tuple with the Scaling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SqlV1MaterializedTableSpec) GetScalingOk() (*SqlV1ScalingSpec, bool) {
+	if o == nil || o.Scaling == nil {
+		return nil, false
+	}
+	return o.Scaling, true
+}
+
+// HasScaling returns a boolean if a field has been set.
+func (o *SqlV1MaterializedTableSpec) HasScaling() bool {
+	if o != nil && o.Scaling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScaling gets a reference to the given SqlV1ScalingSpec and assigns it to the Scaling field.
+func (o *SqlV1MaterializedTableSpec) SetScaling(v SqlV1ScalingSpec) {
+	o.Scaling = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1MaterializedTableSpec) Redact() {
 	o.recurseRedact(o.KafkaClusterId)
@@ -441,6 +508,8 @@ func (o *SqlV1MaterializedTableSpec) Redact() {
 	o.recurseRedact(o.Constraints)
 	o.recurseRedact(o.Distribution)
 	o.recurseRedact(o.Query)
+	o.recurseRedact(o.StartMode)
+	o.recurseRedact(o.Scaling)
 }
 
 func (o *SqlV1MaterializedTableSpec) recurseRedact(v interface{}) {
@@ -507,6 +576,12 @@ func (o SqlV1MaterializedTableSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Query != nil {
 		toSerialize["query"] = o.Query
+	}
+	if o.StartMode != nil {
+		toSerialize["start_mode"] = o.StartMode
+	}
+	if o.Scaling != nil {
+		toSerialize["scaling"] = o.Scaling
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)

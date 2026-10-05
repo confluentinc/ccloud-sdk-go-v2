@@ -36,7 +36,7 @@ import (
 
 // DataType struct for DataType
 type DataType struct {
-	// The data type of the column.
+	// The data type of the column, for example `INTEGER`, `VARCHAR`, `ARRAY`, `MAP`, `ROW` or `VARIANT`.
 	Type string `json:"type,omitempty"`
 	// Indicates whether values in this column can be null.
 	Nullable bool `json:"nullable,omitempty"`
