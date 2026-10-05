@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **Constraints** | Pointer to [**[]SqlV1Constraint**](SqlV1Constraint.md) | Specify table constraints. | [optional] 
 **Distribution** | Pointer to [**SqlV1Distribution**](SqlV1Distribution.md) | Only applicable on creation; ignored on update. | [optional] 
 **Query** | Pointer to **string** | Contains the query section (usually starting with a SELECT) of the latest Materialized Table. | [optional] 
+**StartMode** | Pointer to [**SqlV1MaterializedTableStartMode**](SqlV1MaterializedTableStartMode.md) |  | [optional] 
+**Scaling** | Pointer to [**SqlV1ScalingSpec**](SqlV1ScalingSpec.md) | Mutable scaling configuration for this Materialized Table. | [optional] 
 
 ## Methods
 
@@ -309,6 +311,56 @@ SetQuery sets Query field to given value.
 `func (o *SqlV1MaterializedTableSpec) HasQuery() bool`
 
 HasQuery returns a boolean if a field has been set.
+
+### GetStartMode
+
+`func (o *SqlV1MaterializedTableSpec) GetStartMode() SqlV1MaterializedTableStartMode`
+
+GetStartMode returns the StartMode field if non-nil, zero value otherwise.
+
+### GetStartModeOk
+
+`func (o *SqlV1MaterializedTableSpec) GetStartModeOk() (*SqlV1MaterializedTableStartMode, bool)`
+
+GetStartModeOk returns a tuple with the StartMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartMode
+
+`func (o *SqlV1MaterializedTableSpec) SetStartMode(v SqlV1MaterializedTableStartMode)`
+
+SetStartMode sets StartMode field to given value.
+
+### HasStartMode
+
+`func (o *SqlV1MaterializedTableSpec) HasStartMode() bool`
+
+HasStartMode returns a boolean if a field has been set.
+
+### GetScaling
+
+`func (o *SqlV1MaterializedTableSpec) GetScaling() SqlV1ScalingSpec`
+
+GetScaling returns the Scaling field if non-nil, zero value otherwise.
+
+### GetScalingOk
+
+`func (o *SqlV1MaterializedTableSpec) GetScalingOk() (*SqlV1ScalingSpec, bool)`
+
+GetScalingOk returns a tuple with the Scaling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScaling
+
+`func (o *SqlV1MaterializedTableSpec) SetScaling(v SqlV1ScalingSpec)`
+
+SetScaling sets Scaling field to given value.
+
+### HasScaling
+
+`func (o *SqlV1MaterializedTableSpec) HasScaling() bool`
+
+HasScaling returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

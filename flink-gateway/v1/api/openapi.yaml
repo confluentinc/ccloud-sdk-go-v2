@@ -4557,13 +4557,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"}}'
+            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;","start_mode":{"kind":"RESUME_OR_FROM_BEGINNING","timestamp":"2026-04-01T00:00:00Z","time_interval":{"interval":5,"time_unit":"HOURS"}}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables")
             .post(body)
@@ -4593,19 +4593,22 @@ paths:
           \",\\\"columns\\\":[\\\"user_id\\\",\\\"product_id\\\"],\\\"enforced\\\"\
           :false}],\\\"distribution\\\":{\\\"kind\\\":\\\"HASH\\\",\\\"keys\\\":[\\\
           \"user_id\\\"],\\\"bucket_count\\\":12},\\\"query\\\":\\\"SELECT user_id,\
-          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\"}}\")\n\
-          \n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\",\\\"start_mode\\\
+          \":{\\\"kind\\\":\\\"RESUME_OR_FROM_BEGINNING\\\",\\\"timestamp\\\":\\\"\
+          2026-04-01T00:00:00Z\\\",\\\"time_interval\\\":{\\\"interval\\\":5,\\\"\
+          time_unit\\\":\\\"HOURS\\\"}}}}\")\n\n\treq, _ := http.NewRequest(\"POST\"\
+          , url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}"
+          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}}}"
 
           headers = {
               'content-type': "application/json",
@@ -4689,7 +4692,12 @@ paths:
                 }
               ],
               distribution: {kind: 'HASH', keys: ['user_id'], bucket_count: 12},
-              query: 'SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;'
+              query: 'SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;',
+              start_mode: {
+                kind: 'RESUME_OR_FROM_BEGINNING',
+                timestamp: '2026-04-01T00:00:00Z',
+                time_interval: {interval: 5, time_unit: 'HOURS'}
+              }
             }
           }));
           req.end();
@@ -4705,7 +4713,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -4714,7 +4722,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   ? /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}
   : delete:
@@ -5254,7 +5262,11 @@ paths:
         [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Make a request to update a Materialized Table's mutable fields.
-        Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
+        Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints`, `table_options`, `scaling` and `start_mode`.
+
+        Re-supplying `start_mode` on update governs how the new evolved
+        version reprocesses source data; see `sql.v1.MaterializedTableStartMode`
+        for the available strategies.
       operationId: updateSqlv1MaterializedTable
       parameters:
       - description: The unique identifier for the organization
@@ -5493,13 +5505,13 @@ paths:
             --url 'https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;"},"metadata":{}}'
+            --data '{"name":"high-value-orders","spec":{"kafka_cluster_id":"lkc-12345","compute_pool_id":"lfcp-123","principal":"sa-abc123","stopped":false,"table_options":{"property1":"string","property2":"string"},"session_options":{"property1":"string","property2":"string"},"columns":[{"name":"user_id","type":{"type":"BIGINT","nullable":false,"length":0,"precision":0,"scale":0,"key_type":{},"value_type":{},"element_type":{},"fields":[{"name":"string","field_type":{},"description":"string"}],"resolution":"string","fractional_precision":0,"class_name":"string"},"comment":"string","kind":"Physical"}],"watermark":{"column":"event_timestamp","expression":"event_timestamp - INTERVAL '\''5'\'' SECOND"},"constraints":[{"name":"pk_orders","type":"PRIMARY_KEY","columns":["user_id","product_id"],"enforced":false}],"distribution":{"kind":"HASH","keys":["user_id"],"bucket_count":12},"query":"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;","start_mode":{"kind":"RESUME_OR_FROM_BEGINNING","timestamp":"2026-04-01T00:00:00Z","time_interval":{"interval":5,"time_unit":"HOURS"}}},"metadata":{}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}},\"metadata\":{}}");
           Request request = new Request.Builder()
             .url("https://flink.region.provider.confluent.cloud/sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}")
             .put(body)
@@ -5529,19 +5541,22 @@ paths:
           \",\\\"columns\\\":[\\\"user_id\\\",\\\"product_id\\\"],\\\"enforced\\\"\
           :false}],\\\"distribution\\\":{\\\"kind\\\":\\\"HASH\\\",\\\"keys\\\":[\\\
           \"user_id\\\"],\\\"bucket_count\\\":12},\\\"query\\\":\\\"SELECT user_id,\
-          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\"},\\\"\
-          metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\
-          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
-          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \ product_id, price, quantity FROM orders WHERE price > 1000;\\\",\\\"start_mode\\\
+          \":{\\\"kind\\\":\\\"RESUME_OR_FROM_BEGINNING\\\",\\\"timestamp\\\":\\\"\
+          2026-04-01T00:00:00Z\\\",\\\"time_interval\\\":{\\\"interval\\\":5,\\\"\
+          time_unit\\\":\\\"HOURS\\\"}}},\\\"metadata\\\":{}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PUT\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("flink.region.provider.confluent.cloud")
 
-          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}"
+          payload = "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}},\"metadata\":{}}"
 
           headers = {
               'content-type': "application/json",
@@ -5625,7 +5640,12 @@ paths:
                 }
               ],
               distribution: {kind: 'HASH', keys: ['user_id'], bucket_count: 12},
-              query: 'SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;'
+              query: 'SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;',
+              start_mode: {
+                kind: 'RESUME_OR_FROM_BEGINNING',
+                timestamp: '2026-04-01T00:00:00Z',
+                time_interval: {interval: 5, time_unit: 'HOURS'}
+              }
             },
             metadata: {}
           }));
@@ -5642,7 +5662,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}},\"metadata\":{}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -5651,7 +5671,7 @@ paths:
           var request = new RestRequest(Method.PUT);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\"},\"metadata\":{}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"high-value-orders\",\"spec\":{\"kafka_cluster_id\":\"lkc-12345\",\"compute_pool_id\":\"lfcp-123\",\"principal\":\"sa-abc123\",\"stopped\":false,\"table_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"session_options\":{\"property1\":\"string\",\"property2\":\"string\"},\"columns\":[{\"name\":\"user_id\",\"type\":{\"type\":\"BIGINT\",\"nullable\":false,\"length\":0,\"precision\":0,\"scale\":0,\"key_type\":{},\"value_type\":{},\"element_type\":{},\"fields\":[{\"name\":\"string\",\"field_type\":{},\"description\":\"string\"}],\"resolution\":\"string\",\"fractional_precision\":0,\"class_name\":\"string\"},\"comment\":\"string\",\"kind\":\"Physical\"}],\"watermark\":{\"column\":\"event_timestamp\",\"expression\":\"event_timestamp - INTERVAL '5' SECOND\"},\"constraints\":[{\"name\":\"pk_orders\",\"type\":\"PRIMARY_KEY\",\"columns\":[\"user_id\",\"product_id\"],\"enforced\":false}],\"distribution\":{\"kind\":\"HASH\",\"keys\":[\"user_id\"],\"bucket_count\":12},\"query\":\"SELECT user_id, product_id, price, quantity FROM orders WHERE price > 1000;\",\"start_mode\":{\"kind\":\"RESUME_OR_FROM_BEGINNING\",\"timestamp\":\"2026-04-01T00:00:00Z\",\"time_interval\":{\"interval\":5,\"time_unit\":\"HOURS\"}}},\"metadata\":{}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   ? /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions
   : get:
@@ -9141,6 +9161,10 @@ components:
             > 1000;
           session_options:
             key: session_options
+          start_mode:
+            kind: RESUME_OR_FROM_BEGINNING
+            time_interval: ""
+            timestamp: 2026-04-01T00:00:00Z
           distribution: ""
           constraints:
           - enforced: false
@@ -9253,6 +9277,10 @@ components:
               > 1000;
             session_options:
               key: session_options
+            start_mode:
+              kind: RESUME_OR_FROM_BEGINNING
+              time_interval: ""
+              timestamp: 2026-04-01T00:00:00Z
             distribution: ""
             constraints:
             - enforced: false
@@ -9291,6 +9319,10 @@ components:
               > 1000;
             session_options:
               key: session_options
+            start_mode:
+              kind: RESUME_OR_FROM_BEGINNING
+              time_interval: ""
+              timestamp: 2026-04-01T00:00:00Z
             distribution: ""
             constraints:
             - enforced: false
@@ -9353,6 +9385,10 @@ components:
           > 1000;
         session_options:
           key: session_options
+        start_mode:
+          kind: RESUME_OR_FROM_BEGINNING
+          time_interval: ""
+          timestamp: 2026-04-01T00:00:00Z
         distribution: ""
         constraints:
         - enforced: false
@@ -9432,6 +9468,91 @@ components:
             > 1000;
           maxLength: 131072
           type: string
+        start_mode:
+          $ref: '#/components/schemas/sql.v1.MaterializedTableStartMode'
+        scaling:
+          description: Mutable scaling configuration for this Materialized Table.
+          allOf:
+          - $ref: '#/components/schemas/sql.v1.ScalingSpec'
+      type: object
+    sql.v1.MaterializedTableStartMode:
+      description: |
+        Controls where the Materialized Table begins reading source data on
+        initial creation and on each evolution. When omitted, defaults to
+        `RESUME_OR_FROM_BEGINNING`.
+      example:
+        kind: RESUME_OR_FROM_BEGINNING
+        time_interval: ""
+        timestamp: 2026-04-01T00:00:00Z
+      properties:
+        kind:
+          description: |
+            The start mode strategy.
+
+            - `FROM_BEGINNING` reprocesses all available data from the source(s), starting from the beginning of history.
+            - `FROM_NOW` consumes from the latest stream record, or from a past point obtained by subtracting `time_interval` from the current time.
+            - `FROM_TIMESTAMP` begins processing from the absolute point in time given by `timestamp`. `timestamp` is required.
+            - `RESUME_OR_FROM_BEGINNING` resumes from the previous job's final source offsets, falling back to `FROM_BEGINNING` if resume information is unavailable.
+            - `RESUME_OR_FROM_NOW` resumes from the previous job's final source offsets, falling back to `FROM_NOW` (with optional `time_interval`) if resume information is unavailable.
+            - `RESUME_OR_FROM_TIMESTAMP` resumes from the previous job's final source offsets, falling back to the supplied `timestamp` if resume information is unavailable. `timestamp` is required.
+          example: RESUME_OR_FROM_BEGINNING
+          type: string
+          x-extensible-enum:
+          - FROM_BEGINNING
+          - FROM_NOW
+          - FROM_TIMESTAMP
+          - RESUME_OR_FROM_BEGINNING
+          - RESUME_OR_FROM_NOW
+          - RESUME_OR_FROM_TIMESTAMP
+        timestamp:
+          description: |
+            Absolute point in time to start processing from. Required when
+            `kind` is `FROM_TIMESTAMP` or `RESUME_OR_FROM_TIMESTAMP`; ignored
+            otherwise. Must be an RFC 3339 timestamp that includes a time
+            offset (either `Z` for UTC or an explicit offset such as
+            `+02:00` or `-07:00`); the offset alone determines the exact
+            timezone.
+          example: 2026-04-01T00:00:00Z
+          format: date-time
+          type: string
+        time_interval:
+          allOf:
+          - $ref: '#/components/schemas/sql.v1.IntervalExpression'
+          description: |
+            Lookback interval applied to the `FROM_NOW` semantics. Only
+            meaningful when `kind` is `FROM_NOW` or `RESUME_OR_FROM_NOW`.
+            When set, consumption starts from a past point obtained by
+            subtracting this interval from the current time (e.g.
+            `1 HOURS` means "start from one hour ago"). When omitted with
+            `FROM_NOW`, consumption starts from the latest stream record.
+      required:
+      - kind
+      type: object
+    sql.v1.IntervalExpression:
+      description: A duration expressed as an integer value paired with a time unit.
+      properties:
+        interval:
+          description: Numeric value of the time interval.
+          example: 5
+          format: int32
+          minimum: 1
+          type: integer
+        time_unit:
+          description: Unit of time for the interval.
+          example: HOURS
+          type: string
+          x-extensible-enum:
+          - SECONDS
+          - MINUTES
+          - HOURS
+          - DAYS
+          - WEEKS
+          - MONTHS
+          - QUARTERS
+          - YEARS
+      required:
+      - interval
+      - time_unit
       type: object
     sql.v1.MaterializedTableStatus:
       description: The status of the Materialized Table.
@@ -9843,7 +9964,10 @@ components:
       description: Distribution (bucket by) strategy.
       properties:
         kind:
-          description: The kind of distribution.
+          description: |
+            The kind of distribution. When omitted, the distribution algorithm is
+            connector-dependent, which is the case for a table declared with a
+            bucket count but no bucket keys.
           example: HASH
           type: string
           x-extensible-enum:
@@ -9861,8 +9985,6 @@ components:
           format: int32
           minimum: 1
           type: integer
-      required:
-      - kind
       type: object
     sql.v1.MaterializedTableWarning:
       allOf:
@@ -10631,19 +10753,21 @@ components:
           readOnly: true
           type: string
         end_time:
-          description: "The date and time in UTC (represented as RFC3339 format) at\
-            \ which the statement reached its final terminal state. \nThis field is\
-            \ set when the Phase is COMPLETED, FAILED, or STOPPED.\n\nNote - The attribute\
-            \ is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)\n"
+          description: |
+            The date and time in UTC (represented as RFC3339 format) at which the statement reached its final terminal state.
+            This field is set when the Phase is COMPLETED, FAILED, or STOPPED.
+
+            Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
           example: 2025-03-19T01:02:03-04:05
           format: date-time
           type: string
         duration:
-          description: "The total elapsed time (represented as ISO 8601 format) from\
-            \ when the statement transitioned from \nPENDING to RUNNING until it reached\
-            \ a final terminal state. This field is calculated and set when \nthe\
-            \ Phase is COMPLETED, FAILED, or STOPPED.\n\nNote - The attribute is in\
-            \ a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)\n"
+          description: |
+            The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from
+            PENDING to RUNNING until it reached a final terminal state. This field is calculated and set when
+            the Phase is COMPLETED, FAILED, or STOPPED.
+
+            Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
           example: PT2H30M
           format: duration
           type: string
@@ -10861,6 +10985,85 @@ components:
             `3`: represents `DELETE` (`-D`), i.e. deletion operation;
 
             Defaults to `0`.
+
+            ### Value encoding by column type
+
+            The schema gives each column's type, so the row carries only values. Scalars are JSON strings in
+            SQL notation. A SQL `NULL` is a bare `null`.
+
+            | Schema `type`                              | Payload example                  |
+            |--------------------------------------------|----------------------------------|
+            | `CHAR`, `VARCHAR`                          | `"A string"`                     |
+            | `BOOLEAN`                                  | `"TRUE"`                         |
+            | `BINARY`, `VARBINARY`                      | `"x'7f0203'"`                    |
+            | `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` | `"42"`                           |
+            | `FLOAT`, `DOUBLE`                          | `"1.1111112E7"`                  |
+            | `DECIMAL`                                  | `"12.123"`                       |
+            | `DATE`                                     | `"2023-04-06"`                   |
+            | `TIME_WITHOUT_TIME_ZONE`                   | `"10:56:22.541"`                 |
+            | `TIMESTAMP_WITHOUT_TIME_ZONE`              | `"2023-04-06 10:59:32.628"`      |
+            | `TIMESTAMP_WITH_LOCAL_TIME_ZONE`           | `"2023-04-06 11:06:47.224"`      |
+            | `INTERVAL_YEAR_MONTH`                      | `"+2000-02"`                     |
+            | `INTERVAL_DAY_TIME`                        | `"+2 07:33:20.000"`              |
+            | `ARRAY`                                    | `["1", "2", "3", null]`          |
+            | `MULTISET`                                 | `[["a", "2"], ["b", "1"]]`       |
+            | `MAP`                                      | `[["Bob", "a"], ["Alice", "b"]]` |
+            | `ROW`, `STRUCTURED_TYPE`                   | `["12", "a"]`                    |
+            | `VARIANT`                                  | `[11, "sensor-7"]`               |
+
+            Timestamps use a space separator, not `T`. `TIMESTAMP_WITH_LOCAL_TIME_ZONE` is rendered in the
+            session time zone and carries no offset.
+
+            `ROW` is positional, since its field names are in the schema. `ARRAY` is a plain list. `MAP` is a
+            list of `[key, value]` pairs and `MULTISET` a list of `[element, count]` pairs, so keys travel as
+            data and may be `null`.
+
+            ```
+            schema:  {"type": "ROW", "fields": [
+                       {"name": "id",    "field_type": {"type": "INTEGER"}},
+                       {"name": "tags",  "field_type": {"type": "ARRAY",
+                                           "element_type": {"type": "VARCHAR"}}},
+                       {"name": "props", "field_type": {"type": "MAP",
+                                           "key_type":   {"type": "VARCHAR"},
+                                           "value_type": {"type": "INTEGER"}}}]}
+
+            payload: ["12", ["hot", "cold"], [["a", "1"], ["b", "2"]]]
+            ```
+
+            ### VARIANT values
+
+            A `VARIANT` schema node carries no element types, so the types live in the value and differ per
+            row. Each node is a positional array starting with an integer type code, and the code's **sign**
+            gives the node's shape:
+
+            | Code  | Node shape                      | Meaning                             |
+            |-------|---------------------------------|-------------------------------------|
+            | `> 0` | `[code, value]`                 | a value                             |
+            | `0`   | `[0]`                           | NULL, carries nothing               |
+            | `< 0` | `[code, metadataHex, valueHex]` | not decodable, raw bytes attached   |
+
+            | Code | Type    | Code | Type     | Code | Type            |
+            |------|---------|------|----------|------|-----------------|
+            | `-2` | INVALID | `4`  | TINYINT  | `10` | DECIMAL         |
+            | `-1` | UNKNOWN | `5`  | SMALLINT | `11` | STRING          |
+            | `0`  | NULL    | `6`  | INT      | `12` | DATE            |
+            | `1`  | OBJECT  | `7`  | BIGINT   | `13` | TIMESTAMP       |
+            | `2`  | ARRAY   | `8`  | FLOAT    | `14` | TIMESTAMP_LTZ   |
+            | `3`  | BOOLEAN | `9`  | DOUBLE   | `15` | BYTES           |
+
+            Scalars use the same encoding as the column type of the same name above. `OBJECT` is an array of
+            `[key, node]` pairs, `ARRAY` an array of nodes.
+
+            ```
+            [1, [
+              ["device",  [11, "sensor-7"]],
+              ["meta",    [1, [["n", [4, "7"]], ["ok", [3, "TRUE"]]]]],
+              ["price",   [10, "100.00"]],
+              ["seen_at", [13, "2026-07-28 09:14:02.117000"]],
+              ["tags",    [2, [[11, "hot"], [0]]]],
+              ["weird",   [-1, "x'0102'", "x'7f2a'"]]
+            ]]
+            ```
           example:
           - op: 0
             row:
@@ -10897,9 +11100,9 @@ components:
           maxProperties: 8192
           type: object
         compute_pool_id:
-          description: "The id associated with the compute pool in context. \nIf not\
-            \ specified, the statement will use the default compute pool. The default\
-            \ pool is automatically determined by the system."
+          description: |-
+            The id associated with the compute pool in context.
+            If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
           example: fcp-00000
           maxLength: 255
           type: string
@@ -11161,7 +11364,8 @@ components:
     DataType:
       properties:
         type:
-          description: The data type of the column.
+          description: |
+            The data type of the column, for example `INTEGER`, `VARCHAR`, `ARRAY`, `MAP`, `ROW` or `VARIANT`.
           type: string
         nullable:
           description: Indicates whether values in this column can be null.

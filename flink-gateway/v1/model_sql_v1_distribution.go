@@ -36,8 +36,8 @@ import (
 
 // SqlV1Distribution Distribution (bucket by) strategy.
 type SqlV1Distribution struct {
-	// The kind of distribution.
-	Kind string    `json:"kind,omitempty"`
+	// The kind of distribution. When omitted, the distribution algorithm is connector-dependent, which is the case for a table declared with a bucket count but no bucket keys.
+	Kind *string   `json:"kind,omitempty"`
 	Keys *[]string `json:"keys,omitempty"`
 	// The number of buckets.
 	BucketCount *int32 `json:"bucket_count,omitempty"`
@@ -47,9 +47,8 @@ type SqlV1Distribution struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSqlV1Distribution(kind string) *SqlV1Distribution {
+func NewSqlV1Distribution() *SqlV1Distribution {
 	this := SqlV1Distribution{}
-	this.Kind = kind
 	var bucketCount int32 = 6
 	this.BucketCount = &bucketCount
 	return &this
@@ -65,28 +64,36 @@ func NewSqlV1DistributionWithDefaults() *SqlV1Distribution {
 	return &this
 }
 
-// GetKind returns the Kind field value
+// GetKind returns the Kind field value if set, zero value otherwise.
 func (o *SqlV1Distribution) GetKind() string {
-	if o == nil {
+	if o == nil || o.Kind == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Kind
+	return *o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value
+// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SqlV1Distribution) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Kind == nil {
 		return nil, false
 	}
-	return &o.Kind, true
+	return o.Kind, true
 }
 
-// SetKind sets field value
+// HasKind returns a boolean if a field has been set.
+func (o *SqlV1Distribution) HasKind() bool {
+	if o != nil && o.Kind != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKind gets a reference to the given string and assigns it to the Kind field.
 func (o *SqlV1Distribution) SetKind(v string) {
-	o.Kind = v
+	o.Kind = &v
 }
 
 // GetKeys returns the Keys field value if set, zero value otherwise.
@@ -155,7 +162,7 @@ func (o *SqlV1Distribution) SetBucketCount(v int32) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *SqlV1Distribution) Redact() {
-	o.recurseRedact(&o.Kind)
+	o.recurseRedact(o.Kind)
 	o.recurseRedact(o.Keys)
 	o.recurseRedact(o.BucketCount)
 }
@@ -192,7 +199,7 @@ func (o SqlV1Distribution) zeroField(v interface{}) {
 
 func (o SqlV1Distribution) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Kind != nil {
 		toSerialize["kind"] = o.Kind
 	}
 	if o.Keys != nil {
