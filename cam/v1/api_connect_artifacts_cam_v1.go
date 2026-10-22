@@ -108,6 +108,28 @@ type ConnectArtifactsCamV1Api interface {
 	// ListCamV1ConnectArtifactsExecute executes the request
 	//  @return CamV1ConnectArtifactList
 	ListCamV1ConnectArtifactsExecute(r ApiListCamV1ConnectArtifactsRequest) (CamV1ConnectArtifactList, *_nethttp.Response, error)
+
+	/*
+		UpdateCamV1ConnectArtifact Update a Connect Artifact.
+
+		[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+	Make a request to update a connect artifact.
+
+	Only the display name and description may be updated.
+
+
+
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id The unique identifier for the connect artifact.
+		 @return ApiUpdateCamV1ConnectArtifactRequest
+	*/
+	UpdateCamV1ConnectArtifact(ctx _context.Context, id string) ApiUpdateCamV1ConnectArtifactRequest
+
+	// UpdateCamV1ConnectArtifactExecute executes the request
+	//  @return CamV1ConnectArtifact
+	UpdateCamV1ConnectArtifactExecute(r ApiUpdateCamV1ConnectArtifactRequest) (CamV1ConnectArtifact, *_nethttp.Response, error)
 }
 
 // ConnectArtifactsCamV1ApiService ConnectArtifactsCamV1Api service
@@ -805,6 +827,214 @@ func (a *ConnectArtifactsCamV1ApiService) ListCamV1ConnectArtifactsExecute(r Api
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateCamV1ConnectArtifactRequest struct {
+	ctx                        _context.Context
+	ApiService                 ConnectArtifactsCamV1Api
+	specCloud                  *string
+	environment                *string
+	id                         string
+	camV1ConnectArtifactUpdate *CamV1ConnectArtifactUpdate
+}
+
+// Scope the operation to the given spec.cloud.
+func (r ApiUpdateCamV1ConnectArtifactRequest) SpecCloud(specCloud string) ApiUpdateCamV1ConnectArtifactRequest {
+	r.specCloud = &specCloud
+	return r
+}
+
+// Scope the operation to the given environment.
+func (r ApiUpdateCamV1ConnectArtifactRequest) Environment(environment string) ApiUpdateCamV1ConnectArtifactRequest {
+	r.environment = &environment
+	return r
+}
+func (r ApiUpdateCamV1ConnectArtifactRequest) CamV1ConnectArtifactUpdate(camV1ConnectArtifactUpdate CamV1ConnectArtifactUpdate) ApiUpdateCamV1ConnectArtifactRequest {
+	r.camV1ConnectArtifactUpdate = &camV1ConnectArtifactUpdate
+	return r
+}
+
+func (r ApiUpdateCamV1ConnectArtifactRequest) Execute() (CamV1ConnectArtifact, *_nethttp.Response, error) {
+	return r.ApiService.UpdateCamV1ConnectArtifactExecute(r)
+}
+
+/*
+UpdateCamV1ConnectArtifact Update a Connect Artifact.
+
+[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+Make a request to update a connect artifact.
+
+Only the display name and description may be updated.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier for the connect artifact.
+	@return ApiUpdateCamV1ConnectArtifactRequest
+*/
+func (a *ConnectArtifactsCamV1ApiService) UpdateCamV1ConnectArtifact(ctx _context.Context, id string) ApiUpdateCamV1ConnectArtifactRequest {
+	return ApiUpdateCamV1ConnectArtifactRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CamV1ConnectArtifact
+func (a *ConnectArtifactsCamV1ApiService) UpdateCamV1ConnectArtifactExecute(r ApiUpdateCamV1ConnectArtifactRequest) (CamV1ConnectArtifact, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  CamV1ConnectArtifact
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectArtifactsCamV1ApiService.UpdateCamV1ConnectArtifact")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cam/v1/connect-artifacts/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.specCloud == nil {
+		return localVarReturnValue, nil, reportError("specCloud is required and must be specified")
+	}
+	if r.environment == nil {
+		return localVarReturnValue, nil, reportError("environment is required and must be specified")
+	}
+
+	localVarQueryParams.Add("spec.cloud", parameterToString(*r.specCloud, ""))
+	localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.camV1ConnectArtifactUpdate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Failure
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v Failure
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

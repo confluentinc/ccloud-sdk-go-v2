@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteCamV1ConnectArtifact**](ConnectArtifactsCamV1Api.md#DeleteCamV1ConnectArtifact) | **Delete** /cam/v1/connect-artifacts/{id} | Delete a Connect Artifact
 [**GetCamV1ConnectArtifact**](ConnectArtifactsCamV1Api.md#GetCamV1ConnectArtifact) | **Get** /cam/v1/connect-artifacts/{id} | Read a Connect Artifact
 [**ListCamV1ConnectArtifacts**](ConnectArtifactsCamV1Api.md#ListCamV1ConnectArtifacts) | **Get** /cam/v1/connect-artifacts | List of Connect Artifacts
+[**UpdateCamV1ConnectArtifact**](ConnectArtifactsCamV1Api.md#UpdateCamV1ConnectArtifact) | **Patch** /cam/v1/connect-artifacts/{id} | Update a Connect Artifact.
 
 
 
@@ -292,6 +293,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCamV1ConnectArtifact
+
+> CamV1ConnectArtifact UpdateCamV1ConnectArtifact(ctx, id).SpecCloud(specCloud).Environment(environment).CamV1ConnectArtifactUpdate(camV1ConnectArtifactUpdate).Execute()
+
+Update a Connect Artifact.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    specCloud := "AWS" // string | Scope the operation to the given spec.cloud.
+    environment := "env-00000" // string | Scope the operation to the given environment.
+    id := "id_example" // string | The unique identifier for the connect artifact.
+    camV1ConnectArtifactUpdate := *openapiclient.NewCamV1ConnectArtifactUpdate() // CamV1ConnectArtifactUpdate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ConnectArtifactsCamV1Api.UpdateCamV1ConnectArtifact(context.Background(), id).SpecCloud(specCloud).Environment(environment).CamV1ConnectArtifactUpdate(camV1ConnectArtifactUpdate).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectArtifactsCamV1Api.UpdateCamV1ConnectArtifact``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateCamV1ConnectArtifact`: CamV1ConnectArtifact
+    fmt.Fprintf(os.Stdout, "Response from `ConnectArtifactsCamV1Api.UpdateCamV1ConnectArtifact`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier for the connect artifact. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCamV1ConnectArtifactRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **specCloud** | **string** | Scope the operation to the given spec.cloud. | 
+ **environment** | **string** | Scope the operation to the given environment. | 
+
+ **camV1ConnectArtifactUpdate** | [**CamV1ConnectArtifactUpdate**](CamV1ConnectArtifactUpdate.md) |  | 
+
+### Return type
+
+[**CamV1ConnectArtifact**](cam.v1.ConnectArtifact.md)
+
+### Authorization
+
+[cloud-api-key](../README.md#cloud-api-key), [confluent-sts-access-token](../README.md#confluent-sts-access-token), [confluent_auth](../README.md#confluent_auth), [global-api-key](../README.md#global-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

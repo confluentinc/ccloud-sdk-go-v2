@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Environment** | **string** | Environment the Connect Artifact belongs to. | 
 **DisplayName** | **string** | Unique name of the Connect Artifact archive per cloud, environment scope. | 
 **Description** | Pointer to **string** | Description of the Connect Artifact. | [optional] 
+**Type** | Pointer to **string** | Type of the Connect Artifact. &#x60;CUSTOM_SMT,CONNECT_EXTERNAL_DEP&#x60; denotes an artifact that contains both Custom SMTs and external dependencies.  | [optional] [default to "CUSTOM_SMT"]
 **ContentFormat** | Pointer to **string** | Archive format of the Connect Artifact. | [optional] [readonly] 
-**UploadSource** | Pointer to [**CamV1ConnectArtifactSpecUploadSourceOneOf**](CamV1ConnectArtifactSpecUploadSourceOneOf.md) | Upload source of the Connect Artifact. | [optional] 
+**UploadSource** | Pointer to [**CamV1ConnectArtifactSpecUploadSourceOneOf**](CamV1ConnectArtifactSpecUploadSourceOneOf.md) | Upload source of the Connect Artifact. Only used in &#x60;create&#x60;; ignored in &#x60;update&#x60;, &#x60;read&#x60;, and &#x60;list&#x60;. | [optional] 
 **Plugins** | Pointer to [**[]CamV1Plugins**](CamV1Plugins.md) | List of classes present in the Connect Artifact uploaded | [optional] [readonly] 
 **Usages** | Pointer to **[]string** | List of resource crns where this Connect artifact is being used. | [optional] [readonly] 
 
@@ -116,6 +117,31 @@ SetDescription sets Description field to given value.
 `func (o *CamV1ConnectArtifactSpec) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *CamV1ConnectArtifactSpec) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *CamV1ConnectArtifactSpec) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *CamV1ConnectArtifactSpec) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *CamV1ConnectArtifactSpec) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetContentFormat
 

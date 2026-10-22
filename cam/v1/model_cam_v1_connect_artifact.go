@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// CamV1ConnectArtifact `Connect Artifact` objects represent collection of Custom SMTs, user-defined message transformations that can be applied to Kafka connectors.  The API allows you to upload, retrieve, and delete Connect Artifact, as well as list all available Connect Artifact for use in your connectors.   ## The Connect Artifacts Model <SchemaDefinition schemaRef=\"#/components/schemas/cam.v1.ConnectArtifact\" />
+// CamV1ConnectArtifact `Connect Artifact` objects represent custom code artifacts for Kafka connectors, including Custom SMTs (Single Message Transformations) and external dependencies (e.g., JMS client libraries).  The API allows you to upload, retrieve, and delete Connect Artifacts, as well as list all available artifacts for use in your connectors.   ## The Connect Artifacts Model <SchemaDefinition schemaRef=\"#/components/schemas/cam.v1.ConnectArtifact\" />
 type CamV1ConnectArtifact struct {
 	// APIVersion defines the schema version of this representation of a resource.
 	ApiVersion *string `json:"api_version,omitempty"`

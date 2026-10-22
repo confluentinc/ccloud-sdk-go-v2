@@ -18,11 +18,11 @@ tags:
 - description: |-
     [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
-    `Connect Artifact` objects represent collection of Custom SMTs, user-defined message
-    transformations that can be applied to Kafka connectors.
+    `Connect Artifact` objects represent custom code artifacts for Kafka connectors, including
+    Custom SMTs (Single Message Transformations) and external dependencies (e.g., JMS client libraries).
 
-    The API allows you to upload, retrieve, and delete Connect Artifact, as well as list all
-    available Connect Artifact for use in your connectors.
+    The API allows you to upload, retrieve, and delete Connect Artifacts, as well as list all
+    available artifacts for use in your connectors.
 
 
     ## The Connect Artifacts Model
@@ -640,13 +640,13 @@ paths:
             --url 'https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000' \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"spec":{"cloud":"AWS","environment":"env-00000","display_name":"string","description":"string","upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}}'
+            --data '{"spec":{"cloud":"AWS","environment":"env-00000","display_name":"string","description":"string","type":"CUSTOM_SMT","upload_source":{"location":"PRESIGNED_URL_LOCATION","upload_id":"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66"}}}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"type\":\"CUSTOM_SMT\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000")
             .post(body)
@@ -660,20 +660,21 @@ paths:
           \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts?spec.cloud=AWS&environment=env-00000\"\
           \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"cloud\\\":\\\"AWS\\\
           \",\\\"environment\\\":\\\"env-00000\\\",\\\"display_name\\\":\\\"string\\\
-          \",\\\"description\\\":\\\"string\\\",\\\"upload_source\\\":{\\\"location\\\
-          \":\\\"PRESIGNED_URL_LOCATION\\\",\\\"upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\
-          \"}}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
-          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
-          , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
-          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
-          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          \",\\\"description\\\":\\\"string\\\",\\\"type\\\":\\\"CUSTOM_SMT\\\",\\\
+          \"upload_source\\\":{\\\"location\\\":\\\"PRESIGNED_URL_LOCATION\\\",\\\"\
+          upload_id\\\":\\\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\\\"}}}\")\n\n\treq,\
+          \ _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"content-type\"\
+          , \"application/json\")\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\"\
+          )\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\
+          \tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
       - lang: Python
         source: |-
           import http.client
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}"
+          payload = "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"type\":\"CUSTOM_SMT\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}"
 
           headers = {
               'content-type': "application/json",
@@ -720,6 +721,7 @@ paths:
               environment: 'env-00000',
               display_name: 'string',
               description: 'string',
+              type: 'CUSTOM_SMT',
               upload_source: {
                 location: 'PRESIGNED_URL_LOCATION',
                 upload_id: 'e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66'
@@ -739,7 +741,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"type\":\"CUSTOM_SMT\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -748,7 +750,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"spec\":{\"cloud\":\"AWS\",\"environment\":\"env-00000\",\"display_name\":\"string\",\"description\":\"string\",\"type\":\"CUSTOM_SMT\",\"upload_source\":{\"location\":\"PRESIGNED_URL_LOCATION\",\"upload_id\":\"e53bb2e8-8de3-49fa-9fb1-4e3fd9a16b66\"}}}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
   /cam/v1/connect-artifacts/{id}:
     delete:
@@ -1389,6 +1391,412 @@ paths:
           var request = new RestRequest(Method.GET);
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
           IRestResponse response = client.Execute(request);
+    patch:
+      description: |+
+        [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+        Make a request to update a connect artifact.
+
+        Only the display name and description may be updated.
+
+
+      operationId: updateCamV1ConnectArtifact
+      parameters:
+      - description: Scope the operation to the given spec.cloud.
+        example: AWS
+        explode: true
+        in: query
+        name: spec.cloud
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: Scope the operation to the given environment.
+        example: env-00000
+        explode: true
+        in: query
+        name: environment
+        required: true
+        schema:
+          $ref: '#/components/schemas/SearchFilter'
+        style: form
+      - description: The unique identifier for the connect artifact.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cam.v1.ConnectArtifactUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/cam.v1.ConnectArtifact'
+                - required:
+                  - api_version
+                  - id
+                  - kind
+                  - spec
+                  - status
+                  type: object
+          description: Connect Artifact.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: invalid_filter
+                  title: Invalid Filter
+                  detail: The 'delorean' resource can't be filtered by 'num_doors'
+                  source:
+                    parameter: num_doors
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Bad Request
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: user_unauthenticated
+                  title: Authentication Required
+                  detail: Valid authentication credentials must be provided
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The unique identifier for the API request.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: user_unauthorized
+                  title: User Access Unauthorized
+                  detail: The user 'mcfly' is not allowed to access the 'delorean'
+                    resource without the 'plutonium' role.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The access credentials were considered insufficient to grant
+            access
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  title: Not Found
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Not Found
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "409"
+                  code: resource_already_exists
+                  title: Resource Already exists
+                  detail: The entitlement '91e3e86f-fca6-4f14-98f5-a48e64113ce2' already
+                    exists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request is in conflict with the current server state
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: Resource URI of conflicting resource
+              explode: false
+              schema:
+                example: https://api.confluent.cloud/{object}/{id}
+                format: uri
+                type: string
+              style: simple
+          x-summary: Conflict
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "422"
+                  code: invalid_configuration
+                  id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  title: Validation Failed
+                  detail: 'The property ''/cluster/storage_size'' of type string did
+                    not match the following type: integer'
+                  source:
+                    pointer: /cluster/storage_size
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Validation Failed
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          description: Rate Limit Exceeded
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests you're permitted to make
+                per time period.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current rate limit
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: "The relative time in seconds until the current rate-limit\
+                \ window resets.  \n  \n**Important:** This differs from Github and\
+                \ Twitter's same-named header which uses UTC epoch seconds. We use\
+                \ relative time to avoid client/server time synchronization issues."
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Retry-After:
+              description: The number of seconds to wait until the rate limit window
+                resets. Only sent when the rate limit is reached.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: out_of_gas
+                  title: DeLorean Out Of Gas
+                  detail: The DeLorean has run out of gas, but Doc Brown will fill
+                    'er up for you asap
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Oops, something went wrong!
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - cloud-api-key: []
+      - global-api-key: []
+      - confluent-sts-access-token: []
+      - confluent_auth:
+        - Alter:ConnectArtifact
+      summary: Update a Connect Artifact.
+      tags:
+      - Connect Artifacts (cam/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url 'https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"spec":{"display_name":"string","description":"string"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"spec\":{\"display_name\":\"string\",\"description\":\"string\"}}");
+          Request request = new Request.Builder()
+            .url("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000")
+            .patch(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"spec\\\":{\\\"display_name\\\"\
+          :\\\"string\\\",\\\"description\\\":\\\"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"\
+          PATCH\", url, payload)\n\n\treq.Header.Add(\"content-type\", \"application/json\"\
+          )\n\treq.Header.Add(\"Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\
+          \tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody,\
+          \ _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\
+          \n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.confluent.cloud")
+
+          payload = "{\"spec\":{\"display_name\":\"string\",\"description\":\"string\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("PATCH", "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "PATCH",
+            "hostname": "api.confluent.cloud",
+            "port": null,
+            "path": "/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({spec: {display_name: 'string', description: 'string'}}));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"spec\":{\"display_name\":\"string\",\"description\":\"string\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.confluent.cloud/cam/v1/connect-artifacts/{id}?spec.cloud=AWS&environment=env-00000");
+          var request = new RestRequest(Method.PATCH);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"spec\":{\"display_name\":\"string\",\"description\":\"string\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
   /cam/v1/presigned-upload-url:
     post:
       description: |-
@@ -1944,11 +2352,11 @@ components:
   schemas:
     cam.v1.ConnectArtifact:
       description: |-
-        `Connect Artifact` objects represent collection of Custom SMTs, user-defined message
-        transformations that can be applied to Kafka connectors.
+        `Connect Artifact` objects represent custom code artifacts for Kafka connectors, including
+        Custom SMTs (Single Message Transformations) and external dependencies (e.g., JMS client libraries).
 
-        The API allows you to upload, retrieve, and delete Connect Artifact, as well as list all
-        available Connect Artifact for use in your connectors.
+        The API allows you to upload, retrieve, and delete Connect Artifacts, as well as list all
+        available artifacts for use in your connectors.
 
 
         ## The Connect Artifacts Model
@@ -2084,9 +2492,63 @@ components:
           readOnly: true
           type: object
       type: object
+    cam.v1.ConnectArtifactUpdate:
+      description: |
+        The updatable representation of a Connect Artifact. Only the display name
+        and description may be changed; all other fields are immutable.
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - cam/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - ConnectArtifactUpdate
+          readOnly: true
+          type: string
+        id:
+          description: ID is the "natural identifier" for an object within its scope/namespace;
+            it is normally unique across time but not space. That is, you can assume
+            that the ID will not be reclaimed and reused after an object is deleted
+            ("time"); however, it may collide with IDs for other object `kinds` or
+            objects of the same `kind` within a different scope/namespace ("space").
+          example: dlz-f3a90de
+          maxLength: 255
+          readOnly: true
+          type: string
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/ObjectMeta'
+          - properties:
+              self:
+                example: https://api.confluent.cloud/cam/v1/connect-artifact-updates/cau-12345
+              resource_name:
+                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/connect-artifact-update=cau-12345
+        spec:
+          allOf:
+          - $ref: '#/components/schemas/cam.v1.ConnectArtifactSpecUpdate'
+      type: object
+    cam.v1.ConnectArtifactSpecUpdate:
+      description: The updatable fields of a Connect Artifact spec.
+      properties:
+        display_name:
+          description: Unique name of the Connect Artifact archive per cloud, environment
+            scope.
+          maxLength: 60
+          type: string
+        description:
+          description: Description of the Connect Artifact.
+          maxLength: 256
+          type: string
+      type: object
     cam.v1.ConnectArtifactSpec:
       description: |
-        Connect Artifact objects represent Custom SMTs on Confluent Cloud.
+        Specification for Connect Artifact objects, which represent custom code artifacts for Kafka connectors
+        on Confluent Cloud, including Custom SMTs (Single Message Transformations) and external dependencies.
       properties:
         cloud:
           description: Cloud provider where the Connect Artifact archive is uploaded.
@@ -2109,6 +2571,17 @@ components:
           description: Description of the Connect Artifact.
           maxLength: 256
           type: string
+        type:
+          default: CUSTOM_SMT
+          description: |
+            Type of the Connect Artifact. `CUSTOM_SMT,CONNECT_EXTERNAL_DEP` denotes an artifact
+            that contains both Custom SMTs and external dependencies.
+          example: CUSTOM_SMT
+          type: string
+          x-extensible-enum:
+          - CUSTOM_SMT
+          - CONNECT_EXTERNAL_DEP
+          - CUSTOM_SMT,CONNECT_EXTERNAL_DEP
         content_format:
           description: Archive format of the Connect Artifact.
           example: JAR
@@ -2118,7 +2591,8 @@ components:
           - ZIP
           - JAR
         upload_source:
-          description: Upload source of the Connect Artifact.
+          description: Upload source of the Connect Artifact. Only used in `create`;
+            ignored in `update`, `read`, and `list`.
           discriminator:
             mapping:
               PRESIGNED_URL_LOCATION: '#/components/schemas/cam.v1.UploadSource.PresignedUrl'
@@ -2240,11 +2714,11 @@ components:
       type: string
     cam.v1.ConnectArtifactList:
       description: |-
-        `Connect Artifact` objects represent collection of Custom SMTs, user-defined message
-        transformations that can be applied to Kafka connectors.
+        `Connect Artifact` objects represent custom code artifacts for Kafka connectors, including
+        Custom SMTs (Single Message Transformations) and external dependencies (e.g., JMS client libraries).
 
-        The API allows you to upload, retrieve, and delete Connect Artifact, as well as list all
-        available Connect Artifact for use in your connectors.
+        The API allows you to upload, retrieve, and delete Connect Artifacts, as well as list all
+        available artifacts for use in your connectors.
 
 
         ## The Connect Artifacts Model
@@ -2505,4 +2979,5 @@ components:
               type
             Describe:ConnectArtifact: Describe permission on ConnectArtifact resource
               type
+            Alter:ConnectArtifact: Alter permission on ConnectArtifact resource type
       type: oauth2

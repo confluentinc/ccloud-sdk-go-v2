@@ -34,7 +34,7 @@ import (
 	"reflect"
 )
 
-// CamV1ConnectArtifactSpec Connect Artifact objects represent Custom SMTs on Confluent Cloud.
+// CamV1ConnectArtifactSpec Specification for Connect Artifact objects, which represent custom code artifacts for Kafka connectors on Confluent Cloud, including Custom SMTs (Single Message Transformations) and external dependencies.
 type CamV1ConnectArtifactSpec struct {
 	// Cloud provider where the Connect Artifact archive is uploaded.
 	Cloud string `json:"cloud,omitempty"`
@@ -44,9 +44,11 @@ type CamV1ConnectArtifactSpec struct {
 	DisplayName string `json:"display_name,omitempty"`
 	// Description of the Connect Artifact.
 	Description *string `json:"description,omitempty"`
+	// Type of the Connect Artifact. `CUSTOM_SMT,CONNECT_EXTERNAL_DEP` denotes an artifact that contains both Custom SMTs and external dependencies.
+	Type *string `json:"type,omitempty"`
 	// Archive format of the Connect Artifact.
 	ContentFormat *string `json:"content_format,omitempty"`
-	// Upload source of the Connect Artifact.
+	// Upload source of the Connect Artifact. Only used in `create`; ignored in `update`, `read`, and `list`.
 	UploadSource *CamV1ConnectArtifactSpecUploadSourceOneOf `json:"upload_source,omitempty"`
 	// List of classes present in the Connect Artifact uploaded
 	Plugins *[]CamV1Plugins `json:"plugins,omitempty"`
@@ -63,6 +65,8 @@ func NewCamV1ConnectArtifactSpec(cloud string, environment string, displayName s
 	this.Cloud = cloud
 	this.Environment = environment
 	this.DisplayName = displayName
+	var type_ string = "CUSTOM_SMT"
+	this.Type = &type_
 	return &this
 }
 
@@ -71,6 +75,8 @@ func NewCamV1ConnectArtifactSpec(cloud string, environment string, displayName s
 // but it doesn't guarantee that properties required by API are set
 func NewCamV1ConnectArtifactSpecWithDefaults() *CamV1ConnectArtifactSpec {
 	this := CamV1ConnectArtifactSpec{}
+	var type_ string = "CUSTOM_SMT"
+	this.Type = &type_
 	return &this
 }
 
@@ -176,6 +182,38 @@ func (o *CamV1ConnectArtifactSpec) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *CamV1ConnectArtifactSpec) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *CamV1ConnectArtifactSpec) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CamV1ConnectArtifactSpec) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *CamV1ConnectArtifactSpec) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *CamV1ConnectArtifactSpec) SetType(v string) {
+	o.Type = &v
 }
 
 // GetContentFormat returns the ContentFormat field value if set, zero value otherwise.
@@ -312,6 +350,7 @@ func (o *CamV1ConnectArtifactSpec) Redact() {
 	o.recurseRedact(&o.Environment)
 	o.recurseRedact(&o.DisplayName)
 	o.recurseRedact(o.Description)
+	o.recurseRedact(o.Type)
 	o.recurseRedact(o.ContentFormat)
 	o.recurseRedact(o.UploadSource)
 	o.recurseRedact(o.Plugins)
@@ -361,6 +400,9 @@ func (o CamV1ConnectArtifactSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
 	}
 	if o.ContentFormat != nil {
 		toSerialize["content_format"] = o.ContentFormat

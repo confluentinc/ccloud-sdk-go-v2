@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *ConnectArtifactsCamV1Api* | [**DeleteCamV1ConnectArtifact**](docs/ConnectArtifactsCamV1Api.md#deletecamv1connectartifact) | **Delete** /cam/v1/connect-artifacts/{id} | Delete a Connect Artifact
 *ConnectArtifactsCamV1Api* | [**GetCamV1ConnectArtifact**](docs/ConnectArtifactsCamV1Api.md#getcamv1connectartifact) | **Get** /cam/v1/connect-artifacts/{id} | Read a Connect Artifact
 *ConnectArtifactsCamV1Api* | [**ListCamV1ConnectArtifacts**](docs/ConnectArtifactsCamV1Api.md#listcamv1connectartifacts) | **Get** /cam/v1/connect-artifacts | List of Connect Artifacts
+*ConnectArtifactsCamV1Api* | [**UpdateCamV1ConnectArtifact**](docs/ConnectArtifactsCamV1Api.md#updatecamv1connectartifact) | **Patch** /cam/v1/connect-artifacts/{id} | Update a Connect Artifact.
 *PresignedUrlsCamV1Api* | [**PresignedUploadUrlCamV1PresignedUrl**](docs/PresignedUrlsCamV1Api.md#presigneduploadurlcamv1presignedurl) | **Post** /cam/v1/presigned-upload-url | Request a presigned upload URL for a new Connect Artifact.
 
 
@@ -91,8 +92,10 @@ Class | Method | HTTP request | Description
  - [CamV1ConnectArtifact](docs/CamV1ConnectArtifact.md)
  - [CamV1ConnectArtifactList](docs/CamV1ConnectArtifactList.md)
  - [CamV1ConnectArtifactSpec](docs/CamV1ConnectArtifactSpec.md)
+ - [CamV1ConnectArtifactSpecUpdate](docs/CamV1ConnectArtifactSpecUpdate.md)
  - [CamV1ConnectArtifactSpecUploadSourceOneOf](docs/CamV1ConnectArtifactSpecUploadSourceOneOf.md)
  - [CamV1ConnectArtifactStatus](docs/CamV1ConnectArtifactStatus.md)
+ - [CamV1ConnectArtifactUpdate](docs/CamV1ConnectArtifactUpdate.md)
  - [CamV1Plugins](docs/CamV1Plugins.md)
  - [CamV1PresignedUrl](docs/CamV1PresignedUrl.md)
  - [CamV1PresignedUrlRequest](docs/CamV1PresignedUrlRequest.md)
@@ -148,6 +151,53 @@ import "golang.org/x/oauth2"
 
 tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
 auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### confluent_auth
+
+
+- **Type**: OAuth
+- **Flow**: implicit
+- **Authorization URL**: https://confluent.cloud/oauth
+- **Scopes**: 
+ - **Create:ConnectArtifact**: Create permission on ConnectArtifact resource type
+ - **Delete:ConnectArtifact**: Delete permission on ConnectArtifact resource type
+ - **Describe:ConnectArtifact**: Describe permission on ConnectArtifact resource type
+ - **Alter:ConnectArtifact**: Alter permission on ConnectArtifact resource type
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### global-api-key
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
 r, err := client.Service.Operation(auth, args)
 ```
 
