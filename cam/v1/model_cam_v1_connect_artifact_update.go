@@ -36,14 +36,7 @@ import (
 
 // CamV1ConnectArtifactUpdate The updatable representation of a Connect Artifact. Only the display name and description may be changed; all other fields are immutable.
 type CamV1ConnectArtifactUpdate struct {
-	// APIVersion defines the schema version of this representation of a resource.
-	ApiVersion *string `json:"api_version,omitempty"`
-	// Kind defines the object this REST resource represents.
-	Kind *string `json:"kind,omitempty"`
-	// ID is the \"natural identifier\" for an object within its scope/namespace; it is normally unique across time but not space. That is, you can assume that the ID will not be reclaimed and reused after an object is deleted (\"time\"); however, it may collide with IDs for other object `kinds` or objects of the same `kind` within a different scope/namespace (\"space\").
-	Id       *string                         `json:"id,omitempty"`
-	Metadata *ObjectMeta                     `json:"metadata,omitempty"`
-	Spec     *CamV1ConnectArtifactSpecUpdate `json:"spec,omitempty"`
+	Spec *CamV1ConnectArtifactSpecUpdate `json:"spec,omitempty"`
 }
 
 // NewCamV1ConnectArtifactUpdate instantiates a new CamV1ConnectArtifactUpdate object
@@ -61,134 +54,6 @@ func NewCamV1ConnectArtifactUpdate() *CamV1ConnectArtifactUpdate {
 func NewCamV1ConnectArtifactUpdateWithDefaults() *CamV1ConnectArtifactUpdate {
 	this := CamV1ConnectArtifactUpdate{}
 	return &this
-}
-
-// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
-func (o *CamV1ConnectArtifactUpdate) GetApiVersion() string {
-	if o == nil || o.ApiVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.ApiVersion
-}
-
-// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CamV1ConnectArtifactUpdate) GetApiVersionOk() (*string, bool) {
-	if o == nil || o.ApiVersion == nil {
-		return nil, false
-	}
-	return o.ApiVersion, true
-}
-
-// HasApiVersion returns a boolean if a field has been set.
-func (o *CamV1ConnectArtifactUpdate) HasApiVersion() bool {
-	if o != nil && o.ApiVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetApiVersion gets a reference to the given string and assigns it to the ApiVersion field.
-func (o *CamV1ConnectArtifactUpdate) SetApiVersion(v string) {
-	o.ApiVersion = &v
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *CamV1ConnectArtifactUpdate) GetKind() string {
-	if o == nil || o.Kind == nil {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CamV1ConnectArtifactUpdate) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *CamV1ConnectArtifactUpdate) HasKind() bool {
-	if o != nil && o.Kind != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *CamV1ConnectArtifactUpdate) SetKind(v string) {
-	o.Kind = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *CamV1ConnectArtifactUpdate) GetId() string {
-	if o == nil || o.Id == nil {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CamV1ConnectArtifactUpdate) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *CamV1ConnectArtifactUpdate) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *CamV1ConnectArtifactUpdate) SetId(v string) {
-	o.Id = &v
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CamV1ConnectArtifactUpdate) GetMetadata() ObjectMeta {
-	if o == nil || o.Metadata == nil {
-		var ret ObjectMeta
-		return ret
-	}
-	return *o.Metadata
-}
-
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CamV1ConnectArtifactUpdate) GetMetadataOk() (*ObjectMeta, bool) {
-	if o == nil || o.Metadata == nil {
-		return nil, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *CamV1ConnectArtifactUpdate) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given ObjectMeta and assigns it to the Metadata field.
-func (o *CamV1ConnectArtifactUpdate) SetMetadata(v ObjectMeta) {
-	o.Metadata = &v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
@@ -225,10 +90,6 @@ func (o *CamV1ConnectArtifactUpdate) SetSpec(v CamV1ConnectArtifactSpecUpdate) {
 
 // Redact resets all sensitive fields to their zero value.
 func (o *CamV1ConnectArtifactUpdate) Redact() {
-	o.recurseRedact(o.ApiVersion)
-	o.recurseRedact(o.Kind)
-	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Metadata)
 	o.recurseRedact(o.Spec)
 }
 
@@ -264,18 +125,6 @@ func (o CamV1ConnectArtifactUpdate) zeroField(v interface{}) {
 
 func (o CamV1ConnectArtifactUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ApiVersion != nil {
-		toSerialize["api_version"] = o.ApiVersion
-	}
-	if o.Kind != nil {
-		toSerialize["kind"] = o.Kind
-	}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Metadata != nil {
-		toSerialize["metadata"] = o.Metadata
-	}
 	if o.Spec != nil {
 		toSerialize["spec"] = o.Spec
 	}

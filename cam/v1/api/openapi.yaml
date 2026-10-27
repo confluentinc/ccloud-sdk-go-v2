@@ -2497,37 +2497,6 @@ components:
         The updatable representation of a Connect Artifact. Only the display name
         and description may be changed; all other fields are immutable.
       properties:
-        api_version:
-          description: APIVersion defines the schema version of this representation
-            of a resource.
-          enum:
-          - cam/v1
-          readOnly: true
-          type: string
-        kind:
-          description: Kind defines the object this REST resource represents.
-          enum:
-          - ConnectArtifactUpdate
-          readOnly: true
-          type: string
-        id:
-          description: ID is the "natural identifier" for an object within its scope/namespace;
-            it is normally unique across time but not space. That is, you can assume
-            that the ID will not be reclaimed and reused after an object is deleted
-            ("time"); however, it may collide with IDs for other object `kinds` or
-            objects of the same `kind` within a different scope/namespace ("space").
-          example: dlz-f3a90de
-          maxLength: 255
-          readOnly: true
-          type: string
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/ObjectMeta'
-          - properties:
-              self:
-                example: https://api.confluent.cloud/cam/v1/connect-artifact-updates/cau-12345
-              resource_name:
-                example: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/connect-artifact-update=cau-12345
         spec:
           allOf:
           - $ref: '#/components/schemas/cam.v1.ConnectArtifactSpecUpdate'
