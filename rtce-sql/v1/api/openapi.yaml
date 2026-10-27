@@ -1,0 +1,1526 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: lightning-eng@confluent.io
+    name: Lightning Table Eng
+    url: https://confluent.slack.com/app_redirect?channel=lightning-table-eng
+  description: |
+    SQL-based API for querying data in Confluent Cloud. Only Kafka topics with Real Time Context Engine enabled can be queried. Small or fast operations are handled synchronously, returning inline data. Large or long-running queries are assigned an async tracking job.
+  title: Confluent Analytics API
+  version: 0.0.1
+  x-api-id: a79f70d9-f284-4d64-bfad-50667b51dbcd
+  x-api-group: query/v1
+  x-audience: external-public
+  x-tag-group: Analytics (%s)
+servers:
+- description: SQL Endpoint through Analytics Gateway
+  url: https://sql.<region>.<provider>.confluent.cloud
+tags:
+- description: |-
+    Execute SQL statements against queryable topics and read their results. A statement
+    that resolves quickly returns its results inline; a long-running one is assigned a
+    background job that can be polled for status.
+  name: Statements (query/v1)
+paths:
+  /query/v1:
+    post:
+      description: |
+        Executes an arbitrary SQL query against the engine. If the query resolves in under 10 seconds and returns less than 4 MiB, the response will be an inline HTTP 200 OK. Otherwise, a 202 Accepted response redirects the client to retrieve results from a separate streamed data location. Rows are returned as JSON strings by default; set `options.result_format` to `ARROW_STREAM` to receive a base64-encoded Arrow IPC stream with native column types instead.
+      operationId: executeQueryV1Statement
+      requestBody:
+        content:
+          application/json:
+            examples:
+              show_tables:
+                description: |
+                  Metadata is discovered with `SHOW TABLES` and `DESCRIBE`. Both return the same result envelope as `SELECT`.
+                summary: List the tables in a cluster
+                value:
+                  catalog_name: env-xyz123
+                  database_name: lkc-xyz123
+                  query: SHOW TABLES
+              describe_table:
+                description: |
+                  Returns one row per column. The values in the `type` column are the CLI/UI rendering of the Flink type — `BYTES`, `STRING`, `ROW<...>` — which is a different rendering of the same type system that `schema.columns[].type` describes as JSON.
+                summary: Describe a table's columns
+                value:
+                  catalog_name: env-xyz123
+                  database_name: lkc-xyz123
+                  query: DESCRIBE orders
+              select_with_limit:
+                description: |
+                  Omitting `options.result_format` defaults to `JSON`, returning rows as arrays of JSON strings.
+                summary: SELECT with LIMIT
+                value:
+                  catalog_name: env-xyz123
+                  database_name: lkc-xyz123
+                  query: SELECT l_orderkey, l_quantity, l_description FROM "order"
+                    LIMIT 5
+              select_with_limit_arrow:
+                description: |
+                  Requests the same rows as a base64-encoded Arrow IPC stream, preserving native column types instead of stringifying them.
+                summary: SELECT with LIMIT (Arrow result format)
+                value:
+                  catalog_name: env-xyz123
+                  database_name: lkc-xyz123
+                  options:
+                    result_format: ARROW_STREAM
+                  query: SELECT l_orderkey, l_quantity, l_description FROM "order"
+                    LIMIT 5
+            schema:
+              $ref: '#/components/schemas/query.v1.QueryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                select_with_limit:
+                  summary: Inline Query Execution Result
+                  value:
+                    api_version: query/v1
+                    kind: Statement
+                    result:
+                      result_format: JSON
+                      schema:
+                        columns:
+                        - name: L_ORDERKEY
+                          type:
+                            nullable: true
+                            type: BIGINT
+                        - name: L_QUANTITY
+                          type:
+                            nullable: true
+                            type: FLOAT
+                      data:
+                      - - "1"
+                        - "17.45"
+                select_nested:
+                  description: |
+                    `ROW`, `ARRAY`, `MAP` and `MULTISET` columns describe their structure in `schema` and carry their values as nested JSON arrays. Values are positional at every level: names appear only in the schema. The second row shows a SQL NULL `ARRAY` and an empty `MAP`.
+                  summary: Inline Query Execution Result (complex columns)
+                  value:
+                    api_version: query/v1
+                    kind: Statement
+                    result:
+                      result_format: JSON
+                      schema:
+                        columns:
+                        - name: PK
+                          type:
+                            nullable: false
+                            type: BIGINT
+                        - name: user
+                          type:
+                            nullable: false
+                            type: ROW
+                            fields:
+                            - name: USER_ID
+                              field_type:
+                                nullable: false
+                                type: VARCHAR
+                                length: 2147483647
+                            - name: AGE
+                              field_type:
+                                nullable: false
+                                type: INTEGER
+                        - name: tags
+                          type:
+                            nullable: true
+                            type: ARRAY
+                            element_type:
+                              nullable: true
+                              type: VARCHAR
+                              length: 2147483647
+                        - name: scores
+                          type:
+                            nullable: true
+                            type: MAP
+                            key_type:
+                              nullable: false
+                              type: VARCHAR
+                              length: 2147483647
+                            value_type:
+                              nullable: true
+                              type: INTEGER
+                      data:
+                      - - "912"
+                        - - perspiciatis
+                          - "49"
+                        - - pro
+                          - null
+                        - - - latency
+                            - "42"
+                      - - "27994"
+                        - - suscipit
+                          - "25"
+                        - null
+                        - []
+                describe_table:
+                  description: |
+                    `SHOW` and `DESCRIBE` use the same envelope as `SELECT`, with declared column types and every value encoded as a string. Note `"TRUE"` for the `null` column, which is declared `BOOLEAN`.
+                  summary: Inline Query Execution Result (DESCRIBE)
+                  value:
+                    api_version: query/v1
+                    kind: Statement
+                    result:
+                      result_format: JSON
+                      schema:
+                        columns:
+                        - name: name
+                          type:
+                            nullable: true
+                            type: VARCHAR
+                            length: 2147483647
+                        - name: type
+                          type:
+                            nullable: true
+                            type: VARCHAR
+                            length: 2147483647
+                        - name: "null"
+                          type:
+                            nullable: false
+                            type: BOOLEAN
+                        - name: key
+                          type:
+                            nullable: true
+                            type: VARCHAR
+                            length: 2147483647
+                        - name: extras
+                          type:
+                            nullable: true
+                            type: VARCHAR
+                            length: 2147483647
+                        - name: watermark
+                          type:
+                            nullable: true
+                            type: VARCHAR
+                            length: 2147483647
+                      data:
+                      - - KEY
+                        - BYTES
+                        - "TRUE"
+                        - null
+                        - null
+                        - null
+                      - - PK
+                        - BIGINT
+                        - "FALSE"
+                        - null
+                        - null
+                        - null
+                      - - user
+                        - ROW<`USER_ID` STRING, `AGE` INT>
+                        - "FALSE"
+                        - null
+                        - null
+                        - null
+                select_with_limit_arrow:
+                  description: |
+                    Returned when the statement requested `result_format: ARROW_STREAM`. Rows are carried as a base64-encoded Arrow IPC stream with native column types; `schema` still describes the columns so clients can inspect the result without decoding the payload.
+                  summary: Inline Query Execution Result (Arrow)
+                  value:
+                    api_version: query/v1
+                    kind: Statement
+                    result:
+                      result_format: ARROW_STREAM
+                      schema:
+                        columns:
+                        - name: L_ORDERKEY
+                          type:
+                            nullable: true
+                            type: BIGINT
+                        - name: L_QUANTITY
+                          type:
+                            nullable: true
+                            type: FLOAT
+                      data: /////0FSUk9XLUlQQy1TVFJFQU0tUExBQ0VIT0xERVItQllURVM=
+              schema:
+                $ref: '#/components/schemas/query.v1.QueryResponseInline'
+          description: |
+            Successful synchronous response containing fully inlined metadata and data results.
+          headers:
+            X-Request-Id:
+              description: Unique identifier for this request, useful for support
+                and debugging
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "202":
+          content:
+            application/json:
+              examples:
+                async_redirect:
+                  summary: Async Job Reference Output
+                  value:
+                    api_version: query/v1
+                    kind: Statement
+                    result:
+                      statement_id: statement_1b2c3d4e5f6a
+                      environment_id: env-xyz123
+                      kafka_cluster_id: lkc-xyz123
+                      topic_name: order
+              schema:
+                $ref: '#/components/schemas/query.v1.QueryResponseAsync'
+          description: |
+            Asynchronous request registration. Returned when data sets exceed 4 MiB or execution times cross the 10s processing barrier. Poll the URL in the `Location` header (see `Query Async Job Status`) until the job reaches a terminal state; a successful job's response carries the presigned URL(s) the result can be downloaded from.
+          headers:
+            X-Request-Id:
+              description: Unique identifier for this request, useful for support
+                and debugging
+              explode: false
+              schema:
+                type: string
+              style: simple
+            Location:
+              description: |
+                Path (resolved against this same host) where the client can poll for job status: `/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status`.
+              explode: false
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: FE_UNAUTHENTICATED
+                  title: Unauthenticated
+                  detail: The API key is missing or invalid.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The authentication scheme that the client must use.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: FE_UNAUTHORIZED
+                  title: Unauthorized
+                  detail: The principal is not permitted to query cluster 'lkc-xyz123'.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The authenticated principal is not authorized for the requested
+            cluster or statement.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: FE_SQL_VALIDATION_ERROR
+                  title: SQL Validation Error
+                  detail: Table 'orders' not found in database 'lkc-xyz123'.
+                  source:
+                    pointer: /query
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: |
+            The request could not be processed: invalid or unsupported SQL, a malformed request body, or an unrecognized environment, cluster or statement identifier.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  code: FE_TABLE_NOT_AVAILABLE
+                  title: Table Not Available
+                  detail: Table is not available for querying. The table may still
+                    be provisioning. Contact support if this error persists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: |
+            The requested table is not available for querying. The table may still be provisioning; the request can be retried.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "429"
+                  code: FE_RATE_LIMITED
+                  title: Rate Limit Exceeded
+                  detail: Too many requests. Retry after a short delay.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The client has issued too many requests and is being throttled.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: FE_INTERNAL_ERROR
+                  title: Internal Server Error
+                  detail: The statement could not be completed. Retry, and contact
+                    support with the request id if it persists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: An unexpected error occurred while executing the statement.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Execute SQL Statement
+      tags:
+      - Statements (query/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url 'https://sql./<region>.<provider>.confluent.cloud/query/v1' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
+            --header 'content-type: application/json' \
+            --data '{"catalog_name":"string","database_name":"string","options":{"max_result_rows":1,"result_format":"JSON"},"query":"string","client_info":{"property1":"string","property2":"string"}}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"catalog_name\":\"string\",\"database_name\":\"string\",\"options\":{\"max_result_rows\":1,\"result_format\":\"JSON\"},\"query\":\"string\",\"client_info\":{\"property1\":\"string\",\"property2\":\"string\"}}");
+          Request request = new Request.Builder()
+            .url("https://sql./<region>.<provider>.confluent.cloud/query/v1")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://sql./<region>.<provider>.confluent.cloud/query/v1\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"catalog_name\\\":\\\"string\\\"\
+          ,\\\"database_name\\\":\\\"string\\\",\\\"options\\\":{\\\"max_result_rows\\\
+          \":1,\\\"result_format\\\":\\\"JSON\\\"},\\\"query\\\":\\\"string\\\",\\\
+          \"client_info\\\":{\\\"property1\\\":\\\"string\\\",\\\"property2\\\":\\\
+          \"string\\\"}}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\
+          \n\treq.Header.Add(\"content-type\", \"application/json\")\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("sql.")
+
+          payload = "{\"catalog_name\":\"string\",\"database_name\":\"string\",\"options\":{\"max_result_rows\":1,\"result_format\":\"JSON\"},\"query\":\"string\",\"client_info\":{\"property1\":\"string\",\"property2\":\"string\"}}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Basic REPLACE_BASIC_AUTH"
+              }
+
+          conn.request("POST", "<region>.<provider>.confluent.cloud/query/v1", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "sql.",
+            "port": null,
+            "path": "<region>.<provider>.confluent.cloud/query/v1",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            catalog_name: 'string',
+            database_name: 'string',
+            options: {max_result_rows: 1, result_format: 'JSON'},
+            query: 'string',
+            client_info: {property1: 'string', property2: 'string'}
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://sql./<region>.<provider>.confluent.cloud/query/v1");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"catalog_name\":\"string\",\"database_name\":\"string\",\"options\":{\"max_result_rows\":1,\"result_format\":\"JSON\"},\"query\":\"string\",\"client_info\":{\"property1\":\"string\",\"property2\":\"string\"}}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://sql./<region>.<provider>.confluent.cloud/query/v1");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          request.AddParameter("application/json", "{\"catalog_name\":\"string\",\"database_name\":\"string\",\"options\":{\"max_result_rows\":1,\"result_format\":\"JSON\"},\"query\":\"string\",\"client_info\":{\"property1\":\"string\",\"property2\":\"string\"}}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status:
+    get:
+      description: Returns status updates containing the explicit operational lifecycle
+        states of an active background query.
+      operationId: getQueryV1JobStatus
+      parameters:
+      - description: Confluent Cloud environment ID (e.g., env-xyz123) the statement
+          was run against.
+        explode: false
+        in: path
+        name: environment_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Kafka cluster ID (e.g., lkc-xyz123) the statement was run against.
+        explode: false
+        in: path
+        name: kafka_cluster_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the Kafka topic or Lightning table being queried.
+        explode: false
+        in: path
+        name: topic_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The target unique identifier of the background operational query
+          process.
+        explode: false
+        in: path
+        name: statement_id
+        required: true
+        schema:
+          maxLength: 255
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                job_running:
+                  summary: Statement is still running
+                  value:
+                    api_version: query/v1
+                    kind: JobStatus
+                    result:
+                      state: RUNNING
+                job_succeeded:
+                  summary: Statement completed successfully
+                  value:
+                    api_version: query/v1
+                    kind: JobStatus
+                    result:
+                      state: SUCCEEDED
+                      result_urls:
+                      - https://s3.<region>.amazonaws.com/lightning-blobstorage-.../async-results/.../statement_1b2c3d4e5f6a-abcd1234.json?X-Amz-...
+                job_failed:
+                  summary: Statement failed
+                  value:
+                    api_version: query/v1
+                    kind: JobStatus
+                    result:
+                      state: FAILED
+                    errors:
+                    - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                      status: "200"
+                      code: FE_STATEMENT_FAILED
+                      title: Statement Failed
+                      detail: The statement exceeded the maximum execution time.
+              schema:
+                $ref: '#/components/schemas/query.v1.JobStatusResponse'
+          description: Statement is evaluated successfully.
+          headers:
+            X-Request-Id:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "400"
+                  code: FE_SQL_VALIDATION_ERROR
+                  title: SQL Validation Error
+                  detail: Table 'orders' not found in database 'lkc-xyz123'.
+                  source:
+                    pointer: /query
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: |
+            The request could not be processed: invalid or unsupported SQL, a malformed request body, or an unrecognized environment, cluster or statement identifier.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "401"
+                  code: FE_UNAUTHENTICATED
+                  title: Unauthenticated
+                  detail: The API key is missing or invalid.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The request lacks valid authentication credentials for this
+            resource.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: The authentication scheme that the client must use.
+              example: Basic error="invalid_key", error_description="The API Key is
+                invalid"
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Unauthorized
+        "403":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "403"
+                  code: FE_UNAUTHORIZED
+                  title: Unauthorized
+                  detail: The principal is not permitted to query cluster 'lkc-xyz123'.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The authenticated principal is not authorized for the requested
+            cluster or statement.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+          x-summary: Forbidden
+        "404":
+          content:
+            application/json:
+              examples:
+                statement_not_found:
+                  summary: Unknown statement_id
+                  value:
+                    errors:
+                    - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                      status: "404"
+                      code: FE_STATEMENT_NOT_FOUND
+                      title: Statement Not Found
+                      detail: No background statement 'statement_1b2c3d4e5f6a' was
+                        found.
+                async_query_disabled:
+                  summary: Async query not enabled for this org/environment/cluster
+                  value:
+                    errors:
+                    - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                      status: "404"
+                      code: FE_ASYNC_QUERY_DISABLED
+                      title: Async Query Disabled
+                      detail: Async query is not enabled for cluster 'lkc-xyz123'.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: |
+            No background statement matches the given identifiers, or async query is not enabled for this organization/environment/cluster.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "429"
+                  code: FE_RATE_LIMITED
+                  title: Rate Limit Exceeded
+                  detail: Too many requests. Retry after a short delay.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: The client has issued too many requests and is being throttled.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "500"
+                  code: FE_INTERNAL_ERROR
+                  title: Internal Server Error
+                  detail: The statement could not be completed. Retry, and contact
+                    support with the request id if it persists.
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: An unexpected error occurred while executing the statement.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - resource-api-key: []
+      summary: Query Async Job Status
+      tags:
+      - Statements (query/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://sql./<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status' \
+            --header 'Authorization: Basic REPLACE_BASIC_AUTH'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://sql./<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status")
+            .get()
+            .addHeader("Authorization", "Basic REPLACE_BASIC_AUTH")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://sql./<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("sql.")
+
+          headers = { 'Authorization': "Basic REPLACE_BASIC_AUTH" }
+
+          conn.request("GET", "<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "sql.",
+            "port": null,
+            "path": "<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status",
+            "headers": {
+              "Authorization": "Basic REPLACE_BASIC_AUTH"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://sql./<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://sql./<region>.<provider>.confluent.cloud/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
+          IRestResponse response = client.Execute(request);
+components:
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "400"
+              code: FE_SQL_VALIDATION_ERROR
+              title: SQL Validation Error
+              detail: Table 'orders' not found in database 'lkc-xyz123'.
+              source:
+                pointer: /query
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: |
+        The request could not be processed: invalid or unsupported SQL, a malformed request body, or an unrecognized environment, cluster or statement identifier.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "401"
+              code: FE_UNAUTHENTICATED
+              title: Unauthenticated
+              detail: The API key is missing or invalid.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The request lacks valid authentication credentials for this resource.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        WWW-Authenticate:
+          description: The authentication scheme that the client must use.
+          example: Basic error="invalid_key", error_description="The API Key is invalid"
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Unauthorized
+    UnauthorizedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "403"
+              code: FE_UNAUTHORIZED
+              title: Unauthorized
+              detail: The principal is not permitted to query cluster 'lkc-xyz123'.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The authenticated principal is not authorized for the requested
+        cluster or statement.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+      x-summary: Forbidden
+    NotFoundError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "404"
+              code: FE_TABLE_NOT_AVAILABLE
+              title: Table Not Available
+              detail: Table is not available for querying. The table may still be
+                provisioning. Contact support if this error persists.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: |
+        The requested table is not available for querying. The table may still be provisioning; the request can be retried.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    StatementNotFoundError:
+      content:
+        application/json:
+          examples:
+            statement_not_found:
+              summary: Unknown statement_id
+              value:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  code: FE_STATEMENT_NOT_FOUND
+                  title: Statement Not Found
+                  detail: No background statement 'statement_1b2c3d4e5f6a' was found.
+            async_query_disabled:
+              summary: Async query not enabled for this org/environment/cluster
+              value:
+                errors:
+                - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+                  status: "404"
+                  code: FE_ASYNC_QUERY_DISABLED
+                  title: Async Query Disabled
+                  detail: Async query is not enabled for cluster 'lkc-xyz123'.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: |
+        No background statement matches the given identifiers, or async query is not enabled for this organization/environment/cluster.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    RateLimitError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "429"
+              code: FE_RATE_LIMITED
+              title: Rate Limit Exceeded
+              detail: Too many requests. Retry after a short delay.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: The client has issued too many requests and is being throttled.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    DefaultSystemError:
+      content:
+        application/json:
+          example:
+            errors:
+            - id: ed42afdc-f0d5-4c0d-b428-9fc6ed6e279d
+              status: "500"
+              code: FE_INTERNAL_ERROR
+              title: Internal Server Error
+              detail: The statement could not be completed. Retry, and contact support
+                with the request id if it persists.
+          schema:
+            $ref: '#/components/schemas/Failure'
+      description: An unexpected error occurred while executing the statement.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+  schemas:
+    query.v1.QueryRequest:
+      description: Request parameters for query analysis and extraction.
+      properties:
+        catalog_name:
+          description: Confluent Cloud environment ID (e.g., env-xyz123)
+          type: string
+        database_name:
+          description: Kafka cluster ID (e.g., lkc-xyz123)
+          type: string
+        options:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.QueryOptions'
+          description: Options for this query.
+        query:
+          description: SQL query to execute
+          type: string
+        client_info:
+          additionalProperties:
+            type: string
+          description: |
+            Free-form client metadata for telemetry and debugging (e.g., client_name, client_version, driver_version). Values are strings; not interpreted by the server.
+          type: object
+      required:
+      - catalog_name
+      - database_name
+      - query
+      type: object
+    query.v1.QueryOptions:
+      description: |
+        Settings that tune how this query is handled. Omitted fields fall back to service defaults.
+      properties:
+        max_result_rows:
+          description: |
+            Maximum rows to return inline, up to 200.
+          format: int32
+          maximum: 200
+          minimum: 1
+          type: integer
+        result_format:
+          default: JSON
+          description: |
+            Encoding for the returned rows, echoed back as `result.result_format`. `JSON` returns `result.data` as an array of rows, requiring clients to coerce values using `result.schema`. `ARROW_STREAM` returns `result.data` as a base64-encoded Arrow IPC stream, preserving native column types. Inline `ARROW_STREAM` payloads are size-capped; larger results are delivered through the asynchronous 202 flow.
+          type: string
+          x-extensible-enum:
+          - JSON
+          - ARROW_STREAM
+      type: object
+    query.v1.QueryResponseInline:
+      description: Response structure returned directly for fast inline extractions.
+      example:
+        result: ""
+        kind: kind
+        api_version: api_version
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - query/v1
+        kind:
+          description: Kind defines the object this REST resource represents.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - Statement
+        result:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.QueryResult'
+          description: The schema and data produced by the statement.
+      required:
+      - api_version
+      - kind
+      - result
+      type: object
+    query.v1.QueryResponseAsync:
+      description: Reference pointers issued when standard executions run asynchronously.
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - query/v1
+        kind:
+          description: Kind defines the object this REST resource represents.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - Statement
+        result:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.AsyncJobReference'
+          description: Identifies the background job created for this statement.
+      required:
+      - api_version
+      - kind
+      - result
+      type: object
+    query.v1.AsyncJobReference:
+      description: |
+        Identifies the background job created for this statement. Poll for its outcome via the `Location` response header, or by building `/query/v1/jobs/{environment_id}/{kafka_cluster_id}/{topic_name}/{statement_id}/status` from these fields.
+      properties:
+        statement_id:
+          description: Unique identifier generated to trace the decoupled tracking
+            process.
+          maxLength: 255
+          type: string
+        environment_id:
+          description: Confluent Cloud environment ID (echoed back from `catalog_name`).
+          type: string
+        kafka_cluster_id:
+          description: Kafka cluster ID (echoed back from `database_name`).
+          type: string
+        topic_name:
+          description: Name of the table/topic the statement queried.
+          type: string
+      required:
+      - environment_id
+      - kafka_cluster_id
+      - statement_id
+      - topic_name
+      type: object
+    query.v1.JobStatusResponse:
+      description: Lifecycle state of a statement running in the background.
+      example:
+        result: ""
+        kind: kind
+        api_version: api_version
+        errors:
+        - code: code
+          id: id
+          detail: detail
+          source:
+            pointer: pointer
+            parameter: parameter
+          title: title
+          status: status
+        - code: code
+          id: id
+          detail: detail
+          source:
+            pointer: pointer
+            parameter: parameter
+          title: title
+          status: status
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - query/v1
+        kind:
+          description: Kind defines the object this REST resource represents.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - JobStatus
+        result:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.JobStatus'
+          description: The status of the background statement.
+        errors:
+          description: |
+            Failure details for the background statement. Populated only when `result.state` is `FAILED`; omitted otherwise.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - kind
+      - result
+      type: object
+    query.v1.JobStatus:
+      description: The status of the background statement.
+      properties:
+        state:
+          description: |
+            The lifecycle state of the background statement. A job is always at least
+            RUNNING by the time it can be polled — there is no earlier "queued" state.
+
+            RUNNING: statement execution is in progress;
+
+            SUCCEEDED: statement finished successfully; see `result_urls` for where to
+            download the result;
+
+            FAILED: statement execution failed; see `errors` for details.
+          example: RUNNING
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+        result_urls:
+          description: |
+            Presigned URL(s) the result can be downloaded from. Always present (an empty array if there's nothing to download yet), not just when `state` is `SUCCEEDED` — reserved for a future partial-results feature that could populate this incrementally while `state` is still `RUNNING`; today it's only ever non-empty once `state` is `SUCCEEDED`. Empty for `FAILED`. Each URL expires after a limited time — re-poll this endpoint to obtain a fresh one if it lapses before download.
+          items:
+            format: uri
+            type: string
+          readOnly: true
+          type: array
+      required:
+      - state
+      type: object
+    query.v1.QueryResult:
+      description: |
+        Query result containing schema metadata and row data.
+
+        This envelope is the same for every statement kind. `SHOW` and `DESCRIBE` return declared column types in `schema` and string-encoded values in `data` exactly as `SELECT` does, so a client needs only one result reader and never has to branch on the statement it sent.
+      properties:
+        result_format:
+          description: |
+            Encoding of `data`, echoing the `options.result_format` requested on the statement.
+          readOnly: true
+          type: string
+          x-extensible-enum:
+          - JSON
+          - ARROW_STREAM
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.ResultSchema'
+          description: Column metadata describing the shape of the returned rows.
+        data:
+          description: |
+            Result rows in the encoding named by `result_format`: an array of rows for `JSON`, where each row is a positional array of column values ordered to match `schema.columns`; or a base64-encoded Arrow IPC stream for `ARROW_STREAM`, carrying native column types rather than stringified values. Inline Arrow payloads are size-capped by the service; larger results are delivered through the asynchronous 202 flow.
+
+            Under `JSON`, individual values — including those of complex `ROW`, `ARRAY`, `MAP` and `MULTISET` columns — are encoded as described by `ResultValue`.
+          oneOf:
+          - items:
+              $ref: '#/components/schemas/query.v1.ResultRow'
+            type: array
+          - format: byte
+            type: string
+          x-one-of-name: QueryV1QueryResultDataOneOf
+      required:
+      - data
+      - result_format
+      - schema
+      type: object
+    query.v1.ResultSchema:
+      description: The table columns of the result schema.
+      properties:
+        columns:
+          description: |
+            Column definitions in result order, matching the order of values within each row.
+          items:
+            $ref: '#/components/schemas/query.v1.ColumnDetails'
+          type: array
+      required:
+      - columns
+      type: object
+    query.v1.ColumnDetails:
+      description: A column in the result schema.
+      properties:
+        name:
+          description: The name of the SQL result column.
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.DataType'
+          description: The logical type of the column.
+      required:
+      - name
+      - type
+      type: object
+    query.v1.DataType:
+      description: |
+        Flink logical type descriptor, mirroring `DataType` in the Flink Gateway API.
+        Complex types nest recursively: `element_type`, `key_type`, `value_type` and
+        `fields[].field_type` are themselves `DataType` objects, so `ROW`, `ARRAY`,
+        `MAP` and `MULTISET` nest to arbitrary depth.
+
+        The value of `type` determines which parameter properties are present; all
+        others are absent.
+
+        | `type` | Parameters |
+        | --- | --- |
+        | `BOOLEAN`, `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT`, `FLOAT`, `DOUBLE`, `DATE`, `NULL` | none |
+        | `CHAR`, `VARCHAR`, `BINARY`, `VARBINARY` | `length` |
+        | `DECIMAL` | `precision`, `scale` |
+        | `TIME_WITHOUT_TIME_ZONE`, `TIMESTAMP_WITHOUT_TIME_ZONE`, `TIMESTAMP_WITH_TIME_ZONE` | `precision` |
+        | `INTERVAL_YEAR_MONTH` | `precision`, `resolution` |
+        | `INTERVAL_DAY_TIME` | `precision`, `fractional_precision`, `resolution` |
+        | `ARRAY`, `MULTISET` | `element_type` |
+        | `MAP` | `key_type`, `value_type` |
+        | `ROW` | `fields` |
+      properties:
+        type:
+          description: The Flink logical type name of the column or field.
+          type: string
+        nullable:
+          description: Whether values of this column or field can be null.
+          type: boolean
+        length:
+          description: |
+            Declared length of `CHAR`, `VARCHAR`, `BINARY` and `VARBINARY`. Unbounded `VARCHAR` and `VARBINARY` report 2147483647.
+          format: int32
+          type: integer
+        precision:
+          description: |
+            Declared precision of `DECIMAL`, the `TIME`/`TIMESTAMP` types and the `INTERVAL_*` types.
+          format: int32
+          type: integer
+        scale:
+          description: Declared scale of `DECIMAL`.
+          format: int32
+          type: integer
+        key_type:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.DataType'
+          description: Key type of a `MAP`.
+        value_type:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.DataType'
+          description: Value type of a `MAP`.
+        element_type:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.DataType'
+          description: Element type of an `ARRAY` or `MULTISET`.
+        fields:
+          description: Fields of a `ROW`, in declaration order.
+          items:
+            $ref: '#/components/schemas/query.v1.RowFieldType'
+          type: array
+        resolution:
+          description: |
+            Interval resolution, for example `YEAR_TO_MONTH` for `INTERVAL_YEAR_MONTH` or `DAY_TO_SECOND` for `INTERVAL_DAY_TIME`.
+          type: string
+        fractional_precision:
+          description: Fractional-second precision of `INTERVAL_DAY_TIME`.
+          format: int32
+          type: integer
+        class_name:
+          description: |
+            Class name of a structured type. Present in the Flink type model; the engine does not currently emit structured types.
+          type: string
+      required:
+      - nullable
+      - type
+      type: object
+    query.v1.RowFieldType:
+      description: |
+        One field of a `ROW`. Field names are carried here, in the schema only — never inline with the row values.
+      properties:
+        name:
+          description: The name of the field.
+          type: string
+        field_type:
+          allOf:
+          - $ref: '#/components/schemas/query.v1.DataType'
+          description: The data type of the field.
+        description:
+          description: Optional field comment from the type declaration.
+          type: string
+      required:
+      - field_type
+      - name
+      type: object
+    query.v1.ResultRow:
+      description: |
+        A single result row — column values ordered to match `schema.columns`. Rows carry no changelog operation marker: this API returns a point-in-time snapshot rather than a changelog stream, so there are no retractions to express.
+      items:
+        $ref: '#/components/schemas/query.v1.ResultValue'
+      type: array
+    query.v1.ResultValue:
+      anyOf:
+      - nullable: true
+        type: string
+      - items:
+          $ref: '#/components/schemas/query.v1.ResultValue'
+        nullable: true
+        type: array
+      description: |
+        One value within a `JSON` result row.
+
+        Scalar values are JSON strings encoded according to the declaring column's
+        `DataType.type`. JSON `null` is SQL NULL, at any depth.
+
+        Complex values are JSON arrays whose elements are themselves `ResultValue`s:
+
+        - `ROW` — a positional array with one element per entry of the type's `fields`,
+          in the same order. Field names are never repeated inline; recovering them
+          requires the schema.
+        - `ARRAY` — one element per collection element, in order.
+        - `MAP` and `MULTISET` — an array of two-element `[key, value]` arrays.
+
+        A complex value that is itself SQL NULL is JSON `null`, which is distinct from
+        an array whose elements are null.
+
+        Canonical scalar encodings:
+
+        | `DataType.type` | Encoding |
+        | --- | --- |
+        | `NULL` | JSON `null` |
+        | `BOOLEAN` | `"TRUE"` or `"FALSE"`, upper case |
+        | `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` | base-10 integer string, optional leading `-` |
+        | `FLOAT`, `DOUBLE` | shortest round-trip decimal string, in exponent notation where Java would use it |
+        | `DECIMAL` | plain decimal string with exactly `scale` fractional digits, no exponent |
+        | `CHAR`, `VARCHAR` | the string value verbatim, UTF-8 |
+        | `BINARY`, `VARBINARY` | hexadecimal literal, for example `"x'7f0203'"` |
+        | `DATE` | `YYYY-MM-DD` |
+        | `TIME_WITHOUT_TIME_ZONE` | `HH:MM:SS[.fff]` |
+        | `TIMESTAMP_WITHOUT_TIME_ZONE` | `YYYY-MM-DD HH:MM:SS[.fff]`, space separated |
+        | `TIMESTAMP_WITH_TIME_ZONE` | `YYYY-MM-DD HH:MM:SS[.fff]`, rendered in UTC. Flink's `TIMESTAMP_LTZ` is reported under this name; the instant is stored as UTC and the zone is metadata only, so no offset is emitted |
+        | `INTERVAL_YEAR_MONTH` | `+YYYY-MM` |
+        | `INTERVAL_DAY_TIME` | `+D HH:MM:SS.fff` |
+
+        These render SQL values, not API datetime or numeric fields — each format follows
+        the column's declared SQL type and matches Confluent Flink's documented value
+        encodings, so one decoder serves both surfaces. `TIMESTAMP` therefore uses a space
+        separator rather than RFC 3339's `T`.
+
+        These encodings apply only when `result_format` is `JSON`. Under
+        `ARROW_STREAM` values are carried natively, with `ROW` mapping to an Arrow
+        struct, `ARRAY` and `MULTISET` to a list, and `MAP` to a map.
+    Failure:
+      description: Provides information about problems encountered while performing
+        an operation.
+      properties:
+        errors:
+          description: List of errors which caused this operation to fail
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+          uniqueItems: true
+      required:
+      - errors
+      type: object
+    Error:
+      description: Describes a particular error encountered while performing an operation.
+      example:
+        code: code
+        id: id
+        detail: detail
+        source:
+          pointer: pointer
+          parameter: parameter
+        title: title
+        status: status
+      properties:
+        id:
+          description: A unique identifier for this particular occurrence of the problem.
+          maxLength: 255
+          type: string
+        status:
+          description: The HTTP status code applicable to this problem, expressed
+            as a string value.
+          type: string
+        code:
+          description: An application-specific error code, expressed as a string value.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem. It **SHOULD
+            NOT** change from occurrence to occurrence of the problem, except for
+            purposes of localization.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        source:
+          $ref: '#/components/schemas/Error_source'
+      type: object
+    Error_source:
+      description: If this error was caused by a particular part of the API request,
+        the source will point to the query string parameter or request body property
+        that caused it.
+      example:
+        pointer: pointer
+        parameter: parameter
+      properties:
+        pointer:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request
+            document [e.g. "/spec" for a spec object, or "/spec/title" for a specific
+            field].
+          type: string
+        parameter:
+          description: A string indicating which query parameter caused the error.
+          type: string
+      type: object
+  securitySchemes:
+    resource-api-key:
+      description: Authenticate with resource-specific API Keys using HTTP Basic Auth.
+        Treat the resource-specific API Key ID as the username and resource-specific
+        API Key Secret as the password.
+      scheme: basic
+      type: http
