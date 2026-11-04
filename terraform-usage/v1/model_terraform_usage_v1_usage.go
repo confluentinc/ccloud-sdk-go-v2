@@ -70,6 +70,16 @@ type TerraformUsageV1Usage struct {
 	Error *bool `json:"error,omitempty"`
 	// Source locations from the stack trace of a panic, reported only when the operation panicked.  Each entry is a Go source location of the form `<path>:<line>`, taken from the provider's own stack trace and filtered to Go source lines. Panic messages, function arguments, and resource state are not included. Paths are recorded when the provider binary is compiled, not when it runs, so they do not describe the machine running Terraform, unless the binary was built locally rather than from an official release, in which case they are paths on the machine that built it. Official release builds trim the module prefix but not the Go runtime prefix, so runtime frames still carry an absolute path from the release build machine.
 	StackFrames *[]string `json:"stack_frames,omitempty"`
+	// How many times the operation's Confluent Cloud API requests were retried, in total: every attempt after a request's first, whatever caused it, such as an HTTP 429, a 5xx response, or a connection error. 0 when nothing was retried.  Absent from events sent by provider versions that predate this attribute, which do not report retries.
+	RetryCount *int32 `json:"retry_count,omitempty"`
+	// The part of `retry_count` made after an HTTP 429 (Too Many Requests) response, so it is never greater than `retry_count`
+	RateLimitRetryCount *int32 `json:"rate_limit_retry_count,omitempty"`
+	// If at least one of the operation's API requests stopped because it had no retries left, so the provider gave up on it. When `retry_count` is greater than 0 and this is `false`, the retries did not run out; the operation can still have failed for another reason, which `error` reports.  A request cut short because the operation's context ended while it waited to retry, such as on a Terraform timeout, does not count as exhausted.
+	RetriesExhausted *bool `json:"retries_exhausted,omitempty"`
+	// The HTTP status code that last caused a retry of the request described by `retry_endpoint`, such as 429 or 503. 0 if that attempt received no response, such as on a connection error.  The request described is the first one that exhausted its retries, or if none did, the first one that was retried. Omitted when nothing was retried.
+	RetryStatusCode *int32 `json:"retry_status_code,omitempty"`
+	// The Confluent Cloud API endpoint of the request that `retry_status_code` describes, named by its HTTP method followed by the API group, version, and top-level collection of its path, such as `GET connect/v1/environments`. Omitted when nothing was retried.  No value taken from the request is reported: path segments after the top-level collection, which hold resource IDs and names, and the query string are dropped. A path that does not start with an API group and version, such as a Schema Registry path, is reported as the method followed by `other`.
+	RetryEndpoint *string `json:"retry_endpoint,omitempty"`
 }
 
 // NewTerraformUsageV1Usage instantiates a new TerraformUsageV1Usage object
@@ -633,6 +643,166 @@ func (o *TerraformUsageV1Usage) SetStackFrames(v []string) {
 	o.StackFrames = &v
 }
 
+// GetRetryCount returns the RetryCount field value if set, zero value otherwise.
+func (o *TerraformUsageV1Usage) GetRetryCount() int32 {
+	if o == nil || o.RetryCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RetryCount
+}
+
+// GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerraformUsageV1Usage) GetRetryCountOk() (*int32, bool) {
+	if o == nil || o.RetryCount == nil {
+		return nil, false
+	}
+	return o.RetryCount, true
+}
+
+// HasRetryCount returns a boolean if a field has been set.
+func (o *TerraformUsageV1Usage) HasRetryCount() bool {
+	if o != nil && o.RetryCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryCount gets a reference to the given int32 and assigns it to the RetryCount field.
+func (o *TerraformUsageV1Usage) SetRetryCount(v int32) {
+	o.RetryCount = &v
+}
+
+// GetRateLimitRetryCount returns the RateLimitRetryCount field value if set, zero value otherwise.
+func (o *TerraformUsageV1Usage) GetRateLimitRetryCount() int32 {
+	if o == nil || o.RateLimitRetryCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RateLimitRetryCount
+}
+
+// GetRateLimitRetryCountOk returns a tuple with the RateLimitRetryCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerraformUsageV1Usage) GetRateLimitRetryCountOk() (*int32, bool) {
+	if o == nil || o.RateLimitRetryCount == nil {
+		return nil, false
+	}
+	return o.RateLimitRetryCount, true
+}
+
+// HasRateLimitRetryCount returns a boolean if a field has been set.
+func (o *TerraformUsageV1Usage) HasRateLimitRetryCount() bool {
+	if o != nil && o.RateLimitRetryCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRateLimitRetryCount gets a reference to the given int32 and assigns it to the RateLimitRetryCount field.
+func (o *TerraformUsageV1Usage) SetRateLimitRetryCount(v int32) {
+	o.RateLimitRetryCount = &v
+}
+
+// GetRetriesExhausted returns the RetriesExhausted field value if set, zero value otherwise.
+func (o *TerraformUsageV1Usage) GetRetriesExhausted() bool {
+	if o == nil || o.RetriesExhausted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RetriesExhausted
+}
+
+// GetRetriesExhaustedOk returns a tuple with the RetriesExhausted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerraformUsageV1Usage) GetRetriesExhaustedOk() (*bool, bool) {
+	if o == nil || o.RetriesExhausted == nil {
+		return nil, false
+	}
+	return o.RetriesExhausted, true
+}
+
+// HasRetriesExhausted returns a boolean if a field has been set.
+func (o *TerraformUsageV1Usage) HasRetriesExhausted() bool {
+	if o != nil && o.RetriesExhausted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetriesExhausted gets a reference to the given bool and assigns it to the RetriesExhausted field.
+func (o *TerraformUsageV1Usage) SetRetriesExhausted(v bool) {
+	o.RetriesExhausted = &v
+}
+
+// GetRetryStatusCode returns the RetryStatusCode field value if set, zero value otherwise.
+func (o *TerraformUsageV1Usage) GetRetryStatusCode() int32 {
+	if o == nil || o.RetryStatusCode == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RetryStatusCode
+}
+
+// GetRetryStatusCodeOk returns a tuple with the RetryStatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerraformUsageV1Usage) GetRetryStatusCodeOk() (*int32, bool) {
+	if o == nil || o.RetryStatusCode == nil {
+		return nil, false
+	}
+	return o.RetryStatusCode, true
+}
+
+// HasRetryStatusCode returns a boolean if a field has been set.
+func (o *TerraformUsageV1Usage) HasRetryStatusCode() bool {
+	if o != nil && o.RetryStatusCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryStatusCode gets a reference to the given int32 and assigns it to the RetryStatusCode field.
+func (o *TerraformUsageV1Usage) SetRetryStatusCode(v int32) {
+	o.RetryStatusCode = &v
+}
+
+// GetRetryEndpoint returns the RetryEndpoint field value if set, zero value otherwise.
+func (o *TerraformUsageV1Usage) GetRetryEndpoint() string {
+	if o == nil || o.RetryEndpoint == nil {
+		var ret string
+		return ret
+	}
+	return *o.RetryEndpoint
+}
+
+// GetRetryEndpointOk returns a tuple with the RetryEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TerraformUsageV1Usage) GetRetryEndpointOk() (*string, bool) {
+	if o == nil || o.RetryEndpoint == nil {
+		return nil, false
+	}
+	return o.RetryEndpoint, true
+}
+
+// HasRetryEndpoint returns a boolean if a field has been set.
+func (o *TerraformUsageV1Usage) HasRetryEndpoint() bool {
+	if o != nil && o.RetryEndpoint != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryEndpoint gets a reference to the given string and assigns it to the RetryEndpoint field.
+func (o *TerraformUsageV1Usage) SetRetryEndpoint(v string) {
+	o.RetryEndpoint = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *TerraformUsageV1Usage) Redact() {
 	o.recurseRedact(o.ApiVersion)
@@ -652,6 +822,11 @@ func (o *TerraformUsageV1Usage) Redact() {
 	o.recurseRedact(o.ChangedAttributes)
 	o.recurseRedact(o.Error)
 	o.recurseRedact(o.StackFrames)
+	o.recurseRedact(o.RetryCount)
+	o.recurseRedact(o.RateLimitRetryCount)
+	o.recurseRedact(o.RetriesExhausted)
+	o.recurseRedact(o.RetryStatusCode)
+	o.recurseRedact(o.RetryEndpoint)
 }
 
 func (o *TerraformUsageV1Usage) recurseRedact(v interface{}) {
@@ -736,6 +911,21 @@ func (o TerraformUsageV1Usage) MarshalJSON() ([]byte, error) {
 	}
 	if o.StackFrames != nil {
 		toSerialize["stack_frames"] = o.StackFrames
+	}
+	if o.RetryCount != nil {
+		toSerialize["retry_count"] = o.RetryCount
+	}
+	if o.RateLimitRetryCount != nil {
+		toSerialize["rate_limit_retry_count"] = o.RateLimitRetryCount
+	}
+	if o.RetriesExhausted != nil {
+		toSerialize["retries_exhausted"] = o.RetriesExhausted
+	}
+	if o.RetryStatusCode != nil {
+		toSerialize["retry_status_code"] = o.RetryStatusCode
+	}
+	if o.RetryEndpoint != nil {
+		toSerialize["retry_endpoint"] = o.RetryEndpoint
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
