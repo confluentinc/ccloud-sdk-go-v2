@@ -22,7 +22,6 @@ Name | Type | Description | Notes
 **Error** | Pointer to **bool** | If an error occurred while running the operation. Also set when the operation panicked, in which case &#x60;stack_frames&#x60; is populated | [optional] 
 **StackFrames** | Pointer to **[]string** | Source locations from the stack trace of a panic, reported only when the operation panicked.  Each entry is a Go source location of the form &#x60;&lt;path&gt;:&lt;line&gt;&#x60;, taken from the provider&#39;s own stack trace and filtered to Go source lines. Panic messages, function arguments, and resource state are not included. Paths are recorded when the provider binary is compiled, not when it runs, so they do not describe the machine running Terraform, unless the binary was built locally rather than from an official release, in which case they are paths on the machine that built it. Official release builds trim the module prefix but not the Go runtime prefix, so runtime frames still carry an absolute path from the release build machine.  | [optional] 
 **RetryCount** | Pointer to **int32** | How many times the operation&#39;s Confluent Cloud API requests were retried, in total: every attempt after a request&#39;s first, whatever caused it, such as an HTTP 429, a 5xx response, or a connection error. 0 when nothing was retried.  Absent from events sent by provider versions that predate this attribute, which do not report retries.  | [optional] 
-**RateLimitRetryCount** | Pointer to **int32** | The part of &#x60;retry_count&#x60; made after an HTTP 429 (Too Many Requests) response, so it is never greater than &#x60;retry_count&#x60; | [optional] 
 **RetriesExhausted** | Pointer to **bool** | If at least one of the operation&#39;s API requests stopped because it had no retries left, so the provider gave up on it. When &#x60;retry_count&#x60; is greater than 0 and this is &#x60;false&#x60;, the retries did not run out; the operation can still have failed for another reason, which &#x60;error&#x60; reports.  A request cut short because the operation&#39;s context ended while it waited to retry, such as on a Terraform timeout, does not count as exhausted.  | [optional] 
 **RetryStatusCode** | Pointer to **int32** | The HTTP status code that last caused a retry of the request described by &#x60;retry_endpoint&#x60;, such as 429 or 503. 0 if that attempt received no response, such as on a connection error.  The request described is the first one that exhausted its retries, or if none did, the first one that was retried. Omitted when nothing was retried.  | [optional] 
 **RetryEndpoint** | Pointer to **string** | The Confluent Cloud API endpoint of the request that &#x60;retry_status_code&#x60; describes, named by its HTTP method followed by the API group, version, and top-level collection of its path, such as &#x60;GET connect/v1/environments&#x60;. Omitted when nothing was retried.  No value taken from the request is reported: path segments after the top-level collection, which hold resource IDs and names, and the query string are dropped. A path that does not start with an API group and version, such as a Schema Registry path, is reported as the method followed by &#x60;other&#x60;.  | [optional] 
@@ -495,31 +494,6 @@ SetRetryCount sets RetryCount field to given value.
 `func (o *TerraformUsageV1Usage) HasRetryCount() bool`
 
 HasRetryCount returns a boolean if a field has been set.
-
-### GetRateLimitRetryCount
-
-`func (o *TerraformUsageV1Usage) GetRateLimitRetryCount() int32`
-
-GetRateLimitRetryCount returns the RateLimitRetryCount field if non-nil, zero value otherwise.
-
-### GetRateLimitRetryCountOk
-
-`func (o *TerraformUsageV1Usage) GetRateLimitRetryCountOk() (*int32, bool)`
-
-GetRateLimitRetryCountOk returns a tuple with the RateLimitRetryCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRateLimitRetryCount
-
-`func (o *TerraformUsageV1Usage) SetRateLimitRetryCount(v int32)`
-
-SetRateLimitRetryCount sets RateLimitRetryCount field to given value.
-
-### HasRateLimitRetryCount
-
-`func (o *TerraformUsageV1Usage) HasRateLimitRetryCount() bool`
-
-HasRateLimitRetryCount returns a boolean if a field has been set.
 
 ### GetRetriesExhausted
 

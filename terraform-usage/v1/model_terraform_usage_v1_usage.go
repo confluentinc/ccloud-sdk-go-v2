@@ -72,8 +72,6 @@ type TerraformUsageV1Usage struct {
 	StackFrames *[]string `json:"stack_frames,omitempty"`
 	// How many times the operation's Confluent Cloud API requests were retried, in total: every attempt after a request's first, whatever caused it, such as an HTTP 429, a 5xx response, or a connection error. 0 when nothing was retried.  Absent from events sent by provider versions that predate this attribute, which do not report retries.
 	RetryCount *int32 `json:"retry_count,omitempty"`
-	// The part of `retry_count` made after an HTTP 429 (Too Many Requests) response, so it is never greater than `retry_count`
-	RateLimitRetryCount *int32 `json:"rate_limit_retry_count,omitempty"`
 	// If at least one of the operation's API requests stopped because it had no retries left, so the provider gave up on it. When `retry_count` is greater than 0 and this is `false`, the retries did not run out; the operation can still have failed for another reason, which `error` reports.  A request cut short because the operation's context ended while it waited to retry, such as on a Terraform timeout, does not count as exhausted.
 	RetriesExhausted *bool `json:"retries_exhausted,omitempty"`
 	// The HTTP status code that last caused a retry of the request described by `retry_endpoint`, such as 429 or 503. 0 if that attempt received no response, such as on a connection error.  The request described is the first one that exhausted its retries, or if none did, the first one that was retried. Omitted when nothing was retried.
@@ -675,38 +673,6 @@ func (o *TerraformUsageV1Usage) SetRetryCount(v int32) {
 	o.RetryCount = &v
 }
 
-// GetRateLimitRetryCount returns the RateLimitRetryCount field value if set, zero value otherwise.
-func (o *TerraformUsageV1Usage) GetRateLimitRetryCount() int32 {
-	if o == nil || o.RateLimitRetryCount == nil {
-		var ret int32
-		return ret
-	}
-	return *o.RateLimitRetryCount
-}
-
-// GetRateLimitRetryCountOk returns a tuple with the RateLimitRetryCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TerraformUsageV1Usage) GetRateLimitRetryCountOk() (*int32, bool) {
-	if o == nil || o.RateLimitRetryCount == nil {
-		return nil, false
-	}
-	return o.RateLimitRetryCount, true
-}
-
-// HasRateLimitRetryCount returns a boolean if a field has been set.
-func (o *TerraformUsageV1Usage) HasRateLimitRetryCount() bool {
-	if o != nil && o.RateLimitRetryCount != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRateLimitRetryCount gets a reference to the given int32 and assigns it to the RateLimitRetryCount field.
-func (o *TerraformUsageV1Usage) SetRateLimitRetryCount(v int32) {
-	o.RateLimitRetryCount = &v
-}
-
 // GetRetriesExhausted returns the RetriesExhausted field value if set, zero value otherwise.
 func (o *TerraformUsageV1Usage) GetRetriesExhausted() bool {
 	if o == nil || o.RetriesExhausted == nil {
@@ -823,7 +789,6 @@ func (o *TerraformUsageV1Usage) Redact() {
 	o.recurseRedact(o.Error)
 	o.recurseRedact(o.StackFrames)
 	o.recurseRedact(o.RetryCount)
-	o.recurseRedact(o.RateLimitRetryCount)
 	o.recurseRedact(o.RetriesExhausted)
 	o.recurseRedact(o.RetryStatusCode)
 	o.recurseRedact(o.RetryEndpoint)
@@ -914,9 +879,6 @@ func (o TerraformUsageV1Usage) MarshalJSON() ([]byte, error) {
 	}
 	if o.RetryCount != nil {
 		toSerialize["retry_count"] = o.RetryCount
-	}
-	if o.RateLimitRetryCount != nil {
-		toSerialize["rate_limit_retry_count"] = o.RateLimitRetryCount
 	}
 	if o.RetriesExhausted != nil {
 		toSerialize["retries_exhausted"] = o.RetriesExhausted
