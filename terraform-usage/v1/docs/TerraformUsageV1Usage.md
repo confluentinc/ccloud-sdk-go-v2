@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **ChangedAttributes** | Pointer to **[]string** | Names of the resource&#39;s attributes that the operation changed. Empty for operations that change no attributes, such as &#x60;READ&#x60; and &#x60;IMPORT&#x60;.  Only top-level attribute names declared in the provider&#39;s resource schema are reported. Attribute values are never reported, and a map-typed attribute contributes only its own declared name, never the map&#39;s runtime keys or values. Elements must be valid Terraform SDK field names, which rejects dotted paths such as &#x60;config.cleanup.policy&#x60; and anything containing whitespace or punctuation.  | [optional] 
 **Error** | Pointer to **bool** | If an error occurred while running the operation. Also set when the operation panicked, in which case &#x60;stack_frames&#x60; is populated | [optional] 
 **StackFrames** | Pointer to **[]string** | Source locations from the stack trace of a panic, reported only when the operation panicked.  Each entry is a Go source location of the form &#x60;&lt;path&gt;:&lt;line&gt;&#x60;, taken from the provider&#39;s own stack trace and filtered to Go source lines. Panic messages, function arguments, and resource state are not included. Paths are recorded when the provider binary is compiled, not when it runs, so they do not describe the machine running Terraform, unless the binary was built locally rather than from an official release, in which case they are paths on the machine that built it. Official release builds trim the module prefix but not the Go runtime prefix, so runtime frames still carry an absolute path from the release build machine.  | [optional] 
+**RetryCount** | Pointer to **int32** | How many times the operation&#39;s Confluent Cloud API requests were retried, in total: every attempt after a request&#39;s first, whatever caused it, such as an HTTP 429, a 5xx response, or a connection error. 0 when nothing was retried.  Absent from events sent by provider versions that predate this attribute, which do not report retries.  | [optional] 
+**RetriesExhausted** | Pointer to **bool** | If at least one of the operation&#39;s API requests stopped because it had no retries left, so the provider gave up on it. When &#x60;retry_count&#x60; is greater than 0 and this is &#x60;false&#x60;, the retries did not run out; the operation can still have failed for another reason, which &#x60;error&#x60; reports.  A request cut short because the operation&#39;s context ended while it waited to retry, such as on a Terraform timeout, does not count as exhausted.  | [optional] 
+**RetryStatusCode** | Pointer to **int32** | The HTTP status code that last caused a retry of the request described by &#x60;retry_endpoint&#x60;, such as 429 or 503. 0 if that attempt received no response, such as on a connection error.  The request described is the first one that exhausted its retries, or if none did, the first one that was retried. Omitted when nothing was retried.  | [optional] 
+**RetryEndpoint** | Pointer to **string** | The Confluent Cloud API endpoint of the request that &#x60;retry_status_code&#x60; describes, named by its HTTP method followed by the API group, version, and top-level collection of its path, such as &#x60;GET connect/v1/environments&#x60;. Omitted when nothing was retried.  No value taken from the request is reported: path segments after the top-level collection, which hold resource IDs and names, and the query string are dropped. A path that does not start with an API group and version, such as a Schema Registry path, is reported as the method followed by &#x60;other&#x60;.  | [optional] 
 
 ## Methods
 
@@ -465,6 +469,106 @@ SetStackFrames sets StackFrames field to given value.
 `func (o *TerraformUsageV1Usage) HasStackFrames() bool`
 
 HasStackFrames returns a boolean if a field has been set.
+
+### GetRetryCount
+
+`func (o *TerraformUsageV1Usage) GetRetryCount() int32`
+
+GetRetryCount returns the RetryCount field if non-nil, zero value otherwise.
+
+### GetRetryCountOk
+
+`func (o *TerraformUsageV1Usage) GetRetryCountOk() (*int32, bool)`
+
+GetRetryCountOk returns a tuple with the RetryCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryCount
+
+`func (o *TerraformUsageV1Usage) SetRetryCount(v int32)`
+
+SetRetryCount sets RetryCount field to given value.
+
+### HasRetryCount
+
+`func (o *TerraformUsageV1Usage) HasRetryCount() bool`
+
+HasRetryCount returns a boolean if a field has been set.
+
+### GetRetriesExhausted
+
+`func (o *TerraformUsageV1Usage) GetRetriesExhausted() bool`
+
+GetRetriesExhausted returns the RetriesExhausted field if non-nil, zero value otherwise.
+
+### GetRetriesExhaustedOk
+
+`func (o *TerraformUsageV1Usage) GetRetriesExhaustedOk() (*bool, bool)`
+
+GetRetriesExhaustedOk returns a tuple with the RetriesExhausted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetriesExhausted
+
+`func (o *TerraformUsageV1Usage) SetRetriesExhausted(v bool)`
+
+SetRetriesExhausted sets RetriesExhausted field to given value.
+
+### HasRetriesExhausted
+
+`func (o *TerraformUsageV1Usage) HasRetriesExhausted() bool`
+
+HasRetriesExhausted returns a boolean if a field has been set.
+
+### GetRetryStatusCode
+
+`func (o *TerraformUsageV1Usage) GetRetryStatusCode() int32`
+
+GetRetryStatusCode returns the RetryStatusCode field if non-nil, zero value otherwise.
+
+### GetRetryStatusCodeOk
+
+`func (o *TerraformUsageV1Usage) GetRetryStatusCodeOk() (*int32, bool)`
+
+GetRetryStatusCodeOk returns a tuple with the RetryStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryStatusCode
+
+`func (o *TerraformUsageV1Usage) SetRetryStatusCode(v int32)`
+
+SetRetryStatusCode sets RetryStatusCode field to given value.
+
+### HasRetryStatusCode
+
+`func (o *TerraformUsageV1Usage) HasRetryStatusCode() bool`
+
+HasRetryStatusCode returns a boolean if a field has been set.
+
+### GetRetryEndpoint
+
+`func (o *TerraformUsageV1Usage) GetRetryEndpoint() string`
+
+GetRetryEndpoint returns the RetryEndpoint field if non-nil, zero value otherwise.
+
+### GetRetryEndpointOk
+
+`func (o *TerraformUsageV1Usage) GetRetryEndpointOk() (*string, bool)`
+
+GetRetryEndpointOk returns a tuple with the RetryEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryEndpoint
+
+`func (o *TerraformUsageV1Usage) SetRetryEndpoint(v string)`
+
+SetRetryEndpoint sets RetryEndpoint field to given value.
+
+### HasRetryEndpoint
+
+`func (o *TerraformUsageV1Usage) HasRetryEndpoint() bool`
+
+HasRetryEndpoint returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

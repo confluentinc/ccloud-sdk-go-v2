@@ -266,13 +266,13 @@ paths:
             --url https://api.confluent.cloud/terraform-usage/v1/usages \
             --header 'Authorization: Basic REPLACE_BASIC_AUTH' \
             --header 'content-type: application/json' \
-            --data '{"run_id":"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21","sequence":7,"started_at":"2026-08-14T18:04:05Z","duration_ms":1543,"os":"darwin","arch":"amd64","provider_version":"2.82.3","terraform_version":"1.14.4","resource_type":"confluent_kafka_topic","operation":"CREATE","changed_attributes":["topic_name","partitions_count"],"error":true,"stack_frames":["/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884","github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88"]}'
+            --data '{"run_id":"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21","sequence":7,"started_at":"2026-08-14T18:04:05Z","duration_ms":1543,"os":"darwin","arch":"amd64","provider_version":"2.82.3","terraform_version":"1.14.4","resource_type":"confluent_kafka_topic","operation":"CREATE","changed_attributes":["topic_name","partitions_count"],"error":true,"stack_frames":["/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884","github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88"],"retry_count":12,"retries_exhausted":true,"retry_status_code":429,"retry_endpoint":"GET connect/v1/environments"}'
       - lang: Java
         source: |-
           OkHttpClient client = new OkHttpClient();
 
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"],\"retry_count\":12,\"retries_exhausted\":true,\"retry_status_code\":429,\"retry_endpoint\":\"GET connect/v1/environments\"}");
           Request request = new Request.Builder()
             .url("https://api.confluent.cloud/terraform-usage/v1/usages")
             .post(body)
@@ -292,7 +292,9 @@ paths:
           \":\\\"CREATE\\\",\\\"changed_attributes\\\":[\\\"topic_name\\\",\\\"partitions_count\\\
           \"],\\\"error\\\":true,\\\"stack_frames\\\":[\\\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\\\
           \",\\\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\\\
-          \"]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          \"],\\\"retry_count\\\":12,\\\"retries_exhausted\\\":true,\\\"retry_status_code\\\
+          \":429,\\\"retry_endpoint\\\":\\\"GET connect/v1/environments\\\"}\")\n\n\
+          \treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
           content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
           , \"Basic REPLACE_BASIC_AUTH\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
           \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
@@ -303,7 +305,7 @@ paths:
 
           conn = http.client.HTTPSConnection("api.confluent.cloud")
 
-          payload = "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}"
+          payload = "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"],\"retry_count\":12,\"retries_exhausted\":true,\"retry_status_code\":429,\"retry_endpoint\":\"GET connect/v1/environments\"}"
 
           headers = {
               'content-type': "application/json",
@@ -360,7 +362,11 @@ paths:
             stack_frames: [
               '/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884',
               'github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88'
-            ]
+            ],
+            retry_count: 12,
+            retries_exhausted: true,
+            retry_status_code: 429,
+            retry_endpoint: 'GET connect/v1/environments'
           }));
           req.end();
       - lang: C
@@ -375,7 +381,7 @@ paths:
           headers = curl_slist_append(headers, "Authorization: Basic REPLACE_BASIC_AUTH");
           curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}");
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"],\"retry_count\":12,\"retries_exhausted\":true,\"retry_status_code\":429,\"retry_endpoint\":\"GET connect/v1/environments\"}");
 
           CURLcode ret = curl_easy_perform(hnd);
       - lang: C#
@@ -384,7 +390,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("content-type", "application/json");
           request.AddHeader("Authorization", "Basic REPLACE_BASIC_AUTH");
-          request.AddParameter("application/json", "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"]}", ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"run_id\":\"7d7cf9f0-4c72-4a1f-9b8a-3a2f0f3a4b21\",\"sequence\":7,\"started_at\":\"2026-08-14T18:04:05Z\",\"duration_ms\":1543,\"os\":\"darwin\",\"arch\":\"amd64\",\"provider_version\":\"2.82.3\",\"terraform_version\":\"1.14.4\",\"resource_type\":\"confluent_kafka_topic\",\"operation\":\"CREATE\",\"changed_attributes\":[\"topic_name\",\"partitions_count\"],\"error\":true,\"stack_frames\":[\"/home/runner/.goenv/versions/1.25.9/src/runtime/panic.go:884\",\"github.com/confluentinc/terraform-provider-confluent/internal/provider/telemetry/wrapper.go:88\"],\"retry_count\":12,\"retries_exhausted\":true,\"retry_status_code\":429,\"retry_endpoint\":\"GET connect/v1/environments\"}", ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
 components:
   responses:
@@ -794,6 +800,52 @@ components:
             type: string
           maxItems: 64
           type: array
+        retry_count:
+          description: |
+            How many times the operation's Confluent Cloud API requests were retried, in total: every attempt after
+            a request's first, whatever caused it, such as an HTTP 429, a 5xx response, or a connection error. 0
+            when nothing was retried.
+
+            Absent from events sent by provider versions that predate this attribute, which do not report retries.
+          example: 12
+          format: int32
+          minimum: 0
+          type: integer
+        retries_exhausted:
+          description: |
+            If at least one of the operation's API requests stopped because it had no retries left, so the
+            provider gave up on it. When `retry_count` is greater than 0 and this is `false`, the retries did not
+            run out; the operation can still have failed for another reason, which `error` reports.
+
+            A request cut short because the operation's context ended while it waited to retry, such as on a
+            Terraform timeout, does not count as exhausted.
+          example: true
+          type: boolean
+        retry_status_code:
+          description: |
+            The HTTP status code that last caused a retry of the request described by `retry_endpoint`, such as
+            429 or 503. 0 if that attempt received no response, such as on a connection error.
+
+            The request described is the first one that exhausted its retries, or if none did, the first one that
+            was retried. Omitted when nothing was retried.
+          example: 429
+          format: int32
+          maximum: 599
+          minimum: 0
+          type: integer
+        retry_endpoint:
+          description: |
+            The Confluent Cloud API endpoint of the request that `retry_status_code` describes, named by its HTTP
+            method followed by the API group, version, and top-level collection of its path, such as
+            `GET connect/v1/environments`. Omitted when nothing was retried.
+
+            No value taken from the request is reported: path segments after the top-level collection, which hold
+            resource IDs and names, and the query string are dropped. A path that does not start with an API group
+            and version, such as a Schema Registry path, is reported as the method followed by `other`.
+          example: GET connect/v1/environments
+          maxLength: 128
+          pattern: ^[A-Z]+ ([a-z][a-z0-9-]*/v[0-9]+[a-z0-9]*(/[a-z]+(-[a-z]+)*)?|other)$
+          type: string
       type: object
     ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have,
