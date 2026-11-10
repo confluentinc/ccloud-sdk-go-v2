@@ -779,6 +779,20 @@ type ApiListConnectv1ConnectorsRequest struct {
 	ApiService     ConnectorsConnectV1Api
 	environmentId  string
 	kafkaClusterId string
+	pageSize       *int32
+	pageToken      *string
+}
+
+// Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the &#x60;X-Next-Page-Token&#x60; response header. Values above 100 are capped at 100. Without &#x60;page_size&#x60; and &#x60;page_token&#x60;, every connector is returned in one response.
+func (r ApiListConnectv1ConnectorsRequest) PageSize(pageSize int32) ApiListConnectv1ConnectorsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+// Opaque cursor taken from the previous page&#39;s &#x60;X-Next-Page-Token&#x60; header. Pass it back unchanged; don&#39;t parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page.
+func (r ApiListConnectv1ConnectorsRequest) PageToken(pageToken string) ApiListConnectv1ConnectorsRequest {
+	r.pageToken = &pageToken
+	return r
 }
 
 func (r ApiListConnectv1ConnectorsRequest) Execute() ([]string, *_nethttp.Response, error) {
@@ -831,6 +845,13 @@ func (a *ConnectorsConnectV1ApiService) ListConnectv1ConnectorsExecute(r ApiList
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageToken != nil {
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -921,11 +942,25 @@ type ApiListConnectv1ConnectorsWithExpansionsRequest struct {
 	environmentId  string
 	kafkaClusterId string
 	expand         *string
+	pageSize       *int32
+	pageToken      *string
 }
 
 // - id : Returns metadata of each connector such as id and id type. - info : Returns metadata of each connector such as the configuration, task information, and type of connector. - status : Returns additional state information of each connector including their status and tasks.
 func (r ApiListConnectv1ConnectorsWithExpansionsRequest) Expand(expand string) ApiListConnectv1ConnectorsWithExpansionsRequest {
 	r.expand = &expand
+	return r
+}
+
+// Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the &#x60;X-Next-Page-Token&#x60; response header. Values above 100 are capped at 100. Without &#x60;page_size&#x60; and &#x60;page_token&#x60;, every connector is returned in one response.
+func (r ApiListConnectv1ConnectorsWithExpansionsRequest) PageSize(pageSize int32) ApiListConnectv1ConnectorsWithExpansionsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+// Opaque cursor taken from the previous page&#39;s &#x60;X-Next-Page-Token&#x60; header. Pass it back unchanged; don&#39;t parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page.
+func (r ApiListConnectv1ConnectorsWithExpansionsRequest) PageToken(pageToken string) ApiListConnectv1ConnectorsWithExpansionsRequest {
+	r.pageToken = &pageToken
 	return r
 }
 
@@ -982,6 +1017,12 @@ func (a *ConnectorsConnectV1ApiService) ListConnectv1ConnectorsWithExpansionsExe
 
 	if r.expand != nil {
 		localVarQueryParams.Add("expand", parameterToString(*r.expand, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	if r.pageToken != nil {
+		localVarQueryParams.Add("page_token", parameterToString(*r.pageToken, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
