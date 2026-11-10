@@ -130,6 +130,16 @@ paths:
               schema:
                 type: string
               style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
         "401":
           content:
             application/json:
