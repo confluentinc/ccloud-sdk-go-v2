@@ -52,6 +52,16 @@ paths:
         [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
+
+        Pagination (Early Access): available only for organizations where it has been enabled. Where
+        enabled, pass `page_size` to get one page at a time. The body shape is unchanged; the next-page
+        cursor is returned in the `X-Next-Page-Token` response header. Send it back as `page_token`, with
+        the other query parameters unchanged, to get the next page. No header means the last page. Managed
+        connectors are listed first, then custom connectors. A page may hold fewer than `page_size` entries
+        (or none) while more remain, so keep requesting until the header is absent. An invalid `page_size`
+        or `page_token` returns `400`. Where pagination is not enabled, `page_size` and `page_token` are
+        ignored and all connectors are returned in one response. A paginated listing is not a snapshot: a
+        connector created while you page may be missed if it sorts before the current page.
       operationId: listConnectv1Connectors
       parameters:
       - description: The unique identifier of the environment this resource belongs
@@ -71,6 +81,32 @@ paths:
         schema:
           type: string
         style: simple
+      - description: |-
+          Page size (Early Access), honored only where pagination is enabled for the organization;
+          otherwise ignored. When honored, the response body shape is unchanged and the cursor for the
+          next page is returned in the `X-Next-Page-Token` response header. Values above 100 are capped
+          at 100. Without `page_size` and `page_token`, every connector is returned in one response.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          Opaque cursor taken from the previous page's `X-Next-Page-Token` header. Pass it back unchanged;
+          don't parse or build it. It is valid only for the environment and cluster it was returned for.
+          Omit it, or leave it empty, for the first page.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -86,6 +122,24 @@ paths:
                   type: string
                 type: array
           description: Connector.
+          headers:
+            X-Next-Page-Token:
+              description: Opaque cursor for the next page. Present only when paginating
+                and more pages remain.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -589,6 +643,16 @@ paths:
         [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 
         Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
+
+        Pagination (Early Access): available only for organizations where it has been enabled. Where
+        enabled, pass `page_size` to get one page at a time. The body shape is unchanged; the next-page
+        cursor is returned in the `X-Next-Page-Token` response header. Send it back as `page_token`, with
+        the other query parameters unchanged, to get the next page. No header means the last page. Managed
+        connectors are listed first, then custom connectors. A page may hold fewer than `page_size` entries
+        (or none) while more remain, so keep requesting until the header is absent. An invalid `page_size`
+        or `page_token` returns `400`. Where pagination is not enabled, `page_size` and `page_token` are
+        ignored and all connectors are returned in one response. A paginated listing is not a snapshot: a
+        connector created while you page may be missed if it sorts before the current page.
       operationId: listConnectv1ConnectorsWithExpansions
       parameters:
       - description: The unique identifier of the environment this resource belongs
@@ -622,6 +686,32 @@ paths:
           - id
           - info
           - status
+          type: string
+        style: form
+      - description: |-
+          Page size (Early Access), honored only where pagination is enabled for the organization;
+          otherwise ignored. When honored, the response body shape is unchanged and the cursor for the
+          next page is returned in the `X-Next-Page-Token` response header. Values above 100 are capped
+          at 100. Without `page_size` and `page_token`, every connector is returned in one response.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          Opaque cursor taken from the previous page's `X-Next-Page-Token` header. Pass it back unchanged;
+          don't parse or build it. It is valid only for the environment and cluster it was returned for.
+          Omit it, or leave it empty, for the first page.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
           type: string
         style: form
       responses:
@@ -732,6 +822,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/connect.v1.ConnectorExpansionMap'
           description: Connector.
+          headers:
+            X-Next-Page-Token:
+              description: Opaque cursor for the next page. Present only when paginating
+                and more pages remain.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+              schema:
+                $ref: '#/components/schemas/connect.v1.ConnectorError'
+          description: Bad Request
         "401":
           content:
             application/json:

@@ -321,7 +321,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectv1Connectors
 
-> []string ListConnectv1Connectors(ctx, environmentId, kafkaClusterId).Execute()
+> []string ListConnectv1Connectors(ctx, environmentId, kafkaClusterId).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Connectors
 
@@ -343,9 +343,11 @@ func main() {
     environmentId := "environmentId_example" // string | The unique identifier of the environment this resource belongs to.
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
 
+    pageSize := int32(56) // int32 | Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the `X-Next-Page-Token` response header. Values above 100 are capped at 100. Without `page_size` and `page_token`, every connector is returned in one response. (optional)
+    pageToken := "pageToken_example" // string | Opaque cursor taken from the previous page's `X-Next-Page-Token` header. Pass it back unchanged; don't parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page. (optional)
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectorsConnectV1Api.ListConnectv1Connectors(context.Background(), environmentId, kafkaClusterId).Execute()
+    resp, r, err := api_client.ConnectorsConnectV1Api.ListConnectv1Connectors(context.Background(), environmentId, kafkaClusterId).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsConnectV1Api.ListConnectv1Connectors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -371,6 +373,8 @@ Other parameters are passed through a pointer to a apiListConnectv1ConnectorsReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **pageSize** | **int32** | Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the &#x60;X-Next-Page-Token&#x60; response header. Values above 100 are capped at 100. Without &#x60;page_size&#x60; and &#x60;page_token&#x60;, every connector is returned in one response. | 
+ **pageToken** | **string** | Opaque cursor taken from the previous page&#39;s &#x60;X-Next-Page-Token&#x60; header. Pass it back unchanged; don&#39;t parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page. | 
 
 
 
@@ -394,7 +398,7 @@ Name | Type | Description  | Notes
 
 ## ListConnectv1ConnectorsWithExpansions
 
-> map[string]ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).Execute()
+> map[string]ConnectV1ConnectorExpansion ListConnectv1ConnectorsWithExpansions(ctx, environmentId, kafkaClusterId).Expand(expand).PageSize(pageSize).PageToken(pageToken).Execute()
 
 List of Connectors with Expansions
 
@@ -417,9 +421,11 @@ func main() {
     kafkaClusterId := "kafkaClusterId_example" // string | The unique identifier for the Kafka cluster.
     expand := "expand_example" // string | - id : Returns metadata of each connector such as id and id type. - info : Returns metadata of each connector such as the configuration, task information, and type of connector. - status : Returns additional state information of each connector including their status and tasks. (optional)
 
+    pageSize := int32(56) // int32 | Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the `X-Next-Page-Token` response header. Values above 100 are capped at 100. Without `page_size` and `page_token`, every connector is returned in one response. (optional)
+    pageToken := "pageToken_example" // string | Opaque cursor taken from the previous page's `X-Next-Page-Token` header. Pass it back unchanged; don't parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page. (optional)
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectorsConnectV1Api.ListConnectv1ConnectorsWithExpansions(context.Background(), environmentId, kafkaClusterId).Expand(expand).Execute()
+    resp, r, err := api_client.ConnectorsConnectV1Api.ListConnectv1ConnectorsWithExpansions(context.Background(), environmentId, kafkaClusterId).Expand(expand).PageSize(pageSize).PageToken(pageToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectorsConnectV1Api.ListConnectv1ConnectorsWithExpansions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -448,6 +454,8 @@ Name | Type | Description  | Notes
 
 
  **expand** | **string** | - id : Returns metadata of each connector such as id and id type. - info : Returns metadata of each connector such as the configuration, task information, and type of connector. - status : Returns additional state information of each connector including their status and tasks. | 
+ **pageSize** | **int32** | Page size (Early Access), honored only where pagination is enabled for the organization; otherwise ignored. When honored, the response body shape is unchanged and the cursor for the next page is returned in the &#x60;X-Next-Page-Token&#x60; response header. Values above 100 are capped at 100. Without &#x60;page_size&#x60; and &#x60;page_token&#x60;, every connector is returned in one response. | 
+ **pageToken** | **string** | Opaque cursor taken from the previous page&#39;s &#x60;X-Next-Page-Token&#x60; header. Pass it back unchanged; don&#39;t parse or build it. It is valid only for the environment and cluster it was returned for. Omit it, or leave it empty, for the first page. | 
 
 ### Return type
 
