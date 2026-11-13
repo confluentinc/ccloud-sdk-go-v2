@@ -1,6 +1,6 @@
 module github.com/confluentinc/ccloud-sdk-go-v2/networking-privatelink
 
-go 1.26.10
+go 1.26.11
 
 require (
 	golang.org/x/oauth2 v0.37.0
