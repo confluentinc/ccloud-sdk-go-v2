@@ -3,5 +3,5 @@ module github.com/confluentinc/ccloud-sdk-go-v2/iam-ip-filtering
 go 1.26.10
 
 require (
-	golang.org/x/oauth2 v0.37.0
+	golang.org/x/oauth2 v0.38.0
 )
