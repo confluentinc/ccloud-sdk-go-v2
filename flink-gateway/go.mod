@@ -10,3 +10,6 @@ require (
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 )
+
+// v0.22.0 was tagged on a commit that predates v0.20.0 and v0.21.0 and does not include their changes.
+retract v0.22.0
