@@ -1,0 +1,5 @@
+module github.com/confluentinc/ccloud-sdk-go-v2/logging
+
+go 1.26.10
+
+require golang.org/x/oauth2 v0.38.0
