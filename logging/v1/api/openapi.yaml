@@ -1,0 +1,2439 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: logging-platform@confluent.io
+    name: Logging Platform
+    url: https://confluent.slack.com/app_redirect?channel=logging-platform
+  description: |
+    # Introduction
+
+    The Logs API is served by `cc-logging-service` and returns customer-facing operational log
+    documents for one Confluent Cloud resource, filtered by time window and by the search fields
+    declared for that resource type. Its consumers today are the
+    Confluent Cloud Console log viewer and the Confluent CLI (`pkg/ccloudv2/logging.go`). This spec
+    documents the API exactly as the service serves it on `master` as of 2026-10-15; it is the
+    source for the generated Go client.
+
+    # Authentication
+
+    Requests carry a Confluent Cloud data-plane bearer token obtained from a user session
+    (`Authorization: Bearer <token>`). Cloud API keys are not accepted. The organization in the
+    request's `crn` must match the organization of the token's principal, otherwise the request is
+    rejected with `422`.
+
+    Access is gated per organization by the `logging.external.api.enable` LaunchDarkly flag. An
+    organization without the flag receives `403` with the detail `Feature is not enabled for this
+    organization`.
+
+    # Resource types
+
+    The service resolves the trailing element of `crn` against its resource catalog, which is
+    deployment configuration (`resourceCatalog` in `.halyard/cc-logging-service.yaml`). The catalog
+    decides which OpenSearch indices are queried, which `search` keys are accepted, which fields a
+    document carries in the response, and which RBAC operation is checked. As of 2026-10-15 the
+    production catalog serves these resource types:
+
+    | CRN shape (trailing element) | Accepted `search` keys | Allowed values | Returned fields | RBAC operation |
+    |------------------------------|------------------------|----------------|-----------------|----------------|
+    | `organization/environment/cloud-cluster/connector` | `search_text`, `level`, `task_id`, `id` | `level`: `INFO`, `WARN`, `ERROR`, `FATAL` | `timestamp`, `level`, `task_id`, `message`, `exception.stacktrace`, `id`, `name` | `ReadLogs` |
+    | `organization/environment/flink-region/statement` | `search_text`, `level`, `source`, `id` | `level`: `INFO`, `WARN`, `ERROR` | `id`, `timestamp`, `level`, `message`, `crn`, `data`, `exception`, `function_name`, `function_crn`, `source` | `Describe` |
+    | `organization/environment/flink-region/cloud-cluster/materialized-table` | `search_text`, `level`, `source`, `id` | `level`: `INFO`, `WARN`, `ERROR`; `source`: `MaterializedTable`, `Function` | `id`, `timestamp`, `level`, `message`, `crn`, `data`, `source`, `materialized_table_name`, `materialized_table_version` | `Describe` |
+    | `organization/environment/cloud-cluster/kafka` | `search_text`, `event_type`, `level`, `id` | `level`: `INFO`, `WARN`, `ERROR`; `event_type`: `SERVICE_MAINTENANCE`, `HEALTH_ALERT`, `CONFLUENT_STATUS_UPDATED`, `SERVICE_ISSUE_DETECTED` | `id`, `timestamp`, `level`, `message`, `crn`, `source`, `event_type`, `event_id`, `status`, `cloud_cluster_id` | `ReadLogs` |
+
+    A `crn` that cannot be parsed, or that ends in one of these resource types but does not have every
+    element of its shape, is rejected with `422 Invalid CRN`, and an element that does not match its
+    position in the shape with `422 Invalid CRN element {element}`; see Choosing a log source for the
+    order of the checks. For connectors, the service first
+    resolves the connector's logical cluster ID through the metadata service; a connector it cannot
+    resolve is reported as `403`, never `404`, so that the response does not reveal whether the
+    resource exists.
+
+    The lookback for every resource type above is 3 days. An `end_time` older than that returns an
+    empty `200` without querying OpenSearch; a `start_time` older than that is silently clamped.
+
+    Audit logs (`audit_logs/v1`) are served by the same host under a separate path and are not part
+    of this spec.
+
+    # Discovery
+
+    `GET /logs/v1/sources` and `GET /logs/v1/sources/{name}` let a client learn which log source
+    types this deployment's catalog serves, and what each one supports (crn shape, accepted
+    `search` keys and their allowed values, returned fields, and lookback).
+
+    These endpoints make no OpenSearch calls themselves and are
+    not subject to the per-resource rate limit described below. They're instead subject to the
+    per-IP limit plus their own (user, organization) limit.
+
+    # Choosing a log source
+
+    `source` is optional. The service infers the log source from the `crn`'s trailing element, so a
+    client only sets it to pick one of several log sources for the same resource type.
+
+    The service checks the `crn` and `source` in this order and returns the first failure as a `422`:
+
+    1. The `crn` cannot be parsed: `Invalid CRN`.
+    2. There is no `source`, and the `crn`'s trailing element is a resource type with more than one
+       log source: `source is required for resource type {type}; one of [{sources}]`.
+    3. The log source cannot be resolved. With no `source` and a trailing element that is not a
+       catalog resource type: `Invalid resource type {type}`. With a `source` that does not exist:
+       `Unknown source {name}`. With a `source` that does not serve the `crn`'s trailing resource
+       type: `source {name} does not support resource type {type}`.
+    4. The `crn` does not have every element of the resolved resource type's shape: `Invalid CRN`.
+       An element that does not match its position: `Invalid CRN element {element}`.
+
+    Every query targets one resource, so the `crn` must be complete. A `crn` truncated to an
+    organization or an environment ends in `organization` or `environment`, which is not a resource
+    type, so it fails at step 3: `Invalid resource type environment` without a `source`, and
+    `source cluster-health does not support resource type environment` with one. It never reaches
+    step 4. A `crn` that ends in a real resource type but is missing elements, for example one that
+    stops after `connector=my-connector` with no environment before it, fails at step 4 with
+    `Invalid CRN`.
+
+    # Pagination
+
+    `POST /logs/v1/search` paginates with an opaque `page_token`. When a page is full, the response
+    carries the URL of the next page in `metadata.next`; `metadata` is absent when the page was not
+    full or was empty. The default page size is 100 documents; the maximum is 1000.
+
+    # Rate limiting
+
+    The rate-limit sidecar enforces, per (resource CRN, user, organization, client type), 1 request
+    per second for UI clients (User-Agent containing `mozilla`) and 5 requests per minute for every
+    other client, plus 5 requests per second per client IP before authentication. The per-resource
+    limit applies only to `POST /logs/v1/search`, which is the only endpoint with a resource CRN to
+    key it on; the per-IP limit applies to every endpoint in this spec, including the sources
+    endpoints. The sources endpoints additionally enforce their own limit of 60 requests per minute
+    per (user, organization) pair, independent of the per-IP check — discovery has no resource to
+    key a per-resource limit on, and no UI-vs-other-client distinction the way search does. Every
+    response that passed the per-IP limiter carries `X-RateLimit-Limit`, `X-RateLimit-Remaining`,
+    and `X-RateLimit-Reset` headers, including non-429 responses; a rate-limited request receives
+    `429`. `Retry-After` is not sent. These numbers come from `ratelimit-config.yaml` and
+    `discovery-ratelimit-config.yaml` in the service's Halyard spec as of 2026-09-15 and are
+    deployment configuration, not part of the API contract.
+  title: Confluent Cloud Logs API
+  version: 0.1.0
+  x-api-id: 33741ed0-9d80-446d-90d6-35490cc5268b
+  x-api-group: logging/v1
+  x-tag-group: Logs (%s)
+  x-audience: company-internal
+servers:
+- description: Confluent Cloud production
+  url: https://api.logging.confluent.cloud
+tags:
+- description: Search customer-facing operational logs for one Confluent Cloud resource.
+  name: Logs (logging/v1)
+paths:
+  /logs/v1/search:
+    post:
+      description: |
+        Searches log documents for the resource identified by `crn`.
+
+        `search` filters on the keys the resource type accepts (see the Resource types section
+        above). An unknown key, or a value outside the key's allowed values, returns `422`. The
+        reserved `search_text` key runs a phrase or wildcard match over the resource type's text
+        fields (`message`, and `exception.stacktrace` for connectors).
+
+        `start_time` and `end_time` define an inclusive UTC window. An `end_time` older than the
+        3-day lookback returns an empty `200`; a `start_time` older than the lookback is silently
+        clamped to it. Results page via `page_token`, see the Pagination section above. Requests are
+        subject to the rate limits described in the Rate limiting section above.
+      operationId: searchLoggingV1Logs
+      parameters:
+      - description: Number of documents per page. Values outside 1..1000 are rejected
+          with 422.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 100
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Opaque continuation token taken from `metadata.next` of the previous
+          response. The page size encoded in the token takes precedence over `page_size`.
+          A token that cannot be decoded is ignored and the first page is returned.
+        explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          maxLength: 255
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              connectorLogs:
+                summary: Error and warning logs for one connector, newest first
+                value:
+                  crn: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-abc123/connector=my-connector
+                  search:
+                    level:
+                    - ERROR
+                    - WARN
+                    search_text: disconnected
+                  sort: desc
+                  start_time: 2026-09-05T00:00:00Z
+                  end_time: 2026-09-07T00:00:00Z
+              statementLogsWithHistogram:
+                summary: Flink statement logs with an hourly histogram grouped by
+                  level
+                value:
+                  crn: crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/flink-region=aws.us-west-2/statement=my-statement
+                  search:
+                    level: ERROR
+                  aggregation:
+                    field: timestamp
+                    interval: 1h
+                    group_by: level
+                  start_time: 2026-09-06T00:00:00Z
+                  end_time: 2026-09-07T00:00:00Z
+            schema:
+              $ref: '#/components/schemas/logging.v1.SearchRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                connectorPage:
+                  summary: One page of connector documents with a next-page link
+                  value:
+                    api_version: v1
+                    kind: Logs
+                    data:
+                    - timestamp: 2026-09-06T18:42:10Z
+                      level: ERROR
+                      task_id: task-0
+                      message: Connection to upstream host was lost.
+                      exception.stacktrace: org.apache.kafka.connect.errors.ConnectException
+                        ...
+                      id: lcc-123456
+                      name: my-connector
+                    - timestamp: 2026-09-06T18:39:55Z
+                      level: WARN
+                      task_id: task-0
+                      message: Retrying connection, attempt 3 of 5.
+                      id: lcc-123456
+                      name: my-connector
+                    metadata:
+                      next: https://api.logging.confluent.cloud/logs/v1/search?page_token=eyJvZmZzZXQiOjEwMH0
+                lookbackExceeded:
+                  summary: end_time older than the lookback, returned without querying
+                    the backend
+                  value:
+                    api_version: v1
+                    kind: Logs
+                    data: []
+              schema:
+                $ref: '#/components/schemas/logging.v1.SearchResponse'
+          description: Matching documents, newest first when `sort` is `desc`.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "400"
+                  detail: Unable to process JSON
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The request body could not be parsed. The detail text comes
+            from the framework's generic JSON handler.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "401"
+                  detail: Credentials are required to access this resource.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The request lacks a valid bearer token.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: Always `Basic realm="default"`, the framework default,
+                even though the API accepts only bearer tokens.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "403":
+          content:
+            application/json:
+              examples:
+                featureDisabled:
+                  summary: The Logs API is not enabled for this organization
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: Feature is not enabled for this organization
+                rbacDenied:
+                  summary: The caller's role does not grant the required operation,
+                    or the resource does not exist
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: User is not authorized to perform this action
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller is authenticated but not authorized. Returned when
+            the Logs API is not enabled for the organization, when the RBAC check
+            for the queried resource fails, or when the queried connector cannot be
+            resolved through the metadata service. Resource existence is never revealed
+            as a 404.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "422":
+          content:
+            application/json:
+              examples:
+                unknownSearchParameter:
+                  summary: A search key the resource type does not accept
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: task_owner is not a valid search parameter.
+                disallowedValue:
+                  summary: A value outside the key's allowed values
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: 'Invalid value for field level: DEBUG. Allowed values
+                        are: INFO, WARN, ERROR, FATAL'
+                invalidCrn:
+                  summary: The CRN does not parse, or does not have every element
+                    of the resolved source's shape
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Invalid CRN
+                invalidCrnElement:
+                  summary: A CRN element doesn't match its expected position in the
+                    resolved source's shape
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Invalid CRN element cloud-cluster
+                unknownResourceType:
+                  summary: The CRN's trailing element is a fully unrecognized type
+                    - not in the catalog
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Invalid resource type bogus
+                unknownSource:
+                  summary: source doesn't match any catalog entry
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Unknown source no-such-source
+                sourceResourceTypeMismatch:
+                  summary: source is a real catalog entry, but its resource type doesn't
+                    match the crn's trailing element (for example a crn truncated
+                    to an environment)
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: source cluster-health does not support resource type
+                        environment
+                sourceRequiredForResourceType:
+                  summary: A full crn, no source, and the resource type has more than
+                    one log source. Hypothetical, since no resource type in the current
+                    catalog has more than one
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: source is required for resource type example-type; one
+                        of [example-source-a, example-source-b]
+                organizationMismatch:
+                  summary: The CRN's organization is not the caller's
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Organization mismatch between CRN and credentials
+                startAfterEnd:
+                  summary: start_time after end_time
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: start_time cannot be after end_time
+                invalidDateFormat:
+                  summary: A timestamp the service cannot parse, for example one with
+                    a fractional second or a +00:00 offset. Send whole seconds with
+                    a Z suffix
+                  value:
+                    errors:
+                    - status: "422"
+                      detail: Invalid date format. Please use RFC3339 format with
+                        UTC timezone.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The request failed schema or catalog validation.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                perResource:
+                  summary: Per (resource, user, organization, client type) limit exceeded
+                    (POST /logs/v1/search only)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made for resource: crn://confluent.cloud/organization=9bb441c4-.../cloud-cluster=lkc-abc123/connector=my-connector.
+                        Please see the documentation for current rate limits.'
+                perIp:
+                  summary: Per client IP limit exceeded, before authentication (every
+                    endpoint, including the sources endpoints)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made from this IP address:
+                        203.0.113.7. Please see the documentation for current rate
+                        limits.'
+                discoveryLimit:
+                  summary: Per (user, organization) discovery limit exceeded (the
+                    sources endpoints only - see the Rate limiting section above)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: Too many source discovery requests. Please see the documentation
+                        for current rate limits.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller has exceeded a rate limit described in the Rate
+            limiting section above.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests permitted in the current
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: Seconds until the current rate limit window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "500"
+                  detail: There was an error processing your request. It has been
+                    logged (ID 4f1c9a2b7d3e8f60).
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: An unexpected server error occurred and the request was not
+            processed. The detail text comes from the framework's generic exception
+            handler and carries a log correlation ID.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "503":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "503"
+                  detail: HTTP 503 Service Unavailable
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The OpenSearch backend returned an error or was unreachable.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - data-plane-bearer-token: []
+      - confluent_auth:
+        - Complex
+      summary: Search logs
+      tags:
+      - Logs (logging/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.logging.confluent.cloud/logs/v1/search \
+            --header 'Authorization: Bearer REPLACE_BEARER_TOKEN' \
+            --header 'content-type: application/json' \
+            --data '{"crn":"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector","source":"connector","search":{"level":["ERROR","WARN"],"search_text":"disconnected"},"sort":"asc","aggregation":{"field":"timestamp","interval":"string","group_by":"string"},"start_time":"2026-08-20T00:00:00Z","end_time":"2026-08-21T00:00:00Z"}'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"crn\":\"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector\",\"source\":\"connector\",\"search\":{\"level\":[\"ERROR\",\"WARN\"],\"search_text\":\"disconnected\"},\"sort\":\"asc\",\"aggregation\":{\"field\":\"timestamp\",\"interval\":\"string\",\"group_by\":\"string\"},\"start_time\":\"2026-08-20T00:00:00Z\",\"end_time\":\"2026-08-21T00:00:00Z\"}");
+          Request request = new Request.Builder()
+            .url("https://api.logging.confluent.cloud/logs/v1/search")
+            .post(body)
+            .addHeader("content-type", "application/json")
+            .addHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\
+          \n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.logging.confluent.cloud/logs/v1/search\"\
+          \n\n\tpayload := strings.NewReader(\"{\\\"crn\\\":\\\"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector\\\
+          \",\\\"source\\\":\\\"connector\\\",\\\"search\\\":{\\\"level\\\":[\\\"\
+          ERROR\\\",\\\"WARN\\\"],\\\"search_text\\\":\\\"disconnected\\\"},\\\"sort\\\
+          \":\\\"asc\\\",\\\"aggregation\\\":{\\\"field\\\":\\\"timestamp\\\",\\\"\
+          interval\\\":\\\"string\\\",\\\"group_by\\\":\\\"string\\\"},\\\"start_time\\\
+          \":\\\"2026-08-20T00:00:00Z\\\",\\\"end_time\\\":\\\"2026-08-21T00:00:00Z\\\
+          \"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"\
+          content-type\", \"application/json\")\n\treq.Header.Add(\"Authorization\"\
+          , \"Bearer REPLACE_BEARER_TOKEN\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.logging.confluent.cloud")
+
+          payload = "{\"crn\":\"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector\",\"source\":\"connector\",\"search\":{\"level\":[\"ERROR\",\"WARN\"],\"search_text\":\"disconnected\"},\"sort\":\"asc\",\"aggregation\":{\"field\":\"timestamp\",\"interval\":\"string\",\"group_by\":\"string\"},\"start_time\":\"2026-08-20T00:00:00Z\",\"end_time\":\"2026-08-21T00:00:00Z\"}"
+
+          headers = {
+              'content-type': "application/json",
+              'Authorization': "Bearer REPLACE_BEARER_TOKEN"
+              }
+
+          conn.request("POST", "/logs/v1/search", payload, headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "POST",
+            "hostname": "api.logging.confluent.cloud",
+            "port": null,
+            "path": "/logs/v1/search",
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Bearer REPLACE_BEARER_TOKEN"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.write(JSON.stringify({
+            crn: 'crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector',
+            source: 'connector',
+            search: {level: ['ERROR', 'WARN'], search_text: 'disconnected'},
+            sort: 'asc',
+            aggregation: {field: 'timestamp', interval: 'string', group_by: 'string'},
+            start_time: '2026-08-20T00:00:00Z',
+            end_time: '2026-08-21T00:00:00Z'
+          }));
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.logging.confluent.cloud/logs/v1/search");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "content-type: application/json");
+          headers = curl_slist_append(headers, "Authorization: Bearer REPLACE_BEARER_TOKEN");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"crn\":\"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector\",\"source\":\"connector\",\"search\":{\"level\":[\"ERROR\",\"WARN\"],\"search_text\":\"disconnected\"},\"sort\":\"asc\",\"aggregation\":{\"field\":\"timestamp\",\"interval\":\"string\",\"group_by\":\"string\"},\"start_time\":\"2026-08-20T00:00:00Z\",\"end_time\":\"2026-08-21T00:00:00Z\"}");
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.logging.confluent.cloud/logs/v1/search");
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("content-type", "application/json");
+          request.AddHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN");
+          request.AddParameter("application/json", "{\"crn\":\"crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector\",\"source\":\"connector\",\"search\":{\"level\":[\"ERROR\",\"WARN\"],\"search_text\":\"disconnected\"},\"sort\":\"asc\",\"aggregation\":{\"field\":\"timestamp\",\"interval\":\"string\",\"group_by\":\"string\"},\"start_time\":\"2026-08-20T00:00:00Z\",\"end_time\":\"2026-08-21T00:00:00Z\"}", ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+  /logs/v1/sources:
+    get:
+      description: |
+        Lists every log source `POST /logs/v1/search` can query, with the search fields and
+        returned fields each one supports. See the Discovery section above.
+      operationId: listLoggingV1Sources
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                sources:
+                  summary: A connector, a Flink statement, and the real cluster-health
+                    source
+                  value:
+                    api_version: logging/v1
+                    kind: SourceList
+                    metadata:
+                      total_size: 3
+                    data:
+                    - api_version: logging/v1
+                      kind: Source
+                      name: connector
+                      display_name: connector
+                      resource_type: connector
+                      crn_elements:
+                      - organization
+                      - environment
+                      - cloud-cluster
+                      - connector
+                      search_fields:
+                      - name: level
+                        type: enum
+                        allowed_values:
+                        - INFO
+                        - WARN
+                        - ERROR
+                        - FATAL
+                      - name: task_id
+                        type: string
+                      - name: id
+                        type: string
+                      full_text_search_supported: true
+                      full_text_search_fields:
+                      - message
+                      - exception.stacktrace
+                      returned_fields:
+                      - name: timestamp
+                        type: timestamp
+                        default_column: true
+                      - name: level
+                        type: enum
+                        default_column: true
+                      - name: task_id
+                        type: string
+                        default_column: true
+                      - name: message
+                        type: string
+                        default_column: true
+                      - name: exception.stacktrace
+                        type: string
+                        default_column: true
+                      - name: id
+                        type: string
+                        default_column: true
+                      - name: name
+                        type: string
+                        default_column: true
+                      max_lookback_days: 3
+                    - api_version: logging/v1
+                      kind: Source
+                      name: statement
+                      display_name: statement
+                      resource_type: statement
+                      crn_elements:
+                      - organization
+                      - environment
+                      - flink-region
+                      - statement
+                      search_fields:
+                      - name: level
+                        type: enum
+                        allowed_values:
+                        - INFO
+                        - WARN
+                        - ERROR
+                      - name: source
+                        type: string
+                      - name: id
+                        type: string
+                      full_text_search_supported: true
+                      full_text_search_fields:
+                      - message
+                      returned_fields:
+                      - name: id
+                        type: string
+                        default_column: true
+                      - name: timestamp
+                        type: timestamp
+                        default_column: true
+                      - name: level
+                        type: enum
+                        default_column: true
+                      - name: message
+                        type: string
+                        default_column: true
+                      - name: crn
+                        type: string
+                        default_column: true
+                      - name: data
+                        type: string
+                        default_column: true
+                      - name: exception
+                        type: string
+                        default_column: true
+                      - name: function_name
+                        type: string
+                        default_column: true
+                      - name: function_crn
+                        type: string
+                        default_column: true
+                      - name: source
+                        type: string
+                        default_column: true
+                      max_lookback_days: 3
+                    - api_version: logging/v1
+                      kind: Source
+                      name: cluster-health
+                      display_name: Cluster health events
+                      resource_type: kafka
+                      id_prefix: lkc
+                      crn_elements:
+                      - organization
+                      - environment
+                      - cloud-cluster
+                      - kafka
+                      search_fields:
+                      - name: id
+                        type: string
+                      - name: event_type
+                        type: enum
+                        allowed_values:
+                        - SERVICE_MAINTENANCE
+                        - HEALTH_ALERT
+                        - CONFLUENT_STATUS_UPDATED
+                        - SERVICE_ISSUE_DETECTED
+                      - name: level
+                        type: enum
+                        allowed_values:
+                        - INFO
+                        - WARN
+                        - ERROR
+                      full_text_search_supported: true
+                      full_text_search_fields:
+                      - message
+                      returned_fields:
+                      - name: id
+                        type: string
+                        default_column: false
+                        description: Unique identifier for this log record.
+                      - name: timestamp
+                        type: timestamp
+                        default_column: true
+                        description: Event time, RFC 3339 UTC.
+                      - name: level
+                        type: enum
+                        default_column: true
+                        description: 'Severity level: INFO, WARN, ERROR.'
+                      - name: message
+                        type: string
+                        default_column: true
+                        description: Human-readable description of the event.
+                      - name: crn
+                        type: string
+                        default_column: false
+                        description: Confluent Resource Name of the resource the event
+                          concerns.
+                      - name: source
+                        type: string
+                        default_column: false
+                        description: Component or subsystem that generated the event.
+                      - name: event_type
+                        type: enum
+                        default_column: true
+                        description: Type of cluster health event.
+                      - name: event_id
+                        type: string
+                        default_column: false
+                        description: Event-specific identifier, when provided.
+                      - name: status
+                        type: string
+                        default_column: false
+                        description: Status associated with the event, when applicable.
+                      - name: cloud_cluster_id
+                        type: string
+                        default_column: false
+                        description: lkc- ID the event belongs to.
+                      max_lookback_days: 3
+              schema:
+                $ref: '#/components/schemas/logging.v1.SourceList'
+          description: Every searchable source in the resource catalog.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "401"
+                  detail: Credentials are required to access this resource.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The request lacks a valid bearer token.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: Always `Basic realm="default"`, the framework default,
+                even though the API accepts only bearer tokens.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "403":
+          content:
+            application/json:
+              examples:
+                featureDisabled:
+                  summary: The Logs API is not enabled for this organization
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: Feature is not enabled for this organization
+                missingOrganization:
+                  summary: The caller's token has no organization
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: Organization ID is required
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller is authenticated but not authorized. The sources
+            endpoints perform no RBAC check and resolve no connector, so this is returned
+            only when the Logs API is not enabled for the organization, or when the
+            caller's token has no organization at all.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                perResource:
+                  summary: Per (resource, user, organization, client type) limit exceeded
+                    (POST /logs/v1/search only)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made for resource: crn://confluent.cloud/organization=9bb441c4-.../cloud-cluster=lkc-abc123/connector=my-connector.
+                        Please see the documentation for current rate limits.'
+                perIp:
+                  summary: Per client IP limit exceeded, before authentication (every
+                    endpoint, including the sources endpoints)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made from this IP address:
+                        203.0.113.7. Please see the documentation for current rate
+                        limits.'
+                discoveryLimit:
+                  summary: Per (user, organization) discovery limit exceeded (the
+                    sources endpoints only - see the Rate limiting section above)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: Too many source discovery requests. Please see the documentation
+                        for current rate limits.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller has exceeded a rate limit described in the Rate
+            limiting section above.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests permitted in the current
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: Seconds until the current rate limit window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "500"
+                  detail: There was an error processing your request. It has been
+                    logged (ID 4f1c9a2b7d3e8f60).
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: An unexpected server error occurred and the request was not
+            processed. The detail text comes from the framework's generic exception
+            handler and carries a log correlation ID.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - data-plane-bearer-token: []
+      - confluent_auth:
+        - None
+      summary: List available log sources
+      tags:
+      - Logs (logging/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.logging.confluent.cloud/logs/v1/sources \
+            --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.logging.confluent.cloud/logs/v1/sources")
+            .get()
+            .addHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.logging.confluent.cloud/logs/v1/sources\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Bearer REPLACE_BEARER_TOKEN\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.logging.confluent.cloud")
+
+          headers = { 'Authorization': "Bearer REPLACE_BEARER_TOKEN" }
+
+          conn.request("GET", "/logs/v1/sources", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.logging.confluent.cloud",
+            "port": null,
+            "path": "/logs/v1/sources",
+            "headers": {
+              "Authorization": "Bearer REPLACE_BEARER_TOKEN"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.logging.confluent.cloud/logs/v1/sources");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Bearer REPLACE_BEARER_TOKEN");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.logging.confluent.cloud/logs/v1/sources");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN");
+          IRestResponse response = client.Execute(request);
+  /logs/v1/sources/{name}:
+    get:
+      description: |
+        Describes one source by its catalog key (the `name` field of an entry in
+        `GET /logs/v1/sources`), with the same fields as that entry.
+      operationId: describeLoggingV1Source
+      parameters:
+      - description: The source's catalog key, for example `connector` or `statement`.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                materializedTable:
+                  summary: A Flink materialized table source, whose `source` search
+                    field is itself an enum
+                  value:
+                    api_version: logging/v1
+                    kind: Source
+                    name: materialized-table
+                    display_name: materialized-table
+                    resource_type: materialized-table
+                    crn_elements:
+                    - organization
+                    - environment
+                    - flink-region
+                    - cloud-cluster
+                    - materialized-table
+                    search_fields:
+                    - name: level
+                      type: enum
+                      allowed_values:
+                      - INFO
+                      - WARN
+                      - ERROR
+                    - name: source
+                      type: enum
+                      allowed_values:
+                      - MaterializedTable
+                      - Function
+                    - name: id
+                      type: string
+                    full_text_search_supported: true
+                    full_text_search_fields:
+                    - message
+                    returned_fields:
+                    - name: id
+                      type: string
+                      default_column: true
+                    - name: timestamp
+                      type: timestamp
+                      default_column: true
+                    - name: level
+                      type: enum
+                      default_column: true
+                    - name: message
+                      type: string
+                      default_column: true
+                    - name: crn
+                      type: string
+                      default_column: true
+                    - name: data
+                      type: string
+                      default_column: true
+                    - name: source
+                      type: enum
+                      default_column: true
+                    - name: materialized_table_name
+                      type: string
+                      default_column: true
+                    - name: materialized_table_version
+                      type: string
+                      default_column: true
+                    max_lookback_days: 3
+                clusterHealth:
+                  summary: cluster-health, the only source actually onboarded for
+                    discovery today
+                  value:
+                    api_version: logging/v1
+                    kind: Source
+                    name: cluster-health
+                    display_name: Cluster health events
+                    resource_type: kafka
+                    id_prefix: lkc
+                    crn_elements:
+                    - organization
+                    - environment
+                    - cloud-cluster
+                    - kafka
+                    search_fields:
+                    - name: id
+                      type: string
+                    - name: event_type
+                      type: enum
+                      allowed_values:
+                      - SERVICE_MAINTENANCE
+                      - HEALTH_ALERT
+                      - CONFLUENT_STATUS_UPDATED
+                      - SERVICE_ISSUE_DETECTED
+                    - name: level
+                      type: enum
+                      allowed_values:
+                      - INFO
+                      - WARN
+                      - ERROR
+                    full_text_search_supported: true
+                    full_text_search_fields:
+                    - message
+                    returned_fields:
+                    - name: id
+                      type: string
+                      default_column: false
+                      description: Unique identifier for this log record.
+                    - name: timestamp
+                      type: timestamp
+                      default_column: true
+                      description: Event time, RFC 3339 UTC.
+                    - name: level
+                      type: enum
+                      default_column: true
+                      description: 'Severity level: INFO, WARN, ERROR.'
+                    - name: message
+                      type: string
+                      default_column: true
+                      description: Human-readable description of the event.
+                    - name: crn
+                      type: string
+                      default_column: false
+                      description: Confluent Resource Name of the resource the event
+                        concerns.
+                    - name: source
+                      type: string
+                      default_column: false
+                      description: Component or subsystem that generated the event.
+                    - name: event_type
+                      type: enum
+                      default_column: true
+                      description: Type of cluster health event.
+                    - name: event_id
+                      type: string
+                      default_column: false
+                      description: Event-specific identifier, when provided.
+                    - name: status
+                      type: string
+                      default_column: false
+                      description: Status associated with the event, when applicable.
+                    - name: cloud_cluster_id
+                      type: string
+                      default_column: false
+                      description: lkc- ID the event belongs to.
+                    max_lookback_days: 3
+              schema:
+                $ref: '#/components/schemas/logging.v1.Source'
+          description: The named source's metadata.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "401"
+                  detail: Credentials are required to access this resource.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The request lacks a valid bearer token.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            WWW-Authenticate:
+              description: Always `Basic realm="default"`, the framework default,
+                even though the API accepts only bearer tokens.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "403":
+          content:
+            application/json:
+              examples:
+                featureDisabled:
+                  summary: The Logs API is not enabled for this organization
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: Feature is not enabled for this organization
+                missingOrganization:
+                  summary: The caller's token has no organization
+                  value:
+                    errors:
+                    - status: "403"
+                      detail: Organization ID is required
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller is authenticated but not authorized. The sources
+            endpoints perform no RBAC check and resolve no connector, so this is returned
+            only when the Logs API is not enabled for the organization, or when the
+            caller's token has no organization at all.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "404"
+                  detail: 'Unknown source: no-such-source'
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: No source exists with this name, or it has no OpenSearch index
+            reachable through `POST /logs/v1/search` (for example `audit`).
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                perResource:
+                  summary: Per (resource, user, organization, client type) limit exceeded
+                    (POST /logs/v1/search only)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made for resource: crn://confluent.cloud/organization=9bb441c4-.../cloud-cluster=lkc-abc123/connector=my-connector.
+                        Please see the documentation for current rate limits.'
+                perIp:
+                  summary: Per client IP limit exceeded, before authentication (every
+                    endpoint, including the sources endpoints)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: 'Too many requests have been made from this IP address:
+                        203.0.113.7. Please see the documentation for current rate
+                        limits.'
+                discoveryLimit:
+                  summary: Per (user, organization) discovery limit exceeded (the
+                    sources endpoints only - see the Rate limiting section above)
+                  value:
+                    errors:
+                    - status: "429"
+                      detail: Too many source discovery requests. Please see the documentation
+                        for current rate limits.
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: The caller has exceeded a rate limit described in the Rate
+            limiting section above.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+            X-RateLimit-Limit:
+              description: The maximum number of requests permitted in the current
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of requests remaining in the current window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Reset:
+              description: Seconds until the current rate limit window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "500":
+          content:
+            application/json:
+              example:
+                errors:
+                - status: "500"
+                  detail: There was an error processing your request. It has been
+                    logged (ID 4f1c9a2b7d3e8f60).
+              schema:
+                $ref: '#/components/schemas/logging.v1.ErrorResponse'
+          description: An unexpected server error occurred and the request was not
+            processed. The detail text comes from the framework's generic exception
+            handler and carries a log correlation ID.
+          headers:
+            X-Request-Id:
+              description: The unique identifier for the API request, set by the service
+                on every response.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - data-plane-bearer-token: []
+      - confluent_auth:
+        - None
+      summary: Describe one log source
+      tags:
+      - Logs (logging/v1)
+      x-codeSamples:
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.logging.confluent.cloud/logs/v1/sources/{name}' \
+            --header 'Authorization: Bearer REPLACE_BEARER_TOKEN'
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.logging.confluent.cloud/logs/v1/sources/{name}")
+            .get()
+            .addHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN")
+            .build();
+
+          Response response = client.newCall(request).execute();
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\
+          \n)\n\nfunc main() {\n\n\turl := \"https://api.logging.confluent.cloud/logs/v1/sources/{name}\"\
+          \n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"\
+          Authorization\", \"Bearer REPLACE_BEARER_TOKEN\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\
+          \n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\t\
+          fmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: Python
+        source: |-
+          import http.client
+
+          conn = http.client.HTTPSConnection("api.logging.confluent.cloud")
+
+          headers = { 'Authorization': "Bearer REPLACE_BEARER_TOKEN" }
+
+          conn.request("GET", "/logs/v1/sources/{name}", headers=headers)
+
+          res = conn.getresponse()
+          data = res.read()
+
+          print(data.decode("utf-8"))
+      - lang: Node
+        source: |-
+          const http = require("https");
+
+          const options = {
+            "method": "GET",
+            "hostname": "api.logging.confluent.cloud",
+            "port": null,
+            "path": "/logs/v1/sources/{name}",
+            "headers": {
+              "Authorization": "Bearer REPLACE_BEARER_TOKEN"
+            }
+          };
+
+          const req = http.request(options, function (res) {
+            const chunks = [];
+
+            res.on("data", function (chunk) {
+              chunks.push(chunk);
+            });
+
+            res.on("end", function () {
+              const body = Buffer.concat(chunks);
+              console.log(body.toString());
+            });
+          });
+
+          req.end();
+      - lang: C
+        source: |-
+          CURL *hnd = curl_easy_init();
+
+          curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+          curl_easy_setopt(hnd, CURLOPT_URL, "https://api.logging.confluent.cloud/logs/v1/sources/{name}");
+
+          struct curl_slist *headers = NULL;
+          headers = curl_slist_append(headers, "Authorization: Bearer REPLACE_BEARER_TOKEN");
+          curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+          CURLcode ret = curl_easy_perform(hnd);
+      - lang: C#
+        source: |-
+          var client = new RestClient("https://api.logging.confluent.cloud/logs/v1/sources/{name}");
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Authorization", "Bearer REPLACE_BEARER_TOKEN");
+          IRestResponse response = client.Execute(request);
+components:
+  responses:
+    BadRequestError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "400"
+              detail: Unable to process JSON
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The request body could not be parsed. The detail text comes from
+        the framework's generic JSON handler.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthenticatedError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "401"
+              detail: Credentials are required to access this resource.
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The request lacks a valid bearer token.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        WWW-Authenticate:
+          description: Always `Basic realm="default"`, the framework default, even
+            though the API accepts only bearer tokens.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthorizedError:
+      content:
+        application/json:
+          examples:
+            featureDisabled:
+              summary: The Logs API is not enabled for this organization
+              value:
+                errors:
+                - status: "403"
+                  detail: Feature is not enabled for this organization
+            rbacDenied:
+              summary: The caller's role does not grant the required operation, or
+                the resource does not exist
+              value:
+                errors:
+                - status: "403"
+                  detail: User is not authorized to perform this action
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The caller is authenticated but not authorized. Returned when the
+        Logs API is not enabled for the organization, when the RBAC check for the
+        queried resource fails, or when the queried connector cannot be resolved through
+        the metadata service. Resource existence is never revealed as a 404.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    DiscoveryUnauthorizedError:
+      content:
+        application/json:
+          examples:
+            featureDisabled:
+              summary: The Logs API is not enabled for this organization
+              value:
+                errors:
+                - status: "403"
+                  detail: Feature is not enabled for this organization
+            missingOrganization:
+              summary: The caller's token has no organization
+              value:
+                errors:
+                - status: "403"
+                  detail: Organization ID is required
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The caller is authenticated but not authorized. The sources endpoints
+        perform no RBAC check and resolve no connector, so this is returned only when
+        the Logs API is not enabled for the organization, or when the caller's token
+        has no organization at all.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    SourceNotFoundError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "404"
+              detail: 'Unknown source: no-such-source'
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: No source exists with this name, or it has no OpenSearch index
+        reachable through `POST /logs/v1/search` (for example `audit`).
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    ValidationError:
+      content:
+        application/json:
+          examples:
+            unknownSearchParameter:
+              summary: A search key the resource type does not accept
+              value:
+                errors:
+                - status: "422"
+                  detail: task_owner is not a valid search parameter.
+            disallowedValue:
+              summary: A value outside the key's allowed values
+              value:
+                errors:
+                - status: "422"
+                  detail: 'Invalid value for field level: DEBUG. Allowed values are:
+                    INFO, WARN, ERROR, FATAL'
+            invalidCrn:
+              summary: The CRN does not parse, or does not have every element of the
+                resolved source's shape
+              value:
+                errors:
+                - status: "422"
+                  detail: Invalid CRN
+            invalidCrnElement:
+              summary: A CRN element doesn't match its expected position in the resolved
+                source's shape
+              value:
+                errors:
+                - status: "422"
+                  detail: Invalid CRN element cloud-cluster
+            unknownResourceType:
+              summary: The CRN's trailing element is a fully unrecognized type - not
+                in the catalog
+              value:
+                errors:
+                - status: "422"
+                  detail: Invalid resource type bogus
+            unknownSource:
+              summary: source doesn't match any catalog entry
+              value:
+                errors:
+                - status: "422"
+                  detail: Unknown source no-such-source
+            sourceResourceTypeMismatch:
+              summary: source is a real catalog entry, but its resource type doesn't
+                match the crn's trailing element (for example a crn truncated to an
+                environment)
+              value:
+                errors:
+                - status: "422"
+                  detail: source cluster-health does not support resource type environment
+            sourceRequiredForResourceType:
+              summary: A full crn, no source, and the resource type has more than
+                one log source. Hypothetical, since no resource type in the current
+                catalog has more than one
+              value:
+                errors:
+                - status: "422"
+                  detail: source is required for resource type example-type; one of
+                    [example-source-a, example-source-b]
+            organizationMismatch:
+              summary: The CRN's organization is not the caller's
+              value:
+                errors:
+                - status: "422"
+                  detail: Organization mismatch between CRN and credentials
+            startAfterEnd:
+              summary: start_time after end_time
+              value:
+                errors:
+                - status: "422"
+                  detail: start_time cannot be after end_time
+            invalidDateFormat:
+              summary: A timestamp the service cannot parse, for example one with
+                a fractional second or a +00:00 offset. Send whole seconds with a
+                Z suffix
+              value:
+                errors:
+                - status: "422"
+                  detail: Invalid date format. Please use RFC3339 format with UTC
+                    timezone.
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The request failed schema or catalog validation.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    RateLimitError:
+      content:
+        application/json:
+          examples:
+            perResource:
+              summary: Per (resource, user, organization, client type) limit exceeded
+                (POST /logs/v1/search only)
+              value:
+                errors:
+                - status: "429"
+                  detail: 'Too many requests have been made for resource: crn://confluent.cloud/organization=9bb441c4-.../cloud-cluster=lkc-abc123/connector=my-connector.
+                    Please see the documentation for current rate limits.'
+            perIp:
+              summary: Per client IP limit exceeded, before authentication (every
+                endpoint, including the sources endpoints)
+              value:
+                errors:
+                - status: "429"
+                  detail: 'Too many requests have been made from this IP address:
+                    203.0.113.7. Please see the documentation for current rate limits.'
+            discoveryLimit:
+              summary: Per (user, organization) discovery limit exceeded (the sources
+                endpoints only - see the Rate limiting section above)
+              value:
+                errors:
+                - status: "429"
+                  detail: Too many source discovery requests. Please see the documentation
+                    for current rate limits.
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The caller has exceeded a rate limit described in the Rate limiting
+        section above.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+        X-RateLimit-Limit:
+          description: The maximum number of requests permitted in the current window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Remaining:
+          description: The number of requests remaining in the current window.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-RateLimit-Reset:
+          description: Seconds until the current rate limit window resets.
+          explode: false
+          schema:
+            type: integer
+          style: simple
+    UnavailableError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "503"
+              detail: HTTP 503 Service Unavailable
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: The OpenSearch backend returned an error or was unreachable.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    InternalServerError:
+      content:
+        application/json:
+          example:
+            errors:
+            - status: "500"
+              detail: There was an error processing your request. It has been logged
+                (ID 4f1c9a2b7d3e8f60).
+          schema:
+            $ref: '#/components/schemas/logging.v1.ErrorResponse'
+      description: An unexpected server error occurred and the request was not processed.
+        The detail text comes from the framework's generic exception handler and carries
+        a log correlation ID.
+      headers:
+        X-Request-Id:
+          description: The unique identifier for the API request, set by the service
+            on every response.
+          explode: false
+          schema:
+            type: string
+          style: simple
+  schemas:
+    logging.v1.SearchRequest:
+      description: Selects a resource by `crn`, and the time window and filters to
+        search within. Field names match `LogsSearchRequest` in `cc-logging-service`.
+      properties:
+        crn:
+          description: Confluent Resource Name of the resource whose logs are requested.
+            Its elements must match one of the shapes in the Resource types section
+            above, and its organization must match the caller's.
+          example: crn://confluent.cloud/organization=9bb441c4-.../environment=env-123/cloud-cluster=lkc-abc123/connector=my-connector
+          maxLength: 250
+          type: string
+        source:
+          description: The log source to query, for example cluster-health (see GET
+            /logs/v1/sources). Optional; the service infers it from the crn's trailing
+            element. Required when the crn's resource type has more than one log source.
+          example: connector
+          maxLength: 250
+          type: string
+        search:
+          description: Field filters. Keys must be search keys the resource type accepts.
+            A string value is a phrase match; an array of strings matches any value
+            (OR). The reserved key `search_text` runs a phrase or wildcard match over
+            the resource type's text fields. Keys and string values are limited to
+            250 characters; array elements are not length-checked.
+          example:
+            level:
+            - ERROR
+            - WARN
+            search_text: disconnected
+          type: object
+        sort:
+          default: asc
+          description: Sort order by event timestamp. Omitted sorts ascending. Any
+            value other than `asc` or `desc` is rejected with 422.
+          enum:
+          - asc
+          - desc
+          type: string
+        aggregation:
+          $ref: '#/components/schemas/logging.v1.Aggregation'
+        start_time:
+          description: Inclusive window start, RFC 3339 in UTC with whole seconds
+            and a `Z` suffix, as in the example. This is a string with a pattern,
+            not `date-time`, so a generated client sends exactly this form and not
+            a fractional second or a local offset. The service parses `yyyy-MM-dd'T'HH:mm:ssX`
+            and rejects a fractional second or an offset with minutes such as `+00:00`
+            with 422. It accepts an hour-only offset such as `+05`, and reads it as
+            that offset, not as UTC, so always send `Z`. Starts older than the lookback
+            are clamped to it. The generated client does not validate this format,
+            so callers must send whole seconds and `Z` themselves.
+          example: 2026-08-20T00:00:00Z
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+          type: string
+        end_time:
+          description: Inclusive window end, RFC 3339 in UTC with whole seconds and
+            a `Z` suffix, with the same rules as `start_time`. An end older than the
+            lookback returns an empty 200. The generated client does not validate
+            this format, so callers must send whole seconds and `Z` themselves.
+          example: 2026-08-21T00:00:00Z
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+          type: string
+      required:
+      - crn
+      - end_time
+      - start_time
+      type: object
+    logging.v1.Aggregation:
+      description: Optional date histogram over the matching documents, returned alongside
+        the page in `aggregations`. Used by the Confluent Cloud Console.
+      properties:
+        field:
+          description: Field to bucket by. The service accepts only `timestamp`.
+          enum:
+          - timestamp
+          type: string
+        interval:
+          description: Bucket width, a number followed by s, m, h, d, w, M or y, for
+            example `1h`.
+          pattern: ^[1-9]\d*[smhdwMy]$
+          type: string
+        group_by:
+          description: A search key the resource type accepts, other than `search_text`,
+            to sub-aggregate each bucket by. The service rejects an aggregation without
+            a valid `group_by` with 422.
+          maxLength: 250
+          type: string
+      required:
+      - field
+      - group_by
+      - interval
+      type: object
+    logging.v1.SearchResponse:
+      description: One page of matching log documents, together with the next-page
+        link and any requested aggregation.
+      example:
+        metadata:
+          next: next
+        data:
+        - timestamp: 2026-09-06T18:42:10Z
+          level: ERROR
+          message: Connection to upstream host was lost.
+        - timestamp: 2026-09-06T18:42:10Z
+          level: ERROR
+          message: Connection to upstream host was lost.
+        kind: Logs
+        api_version: v1
+        aggregations:
+          timestamp_histogram:
+            buckets:
+            - count: 0
+              aggregated_terms:
+                buckets:
+                - count: 6
+                  key: key
+                - count: 6
+                  key: key
+              key: key
+            - count: 0
+              aggregated_terms:
+                buckets:
+                - count: 6
+                  key: key
+                - count: 6
+                  key: key
+              key: key
+      properties:
+        api_version:
+          description: Always `v1` on this endpoint.
+          example: v1
+          type: string
+        kind:
+          description: Always `Logs` on this endpoint.
+          example: Logs
+          type: string
+        data:
+          description: Log documents, each limited to the returned fields listed for
+            its resource type in the Resource types section above. The shape differs
+            per resource type.
+          items:
+            example:
+              timestamp: 2026-09-06T18:42:10Z
+              level: ERROR
+              message: Connection to upstream host was lost.
+            type: object
+          type: array
+        metadata:
+          $ref: '#/components/schemas/logging_v1_SearchResponse_metadata'
+        aggregations:
+          $ref: '#/components/schemas/logging.v1.AggregationResponse'
+      required:
+      - api_version
+      - data
+      - kind
+      type: object
+    logging.v1.AggregationResponse:
+      description: Histogram buckets for the request's `aggregation`, returned only
+        when `aggregation` was set.
+      example:
+        timestamp_histogram:
+          buckets:
+          - count: 0
+            aggregated_terms:
+              buckets:
+              - count: 6
+                key: key
+              - count: 6
+                key: key
+            key: key
+          - count: 0
+            aggregated_terms:
+              buckets:
+              - count: 6
+                key: key
+              - count: 6
+                key: key
+            key: key
+      properties:
+        timestamp_histogram:
+          $ref: '#/components/schemas/logging_v1_AggregationResponse_timestamp_histogram'
+      type: object
+    logging.v1.SourceList:
+      description: The full list of log sources `POST /logs/v1/search` can query.
+      example:
+        metadata:
+          total_size: 3
+        data:
+        - max_lookback_days: 3
+          search_fields:
+          - allowed_values:
+            - allowed_values
+            - allowed_values
+            name: level
+            type: enum
+          - allowed_values:
+            - allowed_values
+            - allowed_values
+            name: level
+            type: enum
+          kind: Source
+          name: connector
+          resource_type: connector
+          crn_elements:
+          - organization
+          - environment
+          - cloud-cluster
+          - connector
+          full_text_search_fields:
+          - message
+          - exception.stacktrace
+          full_text_search_supported: true
+          api_version: logging/v1
+          display_name: connector
+          id_prefix: id_prefix
+          returned_fields:
+          - name: timestamp
+            description: description
+            type: timestamp
+            default_column: true
+          - name: timestamp
+            description: description
+            type: timestamp
+            default_column: true
+        - max_lookback_days: 3
+          search_fields:
+          - allowed_values:
+            - allowed_values
+            - allowed_values
+            name: level
+            type: enum
+          - allowed_values:
+            - allowed_values
+            - allowed_values
+            name: level
+            type: enum
+          kind: Source
+          name: connector
+          resource_type: connector
+          crn_elements:
+          - organization
+          - environment
+          - cloud-cluster
+          - connector
+          full_text_search_fields:
+          - message
+          - exception.stacktrace
+          full_text_search_supported: true
+          api_version: logging/v1
+          display_name: connector
+          id_prefix: id_prefix
+          returned_fields:
+          - name: timestamp
+            description: description
+            type: timestamp
+            default_column: true
+          - name: timestamp
+            description: description
+            type: timestamp
+            default_column: true
+        kind: SourceList
+        api_version: logging/v1
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - logging/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - SourceList
+          readOnly: true
+          type: string
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        data:
+          description: Every searchable source in the resource catalog.
+          items:
+            $ref: '#/components/schemas/logging.v1.Source'
+          type: array
+          uniqueItems: true
+      required:
+      - api_version
+      - data
+      - kind
+      - metadata
+      type: object
+    logging.v1.Source:
+      description: 'One source''s capabilities: the fields it can be searched on,
+        and the fields it returns. Field names match `SourceMetadata` in `cc-logging-service`.'
+      example:
+        max_lookback_days: 3
+        search_fields:
+        - allowed_values:
+          - allowed_values
+          - allowed_values
+          name: level
+          type: enum
+        - allowed_values:
+          - allowed_values
+          - allowed_values
+          name: level
+          type: enum
+        kind: Source
+        name: connector
+        resource_type: connector
+        crn_elements:
+        - organization
+        - environment
+        - cloud-cluster
+        - connector
+        full_text_search_fields:
+        - message
+        - exception.stacktrace
+        full_text_search_supported: true
+        api_version: logging/v1
+        display_name: connector
+        id_prefix: id_prefix
+        returned_fields:
+        - name: timestamp
+          description: description
+          type: timestamp
+          default_column: true
+        - name: timestamp
+          description: description
+          type: timestamp
+          default_column: true
+      properties:
+        api_version:
+          description: APIVersion defines the schema version of this representation
+            of a resource.
+          enum:
+          - logging/v1
+          readOnly: true
+          type: string
+        kind:
+          description: Kind defines the object this REST resource represents.
+          enum:
+          - Source
+          readOnly: true
+          type: string
+        name:
+          description: The catalog key that identifies this source. Pass this as `{name}`
+            to `GET /logs/v1/sources/{name}`. Defaults to `resource_type` for a catalog
+            entry with no separately configured source.
+          example: connector
+          type: string
+        display_name:
+          description: Human-readable name for this source. Defaults to `name` when
+            not separately configured.
+          example: connector
+          type: string
+        resource_type:
+          description: The trailing CRN element this source's resources use. Matches
+            a row of the Resource types table above.
+          example: connector
+          type: string
+        id_prefix:
+          description: Prefix of this resource type's identifiers, when one is configured.
+            Omitted when not configured.
+          type: string
+        crn_elements:
+          description: The CRN element names a `crn` for this resource type must match,
+            in order. See the Resource types table above.
+          example:
+          - organization
+          - environment
+          - cloud-cluster
+          - connector
+          items:
+            type: string
+          type: array
+        search_fields:
+          description: Fields `search` accepts for this resource type, other than
+            the reserved `search_text` key (see `full_text_search_supported`).
+          items:
+            $ref: '#/components/schemas/logging.v1.SearchFieldDescriptor'
+          type: array
+        full_text_search_supported:
+          description: Whether the reserved `search_text` key is accepted for this
+            resource type.
+          example: true
+          type: boolean
+        full_text_search_fields:
+          description: Fields `search_text` matches against for this resource type.
+            Present only when `full_text_search_supported` is true.
+          example:
+          - message
+          - exception.stacktrace
+          items:
+            type: string
+          type: array
+        returned_fields:
+          description: Fields a log document for this resource type carries in `POST
+            /logs/v1/search`'s response, with rendering metadata for each. See the
+            Resource types table above.
+          items:
+            $ref: '#/components/schemas/logging.v1.ReturnedFieldDescriptor'
+          type: array
+        max_lookback_days:
+          description: Lookback window in days for this resource type. An `end_time`
+            older than this returns an empty 200 from `POST /logs/v1/search` without
+            querying OpenSearch; a `start_time` older than this is silently clamped.
+          example: 3
+          format: int32
+          type: integer
+      required:
+      - api_version
+      - crn_elements
+      - display_name
+      - full_text_search_supported
+      - kind
+      - max_lookback_days
+      - name
+      - resource_type
+      - returned_fields
+      - search_fields
+      type: object
+    logging.v1.ReturnedFieldDescriptor:
+      description: One field a log document for a source carries in `POST /logs/v1/search`'s
+        response, and how to render it.
+      example:
+        name: timestamp
+        description: description
+        type: timestamp
+        default_column: true
+      properties:
+        name:
+          description: The field name, as it appears in a search response document.
+          example: timestamp
+          type: string
+        type:
+          description: A rendering hint for this field's value, e.g. `timestamp`,
+            `enum`, or `string`. Not a closed set.
+          example: timestamp
+          type: string
+        default_column:
+          description: Whether this field is shown by default, versus only when explicitly
+            requested.
+          example: true
+          type: boolean
+        description:
+          description: Human-readable explanation of this field's meaning. Omitted
+            when not configured.
+          type: string
+      required:
+      - default_column
+      - name
+      - type
+      type: object
+    logging.v1.SearchFieldDescriptor:
+      description: One field `search` accepts for a source, and whether its value
+        is restricted to a fixed set.
+      example:
+        allowed_values:
+        - allowed_values
+        - allowed_values
+        name: level
+        type: enum
+      properties:
+        name:
+          description: The `search` key.
+          example: level
+          type: string
+        type:
+          description: '`enum` when the catalog restricts this field to `allowed_values`;
+            `string` for any free-form phrase or array match.'
+          enum:
+          - enum
+          - string
+          type: string
+        allowed_values:
+          description: The values this field accepts. Present only when `type` is
+            `enum`.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - type
+      type: object
+    ListMeta:
+      description: ListMeta describes metadata that resource collections may have.
+      example:
+        total_size: 3
+      properties:
+        total_size:
+          description: Number of records in the full result set.
+          example: 3
+          format: int32
+          minimum: 0
+          type: integer
+      type: object
+    logging.v1.ErrorResponse:
+      description: The standard error envelope returned by every non-2xx response
+        from this API.
+      properties:
+        errors:
+          description: One or more problems encountered while processing the request.
+            Bean-validation failures produce one entry per violated constraint.
+          items:
+            $ref: '#/components/schemas/logging_v1_ErrorResponse_errors'
+          type: array
+      required:
+      - errors
+      type: object
+    logging_v1_SearchResponse_metadata:
+      description: Pagination metadata. Absent when the page was not full or was empty.
+      example:
+        next: next
+      properties:
+        next:
+          description: Absolute URL of the next page, carrying `page_token`.
+          type: string
+      type: object
+    logging_v1_AggregationResponse_timestamp_histogram_aggregated_terms_buckets:
+      example:
+        count: 6
+        key: key
+      properties:
+        key:
+          description: The `group_by` field's value for this term.
+          type: string
+        count:
+          description: Number of matching documents with this term's value, within
+            the parent bucket.
+          format: int64
+          type: integer
+      type: object
+    logging_v1_AggregationResponse_timestamp_histogram_aggregated_terms:
+      description: Sub-aggregation of this bucket by `aggregation.group_by`. Absent
+        when the bucket has no term buckets.
+      example:
+        buckets:
+        - count: 6
+          key: key
+        - count: 6
+          key: key
+      properties:
+        buckets:
+          description: One entry per distinct `group_by` value in this bucket.
+          items:
+            $ref: '#/components/schemas/logging_v1_AggregationResponse_timestamp_histogram_aggregated_terms_buckets'
+          type: array
+      type: object
+    logging_v1_AggregationResponse_timestamp_histogram_buckets:
+      example:
+        count: 0
+        aggregated_terms:
+          buckets:
+          - count: 6
+            key: key
+          - count: 6
+            key: key
+        key: key
+      properties:
+        key:
+          description: Bucket start, RFC 3339 UTC.
+          type: string
+        count:
+          description: Number of matching documents in this bucket.
+          format: int64
+          type: integer
+        aggregated_terms:
+          $ref: '#/components/schemas/logging_v1_AggregationResponse_timestamp_histogram_aggregated_terms'
+      type: object
+    logging_v1_AggregationResponse_timestamp_histogram:
+      description: The timestamp-bucketed histogram.
+      example:
+        buckets:
+        - count: 0
+          aggregated_terms:
+            buckets:
+            - count: 6
+              key: key
+            - count: 6
+              key: key
+          key: key
+        - count: 0
+          aggregated_terms:
+            buckets:
+            - count: 6
+              key: key
+            - count: 6
+              key: key
+          key: key
+      properties:
+        buckets:
+          description: One entry per time bucket, in bucket order. Empty buckets are
+            omitted.
+          items:
+            $ref: '#/components/schemas/logging_v1_AggregationResponse_timestamp_histogram_buckets'
+          type: array
+      type: object
+    logging_v1_ErrorResponse_errors:
+      properties:
+        id:
+          description: A unique identifier for this occurrence of the problem. Not
+            returned by the service today.
+          maxLength: 255
+          type: string
+        status:
+          description: HTTP status as a string.
+          type: string
+        code:
+          description: An application-specific error code. Not returned by the service
+            today.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+      required:
+      - detail
+      - status
+      type: object
+  securitySchemes:
+    confluent_auth:
+      description: |
+        Requests carry a Confluent Cloud data-plane bearer token obtained from a user session
+        (`Authorization: Bearer <token>`). Cloud API keys are not accepted. RBAC is evaluated against
+        the request's `crn` using the operation the resource catalog declares for its resource type.
+      flows:
+        implicit:
+          authorizationUrl: https://confluent.cloud/oauth
+          scopes:
+            Complex: RBAC permissions required for this endpoint depend on the resource
+              type of the queried CRN.
+            None: No authorization check is performed on this endpoint.
+      type: oauth2
+    data-plane-bearer-token:
+      description: |
+        Confluent Cloud data-plane bearer token obtained from a user session
+        (`Authorization: Bearer <token>`). Cloud API keys are not accepted by this service.
+      scheme: bearer
+      type: http
