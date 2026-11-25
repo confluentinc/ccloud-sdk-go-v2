@@ -4058,6 +4058,7 @@ components:
     connect.v1.Connector:
       example:
         name: name
+        id: id
         type: sink
         config:
           key: config
@@ -4066,6 +4067,23 @@ components:
           connector: connector
         - task: 0
           connector: connector
+        status:
+          connector:
+            trace: trace
+            state: NONE
+            worker_id: worker_id
+          name: name
+          plugin_lifecycle: plugin_lifecycle
+          type: sink
+          tasks:
+          - msg: msg
+            id: 0
+            state: state
+            worker_id: worker_id
+          - msg: msg
+            id: 0
+            state: state
+            worker_id: worker_id
       properties:
         name:
           description: Name of the connector
@@ -4143,6 +4161,15 @@ components:
           - sink
           - source
           type: string
+        id:
+          description: |-
+            ID of the connector, for example `lcc-abc123`. Returned by the read
+            connector operation.
+          maxLength: 255
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/connect_v1_Connector_status'
       required:
       - config
       - name
@@ -5051,6 +5078,58 @@ components:
       required:
       - connector
       - task
+      type: object
+    connect_v1_Connector_status:
+      description: |-
+        Status of the connector and its tasks, in the same format as
+        `GET .../connectors/{connector_name}/status`. Returned by the read
+        connector operation.
+      example:
+        connector:
+          trace: trace
+          state: NONE
+          worker_id: worker_id
+        name: name
+        plugin_lifecycle: plugin_lifecycle
+        type: sink
+        tasks:
+        - msg: msg
+          id: 0
+          state: state
+          worker_id: worker_id
+        - msg: msg
+          id: 0
+          state: state
+          worker_id: worker_id
+      properties:
+        name:
+          description: The name of the connector.
+          type: string
+        type:
+          description: Type of connector, sink or source.
+          enum:
+          - sink
+          - source
+          type: string
+        connector:
+          $ref: '#/components/schemas/inline_response_200_1_connector'
+        tasks:
+          description: The map containing the task status.
+          items:
+            $ref: '#/components/schemas/inline_response_200_1_tasks'
+          type: array
+        plugin_lifecycle:
+          description: The lifecycle status of the plugin used by the connector.
+          type: string
+          x-extensible-enum:
+          - ACTIVE
+          - DEPRECATED
+          - END_OF_LIFE
+      readOnly: true
+      required:
+      - connector
+      - name
+      - type
       type: object
     connect_v1_ConnectorExpansion_id:
       description: The ID of connector.
