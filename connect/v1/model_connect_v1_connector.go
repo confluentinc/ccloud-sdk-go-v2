@@ -251,7 +251,9 @@ func (o *ConnectV1Connector) Redact() {
 	o.recurseRedact(o.Tasks)
 	o.recurseRedact(o.Type)
 	o.recurseRedact(o.Id)
-	o.recurseRedact(o.Status)
+	if o.Status != nil {
+		o.recurseRedact(o.Status)
+	}
 }
 
 func (o *ConnectV1Connector) recurseRedact(v interface{}) {
