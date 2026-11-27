@@ -104,6 +104,7 @@ Class | Method | HTTP request | Description
  - [ConnectV1AlterOffsetRequestType](docs/ConnectV1AlterOffsetRequestType.md)
  - [ConnectV1AlterOffsetStatus](docs/ConnectV1AlterOffsetStatus.md)
  - [ConnectV1AlterOffsetStatusStatus](docs/ConnectV1AlterOffsetStatusStatus.md)
+ - [ConnectV1ConnectorStatus](docs/ConnectV1ConnectorStatus.md)
  - [ConnectV1Connector](docs/ConnectV1Connector.md)
  - [ConnectV1ConnectorError](docs/ConnectV1ConnectorError.md)
  - [ConnectV1ConnectorErrorError](docs/ConnectV1ConnectorErrorError.md)

@@ -44,6 +44,9 @@ type ConnectV1Connector struct {
 	Tasks *[]ConnectV1ConnectorTasks `json:"tasks,omitempty"`
 	// Type of connector, sink or source
 	Type *string `json:"type,omitempty"`
+	// ID of the connector, for example `lcc-abc123`. Returned by the read connector operation.
+	Id     *string                   `json:"id,omitempty"`
+	Status *ConnectV1ConnectorStatus `json:"status,omitempty"`
 }
 
 // NewConnectV1Connector instantiates a new ConnectV1Connector object
@@ -177,12 +180,80 @@ func (o *ConnectV1Connector) SetType(v string) {
 	o.Type = &v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ConnectV1Connector) GetId() string {
+	if o == nil || o.Id == nil {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1Connector) GetIdOk() (*string, bool) {
+	if o == nil || o.Id == nil {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ConnectV1Connector) HasId() bool {
+	if o != nil && o.Id != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ConnectV1Connector) SetId(v string) {
+	o.Id = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *ConnectV1Connector) GetStatus() ConnectV1ConnectorStatus {
+	if o == nil || o.Status == nil {
+		var ret ConnectV1ConnectorStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectV1Connector) GetStatusOk() (*ConnectV1ConnectorStatus, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *ConnectV1Connector) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given ConnectV1ConnectorStatus and assigns it to the Status field.
+func (o *ConnectV1Connector) SetStatus(v ConnectV1ConnectorStatus) {
+	o.Status = &v
+}
+
 // Redact resets all sensitive fields to their zero value.
 func (o *ConnectV1Connector) Redact() {
 	o.recurseRedact(&o.Name)
 	o.recurseRedact(&o.Config)
 	o.recurseRedact(o.Tasks)
 	o.recurseRedact(o.Type)
+	o.recurseRedact(o.Id)
+	if o.Status != nil {
+		o.recurseRedact(o.Status)
+	}
 }
 
 func (o *ConnectV1Connector) recurseRedact(v interface{}) {
@@ -228,6 +299,12 @@ func (o ConnectV1Connector) MarshalJSON() ([]byte, error) {
 	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
